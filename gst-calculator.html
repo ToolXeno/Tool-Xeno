@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional GST Calculator India - Tool Xeno</title>
+    <meta name="description" content="Advanced GST calculator for India with all tax slabs, HSN code lookup, inclusive/exclusive calculations, and invoice generation features.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        
+        .btn-secondary {
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .gst-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--dark-text);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        body.light-theme .gst-input {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: var(--light-text);
+        }
+        
+        .gst-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .gst-rate-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 12px;
+        }
+        
+        .gst-rate-option {
+            padding: 12px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            font-weight: 600;
+        }
+        
+        .gst-rate-option.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        body.light-theme .gst-rate-option {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .toggle-switch.active {
+            background: var(--primary-gradient);
+            border-color: transparent;
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .toggle-switch.active::after {
+            transform: translateX(28px);
+        }
+        
+        .result-card {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .result-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .hsn-search {
+            position: relative;
+        }
+        
+        .hsn-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+        
+        body.light-theme .hsn-suggestions {
+            background: rgba(0, 0, 0, 0.95);
+        }
+        
+        .hsn-suggestion {
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hsn-suggestion:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .invoice-preview {
+            background: white;
+            color: black;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .invoice-header {
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .invoice-table th,
+        .invoice-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .invoice-table th {
+            background: #f8fafc;
+            font-weight: 600;
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin: 20px 0;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .gst-rate-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        <i class="fas fa-calculator mr-2"></i>Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Professional GST Calculator India
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#calculator" class="nav-link">Calculate</a>
+                        <a href="#hsn" class="nav-link">HSN Codes</a>
+                        <a href="#invoice" class="nav-link">Invoice</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Professional GST Calculator
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Advanced GST calculator for India with all tax slabs (5%, 12%, 18%, 28%), HSN code lookup, 
+                inclusive/exclusive calculations, and professional invoice generation.
+            </p>
+        </section>
+        
+        <!-- Main Calculator Interface -->
+        <section id="calculator" class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Input Panel -->
+                <div class="glass-card p-8">
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-calculator mr-3 text-purple-400"></i>
+                        GST Calculator
+                    </h3>
+                    
+                    <!-- Amount Input -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-3">Amount (₹)</label>
+                        <input type="number" id="amountInput" class="gst-input" placeholder="Enter amount" value="10000">
+                    </div>
+                    
+                    <!-- GST Rate Selection -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-3">GST Rate (%)</label>
+                        <div class="gst-rate-selector">
+                            <div class="gst-rate-option" data-rate="5">5%</div>
+                            <div class="gst-rate-option active" data-rate="18">18%</div>
+                            <div class="gst-rate-option" data-rate="12">12%</div>
+                            <div class="gst-rate-option" data-rate="28">28%</div>
+                        </div>
+                        <input type="number" id="customRate" class="gst-input mt-3" placeholder="Custom rate %" min="0" max="100">
+                    </div>
+                    
+                    <!-- Calculation Type Toggle -->
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between p-4 bg-purple-500 bg-opacity-10 rounded-12">
+                            <div>
+                                <label class="text-sm font-medium">Calculation Type</label>
+                                <p class="text-xs opacity-70" id="calculationTypeText">GST Exclusive (Add GST)</p>
+                            </div>
+                            <div class="toggle-switch" id="calculationType" onclick="toggleCalculationType()"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Details -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-3">Product/Service Name</label>
+                        <input type="text" id="productName" class="gst-input" placeholder="Enter product name" value="Professional Services">
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="space-y-3">
+                        <button id="calculateBtn" class="btn-gradient w-full" onclick="calculateGST()">
+                            <i class="fas fa-calculator mr-2"></i>
+                            Calculate GST
+                        </button>
+                        <button id="generateInvoiceBtn" class="btn-success w-full" onclick="generateInvoice()">
+                            <i class="fas fa-file-invoice mr-2"></i>
+                            Generate Invoice
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Results Panel -->
+                <div class="glass-card p-8">
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-chart-pie mr-3 text-blue-400"></i>
+                        Tax Breakdown
+                    </h3>
+                    
+                    <!-- Results Grid -->
+                    <div class="stats-grid mb-6">
+                        <div class="result-card">
+                            <div class="result-value" id="baseAmount">₹10,000</div>
+                            <div class="text-sm opacity-70">Base Amount</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value" id="gstAmount">₹1,800</div>
+                            <div class="text-sm opacity-70">GST Amount</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value" id="totalAmount">₹11,800</div>
+                            <div class="text-sm opacity-70">Total Amount</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value" id="gstRate">18%</div>
+                            <div class="text-sm opacity-70">GST Rate</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tax Composition Chart -->
+                    <div class="chart-container">
+                        <canvas id="gstChart"></canvas>
+                    </div>
+                    
+                    <!-- CGST/SGST/IGST Breakdown -->
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-4">Tax Components</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center p-3 bg-purple-500 bg-opacity-10 rounded-12">
+                                <span class="font-medium">CGST (9%)</span>
+                                <span class="font-bold" id="cgstAmount">₹900</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-blue-500 bg-opacity-10 rounded-12">
+                                <span class="font-medium">SGST (9%)</span>
+                                <span class="font-bold" id="sgstAmount">₹900</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-green-500 bg-opacity-10 rounded-12">
+                                <span class="font-medium">IGST (18%)</span>
+                                <span class="font-bold" id="igstAmount">₹1,800</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- HSN Code Lookup Section -->
+            <div id="hsn" class="glass-card p-8 mb-8">
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-search mr-3 text-green-400"></i>
+                    HSN Code Lookup
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="hsn-search">
+                        <label class="block text-sm font-medium mb-3">Search HSN Code</label>
+                        <input type="text" id="hsnSearch" class="gst-input" placeholder="Search by product name or HSN code" oninput="searchHSN()">
+                        <div class="hsn-suggestions" id="hsnSuggestions"></div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-3">Selected HSN Details</label>
+                        <div class="p-4 bg-gradient-to-r from-purple-500 to-blue-500 bg-opacity-20 rounded-12">
+                            <div class="font-bold text-lg" id="selectedHSN">999794</div>
+                            <div class="text-sm opacity-80" id="selectedHSNDesc">Professional Services</div>
+                            <div class="text-xs opacity-70 mt-2">GST Rate: <span id="selectedHSNRate">18%</span></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Popular HSN Codes -->
+                <div class="mt-8">
+                    <h4 class="text-lg font-semibold mb-4">Popular HSN Codes</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="p-4 bg-purple-500 bg-opacity-10 rounded-12 cursor-pointer hover:bg-opacity-20 transition-all" onclick="selectHSN('999794', 'Professional Services', '18')">
+                            <div class="font-bold">999794</div>
+                            <div class="text-sm opacity-80">Professional Services</div>
+                            <div class="text-xs opacity-70">GST: 18%</div>
+                        </div>
+                        <div class="p-4 bg-blue-500 bg-opacity-10 rounded-12 cursor-pointer hover:bg-opacity-20 transition-all" onclick="selectHSN('8517', 'Mobile Phones', '12')">
+                            <div class="font-bold">8517</div>
+                            <div class="text-sm opacity-80">Mobile Phones</div>
+                            <div class="text-xs opacity-70">GST: 12%</div>
+                        </div>
+                        <div class="p-4 bg-green-500 bg-opacity-10 rounded-12 cursor-pointer hover:bg-opacity-20 transition-all" onclick="selectHSN('1006', 'Rice', '5')">
+                            <div class="font-bold">1006</div>
+                            <div class="text-sm opacity-80">Rice</div>
+                            <div class="text-xs opacity-70">GST: 5%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Invoice Generation Section -->
+            <div id="invoice" class="glass-card p-8">
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-file-invoice-dollar mr-3 text-yellow-400"></i>
+                    Invoice Preview
+                </h3>
+                
+                <!-- Company Details Input -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Company Details</h4>
+                        <div class="space-y-4">
+                            <input type="text" id="companyName" class="gst-input" placeholder="Company Name" value="Tool Xeno Solutions">
+                            <input type="text" id="companyGSTIN" class="gst-input" placeholder="GSTIN" value="29ABCDE1234F1Z5">
+                            <textarea id="companyAddress" class="gst-input" rows="3" placeholder="Company Address">123 Business Park, Tech City, Bangalore - 560001</textarea>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Customer Details</h4>
+                        <div class="space-y-4">
+                            <input type="text" id="customerName" class="gst-input" placeholder="Customer Name" value="ABC Corporation">
+                            <input type="text" id="customerGSTIN" class="gst-input" placeholder="Customer GSTIN" value="27XYZAB1234C1D6">
+                            <textarea id="customerAddress" class="gst-input" rows="3" placeholder="Customer Address">456 Corporate Avenue, Business District, Mumbai - 400001</textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Generated Invoice -->
+                <div class="invoice-preview" id="invoicePreview">
+                    <div class="invoice-header">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h2 class="text-2xl font-bold text-purple-600">TAX INVOICE</h2>
+                                <div class="mt-2">
+                                    <div class="font-bold" id="invoiceCompanyName">Tool Xeno Solutions</div>
+                                    <div class="text-sm" id="invoiceCompanyAddress">123 Business Park, Tech City, Bangalore - 560001</div>
+                                    <div class="text-sm">GSTIN: <span id="invoiceCompanyGSTIN">29ABCDE1234F1Z5</span></div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold">Invoice No: INV-2025-001</div>
+                                <div class="text-sm">Date: <span id="invoiceDate"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+                        <div>
+                            <h4 class="font-bold mb-2">Bill To:</h4>
+                            <div class="font-bold" id="invoiceCustomerName">ABC Corporation</div>
+                            <div class="text-sm" id="invoiceCustomerAddress">456 Corporate Avenue, Business District, Mumbai - 400001</div>
+                            <div class="text-sm">GSTIN: <span id="invoiceCustomerGSTIN">27XYZAB1234C1D6</span></div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">Invoice Details:</h4>
+                            <div class="text-sm">HSN Code: <span id="invoiceHSN">999794</span></div>
+                            <div class="text-sm">Place of Supply: Karnataka</div>
+                            <div class="text-sm">Reverse Charge: No</div>
+                        </div>
+                    </div>
+                    
+                    <table class="invoice-table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>HSN</th>
+                                <th>Qty</th>
+                                <th>Rate</th>
+                                <th>Amount</th>
+                                <th>Tax Rate</th>
+                                <th>Tax Amount</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="invoiceProductName">Professional Services</td>
+                                <td id="invoiceProductHSN">999794</td>
+                                <td>1</td>
+                                <td id="invoiceRate">₹10,000</td>
+                                <td id="invoiceBaseAmount">₹10,000</td>
+                                <td id="invoiceTaxRate">18%</td>
+                                <td id="invoiceTaxAmount">₹1,800</td>
+                                <td id="invoiceTotalAmount">₹11,800</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="mt-6 text-right">
+                        <div class="inline-block text-left">
+                            <div class="flex justify-between w-64 mb-2">
+                                <span>Subtotal:</span>
+                                <span id="invoiceSubtotal">₹10,000</span>
+                            </div>
+                            <div class="flex justify-between w-64 mb-2">
+                                <span>CGST (9%):</span>
+                                <span id="invoiceCGST">₹900</span>
+                            </div>
+                            <div class="flex justify-between w-64 mb-2">
+                                <span>SGST (9%):</span>
+                                <span id="invoiceSGST">₹900</span>
+                            </div>
+                            <div class="flex justify-between w-64 font-bold text-lg border-t pt-2">
+                                <span>Total:</span>
+                                <span id="invoiceGrandTotal">₹11,800</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                        <p class="text-sm opacity-70">This is a computer-generated invoice and does not require a signature.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-8 text-center opacity-70">
+        <p>&copy; 2025 Tool Xeno - Professional GST Calculator India. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Global variables
+        let currentGSTRate = 18;
+        let isGSTInclusive = false;
+        let gstChart = null;
+        
+        // HSN Code database (sample)
+        const hsnDatabase = [
+            { code: '999794', description: 'Professional Services', rate: 18 },
+            { code: '8517', description: 'Mobile Phones', rate: 12 },
+            { code: '1006', description: 'Rice', rate: 5 },
+            { code: '0713', description: 'Pulses', rate: 0 },
+            { code: '2402', description: 'Cigarettes', rate: 28 },
+            { code: '8703', description: 'Motor Cars', rate: 28 },
+            { code: '6403', description: 'Footwear', rate: 18 },
+            { code: '5208', description: 'Cotton Fabric', rate: 5 },
+            { code: '3004', description: 'Medicines', rate: 12 },
+            { code: '2201', description: 'Water', rate: 18 },
+        ];
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            initializeControls();
+            initializeChart();
+            calculateGST();
+            updateInvoiceDate();
+            
+            // Load saved theme
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-theme');
+            }
+        });
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Initialize controls
+        function initializeControls() {
+            // GST rate selection
+            document.querySelectorAll('.gst-rate-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    document.querySelectorAll('.gst-rate-option').forEach(o => o.classList.remove('active'));
+                    option.classList.add('active');
+                    currentGSTRate = parseInt(option.dataset.rate);
+                    document.getElementById('customRate').value = '';
+                    calculateGST();
+                });
+            });
+            
+            // Custom rate input
+            document.getElementById('customRate').addEventListener('input', (e) => {
+                if (e.target.value) {
+                    document.querySelectorAll('.gst-rate-option').forEach(o => o.classList.remove('active'));
+                    currentGSTRate = parseFloat(e.target.value) || 0;
+                    calculateGST();
+                }
+            });
+            
+            // Amount input
+            document.getElementById('amountInput').addEventListener('input', calculateGST);
+            
+            // Company and customer details
+            ['companyName', 'companyGSTIN', 'companyAddress', 'customerName', 'customerGSTIN', 'customerAddress'].forEach(id => {
+                document.getElementById(id).addEventListener('input', updateInvoiceDetails);
+            });
+            
+            // Product name
+            document.getElementById('productName').addEventListener('input', updateInvoiceDetails);
+        }
+        
+        // Toggle calculation type
+        function toggleCalculationType() {
+            const toggle = document.getElementById('calculationType');
+            const text = document.getElementById('calculationTypeText');
+            
+            toggle.classList.toggle('active');
+            isGSTInclusive = toggle.classList.contains('active');
+            
+            text.textContent = isGSTInclusive ? 'GST Inclusive (Extract GST)' : 'GST Exclusive (Add GST)';
+            calculateGST();
+        }
+        
+        // Calculate GST
+        function calculateGST() {
+            const amount = parseFloat(document.getElementById('amountInput').value) || 0;
+            let baseAmount, gstAmount, totalAmount;
+            
+            if (isGSTInclusive) {
+                // GST Inclusive calculation
+                totalAmount = amount;
+                baseAmount = amount / (1 + currentGSTRate / 100);
+                gstAmount = totalAmount - baseAmount;
+            } else {
+                // GST Exclusive calculation
+                baseAmount = amount;
+                gstAmount = amount * currentGSTRate / 100;
+                totalAmount = baseAmount + gstAmount;
+            }
+            
+            // Update display
+            document.getElementById('baseAmount').textContent = `₹${formatNumber(baseAmount)}`;
+            document.getElementById('gstAmount').textContent = `₹${formatNumber(gstAmount)}`;
+            document.getElementById('totalAmount').textContent = `₹${formatNumber(totalAmount)}`;
+            document.getElementById('gstRate').textContent = `${currentGSTRate}%`;
+            
+            // Calculate CGST/SGST/IGST
+            const cgst = gstAmount / 2;
+            const sgst = gstAmount / 2;
+            const igst = gstAmount;
+            
+            document.getElementById('cgstAmount').textContent = `₹${formatNumber(cgst)}`;
+            document.getElementById('sgstAmount').textContent = `₹${formatNumber(sgst)}`;
+            document.getElementById('igstAmount').textContent = `₹${formatNumber(igst)}`;
+            
+            // Update chart
+            updateChart(baseAmount, gstAmount);
+            
+            // Update invoice
+            updateInvoiceCalculations();
+        }
+        
+        // Initialize chart
+        function initializeChart() {
+            const ctx = document.getElementById('gstChart').getContext('2d');
+            
+            gstChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Base Amount', 'GST Amount'],
+                    datasets: [{
+                        data: [10000, 1800],
+                        backgroundColor: [
+                            'rgba(102, 126, 234, 0.8)',
+                            'rgba(79, 172, 254, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(102, 126, 234, 1)',
+                            'rgba(79, 172, 254, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: document.body.classList.contains('light-theme') ? '#1e293b' : '#ffffff',
+                                font: {
+                                    size: 14,
+                                    family: 'Inter'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Update chart
+        function updateChart(baseAmount, gstAmount) {
+            if (gstChart) {
+                gstChart.data.datasets[0].data = [baseAmount, gstAmount];
+                gstChart.update();
+            }
+        }
+        
+        // Search HSN codes
+        function searchHSN() {
+            const query = document.getElementById('hsnSearch').value.toLowerCase();
+            const suggestions = document.getElementById('hsnSuggestions');
+            
+            if (query.length < 2) {
+                suggestions.style.display = 'none';
+                return;
+            }
+            
+            const matches = hsnDatabase.filter(item => 
+                item.code.includes(query) || 
+                item.description.toLowerCase().includes(query)
+            );
+            
+            if (matches.length > 0) {
+                suggestions.innerHTML = matches.map(item => 
+                    `<div class="hsn-suggestion" onclick="selectHSN('${item.code}', '${item.description}', '${item.rate}')">
+                        <div class="font-bold">${item.code}</div>
+                        <div class="text-sm opacity-80">${item.description}</div>
+                        <div class="text-xs opacity-70">GST: ${item.rate}%</div>
+                    </div>`
+                ).join('');
+                suggestions.style.display = 'block';
+            } else {
+                suggestions.style.display = 'none';
+            }
+        }
+        
+        // Select HSN code
+        function selectHSN(code, description, rate) {
+            document.getElementById('selectedHSN').textContent = code;
+            document.getElementById('selectedHSNDesc').textContent = description;
+            document.getElementById('selectedHSNRate').textContent = rate + '%';
+            document.getElementById('productName').value = description;
+            document.getElementById('hsnSearch').value = `${code} - ${description}`;
+            document.getElementById('hsnSuggestions').style.display = 'none';
+            
+            // Update GST rate
+            document.querySelectorAll('.gst-rate-option').forEach(o => o.classList.remove('active'));
+            const rateOption = document.querySelector(`[data-rate="${rate}"]`);
+            if (rateOption) {
+                rateOption.classList.add('active');
+                currentGSTRate = parseInt(rate);
+            } else {
+                document.getElementById('customRate').value = rate;
+                currentGSTRate = parseInt(rate);
+            }
+            
+            calculateGST();
+        }
+        
+        // Update invoice date
+        function updateInvoiceDate() {
+            const today = new Date().toLocaleDateString('en-IN');
+            document.getElementById('invoiceDate').textContent = today;
+        }
+        
+        // Update invoice details
+        function updateInvoiceDetails() {
+            document.getElementById('invoiceCompanyName').textContent = document.getElementById('companyName').value;
+            document.getElementById('invoiceCompanyAddress').textContent = document.getElementById('companyAddress').value;
+            document.getElementById('invoiceCompanyGSTIN').textContent = document.getElementById('companyGSTIN').value;
+            document.getElementById('invoiceCustomerName').textContent = document.getElementById('customerName').value;
+            document.getElementById('invoiceCustomerAddress').textContent = document.getElementById('customerAddress').value;
+            document.getElementById('invoiceCustomerGSTIN').textContent = document.getElementById('customerGSTIN').value;
+            document.getElementById('invoiceProductName').textContent = document.getElementById('productName').value;
+            
+            const selectedHSN = document.getElementById('selectedHSN').textContent;
+            document.getElementById('invoiceHSN').textContent = selectedHSN;
+            document.getElementById('invoiceProductHSN').textContent = selectedHSN;
+        }
+        
+        // Update invoice calculations
+        function updateInvoiceCalculations() {
+            const amount = parseFloat(document.getElementById('amountInput').value) || 0;
+            let baseAmount, gstAmount, totalAmount;
+            
+            if (isGSTInclusive) {
+                totalAmount = amount;
+                baseAmount = amount / (1 + currentGSTRate / 100);
+                gstAmount = totalAmount - baseAmount;
+            } else {
+                baseAmount = amount;
+                gstAmount = amount * currentGSTRate / 100;
+                totalAmount = baseAmount + gstAmount;
+            }
+            
+            const cgst = gstAmount / 2;
+            const sgst = gstAmount / 2;
+            
+            document.getElementById('invoiceRate').textContent = `₹${formatNumber(baseAmount)}`;
+            document.getElementById('invoiceBaseAmount').textContent = `₹${formatNumber(baseAmount)}`;
+            document.getElementById('invoiceTaxRate').textContent = `${currentGSTRate}%`;
+            document.getElementById('invoiceTaxAmount').textContent = `₹${formatNumber(gstAmount)}`;
+            document.getElementById('invoiceTotalAmount').textContent = `₹${formatNumber(totalAmount)}`;
+            document.getElementById('invoiceSubtotal').textContent = `₹${formatNumber(baseAmount)}`;
+            document.getElementById('invoiceCGST').textContent = `₹${formatNumber(cgst)}`;
+            document.getElementById('invoiceSGST').textContent = `₹${formatNumber(sgst)}`;
+            document.getElementById('invoiceGrandTotal').textContent = `₹${formatNumber(totalAmount)}`;
+        }
+        
+        // Generate invoice
+        function generateInvoice() {
+            updateInvoiceDetails();
+            updateInvoiceCalculations();
+            
+            // Scroll to invoice section
+            document.getElementById('invoice').scrollIntoView({ behavior: 'smooth' });
+            
+            // Add fade-in animation
+            const invoice = document.getElementById('invoicePreview');
+            invoice.classList.add('fade-in');
+            
+            // Show success message
+            setTimeout(() => {
+                alert('Invoice generated successfully! You can print or save this invoice using your browser\'s print function.');
+            }, 500);
+        }
+        
+        // Format number with commas
+        function formatNumber(num) {
+            return new Intl.NumberFormat('en-IN').format(Math.round(num * 100) / 100);
+        }
+        
+        // Hide HSN suggestions when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.hsn-search')) {
+                document.getElementById('hsnSuggestions').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
