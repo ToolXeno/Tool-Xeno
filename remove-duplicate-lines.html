@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Remove Duplicate Lines - Tool Xeno</title>
+    <meta name="description" content="Professional duplicate lines removal tool with advanced features - case-sensitive options, preserve order, and various filtering modes with real-time processing.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        
+        .btn-secondary {
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+
+        .btn-warning {
+            background: var(--warning-gradient);
+            box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+        }
+
+        .btn-warning:hover {
+            box-shadow: 0 8px 25px rgba(255, 154, 158, 0.4);
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .text-area {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            color: var(--dark-text);
+            resize: vertical;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            min-height: 300px;
+            width: 100%;
+        }
+        
+        .text-area:focus {
+            outline: none;
+            border-color: rgba(102, 126, 234, 0.8);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+        
+        body.light-theme .text-area {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: var(--light-text);
+        }
+        
+        body.light-theme .text-area:focus {
+            border-color: rgba(102, 126, 234, 0.8);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stat-card {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-switch.active {
+            background: var(--primary-gradient);
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 21px;
+            height: 21px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .toggle-switch.active::after {
+            transform: translateX(25px);
+        }
+        
+        .option-selector {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .option-item {
+            padding: 8px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .option-item.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+        
+        body.light-theme .option-item {
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        body.light-theme .option-item.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .progress-indicator {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success-gradient);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .line-highlight {
+            background: rgba(255, 154, 158, 0.2);
+            padding: 2px 4px;
+            border-radius: 4px;
+            margin: 1px 0;
+            animation: highlightFade 2s ease-out;
+        }
+
+        @keyframes highlightFade {
+            0% { background: rgba(255, 154, 158, 0.4); }
+            100% { background: rgba(255, 154, 158, 0.1); }
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .option-selector {
+                justify-content: center;
+            }
+
+            .text-area {
+                min-height: 250px;
+                font-size: 13px;
+            }
+        }
+
+        .tooltip {
+            position: relative;
+            cursor: help;
+        }
+
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 1000;
+            opacity: 0;
+            animation: tooltipFade 0.3s ease-in-out forwards;
+        }
+
+        @keyframes tooltipFade {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        🛠️ Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Remove Duplicate Lines
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#process" class="nav-link">Process</a>
+                        <a href="#settings" class="nav-link">Settings</a>
+                        <a href="#results" class="nav-link">Results</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Remove Duplicate Lines
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Advanced duplicate line removal with smart filtering options. Clean up your text data with precision control, 
+                case-sensitive detection, and real-time processing for optimal results.
+            </p>
+        </section>
+        
+        <!-- Main Processing Interface -->
+        <section id="process" class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Input Panel -->
+                <div class="lg:col-span-1">
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-edit mr-3"></i>
+                            Input Text
+                        </h3>
+                        
+                        <textarea 
+                            id="inputText" 
+                            class="text-area" 
+                            placeholder="Paste or type your text here...&#10;Each line will be analyzed for duplicates&#10;&#10;Example:&#10;apple&#10;banana&#10;apple&#10;cherry&#10;banana&#10;date"
+                            oninput="processText()"
+                        ></textarea>
+                        
+                        <div class="mt-4 flex flex-wrap gap-3">
+                            <button id="clearBtn" class="btn-warning flex-1" onclick="clearAll()">
+                                <i class="fas fa-trash mr-2"></i>
+                                Clear
+                            </button>
+                            <button id="loadSample" class="btn-secondary flex-1" onclick="loadSampleText()">
+                                <i class="fas fa-file-alt mr-2"></i>
+                                Sample
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Settings Panel -->
+                <div class="lg:col-span-1">
+                    <div class="glass-card p-6" id="settings">
+                        <h3 class="text-xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-cogs mr-3"></i>
+                            Advanced Settings
+                        </h3>
+                        
+                        <!-- Case Sensitivity -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="tooltip" data-tooltip="Compare lines exactly as typed, including uppercase and lowercase">
+                                    <label class="text-sm font-medium">Case Sensitive</label>
+                                    <i class="fas fa-info-circle ml-1 opacity-50"></i>
+                                </div>
+                                <div class="toggle-switch" id="caseSensitive" onclick="toggleSetting('caseSensitive')"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Preserve Order -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-3">Preserve Occurrence</label>
+                            <div class="option-selector">
+                                <div class="option-item active" data-preserve="first" onclick="setPreserveMode('first')">First</div>
+                                <div class="option-item" data-preserve="last" onclick="setPreserveMode('last')">Last</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Whitespace Handling -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="tooltip" data-tooltip="Remove leading and trailing spaces before comparison">
+                                    <label class="text-sm font-medium">Trim Whitespace</label>
+                                    <i class="fas fa-info-circle ml-1 opacity-50"></i>
+                                </div>
+                                <div class="toggle-switch active" id="trimWhitespace" onclick="toggleSetting('trimWhitespace')"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Empty Lines -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="tooltip" data-tooltip="Remove all empty or blank lines from the text">
+                                    <label class="text-sm font-medium">Remove Empty Lines</label>
+                                    <i class="fas fa-info-circle ml-1 opacity-50"></i>
+                                </div>
+                                <div class="toggle-switch active" id="removeEmpty" onclick="toggleSetting('removeEmpty')"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sort Options -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-3">Sort Output</label>
+                            <div class="option-selector">
+                                <div class="option-item active" data-sort="none" onclick="setSortMode('none')">Original</div>
+                                <div class="option-item" data-sort="asc" onclick="setSortMode('asc')">A-Z</div>
+                                <div class="option-item" data-sort="desc" onclick="setSortMode('desc')">Z-A</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Processing Button -->
+                        <button id="processBtn" class="btn-gradient w-full mb-4" onclick="processText()">
+                            <i class="fas fa-filter mr-2"></i>
+                            Remove Duplicates
+                        </button>
+                        
+                        <div id="progressIndicator" class="progress-indicator hidden">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Output Panel -->
+                <div class="lg:col-span-1">
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-check-circle mr-3"></i>
+                            Processed Output
+                        </h3>
+                        
+                        <textarea 
+                            id="outputText" 
+                            class="text-area" 
+                            placeholder="Processed text will appear here..."
+                            readonly
+                        ></textarea>
+                        
+                        <div class="mt-4 flex flex-wrap gap-3">
+                            <button id="copyBtn" class="btn-success flex-1" onclick="copyOutput()" disabled>
+                                <i class="fas fa-copy mr-2"></i>
+                                Copy Result
+                            </button>
+                            <button id="downloadBtn" class="btn-secondary flex-1" onclick="downloadResult()" disabled>
+                                <i class="fas fa-download mr-2"></i>
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Statistics Section -->
+        <section id="results" class="container mx-auto px-6 mt-8">
+            <div class="glass-card p-6">
+                <h3 class="text-xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-chart-bar mr-3"></i>
+                    Processing Statistics
+                </h3>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalLines">0</div>
+                        <div class="text-sm opacity-70">Total Lines</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="uniqueLines">0</div>
+                        <div class="text-sm opacity-70">Unique Lines</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="duplicatesFound">0</div>
+                        <div class="text-sm opacity-70">Duplicates Removed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="reductionPercentage">0%</div>
+                        <div class="text-sm opacity-70">Size Reduction</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="processingTime">0ms</div>
+                        <div class="text-sm opacity-70">Processing Time</div>
+                    </div>
+                </div>
+                
+                <!-- Duplicate Lines Preview -->
+                <div id="duplicatesPreview" class="mt-6 hidden">
+                    <h4 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-eye mr-2"></i>
+                        Duplicate Lines Found
+                    </h4>
+                    <div id="duplicatesList" class="bg-opacity-10 bg-red-500 border border-red-500 border-opacity-30 rounded-lg p-4 max-h-48 overflow-y-auto">
+                        <!-- Duplicate lines will be shown here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-8 text-center opacity-70">
+        <p>&copy; 2025 Tool Xeno. Professional duplicate line removal tool with advanced filtering capabilities.</p>
+    </footer>
+    
+    <script>
+        // Global settings
+        let settings = {
+            caseSensitive: false,
+            preserveMode: 'first',
+            trimWhitespace: true,
+            removeEmpty: true,
+            sortMode: 'none'
+        };
+        
+        let processedData = {
+            totalLines: 0,
+            uniqueLines: 0,
+            duplicatesFound: 0,
+            duplicateLines: [],
+            processingTime: 0
+        };
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            initializeSettings();
+        });
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Initialize settings
+        function initializeSettings() {
+            updateSettingsUI();
+        }
+        
+        // Toggle setting
+        function toggleSetting(setting) {
+            settings[setting] = !settings[setting];
+            updateSettingsUI();
+            processText();
+        }
+        
+        // Set preserve mode
+        function setPreserveMode(mode) {
+            settings.preserveMode = mode;
+            document.querySelectorAll('[data-preserve]').forEach(el => {
+                el.classList.toggle('active', el.dataset.preserve === mode);
+            });
+            processText();
+        }
+        
+        // Set sort mode
+        function setSortMode(mode) {
+            settings.sortMode = mode;
+            document.querySelectorAll('[data-sort]').forEach(el => {
+                el.classList.toggle('active', el.dataset.sort === mode);
+            });
+            processText();
+        }
+        
+        // Update settings UI
+        function updateSettingsUI() {
+            document.getElementById('caseSensitive').classList.toggle('active', settings.caseSensitive);
+            document.getElementById('trimWhitespace').classList.toggle('active', settings.trimWhitespace);
+            document.getElementById('removeEmpty').classList.toggle('active', settings.removeEmpty);
+        }
+        
+        // Load sample text
+        function loadSampleText() {
+            const sampleText = `apple
+banana
+Apple
+cherry
+banana
+date
+apple
+fig
+Cherry
+grape
+banana
+apple
+kiwi
+date
+mango
+Apple
+orange
+cherry
+banana
+fig
+grape
+apple
+kiwi
+date
+mango`;
+            document.getElementById('inputText').value = sampleText;
+            processText();
+        }
+        
+        // Clear all
+        function clearAll() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('outputText').value = '';
+            resetStats();
+            updateButtonStates();
+        }
+        
+        // Process text
+        function processText() {
+            const startTime = performance.now();
+            const inputText = document.getElementById('inputText').value;
+            
+            if (!inputText.trim()) {
+                document.getElementById('outputText').value = '';
+                resetStats();
+                updateButtonStates();
+                return;
+            }
+            
+            showProgress();
+            
+            // Simulate processing for better UX
+            setTimeout(() => {
+                const result = removeDuplicates(inputText);
+                document.getElementById('outputText').value = result.output;
+                
+                processedData = {
+                    ...result,
+                    processingTime: Math.round(performance.now() - startTime)
+                };
+                
+                updateStats();
+                updateButtonStates();
+                hideProgress();
+            }, 100);
+        }
+        
+        // Remove duplicates logic
+        function removeDuplicates(text) {
+            let lines = text.split('\n');
+            const originalCount = lines.length;
+            const seenLines = new Map();
+            const duplicateLines = [];
+            let result = [];
+            
+            // Process each line
+            lines.forEach((line, index) => {
+                let processedLine = line;
+                
+                // Trim whitespace if enabled
+                if (settings.trimWhitespace) {
+                    processedLine = processedLine.trim();
+                }
+                
+                // Skip empty lines if enabled
+                if (settings.removeEmpty && !processedLine) {
+                    return;
+                }
+                
+                // Prepare comparison key
+                let comparisonKey = settings.caseSensitive ? processedLine : processedLine.toLowerCase();
+                
+                if (seenLines.has(comparisonKey)) {
+                    // Duplicate found
+                    const firstIndex = seenLines.get(comparisonKey);
+                    duplicateLines.push({
+                        line: processedLine,
+                        originalIndex: index + 1,
+                        firstSeenAt: firstIndex
+                    });
+                    
+                    if (settings.preserveMode === 'last') {
+                        // Replace the previous occurrence
+                        const resultIndex = result.findIndex(item => 
+                            (settings.caseSensitive ? item : item.toLowerCase()) === comparisonKey
+                        );
+                        if (resultIndex !== -1) {
+                            result[resultIndex] = processedLine;
+                        }
+                    }
+                    // If preserveMode is 'first', do nothing (keep the first occurrence)
+                } else {
+                    // First occurrence
+                    seenLines.set(comparisonKey, index + 1);
+                    result.push(processedLine);
+                }
+            });
+            
+            // Apply sorting
+            if (settings.sortMode === 'asc') {
+                result.sort((a, b) => {
+                    const aKey = settings.caseSensitive ? a : a.toLowerCase();
+                    const bKey = settings.caseSensitive ? b : b.toLowerCase();
+                    return aKey.localeCompare(bKey);
+                });
+            } else if (settings.sortMode === 'desc') {
+                result.sort((a, b) => {
+                    const aKey = settings.caseSensitive ? a : a.toLowerCase();
+                    const bKey = settings.caseSensitive ? b : b.toLowerCase();
+                    return bKey.localeCompare(aKey);
+                });
+            }
+            
+            return {
+                output: result.join('\n'),
+                totalLines: originalCount,
+                uniqueLines: result.length,
+                duplicatesFound: duplicateLines.length,
+                duplicateLines: duplicateLines
+            };
+        }
+        
+        // Show progress
+        function showProgress() {
+            document.getElementById('progressIndicator').classList.remove('hidden');
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 30;
+                if (progress >= 90) {
+                    clearInterval(interval);
+                    progress = 90;
+                }
+                document.getElementById('progressFill').style.width = progress + '%';
+            }, 50);
+        }
+        
+        // Hide progress
+        function hideProgress() {
+            document.getElementById('progressFill').style.width = '100%';
+            setTimeout(() => {
+                document.getElementById('progressIndicator').classList.add('hidden');
+                document.getElementById('progressFill').style.width = '0%';
+            }, 300);
+        }
+        
+        // Update statistics
+        function updateStats() {
+            document.getElementById('totalLines').textContent = processedData.totalLines;
+            document.getElementById('uniqueLines').textContent = processedData.uniqueLines;
+            document.getElementById('duplicatesFound').textContent = processedData.duplicatesFound;
+            
+            const reduction = processedData.totalLines > 0 
+                ? Math.round((processedData.duplicatesFound / processedData.totalLines) * 100)
+                : 0;
+            document.getElementById('reductionPercentage').textContent = reduction + '%';
+            document.getElementById('processingTime').textContent = processedData.processingTime + 'ms';
+            
+            // Show duplicates preview
+            if (processedData.duplicateLines.length > 0) {
+                showDuplicatesPreview();
+            } else {
+                document.getElementById('duplicatesPreview').classList.add('hidden');
+            }
+        }
+        
+        // Show duplicates preview
+        function showDuplicatesPreview() {
+            const preview = document.getElementById('duplicatesPreview');
+            const list = document.getElementById('duplicatesList');
+            
+            list.innerHTML = '';
+            processedData.duplicateLines.slice(0, 20).forEach(duplicate => {
+                const item = document.createElement('div');
+                item.className = 'line-highlight mb-1';
+                item.innerHTML = `
+                    <span class="font-mono text-sm">${escapeHtml(duplicate.line)}</span>
+                    <span class="text-xs opacity-70 ml-2">(line ${duplicate.originalIndex})</span>
+                `;
+                list.appendChild(item);
+            });
+            
+            if (processedData.duplicateLines.length > 20) {
+                const more = document.createElement('div');
+                more.className = 'text-sm opacity-70 mt-2';
+                more.textContent = `... and ${processedData.duplicateLines.length - 20} more duplicates`;
+                list.appendChild(more);
+            }
+            
+            preview.classList.remove('hidden');
+        }
+        
+        // Reset statistics
+        function resetStats() {
+            processedData = {
+                totalLines: 0,
+                uniqueLines: 0,
+                duplicatesFound: 0,
+                duplicateLines: [],
+                processingTime: 0
+            };
+            updateStats();
+        }
+        
+        // Update button states
+        function updateButtonStates() {
+            const hasOutput = document.getElementById('outputText').value.trim() !== '';
+            document.getElementById('copyBtn').disabled = !hasOutput;
+            document.getElementById('downloadBtn').disabled = !hasOutput;
+        }
+        
+        // Copy output
+        function copyOutput() {
+            const output = document.getElementById('outputText');
+            output.select();
+            document.execCommand('copy');
+            
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
+            btn.classList.add('btn-success');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('btn-success');
+            }, 2000);
+        }
+        
+        // Download result
+        function downloadResult() {
+            const output = document.getElementById('outputText').value;
+            if (!output.trim()) return;
+            
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `deduplicated_text_${new Date().getTime()}.txt`;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Debounce function for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
+        // Apply debounce to processText
+        const debouncedProcess = debounce(processText, 300);
+        document.getElementById('inputText').oninput = debouncedProcess;
+    </script>
+</body>
+</html>
