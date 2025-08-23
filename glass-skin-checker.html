@@ -6,828 +6,1224 @@
     <title>Glass Skin Checker - Professional Skin Analysis Tool | Tool Xeno</title>
     <meta name="description" content="Professional glass skin analysis with 15-step assessment, real-time scoring, and personalized skincare recommendations. Get your comprehensive skin health report instantly.">
     <meta name="keywords" content="glass skin checker, skin analysis, skincare assessment, Korean beauty, skin health, dermatology tool, skincare routine">
-    
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+code
+Code
+<!-- External Libraries -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        
+        --dark-bg: #0a0a0a;
+        --dark-surface: #1a1a1a;
+        --dark-surface-elevated: #252525;
+        --dark-text: #ffffff;
+        --dark-text-secondary: #a0a0a0;
+        --dark-border: #333333;
+    }
 
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            
-            --dark-bg: #0a0a0a;
-            --dark-surface: #1a1a1a;
-            --dark-surface-elevated: #252525;
-            --dark-text: #ffffff;
-            --dark-text-secondary: #a0a0a0;
-            --dark-border: #333333;
-            
-            --light-bg: #f8fafc;
-            --light-surface: #ffffff;
-            --light-surface-elevated: #f1f5f9;
-            --light-text: #1e293b;
-            --light-text-secondary: #64748b;
-            --light-border: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            line-height: 1.6;
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-            min-height: 100vh;
-        }
-        
-        body.light-theme { 
-            background-color: var(--light-bg); 
-            color: var(--light-text); 
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.05;
-            background: radial-gradient(circle, #667eea 0%, transparent 70%);
-        }
-        
-        body.light-theme .particle { 
-            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(100vh) rotate(0deg); } 
-            100% { transform: translateY(-100px) rotate(360deg); } 
-        }
-        
-        .header-glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.35s ease, border-color 0.35s ease;
-        }
-        
-        body.light-theme .header-glass { 
-            background: rgba(255, 255, 255, 0.9); 
-            border-bottom-color: rgba(0, 0, 0, 0.1); 
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--dark-surface);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.light-theme .theme-toggle { 
-            background: var(--light-surface-elevated); 
-            border-color: var(--light-border); 
-        }
-        
-        body.light-theme .theme-toggle::after { 
-            transform: translateX(28px); 
-            background: var(--secondary-gradient); 
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
-        
-        body.light-theme .glass-card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-color: rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
-        }
-        
-        .btn-gradient {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .btn-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .btn-gradient:hover::before { left: 100%; }
-        .btn-gradient:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
-        }
-        .btn-gradient:active { transform: translateY(0); }
-        .btn-gradient:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-        .btn-gradient:disabled:hover::before {
-             left: -100%;
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--primary-gradient);
-            border-radius: 4px;
-            transition: width 0.3s ease;
-            width: 0%;
-        }
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: var(--dark-bg);
+        color: var(--dark-text);
+        line-height: 1.6;
+        min-height: 100vh;
+    }
 
-        /* --- Glass Skin Checker Specific Styles --- */
-        .gradient-text {
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+    .particles-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        overflow: hidden;
+    }
 
-        body.light-theme .gradient-text {
-            background: var(--secondary-gradient);
-             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+    .particle {
+        position: absolute;
+        border-radius: 50%;
+        animation: float 20s infinite linear;
+        opacity: 0.05;
+        background: radial-gradient(circle, #667eea 0%, transparent 70%);
+    }
 
-        .question-card {
-            display:none;
-        }
+    @keyframes float {
+        0% { transform: translateY(100vh) rotate(0deg); }
+        100% { transform: translateY(-100px) rotate(360deg); }
+    }
 
-        .question-card.active {
-            display:block;
-            animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
 
-        .option-button {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 16px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: left;
-            display: block;
-            width: 100%;
-            margin: 8px 0;
-        }
-        
-        body.light-theme .option-button {
-            background: rgba(0,0,0,0.02);
-            border-color: var(--light-border);
-        }
+    .glass-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    }
 
-        .option-button:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(102, 126, 234, 0.5);
-            transform: translateX(4px);
-        }
-        
-        body.light-theme .option-button:hover {
-            background: rgba(0,0,0,0.05);
-            border-color: rgba(102, 126, 234, 0.5);
-        }
+    .glass-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
 
-        .option-button.selected {
-            background: rgba(102, 126, 234, 0.2);
-            border-color: #667eea;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
+    .btn-gradient {
+        background: var(--primary-gradient);
+        border: none;
+        border-radius: 12px;
+        padding: 12px 24px;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-        .results-section {
-            display: none;
-        }
+    .btn-gradient:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
 
-        .results-section.active {
-            display: block;
-            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .btn-gradient:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
 
-        .category-score {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+    .progress-bar {
+        height: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: var(--primary-gradient);
+        transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 4px;
+    }
+
+    .question-card {
+        transform: translateX(100%);
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .question-card.active {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    .question-card.prev {
+        transform: translateX(-100%);
+    }
+
+    .option-button {
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 16px 20px;
+        color: var(--dark-text);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: left;
+        display: block;
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    .option-button:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(102, 126, 234, 0.5);
+        transform: translateX(4px);
+    }
+
+    .option-button.selected {
+        background: rgba(102, 126, 234, 0.2);
+        border-color: #667eea;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .score-meter {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        margin: 20px auto;
+    }
+
+    .results-section {
+        display: none;
+    }
+
+    .results-section.active {
+        display: block;
+        animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .category-score {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px;
+        margin: 8px 0;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .score-bar {
+        width: 100px;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .score-bar-fill {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .recommendation-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 20px;
+        margin: 16px 0;
+        transition: all 0.3s ease;
+    }
+
+    .recommendation-card:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+    }
+
+    .chart-container {
+        position: relative;
+        height: 300px;
+        margin: 20px 0;
+    }
+
+    .floating-icon {
+        animation: floatIcon 3s ease-in-out infinite;
+    }
+
+    @keyframes floatIcon {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .gradient-text {
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    @media (max-width: 768px) {
+        .container {
             padding: 16px;
-            margin: 8px 0;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        body.light-theme .category-score {
-             background: rgba(0,0,0,0.02);
-            border-color: var(--light-border);
-        }
-
-        .score-bar {
-            width: 100px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .score-bar-fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .recommendation-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 20px;
-            margin: 16px 0;
-            transition: all 0.3s ease;
         }
         
-        body.light-theme .recommendation-card {
-            background: rgba(0,0,0,0.02);
-            border-color: var(--light-border);
-        }
-
-        .recommendation-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-2px);
+        .score-meter {
+            width: 150px;
+            height: 150px;
         }
         
-        body.light-theme .recommendation-card:hover {
-             background: rgba(0,0,0,0.05);
-        }
-
         .chart-container {
-            position: relative;
-            height: 300px;
-            margin: 20px auto;
-            max-width: 400px;
+            height: 250px;
         }
+    }
 
-        .floating-icon {
-            animation: floatIcon 3s ease-in-out infinite;
-        }
+    .hidden {
+        display: none;
+    }
 
-        @keyframes floatIcon {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
+    .fade-in {
+        animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-        .fade-in {
-            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            .chart-container {
-                height: 250px;
-            }
-        }
-    </style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
 </head>
-
 <body>
     <!-- Floating Particles -->
     <div class="particles-container" id="particles"></div>
-    
-    <!-- Header -->
-    <header class="header-glass fixed w-full top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        🛠️ Tool Xeno
-                    </div>
-                    <div class="hidden md:block text-sm opacity-70">
-                        Glass Skin Analysis
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
-                </div>
+code
+Code
+<!-- Main Container -->
+<div class="min-h-screen py-8">
+    <div class="container mx-auto px-4 max-w-4xl">
+code
+Code
+<!-- Header -->
+    <div class="text-center mb-8 fade-in">
+        <div class="floating-icon text-6xl mb-4">💎</div>
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 gradient-text">
+            Glass Skin Checker
+        </h1>
+        <p class="text-xl md:text-2xl opacity-80 mb-6">
+            Professional 15-Step Skin Analysis & Assessment
+        </p>
+        <p class="text-base opacity-70 max-w-2xl mx-auto">
+            Get your comprehensive glass skin analysis with personalized recommendations, 
+            professional scoring, and detailed skincare routine suggestions.
+        </p>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quizSection" class="glass-card p-6 md:p-8 mb-8">
+        
+        <!-- Progress Bar -->
+        <div class="mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium">Progress</span>
+                <span class="text-sm" id="progressText">0/15</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
             </div>
         </div>
-    </header>
-    
-    <!-- Main Content -->
-    <main class="pt-24 pb-10">
-        <div class="container mx-auto px-4 max-w-4xl">
-            
-            <!-- Hero Section -->
-            <section class="text-center mb-8 fade-in">
-                 <div class="floating-icon text-6xl mb-4">💎</div>
-                <h1 class="text-4xl md:text-6xl font-bold mb-4 gradient-text">
-                    Glass Skin Checker
-                </h1>
-                <p class="text-lg md:text-xl opacity-80 max-w-3xl mx-auto">
-                    Get your comprehensive glass skin analysis with personalized recommendations, professional scoring, and detailed skincare routine suggestions.
-                </p>
-            </section>
 
-            <!-- Quiz Section -->
-            <div id="quizSection" class="glass-card p-6 md:p-8 mb-8">
-                
-                <!-- Progress Bar -->
+        <!-- Question Container -->
+        <div id="questionContainer" class="min-h-96">
+            <!-- Questions will be dynamically inserted here -->
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-between mt-8">
+            <button id="prevBtn" class="btn-gradient opacity-50 cursor-not-allowed" disabled>
+                <i class="fas fa-arrow-left mr-2"></i>Previous
+            </button>
+            <button id="nextBtn" class="btn-gradient opacity-50 cursor-not-allowed" disabled>
+                Next<i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="resultsSection" class="results-section">
+        
+        <!-- Overall Score -->
+        <div class="glass-card p-6 md:p-8 mb-8 text-center">
+            <h2 class="text-3xl font-bold mb-4 gradient-text">Your Glass Skin Score</h2>
+            <div class="chart-container">
+                <canvas id="overallScoreChart"></canvas>
+            </div>
+            <div id="overallScoreText" class="text-2xl font-bold mt-4"></div>
+            <div id="scoreSummary" class="text-lg opacity-80 mt-2"></div>
+        </div>
+
+        <!-- Category Scores -->
+        <div class="glass-card p-6 md:p-8 mb-8">
+            <h3 class="text-2xl font-bold mb-6 gradient-text">Detailed Analysis</h3>
+            <div id="categoryScores">
+                <!-- Category scores will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Skin Analysis Chart -->
+        <div class="glass-card p-6 md:p-8 mb-8">
+            <h3 class="text-2xl font-bold mb-6 gradient-text">Skin Health Radar</h3>
+            <div class="chart-container">
+                <canvas id="radarChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="glass-card p-6 md:p-8 mb-8">
+            <h3 class="text-2xl font-bold mb-6 gradient-text">
+                <i class="fas fa-lightbulb mr-2"></i>Personalized Recommendations
+            </h3>
+            <div id="recommendations">
+                <!-- Recommendations will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Skincare Routine -->
+        <div class="glass-card p-6 md:p-8 mb-8">
+            <h3 class="text-2xl font-bold mb-6 gradient-text">
+                <i class="fas fa-calendar-check mr-2"></i>Recommended Skincare Routine
+            </h3>
+            <div id="skincareRoutine">
+                <!-- Routine will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="text-center space-y-4">
+            <button id="downloadBtn" class="btn-gradient text-lg px-8 py-4 mr-4">
+                <i class="fas fa-download mr-2"></i>Download Report
+            </button>
+            <button id="shareBtn" class="btn-gradient text-lg px-8 py-4 mr-4" style="background: var(--secondary-gradient);">
+                <i class="fas fa-share-alt mr-2"></i>Share Results
+            </button>
+            <button id="retakeBtn" class="btn-gradient text-lg px-8 py-4" style="background: var(--accent-gradient);">
+                <i class="fas fa-redo mr-2"></i>Retake Quiz
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    // Quiz Data
+    const questions = [
+        {
+            id: 1,
+            category: 'hydration',
+            question: 'How does your skin feel in the morning before applying any products?',
+            options: [
+                { text: 'Very tight and dry', score: 1 },
+                { text: 'Slightly tight', score: 2 },
+                { text: 'Normal and comfortable', score: 4 },
+                { text: 'Soft and hydrated', score: 5 }
+            ]
+        },
+        {
+            id: 2,
+            category: 'hydration',
+            question: 'How often do you experience skin flaking or peeling?',
+            options: [
+                { text: 'Daily or almost daily', score: 1 },
+                { text: 'Several times a week', score: 2 },
+                { text: 'Occasionally', score: 3 },
+                { text: 'Rarely or never', score: 5 }
+            ]
+        },
+        {
+            id: 3,
+            category: 'pores',
+            question: 'How would you describe your pore size?',
+            options: [
+                { text: 'Very large and noticeable', score: 1 },
+                { text: 'Moderately large', score: 2 },
+                { text: 'Average size', score: 3 },
+                { text: 'Small and barely visible', score: 5 }
+            ]
+        },
+        {
+            id: 4,
+            category: 'pores',
+            question: 'Do you frequently have clogged pores or blackheads?',
+            options: [
+                { text: 'Yes, constantly', score: 1 },
+                { text: 'Often', score: 2 },
+                { text: 'Sometimes', score: 3 },
+                { text: 'Rarely or never', score: 5 }
+            ]
+        },
+        {
+            id: 5,
+            category: 'texture',
+            question: 'How would you describe your skin texture?',
+            options: [
+                { text: 'Very rough and bumpy', score: 1 },
+                { text: 'Slightly rough', score: 2 },
+                { text: 'Generally smooth', score: 4 },
+                { text: 'Very smooth and even', score: 5 }
+            ]
+        },
+        {
+            id: 6,
+            category: 'texture',
+            question: 'Do you have acne scars or uneven skin surface?',
+            options: [
+                { text: 'Yes, many noticeable scars', score: 1 },
+                { text: 'Some visible scars', score: 2 },
+                { text: 'Very few minor marks', score: 4 },
+                { text: 'No scars, perfectly smooth', score: 5 }
+            ]
+        },
+        {
+            id: 7,
+            category: 'clarity',
+            question: 'How clear and radiant does your skin appear?',
+            options: [
+                { text: 'Dull and tired-looking', score: 1 },
+                { text: 'Somewhat dull', score: 2 },
+                { text: 'Generally bright', score: 4 },
+                { text: 'Very radiant and glowing', score: 5 }
+            ]
+        },
+        {
+            id: 8,
+            category: 'clarity',
+            question: 'Do you have dark spots or hyperpigmentation?',
+            options: [
+                { text: 'Yes, many noticeable spots', score: 1 },
+                { text: 'Some visible spots', score: 2 },
+                { text: 'Very few minor spots', score: 4 },
+                { text: 'No dark spots, even tone', score: 5 }
+            ]
+        },
+        {
+            id: 9,
+            category: 'firmness',
+            question: 'How firm and elastic does your skin feel?',
+            options: [
+                { text: 'Very loose and saggy', score: 1 },
+                { text: 'Somewhat loose', score: 2 },
+                { text: 'Generally firm', score: 4 },
+                { text: 'Very tight and elastic', score: 5 }
+            ]
+        },
+        {
+            id: 10,
+            category: 'firmness',
+            question: 'Do you have visible fine lines or wrinkles?',
+            options: [
+                { text: 'Yes, many noticeable lines', score: 1 },
+                { text: 'Some visible lines', score: 2 },
+                { text: 'Very few minor lines', score: 4 },
+                { text: 'No visible lines', score: 5 }
+            ]
+        },
+        {
+            id: 11,
+            category: 'oil_balance',
+            question: 'How would you describe your skin\'s oil production?',
+            options: [
+                { text: 'Extremely oily, shiny all day', score: 2 },
+                { text: 'Moderately oily', score: 3 },
+                { text: 'Balanced, not too oily or dry', score: 5 },
+                { text: 'Very dry, no oil production', score: 1 }
+            ]
+        },
+        {
+            id: 12,
+            category: 'oil_balance',
+            question: 'How often do you need to blot or powder your face?',
+            options: [
+                { text: 'Multiple times throughout the day', score: 2 },
+                { text: 'Once or twice a day', score: 3 },
+                { text: 'Rarely', score: 5 },
+                { text: 'Never, my skin is too dry', score: 1 }
+            ]
+        },
+        {
+            id: 13,
+            category: 'sensitivity',
+            question: 'How does your skin react to new products?',
+            options: [
+                { text: 'Immediately gets irritated or breaks out', score: 1 },
+                { text: 'Sometimes reacts negatively', score: 2 },
+                { text: 'Occasionally has mild reactions', score: 3 },
+                { text: 'Rarely reacts, very tolerant', score: 5 }
+            ]
+        },
+        {
+            id: 14,
+            category: 'sensitivity',
+            question: 'Do you experience redness or irritation regularly?',
+            options: [
+                { text: 'Yes, frequently red or irritated', score: 1 },
+                { text: 'Sometimes red or irritated', score: 2 },
+                { text: 'Rarely red or irritated', score: 4 },
+                { text: 'Never red or irritated', score: 5 }
+            ]
+        },
+        {
+            id: 15,
+            category: 'overall',
+            question: 'Overall, how satisfied are you with your current skin condition?',
+            options: [
+                { text: 'Very dissatisfied, many concerns', score: 1 },
+                { text: 'Somewhat dissatisfied', score: 2 },
+                { text: 'Generally satisfied', score: 4 },
+                { text: 'Very satisfied, love my skin', score: 5 }
+            ]
+        }
+    ];
+
+    // State
+    let currentQuestion = 0;
+    let answers = {};
+    let scores = {
+        hydration: 0,
+        pores: 0,
+        texture: 0,
+        clarity: 0,
+        firmness: 0,
+        oil_balance: 0,
+        sensitivity: 0,
+        overall: 0
+    };
+
+    // DOM Elements
+    const questionContainer = document.getElementById('questionContainer');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const quizSection = document.getElementById('quizSection');
+    const resultsSection = document.getElementById('resultsSection');
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        createParticles();
+        renderQuestion();
+    });
+
+    // Create floating particles
+    function createParticles() {
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 15; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.width = Math.random() * 4 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            container.appendChild(particle);
+        }
+    }
+
+    // Render current question
+    function renderQuestion() {
+        const question = questions[currentQuestion];
+        
+        questionContainer.innerHTML = `
+            <div class="question-card active">
                 <div class="mb-6">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-sm font-medium opacity-80">Progress</span>
-                        <span class="text-sm font-medium" id="progressText">0/15</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-                    </div>
+                    <span class="text-sm font-medium text-blue-400">Question ${currentQuestion + 1} of 15</span>
+                    <h3 class="text-2xl font-bold mt-2 mb-6">${question.question}</h3>
                 </div>
-
-                <!-- Question Container -->
-                <div id="questionContainer" class="min-h-[24rem] relative">
-                    <!-- Questions will be dynamically inserted here -->
-                </div>
-
-                <!-- Navigation Buttons -->
-                <div class="flex justify-between mt-8 border-t border-white/10 pt-6">
-                    <button id="prevBtn" class="btn-gradient" disabled>
-                        <i class="fas fa-arrow-left mr-2"></i>Previous
-                    </button>
-                    <button id="nextBtn" class="btn-gradient" disabled>
-                        Next<i class="fas fa-arrow-right ml-2"></i>
-                    </button>
+                <div class="space-y-3">
+                    ${question.options.map((option, index) => `
+                        <button class="option-button" onclick="selectOption(${index}, ${option.score})">
+                            <div class="flex items-center">
+                                <span class="flex-1">${option.text}</span>
+                                <i class="fas fa-circle-check ml-3 text-blue-400 opacity-0 transition-opacity"></i>
+                            </div>
+                        </button>
+                    `).join('')}
                 </div>
             </div>
+        `;
 
-            <!-- Results Section -->
-            <div id="resultsSection" class="results-section">
-                
-                <!-- Overall Score -->
-                <div class="glass-card p-6 md:p-8 mb-8 text-center">
-                    <h2 class="text-3xl font-bold mb-4 gradient-text">Your Glass Skin Score</h2>
-                    <div class="chart-container">
-                        <canvas id="overallScoreChart"></canvas>
-                    </div>
-                    <div id="overallScoreText" class="text-2xl font-bold mt-4"></div>
-                    <div id="scoreSummary" class="text-lg opacity-80 mt-2 max-w-2xl mx-auto"></div>
-                </div>
+        // Update progress
+        const progress = ((currentQuestion) / questions.length) * 100;
+        progressFill.style.width = progress + '%';
+        progressText.textContent = `${currentQuestion}/${questions.length}`;
 
-                <!-- Category Scores -->
-                <div class="glass-card p-6 md:p-8 mb-8">
-                    <h3 class="text-2xl font-bold mb-6 gradient-text">Detailed Analysis</h3>
-                    <div id="categoryScores" class="space-y-3">
-                        <!-- Category scores will be inserted here -->
-                    </div>
-                </div>
+        // Update navigation buttons
+        prevBtn.disabled = currentQuestion === 0;
+        prevBtn.className = currentQuestion === 0 
+            ? 'btn-gradient opacity-50 cursor-not-allowed' 
+            : 'btn-gradient';
 
-                <!-- Skin Analysis Chart -->
-                <div class="glass-card p-6 md:p-8 mb-8">
-                    <h3 class="text-2xl font-bold mb-6 gradient-text">Skin Health Radar</h3>
-                    <div class="chart-container h-80">
-                        <canvas id="radarChart"></canvas>
-                    </div>
-                </div>
+        // Check if answer exists for this question
+        const hasAnswer = answers[question.id] !== undefined;
+        nextBtn.disabled = !hasAnswer;
+        nextBtn.className = !hasAnswer 
+            ? 'btn-gradient opacity-50 cursor-not-allowed' 
+            : 'btn-gradient';
 
-                <!-- Recommendations -->
-                <div class="glass-card p-6 md:p-8 mb-8">
-                    <h3 class="text-2xl font-bold mb-6 gradient-text">
-                        <i class="fas fa-lightbulb mr-2"></i>Personalized Recommendations
-                    </h3>
-                    <div id="recommendations">
-                        <!-- Recommendations will be inserted here -->
-                    </div>
-                </div>
-
-                <!-- Skincare Routine -->
-                <div class="glass-card p-6 md:p-8 mb-8">
-                    <h3 class="text-2xl font-bold mb-6 gradient-text">
-                        <i class="fas fa-calendar-check mr-2"></i>Recommended Skincare Routine
-                    </h3>
-                    <div id="skincareRoutine">
-                        <!-- Routine will be inserted here -->
-                    </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="text-center space-y-4 md:space-y-0 md:space-x-4">
-                    <button id="downloadBtn" class="btn-gradient text-lg px-8 py-3">
-                        <i class="fas fa-download mr-2"></i>Download Report
-                    </button>
-                     <button id="retakeBtn" class="btn-gradient text-lg px-8 py-3" style="background: var(--accent-gradient);">
-                        <i class="fas fa-redo mr-2"></i>Retake Quiz
-                    </button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        // --- Theme and Particle Logic from Tool Xeno ---
-        
-        // Theme toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
-            // Re-render charts for theme change if results are visible
-             if (document.getElementById('resultsSection').classList.contains('active')) {
-                renderOverallScoreChart();
-                renderRadarChart();
-            }
+        // Pre-select answer if exists
+        if (hasAnswer) {
+            const buttons = document.querySelectorAll('.option-button');
+            buttons[answers[question.id].optionIndex].classList.add('selected');
+            const checkIcon = buttons[answers[question.id].optionIndex].querySelector('.fa-circle-check');
+            checkIcon.style.opacity = '1';
         }
-        
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-theme');
-        }
-        
-        // Initialize floating particles
-        function initializeParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                container.appendChild(particle);
-            }
-        }
-        
-        // --- Glass Skin Checker Logic ---
-        
-        const questions = [
-            { id: 1, category: 'hydration', question: 'How does your skin feel in the morning before applying any products?', options: [ { text: 'Very tight and dry', score: 1 }, { text: 'Slightly tight', score: 2 }, { text: 'Normal and comfortable', score: 4 }, { text: 'Soft and hydrated', score: 5 } ] },
-            { id: 2, category: 'hydration', question: 'How often do you experience skin flaking or peeling?', options: [ { text: 'Daily or almost daily', score: 1 }, { text: 'Several times a week', score: 2 }, { text: 'Occasionally', score: 3 }, { text: 'Rarely or never', score: 5 } ] },
-            { id: 3, category: 'pores', question: 'How would you describe your pore size?', options: [ { text: 'Very large and noticeable', score: 1 }, { text: 'Moderately large', score: 2 }, { text: 'Average size', score: 3 }, { text: 'Small and barely visible', score: 5 } ] },
-            { id: 4, category: 'pores', question: 'Do you frequently have clogged pores or blackheads?', options: [ { text: 'Yes, constantly', score: 1 }, { text: 'Often', score: 2 }, { text: 'Sometimes', score: 3 }, { text: 'Rarely or never', score: 5 } ] },
-            { id: 5, category: 'texture', question: 'How would you describe your skin texture?', options: [ { text: 'Very rough and bumpy', score: 1 }, { text: 'Slightly rough', score: 2 }, { text: 'Generally smooth', score: 4 }, { text: 'Very smooth and even', score: 5 } ] },
-            { id: 6, category: 'texture', question: 'Do you have acne scars or uneven skin surface?', options: [ { text: 'Yes, many noticeable scars', score: 1 }, { text: 'Some visible scars', score: 2 }, { text: 'Very few minor marks', score: 4 }, { text: 'No scars, perfectly smooth', score: 5 } ] },
-            { id: 7, category: 'clarity', question: 'How clear and radiant does your skin appear?', options: [ { text: 'Dull and tired-looking', score: 1 }, { text: 'Somewhat dull', score: 2 }, { text: 'Generally bright', score: 4 }, { text: 'Very radiant and glowing', score: 5 } ] },
-            { id: 8, category: 'clarity', question: 'Do you have dark spots or hyperpigmentation?', options: [ { text: 'Yes, many noticeable spots', score: 1 }, { text: 'Some visible spots', score: 2 }, { text: 'Very few minor spots', score: 4 }, { text: 'No dark spots, even tone', score: 5 } ] },
-            { id: 9, category: 'firmness', question: 'How firm and elastic does your skin feel?', options: [ { text: 'Very loose and saggy', score: 1 }, { text: 'Somewhat loose', score: 2 }, { text: 'Generally firm', score: 4 }, { text: 'Very tight and elastic', score: 5 } ] },
-            { id: 10, category: 'firmness', question: 'Do you have visible fine lines or wrinkles?', options: [ { text: 'Yes, many noticeable lines', score: 1 }, { text: 'Some visible lines', score: 2 }, { text: 'Very few minor lines', score: 4 }, { text: 'No visible lines', score: 5 } ] },
-            { id: 11, category: 'oil_balance', question: 'How would you describe your skin\'s oil production?', options: [ { text: 'Extremely oily, shiny all day', score: 2 }, { text: 'Moderately oily', score: 3 }, { text: 'Balanced, not too oily or dry', score: 5 }, { text: 'Very dry, no oil production', score: 1 } ] },
-            { id: 12, category: 'oil_balance', question: 'How often do you need to blot or powder your face?', options: [ { text: 'Multiple times throughout the day', score: 2 }, { text: 'Once or twice a day', score: 3 }, { text: 'Rarely', score: 5 }, { text: 'Never, my skin is too dry', score: 1 } ] },
-            { id: 13, category: 'sensitivity', question: 'How does your skin react to new products?', options: [ { text: 'Immediately gets irritated or breaks out', score: 1 }, { text: 'Sometimes reacts negatively', score: 2 }, { text: 'Occasionally has mild reactions', score: 3 }, { text: 'Rarely reacts, very tolerant', score: 5 } ] },
-            { id: 14, category: 'sensitivity', question: 'Do you experience redness or irritation regularly?', options: [ { text: 'Yes, frequently red or irritated', score: 1 }, { text: 'Sometimes red or irritated', score: 2 }, { text: 'Rarely red or irritated', score: 4 }, { text: 'Never red or irritated', score: 5 } ] },
-            { id: 15, category: 'overall', question: 'Overall, how satisfied are you with your current skin condition?', options: [ { text: 'Very dissatisfied, many concerns', score: 1 }, { text: 'Somewhat dissatisfied', score: 2 }, { text: 'Generally satisfied', score: 4 }, { text: 'Very satisfied, love my skin', score: 5 } ] }
-        ];
+    }
 
-        let currentQuestion = 0;
-        let answers = {};
-        let scores = { hydration: 0, pores: 0, texture: 0, clarity: 0, firmness: 0, oil_balance: 0, sensitivity: 0, overall: 0 };
-        let overallChartInstance = null;
-        let radarChartInstance = null;
-
-        const questionContainer = document.getElementById('questionContainer');
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const quizSection = document.getElementById('quizSection');
-        const resultsSection = document.getElementById('resultsSection');
-
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeParticles();
-            renderQuestion();
+    // Select option
+    function selectOption(optionIndex, score) {
+        const question = questions[currentQuestion];
+        
+        // Remove previous selections
+        document.querySelectorAll('.option-button').forEach((btn, index) => {
+            btn.classList.remove('selected');
+            const checkIcon = btn.querySelector('.fa-circle-check');
+            checkIcon.style.opacity = '0';
         });
 
-        function renderQuestion() {
-            const question = questions[currentQuestion];
+        // Add selection to clicked button
+        const selectedButton = document.querySelectorAll('.option-button')[optionIndex];
+        selectedButton.classList.add('selected');
+        const checkIcon = selectedButton.querySelector('.fa-circle-check');
+        checkIcon.style.opacity = '1';
+
+        // Store answer
+        answers[question.id] = {
+            optionIndex: optionIndex,
+            score: score,
+            category: question.category
+        };
+
+        // Enable next button
+        nextBtn.disabled = false;
+        nextBtn.className = 'btn-gradient';
+    }
+
+    // Navigation
+    prevBtn.addEventListener('click', () => {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            renderQuestion();
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            renderQuestion();
+        } else {
+            // Quiz completed
+            calculateScores();
+            showResults();
+        }
+    });
+
+    // Calculate scores
+    function calculateScores() {
+        // Reset scores
+        Object.keys(scores).forEach(key => scores[key] = 0);
+
+        // Calculate category scores
+        Object.values(answers).forEach(answer => {
+            if (scores[answer.category] !== undefined) {
+                scores[answer.category] += answer.score;
+            }
+        });
+
+        // Convert to percentages (each category has different max scores)
+        const maxScores = {
+            hydration: 10,    // 2 questions × 5 max score
+            pores: 10,        // 2 questions × 5 max score
+            texture: 10,      // 2 questions × 5 max score
+            clarity: 10,      // 2 questions × 5 max score
+            firmness: 10,     // 2 questions × 5 max score
+            oil_balance: 10,  // 2 questions × 5 max score
+            sensitivity: 10,  // 2 questions × 5 max score
+            overall: 5        // 1 question × 5 max score
+        };
+
+        Object.keys(scores).forEach(category => {
+            scores[category] = Math.round((scores[category] / maxScores[category]) * 100);
+        });
+
+        // Calculate overall glass skin score
+        const totalScore = Object.values(scores).reduce((sum, score) => sum + score, 0);
+        scores.glassSkinScore = Math.round(totalScore / Object.keys(scores).length);
+    }
+
+    // Show results
+    function showResults() {
+        quizSection.style.display = 'none';
+        resultsSection.classList.add('active');
+
+        // Render overall score chart
+        renderOverallScoreChart();
+        
+        // Render category scores
+        renderCategoryScores();
+        
+        // Render radar chart
+        renderRadarChart();
+        
+        // Generate recommendations
+        generateRecommendations();
+        
+        // Generate skincare routine
+        generateSkincareRoutine();
+
+        // Scroll to results
+        resultsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Render overall score chart
+    function renderOverallScoreChart() {
+        const ctx = document.getElementById('overallScoreChart').getContext('2d');
+        const score = scores.glassSkinScore;
+        
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [score, 100 - score],
+                    backgroundColor: [
+                        'rgba(102, 126, 234, 0.8)',
+                        'rgba(255, 255, 255, 0.1)'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                cutout: '70%',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false }
+                }
+            },
+            plugins: [{
+                afterDraw: function(chart) {
+                    const ctx = chart.ctx;
+                    const centerX = chart.chartArea.left + (chart.chartArea.right - chart.chartArea.left) / 2;
+                    const centerY = chart.chartArea.top + (chart.chartArea.bottom - chart.chartArea.top) / 2;
+                    
+                    ctx.save();
+                    ctx.font = 'bold 36px Inter';
+                    ctx.fillStyle = '#ffffff';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(score + '%', centerX, centerY - 10);
+                    
+                    ctx.font = '14px Inter';
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                    ctx.fillText('Glass Skin Score', centerX, centerY + 20);
+                    ctx.restore();
+                }
+            }]
+        });
+
+        // Update score text and summary
+        document.getElementById('overallScoreText').textContent = `${score}% Glass Skin Achievement`;
+        
+        let summary = '';
+        if (score >= 80) {
+            summary = 'Excellent! You have beautiful, glass-like skin with minimal concerns.';
+        } else if (score >= 60) {
+            summary = 'Good! Your skin is on the right track with some areas to improve.';
+        } else if (score >= 40) {
+            summary = 'Fair. There are several areas that need attention for better skin health.';
+        } else {
+            summary = 'Your skin needs significant care and attention to achieve glass skin goals.';
+        }
+        
+        document.getElementById('scoreSummary').textContent = summary;
+    }
+
+    // Render category scores
+    function renderCategoryScores() {
+        const categoryLabels = {
+            hydration: 'Hydration',
+            pores: 'Pore Quality',
+            texture: 'Skin Texture',
+            clarity: 'Clarity & Radiance',
+            firmness: 'Firmness & Elasticity',
+            oil_balance: 'Oil Balance',
+            sensitivity: 'Sensitivity Level',
+            overall: 'Overall Satisfaction'
+        };
+
+        const categoryIcons = {
+            hydration: 'fas fa-tint',
+            pores: 'fas fa-circle',
+            texture: 'fas fa-hand-paper',
+            clarity: 'fas fa-sun',
+            firmness: 'fas fa-dumbbell',
+            oil_balance: 'fas fa-balance-scale',
+            sensitivity: 'fas fa-exclamation-triangle',
+            overall: 'fas fa-heart'
+        };
+
+        let html = '';
+        Object.entries(scores).filter(([key]) => key !== 'glassSkinScore').forEach(([category, score]) => {
+            const color = score >= 80 ? '#38ef7d' : score >= 60 ? '#4facfe' : score >= 40 ? '#f093fb' : '#f5576c';
             
-            questionContainer.innerHTML = `
-                <div class="question-card active">
-                    <div class="mb-6">
-                        <span class="text-sm font-semibold" style="color: #667eea;">Question ${currentQuestion + 1} of 15</span>
-                        <h3 class="text-2xl font-semibold mt-2 mb-6">${question.question}</h3>
+            html += `
+                <div class="category-score">
+                    <div class="flex items-center">
+                        <i class="${categoryIcons[category]} text-2xl mr-4" style="color: ${color};"></i>
+                        <div>
+                            <div class="font-semibold">${categoryLabels[category]}</div>
+                            <div class="text-sm opacity-70">${score}%</div>
+                        </div>
                     </div>
-                    <div class="space-y-3">
-                        ${question.options.map((option, index) => `
-                            <button class="option-button" onclick="selectOption(${index}, ${option.score})">
-                                <span class="flex-1">${option.text}</span>
-                            </button>
-                        `).join('')}
+                    <div class="score-bar">
+                        <div class="score-bar-fill" style="width: ${score}%; background-color: ${color};"></div>
                     </div>
                 </div>
             `;
-
-            updateProgress();
-            updateNavButtons();
-
-            if (answers[question.id] !== undefined) {
-                const buttons = document.querySelectorAll('.option-button');
-                buttons[answers[question.id].optionIndex].classList.add('selected');
-            }
-        }
-
-        function selectOption(optionIndex, score) {
-            const question = questions[currentQuestion];
-            answers[question.id] = { optionIndex, score, category: question.category };
-            
-            document.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
-            document.querySelectorAll('.option-button')[optionIndex].classList.add('selected');
-
-            updateNavButtons();
-            
-            // Auto-advance to next question
-            setTimeout(() => {
-                nextBtn.click();
-            }, 300);
-        }
-
-        function updateProgress() {
-            const progress = ((currentQuestion) / questions.length) * 100;
-            progressFill.style.width = progress + '%';
-            progressText.textContent = `${currentQuestion}/${questions.length}`;
-        }
-
-        function updateNavButtons() {
-            prevBtn.disabled = currentQuestion === 0;
-            
-            const question = questions[currentQuestion];
-            const hasAnswer = answers[question.id] !== undefined;
-            nextBtn.disabled = !hasAnswer;
-        }
-
-        prevBtn.addEventListener('click', () => {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                renderQuestion();
-            }
         });
 
-        nextBtn.addEventListener('click', () => {
-            if (currentQuestion < questions.length - 1) {
-                currentQuestion++;
-                renderQuestion();
-            } else {
-                calculateScores();
-                showResults();
-            }
-        });
+        document.getElementById('categoryScores').innerHTML = html;
+    }
 
-        function calculateScores() {
-            Object.keys(scores).forEach(key => scores[key] = 0);
+    // Render radar chart
+    function renderRadarChart() {
+        const ctx = document.getElementById('radarChart').getContext('2d');
+        
+        const labels = ['Hydration', 'Pores', 'Texture', 'Clarity', 'Firmness', 'Oil Balance', 'Sensitivity'];
+        const data = [
+            scores.hydration,
+            scores.pores,
+            scores.texture,
+            scores.clarity,
+            scores.firmness,
+            scores.oil_balance,
+            scores.sensitivity
+        ];
 
-            Object.values(answers).forEach(answer => {
-                if (scores[answer.category] !== undefined) {
-                    scores[answer.category] += answer.score;
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Your Skin Health',
+                    data: data,
+                    fill: true,
+                    backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                    borderColor: 'rgba(102, 126, 234, 1)',
+                    pointBackgroundColor: 'rgba(102, 126, 234, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(102, 126, 234, 1)',
+                    borderWidth: 2,
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        pointLabels: { 
+                            color: '#ffffff',
+                            font: { size: 12, weight: '500' }
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)',
+                            backdropColor: 'transparent',
+                            min: 0,
+                            max: 100
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#ffffff' }
+                    }
                 }
-            });
+            }
+        });
+    }
 
-            const maxScores = { hydration: 10, pores: 10, texture: 10, clarity: 10, firmness: 10, oil_balance: 10, sensitivity: 10, overall: 5 };
+    // Generate recommendations
+    function generateRecommendations() {
+        const recommendations = [];
 
-            Object.keys(scores).forEach(category => {
-                scores[category] = Math.round((scores[category] / maxScores[category]) * 100);
-            });
-
-            const totalScore = Object.values(scores).reduce((sum, score) => sum + score, 0);
-            scores.glassSkinScore = Math.round(totalScore / Object.keys(scores).length);
-        }
-
-        function showResults() {
-            quizSection.style.display = 'none';
-            resultsSection.classList.add('active');
-
-            renderOverallScoreChart();
-            renderCategoryScores();
-            renderRadarChart();
-            generateRecommendations();
-            generateSkincareRoutine();
-
-            resultsSection.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function renderOverallScoreChart() {
-            const ctx = document.getElementById('overallScoreChart').getContext('2d');
-            const score = scores.glassSkinScore;
-             if(overallChartInstance) overallChartInstance.destroy();
-
-            const isLight = document.body.classList.contains('light-theme');
-            const textColor = isLight ? '#1e293b' : '#ffffff';
-            const secondaryTextColor = isLight ? '#64748b' : 'rgba(255, 255, 255, 0.7)';
-            const trackColor = isLight ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.1)';
-
-            overallChartInstance = new Chart(ctx, {
-                type: 'doughnut',
-                data: { datasets: [{ data: [score, 100 - score], backgroundColor: ['#667eea', trackColor], borderWidth: 0 }] },
-                options: { cutout: '80%', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false } } },
-                plugins: [{ afterDraw: chart => {
-                    const { ctx, chartArea: { left, right, top, bottom } } = chart;
-                    const centerX = (left + right) / 2;
-                    const centerY = (top + bottom) / 2;
-                    ctx.save();
-                    ctx.font = 'bold 3rem Inter'; ctx.fillStyle = textColor; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-                    ctx.fillText(score + '%', centerX, centerY - 10);
-                    ctx.font = '1rem Inter'; ctx.fillStyle = secondaryTextColor;
-                    ctx.fillText('Glass Skin Score', centerX, centerY + 30);
-                    ctx.restore();
-                }}]
-            });
-
-            document.getElementById('overallScoreText').textContent = `${score}% Glass Skin Achievement`;
-            let summary = score >= 80 ? 'Excellent! You have beautiful, glass-like skin with minimal concerns.' : score >= 60 ? 'Good! Your skin is on the right track with some areas to improve.' : score >= 40 ? 'Fair. There are several areas that need attention for better skin health.' : 'Your skin needs significant care and attention to achieve glass skin goals.';
-            document.getElementById('scoreSummary').textContent = summary;
-        }
-
-        function renderCategoryScores() {
-            const categoryLabels = { hydration: 'Hydration', pores: 'Pore Quality', texture: 'Skin Texture', clarity: 'Clarity & Radiance', firmness: 'Firmness & Elasticity', oil_balance: 'Oil Balance', sensitivity: 'Sensitivity Level', overall: 'Overall Satisfaction' };
-            const categoryIcons = { hydration: 'fas fa-tint', pores: 'fas fa-circle-notch', texture: 'fas fa-wave-square', clarity: 'fas fa-sun', firmness: 'fas fa-dumbbell', oil_balance: 'fas fa-balance-scale', sensitivity: 'fas fa-shield-alt', overall: 'fas fa-heart' };
-
-            let html = '';
-            Object.entries(scores).filter(([key]) => key !== 'glassSkinScore').forEach(([category, score]) => {
-                const color = score >= 80 ? '#38ef7d' : score >= 60 ? '#4facfe' : score >= 40 ? '#f093fb' : '#f5576c';
-                html += `<div class="category-score"><div class="flex items-center gap-4"><i class="${categoryIcons[category]} text-xl w-6 text-center" style="color: ${color};"></i><div class="font-semibold">${categoryLabels[category]}</div></div><div class="flex items-center gap-4"><span class="font-bold">${score}%</span><div class="score-bar"><div class="score-bar-fill" style="width: ${score}%; background-color: ${color};"></div></div></div></div>`;
-            });
-            document.getElementById('categoryScores').innerHTML = html;
-        }
-
-        function renderRadarChart() {
-            const ctx = document.getElementById('radarChart').getContext('2d');
-             if(radarChartInstance) radarChartInstance.destroy();
-            
-            const isLight = document.body.classList.contains('light-theme');
-            const gridColor = isLight ? 'rgba(0,0,0,0.1)' : 'rgba(255, 255, 255, 0.1)';
-            const labelColor = isLight ? '#1e293b' : '#ffffff';
-            const tickColor = isLight ? '#64748b' : 'rgba(255, 255, 255, 0.7)';
-
-
-            const labels = ['Hydration', 'Pores', 'Texture', 'Clarity', 'Firmness', 'Oil Balance', 'Sensitivity'];
-            const data = [ scores.hydration, scores.pores, scores.texture, scores.clarity, scores.firmness, scores.oil_balance, scores.sensitivity ];
-
-            radarChartInstance = new Chart(ctx, {
-                type: 'radar',
-                data: { labels, datasets: [{ label: 'Your Skin Health', data, fill: true, backgroundColor: 'rgba(102, 126, 234, 0.2)', borderColor: 'rgba(102, 126, 234, 1)', pointBackgroundColor: 'rgba(102, 126, 234, 1)', pointBorderColor: '#fff', pointHoverBackgroundColor: '#fff', pointHoverBorderColor: 'rgba(102, 126, 234, 1)', borderWidth: 2, pointRadius: 4 }] },
-                options: { responsive: true, maintainAspectRatio: false, scales: { r: { angleLines: { color: gridColor }, grid: { color: gridColor }, pointLabels: { color: labelColor, font: { size: 12, weight: '500' } }, ticks: { color: tickColor, backdropColor: 'transparent', min: 0, max: 100 } } }, plugins: { legend: { display: false } } }
+        // Hydration recommendations
+        if (scores.hydration < 60) {
+            recommendations.push({
+                category: 'Hydration',
+                icon: 'fas fa-tint',
+                title: 'Boost Your Skin Hydration',
+                advice: 'Use a hyaluronic acid serum and a rich moisturizer. Drink more water and consider a humidifier in dry environments.',
+                products: ['Hyaluronic Acid Serum', 'Rich Moisturizing Cream', 'Overnight Hydrating Mask']
             });
         }
-        
-        function generateRecommendations() {
-            const recommendations = [];
-            if (scores.hydration < 60) recommendations.push({ icon: 'fas fa-tint', title: 'Boost Your Skin Hydration', advice: 'Use a hyaluronic acid serum and a rich moisturizer. Drink more water and consider a humidifier.', products: ['Hyaluronic Acid Serum', 'Rich Moisturizer', 'Hydrating Mask'] });
-            if (scores.pores < 60) recommendations.push({ icon: 'fas fa-circle-notch', title: 'Minimize and Refine Pores', advice: 'Use BHA (salicylic acid) to unclog pores and niacinamide to reduce their appearance. Regular exfoliation is key.', products: ['BHA Toner', 'Niacinamide Serum', 'Clay Mask'] });
-            if (scores.texture < 60) recommendations.push({ icon: 'fas fa-wave-square', title: 'Smooth Skin Texture', advice: 'Incorporate gentle chemical exfoliation with AHA/BHA. Use retinol for improving cell turnover.', products: ['AHA Serum', 'Retinol Treatment', 'Gentle Exfoliant'] });
-            if (scores.clarity < 60) recommendations.push({ icon: 'fas fa-sun', title: 'Enhance Skin Radiance', advice: 'Use vitamin C serum for brightening and always wear SPF. Consider niacinamide for an even skin tone.', products: ['Vitamin C Serum', 'Broad Spectrum SPF 30+', 'Brightening Essence'] });
-            if (scores.firmness < 60) recommendations.push({ icon: 'fas fa-dumbbell', title: 'Improve Skin Firmness', advice: 'Use peptides and retinol for anti-aging. Facial massage and adequate sleep help maintain elasticity.', products: ['Peptide Serum', 'Retinol Cream', 'Firming Mask'] });
-            if (scores.oil_balance < 60) recommendations.push({ icon: 'fas fa-balance-scale', title: 'Balance Oil Production', advice: 'Use niacinamide to regulate oil production. Choose non-comedogenic, lightweight moisturizers.', products: ['Niacinamide Serum', 'Oil-Free Moisturizer', 'Balancing Toner'] });
-            if (scores.sensitivity < 60) recommendations.push({ icon: 'fas fa-shield-alt', title: 'Soothe Skin Sensitivity', advice: 'Use gentle, fragrance-free products. Introduce new ingredients slowly and always patch test.', products: ['Gentle Cleanser', 'Fragrance-Free Moisturizer', 'Calming Centella Serum'] });
-            if (recommendations.length === 0) recommendations.push({ icon: 'fas fa-star', title: 'Maintain Your Beautiful Skin', advice: 'Continue your excellent skincare routine! Focus on sun protection and consistency.', products: ['Daily SPF', 'Antioxidant Serum', 'Weekly Hydrating Mask'] });
 
-            let html = '';
-            recommendations.forEach(rec => {
-                html += `<div class="recommendation-card"><div class="flex items-start"><i class="${rec.icon} text-2xl mr-4 mt-1" style="color: #667eea;"></i><div class="flex-1"><h4 class="text-lg font-semibold mb-2">${rec.title}</h4><p class="text-sm opacity-80 mb-3">${rec.advice}</p><div class="text-xs opacity-70"><strong>Recommended Products:</strong> ${rec.products.join(', ')}</div></div></div></div>`;
+        // Pore recommendations
+        if (scores.pores < 60) {
+            recommendations.push({
+                category: 'Pores',
+                icon: 'fas fa-circle',
+                title: 'Minimize and Refine Pores',
+                advice: 'Use BHA (salicylic acid) to unclog pores and niacinamide to reduce pore appearance. Regular exfoliation is key.',
+                products: ['BHA/Salicylic Acid Toner', 'Niacinamide Serum', 'Clay Mask (weekly)']
             });
-            document.getElementById('recommendations').innerHTML = html;
         }
 
-        function generateSkincareRoutine() {
-            const morning = [ { step: 1, product: 'Gentle Cleanser', desc: 'Cleanse with a mild, pH-balanced cleanser' }, { step: 2, product: 'Toner/Essence', desc: 'Apply hydrating toner or essence' }, { step: 3, product: 'Vitamin C Serum', desc: 'Apply vitamin C for antioxidant protection' }, { step: 4, product: 'Moisturizer', desc: 'Use appropriate moisturizer for your skin type' }, { step: 5, product: 'Sunscreen SPF 30+', desc: 'Apply broad-spectrum sunscreen' } ];
-            const evening = [ { step: 1, product: 'Oil Cleanser', desc: 'Remove makeup and sunscreen' }, { step: 2, product: 'Gentle Cleanser', desc: 'Second cleanse to remove impurities' }, { step: 3, product: 'Treatment (BHA/AHA/Retinol)', desc: 'Use appropriate active (alternate days)' }, { step: 4, product: 'Hydrating Serum', desc: 'Apply hyaluronic acid or niacinamide' }, { step: 5, product: 'Night Moisturizer', desc: 'Use richer moisturizer for overnight repair' } ];
-
-            const routineHTML = (title, icon, routine) => `<div class="p-4 rounded-lg bg-white/5"><h4 class="text-xl font-semibold mb-4 flex items-center"><i class="${icon} mr-3"></i>${title}</h4><div class="space-y-3">${routine.map(item => `<div class="flex items-start"><div class="font-bold text-purple-400 mr-3">${item.step}.</div><div><div class="font-medium">${item.product}</div><div class="text-sm opacity-70">${item.desc}</div></div></div>`).join('')}</div></div>`;
-            document.getElementById('skincareRoutine').innerHTML = `<div class="grid md:grid-cols-2 gap-6">${routineHTML('Morning Routine', 'fas fa-sun text-yellow-400', morning)}${routineHTML('Evening Routine', 'fas fa-moon text-blue-400', evening)}</div>`;
+        // Texture recommendations
+        if (scores.texture < 60) {
+            recommendations.push({
+                category: 'Texture',
+                icon: 'fas fa-hand-paper',
+                title: 'Smooth Skin Texture',
+                advice: 'Incorporate gentle chemical exfoliation with AHA/BHA. Use retinol for cell turnover improvement.',
+                products: ['AHA/Glycolic Acid Serum', 'Retinol Treatment', 'Gentle Physical Exfoliant']
+            });
         }
 
-        document.getElementById('downloadBtn').addEventListener('click', () => {
-             const { jsPDF } = window.jspdf;
-             const doc = new jsPDF();
-             doc.setFontSize(18);
-             doc.text("Glass Skin Analysis Report", 14, 22);
-             doc.setFontSize(11);
-             doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 30);
-             
-             doc.setFontSize(12);
-             doc.text(`OVERALL GLASS SKIN SCORE: ${scores.glassSkinScore}%`, 14, 40);
-             doc.text(document.getElementById('scoreSummary').textContent, 14, 46, { maxWidth: 180 });
+        // Clarity recommendations
+        if (scores.clarity < 60) {
+            recommendations.push({
+                category: 'Clarity',
+                icon: 'fas fa-sun',
+                title: 'Enhance Skin Radiance',
+                advice: 'Use vitamin C serum for brightening and always wear SPF. Consider niacinamide for even skin tone.',
+                products: ['Vitamin C Serum', 'Broad Spectrum SPF 30+', 'Brightening Essence']
+            });
+        }
 
-             let y = 60;
-             doc.text("DETAILED SCORES:", 14, y);
-             y+=6;
-             Object.entries(scores).filter(([k]) => k !== 'glassSkinScore').forEach(([category, score]) => {
-                 doc.text(`- ${category.charAt(0).toUpperCase() + category.slice(1)}: ${score}%`, 14, y);
-                 y+=6;
-             });
-             
-             doc.addPage();
-             y = 22;
-             doc.text("PERSONALIZED RECOMMENDATIONS:", 14, y);
-             y+=8;
-             document.querySelectorAll('#recommendations .recommendation-card').forEach(card => {
-                 const title = card.querySelector('h4').textContent;
-                 const advice = card.querySelector('p').textContent;
-                 doc.setFont(undefined, 'bold');
-                 doc.text(title, 14, y);
-                 y+=5;
-                 doc.setFont(undefined, 'normal');
-                 doc.text(advice, 14, y, { maxWidth: 180 });
-                 y+=15;
-                 if (y > 280) { doc.addPage(); y = 22; }
-             });
+        // Firmness recommendations
+        if (scores.firmness < 60) {
+            recommendations.push({
+                category: 'Firmness',
+                icon: 'fas fa-dumbbell',
+                title: 'Improve Skin Firmness',
+                advice: 'Use peptides and retinol for anti-aging. Facial massage and adequate sleep help maintain elasticity.',
+                products: ['Peptide Serum', 'Retinol Cream', 'Firming Face Mask']
+            });
+        }
 
-             doc.save('Glass_Skin_Analysis_Report.pdf');
+        // Oil balance recommendations
+        if (scores.oil_balance < 60) {
+            recommendations.push({
+                category: 'Oil Balance',
+                icon: 'fas fa-balance-scale',
+                title: 'Balance Oil Production',
+                advice: 'Use niacinamide to regulate oil production. Choose non-comedogenic, lightweight moisturizers.',
+                products: ['Niacinamide Serum', 'Oil-Free Moisturizer', 'Balancing Toner']
+            });
+        }
+
+        // Sensitivity recommendations
+        if (scores.sensitivity < 60) {
+            recommendations.push({
+                category: 'Sensitivity',
+                icon: 'fas fa-exclamation-triangle',
+                title: 'Soothe Skin Sensitivity',
+                advice: 'Use gentle, fragrance-free products. Introduce new ingredients slowly and always patch test.',
+                products: ['Gentle Cleanser', 'Fragrance-Free Moisturizer', 'Calming Centella Serum']
+            });
+        }
+
+        // If all scores are good, provide maintenance advice
+        if (recommendations.length === 0) {
+            recommendations.push({
+                category: 'Maintenance',
+                icon: 'fas fa-star',
+                title: 'Maintain Your Beautiful Skin',
+                advice: 'Continue your excellent skincare routine! Focus on sun protection and consistency.',
+                products: ['Daily SPF', 'Antioxidant Serum', 'Weekly Hydrating Mask']
+            });
+        }
+
+        let html = '';
+        recommendations.forEach(rec => {
+            html += `
+                <div class="recommendation-card">
+                    <div class="flex items-start">
+                        <i class="${rec.icon} text-2xl mr-4 mt-1" style="color: var(--primary-gradient);"></i>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-semibold mb-2">${rec.title}</h4>
+                            <p class="text-sm opacity-80 mb-3">${rec.advice}</p>
+                            <div class="text-xs opacity-70">
+                                <strong>Recommended Products:</strong> ${rec.products.join(', ')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
         });
 
-        document.getElementById('retakeBtn').addEventListener('click', () => {
-            currentQuestion = 0;
-            answers = {};
-            quizSection.style.display = 'block';
-            resultsSection.classList.remove('active');
-            renderQuestion();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    </script>
+        document.getElementById('recommendations').innerHTML = html;
+    }
+
+    // Generate skincare routine
+    function generateSkincareRoutine() {
+        const morningRoutine = [
+            { step: 1, product: 'Gentle Cleanser', description: 'Cleanse with a mild, pH-balanced cleanser' },
+            { step: 2, product: 'Toner/Essence', description: 'Apply hydrating toner or essence' },
+            { step: 3, product: 'Vitamin C Serum', description: 'Apply vitamin C for antioxidant protection' },
+            { step: 4, product: 'Moisturizer', description: 'Use appropriate moisturizer for your skin type' },
+            { step: 5, product: 'Sunscreen SPF 30+', description: 'Apply broad-spectrum sunscreen as final step' }
+        ];
+
+        const eveningRoutine = [
+            { step: 1, product: 'Oil Cleanser (if wearing makeup)', description: 'Remove makeup and sunscreen' },
+            { step: 2, product: 'Gentle Cleanser', description: 'Second cleanse to remove impurities' },
+            { step: 3, product: 'Treatment (BHA/AHA/Retinol)', description: 'Use appropriate active ingredient (alternate days)' },
+            { step: 4, product: 'Hydrating Serum', description: 'Apply hyaluronic acid or niacinamide serum' },
+            { step: 5, product: 'Night Moisturizer', description: 'Use richer moisturizer for overnight repair' }
+        ];
+
+        let html = `
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-sun mr-2 text-yellow-400"></i>Morning Routine
+                    </h4>
+                    ${morningRoutine.map(item => `
+                        <div class="flex items-start mb-3 p-3 bg-rgba(255,255,255,0.05) rounded-lg">
+                            <div class="w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center text-black font-bold text-sm mr-3 mt-1">
+                                ${item.step}
+                            </div>
+                            <div>
+                                <div class="font-medium">${item.product}</div>
+                                <div class="text-sm opacity-70">${item.description}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-moon mr-2 text-blue-400"></i>Evening Routine
+                    </h4>
+                    ${eveningRoutine.map(item => `
+                        <div class="flex items-start mb-3 p-3 bg-rgba(255,255,255,0.05) rounded-lg">
+                            <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center text-white font-bold text-sm mr-3 mt-1">
+                                ${item.step}
+                            </div>
+                            <div>
+                                <div class="font-medium">${item.product}</div>
+                                <div class="text-sm opacity-70">${item.description}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            <div class="mt-6 p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg border border-blue-500/20">
+                <h5 class="font-semibold mb-2"><i class="fas fa-lightbulb mr-2"></i>Pro Tips:</h5>
+                <ul class="text-sm opacity-80 space-y-1">
+                    <li>• Always patch test new products before full application</li>
+                    <li>• Introduce active ingredients gradually to avoid irritation</li>
+                    <li>• Consistency is key - results take 4-6 weeks to show</li>
+                    <li>• Adjust routine based on seasonal changes and skin needs</li>
+                </ul>
+            </div>
+        `;
+
+        document.getElementById('skincareRoutine').innerHTML = html;
+    }
+
+    // Download report functionality
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+        // Simple text-based report (you could enhance this with actual PDF generation)
+        const reportContent = generateTextReport();
+        const blob = new Blob([reportContent], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Glass_Skin_Analysis_Report.txt';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+    });
+
+    function generateTextReport() {
+        const date = new Date().toLocaleDateString();
+        return `
+GLASS SKIN ANALYSIS REPORT
+Generated on: ${date}
+OVERALL GLASS SKIN SCORE: ${scores.glassSkinScore}%
+DETAILED CATEGORY SCORES:
+Hydration: ${scores.hydration}%
+Pore Quality: ${scores.pores}%
+Skin Texture: ${scores.texture}%
+Clarity & Radiance: ${scores.clarity}%
+Firmness & Elasticity: ${scores.firmness}%
+Oil Balance: ${scores.oil_balance}%
+Sensitivity Level: ${scores.sensitivity}%
+Overall Satisfaction: ${scores.overall}%
+ANALYSIS SUMMARY:
+${document.getElementById('scoreSummary').textContent}
+RECOMMENDATIONS:
+${Array.from(document.querySelectorAll('#recommendations .recommendation-card')).map(card =>
+card.querySelector('h4').textContent + ': ' + card.querySelector('p').textContent
+).join('\n')}
+Generated by Glass Skin Checker - Tool Xeno
+Visit toolxeno.com for more professional beauty and skincare tools.
+`;
+}
+code
+Code
+// Share functionality
+    document.getElementById('shareBtn').addEventListener('click', function() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'My Glass Skin Analysis Results',
+                text: `I just completed a professional glass skin analysis! My glass skin score is ${scores.glassSkinScore}%. Check out this amazing tool:`,
+                url: window.location.href
+            });
+        } else {
+            // Fallback - copy to clipboard
+            const shareText = `I just completed a professional glass skin analysis! My glass skin score is ${scores.glassSkinScore}%. Check out this amazing tool: ${window.location.href}`;
+            navigator.clipboard.writeText(shareText).then(() => {
+                alert('Results copied to clipboard! Share with your friends.');
+            });
+        }
+    });
+
+    // Retake quiz
+    document.getElementById('retakeBtn').addEventListener('click', function() {
+        // Reset state
+        currentQuestion = 0;
+        answers = {};
+        scores = {
+            hydration: 0,
+            pores: 0,
+            texture: 0,
+            clarity: 0,
+            firmness: 0,
+            oil_balance: 0,
+            sensitivity: 0,
+            overall: 0
+        };
+
+        // Show quiz section and hide results
+        quizSection.style.display = 'block';
+        resultsSection.classList.remove('active');
+
+        // Render first question
+        renderQuestion();
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
 </body>
-</html>```
+</html>
