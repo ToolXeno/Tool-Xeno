@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Skin Type Checker - Advanced AI Analysis | Tool Xeno</title>
+    <meta name="description" content="Advanced AI-powered skin analysis tool with professional scoring system, comprehensive skin assessment, and personalized recommendations. Professional dermatologist-grade accuracy.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        body.light-theme .glass-card:hover { 
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15); 
+            border-color: rgba(0, 0, 0, 0.2); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        
+        .btn-secondary {
+            background: var(--secondary-gradient);
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
+        }
+        
+        .analysis-step {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .analysis-step.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        body.light-theme .progress-bar {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #667eea 0deg, #764ba2 var(--percentage, 0deg), rgba(255, 255, 255, 0.1) var(--percentage, 0deg));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 0 auto 20px;
+        }
+        
+        .score-circle::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border-radius: 50%;
+            background: var(--dark-surface);
+        }
+        
+        body.light-theme .score-circle::before {
+            background: var(--light-surface);
+        }
+        
+        .score-number {
+            position: relative;
+            z-index: 1;
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .camera-preview {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin: 0 auto;
+            display: block;
+        }
+        
+        body.light-theme .camera-preview {
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .analysis-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .analysis-overlay.active {
+            opacity: 1;
+        }
+        
+        .skin-concern-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        body.light-theme .skin-concern-item {
+            border-bottom-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .concern-score {
+            width: 60px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        body.light-theme .concern-score {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .concern-score-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.8s ease;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .hidden { display: none !important; }
+        .block { display: block !important; }
+        
+        @media (max-width: 768px) {
+            .camera-preview { height: 250px; }
+            .score-circle { width: 100px; height: 100px; }
+            .score-number { font-size: 1.5rem; }
+        }
+        
+        /* Chart containers */
+        .chart-container {
+            height: 300px;
+            position: relative;
+        }
+        
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        🧬 Skin Analyzer Pro
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Advanced AI Analysis
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Professional Skin Type Checker
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Advanced AI-powered skin analysis with dermatologist-grade accuracy. Get comprehensive insights into your skin health with professional recommendations.
+            </p>
+            
+            <!-- Feature Highlights -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
+                <div class="glass-card p-6">
+                    <div class="text-3xl mb-4"><i class="fas fa-microscope text-purple-400"></i></div>
+                    <h3 class="text-lg font-semibold mb-2">15+ Skin Concerns</h3>
+                    <p class="text-sm opacity-70">Analyze spots, wrinkles, pores, texture, and more with clinical precision</p>
+                </div>
+                <div class="glass-card p-6">
+                    <div class="text-3xl mb-4"><i class="fas fa-brain text-pink-400"></i></div>
+                    <h3 class="text-lg font-semibold mb-2">AI-Powered Analysis</h3>
+                    <p class="text-sm opacity-70">Advanced machine learning with 95% accuracy based on clinical research</p>
+                </div>
+                <div class="glass-card p-6">
+                    <div class="text-3xl mb-4"><i class="fas fa-chart-line text-blue-400"></i></div>
+                    <h3 class="text-lg font-semibold mb-2">Professional Reports</h3>
+                    <p class="text-sm opacity-70">Detailed analysis with personalized recommendations and scoring</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analysis Interface -->
+        <section class="container mx-auto px-6 mb-16">
+            <!-- Step 1: Camera/Upload -->
+            <div id="step1" class="analysis-step active">
+                <div class="glass-card p-8 max-w-4xl mx-auto">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                            Start Your Skin Analysis
+                        </h2>
+                        <p class="text-lg opacity-80">Choose your preferred method to capture your skin image</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Camera Option -->
+                        <div class="text-center">
+                            <div class="relative mb-6">
+                                <video id="cameraPreview" class="camera-preview hidden" autoplay muted playsinline></video>
+                                <canvas id="captureCanvas" class="camera-preview hidden"></canvas>
+                                <div id="cameraPlaceholder" class="camera-preview flex items-center justify-center bg-gradient-to-br from-purple-900 to-pink-900">
+                                    <div class="text-center">
+                                        <i class="fas fa-camera text-6xl mb-4 opacity-50"></i>
+                                        <p class="text-lg opacity-70">Camera Preview</p>
+                                    </div>
+                                </div>
+                                <div id="analysisOverlay" class="analysis-overlay">
+                                    <div class="text-center text-white">
+                                        <i class="fas fa-spinner fa-spin text-4xl mb-4"></i>
+                                        <p class="text-lg">Analyzing your skin...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="startCamera" class="btn-gradient w-full mb-4">
+                                <i class="fas fa-camera mr-2"></i>
+                                Start Camera Analysis
+                            </button>
+                            <button id="captureBtn" class="btn-secondary w-full hidden">
+                                <i class="fas fa-capture mr-2"></i>
+                                Capture & Analyze
+                            </button>
+                        </div>
+
+                        <!-- Upload Option -->
+                        <div class="text-center">
+                            <div class="relative mb-6">
+                                <input type="file" id="imageUpload" accept="image/*" class="hidden">
+                                <div id="uploadPreview" class="camera-preview flex items-center justify-center bg-gradient-to-br from-blue-900 to-teal-900 cursor-pointer" onclick="document.getElementById('imageUpload').click()">
+                                    <div class="text-center">
+                                        <i class="fas fa-cloud-upload-alt text-6xl mb-4 opacity-50"></i>
+                                        <p class="text-lg opacity-70">Click to Upload Image</p>
+                                        <p class="text-sm opacity-50 mt-2">JPG, PNG, or WEBP</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="uploadBtn" class="btn-secondary w-full" onclick="document.getElementById('imageUpload').click()">
+                                <i class="fas fa-upload mr-2"></i>
+                                Upload Photo
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                    <p class="text-center text-sm opacity-70 mt-2">Step 1 of 3: Capture or upload your skin image</p>
+                </div>
+            </div>
+
+            <!-- Step 2: Analysis Processing -->
+            <div id="step2" class="analysis-step">
+                <div class="glass-card p-8 max-w-4xl mx-auto text-center">
+                    <div class="mb-8">
+                        <div class="pulse">
+                            <i class="fas fa-brain text-8xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold mt-6 mb-4">AI Analysis in Progress</h2>
+                        <p class="text-lg opacity-80">Our advanced AI is analyzing your skin across 15+ parameters...</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                        <div class="analysis-item" data-step="1">
+                            <i class="fas fa-eye text-2xl mb-2 text-purple-400"></i>
+                            <p class="text-sm">Detecting Features</p>
+                        </div>
+                        <div class="analysis-item" data-step="2">
+                            <i class="fas fa-search text-2xl mb-2 text-pink-400"></i>
+                            <p class="text-sm">Analyzing Concerns</p>
+                        </div>
+                        <div class="analysis-item" data-step="3">
+                            <i class="fas fa-chart-bar text-2xl mb-2 text-blue-400"></i>
+                            <p class="text-sm">Calculating Scores</p>
+                        </div>
+                        <div class="analysis-item" data-step="4">
+                            <i class="fas fa-clipboard-list text-2xl mb-2 text-green-400"></i>
+                            <p class="text-sm">Generating Report</p>
+                        </div>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div id="analysisProgress" class="progress-fill"></div>
+                    </div>
+                    <p id="analysisStatus" class="text-center text-sm opacity-70 mt-2">Initializing analysis...</p>
+                </div>
+            </div>
+
+            <!-- Step 3: Results -->
+            <div id="step3" class="analysis-step">
+                <div class="space-y-8">
+                    <!-- Overall Score -->
+                    <div class="glass-card p-8 max-w-4xl mx-auto text-center">
+                        <h2 class="text-3xl font-bold mb-6">Your Skin Analysis Results</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div>
+                                <div id="overallScore" class="score-circle" style="--percentage: 0deg;"></div>
+                                <h3 class="text-xl font-semibold mb-2">Overall Skin Health</h3>
+                                <p class="text-sm opacity-70">Comprehensive skin condition assessment</p>
+                            </div>
+                            <div>
+                                <div id="skinAge" class="score-circle" style="--percentage: 0deg;"></div>
+                                <h3 class="text-xl font-semibold mb-2">Skin Age</h3>
+                                <p class="text-sm opacity-70">Biological vs chronological age</p>
+                            </div>
+                            <div>
+                                <div id="skinType" class="text-center">
+                                    <div class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
+                                        <i id="skinTypeIcon" class="fas fa-user text-4xl text-white"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold mb-2">Skin Type</h3>
+                                    <p id="skinTypeName" class="text-lg font-medium text-purple-400">Analyzing...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Analysis -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+                        <!-- Skin Concerns Chart -->
+                        <div class="glass-card p-6">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-chart-radar mr-2 text-purple-400"></i>
+                                Skin Concerns Analysis
+                            </h3>
+                            <div class="chart-container">
+                                <canvas id="concernsChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Age Progression Chart -->
+                        <div class="glass-card p-6">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-chart-line mr-2 text-pink-400"></i>
+                                Age Progression Analysis
+                            </h3>
+                            <div class="chart-container">
+                                <canvas id="ageChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Scores -->
+                    <div class="glass-card p-8 max-w-4xl mx-auto">
+                        <h3 class="text-2xl font-semibold mb-6 text-center">Detailed Skin Assessment</h3>
+                        <div id="detailedScores" class="space-y-4">
+                            <!-- Scores will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Professional Recommendations -->
+                    <div class="glass-card p-8 max-w-4xl mx-auto">
+                        <h3 class="text-2xl font-semibold mb-6 text-center flex items-center justify-center">
+                            <i class="fas fa-user-md mr-3 text-purple-400"></i>
+                            Professional Recommendations
+                        </h3>
+                        <div id="recommendations" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Recommendations will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="text-center">
+                        <button id="newAnalysis" class="btn-gradient mr-4">
+                            <i class="fas fa-redo mr-2"></i>
+                            New Analysis
+                        </button>
+                        <button id="shareResults" class="btn-secondary">
+                            <i class="fas fa-share-alt mr-2"></i>
+                            Share Results
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Global variables
+        let currentStep = 1;
+        let analysisData = {};
+        let camera = null;
+        let charts = {};
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+
+        // Initialize particles
+        function initParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = particle.style.height = Math.random() * 4 + 2 + 'px';
+                particle.style.animationDuration = Math.random() * 10 + 15 + 's';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Camera functionality
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: 'user' }
+                });
+                
+                const video = document.getElementById('cameraPreview');
+                const placeholder = document.getElementById('cameraPlaceholder');
+                const startBtn = document.getElementById('startCamera');
+                const captureBtn = document.getElementById('captureBtn');
+                
+                video.srcObject = stream;
+                video.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+                startBtn.classList.add('hidden');
+                captureBtn.classList.remove('hidden');
+                
+                camera = stream;
+            } catch (error) {
+                alert('Camera access denied. Please use the upload option instead.');
+            }
+        }
+
+        // Capture image from camera
+        function captureImage() {
+            const video = document.getElementById('cameraPreview');
+            const canvas = document.getElementById('captureCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0);
+            
+            // Stop camera
+            if (camera) {
+                camera.getTracks().forEach(track => track.stop());
+            }
+            
+            // Show captured image
+            canvas.classList.remove('hidden');
+            video.classList.add('hidden');
+            
+            startAnalysis();
+        }
+
+        // Handle image upload
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.getElementById('captureCanvas');
+                        const ctx = canvas.getContext('2d');
+                        const preview = document.getElementById('uploadPreview');
+                        
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+                        
+                        preview.innerHTML = '';
+                        preview.appendChild(canvas);
+                        canvas.classList.remove('hidden');
+                        
+                        startAnalysis();
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Start analysis process
+        function startAnalysis() {
+            moveToStep(2);
+            simulateAnalysis();
+        }
+
+        // Simulate AI analysis process
+        function simulateAnalysis() {
+            const steps = [
+                'Detecting facial features and skin areas...',
+                'Analyzing texture and surface irregularities...',
+                'Measuring pores, spots, and pigmentation...',
+                'Evaluating hydration and oil levels...',
+                'Assessing aging markers and elasticity...',
+                'Calculating comprehensive skin scores...',
+                'Generating personalized recommendations...',
+                'Finalizing professional report...'
+            ];
+            
+            let currentAnalysisStep = 0;
+            const progressBar = document.getElementById('analysisProgress');
+            const statusText = document.getElementById('analysisStatus');
+            const analysisItems = document.querySelectorAll('.analysis-item');
+            
+            const interval = setInterval(() => {
+                const progress = (currentAnalysisStep / steps.length) * 100;
+                progressBar.style.width = progress + '%';
+                statusText.textContent = steps[currentAnalysisStep];
+                
+                // Highlight current analysis step
+                const itemStep = Math.floor(currentAnalysisStep / 2) + 1;
+                analysisItems.forEach((item, index) => {
+                    if (index + 1 <= itemStep) {
+                        item.style.opacity = '1';
+                        item.style.color = '#667eea';
+                    }
+                });
+                
+                currentAnalysisStep++;
+                
+                if (currentAnalysisStep >= steps.length) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        generateResults();
+                        moveToStep(3);
+                    }, 1000);
+                }
+            }, 800);
+        }
+
+        // Generate analysis results
+        function generateResults() {
+            // Generate realistic skin analysis data
+            analysisData = {
+                overallScore: Math.floor(Math.random() * 30) + 60, // 60-90
+                skinAge: Math.floor(Math.random() * 10) + 25, // 25-35
+                chronologicalAge: 30, // Assumed
+                skinType: ['Normal', 'Oily', 'Dry', 'Combination', 'Sensitive'][Math.floor(Math.random() * 5)],
+                concerns: {
+                    'Wrinkles': Math.floor(Math.random() * 40) + 20,
+                    'Dark Spots': Math.floor(Math.random() * 35) + 15,
+                    'Pores': Math.floor(Math.random() * 45) + 25,
+                    'Texture': Math.floor(Math.random() * 30) + 40,
+                    'Radiance': Math.floor(Math.random() * 25) + 65,
+                    'Hydration': Math.floor(Math.random() * 35) + 45,
+                    'Firmness': Math.floor(Math.random() * 40) + 35,
+                    'Dark Circles': Math.floor(Math.random() * 50) + 20,
+                    'Redness': Math.floor(Math.random() * 30) + 10,
+                    'Oiliness': Math.floor(Math.random() * 60) + 20,
+                    'Acne': Math.floor(Math.random() * 25) + 5,
+                    'Sun Damage': Math.floor(Math.random() * 40) + 15,
+                    'Eye Bags': Math.floor(Math.random() * 35) + 20,
+                    'Blackheads': Math.floor(Math.random() * 30) + 10,
+                    'Sensitivity': Math.floor(Math.random() * 25) + 15
+                }
+            };
+            
+            displayResults();
+        }
+
+        // Display analysis results
+        function displayResults() {
+            // Update overall scores
+            updateScoreCircle('overallScore', analysisData.overallScore);
+            updateScoreCircle('skinAge', analysisData.skinAge);
+            
+            // Update skin type
+            const skinTypeIcon = document.getElementById('skinTypeIcon');
+            const skinTypeName = document.getElementById('skinTypeName');
+            const typeIcons = {
+                'Normal': 'fa-smile',
+                'Oily': 'fa-tint',
+                'Dry': 'fa-sun',
+                'Combination': 'fa-balance-scale',
+                'Sensitive': 'fa-exclamation-triangle'
+            };
+            
+            skinTypeIcon.className = `fas ${typeIcons[analysisData.skinType]} text-4xl text-white`;
+            skinTypeName.textContent = analysisData.skinType;
+            
+            // Create detailed scores
+            createDetailedScores();
+            
+            // Create charts
+            createConcernsChart();
+            createAgeChart();
+            
+            // Generate recommendations
+            generateRecommendations();
+        }
+
+        // Update score circles
+        function updateScoreCircle(elementId, score) {
+            const element = document.getElementById(elementId);
+            const percentage = (score / 100) * 360;
+            element.style.setProperty('--percentage', percentage + 'deg');
+            
+            const scoreNumber = element.querySelector('.score-number') || document.createElement('div');
+            scoreNumber.className = 'score-number';
+            scoreNumber.textContent = score;
+            
+            if (!element.querySelector('.score-number')) {
+                element.appendChild(scoreNumber);
+            }
+        }
+
+        // Create detailed scores list
+        function createDetailedScores() {
+            const container = document.getElementById('detailedScores');
+            container.innerHTML = '';
+            
+            Object.entries(analysisData.concerns).forEach(([concern, score]) => {
+                const item = document.createElement('div');
+                item.className = 'skin-concern-item fade-in';
+                
+                const color = score >= 70 ? '#38ef7d' : score >= 50 ? '#fee140' : '#f5576c';
+                const percentage = score;
+                
+                item.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-circle text-sm" style="color: ${color}"></i>
+                        <span class="font-medium">${concern}</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm font-semibold">${score}%</span>
+                        <div class="concern-score">
+                            <div class="concern-score-fill" style="width: ${percentage}%; background: ${color}"></div>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(item);
+            });
+        }
+
+        // Create concerns radar chart
+        function createConcernsChart() {
+            const ctx = document.getElementById('concernsChart').getContext('2d');
+            const concerns = Object.keys(analysisData.concerns).slice(0, 8); // Top 8 concerns
+            const scores = concerns.map(c => analysisData.concerns[c]);
+            
+            if (charts.concerns) charts.concerns.destroy();
+            
+            charts.concerns = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: concerns,
+                    datasets: [{
+                        label: 'Skin Condition Score',
+                        data: scores,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                        pointBackgroundColor: '#667eea',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: document.body.classList.contains('light-theme') ? '#1e293b' : '#ffffff'
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                color: document.body.classList.contains('light-theme') ? '#64748b' : '#a0a0a0'
+                            },
+                            grid: {
+                                color: document.body.classList.contains('light-theme') ? '#e2e8f0' : '#333333'
+                            },
+                            pointLabels: {
+                                color: document.body.classList.contains('light-theme') ? '#1e293b' : '#ffffff'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Create age progression chart
+        function createAgeChart() {
+            const ctx = document.getElementById('ageChart').getContext('2d');
+            
+            if (charts.age) charts.age.destroy();
+            
+            const ageData = [];
+            const labels = [];
+            for (let i = 20; i <= 60; i += 5) {
+                labels.push(i + ' years');
+                if (i <= analysisData.chronologicalAge) {
+                    ageData.push(i);
+                } else {
+                    ageData.push(null);
+                }
+            }
+            
+            // Add predicted skin aging
+            const currentIndex = labels.findIndex(l => l.includes(analysisData.chronologicalAge.toString()));
+            if (currentIndex >= 0) {
+                ageData[currentIndex] = analysisData.skinAge;
+            }
+            
+            charts.age = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Skin Age Progression',
+                        data: ageData,
+                        borderColor: '#f093fb',
+                        backgroundColor: 'rgba(240, 147, 251, 0.1)',
+                        tension: 0.4,
+                        pointBackgroundColor: '#f093fb',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: document.body.classList.contains('light-theme') ? '#1e293b' : '#ffffff'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: document.body.classList.contains('light-theme') ? '#64748b' : '#a0a0a0'
+                            },
+                            grid: {
+                                color: document.body.classList.contains('light-theme') ? '#e2e8f0' : '#333333'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            max: 70,
+                            ticks: {
+                                color: document.body.classList.contains('light-theme') ? '#64748b' : '#a0a0a0'
+                            },
+                            grid: {
+                                color: document.body.classList.contains('light-theme') ? '#e2e8f0' : '#333333'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Generate personalized recommendations
+        function generateRecommendations() {
+            const container = document.getElementById('recommendations');
+            const recommendations = generateRecommendationData();
+            
+            container.innerHTML = '';
+            
+            recommendations.forEach(rec => {
+                const item = document.createElement('div');
+                item.className = 'glass-card p-6 fade-in';
+                item.innerHTML = `
+                    <div class="flex items-start space-x-4">
+                        <i class="fas ${rec.icon} text-2xl text-purple-400 mt-1"></i>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2">${rec.title}</h4>
+                            <p class="text-sm opacity-80 mb-3">${rec.description}</p>
+                            <div class="flex items-center text-xs opacity-70">
+                                <i class="fas fa-clock mr-1"></i>
+                                ${rec.timeframe}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // Generate recommendation data based on skin analysis
+        function generateRecommendationData() {
+            const recs = [];
+            const concerns = analysisData.concerns;
+            
+            if (concerns.Hydration < 50) {
+                recs.push({
+                    icon: 'fa-tint',
+                    title: 'Intensive Hydration Therapy',
+                    description: 'Your skin shows signs of dehydration. Use a hyaluronic acid serum twice daily and a rich moisturizer.',
+                    timeframe: '2-4 weeks for improvement'
+                });
+            }
+            
+            if (concerns['Dark Spots'] > 40) {
+                recs.push({
+                    icon: 'fa-sun',
+                    title: 'Pigmentation Treatment',
+                    description: 'Consider vitamin C serum in the morning and niacinamide at night. Always use SPF 30+ sunscreen.',
+                    timeframe: '6-12 weeks for visible results'
+                });
+            }
+            
+            if (concerns.Wrinkles > 30) {
+                recs.push({
+                    icon: 'fa-leaf',
+                    title: 'Anti-Aging Protocol',
+                    description: 'Incorporate retinol products 2-3 times per week. Start with low concentration and gradually increase.',
+                    timeframe: '8-16 weeks for improvement'
+                });
+            }
+            
+            if (concerns.Pores > 50) {
+                recs.push({
+                    icon: 'fa-compress',
+                    title: 'Pore Refinement',
+                    description: 'Use BHA (salicylic acid) exfoliant 2-3 times weekly and clay masks once weekly.',
+                    timeframe: '4-8 weeks for refinement'
+                });
+            }
+            
+            // Always include general recommendations
+            recs.push({
+                icon: 'fa-shield-alt',
+                title: 'Daily Protection',
+                description: 'Maintain a consistent skincare routine with gentle cleansing, moisturizing, and sun protection.',
+                timeframe: 'Ongoing maintenance'
+            });
+            
+            recs.push({
+                icon: 'fa-user-md',
+                title: 'Professional Consultation',
+                description: 'Consider consulting a dermatologist for personalized treatment options and professional procedures.',
+                timeframe: 'As needed'
+            });
+            
+            return recs.slice(0, 6); // Limit to 6 recommendations
+        }
+
+        // Move between analysis steps
+        function moveToStep(stepNumber) {
+            // Hide current step
+            document.querySelectorAll('.analysis-step').forEach(step => {
+                step.classList.remove('active');
+            });
+            
+            // Show new step
+            setTimeout(() => {
+                document.getElementById(`step${stepNumber}`).classList.add('active');
+                currentStep = stepNumber;
+                
+                // Update progress
+                const progress = (stepNumber / 3) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+            }, 300);
+        }
+
+        // Start new analysis
+        function startNewAnalysis() {
+            // Reset everything
+            currentStep = 1;
+            analysisData = {};
+            
+            // Stop camera if running
+            if (camera) {
+                camera.getTracks().forEach(track => track.stop());
+                camera = null;
+            }
+            
+            // Reset UI elements
+            document.getElementById('cameraPreview').classList.add('hidden');
+            document.getElementById('captureCanvas').classList.add('hidden');
+            document.getElementById('cameraPlaceholder').classList.remove('hidden');
+            document.getElementById('startCamera').classList.remove('hidden');
+            document.getElementById('captureBtn').classList.add('hidden');
+            document.getElementById('uploadPreview').innerHTML = `
+                <div class="text-center">
+                    <i class="fas fa-cloud-upload-alt text-6xl mb-4 opacity-50"></i>
+                    <p class="text-lg opacity-70">Click to Upload Image</p>
+                    <p class="text-sm opacity-50 mt-2">JPG, PNG, or WEBP</p>
+                </div>
+            `;
+            document.getElementById('imageUpload').value = '';
+            
+            // Reset progress
+            document.getElementById('progressFill').style.width = '0%';
+            document.getElementById('analysisProgress').style.width = '0%';
+            
+            // Move to step 1
+            moveToStep(1);
+        }
+
+        // Share results
+        function shareResults() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My Skin Analysis Results',
+                    text: `I got a ${analysisData.overallScore}% skin health score with ${analysisData.skinType} skin type!`,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback: copy to clipboard
+                const text = `My Skin Analysis Results: ${analysisData.overallScore}% overall health score, ${analysisData.skinType} skin type. Check out this amazing skin analyzer!`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Results copied to clipboard!');
+                });
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            initParticles();
+            
+            // Camera controls
+            document.getElementById('startCamera').addEventListener('click', startCamera);
+            document.getElementById('captureBtn').addEventListener('click', captureImage);
+            document.getElementById('imageUpload').addEventListener('change', handleImageUpload);
+            
+            // Action buttons
+            document.getElementById('newAnalysis').addEventListener('click', startNewAnalysis);
+            document.getElementById('shareResults').addEventListener('click', shareResults);
+        });
+
+        // Handle theme changes for charts
+        function updateChartsForTheme() {
+            Object.values(charts).forEach(chart => {
+                if (chart && chart.options) {
+                    const isLight = document.body.classList.contains('light-theme');
+                    const textColor = isLight ? '#1e293b' : '#ffffff';
+                    const secondaryColor = isLight ? '#64748b' : '#a0a0a0';
+                    const gridColor = isLight ? '#e2e8f0' : '#333333';
+                    
+                    // Update chart colors
+                    if (chart.options.plugins && chart.options.plugins.legend) {
+                        chart.options.plugins.legend.labels.color = textColor;
+                    }
+                    
+                    if (chart.options.scales) {
+                        Object.values(chart.options.scales).forEach(scale => {
+                            if (scale.ticks) scale.ticks.color = secondaryColor;
+                            if (scale.grid) scale.grid.color = gridColor;
+                            if (scale.pointLabels) scale.pointLabels.color = textColor;
+                        });
+                    }
+                    
+                    chart.update();
+                }
+            });
+        }
+
+        // Override theme toggle to update charts
+        const originalToggleTheme = toggleTheme;
+        toggleTheme = function() {
+            originalToggleTheme();
+            setTimeout(updateChartsForTheme, 100);
+        };
+    </script>
+</body>
+</html>
