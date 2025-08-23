@@ -25,19 +25,12 @@
     <meta property="twitter:description" content="Convert, calculate, compress, and simplify your everyday tasks — fast and free.">
     <meta property="twitter:image" content="https://toolxeno.com/og-image.png">
     
-    <!-- Preconnect for performance -->
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- External Libraries - Tailwind is critical and remains render-blocking -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    
-    <!-- PERFORMANCE OPTIMIZATION: Asynchronously load non-critical CSS to prevent render blocking -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"></noscript>
-    
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23667eea'/><stop offset='100%' stop-color='%23764ba2'/></linearGradient></defs><rect width='100' height='100' rx='15' fill='url(%23g)'/><path fill='white' d='M30,42 L42,42 L42,30 L58,30 L58,42 L70,42 L70,58 L58,58 L58,70 L42,70 L42,58 L30,58 Z' transform='rotate(45 50 50)'/></svg>">
@@ -70,6 +63,7 @@
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             
             --dark-bg: #0a0a0a;
             --dark-surface: #1a1a1a;
@@ -91,7 +85,7 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s ease, color 0.35s ease;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             line-height: 1.6;
             background-color: var(--dark-bg);
             color: var(--dark-text);
@@ -132,25 +126,63 @@
         
         body.light-theme .header-glass { background: rgba(255, 255, 255, 0.9); border-bottom-color: rgba(0, 0, 0, 0.1); }
         
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { background: var(--light-surface-elevated); border-color: var(--light-border); }
+        body.light-theme .theme-toggle::after { transform: translateX(28px); background: var(--secondary-gradient); }
+        
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
             position: relative;
             overflow: hidden;
             text-decoration: none;
             color: inherit;
             display: block;
-            opacity: 0; /* BLINKING FIX: Start invisible to prevent flicker */
-            will-change: transform, opacity; /* PERFORMANCE: Hint to the browser about upcoming animations */
+            /* DEBUG FIX: Added will-change to hint browser for performance optimization, fixing scroll lag/blink */
+            will-change: transform, box-shadow, border-color;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
         }
         
         .glass-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
         }
         
         body.light-theme .glass-card { background-color: rgba(255, 255, 255, 0.9); border-color: rgba(0, 0, 0, 0.1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); }
@@ -163,26 +195,152 @@
             padding: 12px 24px;
             color: white;
             font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
         }
-
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
         .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); }
+        .btn-gradient:active { transform: translateY(0); }
         
-        .fade-in {
-            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .search-input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            color: inherit;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            backdrop-filter: blur(10px);
         }
-
+        
+        .search-input:focus { 
+            outline: none; 
+            border-color: #667eea; 
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); 
+            background: rgba(255, 255, 255, 0.1); 
+        }
+        
+        body.light-theme .search-input { 
+            background: white; 
+            border-color: var(--light-border); 
+            color: var(--light-text); 
+        }
+        
+        body.light-theme .search-input:focus { 
+            border-color: #667eea; 
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); 
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            pointer-events: none;
+        }
+        
+        .tool-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: white;
+        }
+        
+        .category-beauty { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .category-image { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .category-document { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .category-calculator { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .category-text { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .category-developer { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .category-color { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+        .category-seo { background: linear-gradient(135deg, #ff9a9e, #fecfef); }
+        .category-utility { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { background: rgba(255, 255, 255, 0.1); color: white; }
+        body.light-theme .nav-link { color: rgba(0, 0, 0, 0.7); }
+        body.light-theme .nav-link:hover { background: rgba(0, 0, 0, 0.1); color: black; }
+        
+        .fade-in { animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; opacity: 0; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
         .tool-card.hidden { display: none; }
+        
+        .hero-illustration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            animation: float-icon 3s ease-in-out infinite;
+        }
+        
+        .tool-icon:nth-child(2) { animation-delay: 0.5s; }
+        .tool-icon:nth-child(3) { animation-delay: 1s; }
+        .tool-icon:nth-child(4) { animation-delay: 1.5s; }
+        
+        @keyframes float-icon {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-illustration { gap: 15px; }
+            .tool-icon { width: 50px; height: 50px; font-size: 20px; }
+        }
         
         .section-header {
             text-align: center;
@@ -199,14 +357,18 @@
             background-clip: text;
             display: inline-flex;
             align-items: center;
-            gap: 1rem;
         }
         
         .section-subtitle {
             font-size: 1.2rem;
             opacity: 0.8;
-            max-w-600px;
+            max-width: 600px;
             margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .section-title { font-size: 2rem; }
+            .section-subtitle { font-size: 1rem; }
         }
     </style>
 </head>
@@ -223,12 +385,18 @@
                     <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                         🛠️ Tool Xeno
                     </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Professional Tools Suite
+                    </div>
                 </a>
-                <nav class="hidden md:flex space-x-2">
-                    <a href="#home" class="px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">Home</a>
-                    <a href="#tools" class="px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">Tools</a>
-                    <a href="#contact" class="px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">Contact</a>
-                </nav>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#home" class="nav-link">Home</a>
+                        <a href="#tools" class="nav-link">Tools</a>
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </nav>
+                    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light and dark theme"></button>
+                </div>
             </div>
         </div>
     </header>
@@ -237,13 +405,30 @@
     <main class="pt-20">
         <!-- Hero Section -->
         <section id="home" class="container mx-auto px-6 py-16 text-center">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
                 Your Daily Tools, All in One Place
             </h1>
             <p class="text-xl md:text-2xl mb-8 opacity-80 max-w-3xl mx-auto">
                 Convert, calculate, compress, and simplify your everyday tasks — fast and free.
             </p>
-            <a href="#tools" class="btn-gradient text-lg px-8 py-4">
+            
+            <!-- Hero Illustration -->
+            <div class="hero-illustration">
+                <div class="tool-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <i class="fas fa-image"></i>
+                </div>
+                <div class="tool-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="tool-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="tool-icon" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                    <i class="fas fa-video"></i>
+                </div>
+            </div>
+            
+            <a href="#tools" class="btn-gradient text-lg px-8 py-4 mb-12">
                 <i class="fas fa-rocket mr-2"></i>
                 Explore Tools
             </a>
@@ -251,77 +436,535 @@
         
         <!-- Search Bar -->
         <section class="container mx-auto px-6 mb-16">
-            <div class="relative max-w-xl mx-auto">
+            <div class="search-container">
                 <input 
                     type="text" 
                     id="toolSearch" 
-                    class="w-full py-3 pl-5 pr-12 text-white bg-gray-800 border border-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    class="search-input" 
                     placeholder="Search for a tool..." 
                     oninput="filterTools()"
                 >
-                <i class="fas fa-search absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                <i class="fas fa-search search-icon"></i>
             </div>
         </section>
         
-        <!-- Tools Section -->
+        <!-- Tools Sections -->
         <section id="tools" class="container mx-auto px-6">
-            <!-- Dynamically generated sections will go here -->
-            <div id="tool-grid-container">
-                 <!-- Beauty Tools -->
-                <div class="section-header">
-                    <h2 class="section-title"><i class="fas fa-gem"></i>Beauty Tools</h2>
-                    <p class="section-subtitle">Professional skin analysis and beauty enhancement tools</p>
+            
+            <!-- Beauty Tools -->
+            <div class="section-header">
+                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
+                <h2 class="section-title"><i class="fas fa-gem mr-4"></i>Beauty Tools</h2>
+                <p class="section-subtitle">Professional skin analysis and beauty enhancement tools</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16" data-category="beauty">
+                <!-- FIX: Updated href to point to a specific .html file -->
+                <a href="glass-skin-checker.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-gem"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Glass Skin Checker</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Advanced skin analysis tool with professional scoring</p>
+                    <div class="text-center">
+                        <span class="tool-category category-beauty">beauty</span>
+                    </div>
+                </a>
+                <!-- FIX: Updated href to point to a specific .html file -->
+                <a href="skin-type-checker.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-user-check"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Skin Type Checker</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Professional 15-point skin analysis with personalized reports</p>
+                    <div class="text-center">
+                        <span class="tool-category category-beauty">beauty</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Image Tools -->
+            <div class="section-header">
+                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
+                <h2 class="section-title"><i class="fas fa-images mr-4"></i>Image Tools</h2>
+                <p class="section-subtitle">Powerful image processing and editing utilities</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16" data-category="image">
+                <a href="image-converter.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-exchange-alt"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Image Converter</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Convert between different image formats instantly</p>
+                    <div class="text-center">
+                        <span class="tool-category category-image">image</span>
+                    </div>
+                </a>
+                <a href="image-compressor.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-compress"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Image Compressor</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Reduce image file size without quality loss</p>
+                    <div class="text-center">
+                        <span class="tool-category category-image">image</span>
+                    </div>
+                </a>
+                <a href="image-resizer.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-expand-arrows-alt"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Image Resizer</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Resize images to any dimension with precision</p>
+                    <div class="text-center">
+                        <span class="tool-category category-image">image</span>
+                    </div>
+                </a>
+                <a href="image-cropper.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-crop"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Image Cropper</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Crop and trim images with advanced tools</p>
+                    <div class="text-center">
+                        <span class="tool-category category-image">image</span>
+                    </div>
+                </a>
+                <a href="image-to-text.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-text-width"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Image to Text (OCR)</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Extract text from images using OCR technology</p>
+                    <div class="text-center">
+                        <span class="tool-category category-image">image</span>
+                    </div>
+                </a>
+                <a href="image-rotator.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-redo"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Image Rotator/Flipper</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Rotate and flip images in any direction</p>
+                    <div class="text-center">
+                        <span class="tool-category category-image">image</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Document Tools -->
+            <div class="section-header">
+                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
+                <h2 class="section-title"><i class="fas fa-file-alt mr-4"></i>Document Tools</h2>
+                <p class="section-subtitle">Professional PDF and document processing tools</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16" data-category="document">
+                <a href="pdf-word-converter.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-file-export"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">PDF to Word / Word to PDF</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Convert between PDF and Word formats seamlessly</p>
+                    <div class="text-center">
+                        <span class="tool-category category-document">document</span>
+                    </div>
+                </a>
+                <a href="pdf-compressor.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-file-archive"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">PDF Compressor</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Reduce PDF file size while maintaining quality</p>
+                    <div class="text-center">
+                        <span class="tool-category category-document">document</span>
+                    </div>
+                </a>
+                <a href="pdf-merger-splitter.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-object-group"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">PDF Merger & Splitter</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Merge multiple PDFs or split them into pages</p>
+                    <div class="text-center">
+                        <span class="tool-category category-document">document</span>
+                    </div>
+                </a>
+                <a href="document-converter.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-random"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Document Converter</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Convert between various document formats</p>
+                    <div class="text-center">
+                        <span class="tool-category category-document">document</span>
+                    </div>
+                </a>
+                <a href="pdf-lock-unlock.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-lock"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">PDF Lock/Unlock</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Add password protection or remove it from PDFs</p>
+                    <div class="text-center">
+                        <span class="tool-category category-document">document</span>
+                    </div>
+                </a>
+                <a href="esign-pdf.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-signature"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">eSign PDF</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Add digital signatures to PDF documents</p>
+                    <div class="text-center">
+                        <span class="tool-category category-document">document</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Calculator Tools -->
+            <div class="section-header">
+                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
+                <h2 class="section-title"><i class="fas fa-calculator mr-4"></i>Calculator Tools</h2>
+                <p class="section-subtitle">Advanced calculators for all your computational needs</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16" data-category="calculator">
+                <a href="scientific-calculator.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-calculator"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Scientific Calculator</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Advanced scientific calculations with functions</p>
+                    <div class="text-center">
+                        <span class="tool-category category-calculator">calculator</span>
+                    </div>
+                </a>
+                <a href="age-calculator.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-birthday-cake"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Age Calculator</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Calculate precise age and life statistics</p>
+                    <div class="text-center">
+                        <span class="tool-category category-calculator">calculator</span>
+                    </div>
+                </a>
+                <a href="bmi-calculator.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-weight"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">BMI Calculator</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Calculate Body Mass Index and health status</p>
+                    <div class="text-center">
+                        <span class="tool-category category-calculator">calculator</span>
+                    </div>
+                </a>
+                <a href="loan-emi-calculator.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Loan EMI Calculator</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Calculate loan EMI with amortization schedule</p>
+                    <div class="text-center">
+                        <span class="tool-category category-calculator">calculator</span>
+                    </div>
+                </a>
+                <a href="gst-calculator.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-percentage"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">GST Calculator</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Calculate GST inclusive and exclusive amounts</p>
+                    <div class="text-center">
+                        <span class="tool-category category-calculator">calculator</span>
+                    </div>
+                </a>
+                <a href="currency-converter.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-coins"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Currency Converter</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Convert between world currencies with live rates</p>
+                    <div class="text-center">
+                        <span class="tool-category category-calculator">calculator</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Text Tools -->
+            <div class="section-header">
+                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
+                <h2 class="section-title"><i class="fas fa-font mr-4"></i>Text Tools</h2>
+                <p class="section-subtitle">Powerful text processing and manipulation utilities</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16" data-category="text">
+                <a href="text-case-converter.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-font"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Text Case Converter</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Convert text between different cases and formats</p>
+                    <div class="text-center">
+                        <span class="tool-category category-text">text</span>
+                    </div>
+                </a>
+                <a href="word-counter.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-list-ol"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Word & Character Counter</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Count words, characters, and analyze text</p>
+                    <div class="text-center">
+                        <span class="tool-category category-text">text</span>
+                    </div>
+                </a>
+                <a href="remove-duplicate-lines.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-copy"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Remove Duplicate Lines</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Remove duplicate lines from text efficiently</p>
+                    <div class="text-center">
+                        <span class="tool-category category-text">text</span>
+                    </div>
+                </a>
+                <a href="text-sorter.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-sort-alpha-down"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Text Sorter</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Sort lines of text alphabetically or numerically</p>
+                    <div class="text-center">
+                        <span class="tool-category category-text">text</span>
+                    </div>
+                </a>
+                <a href="text-reverser.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-exchange-alt"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Text Reverser</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Reverse text, words, or character order</p>
+                    <div class="text-center">
+                        <span class="tool-category category-text">text</span>
+                    </div>
+                </a>
+                <a href="text-encryptor.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-lock"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Text Encryptor/Decryptor</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Encrypt and decrypt text with various methods</p>
+                    <div class="text-center">
+                        <span class="tool-category category-text">text</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Web/Developer Tools -->
+            <div class="section-header">
+                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
+                <h2 class="section-title"><i class="fas fa-code mr-4"></i>Web/Developer Tools</h2>
+                <p class="section-subtitle">Essential tools for web developers and programmers</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16" data-category="developer">
+                <a href="code-minifier.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-compress-arrows-alt"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">HTML/CSS/JS Minifier</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Minify and optimize web code for better performance</p>
+                    <div class="text-center">
+                        <span class="tool-category category-developer">developer</span>
+                    </div>
+                </a>
+                <a href="json-formatter.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-code"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">JSON Formatter & Validator</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Format, validate, and beautify JSON data</p>
+                    <div class="text-center">
+                        <span class="tool-category category-developer">developer</span>
+                    </div>
+                </a>
+                <a href="base64-encoder.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-key"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Base64 Encoder/Decoder</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Encode and decode data in Base64 format</p>
+                    <div class="text-center">
+                        <span class="tool-category category-developer">developer</span>
+                    </div>
+                </a>
+                <a href="url-encoder.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-link"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">URL Encoder/Decoder</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Encode and decode URLs for web development</p>
+                    <div class="text-center">
+                        <span class="tool-category category-developer">developer</span>
+                    </div>
+                </a>
+                <a href="color-picker.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-palette"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Color Picker & Converter</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Pick colors and convert between formats</p>
+                    <div class="text-center">
+                        <span class="tool-category category-developer">developer</span>
+                    </div>
+                </a>
+                <a href="regex-tester.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-search"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Regex Tester</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Test and debug regular expressions</p>
+                    <div class="text-center">
+                        <span class="tool-category category-developer">developer</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Color Tools -->
+            <div class="section-header">
+                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
+                <h2 class="section-title"><i class="fas fa-palette mr-4"></i>Color Tools</h2>
+                <p class="section-subtitle">Professional color analysis and manipulation tools</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16" data-category="color">
+                <a href="color-picker-from-image.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-eyedropper"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Color Picker from Image</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Extract colors from any image or photo</p>
+                    <div class="text-center">
+                        <span class="tool-category category-color">color</span>
+                    </div>
+                </a>
+                <a href="hex-rgb-converter.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-exchange-alt"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">HEX to RGB Converter</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Convert between HEX and RGB color formats</p>
+                    <div class="text-center">
+                        <span class="tool-category category-color">color</span>
+                    </div>
+                </a>
+                <a href="gradient-generator.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-fill-drip"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Gradient Generator</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Create beautiful CSS gradients with ease</p>
+                    <div class="text-center">
+                        <span class="tool-category category-color">color</span>
+                    </div>
+                </a>
+                <a href="contrast-checker.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-adjust"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Contrast Checker</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Check color contrast for accessibility</p>
+                    <div class="text-center">
+                        <span class="tool-category category-color">color</span>
+                    </div>
+                </a>
+                <a href="palette-generator.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-swatchbook"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Palette Generator</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Generate harmonious color palettes</p>
+                    <div class="text-center">
+                        <span class="tool-category category-color">color</span>
+                    </div>
+                </a>
+                <a href="color-blindness-simulator.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-eye"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Color Blindness Simulator</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Simulate different types of color blindness</p>
+                    <div class="text-center">
+                        <span class="tool-category category-color">color</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- SEO & Marketing Tools -->
+            <div class="section-header">
+                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
+                <h2 class="section-title"><i class="fas fa-chart-line mr-4"></i>SEO & Marketing Tools</h2>
+                <p class="section-subtitle">Optimize your content for search engines and marketing</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16" data-category="seo">
+                <a href="keyword-density-checker.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-search-plus"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Keyword Density Checker</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Analyze keyword density in your content</p>
+                    <div class="text-center">
+                        <span class="tool-category category-seo">seo</span>
+                    </div>
+                </a>
+                <a href="meta-tag-analyzer.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-tags"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Meta Tag Analyzer</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Analyze and optimize meta tags for SEO</p>
+                    <div class="text-center">
+                        <span class="tool-category category-seo">seo</span>
+                    </div>
+                </a>
+                <a href="word-counter-seo.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-file-word"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Word Counter</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Count words for SEO optimization</p>
+                    <div class="text-center">
+                        <span class="tool-category category-seo">seo</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Utility Tools -->
+            <div class="section-header">
+                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
+                <h2 class="section-title"><i class="fas fa-tools mr-4"></i>Utility Tools</h2>
+                <p class="section-subtitle">Essential utilities for everyday digital tasks</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16" data-category="utility">
+                <a href="qr-code-generator.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-qrcode"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">QR Code Generator & Scanner</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Generate and scan QR codes instantly</p>
+                    <div class="text-center">
+                        <span class="tool-category category-utility">utility</span>
+                    </div>
+                </a>
+                <a href="barcode-generator.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-barcode"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Barcode Generator</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Create various types of barcodes</p>
+                    <div class="text-center">
+                        <span class="tool-category category-utility">utility</span>
+                    </div>
+                </a>
+                <a href="uuid-generator.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-fingerprint"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">UUID Generator</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Generate unique identifiers instantly</p>
+                    <div class="text-center">
+                        <span class="tool-category category-utility">utility</span>
+                    </div>
+                </a>
+                <a href="unit-converter.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-ruler"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Unit Converter</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Convert between various units of measurement</p>
+                    <div class="text-center">
+                        <span class="tool-category category-utility">utility</span>
+                    </div>
+                </a>
+                <a href="timezone-converter.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-globe"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Time Zone Converter</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Convert time between different time zones</p>
+                    <div class="text-center">
+                        <span class="tool-category category-utility">utility</span>
+                    </div>
+                </a>
+                <a href="password-generator.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Random Number/Password Generator</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Generate secure passwords and random numbers</p>
+                    <div class="text-center">
+                        <span class="tool-category category-utility">utility</span>
+                    </div>
+                </a>
+            </div>
+            
+        </section>
+        
+        <!-- Why Choose Tool Xeno Section -->
+        <section class="container mx-auto px-6 py-16">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose Tool Xeno?</h2>
+                <p class="section-subtitle">Professional-grade tools with enterprise-level features</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 text-center">
+                    <div class="text-5xl mb-4">🚀</div>
+                    <h3 class="text-xl font-semibold mb-3">Lightning Fast</h3>
+                    <p class="opacity-70">Client-side processing ensures maximum speed and privacy. No server delays, instant results every time.</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16" data-category="beauty">
-                    <a href="/glass-skin-checker" class="glass-card p-6 tool-card">
-                        <div class="text-3xl mb-4 text-center"><i class="fas fa-gem"></i></div>
-                        <h3 class="text-lg font-semibold mb-2 text-center">Glass Skin Checker</h3>
-                        <p class="text-sm opacity-70 text-center">Advanced skin analysis tool with professional scoring</p>
-                    </a>
-                    <a href="/skin-type-checker" class="glass-card p-6 tool-card">
-                        <div class="text-3xl mb-4 text-center"><i class="fas fa-user-check"></i></div>
-                        <h3 class="text-lg font-semibold mb-2 text-center">Skin Type Checker</h3>
-                        <p class="text-sm opacity-70 text-center">15-point skin analysis with personalized reports</p>
-                    </a>
+                <div class="glass-card p-8 text-center">
+                    <div class="text-5xl mb-4">🔒</div>
+                    <h3 class="text-xl font-semibold mb-3">100% Secure</h3>
+                    <p class="opacity-70">Your data never leaves your device - complete privacy guaranteed. All processing happens locally in your browser.</p>
                 </div>
-
-                <!-- Image Tools -->
-                <div class="section-header">
-                    <h2 class="section-title"><i class="fas fa-image"></i>Image Tools</h2>
-                    <p class="section-subtitle">Powerful image processing and editing utilities</p>
+                <div class="glass-card p-8 text-center">
+                    <div class="text-5xl mb-4">⚡</div>
+                    <h3 class="text-xl font-semibold mb-3">Professional Grade</h3>
+                    <p class="opacity-70">Advanced features that rival paid enterprise solutions. No compromises on quality or functionality.</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16" data-category="image">
-                    <a href="/image-converter" class="glass-card p-6 tool-card">
-                        <div class="text-3xl mb-4 text-center"><i class="fas fa-exchange-alt"></i></div>
-                        <h3 class="text-lg font-semibold mb-2 text-center">Image Converter</h3>
-                        <p class="text-sm opacity-70 text-center">Convert between different image formats instantly</p>
-                    </a>
-                    <a href="/image-compressor" class="glass-card p-6 tool-card">
-                        <div class="text-3xl mb-4 text-center"><i class="fas fa-compress"></i></div>
-                        <h3 class="text-lg font-semibold mb-2 text-center">Image Compressor</h3>
-                        <p class="text-sm opacity-70 text-center">Reduce image file size without quality loss</p>
-                    </a>
-                     <a href="/image-to-text" class="glass-card p-6 tool-card">
-                        <div class="text-3xl mb-4 text-center"><i class="fas fa-text-width"></i></div>
-                        <h3 class="text-lg font-semibold mb-2 text-center">Image to Text (OCR)</h3>
-                        <p class="text-sm opacity-70 text-center">Extract text from images using OCR technology</p>
-                    </a>
+                <div class="glass-card p-8 text-center">
+                    <div class="text-5xl mb-4">📱</div>
+                    <h3 class="text-xl font-semibold mb-3">Mobile Optimized</h3>
+                    <p class="opacity-70">Fully responsive design that works perfectly on all devices. Same great experience everywhere.</p>
                 </div>
-
-                <!-- ... Add other tool sections here in the same format ... -->
-
+                <div class="glass-card p-8 text-center">
+                    <div class="text-5xl mb-4">🆓</div>
+                    <h3 class="text-xl font-semibold mb-3">Completely Free</h3>
+                    <p class="opacity-70">All tools are free to use with no hidden costs or premium tiers. Professional tools for everyone.</p>
+                </div>
+                <div class="glass-card p-8 text-center">
+                    <div class="text-5xl mb-4">🎯</div>
+                    <h3 class="text-xl font-semibold mb-3">No Registration</h3>
+                    <p class="opacity-70">Start using tools immediately without creating accounts or providing personal information.</p>
+                </div>
             </div>
         </section>
-
+        
         <!-- Contact Section -->
         <section id="contact" class="container mx-auto px-6 py-16">
             <div class="section-header">
                 <h2 class="section-title">Get in Touch</h2>
-                <p class="section-subtitle">Have questions or suggestions? We'd love to hear from you.</p>
+                <p class="section-subtitle">Have questions or suggestions? We'd love to hear from you</p>
             </div>
-            <div class="max-w-xl mx-auto text-center">
+            
+            <div class="max-w-2xl mx-auto text-center">
                 <div class="glass-card p-8">
-                    <p class="mb-4">For support or feature requests, please reach out.</p>
+                    <div class="text-4xl mb-4">📧</div>
+                    <h3 class="text-xl font-semibold mb-4">Contact Us</h3>
+                    <p class="mb-6 opacity-80">For support, feature requests, or general inquiries, reach out to us via email.</p>
                     <a href="mailto:toolture@gmail.com" class="btn-gradient">
                         <i class="fas fa-envelope mr-2"></i>
                         toolture@gmail.com
@@ -331,8 +974,29 @@
         </section>
         
         <!-- Footer -->
-        <footer class="container mx-auto px-6 py-8 text-center text-gray-400">
-            <p>&copy; 2025 Tool Xeno. All rights reserved.</p>
+        <footer class="container mx-auto px-6 py-12 text-center border-t border-opacity-20">
+            <div class="glass-card p-8">
+                <div class="flex items-center justify-center space-x-4 mb-6">
+                    <div class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        🛠️ Tool Xeno
+                    </div>
+                    <div class="text-sm opacity-70">
+                        Simplifying your digital life.
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-6 mb-6">
+                    <a href="#home" class="nav-link text-sm">Home</a>
+                    <a href="#tools" class="nav-link text-sm">Tools</a>
+                    <a href="mailto:toolture@gmail.com" class="nav-link text-sm">Contact</a>
+                    <a href="privacy-policy.html" class="nav-link text-sm">Privacy Policy</a>
+                    <a href="terms-of-use.html" class="nav-link text-sm">Terms of Use</a>
+                </div>
+                
+                <p class="text-sm opacity-70">
+                    &copy; 2025 Tool Xeno. All rights reserved. Built with ❤️ for professionals worldwide.
+                </p>
+            </div>
         </footer>
     </main>
     
@@ -340,7 +1004,8 @@
         // Theme Management
         function toggleTheme() {
             document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+            const isLight = document.body.classList.contains('light-theme');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
         }
         
         function initializeTheme() {
@@ -351,20 +1016,24 @@
         
         // Particle System
         function initializeParticles() {
-            const container = document.getElementById('particles');
-            if (!container) return;
-            // PERFORMANCE FIX: Reduced particle count to prevent hanging/lag on scroll
-            const particleCount = window.innerWidth < 768 ? 10 : 20;
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+            
+            // FIX: Reduced particle count for performance
+            const particleCount = window.innerWidth < 768 ? 20 : 50;
+            
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
-                const size = Math.random() * 80 + 40;
+                
+                const size = Math.random() * 100 + 50;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 particle.style.left = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${Math.random() * 20 + 15}s`;
-                particle.style.animationDelay = `${Math.random() * 15}s`;
-                container.appendChild(particle);
+                particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                particle.style.animationDelay = `${Math.random() * 20}s`;
+                
+                particlesContainer.appendChild(particle);
             }
         }
         
@@ -375,16 +1044,41 @@
             
             toolCards.forEach(card => {
                 const toolName = card.querySelector('h3').textContent.toLowerCase();
-                const isMatch = toolName.includes(searchTerm);
-                card.classList.toggle('hidden', !isMatch);
+                const toolDescription = card.querySelector('p').textContent.toLowerCase();
+                const toolCategory = card.querySelector('.tool-category').textContent.toLowerCase();
+                
+                const isMatch = toolName.includes(searchTerm) || 
+                              toolDescription.includes(searchTerm) || 
+                              toolCategory.includes(searchTerm);
+                
+                card.classList.toggle('hidden', !isMatch && searchTerm !== '');
             });
-
-            document.querySelectorAll('[data-category]').forEach(section => {
+            
+            // Hide empty sections
+            const sections = document.querySelectorAll('[data-category]');
+            sections.forEach(section => {
                 const visibleCards = section.querySelectorAll('.tool-card:not(.hidden)');
                 const sectionHeader = section.previousElementSibling;
                 const shouldHide = visibleCards.length === 0 && searchTerm !== '';
+                
                 section.style.display = shouldHide ? 'none' : 'grid';
-                if(sectionHeader) sectionHeader.style.display = shouldHide ? 'none' : 'block';
+                if (sectionHeader && sectionHeader.classList.contains('section-header')) {
+                    sectionHeader.style.display = shouldHide ? 'none' : 'block';
+                }
+            });
+        }
+        
+        // Smooth Scrolling for Navigation
+        function initializeNavigation() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
             });
         }
         
@@ -397,23 +1091,34 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1 });
-            
-            document.querySelectorAll('.glass-card').forEach((el, index) => {
-                el.style.animationDelay = `${index * 0.05}s`;
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.tool-card, .glass-card').forEach(el => {
+                // FIX: Removed redundant class removal that could cause blinking
                 observer.observe(el);
             });
         }
         
-        // Initialize critical scripts when DOM is ready
+        // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             initializeTheme();
+            initializeParticles();
+            initializeNavigation();
             initializeScrollAnimations();
+            
+            // Add stagger animation to tool cards
+            document.querySelectorAll('.tool-card').forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.05}s`;
+            });
         });
         
-        // PERFORMANCE OPTIMIZATION: Defer non-essential scripts until after page has fully loaded
-        window.addEventListener('load', function() {
-            initializeParticles();
+        // Handle window resize for particles
+        window.addEventListener('resize', function() {
+            const particlesContainer = document.getElementById('particles');
+            if (particlesContainer) {
+                particlesContainer.innerHTML = '';
+                initializeParticles();
+            }
         });
     </script>
 </body>
