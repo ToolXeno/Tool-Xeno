@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Image Rotator & Flipper Tool - Tool Xeno</title>
+    <meta name="description" content="Professional image rotation and flipping tool with advanced features including custom angle rotation, batch processing, real-time preview, and quality preservation. Free online tool with glass-morphism design.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); }
+        .btn-gradient:active { transform: translateY(0); }
+        .btn-gradient:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        body.light-theme .btn-secondary {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-theme .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 60px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .upload-area:hover, .upload-area.dragover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+            transform: scale(1.02);
+        }
+        
+        body.light-theme .upload-area {
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .preview-container {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        body.light-theme .preview-container {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .preview-image {
+            max-width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 16px;
+            transition: transform 0.3s ease;
+        }
+        
+        .control-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .angle-input {
+            width: 80px;
+            padding: 8px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: inherit;
+            text-align: center;
+            font-family: inherit;
+        }
+        
+        .angle-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+        
+        body.light-theme .angle-input {
+            background: white;
+            border-color: var(--light-border);
+            color: var(--light-text);
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 200px;
+        }
+        
+        .angle-slider {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        .angle-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .angle-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 16px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .batch-counter {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            display: flex;
+            gap: 8px;
+        }
+        
+        .zoom-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+        
+        .zoom-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .history-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .processing {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .processing::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 1.5s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .tooltip {
+            position: relative;
+        }
+        
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .control-panel {
+                flex-direction: column;
+                gap: 24px;
+            }
+            
+            .control-buttons {
+                justify-content: center;
+            }
+            
+            .slider-container {
+                min-width: 280px;
+            }
+            
+            .upload-area {
+                padding: 40px 20px;
+            }
+            
+            .preview-image {
+                max-height: 300px;
+            }
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .image-info {
+            text-align: center;
+            margin-top: 16px;
+            opacity: 0.7;
+            font-size: 14px;
+        }
+        
+        .error-message {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-top: 16px;
+            display: none;
+        }
+        
+        .success-message {
+            background: var(--success-gradient);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-top: 16px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        🛠️ Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Professional Image Rotator & Flipper
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 min-h-screen">
+        <div class="container mx-auto px-6 py-16">
+            <!-- Hero Section -->
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                    Professional Image Rotator & Flipper
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-80 max-w-4xl mx-auto">
+                    Rotate, flip, and transform your images with precision. Advanced tools for perfect image orientation with quality preservation.
+                </p>
+            </div>
+            
+            <!-- Tool Interface -->
+            <div class="max-w-6xl mx-auto">
+                <!-- Upload Section -->
+                <div class="glass-card p-8 mb-8 fade-in">
+                    <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                        <input type="file" id="fileInput" class="file-input" multiple accept="image/*" onchange="handleFileSelect(event)">
+                        <div class="text-6xl mb-4 opacity-50">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-2">Upload Your Images</h3>
+                        <p class="text-lg opacity-70 mb-4">Drag & drop images here or click to browse</p>
+                        <p class="text-sm opacity-50">Supports JPG, PNG, WebP, GIF • Multiple files supported</p>
+                        
+                        <div class="progress-bar" id="uploadProgress" style="display: none;">
+                            <div class="progress-fill" id="uploadProgressFill"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="error-message" id="errorMessage"></div>
+                    <div class="success-message" id="successMessage"></div>
+                </div>
+                
+                <!-- Image Preview Section -->
+                <div class="glass-card p-8 mb-8 fade-in" id="previewSection" style="display: none;">
+                    <div class="preview-container" id="previewContainer">
+                        <div class="batch-counter" id="batchCounter" style="display: none;">1 / 1</div>
+                        <div class="zoom-controls">
+                            <button class="zoom-btn tooltip" data-tooltip="Zoom Out" onclick="zoomImage(-0.1)">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button class="zoom-btn tooltip" data-tooltip="Reset Zoom" onclick="resetZoom()">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="zoom-btn tooltip" data-tooltip="Zoom In" onclick="zoomImage(0.1)">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                        <div class="flex justify-center p-8">
+                            <img id="previewImage" class="preview-image" alt="Preview">
+                        </div>
+                    </div>
+                    
+                    <div class="image-info" id="imageInfo"></div>
+                </div>
+                
+                <!-- Control Panel -->
+                <div class="glass-card p-8 mb-8 fade-in" id="controlPanel" style="display: none;">
+                    <h3 class="text-2xl font-semibold mb-6 text-center">Transformation Controls</h3>
+                    
+                    <div class="control-panel">
+                        <!-- Quick Rotation -->
+                        <div class="control-group">
+                            <label class="text-sm font-semibold opacity-70 uppercase tracking-wide">Quick Rotate</label>
+                            <div class="control-buttons">
+                                <button class="control-btn tooltip" data-tooltip="Rotate 90° Left" onclick="rotateImage(-90)">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                                <button class="control-btn tooltip" data-tooltip="Rotate 90° Right" onclick="rotateImage(90)">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                                <button class="control-btn tooltip" data-tooltip="Rotate 180°" onclick="rotateImage(180)">
+                                    <i class="fas fa-sync"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Custom Angle -->
+                        <div class="control-group">
+                            <label class="text-sm font-semibold opacity-70 uppercase tracking-wide">Custom Angle</label>
+                            <div class="slider-container">
+                                <span class="text-sm">-180°</span>
+                                <input type="range" class="angle-slider" id="angleSlider" min="-180" max="180" value="0" oninput="updateAngle(this.value)">
+                                <span class="text-sm">180°</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <input type="number" class="angle-input" id="angleInput" min="-180" max="180" value="0" onchange="updateAngleFromInput(this.value)">
+                                <span class="text-sm">degrees</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Flip Controls -->
+                        <div class="control-group">
+                            <label class="text-sm font-semibold opacity-70 uppercase tracking-wide">Flip</label>
+                            <div class="control-buttons">
+                                <button class="control-btn tooltip" data-tooltip="Flip Horizontal" onclick="flipImage('horizontal')">
+                                    <i class="fas fa-arrows-alt-h"></i>
+                                </button>
+                                <button class="control-btn tooltip" data-tooltip="Flip Vertical" onclick="flipImage('vertical')">
+                                    <i class="fas fa-arrows-alt-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- History Controls -->
+                        <div class="control-group">
+                            <label class="text-sm font-semibold opacity-70 uppercase tracking-wide">History</label>
+                            <div class="history-controls">
+                                <button class="btn-secondary tooltip" data-tooltip="Undo" onclick="undoTransformation()" id="undoBtn" disabled>
+                                    <i class="fas fa-arrow-left mr-2"></i>
+                                    Undo
+                                </button>
+                                <button class="btn-secondary tooltip" data-tooltip="Redo" onclick="redoTransformation()" id="redoBtn" disabled>
+                                    <i class="fas fa-arrow-right mr-2"></i>
+                                    Redo
+                                </button>
+                                <button class="btn-secondary tooltip" data-tooltip="Reset All" onclick="resetImage()">
+                                    <i class="fas fa-refresh mr-2"></i>
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Batch Navigation -->
+                    <div class="flex justify-center items-center gap-4 mt-8" id="batchNavigation" style="display: none;">
+                        <button class="btn-secondary" onclick="previousImage()" id="prevBtn" disabled>
+                            <i class="fas fa-chevron-left mr-2"></i>
+                            Previous
+                        </button>
+                        <span class="text-lg font-semibold" id="imageCounter">1 / 1</span>
+                        <button class="btn-secondary" onclick="nextImage()" id="nextBtn" disabled>
+                            Next
+                            <i class="fas fa-chevron-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="glass-card p-8 fade-in" id="actionSection" style="display: none;">
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button class="btn-gradient" onclick="downloadImage()" id="downloadBtn">
+                            <i class="fas fa-download mr-2"></i>
+                            Download Image
+                        </button>
+                        <button class="btn-gradient" onclick="downloadAllImages()" id="downloadAllBtn" style="display: none;">
+                            <i class="fas fa-download mr-2"></i>
+                            Download All Images
+                        </button>
+                        <button class="btn-secondary" onclick="resetTool()">
+                            <i class="fas fa-plus mr-2"></i>
+                            Process More Images
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Global variables
+        let currentImages = [];
+        let currentImageIndex = 0;
+        let currentTransformations = [];
+        let history = [];
+        let historyIndex = -1;
+        let zoomLevel = 1;
+        
+        // Theme management
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Particle animation
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = particle.style.height = Math.random() * 4 + 1 + 'px';
+                particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // File handling
+        function handleFileSelect(event) {
+            const files = Array.from(event.target.files);
+            if (files.length === 0) return;
+            
+            // Validate files
+            const validFiles = files.filter(file => {
+                if (!file.type.startsWith('image/')) {
+                    showError(`${file.name} is not a valid image file.`);
+                    return false;
+                }
+                if (file.size > 50 * 1024 * 1024) { // 50MB limit
+                    showError(`${file.name} is too large. Maximum size is 50MB.`);
+                    return false;
+                }
+                return true;
+            });
+            
+            if (validFiles.length === 0) return;
+            
+            showProgress(true);
+            loadImages(validFiles);
+        }
+        
+        function loadImages(files) {
+            currentImages = [];
+            currentTransformations = [];
+            let loadedCount = 0;
+            
+            files.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        currentImages[index] = {
+                            src: e.target.result,
+                            file: file,
+                            width: img.width,
+                            height: img.height,
+                            name: file.name,
+                            size: file.size
+                        };
+                        
+                        currentTransformations[index] = {
+                            rotation: 0,
+                            flipH: false,
+                            flipV: false
+                        };
+                        
+                        loadedCount++;
+                        updateProgress((loadedCount / files.length) * 100);
+                        
+                        if (loadedCount === files.length) {
+                            showProgress(false);
+                            currentImageIndex = 0;
+                            initializeEditor();
+                            showSuccess(`Successfully loaded ${files.length} image${files.length > 1 ? 's' : ''}.`);
+                        }
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        function initializeEditor() {
+            // Show relevant sections
+            document.getElementById('previewSection').style.display = 'block';
+            document.getElementById('controlPanel').style.display = 'block';
+            document.getElementById('actionSection').style.display = 'block';
+            
+            // Setup batch navigation
+            if (currentImages.length > 1) {
+                document.getElementById('batchNavigation').style.display = 'flex';
+                document.getElementById('batchCounter').style.display = 'block';
+                document.getElementById('downloadAllBtn').style.display = 'inline-flex';
+            } else {
+                document.getElementById('batchNavigation').style.display = 'none';
+                document.getElementById('batchCounter').style.display = 'none';
+                document.getElementById('downloadAllBtn').style.display = 'none';
+            }
+            
+            updateImageDisplay();
+            resetHistory();
+        }
+        
+        function updateImageDisplay() {
+            const currentImage = currentImages[currentImageIndex];
+            const currentTransform = currentTransformations[currentImageIndex];
+            
+            if (!currentImage) return;
+            
+            const previewImg = document.getElementById('previewImage');
+            previewImg.src = currentImage.src;
+            
+            // Apply transformations
+            let transform = `scale(${zoomLevel})`;
+            if (currentTransform.rotation !== 0) {
+                transform += ` rotate(${currentTransform.rotation}deg)`;
+            }
+            if (currentTransform.flipH) {
+                transform += ` scaleX(-1)`;
+            }
+            if (currentTransform.flipV) {
+                transform += ` scaleY(-1)`;
+            }
+            
+            previewImg.style.transform = transform;
+            
+            // Update UI elements
+            document.getElementById('angleSlider').value = currentTransform.rotation;
+            document.getElementById('angleInput').value = currentTransform.rotation;
+            
+            // Update counters
+            document.getElementById('imageCounter').textContent = `${currentImageIndex + 1} / ${currentImages.length}`;
+            document.getElementById('batchCounter').textContent = `${currentImageIndex + 1} / ${currentImages.length}`;
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentImageIndex === 0;
+            document.getElementById('nextBtn').disabled = currentImageIndex === currentImages.length - 1;
+            
+            // Update image info
+            updateImageInfo();
+        }
+        
+        function updateImageInfo() {
+            const currentImage = currentImages[currentImageIndex];
+            const info = document.getElementById('imageInfo');
+            const fileSize = (currentImage.size / 1024).toFixed(1);
+            info.textContent = `${currentImage.name} • ${currentImage.width} × ${currentImage.height} • ${fileSize} KB`;
+        }
+        
+        // Transformation functions
+        function rotateImage(angle) {
+            saveToHistory();
+            currentTransformations[currentImageIndex].rotation += angle;
+            
+            // Normalize angle to -180 to 180 range
+            let normalizedAngle = currentTransformations[currentImageIndex].rotation % 360;
+            if (normalizedAngle > 180) normalizedAngle -= 360;
+            if (normalizedAngle <= -180) normalizedAngle += 360;
+            currentTransformations[currentImageIndex].rotation = normalizedAngle;
+            
+            updateImageDisplay();
+        }
+        
+        function updateAngle(angle) {
+            saveToHistory();
+            currentTransformations[currentImageIndex].rotation = parseInt(angle);
+            updateImageDisplay();
+        }
+        
+        function updateAngleFromInput(angle) {
+            const validAngle = Math.max(-180, Math.min(180, parseInt(angle) || 0));
+            document.getElementById('angleInput').value = validAngle;
+            updateAngle(validAngle);
+        }
+        
+        function flipImage(direction) {
+            saveToHistory();
+            if (direction === 'horizontal') {
+                currentTransformations[currentImageIndex].flipH = !currentTransformations[currentImageIndex].flipH;
+            } else if (direction === 'vertical') {
+                currentTransformations[currentImageIndex].flipV = !currentTransformations[currentImageIndex].flipV;
+            }
+            updateImageDisplay();
+        }
+        
+        // Zoom functions
+        function zoomImage(delta) {
+            zoomLevel = Math.max(0.1, Math.min(3, zoomLevel + delta));
+            updateImageDisplay();
+        }
+        
+        function resetZoom() {
+            zoomLevel = 1;
+            updateImageDisplay();
+        }
+        
+        // History management
+        function saveToHistory() {
+            // Remove any redo history
+            history = history.slice(0, historyIndex + 1);
+            
+            // Save current state
+            history.push(JSON.parse(JSON.stringify(currentTransformations)));
+            historyIndex++;
+            
+            // Limit history size
+            if (history.length > 50) {
+                history.shift();
+                historyIndex--;
+            }
+            
+            updateHistoryButtons();
+        }
+        
+        function undoTransformation() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                currentTransformations = JSON.parse(JSON.stringify(history[historyIndex]));
+                updateImageDisplay();
+                updateHistoryButtons();
+            }
+        }
+        
+        function redoTransformation() {
+            if (historyIndex < history.length - 1) {
+                historyIndex++;
+                currentTransformations = JSON.parse(JSON.stringify(history[historyIndex]));
+                updateImageDisplay();
+                updateHistoryButtons();
+            }
+        }
+        
+        function resetHistory() {
+            history = [JSON.parse(JSON.stringify(currentTransformations))];
+            historyIndex = 0;
+            updateHistoryButtons();
+        }
+        
+        function updateHistoryButtons() {
+            document.getElementById('undoBtn').disabled = historyIndex <= 0;
+            document.getElementById('redoBtn').disabled = historyIndex >= history.length - 1;
+        }
+        
+        function resetImage() {
+            saveToHistory();
+            currentTransformations[currentImageIndex] = {
+                rotation: 0,
+                flipH: false,
+                flipV: false
+            };
+            zoomLevel = 1;
+            updateImageDisplay();
+        }
+        
+        // Navigation functions
+        function previousImage() {
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                updateImageDisplay();
+            }
+        }
+        
+        function nextImage() {
+            if (currentImageIndex < currentImages.length - 1) {
+                currentImageIndex++;
+                updateImageDisplay();
+            }
+        }
+        
+        // Download functions
+        function downloadImage() {
+            const currentImage = currentImages[currentImageIndex];
+            const currentTransform = currentTransformations[currentImageIndex];
+            
+            processImageDownload(currentImage, currentTransform, currentImage.name);
+        }
+        
+        function downloadAllImages() {
+            if (currentImages.length === 1) {
+                downloadImage();
+                return;
+            }
+            
+            showProgress(true, 'Processing images...');
+            let processedCount = 0;
+            const processedImages = [];
+            
+            currentImages.forEach((image, index) => {
+                const transform = currentTransformations[index];
+                processImageForBatch(image, transform, (processedBlob, fileName) => {
+                    processedImages[index] = { blob: processedBlob, name: fileName };
+                    processedCount++;
+                    updateProgress((processedCount / currentImages.length) * 100);
+                    
+                    if (processedCount === currentImages.length) {
+                        createZipAndDownload(processedImages);
+                        showProgress(false);
+                    }
+                });
+            });
+        }
+        
+        function processImageDownload(image, transform, fileName) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.onload = function() {
+                // Calculate canvas size based on rotation
+                const rotationRad = (transform.rotation * Math.PI) / 180;
+                const cos = Math.abs(Math.cos(rotationRad));
+                const sin = Math.abs(Math.sin(rotationRad));
+                
+                canvas.width = img.width * cos + img.height * sin;
+                canvas.height = img.width * sin + img.height * cos;
+                
+                // Center the transformation
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                
+                // Apply transformations
+                if (transform.rotation !== 0) {
+                    ctx.rotate(rotationRad);
+                }
+                
+                let scaleX = transform.flipH ? -1 : 1;
+                let scaleY = transform.flipV ? -1 : 1;
+                ctx.scale(scaleX, scaleY);
+                
+                // Draw the image
+                ctx.drawImage(img, -img.width / 2, -img.height / 2);
+                
+                // Create download
+                canvas.toBlob(function(blob) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = getProcessedFileName(fileName);
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    showSuccess('Image downloaded successfully!');
+                }, 'image/png', 1.0);
+            };
+            
+            img.src = image.src;
+        }
+        
+        function processImageForBatch(image, transform, callback) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.onload = function() {
+                // Same processing logic as single image
+                const rotationRad = (transform.rotation * Math.PI) / 180;
+                const cos = Math.abs(Math.cos(rotationRad));
+                const sin = Math.abs(Math.sin(rotationRad));
+                
+                canvas.width = img.width * cos + img.height * sin;
+                canvas.height = img.width * sin + img.height * cos;
+                
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                
+                if (transform.rotation !== 0) {
+                    ctx.rotate(rotationRad);
+                }
+                
+                let scaleX = transform.flipH ? -1 : 1;
+                let scaleY = transform.flipV ? -1 : 1;
+                ctx.scale(scaleX, scaleY);
+                
+                ctx.drawImage(img, -img.width / 2, -img.height / 2);
+                
+                canvas.toBlob(function(blob) {
+                    callback(blob, getProcessedFileName(image.name));
+                }, 'image/png', 1.0);
+            };
+            
+            img.src = image.src;
+        }
+        
+        function createZipAndDownload(processedImages) {
+            // Simple implementation - in a real app, you'd use a library like JSZip
+            // For now, download images individually with delay
+            processedImages.forEach((processed, index) => {
+                setTimeout(() => {
+                    const url = URL.createObjectURL(processed.blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = processed.name;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, index * 500); // 500ms delay between downloads
+            });
+            
+            showSuccess(`All ${processedImages.length} images downloaded successfully!`);
+        }
+        
+        function getProcessedFileName(originalName) {
+            const name = originalName.split('.')[0];
+            const extension = originalName.split('.').pop();
+            return `${name}_rotated.${extension}`;
+        }
+        
+        // Utility functions
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+        
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 3000);
+        }
+        
+        function showProgress(show, message = 'Processing...') {
+            const progressBar = document.getElementById('uploadProgress');
+            if (show) {
+                progressBar.style.display = 'block';
+                updateProgress(0);
+            } else {
+                progressBar.style.display = 'none';
+            }
+        }
+        
+        function updateProgress(percent) {
+            const progressFill = document.getElementById('uploadProgressFill');
+            progressFill.style.width = percent + '%';
+        }
+        
+        function resetTool() {
+            currentImages = [];
+            currentImageIndex = 0;
+            currentTransformations = [];
+            history = [];
+            historyIndex = -1;
+            zoomLevel = 1;
+            
+            document.getElementById('previewSection').style.display = 'none';
+            document.getElementById('controlPanel').style.display = 'none';
+            document.getElementById('actionSection').style.display = 'none';
+            document.getElementById('fileInput').value = '';
+            
+            showSuccess('Ready for new images!');
+        }
+        
+        // Drag and drop functionality
+        const uploadArea = document.getElementById('uploadArea');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, () => uploadArea.classList.add('dragover'), false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, () => uploadArea.classList.remove('dragover'), false);
+        });
+        
+        uploadArea.addEventListener('drop', handleDrop, false);
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        function handleDrop(e) {
+            const files = Array.from(e.dataTransfer.files);
+            if (files.length > 0) {
+                handleFileSelect({ target: { files: files } });
+            }
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (!currentImages.length) return;
+            
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'z':
+                        e.preventDefault();
+                        if (e.shiftKey) {
+                            redoTransformation();
+                        } else {
+                            undoTransformation();
+                        }
+                        break;
+                    case 'y':
+                        e.preventDefault();
+                        redoTransformation();
+                        break;
+                    case 's':
+                        e.preventDefault();
+                        downloadImage();
+                        break;
+                }
+            } else {
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        if (currentImages.length > 1) previousImage();
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        if (currentImages.length > 1) nextImage();
+                        break;
+                    case 'r':
+                        e.preventDefault();
+                        rotateImage(90);
+                        break;
+                    case 'h':
+                        e.preventDefault();
+                        flipImage('horizontal');
+                        break;
+                    case 'v':
+                        e.preventDefault();
+                        flipImage('vertical');
+                        break;
+                }
+            }
+        });
+        
+        // Touch gesture support for mobile
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        document.getElementById('previewImage').addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        });
+        
+        document.getElementById('previewImage').addEventListener('touchend', function(e) {
+            if (!touchStartX || !touchStartY) return;
+            
+            let touchEndX = e.changedTouches[0].clientX;
+            let touchEndY = e.changedTouches[0].clientY;
+            
+            let deltaX = touchStartX - touchEndX;
+            let deltaY = touchStartY - touchEndY;
+            
+            // Swipe gestures
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                if (Math.abs(deltaX) > 50) { // Minimum swipe distance
+                    if (deltaX > 0 && currentImages.length > 1) {
+                        nextImage(); // Swipe left -> next image
+                    } else if (deltaX < 0 && currentImages.length > 1) {
+                        previousImage(); // Swipe right -> previous image
+                    }
+                }
+            }
+            
+            touchStartX = 0;
+            touchStartY = 0;
+        });
+        
+        // Initialize particles on load
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            // Add fade-in animation to elements
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+    </script>
+</body>
+</html>
