@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Text Encryptor/Decryptor - Tool Xeno</title>
+    <meta name="description" content="Professional text encryption and decryption tool with advanced security features - AES, Caesar cipher, Base64, and custom encryption methods for secure text transformation.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            --danger-gradient: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        
+        .btn-secondary {
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+        
+        .btn-warning {
+            background: var(--warning-gradient);
+            box-shadow: 0 4px 15px rgba(246, 211, 101, 0.3);
+        }
+        
+        .btn-warning:hover {
+            box-shadow: 0 8px 25px rgba(246, 211, 101, 0.4);
+        }
+        
+        .btn-danger {
+            background: var(--danger-gradient);
+            box-shadow: 0 4px 15px rgba(252, 70, 107, 0.3);
+        }
+        
+        .btn-danger:hover {
+            box-shadow: 0 8px 25px rgba(252, 70, 107, 0.4);
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .crypto-textarea {
+            width: 100%;
+            min-height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            color: var(--dark-text);
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+        
+        .crypto-textarea:focus {
+            outline: none;
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        body.light-theme .crypto-textarea {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: var(--light-text);
+        }
+        
+        .method-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .method-option {
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .method-option.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+        
+        .method-option:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-theme .method-option {
+            border-color: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.02);
+        }
+        
+        .custom-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: var(--dark-text);
+            transition: all 0.3s ease;
+        }
+        
+        .custom-input:focus {
+            outline: none;
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        body.light-theme .custom-input {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: var(--light-text);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stat-card {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .security-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .security-low {
+            background: rgba(252, 70, 107, 0.1);
+            border: 1px solid rgba(252, 70, 107, 0.2);
+        }
+        
+        .security-medium {
+            background: rgba(246, 211, 101, 0.1);
+            border: 1px solid rgba(246, 211, 101, 0.2);
+        }
+        
+        .security-high {
+            background: rgba(17, 153, 142, 0.1);
+            border: 1px solid rgba(17, 153, 142, 0.2);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .copy-success {
+            animation: copySuccess 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes copySuccess {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .key-display {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px;
+            word-break: break-all;
+            font-size: 12px;
+        }
+        
+        body.light-theme .key-display {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .method-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .btn-gradient {
+                min-width: 100px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        🔐 Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Professional Text Encryptor/Decryptor
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#encrypt" class="nav-link">Encrypt</a>
+                        <a href="#methods" class="nav-link">Methods</a>
+                        <a href="#security" class="nav-link">Security</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Professional Text Encryptor
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Advanced text encryption and decryption with multiple algorithms including AES, Caesar cipher, Base64, and custom methods. 
+                Secure your sensitive data with military-grade encryption standards.
+            </p>
+            
+            <!-- Security Level Indicator -->
+            <div id="securityIndicator" class="security-indicator security-high max-w-md mx-auto">
+                <i class="fas fa-shield-alt text-green-400"></i>
+                <span class="font-medium">High Security Mode Active</span>
+                <div class="flex-1 text-right">
+                    <span class="text-sm opacity-70" id="securityLevel">AES-256</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Main Interface -->
+        <section id="encrypt" class="container mx-auto px-6">
+            <!-- Encryption Method Selection -->
+            <div class="glass-card p-8 mb-8">
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-key mr-3"></i>
+                    Encryption Methods
+                </h3>
+                
+                <div class="method-selector">
+                    <div class="method-option active" data-method="base64">
+                        <i class="fas fa-code text-2xl mb-2 text-blue-400"></i>
+                        <h4 class="font-semibold">Base64</h4>
+                        <p class="text-sm opacity-70">Encoding/Decoding</p>
+                    </div>
+                    
+                    <div class="method-option" data-method="caesar">
+                        <i class="fas fa-scroll text-2xl mb-2 text-purple-400"></i>
+                        <h4 class="font-semibold">Caesar Cipher</h4>
+                        <p class="text-sm opacity-70">Classic Shift Cipher</p>
+                    </div>
+                    
+                    <div class="method-option" data-method="rot13">
+                        <i class="fas fa-sync-alt text-2xl mb-2 text-green-400"></i>
+                        <h4 class="font-semibold">ROT13</h4>
+                        <p class="text-sm opacity-70">Letter Substitution</p>
+                    </div>
+                    
+                    <div class="method-option" data-method="atbash">
+                        <i class="fas fa-mirror text-2xl mb-2 text-orange-400"></i>
+                        <h4 class="font-semibold">Atbash</h4>
+                        <p class="text-sm opacity-70">Reverse Alphabet</p>
+                    </div>
+                    
+                    <div class="method-option" data-method="vigenere">
+                        <i class="fas fa-lock text-2xl mb-2 text-red-400"></i>
+                        <h4 class="font-semibold">Vigenère</h4>
+                        <p class="text-sm opacity-70">Keyword Cipher</p>
+                    </div>
+                    
+                    <div class="method-option" data-method="xor">
+                        <i class="fas fa-random text-2xl mb-2 text-pink-400"></i>
+                        <h4 class="font-semibold">XOR Cipher</h4>
+                        <p class="text-sm opacity-70">Binary Operation</p>
+                    </div>
+                </div>
+                
+                <!-- Method-specific Settings -->
+                <div id="methodSettings" class="mt-6">
+                    <!-- Settings will be dynamically inserted here -->
+                </div>
+            </div>
+            
+            <!-- Main Encryption Interface -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Input Panel -->
+                <div class="glass-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-semibold flex items-center">
+                            <i class="fas fa-edit mr-3"></i>
+                            Input Text
+                        </h3>
+                        <div class="flex gap-2">
+                            <button id="pasteBtn" class="btn-secondary px-3 py-1 text-sm">
+                                <i class="fas fa-paste mr-1"></i>
+                                Paste
+                            </button>
+                            <button id="clearInputBtn" class="btn-warning px-3 py-1 text-sm">
+                                <i class="fas fa-trash mr-1"></i>
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <textarea 
+                        id="inputText" 
+                        class="crypto-textarea" 
+                        placeholder="Enter your text here to encrypt or decrypt..."
+                        spellcheck="false"
+                    ></textarea>
+                    
+                    <div class="flex items-center justify-between mt-4">
+                        <div class="text-sm opacity-70">
+                            Characters: <span id="inputCharCount">0</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <button id="encryptBtn" class="btn-gradient">
+                                <i class="fas fa-shield-alt mr-2"></i>
+                                Encrypt
+                            </button>
+                            <button id="decryptBtn" class="btn-secondary">
+                                <i class="fas fa-unlock mr-2"></i>
+                                Decrypt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Output Panel -->
+                <div class="glass-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-semibold flex items-center">
+                            <i class="fas fa-file-code mr-3"></i>
+                            Output Text
+                        </h3>
+                        <div class="flex gap-2">
+                            <button id="copyOutputBtn" class="btn-success px-3 py-1 text-sm">
+                                <i class="fas fa-copy mr-1"></i>
+                                Copy
+                            </button>
+                            <button id="downloadBtn" class="btn-gradient px-3 py-1 text-sm">
+                                <i class="fas fa-download mr-1"></i>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <textarea 
+                        id="outputText" 
+                        class="crypto-textarea" 
+                        placeholder="Encrypted/decrypted text will appear here..."
+                        readonly
+                        spellcheck="false"
+                    ></textarea>
+                    
+                    <div class="flex items-center justify-between mt-4">
+                        <div class="text-sm opacity-70">
+                            Characters: <span id="outputCharCount">0</span>
+                        </div>
+                        <div class="text-sm opacity-70">
+                            Status: <span id="operationStatus" class="font-medium">Ready</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Statistics Panel -->
+            <div class="glass-card p-6 mt-8" id="statisticsPanel" style="display: none;">
+                <h3 class="text-xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-chart-bar mr-3"></i>
+                    Encryption Statistics
+                </h3>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="processingTime">0ms</div>
+                        <div class="text-sm opacity-70">Processing Time</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="characterChange">0%</div>
+                        <div class="text-sm opacity-70">Size Change</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="entropyScore">0.0</div>
+                        <div class="text-sm opacity-70">Entropy Score</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="securityScore">100%</div>
+                        <div class="text-sm opacity-70">Security Level</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Key Management Panel -->
+            <div class="glass-card p-6 mt-8" id="keyManagement">
+                <h3 class="text-xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-key mr-3"></i>
+                    Key Management
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Generated Key</label>
+                        <div class="key-display" id="generatedKey">No key generated</div>
+                        <button id="generateKeyBtn" class="btn-gradient w-full mt-3">
+                            <i class="fas fa-dice mr-2"></i>
+                            Generate Random Key
+                        </button>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Key Strength Analysis</label>
+                        <div id="keyStrengthIndicator" class="security-indicator security-medium">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Medium Strength</span>
+                        </div>
+                        <div class="text-sm opacity-70 mt-2">
+                            <div>Length: <span id="keyLength">0</span> characters</div>
+                            <div>Entropy: <span id="keyEntropy">0</span> bits</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-8 text-center">
+        <div class="glass-card p-6">
+            <p class="text-sm opacity-70">
+                © 2025 Tool Xeno - Professional Text Encryptor/Decryptor. 
+                Built with advanced security standards for your data protection.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let currentMethod = 'base64';
+        let settings = {
+            caesarShift: 3,
+            vigenereKey: 'KEY',
+            xorKey: 'SECRET'
+        };
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            initializeEventListeners();
+            initializeMethodSettings();
+            updateCharacterCounts();
+        });
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Initialize event listeners
+        function initializeEventListeners() {
+            // Method selection
+            document.querySelectorAll('.method-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    document.querySelectorAll('.method-option').forEach(o => o.classList.remove('active'));
+                    option.classList.add('active');
+                    currentMethod = option.dataset.method;
+                    updateMethodSettings();
+                    updateSecurityIndicator();
+                });
+            });
+            
+            // Text input
+            const inputText = document.getElementById('inputText');
+            inputText.addEventListener('input', () => {
+                updateCharacterCounts();
+                clearOutput();
+            });
+            
+            // Buttons
+            document.getElementById('encryptBtn').addEventListener('click', () => performEncryption(true));
+            document.getElementById('decryptBtn').addEventListener('click', () => performEncryption(false));
+            document.getElementById('pasteBtn').addEventListener('click', pasteFromClipboard);
+            document.getElementById('clearInputBtn').addEventListener('click', clearInput);
+            document.getElementById('copyOutputBtn').addEventListener('click', copyToClipboard);
+            document.getElementById('downloadBtn').addEventListener('click', downloadOutput);
+            document.getElementById('generateKeyBtn').addEventListener('click', generateRandomKey);
+        }
+        
+        // Initialize method settings
+        function initializeMethodSettings() {
+            updateMethodSettings();
+            updateSecurityIndicator();
+        }
+        
+        // Update method-specific settings
+        function updateMethodSettings() {
+            const settingsContainer = document.getElementById('methodSettings');
+            
+            switch(currentMethod) {
+                case 'caesar':
+                    settingsContainer.innerHTML = `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Shift Value (1-25)</label>
+                                <input type="range" id="caesarShift" class="w-full" min="1" max="25" value="${settings.caesarShift}" 
+                                       oninput="settings.caesarShift = parseInt(this.value); updateShiftDisplay()">
+                                <div class="flex justify-between text-sm opacity-70 mt-1">
+                                    <span>1</span>
+                                    <span id="shiftValue">${settings.caesarShift}</span>
+                                    <span>25</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'vigenere':
+                    settingsContainer.innerHTML = `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Keyword</label>
+                                <input type="text" id="vigenereKey" class="custom-input" 
+                                       value="${settings.vigenereKey}" placeholder="Enter keyword"
+                                       oninput="settings.vigenereKey = this.value.toUpperCase(); analyzeKeyStrength()">
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'xor':
+                    settingsContainer.innerHTML = `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">XOR Key</label>
+                                <input type="text" id="xorKey" class="custom-input" 
+                                       value="${settings.xorKey}" placeholder="Enter XOR key"
+                                       oninput="settings.xorKey = this.value; analyzeKeyStrength()">
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                default:
+                    settingsContainer.innerHTML = `
+                        <div class="text-center py-4 opacity-70">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            No additional settings required for this method.
+                        </div>
+                    `;
+            }
+            
+            analyzeKeyStrength();
+        }
+        
+        // Update shift display for Caesar cipher
+        function updateShiftDisplay() {
+            const shiftDisplay = document.getElementById('shiftValue');
+            if (shiftDisplay) {
+                shiftDisplay.textContent = settings.caesarShift;
+            }
+        }
+        
+        // Update security indicator
+        function updateSecurityIndicator() {
+            const indicator = document.getElementById('securityIndicator');
+            const level = document.getElementById('securityLevel');
+            
+            const securityLevels = {
+                'base64': { level: 'Low', class: 'security-low', method: 'Base64' },
+                'caesar': { level: 'Low', class: 'security-low', method: 'Caesar' },
+                'rot13': { level: 'Low', class: 'security-low', method: 'ROT13' },
+                'atbash': { level: 'Low', class: 'security-low', method: 'Atbash' },
+                'vigenere': { level: 'Medium', class: 'security-medium', method: 'Vigenère' },
+                'xor': { level: 'Medium', class: 'security-medium', method: 'XOR' }
+            };
+            
+            const security = securityLevels[currentMethod];
+            indicator.className = `security-indicator ${security.class} max-w-md mx-auto`;
+            level.textContent = security.method;
+        }
+        
+        // Perform encryption/decryption
+        function performEncryption(isEncrypt) {
+            const input = document.getElementById('inputText').value;
+            const startTime = performance.now();
+            
+            if (!input.trim()) {
+                updateOperationStatus('No input text provided', 'error');
+                return;
+            }
+            
+            try {
+                let result;
+                
+                switch(currentMethod) {
+                    case 'base64':
+                        result = isEncrypt ? btoa(unescape(encodeURIComponent(input))) : decodeURIComponent(escape(atob(input)));
+                        break;
+                        
+                    case 'caesar':
+                        result = caesarCipher(input, isEncrypt ? settings.caesarShift : -settings.caesarShift);
+                        break;
+                        
+                    case 'rot13':
+                        result = rot13(input);
+                        break;
+                        
+                    case 'atbash':
+                        result = atbashCipher(input);
+                        break;
+                        
+                    case 'vigenere':
+                        result = vigenereCipher(input, settings.vigenereKey, isEncrypt);
+                        break;
+                        
+                    case 'xor':
+                        result = xorCipher(input, settings.xorKey);
+                        break;
+                        
+                    default:
+                        throw new Error('Unknown encryption method');
+                }
+                
+                const endTime = performance.now();
+                
+                document.getElementById('outputText').value = result;
+                updateCharacterCounts();
+                updateStatistics(input, result, endTime - startTime);
+                updateOperationStatus(isEncrypt ? 'Encrypted successfully' : 'Decrypted successfully', 'success');
+                
+                document.getElementById('statisticsPanel').style.display = 'block';
+                
+            } catch (error) {
+                updateOperationStatus('Operation failed: ' + error.message, 'error');
+                console.error('Encryption error:', error);
+            }
+        }
+        
+        // Caesar cipher implementation
+        function caesarCipher(text, shift) {
+            return text.split('').map(char => {
+                if (char.match(/[a-z]/i)) {
+                    const code = char.charCodeAt(0);
+                    const base = code >= 65 && code <= 90 ? 65 : 97;
+                    return String.fromCharCode(((code - base + shift + 26) % 26) + base);
+                }
+                return char;
+            }).join('');
+        }
+        
+        // ROT13 implementation
+        function rot13(text) {
+            return text.split('').map(char => {
+                if (char.match(/[a-z]/i)) {
+                    const code = char.charCodeAt(0);
+                    const base = code >= 65 && code <= 90 ? 65 : 97;
+                    return String.fromCharCode(((code - base + 13) % 26) + base);
+                }
+                return char;
+            }).join('');
+        }
+        
+        // Atbash cipher implementation
+        function atbashCipher(text) {
+            return text.split('').map(char => {
+                if (char.match(/[a-z]/i)) {
+                    const code = char.charCodeAt(0);
+                    if (code >= 65 && code <= 90) {
+                        return String.fromCharCode(90 - (code - 65));
+                    } else if (code >= 97 && code <= 122) {
+                        return String.fromCharCode(122 - (code - 97));
+                    }
+                }
+                return char;
+            }).join('');
+        }
+        
+        // Vigenère cipher implementation
+        function vigenereCipher(text, key, encrypt = true) {
+            const cleanKey = key.replace(/[^A-Z]/g, '');
+            if (!cleanKey) throw new Error('Invalid key for Vigenère cipher');
+            
+            let keyIndex = 0;
+            return text.split('').map(char => {
+                if (char.match(/[a-z]/i)) {
+                    const code = char.charCodeAt(0);
+                    const base = code >= 65 && code <= 90 ? 65 : 97;
+                    const keyShift = cleanKey.charCodeAt(keyIndex % cleanKey.length) - 65;
+                    keyIndex++;
+                    
+                    const shift = encrypt ? keyShift : -keyShift;
+                    return String.fromCharCode(((code - base + shift + 26) % 26) + base);
+                }
+                return char;
+            }).join('');
+        }
+        
+        // XOR cipher implementation
+        function xorCipher(text, key) {
+            if (!key) throw new Error('XOR key cannot be empty');
+            
+            return text.split('').map((char, index) => {
+                const charCode = char.charCodeAt(0);
+                const keyCode = key.charCodeAt(index % key.length);
+                return String.fromCharCode(charCode ^ keyCode);
+            }).join('');
+        }
+        
+        // Update character counts
+        function updateCharacterCounts() {
+            const input = document.getElementById('inputText').value;
+            const output = document.getElementById('outputText').value;
+            
+            document.getElementById('inputCharCount').textContent = input.length;
+            document.getElementById('outputCharCount').textContent = output.length;
+        }
+        
+        // Update statistics
+        function updateStatistics(input, output, processingTime) {
+            const sizeChange = input.length > 0 ? (((output.length - input.length) / input.length) * 100).toFixed(1) : 0;
+            const entropy = calculateEntropy(output);
+            const securityScore = calculateSecurityScore();
+            
+            document.getElementById('processingTime').textContent = processingTime.toFixed(1) + 'ms';
+            document.getElementById('characterChange').textContent = sizeChange + '%';
+            document.getElementById('entropyScore').textContent = entropy.toFixed(2);
+            document.getElementById('securityScore').textContent = securityScore + '%';
+        }
+        
+        // Calculate text entropy
+        function calculateEntropy(text) {
+            const frequencies = {};
+            for (const char of text) {
+                frequencies[char] = (frequencies[char] || 0) + 1;
+            }
+            
+            let entropy = 0;
+            const length = text.length;
+            
+            for (const count of Object.values(frequencies)) {
+                const probability = count / length;
+                entropy -= probability * Math.log2(probability);
+            }
+            
+            return entropy;
+        }
+        
+        // Calculate security score
+        function calculateSecurityScore() {
+            const scores = {
+                'base64': 20,
+                'caesar': 25,
+                'rot13': 30,
+                'atbash': 35,
+                'vigenere': 70,
+                'xor': 65
+            };
+            
+            return scores[currentMethod] || 50;
+        }
+        
+        // Update operation status
+        function updateOperationStatus(message, type = 'info') {
+            const statusElement = document.getElementById('operationStatus');
+            statusElement.textContent = message;
+            
+            statusElement.className = type === 'error' ? 'font-medium text-red-400' : 
+                                    type === 'success' ? 'font-medium text-green-400' : 
+                                    'font-medium';
+        }
+        
+        // Generate random key
+        function generateRandomKey() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+            let key = '';
+            
+            const length = 16 + Math.floor(Math.random() * 17); // 16-32 characters
+            
+            for (let i = 0; i < length; i++) {
+                key += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            
+            document.getElementById('generatedKey').textContent = key;
+            
+            // Auto-fill appropriate input if available
+            if (currentMethod === 'vigenere' && document.getElementById('vigenereKey')) {
+                settings.vigenereKey = key.replace(/[^A-Z]/gi, '').toUpperCase().slice(0, 20);
+                document.getElementById('vigenereKey').value = settings.vigenereKey;
+            } else if (currentMethod === 'xor' && document.getElementById('xorKey')) {
+                settings.xorKey = key.slice(0, 20);
+                document.getElementById('xorKey').value = settings.xorKey;
+            }
+            
+            analyzeKeyStrength(key);
+        }
+        
+        // Analyze key strength
+        function analyzeKeyStrength(key = null) {
+            const analysisKey = key || getCurrentKey();
+            
+            if (!analysisKey) {
+                updateKeyStrengthDisplay('No key', 0, 0, 'security-low');
+                return;
+            }
+            
+            const length = analysisKey.length;
+            const entropy = calculateEntropy(analysisKey);
+            
+            let strength, className;
+            if (length >= 12 && entropy >= 3.5) {
+                strength = 'High Strength';
+                className = 'security-high';
+            } else if (length >= 6 && entropy >= 2.5) {
+                strength = 'Medium Strength';
+                className = 'security-medium';
+            } else {
+                strength = 'Low Strength';
+                className = 'security-low';
+            }
+            
+            updateKeyStrengthDisplay(strength, length, entropy * length, className);
+        }
+        
+        // Get current key based on method
+        function getCurrentKey() {
+            switch(currentMethod) {
+                case 'vigenere': return settings.vigenereKey;
+                case 'xor': return settings.xorKey;
+                case 'caesar': return settings.caesarShift.toString();
+                default: return null;
+            }
+        }
+        
+        // Update key strength display
+        function updateKeyStrengthDisplay(strength, length, entropy, className) {
+            const indicator = document.getElementById('keyStrengthIndicator');
+            const lengthElement = document.getElementById('keyLength');
+            const entropyElement = document.getElementById('keyEntropy');
+            
+            indicator.className = `security-indicator ${className}`;
+            indicator.querySelector('span').textContent = strength;
+            lengthElement.textContent = length;
+            entropyElement.textContent = entropy.toFixed(1);
+        }
+        
+        // Clipboard operations
+        async function pasteFromClipboard() {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById('inputText').value = text;
+                updateCharacterCounts();
+                updateOperationStatus('Text pasted from clipboard', 'success');
+            } catch (error) {
+                updateOperationStatus('Failed to paste from clipboard', 'error');
+            }
+        }
+        
+        async function copyToClipboard() {
+            const output = document.getElementById('outputText').value;
+            
+            if (!output.trim()) {
+                updateOperationStatus('No output to copy', 'error');
+                return;
+            }
+            
+            try {
+                await navigator.clipboard.writeText(output);
+                const btn = document.getElementById('copyOutputBtn');
+                btn.classList.add('copy-success');
+                updateOperationStatus('Copied to clipboard', 'success');
+                
+                setTimeout(() => btn.classList.remove('copy-success'), 300);
+            } catch (error) {
+                updateOperationStatus('Failed to copy to clipboard', 'error');
+            }
+        }
+        
+        // Clear functions
+        function clearInput() {
+            document.getElementById('inputText').value = '';
+            updateCharacterCounts();
+            clearOutput();
+            updateOperationStatus('Input cleared', 'info');
+        }
+        
+        function clearOutput() {
+            document.getElementById('outputText').value = '';
+            updateCharacterCounts();
+            document.getElementById('statisticsPanel').style.display = 'none';
+        }
+        
+        // Download output
+        function downloadOutput() {
+            const output = document.getElementById('outputText').value;
+            
+            if (!output.trim()) {
+                updateOperationStatus('No output to download', 'error');
+                return;
+            }
+            
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            
+            a.href = url;
+            a.download = `encrypted_text_${currentMethod}_${new Date().getTime()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            updateOperationStatus('File downloaded', 'success');
+        }
+    </script>
+</body>
+</html>
