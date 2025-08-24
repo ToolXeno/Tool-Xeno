@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Meta Tag Analyzer - Tool Xeno</title>
+    <meta name="description" content="Advanced meta tag analysis tool with real-time SEO scoring, Open Graph validation, and professional reporting features.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --error-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        
+        .btn-secondary {
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .input-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: var(--dark-text);
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        body.light-theme .input-field {
+            background: var(--light-surface);
+            border-color: var(--light-border);
+            color: var(--light-text);
+        }
+        
+        .textarea-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            color: var(--dark-text);
+            transition: all 0.3s ease;
+            width: 100%;
+            min-height: 200px;
+            resize: vertical;
+            font-family: 'Inter', monospace;
+        }
+        
+        .textarea-field:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        body.light-theme .textarea-field {
+            background: var(--light-surface);
+            border-color: var(--light-border);
+            color: var(--light-text);
+        }
+        
+        .meta-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 16px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .meta-tag {
+            background: rgba(0, 0, 0, 0.03);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .seo-score {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        
+        .score-excellent {
+            background: var(--success-gradient);
+            color: white;
+        }
+        
+        .score-good {
+            background: var(--accent-gradient);
+            color: white;
+        }
+        
+        .score-warning {
+            background: var(--warning-gradient);
+            color: white;
+        }
+        
+        .score-poor {
+            background: var(--error-gradient);
+            color: white;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        .recommendation {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            margin: 8px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .recommendation-icon {
+            margin-right: 12px;
+            margin-top: 2px;
+            color: #667eea;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-button {
+            padding: 10px 20px;
+            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 8px;
+        }
+        
+        .tab-button.active {
+            background: var(--primary-gradient);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        body.light-theme .tab-button {
+            background: rgba(0, 0, 0, 0.05);
+            color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-good { background: #38ef7d; }
+        .status-warning { background: #f5576c; }
+        .status-error { background: #ff6b6b; }
+        
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr !important; }
+            .tab-button { margin-bottom: 8px; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Meta Tag Analyzer
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#analyzer" class="nav-link">Analyzer</a>
+                        <a href="#report" class="nav-link">Report</a>
+                        <a href="#recommendations" class="nav-link">Tips</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Meta Tag Analyzer
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Analyze and optimize your website's meta tags for better SEO performance. Check titles, descriptions, Open Graph, Twitter Cards, and more with professional insights.
+            </p>
+        </section>
+        
+        <!-- Analysis Interface -->
+        <section id="analyzer" class="container mx-auto px-6">
+            <!-- Input Section -->
+            <div class="glass-card p-8 mb-8">
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-search mr-3"></i>
+                    Analyze Meta Tags
+                </h3>
+                
+                <div class="mb-6">
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <button class="tab-button active" onclick="switchTab('url')">
+                            <i class="fas fa-link mr-2"></i>URL Analysis
+                        </button>
+                        <button class="tab-button" onclick="switchTab('html')">
+                            <i class="fas fa-code mr-2"></i>HTML Code
+                        </button>
+                    </div>
+                    
+                    <div id="urlTab" class="tab-content active">
+                        <label class="block text-sm font-medium mb-3">Enter Website URL</label>
+                        <div class="flex gap-3">
+                            <input type="url" id="urlInput" class="input-field flex-1" placeholder="https://example.com">
+                            <button id="analyzeUrlBtn" class="btn-gradient">
+                                <i class="fas fa-search mr-2"></i>Analyze
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="htmlTab" class="tab-content">
+                        <label class="block text-sm font-medium mb-3">Paste HTML Code</label>
+                        <textarea id="htmlInput" class="textarea-field" placeholder="Paste your HTML code here..."></textarea>
+                        <button id="analyzeHtmlBtn" class="btn-gradient mt-3">
+                            <i class="fas fa-code mr-2"></i>Analyze HTML
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Loading State -->
+                <div id="loadingState" class="hidden text-center py-8">
+                    <div class="text-4xl mb-4">
+                        <i class="fas fa-spinner fa-spin opacity-50"></i>
+                    </div>
+                    <p class="opacity-70">Analyzing meta tags...</p>
+                </div>
+            </div>
+            
+            <!-- Results Section -->
+            <div id="resultsSection" class="hidden">
+                <!-- SEO Score Overview -->
+                <div class="glass-card p-8 mb-8">
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-chart-line mr-3"></i>
+                        SEO Score Overview
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div id="overallScore" class="seo-score score-excellent">85</div>
+                            <p class="font-medium">Overall Score</p>
+                        </div>
+                        <div class="text-center">
+                            <div id="titleScore" class="seo-score score-good">90</div>
+                            <p class="font-medium">Title Tag</p>
+                        </div>
+                        <div class="text-center">
+                            <div id="descriptionScore" class="seo-score score-warning">75</div>
+                            <p class="font-medium">Description</p>
+                        </div>
+                        <div class="text-center">
+                            <div id="socialScore" class="seo-score score-good">88</div>
+                            <p class="font-medium">Social Tags</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Detailed Analysis -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Basic Meta Tags -->
+                    <div class="glass-card p-6">
+                        <h4 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-tags mr-3"></i>
+                            Basic Meta Tags
+                        </h4>
+                        
+                        <div id="basicTags">
+                            <!-- Title Tag -->
+                            <div class="meta-tag">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium">Title Tag</span>
+                                    <span class="status-indicator status-good"></span>
+                                </div>
+                                <div id="titleContent" class="text-sm opacity-80 mb-2">Example Website - Best Services</div>
+                                <div class="flex justify-between text-xs opacity-60">
+                                    <span id="titleLength">32 characters</span>
+                                    <span>Recommended: 50-60 characters</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div id="titleProgress" class="progress-fill" style="width: 53%"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Meta Description -->
+                            <div class="meta-tag">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium">Meta Description</span>
+                                    <span class="status-indicator status-warning"></span>
+                                </div>
+                                <div id="descriptionContent" class="text-sm opacity-80 mb-2">This is an example meta description for the website.</div>
+                                <div class="flex justify-between text-xs opacity-60">
+                                    <span id="descriptionLength">52 characters</span>
+                                    <span>Recommended: 150-160 characters</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div id="descriptionProgress" class="progress-fill" style="width: 33%"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Meta Keywords -->
+                            <div class="meta-tag">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium">Meta Keywords</span>
+                                    <span class="status-indicator status-error"></span>
+                                </div>
+                                <div id="keywordsContent" class="text-sm opacity-80 mb-2">Not found</div>
+                                <div class="text-xs opacity-60">Meta keywords are deprecated but some search engines still consider them</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Open Graph Tags -->
+                    <div class="glass-card p-6">
+                        <h4 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fab fa-facebook mr-3"></i>
+                            Open Graph Tags
+                        </h4>
+                        
+                        <div id="openGraphTags">
+                            <!-- OG Title -->
+                            <div class="meta-tag">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium">og:title</span>
+                                    <span class="status-indicator status-good"></span>
+                                </div>
+                                <div id="ogTitleContent" class="text-sm opacity-80">Example Website - Best Services</div>
+                            </div>
+                            
+                            <!-- OG Description -->
+                            <div class="meta-tag">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium">og:description</span>
+                                    <span class="status-indicator status-good"></span>
+                                </div>
+                                <div id="ogDescriptionContent" class="text-sm opacity-80">This is an example description for social sharing.</div>
+                            </div>
+                            
+                            <!-- OG Image -->
+                            <div class="meta-tag">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium">og:image</span>
+                                    <span class="status-indicator status-warning"></span>
+                                </div>
+                                <div id="ogImageContent" class="text-sm opacity-80">Not found</div>
+                            </div>
+                            
+                            <!-- OG URL -->
+                            <div class="meta-tag">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium">og:url</span>
+                                    <span class="status-indicator status-good"></span>
+                                </div>
+                                <div id="ogUrlContent" class="text-sm opacity-80">https://example.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Twitter Cards & Additional Tags -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Twitter Cards -->
+                    <div class="glass-card p-6">
+                        <h4 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fab fa-twitter mr-3"></i>
+                            Twitter Cards
+                        </h4>
+                        
+                        <div id="twitterTags">
+                            <div class="meta-tag">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium">twitter:card</span>
+                                    <span class="status-indicator status-warning"></span>
+                                </div>
+                                <div id="twitterCardContent" class="text-sm opacity-80">Not found</div>
+                            </div>
+                            
+                            <div class="meta-tag">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium">twitter:title</span>
+                                    <span class="status-indicator status-warning"></span>
+                                </div>
+                                <div id="twitterTitleContent" class="text-sm opacity-80">Not found</div>
+                            </div>
+                            
+                            <div class="meta-tag">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium">twitter:description</span>
+                                    <span class="status-indicator status-warning"></span>
+                                </div>
+                                <div id="twitterDescriptionContent" class="text-sm opacity-80">Not found</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Technical Tags -->
+                    <div class="glass-card p-6">
+                        <h4 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-cog mr-3"></i>
+                            Technical Tags
+                        </h4>
+                        
+                        <div id="technicalTags">
+                            <div class="meta-tag">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium">Charset</span>
+                                    <span class="status-indicator status-good"></span>
+                                </div>
+                                <div id="charsetContent" class="text-sm opacity-80">UTF-8</div>
+                            </div>
+                            
+                            <div class="meta-tag">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium">Viewport</span>
+                                    <span class="status-indicator status-good"></span>
+                                </div>
+                                <div id="viewportContent" class="text-sm opacity-80">width=device-width, initial-scale=1.0</div>
+                            </div>
+                            
+                            <div class="meta-tag">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium">Robots</span>
+                                    <span class="status-indicator status-good"></span>
+                                </div>
+                                <div id="robotsContent" class="text-sm opacity-80">index, follow</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recommendations -->
+                <div class="glass-card p-8">
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-lightbulb mr-3"></i>
+                        SEO Recommendations
+                    </h3>
+                    
+                    <div id="recommendations" class="space-y-4">
+                        <div class="recommendation">
+                            <i class="fas fa-info-circle recommendation-icon"></i>
+                            <div>
+                                <div class="font-medium">Optimize Title Tag Length</div>
+                                <div class="text-sm opacity-80 mt-1">Your title tag is too short. Consider expanding it to 50-60 characters for better SEO performance.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation">
+                            <i class="fas fa-exclamation-triangle recommendation-icon"></i>
+                            <div>
+                                <div class="font-medium">Add Meta Description</div>
+                                <div class="text-sm opacity-80 mt-1">Your meta description is too short. Write a compelling 150-160 character description to improve click-through rates.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation">
+                            <i class="fas fa-share-alt recommendation-icon"></i>
+                            <div>
+                                <div class="font-medium">Add Open Graph Image</div>
+                                <div class="text-sm opacity-80 mt-1">Add an og:image tag to control how your page appears when shared on social media.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation">
+                            <i class="fab fa-twitter recommendation-icon"></i>
+                            <div>
+                                <div class="font-medium">Implement Twitter Cards</div>
+                                <div class="text-sm opacity-80 mt-1">Add Twitter Card meta tags to enhance your content's appearance on Twitter.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-8 text-center border-t border-opacity-20 border-white">
+        <p class="opacity-70">&copy; 2025 Tool Xeno. All rights reserved. Professional Meta Tag Analysis Tool.</p>
+    </footer>
+    
+    <script>
+        // Global variables
+        let analysisData = {};
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            initializeEventListeners();
+            loadExampleData();
+        });
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Initialize event listeners
+        function initializeEventListeners() {
+            document.getElementById('analyzeUrlBtn').addEventListener('click', analyzeUrl);
+            document.getElementById('analyzeHtmlBtn').addEventListener('click', analyzeHtml);
+            
+            // Enter key support
+            document.getElementById('urlInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') analyzeUrl();
+            });
+        }
+        
+        // Switch tabs
+        function switchTab(tabName) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Activate selected tab
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+        
+        // Analyze URL
+        async function analyzeUrl() {
+            const url = document.getElementById('urlInput').value.trim();
+            
+            if (!url) {
+                alert('Please enter a valid URL');
+                return;
+            }
+            
+            if (!isValidUrl(url)) {
+                alert('Please enter a valid URL (must start with http:// or https://)');
+                return;
+            }
+            
+            showLoading();
+            
+            try {
+                // Simulate API call with timeout
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // For demo purposes, generate sample data based on URL
+                const sampleData = generateSampleData(url);
+                displayResults(sampleData);
+                
+            } catch (error) {
+                console.error('Analysis failed:', error);
+                alert('Failed to analyze URL. Please try again.');
+                hideLoading();
+            }
+        }
+        
+        // Analyze HTML
+        function analyzeHtml() {
+            const html = document.getElementById('htmlInput').value.trim();
+            
+            if (!html) {
+                alert('Please enter HTML code');
+                return;
+            }
+            
+            showLoading();
+            
+            try {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                const analysisResult = parseMetaTags(doc);
+                
+                setTimeout(() => {
+                    displayResults(analysisResult);
+                }, 1000);
+                
+            } catch (error) {
+                console.error('HTML parsing failed:', error);
+                alert('Failed to parse HTML. Please check your code.');
+                hideLoading();
+            }
+        }
+        
+        // Parse meta tags from HTML document
+        function parseMetaTags(doc) {
+            const result = {
+                title: doc.querySelector('title')?.textContent || 'Not found',
+                description: doc.querySelector('meta[name="description"]')?.getAttribute('content') || 'Not found',
+                keywords: doc.querySelector('meta[name="keywords"]')?.getAttribute('content') || 'Not found',
+                charset: doc.querySelector('meta[charset]')?.getAttribute('charset') || 'Not specified',
+                viewport: doc.querySelector('meta[name="viewport"]')?.getAttribute('content') || 'Not found',
+                robots: doc.querySelector('meta[name="robots"]')?.getAttribute('content') || 'Not specified',
+                ogTitle: doc.querySelector('meta[property="og:title"]')?.getAttribute('content') || 'Not found',
+                ogDescription: doc.querySelector('meta[property="og:description"]')?.getAttribute('content') || 'Not found',
+                ogImage: doc.querySelector('meta[property="og:image"]')?.getAttribute('content') || 'Not found',
+                ogUrl: doc.querySelector('meta[property="og:url"]')?.getAttribute('content') || 'Not found',
+                twitterCard: doc.querySelector('meta[name="twitter:card"]')?.getAttribute('content') || 'Not found',
+                twitterTitle: doc.querySelector('meta[name="twitter:title"]')?.getAttribute('content') || 'Not found',
+                twitterDescription: doc.querySelector('meta[name="twitter:description"]')?.getAttribute('content') || 'Not found'
+            };
+            
+            return result;
+        }
+        
+        // Generate sample data for URL analysis
+        function generateSampleData(url) {
+            const domain = new URL(url).hostname;
+            
+            return {
+                title: `${domain} - Professional Services & Solutions`,
+                description: `Discover premium services and solutions at ${domain}. We provide expert consultation and innovative approaches to meet your business needs.`,
+                keywords: 'business, services, solutions, professional, consultation',
+                charset: 'UTF-8',
+                viewport: 'width=device-width, initial-scale=1.0',
+                robots: 'index, follow',
+                ogTitle: `${domain} - Professional Services`,
+                ogDescription: `Premium services and solutions for businesses. Expert consultation and innovative approaches.`,
+                ogImage: `https://${domain}/images/og-image.jpg`,
+                ogUrl: url,
+                twitterCard: 'summary_large_image',
+                twitterTitle: `${domain} - Professional Services`,
+                twitterDescription: `Premium services and solutions for businesses.`
+            };
+        }
+        
+        // Show loading state
+        function showLoading() {
+            document.getElementById('loadingState').classList.remove('hidden');
+            document.getElementById('resultsSection').classList.add('hidden');
+        }
+        
+        // Hide loading state
+        function hideLoading() {
+            document.getElementById('loadingState').classList.add('hidden');
+        }
+        
+        // Display analysis results
+        function displayResults(data) {
+            analysisData = data;
+            
+            // Update basic meta tags
+            updateBasicTags(data);
+            
+            // Update Open Graph tags
+            updateOpenGraphTags(data);
+            
+            // Update Twitter tags
+            updateTwitterTags(data);
+            
+            // Update technical tags
+            updateTechnicalTags(data);
+            
+            // Calculate and update scores
+            updateScores(data);
+            
+            // Update recommendations
+            updateRecommendations(data);
+            
+            // Show results
+            hideLoading();
+            document.getElementById('resultsSection').classList.remove('hidden');
+            document.getElementById('resultsSection').classList.add('fade-in');
+        }
+        
+        // Update basic meta tags
+        function updateBasicTags(data) {
+            // Title tag
+            document.getElementById('titleContent').textContent = data.title;
+            const titleLength = data.title.length;
+            document.getElementById('titleLength').textContent = `${titleLength} characters`;
+            
+            const titleProgress = Math.min((titleLength / 60) * 100, 100);
+            document.getElementById('titleProgress').style.width = titleProgress + '%';
+            
+            const titleStatus = getTitleStatus(titleLength);
+            updateTagStatus('title', titleStatus);
+            
+            // Meta description
+            document.getElementById('descriptionContent').textContent = data.description;
+            const descLength = data.description !== 'Not found' ? data.description.length : 0;
+            document.getElementById('descriptionLength').textContent = `${descLength} characters`;
+            
+            const descProgress = Math.min((descLength / 160) * 100, 100);
+            document.getElementById('descriptionProgress').style.width = descProgress + '%';
+            
+            const descStatus = getDescriptionStatus(descLength);
+            updateTagStatus('description', descStatus);
+            
+            // Meta keywords
+            document.getElementById('keywordsContent').textContent = data.keywords;
+            const keywordStatus = data.keywords !== 'Not found' ? 'good' : 'error';
+            updateTagStatus('keywords', keywordStatus);
+        }
+        
+        // Update Open Graph tags
+        function updateOpenGraphTags(data) {
+            document.getElementById('ogTitleContent').textContent = data.ogTitle;
+            document.getElementById('ogDescriptionContent').textContent = data.ogDescription;
+            document.getElementById('ogImageContent').textContent = data.ogImage;
+            document.getElementById('ogUrlContent').textContent = data.ogUrl;
+        }
+        
+        // Update Twitter tags
+        function updateTwitterTags(data) {
+            document.getElementById('twitterCardContent').textContent = data.twitterCard;
+            document.getElementById('twitterTitleContent').textContent = data.twitterTitle;
+            document.getElementById('twitterDescriptionContent').textContent = data.twitterDescription;
+        }
+        
+        // Update technical tags
+        function updateTechnicalTags(data) {
+            document.getElementById('charsetContent').textContent = data.charset;
+            document.getElementById('viewportContent').textContent = data.viewport;
+            document.getElementById('robotsContent').textContent = data.robots;
+        }
+        
+        // Update tag status indicator
+        function updateTagStatus(tagType, status) {
+            const indicators = document.querySelectorAll(`#${tagType}Tags .status-indicator`);
+            indicators.forEach(indicator => {
+                indicator.className = `status-indicator status-${status}`;
+            });
+        }
+        
+        // Get title status
+        function getTitleStatus(length) {
+            if (length >= 50 && length <= 60) return 'good';
+            if (length >= 40 && length <= 70) return 'warning';
+            return 'error';
+        }
+        
+        // Get description status
+        function getDescriptionStatus(length) {
+            if (length >= 150 && length <= 160) return 'good';
+            if (length >= 120 && length <= 170) return 'warning';
+            return 'error';
+        }
+        
+        // Update SEO scores
+        function updateScores(data) {
+            const titleScore = calculateTitleScore(data.title);
+            const descScore = calculateDescriptionScore(data.description);
+            const socialScore = calculateSocialScore(data);
+            const overallScore = Math.round((titleScore + descScore + socialScore) / 3);
+            
+            updateScoreDisplay('titleScore', titleScore);
+            updateScoreDisplay('descriptionScore', descScore);
+            updateScoreDisplay('socialScore', socialScore);
+            updateScoreDisplay('overallScore', overallScore);
+        }
+        
+        // Update score display
+        function updateScoreDisplay(elementId, score) {
+            const element = document.getElementById(elementId);
+            element.textContent = score;
+            
+            // Update score class
+            element.className = 'seo-score';
+            if (score >= 85) element.classList.add('score-excellent');
+            else if (score >= 70) element.classList.add('score-good');
+            else if (score >= 50) element.classList.add('score-warning');
+            else element.classList.add('score-poor');
+        }
+        
+        // Calculate title score
+        function calculateTitleScore(title) {
+            if (title === 'Not found' || !title) return 0;
+            
+            let score = 50; // Base score
+            
+            const length = title.length;
+            if (length >= 50 && length <= 60) score += 30;
+            else if (length >= 40 && length <= 70) score += 20;
+            else score -= 20;
+            
+            // Check for keywords (simple check)
+            if (title.toLowerCase().includes('professional') || 
+                title.toLowerCase().includes('services') ||
+                title.toLowerCase().includes('business')) {
+                score += 20;
+            }
+            
+            return Math.max(0, Math.min(100, score));
+        }
+        
+        // Calculate description score
+        function calculateDescriptionScore(description) {
+            if (description === 'Not found' || !description) return 0;
+            
+            let score = 40; // Base score
+            
+            const length = description.length;
+            if (length >= 150 && length <= 160) score += 40;
+            else if (length >= 120 && length <= 170) score += 30;
+            else if (length >= 100) score += 20;
+            else score -= 20;
+            
+            // Check for call-to-action words
+            const ctaWords = ['discover', 'learn', 'get', 'find', 'explore', 'join'];
+            if (ctaWords.some(word => description.toLowerCase().includes(word))) {
+                score += 20;
+            }
+            
+            return Math.max(0, Math.min(100, score));
+        }
+        
+        // Calculate social score
+        function calculateSocialScore(data) {
+            let score = 0;
+            
+            // Open Graph tags
+            if (data.ogTitle !== 'Not found') score += 20;
+            if (data.ogDescription !== 'Not found') score += 20;
+            if (data.ogImage !== 'Not found') score += 25;
+            if (data.ogUrl !== 'Not found') score += 10;
+            
+            // Twitter Cards
+            if (data.twitterCard !== 'Not found') score += 15;
+            if (data.twitterTitle !== 'Not found') score += 5;
+            if (data.twitterDescription !== 'Not found') score += 5;
+            
+            return Math.min(100, score);
+        }
+        
+        // Update recommendations
+        function updateRecommendations(data) {
+            const recommendations = [];
+            
+            // Title recommendations
+            if (data.title === 'Not found') {
+                recommendations.push({
+                    icon: 'fas fa-exclamation-triangle',
+                    title: 'Missing Title Tag',
+                    description: 'Add a title tag to your HTML head section. This is crucial for SEO and user experience.'
+                });
+            } else if (data.title.length < 50) {
+                recommendations.push({
+                    icon: 'fas fa-info-circle',
+                    title: 'Optimize Title Tag Length',
+                    description: 'Your title tag is too short. Consider expanding it to 50-60 characters for better SEO performance.'
+                });
+            } else if (data.title.length > 60) {
+                recommendations.push({
+                    icon: 'fas fa-info-circle',
+                    title: 'Shorten Title Tag',
+                    description: 'Your title tag is too long and may be truncated in search results. Keep it under 60 characters.'
+                });
+            }
+            
+            // Description recommendations
+            if (data.description === 'Not found') {
+                recommendations.push({
+                    icon: 'fas fa-exclamation-triangle',
+                    title: 'Missing Meta Description',
+                    description: 'Add a meta description to improve click-through rates from search results.'
+                });
+            } else if (data.description.length < 120) {
+                recommendations.push({
+                    icon: 'fas fa-info-circle',
+                    title: 'Expand Meta Description',
+                    description: 'Your meta description is too short. Write a compelling 150-160 character description.'
+                });
+            }
+            
+            // Social media recommendations
+            if (data.ogImage === 'Not found') {
+                recommendations.push({
+                    icon: 'fas fa-share-alt',
+                    title: 'Add Open Graph Image',
+                    description: 'Add an og:image tag to control how your page appears when shared on social media.'
+                });
+            }
+            
+            if (data.twitterCard === 'Not found') {
+                recommendations.push({
+                    icon: 'fab fa-twitter',
+                    title: 'Implement Twitter Cards',
+                    description: 'Add Twitter Card meta tags to enhance your content\'s appearance on Twitter.'
+                });
+            }
+            
+            // Viewport recommendation
+            if (data.viewport === 'Not found') {
+                recommendations.push({
+                    icon: 'fas fa-mobile-alt',
+                    title: 'Add Viewport Meta Tag',
+                    description: 'Add a viewport meta tag to ensure proper mobile responsiveness.'
+                });
+            }
+            
+            renderRecommendations(recommendations);
+        }
+        
+        // Render recommendations
+        function renderRecommendations(recommendations) {
+            const container = document.getElementById('recommendations');
+            
+            if (recommendations.length === 0) {
+                container.innerHTML = `
+                    <div class="recommendation">
+                        <i class="fas fa-check-circle recommendation-icon" style="color: #38ef7d;"></i>
+                        <div>
+                            <div class="font-medium">Excellent! No Critical Issues Found</div>
+                            <div class="text-sm opacity-80 mt-1">Your meta tags are well optimized. Keep up the good work!</div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = recommendations.map(rec => `
+                <div class="recommendation fade-in">
+                    <i class="${rec.icon} recommendation-icon"></i>
+                    <div>
+                        <div class="font-medium">${rec.title}</div>
+                        <div class="text-sm opacity-80 mt-1">${rec.description}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Load example data on page load
+        function loadExampleData() {
+            const exampleData = {
+                title: 'Professional Web Development Services - Your Company Name',
+                description: 'Expert web development services including custom websites, e-commerce solutions, and digital marketing. Get started with our professional team today.',
+                keywords: 'web development, custom websites, e-commerce, digital marketing, professional services',
+                charset: 'UTF-8',
+                viewport: 'width=device-width, initial-scale=1.0',
+                robots: 'index, follow',
+                ogTitle: 'Professional Web Development Services',
+                ogDescription: 'Expert web development services including custom websites and e-commerce solutions.',
+                ogImage: 'https://example.com/images/og-image.jpg',
+                ogUrl: 'https://example.com',
+                twitterCard: 'summary_large_image',
+                twitterTitle: 'Professional Web Development Services',
+                twitterDescription: 'Expert web development services for modern businesses.'
+            };
+            
+            // Show example results immediately
+            setTimeout(() => {
+                displayResults(exampleData);
+            }, 500);
+        }
+        
+        // Utility function to validate URL
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return string.startsWith('http://') || string.startsWith('https://');
+            } catch (_) {
+                return false;
+            }
+        }
+        
+        // Debounce function for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+    </script>
+</body>
+</html>
