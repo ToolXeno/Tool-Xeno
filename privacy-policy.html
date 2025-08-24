@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Privacy Policy - Tool Xeno</title>
+    <meta name="description" content="Privacy Policy for Tool Xeno. Understand how we prioritize your privacy with our client-side online tools. Your data never leaves your device.">
+    <meta name="author" content="Tool Xeno">
+    <meta name="robots" content="index, follow">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23667eea'/><stop offset='100%' stop-color='%23764ba2'/></linearGradient></defs><rect width='100' height='100' rx='15' fill='url(%23g)'/><path fill='white' d='M30,42 L42,42 L42,30 L58,30 L58,42 L70,42 L70,58 L58,58 L58,70 L42,70 L42,58 L30,58 Z' transform='rotate(45 50 50)'/></svg>">
+    
+    <!-- Styles from homepage -->
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        body.light-theme { background-color: var(--light-bg); color: var(--light-text); }
+        .particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; overflow: hidden; }
+        .particle { position: absolute; border-radius: 50%; animation: float 20s infinite linear; opacity: 0.05; background: radial-gradient(circle, #667eea 0%, transparent 70%); }
+        body.light-theme .particle { background: radial-gradient(circle, #4facfe 0%, transparent 70%); }
+        @keyframes float { 0% { transform: translateY(100vh) rotate(0deg); } 100% { transform: translateY(-100px) rotate(360deg); } }
+        .header-glass { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: rgba(0, 0, 0, 0.4); border-bottom: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); transition: background-color 0.35s ease, border-color 0.35s ease; }
+        body.light-theme .header-glass { background: rgba(255, 255, 255, 0.9); border-bottom-color: rgba(0, 0, 0, 0.1); }
+        .theme-toggle { position: relative; width: 60px; height: 30px; background: var(--dark-surface); border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255, 255, 255, 0.1); }
+        .theme-toggle::after { content: ''; position: absolute; top: 2px; left: 2px; width: 22px; height: 22px; background: var(--primary-gradient); border-radius: 50%; transition: transform 0.3s ease; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); }
+        body.light-theme .theme-toggle { background: var(--light-surface-elevated); border-color: var(--light-border); }
+        body.light-theme .theme-toggle::after { transform: translateX(28px); background: var(--secondary-gradient); }
+        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; transition: background-color 0.35s ease, border-color 0.35s ease; position: relative; overflow: hidden; }
+        body.light-theme .glass-card { background-color: rgba(255, 255, 255, 0.9); border-color: rgba(0, 0, 0, 0.1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); }
+        .nav-link { padding: 8px 16px; border-radius: 8px; transition: background-color 0.3s ease, color 0.3s ease; cursor: pointer; color: rgba(255, 255, 255, 0.7); text-decoration: none; }
+        .nav-link:hover { background: rgba(255, 255, 255, 0.1); color: white; }
+        body.light-theme .nav-link { color: rgba(0, 0, 0, 0.7); }
+        body.light-theme .nav-link:hover { background: rgba(0, 0, 0, 0.1); color: black; }
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 16px; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .section-subtitle { font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto; }
+        .policy-content h2 { font-size: 1.8rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; border-bottom: 1px solid var(--light-border); padding-bottom: 0.5rem; }
+        body.light-theme .policy-content h2 { border-bottom-color: var(--light-border); }
+        .policy-content p { margin-bottom: 1rem; opacity: 0.8; }
+        .policy-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; opacity: 0.8; }
+        .policy-content a { color: #667eea; text-decoration: none; transition: color 0.3s; }
+        .policy-content a:hover { text-decoration: underline; color: #764ba2; }
+        @media (max-width: 768px) { .section-title { font-size: 2rem; } .section-subtitle { font-size: 1rem; } }
+    </style>
+</head>
+<body>
+    <div class="particles-container" id="particles"></div>
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="flex items-center space-x-4" aria-label="Tool Xeno Home">
+                <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">🛠️ Tool Xeno</div>
+            </a>
+            <div class="flex items-center space-x-4">
+                <nav class="hidden md:flex space-x-2">
+                    <a href="/" class="nav-link">Home</a>
+                </nav>
+                <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light and dark theme"></button>
+            </div>
+        </div>
+    </header>
+    <main class="pt-24">
+        <section id="policy" class="container mx-auto px-6 py-16">
+            <div class="section-header">
+                <h1 class="section-title">Privacy Policy</h1>
+                <p class="section-subtitle">Your privacy is our absolute priority. Here's how we protect it.</p>
+            </div>
+            <div class="glass-card max-w-4xl mx-auto p-8 md:p-12 policy-content">
+                <p class="opacity-70"><strong>Last Updated:</strong> August 22, 2025</p>
+                
+                <p>Welcome to Tool Xeno ("we," "us," or "our"). We are committed to protecting your privacy. This Privacy Policy explains our principles and practices regarding data, especially highlighting that our tools are designed to be completely client-side.</p>
+
+                <h2>1. The Core Principle: Your Data is Your Own</h2>
+                <p>Tool Xeno operates on a fundamental principle of privacy: <strong>your data never leaves your device</strong>. The vast majority of our tools (e.g., image converters, document compressors, text analyzers) perform all their processing directly in your web browser. This means the files, text, and other data you work with are never uploaded to our servers. We have no access to them, and we do not store them.</p>
+
+                <h2>2. Information We Do Not Collect</h2>
+                <p>Because our tools are client-side, we do not collect, see, or store any personal or sensitive information you process using them. This includes, but is not limited to:</p>
+                <ul>
+                    <li>The content of your documents, images, or text.</li>
+                    <li>Any personal information contained within your files.</li>
+                    <li>Data generated by the tools (e.g., converted files, compressed images).</li>
+                </ul>
+
+                <h2>3. Information We Collect (Limited)</h2>
+                <p>While using our website, we may collect anonymous, non-personal information to improve our service:</p>
+                <ul>
+                    <li><strong>Usage Analytics:</strong> We may collect anonymous data about website traffic, such as which tools are most popular and how users navigate the site. This data is aggregated and cannot be used to identify you personally.</li>
+                    <li><strong>Device Information:</strong> We may collect basic information about the device and browser you are using (e.g., browser type, operating system) to ensure our site functions correctly on different platforms.</li>
+                </ul>
+
+                <h2>4. Cookies and Local Storage</h2>
+                <p>We use `localStorage` for one specific purpose: to save your theme preference (light or dark mode). This is stored in your browser and is not a tracking cookie. We do not use cookies for tracking or advertising purposes.</p>
+
+                <h2>5. Third-Party Services</h2>
+                <p>We may use third-party services, such as web font providers (Google Fonts) and content delivery networks (CDNs). These services may collect their own anonymous data as per their respective privacy policies. We do not share any personal information with them.</p>
+
+                <h2>6. Data Security</h2>
+                <p>The best security is not having data to protect. Since we do not store your files or personal data from our tools, the risk of a data breach involving your content is eliminated on our end. All processing is handled securely within your browser's sandboxed environment.</p>
+
+                <h2>7. Children's Privacy</h2>
+                <p>Our services are not directed to individuals under the age of 13. We do not knowingly collect any personal information from children. If you believe we have inadvertently collected such information, please contact us so we can take appropriate action.</p>
+
+                <h2>8. Changes to This Privacy Policy</h2>
+                <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last Updated" date. We encourage you to review this Privacy Policy periodically.</p>
+
+                <h2>9. Contact Us</h2>
+                <p>If you have any questions or concerns about this Privacy Policy, please feel free to contact us at: <a href="mailto:toolture@gmail.com">toolture@gmail.com</a>.</p>
+            </div>
+        </section>
+    </main>
+    <footer class="container mx-auto px-6 py-12 text-center border-t border-opacity-20">
+        <p class="text-sm opacity-70">&copy; 2025 Tool Xeno. All rights reserved.</p>
+    </footer>
+    <script>
+        function toggleTheme() { document.body.classList.toggle('light-theme'); localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark'); }
+        function initializeTheme() { if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-theme'); } }
+        function initializeParticles() { const p = document.getElementById('particles'); if (!p) return; const n = window.innerWidth < 768 ? 20 : 50; for (let i = 0; i < n; i++) { const e = document.createElement('div'); e.className = 'particle'; const t = Math.random() * 100 + 50; e.style.width = `${t}px`; e.style.height = `${t}px`; e.style.left = `${Math.random()*100}%`; e.style.animationDuration = `${Math.random()*20+10}s`; e.style.animationDelay = `${Math.random()*20}s`; p.appendChild(e); } }
+        document.addEventListener('DOMContentLoaded', function() { initializeTheme(); initializeParticles(); });
+    </script>
+</body>
+</html>
