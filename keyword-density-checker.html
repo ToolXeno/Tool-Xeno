@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Keyword Density Checker - Tool Xeno</title>
+    <meta name="description" content="Advanced keyword density checker with real-time analysis, SEO optimization suggestions, and professional reporting features for optimal content optimization.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        
+        .btn-secondary {
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .text-area {
+            width: 100%;
+            min-height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            color: var(--dark-text);
+            font-size: 16px;
+            line-height: 1.6;
+            resize: vertical;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        .text-area:focus {
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        body.light-theme .text-area {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: var(--light-text);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        body.light-theme .stat-card {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .keyword-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+        
+        .keyword-item:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        body.light-theme .keyword-item {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-theme .keyword-item:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+        
+        .density-bar {
+            width: 100px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0 15px;
+        }
+        
+        .density-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .density-optimal { background: var(--success-gradient); }
+        .density-warning { background: var(--warning-gradient); }
+        .density-danger { background: var(--secondary-gradient); }
+        
+        .seo-recommendation {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        body.light-theme .seo-recommendation {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .url-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            color: var(--dark-text);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        .url-input:focus {
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        body.light-theme .url-input {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: var(--light-text);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 20px 0;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .chart-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        <i class="fas fa-search mr-2"></i>Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Keyword Density Checker
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#analyze" class="nav-link">Analyze</a>
+                        <a href="#results" class="nav-link">Results</a>
+                        <a href="#seo-tips" class="nav-link">SEO Tips</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Keyword Density Checker
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Advanced keyword density analysis with real-time SEO optimization suggestions. 
+                Analyze your content, get professional insights, and optimize for better search rankings.
+            </p>
+        </section>
+        
+        <!-- Analysis Interface -->
+        <section id="analyze" class="container mx-auto px-6 mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Input Panel -->
+                <div class="glass-card p-8">
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-edit mr-3"></i>
+                        Content Analysis
+                    </h3>
+                    
+                    <!-- Tab Selection -->
+                    <div class="flex mb-6 bg-rgba(255,255,255,0.05) rounded-xl p-1">
+                        <button id="textTab" class="flex-1 py-2 px-4 rounded-lg btn-gradient text-sm font-medium">
+                            <i class="fas fa-keyboard mr-2"></i>Text Input
+                        </button>
+                        <button id="urlTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium opacity-70 hover:opacity-100 transition-opacity">
+                            <i class="fas fa-link mr-2"></i>URL Analysis
+                        </button>
+                    </div>
+                    
+                    <!-- Text Input -->
+                    <div id="textInput" class="mb-6">
+                        <textarea 
+                            id="contentText" 
+                            class="text-area" 
+                            placeholder="Paste your content here for keyword density analysis...
+                            
+Example: Enter your blog post, article, or any text content you want to analyze for keyword density and SEO optimization."
+                            oninput="analyzeContent()"
+                        ></textarea>
+                    </div>
+                    
+                    <!-- URL Input -->
+                    <div id="urlInput" class="hidden mb-6">
+                        <div class="flex gap-3">
+                            <input 
+                                type="url" 
+                                id="websiteUrl" 
+                                class="url-input flex-1" 
+                                placeholder="https://example.com/page-to-analyze"
+                            >
+                            <button id="analyzeUrlBtn" class="btn-gradient px-6" onclick="analyzeUrl()">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Target Keywords -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-3">Target Keywords (Optional)</label>
+                        <input 
+                            type="text" 
+                            id="targetKeywords" 
+                            class="url-input" 
+                            placeholder="keyword1, keyword2, SEO optimization"
+                            oninput="analyzeContent()"
+                        >
+                        <p class="text-xs opacity-60 mt-2">Separate multiple keywords with commas</p>
+                    </div>
+                    
+                    <!-- Analysis Options -->
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="flex items-center justify-between p-3 bg-rgba(255,255,255,0.05) rounded-lg">
+                            <div>
+                                <label class="text-sm font-medium">Case Sensitive</label>
+                                <p class="text-xs opacity-60">Match exact case</p>
+                            </div>
+                            <div class="toggle-switch" id="caseSensitive" onclick="toggleOption(this)"></div>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-rgba(255,255,255,0.05) rounded-lg">
+                            <div>
+                                <label class="text-sm font-medium">Include Stop Words</label>
+                                <p class="text-xs opacity-60">Analyze common words</p>
+                            </div>
+                            <div class="toggle-switch" id="includeStopWords" onclick="toggleOption(this)"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="space-y-3">
+                        <button id="analyzeBtn" class="btn-gradient w-full" onclick="analyzeContent()">
+                            <i class="fas fa-chart-line mr-2"></i>
+                            Analyze Content
+                        </button>
+                        <button id="clearBtn" class="btn-secondary w-full" onclick="clearAnalysis()">
+                            <i class="fas fa-trash mr-2"></i>
+                            Clear Content
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Stats Panel -->
+                <div class="glass-card p-8">
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-chart-bar mr-3"></i>
+                        Content Statistics
+                    </h3>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="wordCount">0</div>
+                            <div class="text-sm opacity-70">Total Words</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="charCount">0</div>
+                            <div class="text-sm opacity-70">Characters</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="sentenceCount">0</div>
+                            <div class="text-sm opacity-70">Sentences</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="paragraphCount">0</div>
+                            <div class="text-sm opacity-70">Paragraphs</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="uniqueWords">0</div>
+                            <div class="text-sm opacity-70">Unique Words</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="readabilityScore">0</div>
+                            <div class="text-sm opacity-70">Readability</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Real-time Keyword Analysis -->
+                    <div class="mt-8">
+                        <h4 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-eye mr-2"></i>
+                            Live Analysis
+                        </h4>
+                        <div id="liveAnalysis" class="text-center py-8 opacity-50">
+                            <i class="fas fa-keyboard text-4xl mb-4"></i>
+                            <p>Start typing to see real-time analysis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Results Section -->
+        <section id="results" class="container mx-auto px-6 mb-8">
+            <div id="analysisResults" class="hidden">
+                <!-- Keyword Density Chart -->
+                <div class="glass-card p-8 mb-8">
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-chart-pie mr-3"></i>
+                        Keyword Density Visualization
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="densityChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Top Keywords Table -->
+                <div class="glass-card p-8 mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-2xl font-semibold flex items-center">
+                            <i class="fas fa-list-ol mr-3"></i>
+                            Top Keywords Analysis
+                        </h3>
+                        <div class="flex gap-2">
+                            <button class="btn-secondary px-4 py-2 text-sm" onclick="exportResults('csv')">
+                                <i class="fas fa-file-csv mr-2"></i>Export CSV
+                            </button>
+                            <button class="btn-gradient px-4 py-2 text-sm" onclick="exportResults('json')">
+                                <i class="fas fa-file-code mr-2"></i>Export JSON
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="keywordsList" class="space-y-2">
+                        <!-- Keyword items will be populated here -->
+                    </div>
+                </div>
+                
+                <!-- SEO Recommendations -->
+                <div class="glass-card p-8">
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-lightbulb mr-3"></i>
+                        SEO Optimization Recommendations
+                    </h3>
+                    <div id="seoRecommendations">
+                        <!-- Recommendations will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SEO Tips Section -->
+        <section id="seo-tips" class="container mx-auto px-6">
+            <div class="glass-card p-8">
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-graduation-cap mr-3"></i>
+                    SEO Best Practices & Tips
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="seo-recommendation">
+                        <h4 class="font-semibold text-lg mb-3 flex items-center">
+                            <i class="fas fa-target text-green-400 mr-2"></i>
+                            Optimal Keyword Density
+                        </h4>
+                        <p class="opacity-80 mb-2">Maintain keyword density between 1-2% for optimal SEO performance.</p>
+                        <ul class="text-sm opacity-70 space-y-1">
+                            <li>• Primary keywords: 1-2%</li>
+                            <li>• Secondary keywords: 0.5-1%</li>
+                            <li>• Long-tail keywords: 0.3-0.8%</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="seo-recommendation">
+                        <h4 class="font-semibold text-lg mb-3 flex items-center">
+                            <i class="fas fa-exclamation-triangle text-yellow-400 mr-2"></i>
+                            Avoid Keyword Stuffing
+                        </h4>
+                        <p class="opacity-80 mb-2">Excessive keyword usage can harm your SEO rankings.</p>
+                        <ul class="text-sm opacity-70 space-y-1">
+                            <li>• Don't exceed 3% density</li>
+                            <li>• Use natural language</li>
+                            <li>• Focus on user experience</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="seo-recommendation">
+                        <h4 class="font-semibold text-lg mb-3 flex items-center">
+                            <i class="fas fa-sync-alt text-blue-400 mr-2"></i>
+                            Use Keyword Variations
+                        </h4>
+                        <p class="opacity-80 mb-2">Include synonyms and related terms for better content diversity.</p>
+                        <ul class="text-sm opacity-70 space-y-1">
+                            <li>• LSI keywords</li>
+                            <li>• Semantic variations</li>
+                            <li>• Related phrases</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="seo-recommendation">
+                        <h4 class="font-semibold text-lg mb-3 flex items-center">
+                            <i class="fas fa-users text-purple-400 mr-2"></i>
+                            Focus on User Intent
+                        </h4>
+                        <p class="opacity-80 mb-2">Create content that matches what users are searching for.</p>
+                        <ul class="text-sm opacity-70 space-y-1">
+                            <li>• Answer user questions</li>
+                            <li>• Provide valuable content</li>
+                            <li>• Match search intent</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-8 text-center opacity-60 text-sm">
+        <p>&copy; 2025 Tool Xeno - Professional Keyword Density Checker. All rights reserved.</p>
+        <p class="mt-2">Advanced SEO tools for content optimization and search engine success.</p>
+    </footer>
+    
+    <script>
+        // Global variables
+        let analysisData = {
+            text: '',
+            keywords: {},
+            stats: {},
+            recommendations: []
+        };
+        
+        let settings = {
+            caseSensitive: false,
+            includeStopWords: false
+        };
+        
+        let densityChart = null;
+        
+        // Stop words list
+        const stopWords = new Set([
+            'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with',
+            'by', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had',
+            'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'must',
+            'can', 'this', 'that', 'these', 'those', 'i', 'you', 'he', 'she', 'it', 'we', 'they'
+        ]);
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            initializeTabs();
+            loadSampleContent();
+        });
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+            
+            // Recreate chart with new theme
+            if (densityChart) {
+                createDensityChart();
+            }
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Initialize tabs
+        function initializeTabs() {
+            document.getElementById('textTab').addEventListener('click', () => switchTab('text'));
+            document.getElementById('urlTab').addEventListener('click', () => switchTab('url'));
+        }
+        
+        // Switch tabs
+        function switchTab(tab) {
+            const textTab = document.getElementById('textTab');
+            const urlTab = document.getElementById('urlTab');
+            const textInput = document.getElementById('textInput');
+            const urlInput = document.getElementById('urlInput');
+            
+            if (tab === 'text') {
+                textTab.className = textTab.className.replace('opacity-70', '').replace('hover:opacity-100', '') + ' btn-gradient';
+                urlTab.className = 'flex-1 py-2 px-4 rounded-lg text-sm font-medium opacity-70 hover:opacity-100 transition-opacity';
+                textInput.classList.remove('hidden');
+                urlInput.classList.add('hidden');
+            } else {
+                urlTab.className = urlTab.className.replace('opacity-70', '').replace('hover:opacity-100', '') + ' btn-gradient';
+                textTab.className = 'flex-1 py-2 px-4 rounded-lg text-sm font-medium opacity-70 hover:opacity-100 transition-opacity';
+                urlInput.classList.remove('hidden');
+                textInput.classList.add('hidden');
+            }
+        }
+        
+        // Load sample content
+        function loadSampleContent() {
+            const sampleText = `SEO optimization is crucial for digital marketing success. Search engine optimization helps websites rank higher in search results. Modern SEO techniques focus on content quality, user experience, and keyword relevance.
+
+Effective SEO strategies include keyword research, content optimization, and technical SEO improvements. Professional SEO tools can analyze your content and provide recommendations for better search rankings.
+
+Quality content with proper keyword density attracts both users and search engines. The best SEO practices emphasize natural language and user intent matching.`;
+            
+            document.getElementById('contentText').value = sampleText;
+            analyzeContent();
+        }
+        
+        // Toggle option
+        function toggleOption(element) {
+            element.classList.toggle('active');
+            const option = element.id;
+            settings[option] = element.classList.contains('active');
+            
+            if (analysisData.text) {
+                analyzeContent();
+            }
+        }
+        
+        // Analyze content
+        function analyzeContent() {
+            const text = document.getElementById('contentText').value.trim();
+            
+            if (!text) {
+                clearStats();
+                return;
+            }
+            
+            analysisData.text = text;
+            
+            // Calculate basic stats
+            calculateStats(text);
+            
+            // Analyze keywords
+            analyzeKeywords(text);
+            
+            // Generate recommendations
+            generateRecommendations();
+            
+            // Update UI
+            updateStats();
+            updateLiveAnalysis();
+            showResults();
+        }
+        
+        // Calculate basic statistics
+        function calculateStats(text) {
+            const words = text.match(/\b\w+\b/g) || [];
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+            const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim().length > 0);
+            const uniqueWordsSet = new Set(words.map(w => w.toLowerCase()));
+            
+            // Calculate readability (simplified Flesch score)
+            const avgWordsPerSentence = words.length / sentences.length;
+            const avgSyllablesPerWord = words.reduce((sum, word) => sum + countSyllables(word), 0) / words.length;
+            const readability = Math.max(0, Math.min(100, 206.835 - (1.015 * avgWordsPerSentence) - (84.6 * avgSyllablesPerWord)));
+            
+            analysisData.stats = {
+                words: words.length,
+                characters: text.length,
+                sentences: sentences.length,
+                paragraphs: paragraphs.length,
+                uniqueWords: uniqueWordsSet.size,
+                readability: Math.round(readability)
+            };
+        }
+        
+        // Count syllables (simplified)
+        function countSyllables(word) {
+            word = word.toLowerCase();
+            if (word.length <= 3) return 1;
+            
+            word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
+            word = word.replace(/^y/, '');
+            
+            const matches = word.match(/[aeiouy]{1,2}/g);
+            return matches ? matches.length : 1;
+        }
+        
+        // Analyze keywords
+        function analyzeKeywords(text) {
+            const words = settings.caseSensitive ? 
+                text.match(/\b\w+\b/g) || [] : 
+                text.toLowerCase().match(/\b\w+\b/g) || [];
+            
+            const totalWords = words.length;
+            const keywordCounts = {};
+            
+            // Count word frequencies
+            words.forEach(word => {
+                const cleanWord = word.replace(/[^\w]/g, '');
+                if (cleanWord.length < 2) return;
+                
+                // Skip stop words if option is disabled
+                if (!settings.includeStopWords && stopWords.has(cleanWord.toLowerCase())) return;
+                
+                keywordCounts[cleanWord] = (keywordCounts[cleanWord] || 0) + 1;
+            });
+            
+            // Calculate densities and sort
+            const keywords = Object.entries(keywordCounts)
+                .map(([word, count]) => ({
+                    word,
+                    count,
+                    density: ((count / totalWords) * 100).toFixed(2)
+                }))
+                .sort((a, b) => b.count - a.count)
+                .slice(0, 20); // Top 20 keywords
+            
+            analysisData.keywords = keywords;
+            
+            // Analyze target keywords if specified
+            const targetKeywords = document.getElementById('targetKeywords').value;
+            if (targetKeywords) {
+                analyzeTargetKeywords(text, targetKeywords, totalWords);
+            }
+        }
+        
+        // Analyze target keywords
+        function analyzeTargetKeywords(text, targetKeywords, totalWords) {
+            const keywords = targetKeywords.split(',').map(k => k.trim());
+            const textToAnalyze = settings.caseSensitive ? text : text.toLowerCase();
+            
+            analysisData.targetKeywords = keywords.map(keyword => {
+                const keywordToFind = settings.caseSensitive ? keyword : keyword.toLowerCase();
+                const regex = new RegExp(`\\b${keywordToFind.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'g');
+                const matches = textToAnalyze.match(regex) || [];
+                const count = matches.length;
+                const density = ((count / totalWords) * 100).toFixed(2);
+                
+                return {
+                    word: keyword,
+                    count,
+                    density,
+                    status: getDensityStatus(parseFloat(density))
+                };
+            });
+        }
+        
+        // Get density status
+        function getDensityStatus(density) {
+            if (density >= 1 && density <= 2) return 'optimal';
+            if (density > 2 && density <= 3) return 'warning';
+            if (density > 3) return 'danger';
+            return 'low';
+        }
+        
+        // Generate recommendations
+        function generateRecommendations() {
+            const recommendations = [];
+            
+            // Check target keywords
+            if (analysisData.targetKeywords) {
+                analysisData.targetKeywords.forEach(keyword => {
+                    const density = parseFloat(keyword.density);
+                    
+                    if (density < 0.5) {
+                        recommendations.push({
+                            type: 'warning',
+                            title: `Low density for "${keyword.word}"`,
+                            message: `Current density: ${keyword.density}%. Consider adding this keyword more naturally throughout your content.`,
+                            suggestion: 'Aim for 1-2% density for primary keywords.'
+                        });
+                    } else if (density > 3) {
+                        recommendations.push({
+                            type: 'danger',
+                            title: `Keyword stuffing detected for "${keyword.word}"`,
+                            message: `Current density: ${keyword.density}%. This is too high and may harm your SEO.`,
+                            suggestion: 'Reduce keyword usage and use synonyms instead.'
+                        });
+                    } else if (density >= 1 && density <= 2) {
+                        recommendations.push({
+                            type: 'success',
+                            title: `Optimal density for "${keyword.word}"`,
+                            message: `Current density: ${keyword.density}%. This is within the recommended range.`,
+                            suggestion: 'Maintain this keyword density for best results.'
+                        });
+                    }
+                });
+            }
+            
+            // Content quality recommendations
+            const stats = analysisData.stats;
+            
+            if (stats.words < 300) {
+                recommendations.push({
+                    type: 'warning',
+                    title: 'Content length is too short',
+                    message: `Your content has only ${stats.words} words.`,
+                    suggestion: 'Aim for at least 300-500 words for better SEO performance.'
+                });
+            }
+            
+            if (stats.readability < 60) {
+                recommendations.push({
+                    type: 'warning',
+                    title: 'Content readability needs improvement',
+                    message: `Readability score: ${stats.readability}%.`,
+                    suggestion: 'Use shorter sentences and simpler words to improve readability.'
+                });
+            }
+            
+            analysisData.recommendations = recommendations;
+        }
+        
+        // Update statistics display
+        function updateStats() {
+            const stats = analysisData.stats;
+            
+            document.getElementById('wordCount').textContent = stats.words.toLocaleString();
+            document.getElementById('charCount').textContent = stats.characters.toLocaleString();
+            document.getElementById('sentenceCount').textContent = stats.sentences.toLocaleString();
+            document.getElementById('paragraphCount').textContent = stats.paragraphs.toLocaleString();
+            document.getElementById('uniqueWords').textContent = stats.uniqueWords.toLocaleString();
+            document.getElementById('readabilityScore').textContent = stats.readability + '%';
+        }
+        
+        // Update live analysis
+        function updateLiveAnalysis() {
+            const liveAnalysis = document.getElementById('liveAnalysis');
+            
+            if (analysisData.keywords.length === 0) {
+                liveAnalysis.innerHTML = `
+                    <i class="fas fa-keyboard text-4xl mb-4"></i>
+                    <p>No keywords found to analyze</p>
+                `;
+                return;
+            }
+            
+            const topKeywords = analysisData.keywords.slice(0, 5);
+            
+            liveAnalysis.innerHTML = `
+                <h5 class="font-medium mb-3">Top Keywords</h5>
+                <div class="space-y-2">
+                    ${topKeywords.map(keyword => `
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="font-medium">${keyword.word}</span>
+                            <div class="flex items-center gap-2">
+                                <span class="opacity-70">${keyword.count}x</span>
+                                <span class="text-purple-400">${keyword.density}%</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        
+        // Show results
+        function showResults() {
+            document.getElementById('analysisResults').classList.remove('hidden');
+            
+            updateKeywordsList();
+            updateRecommendations();
+            createDensityChart();
+        }
+        
+        // Update keywords list
+        function updateKeywordsList() {
+            const keywordsList = document.getElementById('keywordsList');
+            
+            let html = '';
+            
+            // Add target keywords first if they exist
+            if (analysisData.targetKeywords) {
+                html += '<h4 class="font-semibold text-lg mb-4 text-purple-400">Target Keywords</h4>';
+                
+                analysisData.targetKeywords.forEach(keyword => {
+                    const densityClass = keyword.status === 'optimal' ? 'density-optimal' :
+                                       keyword.status === 'warning' ? 'density-warning' : 
+                                       keyword.status === 'danger' ? 'density-danger' : 'density-optimal';
+                    
+                    html += `
+                        <div class="keyword-item fade-in">
+                            <div class="flex-1">
+                                <div class="font-medium">${keyword.word}</div>
+                                <div class="text-sm opacity-70">Target keyword</div>
+                            </div>
+                            <div class="density-bar">
+                                <div class="density-fill ${densityClass}" style="width: ${Math.min(100, parseFloat(keyword.density) * 10)}%"></div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-semibold">${keyword.density}%</div>
+                                <div class="text-sm opacity-70">${keyword.count} times</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += '<h4 class="font-semibold text-lg mb-4 mt-8">All Keywords</h4>';
+            }
+            
+            // Add all keywords
+            analysisData.keywords.forEach((keyword, index) => {
+                const density = parseFloat(keyword.density);
+                const densityClass = density >= 1 && density <= 2 ? 'density-optimal' :
+                                   density > 2 && density <= 3 ? 'density-warning' : 
+                                   density > 3 ? 'density-danger' : 'density-optimal';
+                
+                html += `
+                    <div class="keyword-item fade-in" style="animation-delay: ${index * 0.1}s">
+                        <div class="flex-1">
+                            <div class="font-medium">${keyword.word}</div>
+                            <div class="text-sm opacity-70">Rank #${index + 1}</div>
+                        </div>
+                        <div class="density-bar">
+                            <div class="density-fill ${densityClass}" style="width: ${Math.min(100, density * 10)}%"></div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold">${keyword.density}%</div>
+                            <div class="text-sm opacity-70">${keyword.count} times</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            keywordsList.innerHTML = html;
+        }
+        
+        // Update recommendations
+        function updateRecommendations() {
+            const recommendationsEl = document.getElementById('seoRecommendations');
+            
+            if (analysisData.recommendations.length === 0) {
+                recommendationsEl.innerHTML = `
+                    <div class="text-center py-8 opacity-50">
+                        <i class="fas fa-thumbs-up text-4xl mb-4"></i>
+                        <p>Great! No major issues found with your content.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const html = analysisData.recommendations.map((rec, index) => {
+                const iconClass = rec.type === 'success' ? 'fa-check-circle text-green-400' :
+                                rec.type === 'warning' ? 'fa-exclamation-triangle text-yellow-400' :
+                                'fa-times-circle text-red-400';
+                
+                return `
+                    <div class="seo-recommendation fade-in" style="animation-delay: ${index * 0.1}s">
+                        <h4 class="font-semibold text-lg mb-2 flex items-center">
+                            <i class="fas ${iconClass} mr-2"></i>
+                            ${rec.title}
+                        </h4>
+                        <p class="opacity-80 mb-2">${rec.message}</p>
+                        <p class="text-sm opacity-70 italic">${rec.suggestion}</p>
+                    </div>
+                `;
+            }).join('');
+            
+            recommendationsEl.innerHTML = html;
+        }
+        
+        // Create density chart
+        function createDensityChart() {
+            const ctx = document.getElementById('densityChart').getContext('2d');
+            
+            if (densityChart) {
+                densityChart.destroy();
+            }
+            
+            const topKeywords = analysisData.keywords.slice(0, 10);
+            const isDarkTheme = !document.body.classList.contains('light-theme');
+            
+            const chartData = {
+                labels: topKeywords.map(k => k.word),
+                datasets: [{
+                    label: 'Keyword Density (%)',
+                    data: topKeywords.map(k => parseFloat(k.density)),
+                    backgroundColor: topKeywords.map((k, i) => {
+                        const density = parseFloat(k.density);
+                        if (density >= 1 && density <= 2) return 'rgba(17, 153, 142, 0.6)';
+                        if (density > 2 && density <= 3) return 'rgba(255, 154, 158, 0.6)';
+                        if (density > 3) return 'rgba(240, 147, 251, 0.6)';
+                        return 'rgba(79, 172, 254, 0.6)';
+                    }),
+                    borderColor: topKeywords.map((k, i) => {
+                        const density = parseFloat(k.density);
+                        if (density >= 1 && density <= 2) return 'rgba(17, 153, 142, 1)';
+                        if (density > 2 && density <= 3) return 'rgba(255, 154, 158, 1)';
+                        if (density > 3) return 'rgba(240, 147, 251, 1)';
+                        return 'rgba(79, 172, 254, 1)';
+                    }),
+                    borderWidth: 2
+                }]
+            };
+            
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: isDarkTheme ? '#ffffff' : '#1e293b'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const keyword = topKeywords[context.dataIndex];
+                                return `${keyword.word}: ${keyword.density}% (${keyword.count} times)`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: Math.max(5, Math.max(...topKeywords.map(k => parseFloat(k.density))) * 1.2),
+                        grid: {
+                            color: isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+                        },
+                        ticks: {
+                            color: isDarkTheme ? '#ffffff' : '#1e293b',
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Density (%)',
+                            color: isDarkTheme ? '#ffffff' : '#1e293b'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+                        },
+                        ticks: {
+                            color: isDarkTheme ? '#ffffff' : '#1e293b',
+                            maxRotation: 45
+                        }
+                    }
+                }
+            };
+            
+            densityChart = new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: chartOptions
+            });
+        }
+        
+        // Analyze URL
+        async function analyzeUrl() {
+            const url = document.getElementById('websiteUrl').value.trim();
+            const btn = document.getElementById('analyzeUrlBtn');
+            
+            if (!url) {
+                alert('Please enter a valid URL');
+                return;
+            }
+            
+            btn.innerHTML = '<div class="loading-spinner"></div>';
+            btn.disabled = true;
+            
+            try {
+                // Simulate URL content extraction (in real implementation, you'd use a backend service)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                const sampleContent = `Extracted content from ${url}. 
+                
+This is sample content that would be extracted from the webpage. In a real implementation, you would use a backend service to fetch and parse the HTML content from the provided URL.
+
+The content would include the main text content, meta tags, headings, and other relevant text elements from the webpage for SEO analysis.`;
+                
+                document.getElementById('contentText').value = sampleContent;
+                switchTab('text');
+                analyzeContent();
+                
+            } catch (error) {
+                alert('Error analyzing URL. Please try again or use text input.');
+            } finally {
+                btn.innerHTML = '<i class="fas fa-search"></i>';
+                btn.disabled = false;
+            }
+        }
+        
+        // Clear analysis
+        function clearAnalysis() {
+            document.getElementById('contentText').value = '';
+            document.getElementById('targetKeywords').value = '';
+            document.getElementById('analysisResults').classList.add('hidden');
+            clearStats();
+            
+            if (densityChart) {
+                densityChart.destroy();
+                densityChart = null;
+            }
+        }
+        
+        // Clear statistics
+        function clearStats() {
+            ['wordCount', 'charCount', 'sentenceCount', 'paragraphCount', 'uniqueWords', 'readabilityScore'].forEach(id => {
+                document.getElementById(id).textContent = '0';
+            });
+            
+            document.getElementById('liveAnalysis').innerHTML = `
+                <i class="fas fa-keyboard text-4xl mb-4"></i>
+                <p>Start typing to see real-time analysis</p>
+            `;
+        }
+        
+        // Export results
+        function exportResults(format) {
+            if (!analysisData.keywords || analysisData.keywords.length === 0) {
+                alert('No data to export. Please analyze some content first.');
+                return;
+            }
+            
+            const data = {
+                timestamp: new Date().toISOString(),
+                statistics: analysisData.stats,
+                keywords: analysisData.keywords,
+                targetKeywords: analysisData.targetKeywords || [],
+                recommendations: analysisData.recommendations
+            };
+            
+            if (format === 'csv') {
+                exportToCSV(data);
+            } else if (format === 'json') {
+                exportToJSON(data);
+            }
+        }
+        
+        // Export to CSV
+        function exportToCSV(data) {
+            let csv = 'Keyword,Count,Density\n';
+            
+            data.keywords.forEach(keyword => {
+                csv += `"${keyword.word}",${keyword.count},${keyword.density}%\n`;
+            });
+            
+            downloadFile(csv, 'keyword-analysis.csv', 'text/csv');
+        }
+        
+        // Export to JSON
+        function exportToJSON(data) {
+            const json = JSON.stringify(data, null, 2);
+            downloadFile(json, 'keyword-analysis.json', 'application/json');
+        }
+        
+        // Download file
+        function downloadFile(content, filename, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Debounce function for real-time analysis
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
+        // Use debounced analysis for real-time updates
+        const debouncedAnalyze = debounce(analyzeContent, 500);
+        document.getElementById('contentText').addEventListener('input', debouncedAnalyze);
+    </script>
+</body>
+</html>
