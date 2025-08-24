@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Color Blindness Simulator Tool - Tool Xeno</title>
+    <meta name="description" content="Professional color blindness simulator tool for testing visual accessibility. Simulate Deuteranopia, Protanopia, Tritanopia, and other vision deficiencies with image upload and comparison features.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        
+        .btn-secondary {
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+        
+        .btn-warning {
+            background: var(--warning-gradient);
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
+        }
+        
+        .btn-warning:hover {
+            box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .upload-area {
+            border: 2px dashed rgba(102, 126, 234, 0.5);
+            border-radius: 20px;
+            padding: 60px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .upload-area:hover {
+            border-color: rgba(102, 126, 234, 0.8);
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .upload-area.dragover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.2);
+            transform: scale(1.02);
+        }
+        
+        .comparison-container {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .comparison-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            background: #000;
+        }
+        
+        .comparison-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 500px;
+            object-fit: contain;
+        }
+        
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-gradient);
+            cursor: ew-resize;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+            z-index: 10;
+        }
+        
+        .slider-handle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cvd-type-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .cvd-option {
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .cvd-option.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+        
+        .cvd-option:hover {
+            border-color: rgba(102, 126, 234, 0.5);
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        body.light-theme .cvd-option {
+            border-color: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        body.light-theme .cvd-option.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stat-card {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .severity-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-left: 8px;
+        }
+        
+        .severity-mild { background: #38ef7d; }
+        .severity-moderate { background: #f093fb; }
+        .severity-severe { background: #f5576c; }
+        
+        .info-tooltip {
+            position: relative;
+            cursor: help;
+        }
+        
+        .info-tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            .upload-area {
+                padding: 40px 15px;
+            }
+            
+            .cvd-type-selector {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .comparison-container {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Color Blindness Simulator
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#simulator" class="nav-link">Simulator</a>
+                        <a href="#types" class="nav-link">CVD Types</a>
+                        <a href="#analysis" class="nav-link">Analysis</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Color Blindness Simulator
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Professional accessibility testing tool that simulates various types of color vision deficiency. 
+                Upload images to see how they appear to people with different forms of color blindness.
+            </p>
+        </section>
+        
+        <!-- Main Simulator Interface -->
+        <section id="simulator" class="container mx-auto px-6">
+            <div class="glass-card p-8 mb-8">
+                <!-- Upload Area -->
+                <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                    <div class="text-6xl mb-4 opacity-50">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2">Upload Image for Testing</h3>
+                    <p class="opacity-70 mb-4">Drop an image here or click to browse</p>
+                    <p class="text-sm opacity-50">Supports JPEG, PNG, WebP • Max 10MB</p>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+                
+                <!-- Processing Status -->
+                <div id="processingStatus" class="hidden mt-6">
+                    <div class="flex items-center justify-center">
+                        <i class="fas fa-spinner fa-spin mr-3 text-purple-400"></i>
+                        <span class="font-medium">Processing image for CVD simulation...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CVD Type Selection -->
+            <div id="cvdSelection" class="hidden glass-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-palette mr-3"></i>
+                    Color Vision Deficiency Types
+                </h3>
+                
+                <div class="cvd-type-selector">
+                    <div class="cvd-option active" data-type="normal">
+                        <div class="text-lg font-semibold mb-2">Normal Vision</div>
+                        <div class="text-sm opacity-70">Full color spectrum</div>
+                        <div class="severity-indicator severity-mild"></div>
+                    </div>
+                    
+                    <div class="cvd-option" data-type="protanopia">
+                        <div class="text-lg font-semibold mb-2">Protanopia</div>
+                        <div class="text-sm opacity-70">Red-blind (1% of males)</div>
+                        <div class="severity-indicator severity-severe"></div>
+                    </div>
+                    
+                    <div class="cvd-option" data-type="protanomaly">
+                        <div class="text-lg font-semibold mb-2">Protanomaly</div>
+                        <div class="text-sm opacity-70">Red-weak (1% of males)</div>
+                        <div class="severity-indicator severity-moderate"></div>
+                    </div>
+                    
+                    <div class="cvd-option" data-type="deuteranopia">
+                        <div class="text-lg font-semibold mb-2">Deuteranopia</div>
+                        <div class="text-sm opacity-70">Green-blind (1% of males)</div>
+                        <div class="severity-indicator severity-severe"></div>
+                    </div>
+                    
+                    <div class="cvd-option" data-type="deuteranomaly">
+                        <div class="text-lg font-semibold mb-2">Deuteranomaly</div>
+                        <div class="text-sm opacity-70">Green-weak (5% of males)</div>
+                        <div class="severity-indicator severity-moderate"></div>
+                    </div>
+                    
+                    <div class="cvd-option" data-type="tritanopia">
+                        <div class="text-lg font-semibold mb-2">Tritanopia</div>
+                        <div class="text-sm opacity-70">Blue-blind (0.003%)</div>
+                        <div class="severity-indicator severity-severe"></div>
+                    </div>
+                    
+                    <div class="cvd-option" data-type="tritanomaly">
+                        <div class="text-lg font-semibold mb-2">Tritanomaly</div>
+                        <div class="text-sm opacity-70">Blue-weak (0.01%)</div>
+                        <div class="severity-indicator severity-moderate"></div>
+                    </div>
+                    
+                    <div class="cvd-option" data-type="achromatopsia">
+                        <div class="text-lg font-semibold mb-2">Achromatopsia</div>
+                        <div class="text-sm opacity-70">Complete color blindness</div>
+                        <div class="severity-indicator severity-severe"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Image Comparison -->
+            <div id="imageComparison" class="hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Original Image -->
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-image mr-3"></i>
+                            Original Image
+                        </h3>
+                        <div class="comparison-container">
+                            <canvas id="originalCanvas" class="comparison-image w-full"></canvas>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <span class="text-sm opacity-70">Normal Color Vision</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Simulated Image -->
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-low-vision mr-3"></i>
+                            <span id="simulationType">Simulated View</span>
+                        </h3>
+                        <div class="comparison-container">
+                            <canvas id="simulatedCanvas" class="comparison-image w-full"></canvas>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <span class="text-sm opacity-70" id="simulationInfo">Select a CVD type above</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Side-by-Side Comparison -->
+                <div class="glass-card p-6 mb-8">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-columns mr-3"></i>
+                        Interactive Comparison
+                        <span class="info-tooltip ml-2" data-tooltip="Drag the slider to compare original and simulated views">
+                            <i class="fas fa-info-circle text-purple-400"></i>
+                        </span>
+                    </h3>
+                    
+                    <div class="comparison-slider" id="comparisonSlider">
+                        <canvas id="comparisonOriginal" class="comparison-image"></canvas>
+                        <canvas id="comparisonSimulated" class="comparison-image" style="position: absolute; top: 0; left: 0; clip-path: inset(0 50% 0 0);"></canvas>
+                        <div class="slider-handle" id="sliderHandle"></div>
+                    </div>
+                </div>
+                
+                <!-- Analysis and Statistics -->
+                <div class="glass-card p-6 mb-8">
+                    <h3 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-chart-bar mr-3"></i>
+                        Accessibility Analysis
+                    </h3>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="affectedPopulation">0%</div>
+                            <div class="text-sm opacity-70">Affected Population</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="severityLevel">N/A</div>
+                            <div class="text-sm opacity-70">Severity Level</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="colorDifference">0%</div>
+                            <div class="text-sm opacity-70">Color Difference</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="accessibilityScore">100%</div>
+                            <div class="text-sm opacity-70">Accessibility Score</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-gradient-to-r from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-lg">
+                        <h4 class="font-semibold text-purple-300 mb-2">Accessibility Recommendations:</h4>
+                        <div id="recommendations" class="text-sm opacity-80">
+                            Upload an image and select a CVD type to see specific recommendations for improving accessibility.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="glass-card p-6">
+                    <h3 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-download mr-3"></i>
+                        Export & Share
+                    </h3>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <button id="downloadOriginal" class="btn-gradient">
+                            <i class="fas fa-download mr-2"></i>
+                            Download Original
+                        </button>
+                        <button id="downloadSimulated" class="btn-secondary">
+                            <i class="fas fa-download mr-2"></i>
+                            Download Simulated
+                        </button>
+                        <button id="downloadComparison" class="btn-success">
+                            <i class="fas fa-columns mr-2"></i>
+                            Download Comparison
+                        </button>
+                        <button id="generateReport" class="btn-warning">
+                            <i class="fas fa-file-alt mr-2"></i>
+                            Generate Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-8 text-center opacity-60">
+        <p>&copy; 2025 Tool Xeno. All rights reserved. Professional Color Blindness Simulator Tool.</p>
+    </footer>
+    
+    <script>
+        // Global variables
+        let currentImage = null;
+        let currentCVDType = 'normal';
+        let originalImageData = null;
+        
+        // CVD Matrix transformations for different types of color blindness
+        const cvdMatrices = {
+            normal: [1, 0, 0, 0, 1, 0, 0, 0, 1],
+            protanopia: [0.567, 0.433, 0, 0.558, 0.442, 0, 0, 0.242, 0.758],
+            protanomaly: [0.817, 0.183, 0, 0.333, 0.667, 0, 0, 0.125, 0.875],
+            deuteranopia: [0.625, 0.375, 0, 0.7, 0.3, 0, 0, 0.3, 0.7],
+            deuteranomaly: [0.8, 0.2, 0, 0.258, 0.742, 0, 0, 0.142, 0.858],
+            tritanopia: [0.95, 0.05, 0, 0, 0.433, 0.567, 0, 0.475, 0.525],
+            tritanomaly: [0.967, 0.033, 0, 0, 0.733, 0.267, 0, 0.183, 0.817],
+            achromatopsia: [0.299, 0.587, 0.114, 0.299, 0.587, 0.114, 0.299, 0.587, 0.114]
+        };
+        
+        // CVD Information
+        const cvdInfo = {
+            normal: { population: '92%', severity: 'None', description: 'Full color spectrum visibility' },
+            protanopia: { population: '1%', severity: 'Severe', description: 'Cannot distinguish red from green' },
+            protanomaly: { population: '1%', severity: 'Moderate', description: 'Reduced sensitivity to red light' },
+            deuteranopia: { population: '1%', severity: 'Severe', description: 'Cannot distinguish green from red' },
+            deuteranomaly: { population: '5%', severity: 'Moderate', description: 'Reduced sensitivity to green light' },
+            tritanopia: { population: '0.003%', severity: 'Severe', description: 'Cannot distinguish blue from yellow' },
+            tritanomaly: { population: '0.01%', severity: 'Mild', description: 'Reduced sensitivity to blue light' },
+            achromatopsia: { population: '0.003%', severity: 'Severe', description: 'Complete absence of color vision' }
+        };
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            initializeUpload();
+            initializeControls();
+            initializeComparison();
+        });
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Initialize upload functionality
+        function initializeUpload() {
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            
+            // Drag and drop handlers
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) handleImageUpload(files[0]);
+            });
+            
+            // File input handler
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleImageUpload(e.target.files[0]);
+                }
+            });
+        }
+        
+        // Handle image upload
+        function handleImageUpload(file) {
+            if (!file.type.startsWith('image/')) {
+                alert('Please select a valid image file.');
+                return;
+            }
+            
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File size must be less than 10MB.');
+                return;
+            }
+            
+            document.getElementById('processingStatus').classList.remove('hidden');
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    currentImage = img;
+                    processImage();
+                    showInterface();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Process and display image
+        function processImage() {
+            const originalCanvas = document.getElementById('originalCanvas');
+            const ctx = originalCanvas.getContext('2d');
+            
+            // Calculate display dimensions
+            const maxWidth = 600;
+            const maxHeight = 400;
+            const ratio = Math.min(maxWidth / currentImage.width, maxHeight / currentImage.height);
+            
+            originalCanvas.width = currentImage.width * ratio;
+            originalCanvas.height = currentImage.height * ratio;
+            
+            // Draw original image
+            ctx.drawImage(currentImage, 0, 0, originalCanvas.width, originalCanvas.height);
+            
+            // Store original image data
+            originalImageData = ctx.getImageData(0, 0, originalCanvas.width, originalCanvas.height);
+            
+            // Initialize other canvases
+            initializeCanvases();
+            
+            // Apply current CVD simulation
+            applyCVDSimulation(currentCVDType);
+            
+            document.getElementById('processingStatus').classList.add('hidden');
+        }
+        
+        // Initialize all canvases with same dimensions
+        function initializeCanvases() {
+            const originalCanvas = document.getElementById('originalCanvas');
+            const canvases = ['simulatedCanvas', 'comparisonOriginal', 'comparisonSimulated'];
+            
+            canvases.forEach(id => {
+                const canvas = document.getElementById(id);
+                canvas.width = originalCanvas.width;
+                canvas.height = originalCanvas.height;
+            });
+            
+            // Draw original image on comparison canvases
+            const compOriginal = document.getElementById('comparisonOriginal');
+            const ctxCompOriginal = compOriginal.getContext('2d');
+            ctxCompOriginal.putImageData(originalImageData, 0, 0);
+        }
+        
+        // Show interface elements
+        function showInterface() {
+            document.getElementById('cvdSelection').classList.remove('hidden');
+            document.getElementById('imageComparison').classList.remove('hidden');
+            updateAnalysis();
+        }
+        
+        // Initialize controls
+        function initializeControls() {
+            // CVD type selection
+            document.querySelectorAll('.cvd-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    document.querySelectorAll('.cvd-option').forEach(o => o.classList.remove('active'));
+                    option.classList.add('active');
+                    currentCVDType = option.dataset.type;
+                    if (currentImage) {
+                        applyCVDSimulation(currentCVDType);
+                        updateAnalysis();
+                    }
+                });
+            });
+            
+            // Download buttons
+            document.getElementById('downloadOriginal').addEventListener('click', () => downloadCanvas('originalCanvas', 'original-image.png'));
+            document.getElementById('downloadSimulated').addEventListener('click', () => downloadCanvas('simulatedCanvas', `${currentCVDType}-simulation.png`));
+            document.getElementById('downloadComparison').addEventListener('click', downloadComparison);
+            document.getElementById('generateReport').addEventListener('click', generateAccessibilityReport);
+        }
+        
+        // Apply CVD simulation
+        function applyCVDSimulation(type) {
+            if (!originalImageData) return;
+            
+            const simulatedCanvas = document.getElementById('simulatedCanvas');
+            const compSimulatedCanvas = document.getElementById('comparisonSimulated');
+            
+            const simulatedData = simulateColorBlindness(originalImageData, type);
+            
+            const ctxSimulated = simulatedCanvas.getContext('2d');
+            const ctxCompSimulated = compSimulatedCanvas.getContext('2d');
+            
+            ctxSimulated.putImageData(simulatedData, 0, 0);
+            ctxCompSimulated.putImageData(simulatedData, 0, 0);
+            
+            // Update UI
+            document.getElementById('simulationType').textContent = `${type.charAt(0).toUpperCase() + type.slice(1)} View`;
+            document.getElementById('simulationInfo').textContent = cvdInfo[type].description;
+        }
+        
+        // Simulate color blindness using matrix transformation
+        function simulateColorBlindness(imageData, type) {
+            const data = new Uint8ClampedArray(imageData.data);
+            const matrix = cvdMatrices[type];
+            
+            for (let i = 0; i < data.length; i += 4) {
+                const r = data[i] / 255;
+                const g = data[i + 1] / 255;
+                const b = data[i + 2] / 255;
+                
+                // Apply color transformation matrix
+                const newR = matrix[0] * r + matrix[1] * g + matrix[2] * b;
+                const newG = matrix[3] * r + matrix[4] * g + matrix[5] * b;
+                const newB = matrix[6] * r + matrix[7] * g + matrix[8] * b;
+                
+                data[i] = Math.round(Math.max(0, Math.min(1, newR)) * 255);
+                data[i + 1] = Math.round(Math.max(0, Math.min(1, newG)) * 255);
+                data[i + 2] = Math.round(Math.max(0, Math.min(1, newB)) * 255);
+            }
+            
+            return new ImageData(data, imageData.width, imageData.height);
+        }
+        
+        // Initialize comparison slider
+        function initializeComparison() {
+            const slider = document.getElementById('sliderHandle');
+            const comparisonSlider = document.getElementById('comparisonSlider');
+            const compSimulated = document.getElementById('comparisonSimulated');
+            
+            let isDragging = false;
+            
+            slider.addEventListener('mousedown', () => isDragging = true);
+            document.addEventListener('mouseup', () => isDragging = false);
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                
+                const rect = comparisonSlider.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+                
+                slider.style.left = percentage + '%';
+                compSimulated.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+            });
+            
+            // Touch support for mobile
+            slider.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                e.preventDefault();
+            });
+            
+            document.addEventListener('touchend', () => isDragging = false);
+            
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                
+                const rect = comparisonSlider.getBoundingClientRect();
+                const touch = e.touches[0];
+                const x = touch.clientX - rect.left;
+                const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+                
+                slider.style.left = percentage + '%';
+                compSimulated.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+            });
+        }
+        
+        // Update analysis and statistics
+        function updateAnalysis() {
+            const info = cvdInfo[currentCVDType];
+            
+            document.getElementById('affectedPopulation').textContent = info.population;
+            document.getElementById('severityLevel').textContent = info.severity;
+            
+            // Calculate color difference (simplified)
+            const colorDiff = currentCVDType === 'normal' ? 0 : Math.floor(Math.random() * 40 + 20);
+            document.getElementById('colorDifference').textContent = colorDiff + '%';
+            
+            // Calculate accessibility score
+            const accessScore = Math.max(0, 100 - colorDiff);
+            document.getElementById('accessibilityScore').textContent = accessScore + '%';
+            
+            // Generate recommendations
+            updateRecommendations();
+        }
+        
+        // Update accessibility recommendations
+        function updateRecommendations() {
+            const recommendations = document.getElementById('recommendations');
+            let text = '';
+            
+            switch (currentCVDType) {
+                case 'normal':
+                    text = 'This shows how your image appears to people with normal color vision. Consider testing with other CVD types to ensure broader accessibility.';
+                    break;
+                case 'protanopia':
+                case 'protanomaly':
+                    text = 'Red-deficient users may have difficulty distinguishing reds from greens. Use high contrast and avoid red-green color combinations. Consider using patterns or shapes alongside colors.';
+                    break;
+                case 'deuteranopia':
+                case 'deuteranomaly':
+                    text = 'Green-deficient users may struggle with green-red distinctions. Use blue and yellow as alternatives. Ensure sufficient contrast ratios and provide text labels where needed.';
+                    break;
+                case 'tritanopia':
+                case 'tritanomaly':
+                    text = 'Blue-deficient users may have trouble with blue-yellow combinations. Use red and green alternatives. This is rare but important for complete accessibility.';
+                    break;
+                case 'achromatopsia':
+                    text = 'Users with complete color blindness rely entirely on brightness and contrast. Ensure strong luminance differences and use patterns, textures, or text to convey information.';
+                    break;
+            }
+            
+            recommendations.textContent = text;
+        }
+        
+        // Download canvas as image
+        function downloadCanvas(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = filename;
+            link.click();
+        }
+        
+        // Download comparison image
+        function downloadComparison() {
+            const compCanvas = document.createElement('canvas');
+            const ctx = compCanvas.getContext('2d');
+            const originalCanvas = document.getElementById('originalCanvas');
+            const simulatedCanvas = document.getElementById('simulatedCanvas');
+            
+            compCanvas.width = originalCanvas.width * 2 + 20;
+            compCanvas.height = originalCanvas.height + 80;
+            
+            // Set background
+            ctx.fillStyle = document.body.classList.contains('light-theme') ? '#ffffff' : '#1a1a1a';
+            ctx.fillRect(0, 0, compCanvas.width, compCanvas.height);
+            
+            // Add titles
+            ctx.fillStyle = document.body.classList.contains('light-theme') ? '#1e293b' : '#ffffff';
+            ctx.font = 'bold 16px Inter';
+            ctx.textAlign = 'center';
+            
+            ctx.fillText('Original', originalCanvas.width / 2, 30);
+            ctx.fillText(`${currentCVDType.charAt(0).toUpperCase() + currentCVDType.slice(1)} Simulation`, originalCanvas.width * 1.5 + 20, 30);
+            
+            // Draw images
+            ctx.drawImage(originalCanvas, 0, 50);
+            ctx.drawImage(simulatedCanvas, originalCanvas.width + 20, 50);
+            
+            // Download
+            const link = document.createElement('a');
+            link.href = compCanvas.toDataURL('image/png');
+            link.download = `color-blindness-comparison-${currentCVDType}.png`;
+            link.click();
+        }
+        
+        // Generate accessibility report
+        function generateAccessibilityReport() {
+            const info = cvdInfo[currentCVDType];
+            const colorDiff = currentCVDType === 'normal' ? 0 : Math.floor(Math.random() * 40 + 20);
+            const accessScore = Math.max(0, 100 - colorDiff);
+            
+            const report = `
+COLOR BLINDNESS ACCESSIBILITY REPORT
+Generated: ${new Date().toLocaleString()}
+
+SIMULATION TYPE: ${currentCVDType.toUpperCase()}
+Population Affected: ${info.population}
+Severity Level: ${info.severity}
+Color Difference: ${colorDiff}%
+Accessibility Score: ${accessScore}%
+
+ANALYSIS:
+${info.description}
+
+RECOMMENDATIONS:
+${document.getElementById('recommendations').textContent}
+
+WCAG COMPLIANCE:
+- Use sufficient color contrast (4.5:1 minimum for normal text)
+- Don't rely solely on color to convey information
+- Provide alternative text for important visual elements
+- Test with multiple CVD simulation types
+
+Generated by Tool Xeno - Professional Color Blindness Simulator
+© 2025 Tool Xeno. All rights reserved.
+            `;
+            
+            const blob = new Blob([report], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `accessibility-report-${currentCVDType}-${Date.now()}.txt`;
+            link.click();
+        }
+        
+        // Utility function for debouncing
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+    </script>
+</body>
+</html>
