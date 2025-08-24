@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Contrast Checker Tool - Tool Xeno</title>
+    <meta name="description" content="Professional contrast checker tool that validates color combinations against WCAG accessibility standards. Features real-time analysis, compliance indicators, and suggestions for improvement.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #ff9a56 0%, #ffad56 100%);
+            --error-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        
+        .btn-secondary {
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+
+        .btn-warning {
+            background: var(--warning-gradient);
+            box-shadow: 0 4px 15px rgba(255, 154, 86, 0.3);
+        }
+
+        .btn-error {
+            background: var(--error-gradient);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+
+        .color-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .color-input:focus {
+            outline: none;
+            border-color: rgba(102, 126, 234, 0.8);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        body.light-theme .color-input {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.2);
+            color: var(--light-text);
+        }
+
+        body.light-theme .color-input:focus {
+            background: rgba(0, 0, 0, 0.08);
+            border-color: rgba(102, 126, 234, 0.8);
+        }
+
+        .color-preview {
+            width: 100px;
+            height: 60px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contrast-preview {
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 20px 0;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .ratio-display {
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin: 20px 0;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .compliance-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .badge-pass {
+            background: rgba(17, 153, 142, 0.2);
+            color: #38ef7d;
+            border: 2px solid rgba(56, 239, 125, 0.3);
+        }
+
+        .badge-fail {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .suggestions-list {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        body.light-theme .suggestions-list {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .suggestion-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        body.light-theme .suggestion-item {
+            border-bottom-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .color-picker-wrapper {
+            position: relative;
+        }
+
+        .color-picker-input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .color-preview {
+                width: 80px;
+                height: 50px;
+            }
+            
+            .ratio-display {
+                font-size: 2rem;
+            }
+
+            .contrast-preview {
+                font-size: 18px;
+                padding: 20px;
+                min-height: 120px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass w-full">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Professional Contrast Checker
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#checker" class="nav-link">Contrast Check</a>
+                        <a href="#results" class="nav-link">Results</a>
+                        <a href="#suggestions" class="nav-link">Suggestions</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Professional Contrast Checker
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Validate color combinations against WCAG accessibility standards with real-time analysis, 
+                compliance indicators, and professional improvement suggestions for optimal accessibility.
+            </p>
+        </section>
+        
+        <!-- Contrast Checker Interface -->
+        <section id="checker" class="container mx-auto px-6 mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Color Input Panel -->
+                <div class="glass-card p-8">
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-palette mr-3"></i>
+                        Color Selection
+                    </h3>
+                    
+                    <!-- Foreground Color -->
+                    <div class="mb-8">
+                        <label class="block text-sm font-medium mb-3">Foreground Color (Text)</label>
+                        <div class="flex items-center gap-4">
+                            <div class="color-picker-wrapper">
+                                <div class="color-preview" id="foregroundPreview" style="background-color: #000000;"></div>
+                                <input type="color" class="color-picker-input" id="foregroundPicker" value="#000000">
+                            </div>
+                            <div class="flex-1">
+                                <input type="text" class="color-input" id="foregroundInput" placeholder="Enter HEX, RGB, or HSL" value="#000000">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 mt-3 text-sm opacity-70">
+                            <div>HEX: <span id="foregroundHex">#000000</span></div>
+                            <div>RGB: <span id="foregroundRgb">0, 0, 0</span></div>
+                            <div>HSL: <span id="foregroundHsl">0°, 0%, 0%</span></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Background Color -->
+                    <div class="mb-8">
+                        <label class="block text-sm font-medium mb-3">Background Color</label>
+                        <div class="flex items-center gap-4">
+                            <div class="color-picker-wrapper">
+                                <div class="color-preview" id="backgroundPreview" style="background-color: #ffffff;"></div>
+                                <input type="color" class="color-picker-input" id="backgroundPicker" value="#ffffff">
+                            </div>
+                            <div class="flex-1">
+                                <input type="text" class="color-input" id="backgroundInput" placeholder="Enter HEX, RGB, or HSL" value="#ffffff">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 mt-3 text-sm opacity-70">
+                            <div>HEX: <span id="backgroundHex">#ffffff</span></div>
+                            <div>RGB: <span id="backgroundRgb">255, 255, 255</span></div>
+                            <div>HSL: <span id="backgroundHsl">0°, 0%, 100%</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="flex flex-wrap gap-3">
+                        <button class="btn-gradient flex-1" onclick="checkContrast()">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Check Contrast
+                        </button>
+                        <button class="btn-secondary" onclick="swapColors()">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                        <button class="btn-secondary" onclick="copyResults()">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button class="btn-secondary" onclick="resetColors()">
+                            <i class="fas fa-refresh"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Panel -->
+                <div class="glass-card p-8">
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-chart-line mr-3"></i>
+                        Contrast Analysis
+                    </h3>
+
+                    <!-- Contrast Ratio Display -->
+                    <div class="text-center mb-6">
+                        <div class="ratio-display" id="contrastRatio">21:1</div>
+                        <p class="text-sm opacity-70">Contrast Ratio</p>
+                    </div>
+
+                    <!-- Live Preview -->
+                    <div class="contrast-preview" id="contrastPreview" style="background-color: #ffffff; color: #000000;">
+                        Sample Text Preview
+                        <br><span style="font-size: 18px;">Normal Text • Large Text</span>
+                    </div>
+
+                    <!-- WCAG Compliance Badges -->
+                    <div class="text-center mb-6">
+                        <h4 class="text-lg font-semibold mb-4">WCAG Compliance</h4>
+                        <div class="flex flex-wrap justify-center gap-2">
+                            <div class="compliance-badge badge-pass" id="wcagAANormal">
+                                <i class="fas fa-check-circle"></i>
+                                AA Normal
+                            </div>
+                            <div class="compliance-badge badge-pass" id="wcagAALarge">
+                                <i class="fas fa-check-circle"></i>
+                                AA Large
+                            </div>
+                            <div class="compliance-badge badge-pass" id="wcagAAA">
+                                <i class="fas fa-check-circle"></i>
+                                AAA Enhanced
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accessibility Score -->
+                    <div class="text-center">
+                        <div class="text-2xl font-bold mb-2" id="accessibilityScore">Perfect</div>
+                        <p class="text-sm opacity-70">Accessibility Rating</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Suggestions and Improvements -->
+        <section id="suggestions" class="container mx-auto px-6 mb-8">
+            <div class="glass-card p-8">
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-lightbulb mr-3"></i>
+                    Improvement Suggestions
+                </h3>
+
+                <div class="suggestions-list" id="suggestionsList">
+                    <div class="suggestion-item">
+                        <i class="fas fa-info-circle text-blue-400"></i>
+                        <div>
+                            <div class="font-medium">Perfect Contrast Ratio</div>
+                            <div class="text-sm opacity-70">Your current color combination meets all WCAG standards excellently.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alternative Color Suggestions -->
+                <div class="mt-8">
+                    <h4 class="text-lg font-semibold mb-4">Suggested Improvements</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="colorSuggestions">
+                        <!-- Color suggestions will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Educational Information -->
+        <section class="container mx-auto px-6 mb-8">
+            <div class="glass-card p-8">
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-graduation-cap mr-3"></i>
+                    Understanding WCAG Standards
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center p-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl">
+                        <div class="text-3xl font-bold text-blue-400 mb-2">4.5:1</div>
+                        <div class="font-semibold mb-2">WCAG AA Normal</div>
+                        <div class="text-sm opacity-70">Minimum contrast for normal text (under 18pt or 14pt bold)</div>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-xl">
+                        <div class="text-3xl font-bold text-green-400 mb-2">3:1</div>
+                        <div class="font-semibold mb-2">WCAG AA Large</div>
+                        <div class="text-sm opacity-70">Minimum contrast for large text (18pt+ or 14pt+ bold)</div>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl">
+                        <div class="text-3xl font-bold text-purple-400 mb-2">7:1</div>
+                        <div class="font-semibold mb-2">WCAG AAA Enhanced</div>
+                        <div class="text-sm opacity-70">Enhanced contrast for maximum accessibility</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-8 text-center">
+        <div class="glass-card p-6">
+            <p class="text-sm opacity-70">
+                © 2025 Tool Xeno - Professional Contrast Checker Tool. 
+                Ensuring digital accessibility through advanced color contrast analysis.
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        // Global variables
+        let currentForeground = '#000000';
+        let currentBackground = '#ffffff';
+        let contrastRatio = 21;
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            initializeColorPickers();
+            checkContrast();
+        });
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Initialize color pickers and inputs
+        function initializeColorPickers() {
+            // Foreground color handlers
+            const foregroundPicker = document.getElementById('foregroundPicker');
+            const foregroundInput = document.getElementById('foregroundInput');
+            const foregroundPreview = document.getElementById('foregroundPreview');
+
+            foregroundPicker.addEventListener('change', (e) => {
+                currentForeground = e.target.value;
+                updateForegroundColor();
+                checkContrast();
+            });
+
+            foregroundInput.addEventListener('input', (e) => {
+                const color = parseColor(e.target.value);
+                if (color) {
+                    currentForeground = color;
+                    foregroundPicker.value = color;
+                    updateForegroundColor();
+                    checkContrast();
+                }
+            });
+
+            // Background color handlers
+            const backgroundPicker = document.getElementById('backgroundPicker');
+            const backgroundInput = document.getElementById('backgroundInput');
+            const backgroundPreview = document.getElementById('backgroundPreview');
+
+            backgroundPicker.addEventListener('change', (e) => {
+                currentBackground = e.target.value;
+                updateBackgroundColor();
+                checkContrast();
+            });
+
+            backgroundInput.addEventListener('input', (e) => {
+                const color = parseColor(e.target.value);
+                if (color) {
+                    currentBackground = color;
+                    backgroundPicker.value = color;
+                    updateBackgroundColor();
+                    checkContrast();
+                }
+            });
+        }
+
+        // Parse color input (HEX, RGB, HSL)
+        function parseColor(input) {
+            input = input.trim();
+            
+            // HEX color
+            if (input.match(/^#[0-9A-Fa-f]{6}$/)) {
+                return input;
+            }
+            
+            // Short HEX color
+            if (input.match(/^#[0-9A-Fa-f]{3}$/)) {
+                return '#' + input[1] + input[1] + input[2] + input[2] + input[3] + input[3];
+            }
+            
+            // RGB color
+            const rgbMatch = input.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+            if (rgbMatch) {
+                const r = parseInt(rgbMatch[1]);
+                const g = parseInt(rgbMatch[2]);
+                const b = parseInt(rgbMatch[3]);
+                return rgbToHex(r, g, b);
+            }
+            
+            // HSL color
+            const hslMatch = input.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
+            if (hslMatch) {
+                const h = parseInt(hslMatch[1]);
+                const s = parseInt(hslMatch[2]);
+                const l = parseInt(hslMatch[3]);
+                return hslToHex(h, s, l);
+            }
+            
+            return null;
+        }
+
+        // Convert RGB to HEX
+        function rgbToHex(r, g, b) {
+            return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        }
+
+        // Convert HSL to HEX
+        function hslToHex(h, s, l) {
+            h /= 360;
+            s /= 100;
+            l /= 100;
+            
+            const hue2rgb = (p, q, t) => {
+                if (t < 0) t += 1;
+                if (t > 1) t -= 1;
+                if (t < 1/6) return p + (q - p) * 6 * t;
+                if (t < 1/2) return q;
+                if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                return p;
+            };
+            
+            let r, g, b;
+            if (s === 0) {
+                r = g = b = l;
+            } else {
+                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                const p = 2 * l - q;
+                r = hue2rgb(p, q, h + 1/3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1/3);
+            }
+            
+            return rgbToHex(Math.round(r * 255), Math.round(g * 255), Math.round(b * 255));
+        }
+
+        // Convert HEX to RGB
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        // Convert RGB to HSL
+        function rgbToHsl(r, g, b) {
+            r /= 255;
+            g /= 255;
+            b /= 255;
+            
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+            
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+            
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                l: Math.round(l * 100)
+            };
+        }
+
+        // Update foreground color displays
+        function updateForegroundColor() {
+            const preview = document.getElementById('foregroundPreview');
+            const input = document.getElementById('foregroundInput');
+            const hexDisplay = document.getElementById('foregroundHex');
+            const rgbDisplay = document.getElementById('foregroundRgb');
+            const hslDisplay = document.getElementById('foregroundHsl');
+
+            preview.style.backgroundColor = currentForeground;
+            input.value = currentForeground;
+            hexDisplay.textContent = currentForeground;
+
+            const rgb = hexToRgb(currentForeground);
+            if (rgb) {
+                rgbDisplay.textContent = `${rgb.r}, ${rgb.g}, ${rgb.b}`;
+                const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+                hslDisplay.textContent = `${hsl.h}°, ${hsl.s}%, ${hsl.l}%`;
+            }
+        }
+
+        // Update background color displays
+        function updateBackgroundColor() {
+            const preview = document.getElementById('backgroundPreview');
+            const input = document.getElementById('backgroundInput');
+            const hexDisplay = document.getElementById('backgroundHex');
+            const rgbDisplay = document.getElementById('backgroundRgb');
+            const hslDisplay = document.getElementById('backgroundHsl');
+
+            preview.style.backgroundColor = currentBackground;
+            input.value = currentBackground;
+            hexDisplay.textContent = currentBackground;
+
+            const rgb = hexToRgb(currentBackground);
+            if (rgb) {
+                rgbDisplay.textContent = `${rgb.r}, ${rgb.g}, ${rgb.b}`;
+                const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+                hslDisplay.textContent = `${hsl.h}°, ${hsl.s}%, ${hsl.l}%`;
+            }
+        }
+
+        // Calculate luminance
+        function getLuminance(hex) {
+            const rgb = hexToRgb(hex);
+            if (!rgb) return 0;
+
+            const sRGB = [rgb.r, rgb.g, rgb.b].map(c => {
+                c = c / 255;
+                return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+            });
+
+            return 0.2126 * sRGB[0] + 0.7152 * sRGB[1] + 0.0722 * sRGB[2];
+        }
+
+        // Calculate contrast ratio
+        function calculateContrastRatio(color1, color2) {
+            const lum1 = getLuminance(color1);
+            const lum2 = getLuminance(color2);
+            const brightest = Math.max(lum1, lum2);
+            const darkest = Math.min(lum1, lum2);
+            return (brightest + 0.05) / (darkest + 0.05);
+        }
+
+        // Check contrast and update UI
+        function checkContrast() {
+            contrastRatio = calculateContrastRatio(currentForeground, currentBackground);
+            
+            // Update ratio display
+            const ratioElement = document.getElementById('contrastRatio');
+            ratioElement.textContent = contrastRatio.toFixed(2) + ':1';
+            
+            // Update preview
+            const preview = document.getElementById('contrastPreview');
+            preview.style.backgroundColor = currentBackground;
+            preview.style.color = currentForeground;
+            
+            // Update compliance badges
+            updateComplianceBadges();
+            
+            // Update accessibility score
+            updateAccessibilityScore();
+            
+            // Update suggestions
+            updateSuggestions();
+            
+            // Animate changes
+            ratioElement.classList.add('fade-in');
+            setTimeout(() => ratioElement.classList.remove('fade-in'), 600);
+        }
+
+        // Update WCAG compliance badges
+        function updateComplianceBadges() {
+            const wcagAANormal = document.getElementById('wcagAANormal');
+            const wcagAALarge = document.getElementById('wcagAALarge');
+            const wcagAAA = document.getElementById('wcagAAA');
+
+            // WCAG AA Normal (4.5:1)
+            if (contrastRatio >= 4.5) {
+                wcagAANormal.className = 'compliance-badge badge-pass';
+                wcagAANormal.innerHTML = '<i class="fas fa-check-circle"></i> AA Normal';
+            } else {
+                wcagAANormal.className = 'compliance-badge badge-fail';
+                wcagAANormal.innerHTML = '<i class="fas fa-times-circle"></i> AA Normal';
+            }
+
+            // WCAG AA Large (3:1)
+            if (contrastRatio >= 3) {
+                wcagAALarge.className = 'compliance-badge badge-pass';
+                wcagAALarge.innerHTML = '<i class="fas fa-check-circle"></i> AA Large';
+            } else {
+                wcagAALarge.className = 'compliance-badge badge-fail';
+                wcagAALarge.innerHTML = '<i class="fas fa-times-circle"></i> AA Large';
+            }
+
+            // WCAG AAA Enhanced (7:1)
+            if (contrastRatio >= 7) {
+                wcagAAA.className = 'compliance-badge badge-pass';
+                wcagAAA.innerHTML = '<i class="fas fa-check-circle"></i> AAA Enhanced';
+            } else {
+                wcagAAA.className = 'compliance-badge badge-fail';
+                wcagAAA.innerHTML = '<i class="fas fa-times-circle"></i> AAA Enhanced';
+            }
+        }
+
+        // Update accessibility score
+        function updateAccessibilityScore() {
+            const scoreElement = document.getElementById('accessibilityScore');
+            let score, color;
+
+            if (contrastRatio >= 7) {
+                score = 'Perfect';
+                color = '#38ef7d';
+            } else if (contrastRatio >= 4.5) {
+                score = 'Excellent';
+                color = '#4facfe';
+            } else if (contrastRatio >= 3) {
+                score = 'Good';
+                color = '#ffad56';
+            } else {
+                score = 'Poor';
+                color = '#ff6b6b';
+            }
+
+            scoreElement.textContent = score;
+            scoreElement.style.color = color;
+        }
+
+        // Update suggestions
+        function updateSuggestions() {
+            const suggestionsList = document.getElementById('suggestionsList');
+            const colorSuggestions = document.getElementById('colorSuggestions');
+            
+            let suggestions = [];
+
+            if (contrastRatio >= 7) {
+                suggestions.push({
+                    icon: 'fas fa-trophy',
+                    title: 'Perfect Contrast Ratio',
+                    description: 'Your color combination meets the highest accessibility standards (AAA).',
+                    type: 'success'
+                });
+            } else if (contrastRatio >= 4.5) {
+                suggestions.push({
+                    icon: 'fas fa-check-circle',
+                    title: 'Good Contrast Ratio',
+                    description: 'Meets WCAG AA standards. Consider enhancing to AAA for better accessibility.',
+                    type: 'info'
+                });
+            } else if (contrastRatio >= 3) {
+                suggestions.push({
+                    icon: 'fas fa-exclamation-triangle',
+                    title: 'Marginal Contrast',
+                    description: 'Only suitable for large text. Improve contrast for normal text accessibility.',
+                    type: 'warning'
+                });
+            } else {
+                suggestions.push({
+                    icon: 'fas fa-times-circle',
+                    title: 'Poor Contrast Ratio',
+                    description: 'Does not meet accessibility standards. Please adjust colors for better readability.',
+                    type: 'error'
+                });
+            }
+
+            // Additional contextual suggestions
+            if (contrastRatio < 4.5) {
+                suggestions.push({
+                    icon: 'fas fa-lightbulb',
+                    title: 'Improvement Tips',
+                    description: 'Try using darker foreground colors or lighter background colors to increase contrast.',
+                    type: 'info'
+                });
+            }
+
+            // Render suggestions
+            suggestionsList.innerHTML = suggestions.map(suggestion => `
+                <div class="suggestion-item">
+                    <i class="${suggestion.icon} ${getIconColor(suggestion.type)}"></i>
+                    <div>
+                        <div class="font-medium">${suggestion.title}</div>
+                        <div class="text-sm opacity-70">${suggestion.description}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Generate color suggestions
+            generateColorSuggestions();
+        }
+
+        // Get icon color based on suggestion type
+        function getIconColor(type) {
+            switch (type) {
+                case 'success': return 'text-green-400';
+                case 'warning': return 'text-yellow-400';
+                case 'error': return 'text-red-400';
+                default: return 'text-blue-400';
+            }
+        }
+
+        // Generate alternative color suggestions
+        function generateColorSuggestions() {
+            const colorSuggestions = document.getElementById('colorSuggestions');
+            
+            if (contrastRatio >= 7) {
+                colorSuggestions.innerHTML = '<p class="text-center opacity-70 col-span-2">Your current colors are already optimal!</p>';
+                return;
+            }
+
+            const suggestions = [];
+            const currentBg = hexToRgb(currentBackground);
+            const currentFg = hexToRgb(currentForeground);
+
+            // Generate darker foreground suggestions
+            if (currentFg) {
+                const darkerFg = rgbToHex(
+                    Math.max(0, currentFg.r - 50),
+                    Math.max(0, currentFg.g - 50),
+                    Math.max(0, currentFg.b - 50)
+                );
+                const ratio = calculateContrastRatio(darkerFg, currentBackground);
+                
+                suggestions.push({
+                    type: 'foreground',
+                    color: darkerFg,
+                    ratio: ratio,
+                    title: 'Darker Foreground'
+                });
+            }
+
+            // Generate lighter background suggestions
+            if (currentBg) {
+                const lighterBg = rgbToHex(
+                    Math.min(255, currentBg.r + 50),
+                    Math.min(255, currentBg.g + 50),
+                    Math.min(255, currentBg.b + 50)
+                );
+                const ratio = calculateContrastRatio(currentForeground, lighterBg);
+                
+                suggestions.push({
+                    type: 'background',
+                    color: lighterBg,
+                    ratio: ratio,
+                    title: 'Lighter Background'
+                });
+            }
+
+            colorSuggestions.innerHTML = suggestions.map(suggestion => `
+                <div class="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-xl p-4 cursor-pointer transition-all duration-300 hover:from-purple-500/20 hover:to-pink-500/20"
+                     onclick="applySuggestion('${suggestion.type}', '${suggestion.color}')">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-8 h-8 rounded-full border-2 border-white/20" style="background-color: ${suggestion.color}"></div>
+                        <div class="font-medium">${suggestion.title}</div>
+                    </div>
+                    <div class="text-sm opacity-70 mb-1">${suggestion.color}</div>
+                    <div class="text-xs font-medium ${suggestion.ratio >= 4.5 ? 'text-green-400' : 'text-yellow-400'}">
+                        Ratio: ${suggestion.ratio.toFixed(2)}:1
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Apply color suggestion
+        function applySuggestion(type, color) {
+            if (type === 'foreground') {
+                currentForeground = color;
+                document.getElementById('foregroundPicker').value = color;
+                updateForegroundColor();
+            } else {
+                currentBackground = color;
+                document.getElementById('backgroundPicker').value = color;
+                updateBackgroundColor();
+            }
+            checkContrast();
+        }
+
+        // Swap foreground and background colors
+        function swapColors() {
+            const tempColor = currentForeground;
+            currentForeground = currentBackground;
+            currentBackground = tempColor;
+
+            document.getElementById('foregroundPicker').value = currentForeground;
+            document.getElementById('backgroundPicker').value = currentBackground;
+            
+            updateForegroundColor();
+            updateBackgroundColor();
+            checkContrast();
+        }
+
+        // Reset to default colors
+        function resetColors() {
+            currentForeground = '#000000';
+            currentBackground = '#ffffff';
+            
+            document.getElementById('foregroundPicker').value = currentForeground;
+            document.getElementById('backgroundPicker').value = currentBackground;
+            
+            updateForegroundColor();
+            updateBackgroundColor();
+            checkContrast();
+        }
+
+        // Copy results to clipboard
+        function copyResults() {
+            const results = `Contrast Analysis Results:
+Foreground: ${currentForeground}
+Background: ${currentBackground}
+Contrast Ratio: ${contrastRatio.toFixed(2)}:1
+WCAG AA Normal: ${contrastRatio >= 4.5 ? 'PASS' : 'FAIL'}
+WCAG AA Large: ${contrastRatio >= 3 ? 'PASS' : 'FAIL'}
+WCAG AAA Enhanced: ${contrastRatio >= 7 ? 'PASS' : 'FAIL'}`;
+
+            navigator.clipboard.writeText(results).then(() => {
+                // Show success feedback
+                const btn = event.target.closest('button');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                }, 2000);
+            }).catch(() => {
+                alert('Failed to copy results to clipboard');
+            });
+        }
+
+        // Initialize on load
+        updateForegroundColor();
+        updateBackgroundColor();
+    </script>
+</body>
+</html>
