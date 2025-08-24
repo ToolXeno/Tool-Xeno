@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Encoder/Decoder Tool - Tool Xeno</title>
+    <meta name="description" content="Professional URL encoder/decoder with component analysis, batch processing, and validation - encode/decode URLs with advanced features and real-time analysis.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        
+        .btn-secondary {
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+        
+        .input-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: var(--dark-text);
+            font-family: 'Inter', monospace;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+        }
+        
+        body.light-theme .input-field {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: var(--light-text);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stat-card {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .component-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .component-item {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .component-label {
+            font-weight: 600;
+            color: #667eea;
+            min-width: 80px;
+        }
+        
+        .component-value {
+            font-family: 'Courier New', monospace;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 8px;
+            border-radius: 6px;
+            word-break: break-all;
+            flex: 1;
+            margin-left: 12px;
+        }
+        
+        .batch-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .batch-item {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .copy-btn {
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            padding: 6px 12px;
+            color: #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 12px;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(102, 126, 234, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        .url-status {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-valid {
+            background: rgba(17, 153, 142, 0.2);
+            color: #11998e;
+        }
+        
+        .status-invalid {
+            background: rgba(245, 87, 108, 0.2);
+            color: #f5576c;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .component-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .component-value {
+                margin-left: 0;
+                margin-top: 8px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                         Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        URL Encoder/Decoder Tool
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#encode" class="nav-link">Encode/Decode</a>
+                        <a href="#analysis" class="nav-link">Analysis</a>
+                        <a href="#batch" class="nav-link">Batch</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                URL Encoder/Decoder Tool
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Professional URL encoding and decoding with advanced component analysis, batch processing, 
+                and validation. Perfect for developers working with web APIs and URL manipulation.
+            </p>
+        </section>
+        
+        <!-- Main Tool Interface -->
+        <section id="encode" class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Input Section -->
+                <div class="glass-card p-6">
+                    <h3 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-edit mr-3"></i>
+                        URL Input
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Enter URL or Text:</label>
+                            <textarea 
+                                id="inputText" 
+                                class="input-field w-full" 
+                                placeholder="Enter your URL or text here..."
+                                oninput="processInput()"
+                            ></textarea>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-3">
+                            <button id="encodeBtn" class="btn-gradient" onclick="encodeURL()">
+                                <i class="fas fa-lock mr-2"></i>
+                                Encode URL
+                            </button>
+                            <button id="decodeBtn" class="btn-secondary" onclick="decodeURL()">
+                                <i class="fas fa-unlock mr-2"></i>
+                                Decode URL
+                            </button>
+                            <button class="btn-success" onclick="clearAll()">
+                                <i class="fas fa-trash mr-2"></i>
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Output Section -->
+                <div class="glass-card p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold flex items-center">
+                            <i class="fas fa-code mr-3"></i>
+                            Output
+                        </h3>
+                        <button class="copy-btn" onclick="copyOutput()">
+                            <i class="fas fa-copy mr-1"></i>
+                            Copy
+                        </button>
+                    </div>
+                    
+                    <div>
+                        <textarea 
+                            id="outputText" 
+                            class="input-field w-full" 
+                            readonly 
+                            placeholder="Output will appear here..."
+                        ></textarea>
+                    </div>
+                    
+                    <div id="urlStatus" class="mt-4 hidden">
+                        <div class="flex items-center gap-3">
+                            <span class="text-sm font-medium">Status:</span>
+                            <span id="statusBadge" class="url-status"></span>
+                            <span id="encodingPercentage" class="text-sm opacity-70"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- URL Component Analysis -->
+            <div id="analysis" class="glass-card p-6 mb-8 hidden">
+                <h3 class="text-xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-search mr-3"></i>
+                    URL Component Analysis
+                </h3>
+                
+                <div id="componentAnalysis" class="space-y-3">
+                    <!-- Components will be inserted here -->
+                </div>
+                
+                <div id="queryParams" class="hidden mt-6">
+                    <h4 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-list mr-2"></i>
+                        Query Parameters
+                    </h4>
+                    <div id="paramsList" class="space-y-2">
+                        <!-- Parameters will be inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Statistics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="originalLength">0</div>
+                    <div class="text-sm opacity-70">Original Length</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="processedLength">0</div>
+                    <div class="text-sm opacity-70">Processed Length</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="encodedChars">0</div>
+                    <div class="text-sm opacity-70">Encoded Characters</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="compressionRatio">0%</div>
+                    <div class="text-sm opacity-70">Size Change</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Batch Processing -->
+        <section id="batch" class="container mx-auto px-6 mt-12">
+            <div class="glass-card p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <i class="fas fa-layer-group mr-3"></i>
+                        Batch Processing
+                    </h3>
+                    <div class="flex gap-3">
+                        <button class="btn-gradient" onclick="addBatchItem()">
+                            <i class="fas fa-plus mr-2"></i>
+                            Add URL
+                        </button>
+                        <button class="btn-secondary" onclick="processBatch()">
+                            <i class="fas fa-cogs mr-2"></i>
+                            Process All
+                        </button>
+                        <button class="btn-success" onclick="downloadBatch()">
+                            <i class="fas fa-download mr-2"></i>
+                            Download Results
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="batchContainer" class="space-y-3">
+                    <div class="batch-item">
+                        <div class="flex items-center gap-4 mb-3">
+                            <span class="text-sm font-medium opacity-70">#1</span>
+                            <input type="text" class="input-field flex-1" placeholder="Enter URL here..." onchange="updateBatchItem(0, this.value)">
+                            <button class="copy-btn" onclick="removeBatchItem(0)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <div class="text-xs opacity-50 mb-1">Original:</div>
+                                <div class="component-value text-sm" id="batchOriginal0">-</div>
+                            </div>
+                            <div>
+                                <div class="text-xs opacity-50 mb-1">Processed:</div>
+                                <div class="component-value text-sm" id="batchProcessed0">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="batchStats" class="hidden mt-6">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-purple-400" id="batchTotal">0</div>
+                            <div class="text-sm opacity-70">Total URLs</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-400" id="batchProcessed">0</div>
+                            <div class="text-sm opacity-70">Processed</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-green-400" id="batchValid">0</div>
+                            <div class="text-sm opacity-70">Valid URLs</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-red-400" id="batchInvalid">0</div>
+                            <div class="text-sm opacity-70">Invalid URLs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-8 text-center opacity-70">
+        <p>&copy; 2025 Tool Xeno. All rights reserved. Professional URL Encoder/Decoder Tool.</p>
+    </footer>
+    
+    <script>
+        // Global variables
+        let batchItems = [''];
+        let processedData = null;
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            loadSavedTheme();
+        });
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        function loadSavedTheme() {
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-theme');
+            }
+        }
+        
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Process input in real-time
+        function processInput() {
+            const input = document.getElementById('inputText').value;
+            updateStatistics(input, input);
+            
+            if (input.trim()) {
+                analyzeURL(input);
+            } else {
+                hideAnalysis();
+            }
+        }
+        
+        // Encode URL
+        function encodeURL() {
+            const input = document.getElementById('inputText').value;
+            if (!input.trim()) {
+                alert('Please enter a URL or text to encode.');
+                return;
+            }
+            
+            try {
+                const encoded = encodeURIComponent(input);
+                document.getElementById('outputText').value = encoded;
+                processedData = { original: input, processed: encoded, operation: 'encode' };
+                
+                updateStatistics(input, encoded);
+                updateStatus(input, encoded, 'encode');
+                analyzeURL(input);
+                
+                // Animate the process
+                animateProcess();
+                
+            } catch (error) {
+                alert('Error encoding URL: ' + error.message);
+            }
+        }
+        
+        // Decode URL
+        function decodeURL() {
+            const input = document.getElementById('inputText').value;
+            if (!input.trim()) {
+                alert('Please enter a URL or text to decode.');
+                return;
+            }
+            
+            try {
+                const decoded = decodeURIComponent(input);
+                document.getElementById('outputText').value = decoded;
+                processedData = { original: input, processed: decoded, operation: 'decode' };
+                
+                updateStatistics(input, decoded);
+                updateStatus(input, decoded, 'decode');
+                analyzeURL(decoded);
+                
+                // Animate the process
+                animateProcess();
+                
+            } catch (error) {
+                alert('Error decoding URL: ' + error.message);
+            }
+        }
+        
+        // Update statistics
+        function updateStatistics(original, processed) {
+            const originalLength = original.length;
+            const processedLength = processed.length;
+            const encodedChars = countEncodedCharacters(processed);
+            const ratio = originalLength > 0 ? ((processedLength - originalLength) / originalLength * 100).toFixed(1) : 0;
+            
+            document.getElementById('originalLength').textContent = originalLength;
+            document.getElementById('processedLength').textContent = processedLength;
+            document.getElementById('encodedChars').textContent = encodedChars;
+            document.getElementById('compressionRatio').textContent = (ratio >= 0 ? '+' : '') + ratio + '%';
+        }
+        
+        // Count encoded characters
+        function countEncodedCharacters(text) {
+            const matches = text.match(/%[0-9A-Fa-f]{2}/g);
+            return matches ? matches.length : 0;
+        }
+        
+        // Update URL status
+        function updateStatus(original, processed, operation) {
+            const statusDiv = document.getElementById('urlStatus');
+            const statusBadge = document.getElementById('statusBadge');
+            const encodingPercentage = document.getElementById('encodingPercentage');
+            
+            const isValidURL = isValidURL(operation === 'decode' ? processed : original);
+            const encodedPercent = ((countEncodedCharacters(processed) * 3) / processed.length * 100).toFixed(1);
+            
+            statusDiv.classList.remove('hidden');
+            
+            if (isValidURL) {
+                statusBadge.textContent = 'Valid URL';
+                statusBadge.className = 'url-status status-valid';
+            } else {
+                statusBadge.textContent = 'Invalid URL';
+                statusBadge.className = 'url-status status-invalid';
+            }
+            
+            encodingPercentage.textContent = `${encodedPercent}% encoded`;
+        }
+        
+        // Validate URL
+        function isValidURL(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                // Check if it's a relative URL or just has URL-like structure
+                const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+                return urlPattern.test(string) || string.includes('/') || string.includes('?') || string.includes('#');
+            }
+        }
+        
+        // Analyze URL components
+        function analyzeURL(urlString) {
+            try {
+                // Try to parse as full URL
+                let url;
+                if (urlString.startsWith('http://') || urlString.startsWith('https://')) {
+                    url = new URL(urlString);
+                } else {
+                    // Try to parse as relative URL by adding a base
+                    url = new URL(urlString, 'https://example.com');
+                }
+                
+                const components = {
+                    'Protocol': url.protocol || '-',
+                    'Host': url.hostname || '-',
+                    'Port': url.port || '-',
+                    'Path': url.pathname || '-',
+                    'Query': url.search || '-',
+                    'Fragment': url.hash || '-'
+                };
+                
+                displayComponents(components);
+                
+                // Parse query parameters
+                if (url.search) {
+                    const params = new URLSearchParams(url.search);
+                    displayQueryParams(params);
+                }
+                
+                document.getElementById('analysis').classList.remove('hidden');
+                
+            } catch (error) {
+                // Manual parsing for invalid URLs
+                const components = parseURLManually(urlString);
+                displayComponents(components);
+                document.getElementById('analysis').classList.remove('hidden');
+            }
+        }
+        
+        // Manual URL parsing
+        function parseURLManually(urlString) {
+            const components = {
+                'Protocol': '-',
+                'Host': '-',
+                'Port': '-',
+                'Path': '-',
+                'Query': '-',
+                'Fragment': '-'
+            };
+            
+            let remaining = urlString;
+            
+            // Extract protocol
+            const protocolMatch = remaining.match(/^(\w+:\/\/)/);
+            if (protocolMatch) {
+                components['Protocol'] = protocolMatch[1];
+                remaining = remaining.substring(protocolMatch[1].length);
+            }
+            
+            // Extract fragment
+            const fragmentIndex = remaining.indexOf('#');
+            if (fragmentIndex !== -1) {
+                components['Fragment'] = remaining.substring(fragmentIndex);
+                remaining = remaining.substring(0, fragmentIndex);
+            }
+            
+            // Extract query
+            const queryIndex = remaining.indexOf('?');
+            if (queryIndex !== -1) {
+                components['Query'] = remaining.substring(queryIndex);
+                remaining = remaining.substring(0, queryIndex);
+            }
+            
+            // Extract path
+            const pathIndex = remaining.indexOf('/');
+            if (pathIndex !== -1) {
+                components['Path'] = remaining.substring(pathIndex);
+                remaining = remaining.substring(0, pathIndex);
+            }
+            
+            // Remaining is host and port
+            if (remaining) {
+                const hostPortMatch = remaining.match(/^([^:]+)(?::(\d+))?$/);
+                if (hostPortMatch) {
+                    components['Host'] = hostPortMatch[1];
+                    if (hostPortMatch[2]) {
+                        components['Port'] = hostPortMatch[2];
+                    }
+                }
+            }
+            
+            return components;
+        }
+        
+        // Display URL components
+        function displayComponents(components) {
+            const container = document.getElementById('componentAnalysis');
+            container.innerHTML = '';
+            
+            Object.entries(components).forEach(([key, value]) => {
+                if (value && value !== '-') {
+                    const div = document.createElement('div');
+                    div.className = 'component-item fade-in';
+                    div.innerHTML = `
+                        <div class="component-label">${key}:</div>
+                        <div class="component-value">${escapeHtml(value)}</div>
+                        <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(value)}')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    `;
+                    container.appendChild(div);
+                }
+            });
+        }
+        
+        // Display query parameters
+        function displayQueryParams(params) {
+            const container = document.getElementById('paramsList');
+            const querySection = document.getElementById('queryParams');
+            
+            container.innerHTML = '';
+            
+            if (params.toString()) {
+                querySection.classList.remove('hidden');
+                
+                for (const [key, value] of params.entries()) {
+                    const div = document.createElement('div');
+                    div.className = 'component-item fade-in';
+                    div.innerHTML = `
+                        <div class="component-label">${escapeHtml(key)}:</div>
+                        <div class="component-value">${escapeHtml(value)}</div>
+                        <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(value)}')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    `;
+                    container.appendChild(div);
+                }
+            } else {
+                querySection.classList.add('hidden');
+            }
+        }
+        
+        // Hide analysis section
+        function hideAnalysis() {
+            document.getElementById('analysis').classList.add('hidden');
+        }
+        
+        // Copy output to clipboard
+        function copyOutput() {
+            const output = document.getElementById('outputText');
+            output.select();
+            document.execCommand('copy');
+            showToast('Output copied to clipboard!');
+        }
+        
+        // Copy text to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied to clipboard!');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('Copied to clipboard!');
+            });
+        }
+        
+        // Clear all fields
+        function clearAll() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('outputText').value = '';
+            document.getElementById('urlStatus').classList.add('hidden');
+            hideAnalysis();
+            updateStatistics('', '');
+        }
+        
+        // Animate process
+        function animateProcess() {
+            const outputField = document.getElementById('outputText');
+            outputField.style.transform = 'scale(1.02)';
+            outputField.style.boxShadow = '0 0 20px rgba(102, 126, 234, 0.4)';
+            
+            setTimeout(() => {
+                outputField.style.transform = 'scale(1)';
+                outputField.style.boxShadow = 'none';
+            }, 300);
+        }
+        
+        // Batch processing functions
+        function addBatchItem() {
+            batchItems.push('');
+            renderBatchItems();
+        }
+        
+        function removeBatchItem(index) {
+            if (batchItems.length > 1) {
+                batchItems.splice(index, 1);
+                renderBatchItems();
+            }
+        }
+        
+        function updateBatchItem(index, value) {
+            batchItems[index] = value;
+        }
+        
+        function renderBatchItems() {
+            const container = document.getElementById('batchContainer');
+            container.innerHTML = '';
+            
+            batchItems.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'batch-item fade-in';
+                div.innerHTML = `
+                    <div class="flex items-center gap-4 mb-3">
+                        <span class="text-sm font-medium opacity-70">#${index + 1}</span>
+                        <input type="text" class="input-field flex-1" placeholder="Enter URL here..." value="${item}" onchange="updateBatchItem(${index}, this.value)">
+                        <button class="copy-btn" onclick="removeBatchItem(${index})" ${batchItems.length <= 1 ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <div class="text-xs opacity-50 mb-1">Original:</div>
+                            <div class="component-value text-sm" id="batchOriginal${index}">-</div>
+                        </div>
+                        <div>
+                            <div class="text-xs opacity-50 mb-1">Processed:</div>
+                            <div class="component-value text-sm" id="batchProcessed${index}">-</div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        function processBatch() {
+            let processedCount = 0;
+            let validCount = 0;
+            let invalidCount = 0;
+            
+            batchItems.forEach((item, index) => {
+                if (item.trim()) {
+                    try {
+                        const encoded = encodeURIComponent(item);
+                        const decoded = decodeURIComponent(item);
+                        
+                        // Determine if we should show encoded or decoded version
+                        const hasEncoded = countEncodedCharacters(item) > 0;
+                        const processed = hasEncoded ? decoded : encoded;
+                        
+                        document.getElementById(`batchOriginal${index}`).textContent = item;
+                        document.getElementById(`batchProcessed${index}`).textContent = processed;
+                        
+                        if (isValidURL(hasEncoded ? decoded : item)) {
+                            validCount++;
+                        } else {
+                            invalidCount++;
+                        }
+                        
+                        processedCount++;
+                    } catch (error) {
+                        document.getElementById(`batchOriginal${index}`).textContent = item;
+                        document.getElementById(`batchProcessed${index}`).textContent = 'Error: ' + error.message;
+                        invalidCount++;
+                    }
+                }
+            });
+            
+            // Update batch statistics
+            document.getElementById('batchTotal').textContent = batchItems.filter(item => item.trim()).length;
+            document.getElementById('batchProcessed').textContent = processedCount;
+            document.getElementById('batchValid').textContent = validCount;
+            document.getElementById('batchInvalid').textContent = invalidCount;
+            document.getElementById('batchStats').classList.remove('hidden');
+        }
+        
+        function downloadBatch() {
+            const results = [];
+            
+            batchItems.forEach((item, index) => {
+                if (item.trim()) {
+                    const original = document.getElementById(`batchOriginal${index}`).textContent;
+                    const processed = document.getElementById(`batchProcessed${index}`).textContent;
+                    
+                    if (original !== '-' && processed !== '-') {
+                        results.push(`${index + 1}. Original: ${original}`);
+                        results.push(`   Processed: ${processed}`);
+                        results.push('');
+                    }
+                }
+            });
+            
+            if (results.length === 0) {
+                alert('No processed results to download. Please process the batch first.');
+                return;
+            }
+            
+            const content = results.join('\n');
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'url_batch_results.txt';
+            a.click();
+            
+            URL.revokeObjectURL(url);
+            showToast('Batch results downloaded!');
+        }
+        
+        // Utility functions
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function showToast(message) {
+            // Create toast notification
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-20 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-all duration-300';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            // Animate in
+            setTimeout(() => {
+                toast.style.transform = 'translateX(0)';
+                toast.style.opacity = '1';
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.style.transform = 'translateX(100%)';
+                toast.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
