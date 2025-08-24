@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional HTML Minifier - Tool Xeno</title>
+    <meta name="description" content="Advanced HTML minifier with syntax highlighting, compression analytics, and professional optimization features - minify HTML code with real-time preview and statistics.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        
+        .btn-secondary {
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .code-editor {
+            width: 100%;
+            min-height: 300px;
+            resize: vertical;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--dark-text);
+            padding: 20px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            transition: border-color 0.3s ease, background-color 0.35s ease;
+            outline: none;
+        }
+        
+        .code-editor:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+        }
+        
+        body.light-theme .code-editor {
+            background: var(--light-surface);
+            color: var(--light-text);
+            border-color: var(--light-border);
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-switch.active {
+            background: var(--primary-gradient);
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 21px;
+            height: 21px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .toggle-switch.active::after {
+            transform: translateX(25px);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stat-card {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .comparison-view {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-view {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--success-gradient);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        .tooltip {
+            position: relative;
+            cursor: help;
+        }
+        
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+        
+        pre[class*="language-"] {
+            margin: 0;
+            background: transparent !important;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+        
+        code[class*="language-"] {
+            background: transparent !important;
+            color: var(--dark-text-secondary) !important;
+        }
+        
+        body.light-theme code[class*="language-"] {
+            color: var(--light-text) !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        🛠️ Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Professional HTML Minifier
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#minify" class="nav-link">Minify</a>
+                        <a href="#options" class="nav-link">Options</a>
+                        <a href="#stats" class="nav-link">Statistics</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Professional HTML Minifier
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Advanced HTML minification with syntax highlighting, real-time preview, and comprehensive compression analytics. 
+                Optimize your HTML code for faster loading times and better performance.
+            </p>
+        </section>
+        
+        <!-- Main Minifier Interface -->
+        <section id="minify" class="container mx-auto px-6">
+            <!-- Options Panel -->
+            <div class="glass-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-cogs mr-3"></i>
+                    Minification Options
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <label class="text-sm font-medium tooltip" data-tooltip="Remove all HTML comments">Remove Comments</label>
+                            <p class="text-xs opacity-70">Strip <!-- --> tags</p>
+                        </div>
+                        <div class="toggle-switch active" data-option="removeComments"></div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <label class="text-sm font-medium tooltip" data-tooltip="Collapse whitespace between tags">Collapse Whitespace</label>
+                            <p class="text-xs opacity-70">Minimize spaces</p>
+                        </div>
+                        <div class="toggle-switch active" data-option="collapseWhitespace"></div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <label class="text-sm font-medium tooltip" data-tooltip="Remove empty attributes like class=''">Remove Empty Attrs</label>
+                            <p class="text-xs opacity-70">Clean empty values</p>
+                        </div>
+                        <div class="toggle-switch active" data-option="removeEmptyAttributes"></div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <label class="text-sm font-medium tooltip" data-tooltip="Minify inline CSS and JavaScript">Minify Inline</label>
+                            <p class="text-xs opacity-70">CSS & JS optimization</p>
+                        </div>
+                        <div class="toggle-switch active" data-option="minifyCSS"></div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex flex-wrap gap-3">
+                    <button id="minifyBtn" class="btn-gradient">
+                        <i class="fas fa-compress mr-2"></i>
+                        Minify HTML
+                    </button>
+                    <button id="clearBtn" class="btn-secondary">
+                        <i class="fas fa-eraser mr-2"></i>
+                        Clear All
+                    </button>
+                    <button id="sampleBtn" class="btn-gradient">
+                        <i class="fas fa-file-code mr-2"></i>
+                        Load Sample
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Code Editor Section -->
+            <div class="comparison-view mb-8">
+                <!-- Original HTML -->
+                <div class="glass-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold flex items-center">
+                            <i class="fas fa-code mr-3"></i>
+                            Original HTML
+                        </h3>
+                        <span id="originalLines" class="text-sm opacity-70">0 lines</span>
+                    </div>
+                    <textarea 
+                        id="originalHtml" 
+                        class="code-editor"
+                        placeholder="Paste your HTML code here..."
+                        spellcheck="false"
+                    ></textarea>
+                </div>
+                
+                <!-- Minified HTML -->
+                <div class="glass-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold flex items-center">
+                            <i class="fas fa-compress-arrows-alt mr-3"></i>
+                            Minified HTML
+                        </h3>
+                        <div class="flex gap-2">
+                            <span id="minifiedLines" class="text-sm opacity-70">0 lines</span>
+                            <button id="copyBtn" class="btn-success px-3 py-1 text-sm" title="Copy to clipboard">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <pre id="minifiedHtml" class="code-editor min-h-[300px] overflow-auto"><code class="language-html">// Minified HTML will appear here...</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Statistics Dashboard -->
+            <div id="statsSection" class="glass-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-chart-bar mr-3"></i>
+                    Compression Statistics
+                </h3>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="originalSize">0 B</div>
+                        <div class="text-sm opacity-70">Original Size</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="minifiedSize">0 B</div>
+                        <div class="text-sm opacity-70">Minified Size</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="compressionRatio">0%</div>
+                        <div class="text-sm opacity-70">Size Reduction</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="bytesSaved">0 B</div>
+                        <div class="text-sm opacity-70">Bytes Saved</div>
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium">Compression Progress</span>
+                        <span id="compressionPercent" class="text-sm font-bold text-green-400">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Advanced Analytics -->
+            <div class="glass-card p-6">
+                <h3 class="text-xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-analytics mr-3"></i>
+                    Detailed Analysis
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span class="text-sm opacity-70">Total Characters:</span>
+                            <span id="totalChars" class="font-medium">0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm opacity-70">HTML Tags:</span>
+                            <span id="htmlTags" class="font-medium">0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm opacity-70">Attributes:</span>
+                            <span id="attributes" class="font-medium">0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm opacity-70">Comments Removed:</span>
+                            <span id="commentsRemoved" class="font-medium">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span class="text-sm opacity-70">Whitespace Removed:</span>
+                            <span id="whitespaceRemoved" class="font-medium">0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm opacity-70">Empty Attrs Removed:</span>
+                            <span id="emptyAttrsRemoved" class="font-medium">0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm opacity-70">Processing Time:</span>
+                            <span id="processingTime" class="font-medium">0ms</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm opacity-70">Optimization Level:</span>
+                            <span id="optimizationLevel" class="font-medium">High</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-8 text-center opacity-70">
+        <div class="border-t border-opacity-20 pt-6">
+            <p>&copy; 2025 Tool Xeno. Professional HTML Minifier - Advanced web development tools.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Global variables
+        let minifierOptions = {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeEmptyAttributes: true,
+            minifyCSS: true
+        };
+        
+        let analytics = {
+            totalChars: 0,
+            htmlTags: 0,
+            attributes: 0,
+            commentsRemoved: 0,
+            whitespaceRemoved: 0,
+            emptyAttrsRemoved: 0,
+            processingTime: 0
+        };
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            initializeControls();
+            loadSampleHTML();
+        });
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Initialize controls
+        function initializeControls() {
+            // Toggle switches
+            document.querySelectorAll('.toggle-switch').forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    toggle.classList.toggle('active');
+                    const option = toggle.dataset.option;
+                    minifierOptions[option] = toggle.classList.contains('active');
+                    
+                    if (document.getElementById('originalHtml').value.trim()) {
+                        debounce(minifyHTML, 300)();
+                    }
+                });
+            });
+            
+            // Buttons
+            document.getElementById('minifyBtn').addEventListener('click', minifyHTML);
+            document.getElementById('clearBtn').addEventListener('click', clearAll);
+            document.getElementById('sampleBtn').addEventListener('click', loadSampleHTML);
+            document.getElementById('copyBtn').addEventListener('click', copyToClipboard);
+            
+            // Real-time processing
+            document.getElementById('originalHtml').addEventListener('input', () => {
+                debounce(minifyHTML, 500)();
+                updateLineCount();
+            });
+        }
+        
+        // Load sample HTML
+        function loadSampleHTML() {
+            const sampleHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample HTML Document</title>
+    <!-- This is a comment that will be removed -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Main content section -->
+    <div class="container">
+        <header>
+            <h1>Welcome to HTML Minifier</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact" title="">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <section id="content">
+                <h2>Advanced HTML Minification</h2>
+                <p>
+                    This tool provides professional HTML minification with advanced
+                    features including comment removal, whitespace optimization, 
+                    and comprehensive analytics.
+                </p>
+                
+                <div class="features">
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>Real-time minification</li>
+                        <li>Syntax highlighting</li>
+                        <li>Compression statistics</li>
+                        <li>Advanced optimization options</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="">
+            <p>&copy; 2025 Tool Xeno. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        console.log('Sample HTML loaded successfully!');
+        
+        // Sample JavaScript that can be minified
+        function initializeApp() {
+            const elements = document.querySelectorAll('.feature');
+            elements.forEach(element => {
+                element.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    </script>
+</body>
+</html>`;
+            
+            document.getElementById('originalHtml').value = sampleHTML;
+            minifyHTML();
+            updateLineCount();
+        }
+        
+        // Minify HTML function
+        function minifyHTML() {
+            const startTime = performance.now();
+            const originalHTML = document.getElementById('originalHtml').value;
+            
+            if (!originalHTML.trim()) {
+                clearResults();
+                return;
+            }
+            
+            let minified = originalHTML;
+            
+            // Reset analytics
+            analytics = {
+                totalChars: originalHTML.length,
+                htmlTags: 0,
+                attributes: 0,
+                commentsRemoved: 0,
+                whitespaceRemoved: 0,
+                emptyAttrsRemoved: 0,
+                processingTime: 0
+            };
+            
+            // Count HTML tags and attributes
+            analytics.htmlTags = (originalHTML.match(/<[^>]+>/g) || []).length;
+            analytics.attributes = (originalHTML.match(/\w+\s*=\s*["'][^"']*["']/g) || []).length;
+            
+            // Remove comments
+            if (minifierOptions.removeComments) {
+                const commentsBefore = (minified.match(/<!--[\s\S]*?-->/g) || []).length;
+                minified = minified.replace(/<!--[\s\S]*?-->/g, '');
+                analytics.commentsRemoved = commentsBefore;
+            }
+            
+            // Remove empty attributes
+            if (minifierOptions.removeEmptyAttributes) {
+                const emptyAttrsBefore = (minified.match(/\s+\w+\s*=\s*["'][\s]*["']/g) || []).length;
+                minified = minified.replace(/\s+\w+\s*=\s*["'][\s]*["']/g, '');
+                analytics.emptyAttrsRemoved = emptyAttrsBefore;
+            }
+            
+            // Collapse whitespace
+            if (minifierOptions.collapseWhitespace) {
+                const whitespaceBefore = minified.length;
+                minified = minified
+                    .replace(/>\s+</g, '><') // Remove whitespace between tags
+                    .replace(/\s+/g, ' ') // Collapse multiple spaces
+                    .replace(/^\s+|\s+$/g, '') // Trim leading/trailing whitespace
+                    .replace(/\s+>/g, '>') // Remove space before closing tag
+                    .replace(/<\s+/g, '<'); // Remove space after opening tag
+                analytics.whitespaceRemoved = whitespaceBefore - minified.length;
+            }
+            
+            // Minify inline CSS and JS
+            if (minifierOptions.minifyCSS) {
+                minified = minified
+                    .replace(/<style[^>]*>([\s\S]*?)<\/style>/gi, (match, css) => {
+                        const minifiedCSS = css
+                            .replace(/\/\*[\s\S]*?\*\//g, '') // Remove CSS comments
+                            .replace(/\s*{\s*/g, '{')
+                            .replace(/\s*}\s*/g, '}')
+                            .replace(/\s*;\s*/g, ';')
+                            .replace(/\s*:\s*/g, ':')
+                            .replace(/\s+/g, ' ')
+                            .trim();
+                        return match.replace(css, minifiedCSS);
+                    })
+                    .replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, (match, js) => {
+                        const minifiedJS = js
+                            .replace(/\/\*[\s\S]*?\*\//g, '') // Remove JS comments
+                            .replace(/\/\/.*$/gm, '') // Remove single-line comments
+                            .replace(/\s*{\s*/g, '{')
+                            .replace(/\s*}\s*/g, '}')
+                            .replace(/\s*;\s*/g, ';')
+                            .replace(/\s+/g, ' ')
+                            .trim();
+                        return match.replace(js, minifiedJS);
+                    });
+            }
+            
+            analytics.processingTime = Math.round(performance.now() - startTime);
+            
+            // Display results
+            displayMinifiedHTML(minified);
+            updateStatistics(originalHTML, minified);
+            updateAnalytics();
+        }
+        
+        // Display minified HTML with syntax highlighting
+        function displayMinifiedHTML(minified) {
+            const codeElement = document.querySelector('#minifiedHtml code');
+            codeElement.textContent = minified;
+            
+            // Trigger Prism.js highlighting
+            if (typeof Prism !== 'undefined') {
+                Prism.highlightElement(codeElement);
+            }
+            
+            updateMinifiedLineCount(minified);
+        }
+        
+        // Update statistics
+        function updateStatistics(original, minified) {
+            const originalSize = new Blob([original]).size;
+            const minifiedSize = new Blob([minified]).size;
+            const savings = originalSize - minifiedSize;
+            const compressionRatio = originalSize > 0 ? (savings / originalSize * 100) : 0;
+            
+            document.getElementById('originalSize').textContent = formatFileSize(originalSize);
+            document.getElementById('minifiedSize').textContent = formatFileSize(minifiedSize);
+            document.getElementById('compressionRatio').textContent = compressionRatio.toFixed(1) + '%';
+            document.getElementById('bytesSaved').textContent = formatFileSize(savings);
+            document.getElementById('compressionPercent').textContent = compressionRatio.toFixed(1) + '%';
+            
+            // Update progress bar
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = Math.min(compressionRatio, 100) + '%';
+        }
+        
+        // Update detailed analytics
+        function updateAnalytics() {
+            document.getElementById('totalChars').textContent = analytics.totalChars.toLocaleString();
+            document.getElementById('htmlTags').textContent = analytics.htmlTags;
+            document.getElementById('attributes').textContent = analytics.attributes;
+            document.getElementById('commentsRemoved').textContent = analytics.commentsRemoved;
+            document.getElementById('whitespaceRemoved').textContent = analytics.whitespaceRemoved;
+            document.getElementById('emptyAttrsRemoved').textContent = analytics.emptyAttrsRemoved;
+            document.getElementById('processingTime').textContent = analytics.processingTime + 'ms';
+            
+            // Determine optimization level
+            let level = 'Low';
+            if (analytics.processingTime < 50 && analytics.whitespaceRemoved > 100) level = 'High';
+            else if (analytics.processingTime < 100) level = 'Medium';
+            
+            document.getElementById('optimizationLevel').textContent = level;
+        }
+        
+        // Update line counts
+        function updateLineCount() {
+            const original = document.getElementById('originalHtml').value;
+            const lines = original ? original.split('\n').length : 0;
+            document.getElementById('originalLines').textContent = lines + ' lines';
+        }
+        
+        function updateMinifiedLineCount(minified) {
+            const lines = minified ? minified.split('\n').length : 0;
+            document.getElementById('minifiedLines').textContent = lines + ' lines';
+        }
+        
+        // Clear all
+        function clearAll() {
+            document.getElementById('originalHtml').value = '';
+            document.querySelector('#minifiedHtml code').textContent = '// Minified HTML will appear here...';
+            clearResults();
+            updateLineCount();
+        }
+        
+        // Clear results
+        function clearResults() {
+            document.getElementById('originalSize').textContent = '0 B';
+            document.getElementById('minifiedSize').textContent = '0 B';
+            document.getElementById('compressionRatio').textContent = '0%';
+            document.getElementById('bytesSaved').textContent = '0 B';
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('compressionPercent').textContent = '0%';
+            document.getElementById('minifiedLines').textContent = '0 lines';
+            
+            // Clear analytics
+            Object.keys(analytics).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) element.textContent = key === 'processingTime' ? '0ms' : '0';
+            });
+            document.getElementById('optimizationLevel').textContent = 'None';
+        }
+        
+        // Copy to clipboard
+        function copyToClipboard() {
+            const minifiedCode = document.querySelector('#minifiedHtml code').textContent;
+            
+            if (!minifiedCode || minifiedCode === '// Minified HTML will appear here...') {
+                alert('No minified code to copy!');
+                return;
+            }
+            
+            navigator.clipboard.writeText(minifiedCode).then(() => {
+                const btn = document.getElementById('copyBtn');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i>';
+                btn.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.classList.remove('bg-green-500');
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = minifiedCode;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Code copied to clipboard!');
+            });
+        }
+        
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+        }
+        
+        // Debounce function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+    </script>
+</body>
+</html>
