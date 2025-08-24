@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder/Decoder Tool - Tool Xeno</title>
+    <meta name="description" content="Professional Base64 encoder/decoder with file support, image preview, batch processing, and real-time encoding/decoding capabilities.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        .btn-gradient:disabled { 
+            opacity: 0.6; 
+            cursor: not-allowed; 
+            transform: none; 
+        }
+        
+        .btn-secondary {
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .upload-area {
+            border: 2px dashed rgba(102, 126, 234, 0.5);
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .upload-area:hover {
+            border-color: rgba(102, 126, 234, 0.8);
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .upload-area.dragover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.2);
+            transform: scale(1.02);
+        }
+        
+        .textarea-style {
+            width: 100%;
+            min-height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            color: var(--dark-text);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+        
+        .textarea-style:focus {
+            outline: none;
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        body.light-theme .textarea-style {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: var(--light-text);
+        }
+        
+        .file-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .file-item {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .file-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        .stats-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stats-card {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .stats-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .tab-button {
+            padding: 12px 24px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .tab-button.active {
+            background: var(--primary-gradient);
+            color: white;
+        }
+        
+        body.light-theme .tab-button {
+            color: rgba(0, 0, 0, 0.6);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .upload-area {
+                padding: 30px 15px;
+            }
+            
+            .file-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .tab-button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        🔐 Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Base64 Encoder/Decoder
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#encode" class="nav-link">Encode</a>
+                        <a href="#decode" class="nav-link">Decode</a>
+                        <a href="#files" class="nav-link">Files</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Base64 Encoder/Decoder
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Professional Base64 encoding and decoding tool with support for text, files, and images. 
+                Features real-time processing, batch operations, and advanced file handling capabilities.
+            </p>
+        </section>
+        
+        <!-- Main Interface -->
+        <section class="container mx-auto px-6">
+            <!-- Tab Navigation -->
+            <div class="glass-card p-6 mb-8">
+                <div class="flex flex-wrap justify-center gap-4 mb-6">
+                    <button class="tab-button active" onclick="switchTab('text')" id="textTab">
+                        <i class="fas fa-font mr-2"></i>Text
+                    </button>
+                    <button class="tab-button" onclick="switchTab('file')" id="fileTab">
+                        <i class="fas fa-file mr-2"></i>Single File
+                    </button>
+                    <button class="tab-button" onclick="switchTab('batch')" id="batchTab">
+                        <i class="fas fa-layer-group mr-2"></i>Batch Files
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Text Tab -->
+            <div id="textInterface" class="tab-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Input Section -->
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-edit mr-3"></i>
+                            Input Text
+                        </h3>
+                        <textarea 
+                            id="inputText" 
+                            class="textarea-style" 
+                            placeholder="Enter your text here to encode, or paste Base64 to decode..."
+                            oninput="processText()"
+                        ></textarea>
+                        
+                        <div class="flex flex-wrap gap-3 mt-4">
+                            <button class="btn-gradient" onclick="encodeText()">
+                                <i class="fas fa-lock mr-2"></i>Encode
+                            </button>
+                            <button class="btn-secondary" onclick="decodeText()">
+                                <i class="fas fa-unlock mr-2"></i>Decode
+                            </button>
+                            <button class="btn-success" onclick="clearText()">
+                                <i class="fas fa-trash mr-2"></i>Clear
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Output Section -->
+                    <div class="glass-card p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-semibold flex items-center">
+                                <i class="fas fa-code mr-3"></i>
+                                Output
+                            </h3>
+                            <button class="btn-gradient px-3 py-2 text-sm" onclick="copyOutput()" id="copyBtn">
+                                <i class="fas fa-copy mr-2"></i>Copy
+                            </button>
+                        </div>
+                        <textarea 
+                            id="outputText" 
+                            class="textarea-style" 
+                            placeholder="Processed output will appear here..."
+                            readonly
+                        ></textarea>
+                        
+                        <!-- Statistics -->
+                        <div class="grid grid-cols-2 gap-4 mt-4">
+                            <div class="stats-card">
+                                <div class="stats-value" id="inputSize">0</div>
+                                <div class="text-sm opacity-70">Input Size</div>
+                            </div>
+                            <div class="stats-card">
+                                <div class="stats-value" id="outputSize">0</div>
+                                <div class="text-sm opacity-70">Output Size</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Single File Tab -->
+            <div id="fileInterface" class="tab-content hidden">
+                <div class="glass-card p-6 mb-6">
+                    <!-- File Upload Area -->
+                    <div class="upload-area" id="singleFileUpload" onclick="document.getElementById('singleFileInput').click()">
+                        <div class="text-4xl mb-4 opacity-50">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Drop File Here</h3>
+                        <p class="opacity-70 mb-4">Or click to browse files</p>
+                        <p class="text-sm opacity-50">Supports all file types • Max 50MB</p>
+                        <input type="file" id="singleFileInput" style="display: none;" onchange="handleSingleFile(this.files[0])">
+                    </div>
+                </div>
+                
+                <!-- File Processing Interface -->
+                <div id="singleFileProcessor" class="hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- File Info -->
+                        <div class="glass-card p-6">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-file-alt mr-3"></i>
+                                File Information
+                            </h3>
+                            <div id="fileInfo" class="space-y-3">
+                                <!-- File details will be inserted here -->
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-3 mt-6">
+                                <button class="btn-gradient" onclick="encodeFile()">
+                                    <i class="fas fa-lock mr-2"></i>Encode to Base64
+                                </button>
+                                <button class="btn-secondary" onclick="downloadEncodedFile()">
+                                    <i class="fas fa-download mr-2"></i>Download
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Preview/Output -->
+                        <div class="glass-card p-6">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-eye mr-3"></i>
+                                Preview & Output
+                            </h3>
+                            <div id="filePreview" class="mb-4">
+                                <!-- Preview will be inserted here -->
+                            </div>
+                            <div id="encodedOutput" class="hidden">
+                                <textarea class="textarea-style h-32" id="encodedFileData" readonly placeholder="Base64 encoded data will appear here..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Batch Files Tab -->
+            <div id="batchInterface" class="tab-content hidden">
+                <div class="glass-card p-6 mb-6">
+                    <!-- Batch Upload Area -->
+                    <div class="upload-area" id="batchFileUpload" onclick="document.getElementById('batchFileInput').click()">
+                        <div class="text-4xl mb-4 opacity-50">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Drop Multiple Files</h3>
+                        <p class="opacity-70 mb-4">Or click to browse multiple files</p>
+                        <p class="text-sm opacity-50">Supports all file types • Max 50MB per file</p>
+                        <input type="file" id="batchFileInput" multiple style="display: none;" onchange="handleBatchFiles(this.files)">
+                    </div>
+                </div>
+                
+                <!-- Batch Controls -->
+                <div id="batchControls" class="hidden mb-6">
+                    <div class="glass-card p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-semibold flex items-center">
+                                <i class="fas fa-cogs mr-3"></i>
+                                Batch Operations
+                            </h3>
+                            <div class="flex gap-3">
+                                <button class="btn-gradient" onclick="encodeAllFiles()">
+                                    <i class="fas fa-lock mr-2"></i>Encode All
+                                </button>
+                                <button class="btn-success" onclick="downloadAllEncoded()">
+                                    <i class="fas fa-download mr-2"></i>Download All
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Progress -->
+                        <div id="batchProgress" class="hidden mb-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-medium">Processing Files...</span>
+                                <span id="batchProgressText">0/0</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="batchProgressFill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- File List -->
+                <div id="batchFileList" class="hidden">
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-list mr-3"></i>
+                            Files Queue
+                        </h3>
+                        <div id="filesList">
+                            <!-- File items will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-8 text-center opacity-70">
+        <p>&copy; 2025 Tool Xeno. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Global variables
+        let currentFile = null;
+        let batchFiles = [];
+        let currentTab = 'text';
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            initializeDragDrop();
+            loadTheme();
+        });
+        
+        // Theme functionality
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        function loadTheme() {
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-theme');
+            }
+        }
+        
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Tab switching
+        function switchTab(tab) {
+            // Update active tab button
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tab + 'Tab').classList.add('active');
+            
+            // Show/hide tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
+            document.getElementById(tab + 'Interface').classList.remove('hidden');
+            
+            currentTab = tab;
+        }
+        
+        // Text processing functions
+        function processText() {
+            const input = document.getElementById('inputText').value;
+            updateInputStats(input);
+        }
+        
+        function encodeText() {
+            const input = document.getElementById('inputText').value;
+            if (!input.trim()) {
+                alert('Please enter some text to encode.');
+                return;
+            }
+            
+            try {
+                const encoded = btoa(unescape(encodeURIComponent(input)));
+                document.getElementById('outputText').value = encoded;
+                updateOutputStats(encoded);
+                showCopyButton();
+            } catch (error) {
+                alert('Error encoding text: ' + error.message);
+            }
+        }
+        
+        function decodeText() {
+            const input = document.getElementById('inputText').value;
+            if (!input.trim()) {
+                alert('Please enter Base64 text to decode.');
+                return;
+            }
+            
+            try {
+                const decoded = decodeURIComponent(escape(atob(input)));
+                document.getElementById('outputText').value = decoded;
+                updateOutputStats(decoded);
+                showCopyButton();
+            } catch (error) {
+                alert('Invalid Base64 input. Please check your data.');
+            }
+        }
+        
+        function clearText() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('outputText').value = '';
+            updateInputStats('');
+            updateOutputStats('');
+        }
+        
+        function copyOutput() {
+            const output = document.getElementById('outputText');
+            output.select();
+            document.execCommand('copy');
+            
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+            }, 2000);
+        }
+        
+        function updateInputStats(text) {
+            document.getElementById('inputSize').textContent = formatFileSize(new Blob([text]).size);
+        }
+        
+        function updateOutputStats(text) {
+            document.getElementById('outputSize').textContent = formatFileSize(new Blob([text]).size);
+        }
+        
+        function showCopyButton() {
+            document.getElementById('copyBtn').style.display = 'inline-flex';
+        }
+        
+        // File handling functions
+        function initializeDragDrop() {
+            // Single file upload
+            const singleUpload = document.getElementById('singleFileUpload');
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                singleUpload.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                singleUpload.addEventListener(eventName, () => singleUpload.classList.add('dragover'), false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                singleUpload.addEventListener(eventName, () => singleUpload.classList.remove('dragover'), false);
+            });
+            
+            singleUpload.addEventListener('drop', handleSingleFileDrop, false);
+            
+            // Batch file upload
+            const batchUpload = document.getElementById('batchFileUpload');
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                batchUpload.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                batchUpload.addEventListener(eventName, () => batchUpload.classList.add('dragover'), false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                batchUpload.addEventListener(eventName, () => batchUpload.classList.remove('dragover'), false);
+            });
+            
+            batchUpload.addEventListener('drop', handleBatchFilesDrop, false);
+        }
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        function handleSingleFileDrop(e) {
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleSingleFile(files[0]);
+            }
+        }
+        
+        function handleBatchFilesDrop(e) {
+            const files = e.dataTransfer.files;
+            handleBatchFiles(files);
+        }
+        
+        function handleSingleFile(file) {
+            if (!file) return;
+            
+            if (file.size > 50 * 1024 * 1024) {
+                alert('File size must be less than 50MB.');
+                return;
+            }
+            
+            currentFile = file;
+            displayFileInfo(file);
+            displayFilePreview(file);
+            document.getElementById('singleFileProcessor').classList.remove('hidden');
+        }
+        
+        function displayFileInfo(file) {
+            const fileInfo = document.getElementById('fileInfo');
+            fileInfo.innerHTML = `
+                <div class="flex items-center justify-between p-3 bg-black bg-opacity-20 rounded-lg">
+                    <span class="font-medium">Name:</span>
+                    <span class="text-purple-400">${file.name}</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-black bg-opacity-20 rounded-lg">
+                    <span class="font-medium">Size:</span>
+                    <span class="text-blue-400">${formatFileSize(file.size)}</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-black bg-opacity-20 rounded-lg">
+                    <span class="font-medium">Type:</span>
+                    <span class="text-green-400">${file.type || 'Unknown'}</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-black bg-opacity-20 rounded-lg">
+                    <span class="font-medium">Modified:</span>
+                    <span class="text-yellow-400">${new Date(file.lastModified).toLocaleDateString()}</span>
+                </div>
+            `;
+        }
+        
+        function displayFilePreview(file) {
+            const preview = document.getElementById('filePreview');
+            
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    preview.innerHTML = `
+                        <div class="text-center">
+                            <img src="${e.target.result}" alt="Preview" class="file-preview mx-auto mb-3" style="width: auto; height: 200px; max-width: 100%;">
+                            <p class="text-sm opacity-70">Image Preview</p>
+                        </div>
+                    `;
+                };
+                reader.readAsDataURL(file);
+            } else if (file.type.startsWith('text/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const content = e.target.result.substring(0, 500);
+                    preview.innerHTML = `
+                        <div class="text-left">
+                            <div class="bg-black bg-opacity-20 p-4 rounded-lg font-mono text-sm">
+                                <pre class="whitespace-pre-wrap">${content}${e.target.result.length > 500 ? '...' : ''}</pre>
+                            </div>
+                            <p class="text-sm opacity-70 mt-2 text-center">Text Preview</p>
+                        </div>
+                    `;
+                };
+                reader.readAsText(file);
+            } else {
+                const icon = getFileIcon(file.type);
+                preview.innerHTML = `
+                    <div class="text-center">
+                        <div class="text-6xl opacity-50 mb-3">${icon}</div>
+                        <p class="text-sm opacity-70">${file.type || 'Unknown File Type'}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function encodeFile() {
+            if (!currentFile) return;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const base64 = e.target.result.split(',')[1]; // Remove data:type;base64, prefix
+                document.getElementById('encodedFileData').value = base64;
+                document.getElementById('encodedOutput').classList.remove('hidden');
+            };
+            reader.readAsDataURL(currentFile);
+        }
+        
+        function downloadEncodedFile() {
+            const encodedData = document.getElementById('encodedFileData').value;
+            if (!encodedData) {
+                alert('Please encode the file first.');
+                return;
+            }
+            
+            const blob = new Blob([encodedData], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentFile.name}.base64.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Batch file functions
+        function handleBatchFiles(fileList) {
+            const files = Array.from(fileList).filter(file => file.size <= 50 * 1024 * 1024);
+            
+            if (files.length === 0) {
+                alert('No valid files selected. Please ensure files are under 50MB.');
+                return;
+            }
+            
+            batchFiles = files.map((file, index) => ({
+                id: index,
+                file: file,
+                encoded: null,
+                status: 'ready'
+            }));
+            
+            displayBatchFiles();
+            document.getElementById('batchControls').classList.remove('hidden');
+            document.getElementById('batchFileList').classList.remove('hidden');
+        }
+        
+        function displayBatchFiles() {
+            const filesList = document.getElementById('filesList');
+            filesList.innerHTML = '';
+            
+            batchFiles.forEach((item, index) => {
+                const fileDiv = document.createElement('div');
+                fileDiv.className = 'file-item fade-in';
+                fileDiv.innerHTML = `
+                    <div class="file-preview bg-gray-600 flex items-center justify-center text-2xl">
+                        ${getFileIcon(item.file.type)}
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-medium">${item.file.name}</div>
+                        <div class="text-sm opacity-70">${formatFileSize(item.file.size)} • ${item.file.type || 'Unknown'}</div>
+                        <div class="text-xs mt-1 status-${item.status}">${getStatusText(item.status)}</div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="btn-gradient px-3 py-2 text-sm" onclick="encodeSingleBatchFile(${index})" ${item.status === 'completed' ? 'disabled' : ''}>
+                            <i class="fas fa-lock"></i>
+                        </button>
+                        <button class="btn-success px-3 py-2 text-sm" onclick="downloadSingleBatchFile(${index})" ${item.encoded ? '' : 'disabled'}>
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                `;
+                filesList.appendChild(fileDiv);
+            });
+        }
+        
+        async function encodeAllFiles() {
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...';
+            btn.disabled = true;
+            
+            document.getElementById('batchProgress').classList.remove('hidden');
+            
+            for (let i = 0; i < batchFiles.length; i++) {
+                const item = batchFiles[i];
+                if (item.status === 'completed') continue;
+                
+                item.status = 'processing';
+                updateBatchProgress(i, batchFiles.length);
+                displayBatchFiles();
+                
+                try {
+                    const encoded = await encodeFileToBase64(item.file);
+                    item.encoded = encoded;
+                    item.status = 'completed';
+                } catch (error) {
+                    item.status = 'error';
+                    console.error('Error encoding file:', error);
+                }
+                
+                displayBatchFiles();
+                await new Promise(resolve => setTimeout(resolve, 100)); // Small delay for UI updates
+            }
+            
+            updateBatchProgress(batchFiles.length, batchFiles.length);
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+        
+        function encodeSingleBatchFile(index) {
+            const item = batchFiles[index];
+            if (item.status === 'completed') return;
+            
+            item.status = 'processing';
+            displayBatchFiles();
+            
+            encodeFileToBase64(item.file)
+                .then(encoded => {
+                    item.encoded = encoded;
+                    item.status = 'completed';
+                    displayBatchFiles();
+                })
+                .catch(error => {
+                    item.status = 'error';
+                    displayBatchFiles();
+                    console.error('Error encoding file:', error);
+                });
+        }
+        
+        function downloadSingleBatchFile(index) {
+            const item = batchFiles[index];
+            if (!item.encoded) return;
+            
+            const blob = new Blob([item.encoded], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${item.file.name}.base64.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function downloadAllEncoded() {
+            const completedFiles = batchFiles.filter(item => item.encoded);
+            if (completedFiles.length === 0) {
+                alert('No encoded files available for download.');
+                return;
+            }
+            
+            completedFiles.forEach((item, index) => {
+                setTimeout(() => {
+                    downloadSingleBatchFile(batchFiles.indexOf(item));
+                }, index * 200); // Stagger downloads
+            });
+        }
+        
+        function updateBatchProgress(current, total) {
+            const percentage = (current / total) * 100;
+            document.getElementById('batchProgressFill').style.width = percentage + '%';
+            document.getElementById('batchProgressText').textContent = `${current}/${total}`;
+        }
+        
+        // Utility functions
+        function encodeFileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const base64 = e.target.result.split(',')[1];
+                    resolve(base64);
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        function getFileIcon(mimeType) {
+            if (!mimeType) return '📄';
+            
+            if (mimeType.startsWith('image/')) return '🖼️';
+            if (mimeType.startsWith('video/')) return '🎬';
+            if (mimeType.startsWith('audio/')) return '🎵';
+            if (mimeType.includes('pdf')) return '📕';
+            if (mimeType.includes('zip') || mimeType.includes('rar')) return '📦';
+            if (mimeType.includes('text/')) return '📝';
+            if (mimeType.includes('json')) return '⚙️';
+            if (mimeType.includes('xml')) return '🏷️';
+            
+            return '📄';
+        }
+        
+        function getStatusText(status) {
+            switch (status) {
+                case 'ready': return 'Ready';
+                case 'processing': return 'Processing...';
+                case 'completed': return 'Completed';
+                case 'error': return 'Error';
+                default: return 'Unknown';
+            }
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+        }
+    </script>
+</body>
+</html>
