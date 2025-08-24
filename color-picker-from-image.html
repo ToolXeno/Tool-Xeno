@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Color Picker from Image Tool - Tool Xeno</title>
+    <meta name="description" content="Advanced color picker tool that extracts colors from images with precision. Upload any image and click to get HEX, RGB, HSL color codes with live preview and professional features.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        
+        .btn-secondary {
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .upload-area {
+            border: 2px dashed rgba(102, 126, 234, 0.5);
+            border-radius: 20px;
+            padding: 60px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .upload-area:hover {
+            border-color: rgba(102, 126, 234, 0.8);
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .upload-area.dragover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.2);
+            transform: scale(1.02);
+        }
+        
+        .image-canvas {
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: crosshair;
+            position: relative;
+        }
+        
+        .crosshair {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+        
+        .color-display {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .color-display:hover {
+            transform: scale(1.05);
+        }
+        
+        .color-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: var(--dark-text);
+            font-family: 'Inter', monospace;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .color-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        body.light-theme .color-input {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: var(--light-text);
+        }
+        
+        .color-history {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .history-color {
+            width: 100%;
+            height: 60px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .history-color:hover {
+            transform: scale(1.05);
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            z-index: 20;
+        }
+        
+        .zoom-btn {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .zoom-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.05);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stat-card {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .upload-area {
+                padding: 40px 15px;
+            }
+            
+            .color-history {
+                grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                         Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Professional Color Picker from Image
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#picker" class="nav-link">Color Picker</a>
+                        <a href="#history" class="nav-link">History</a>
+                        <a href="#formats" class="nav-link">Formats</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Color Picker from Image
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Extract precise colors from any image with professional accuracy. Upload your image, click any pixel, and get instant HEX, RGB, and HSL color codes with advanced features like zoom, history, and multiple format support.
+            </p>
+        </section>
+        
+        <!-- Main Interface -->
+        <section id="picker" class="container mx-auto px-6">
+            <!-- Upload Section -->
+            <div class="glass-card p-8 mb-8" id="uploadSection">
+                <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                    <div class="text-6xl mb-4 opacity-50">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2">Upload Image for Color Picking</h3>
+                    <p class="opacity-70 mb-4">Drag & drop or click to browse</p>
+                    <p class="text-sm opacity-50">Supports JPG, PNG, GIF, WebP • Max 10MB</p>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+            </div>
+            
+            <!-- Color Picker Interface -->
+            <div id="pickerInterface" class="hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                    <!-- Image Canvas -->
+                    <div class="lg:col-span-2">
+                        <div class="glass-card p-6">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-xl font-semibold flex items-center">
+                                    <i class="fas fa-eye-dropper mr-3"></i>
+                                    Click to Pick Color
+                                </h3>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-sm opacity-70">Zoom: <span id="zoomLevel">100%</span></span>
+                                </div>
+                            </div>
+                            
+                            <div class="image-canvas relative" id="imageContainer">
+                                <canvas id="imageCanvas" class="max-w-full h-auto"></canvas>
+                                <div class="crosshair hidden" id="crosshair"></div>
+                                <div class="zoom-controls">
+                                    <button class="zoom-btn" id="zoomIn" title="Zoom In">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                    <button class="zoom-btn" id="zoomOut" title="Zoom Out">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button class="zoom-btn" id="zoomReset" title="Reset Zoom">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 text-center">
+                                <p class="text-sm opacity-70">
+                                    <i class="fas fa-info-circle mr-2"></i>
+                                    Click anywhere on the image to extract color information
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Color Information Panel -->
+                    <div class="space-y-6">
+                        <!-- Current Color Display -->
+                        <div class="glass-card p-6">
+                            <h3 class="text-xl font-semibold mb-6 flex items-center">
+                                <i class="fas fa-palette mr-3"></i>
+                                Picked Color
+                            </h3>
+                            
+                            <div class="text-center mb-6">
+                                <div class="color-display mx-auto" id="colorDisplay" style="background: #667eea;"></div>
+                                <p class="mt-3 text-sm opacity-70">Current Color Preview</p>
+                            </div>
+                            
+                            <!-- Color Formats -->
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">HEX Color</label>
+                                    <div class="flex">
+                                        <input type="text" id="hexValue" class="color-input" value="#667eea" readonly>
+                                        <button class="btn-gradient ml-2 px-3" onclick="copyColor('hex')" title="Copy HEX">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">RGB Color</label>
+                                    <div class="flex">
+                                        <input type="text" id="rgbValue" class="color-input" value="rgb(102, 126, 234)" readonly>
+                                        <button class="btn-gradient ml-2 px-3" onclick="copyColor('rgb')" title="Copy RGB">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">HSL Color</label>
+                                    <div class="flex">
+                                        <input type="text" id="hslValue" class="color-input" value="hsl(229, 76%, 66%)" readonly>
+                                        <button class="btn-gradient ml-2 px-3" onclick="copyColor('hsl')" title="Copy HSL">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="mt-6 space-y-3">
+                                <button class="btn-success w-full" onclick="saveColor()">
+                                    <i class="fas fa-save mr-2"></i>
+                                    Save Color to History
+                                </button>
+                                <button class="btn-secondary w-full" onclick="copyAllFormats()">
+                                    <i class="fas fa-clipboard mr-2"></i>
+                                    Copy All Formats
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Color Statistics -->
+                        <div class="glass-card p-6">
+                            <h3 class="text-xl font-semibold mb-6 flex items-center">
+                                <i class="fas fa-chart-bar mr-3"></i>
+                                Color Analysis
+                            </h3>
+                            
+                            <div class="space-y-4">
+                                <div class="stat-card">
+                                    <div class="stat-value" id="brightness">65%</div>
+                                    <div class="text-sm opacity-70">Brightness</div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <div class="stat-value" id="saturation">76%</div>
+                                    <div class="text-sm opacity-70">Saturation</div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <div class="stat-value" id="hue">229°</div>
+                                    <div class="text-sm opacity-70">Hue Angle</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Color History Section -->
+            <div id="history" class="glass-card p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <i class="fas fa-history mr-3"></i>
+                        Color History
+                    </h3>
+                    <button class="btn-gradient" onclick="clearHistory()">
+                        <i class="fas fa-trash mr-2"></i>
+                        Clear History
+                    </button>
+                </div>
+                
+                <div class="color-history" id="colorHistory">
+                    <!-- History colors will be added here -->
+                </div>
+                
+                <div id="emptyHistory" class="text-center py-8 opacity-70">
+                    <i class="fas fa-palette text-4xl mb-3"></i>
+                    <p>No colors picked yet. Start by uploading an image!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-8 text-center opacity-70">
+        <p>&copy; 2025 Tool Xeno. All rights reserved. Professional Color Picker Tool.</p>
+    </footer>
+    
+    <script>
+        // Global variables
+        let currentImage = null;
+        let canvas = null;
+        let ctx = null;
+        let zoomLevel = 1;
+        let colorHistory = JSON.parse(localStorage.getItem('colorHistory')) || [];
+        let isDragging = false;
+        let lastX = 0;
+        let lastY = 0;
+        let offsetX = 0;
+        let offsetY = 0;
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            initializeUpload();
+            initializeCanvas();
+            loadColorHistory();
+        });
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Initialize upload functionality
+        function initializeUpload() {
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            
+            // Drag and drop handlers
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    loadImage(files[0]);
+                }
+            });
+            
+            // File input handler
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    loadImage(e.target.files[0]);
+                }
+            });
+        }
+        
+        // Initialize canvas
+        function initializeCanvas() {
+            canvas = document.getElementById('imageCanvas');
+            ctx = canvas.getContext('2d');
+            
+            // Canvas click handler
+            canvas.addEventListener('click', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const x = (e.clientX - rect.left - offsetX) / zoomLevel;
+                const y = (e.clientY - rect.top - offsetY) / zoomLevel;
+                
+                if (x >= 0 && y >= 0 && x < currentImage.width && y < currentImage.height) {
+                    extractColor(Math.floor(x), Math.floor(y));
+                }
+            });
+            
+            // Mouse move for crosshair
+            canvas.addEventListener('mousemove', (e) => {
+                const crosshair = document.getElementById('crosshair');
+                const rect = canvas.getBoundingClientRect();
+                
+                crosshair.style.left = (e.clientX - rect.left) + 'px';
+                crosshair.style.top = (e.clientY - rect.top) + 'px';
+                crosshair.classList.remove('hidden');
+            });
+            
+            canvas.addEventListener('mouseleave', () => {
+                document.getElementById('crosshair').classList.add('hidden');
+            });
+            
+            // Zoom controls
+            document.getElementById('zoomIn').addEventListener('click', () => {
+                zoomLevel = Math.min(zoomLevel * 1.5, 10);
+                updateCanvasZoom();
+            });
+            
+            document.getElementById('zoomOut').addEventListener('click', () => {
+                zoomLevel = Math.max(zoomLevel / 1.5, 0.1);
+                updateCanvasZoom();
+            });
+            
+            document.getElementById('zoomReset').addEventListener('click', () => {
+                zoomLevel = 1;
+                offsetX = 0;
+                offsetY = 0;
+                updateCanvasZoom();
+            });
+            
+            // Pan functionality
+            canvas.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                lastX = e.clientX;
+                lastY = e.clientY;
+                canvas.style.cursor = 'grabbing';
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    const deltaX = e.clientX - lastX;
+                    const deltaY = e.clientY - lastY;
+                    
+                    offsetX += deltaX;
+                    offsetY += deltaY;
+                    
+                    updateCanvasTransform();
+                    
+                    lastX = e.clientX;
+                    lastY = e.clientY;
+                }
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                canvas.style.cursor = 'crosshair';
+            });
+        }
+        
+        // Load image
+        function loadImage(file) {
+            if (!file.type.startsWith('image/')) {
+                alert('Please select a valid image file.');
+                return;
+            }
+            
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File size must be less than 10MB.');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    currentImage = img;
+                    displayImage();
+                    showPickerInterface();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Display image on canvas
+        function displayImage() {
+            const maxWidth = 800;
+            const maxHeight = 600;
+            
+            let { width, height } = currentImage;
+            
+            // Scale image to fit container
+            const ratio = Math.min(maxWidth / width, maxHeight / height);
+            width *= ratio;
+            height *= ratio;
+            
+            canvas.width = width;
+            canvas.height = height;
+            
+            ctx.drawImage(currentImage, 0, 0, width, height);
+            
+            // Reset zoom and pan
+            zoomLevel = 1;
+            offsetX = 0;
+            offsetY = 0;
+            updateCanvasZoom();
+        }
+        
+        // Show picker interface
+        function showPickerInterface() {
+            document.getElementById('uploadSection').style.display = 'none';
+            document.getElementById('pickerInterface').classList.remove('hidden');
+            document.getElementById('pickerInterface').classList.add('fade-in');
+        }
+        
+        // Update canvas zoom
+        function updateCanvasZoom() {
+            document.getElementById('zoomLevel').textContent = Math.round(zoomLevel * 100) + '%';
+            updateCanvasTransform();
+        }
+        
+        // Update canvas transform
+        function updateCanvasTransform() {
+            canvas.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${zoomLevel})`;
+            canvas.style.transformOrigin = '0 0';
+        }
+        
+        // Extract color from coordinates
+        function extractColor(x, y) {
+            // Draw original image at 1:1 scale to get accurate pixel data
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            
+            tempCanvas.width = currentImage.width;
+            tempCanvas.height = currentImage.height;
+            tempCtx.drawImage(currentImage, 0, 0);
+            
+            const imageData = tempCtx.getImageData(x, y, 1, 1);
+            const [r, g, b] = imageData.data;
+            
+            updateColorDisplay(r, g, b);
+        }
+        
+        // Update color display
+        function updateColorDisplay(r, g, b) {
+            const hex = rgbToHex(r, g, b);
+            const rgb = `rgb(${r}, ${g}, ${b})`;
+            const hsl = rgbToHsl(r, g, b);
+            
+            // Update color display
+            const colorDisplay = document.getElementById('colorDisplay');
+            colorDisplay.style.backgroundColor = rgb;
+            
+            // Update input values
+            document.getElementById('hexValue').value = hex;
+            document.getElementById('rgbValue').value = rgb;
+            document.getElementById('hslValue').value = hsl;
+            
+            // Update color analysis
+            updateColorAnalysis(r, g, b);
+        }
+        
+        // Update color analysis
+        function updateColorAnalysis(r, g, b) {
+            const [h, s, l] = rgbToHslValues(r, g, b);
+            
+            document.getElementById('brightness').textContent = Math.round(l) + '%';
+            document.getElementById('saturation').textContent = Math.round(s) + '%';
+            document.getElementById('hue').textContent = Math.round(h) + '°';
+        }
+        
+        // Color conversion functions
+        function rgbToHex(r, g, b) {
+            return '#' + [r, g, b].map(x => {
+                const hex = x.toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            }).join('');
+        }
+        
+        function rgbToHsl(r, g, b) {
+            const [h, s, l] = rgbToHslValues(r, g, b);
+            return `hsl(${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l)}%)`;
+        }
+        
+        function rgbToHslValues(r, g, b) {
+            r /= 255;
+            g /= 255;
+            b /= 255;
+            
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+            
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+            
+            return [h * 360, s * 100, l * 100];
+        }
+        
+        // Copy color functions
+        function copyColor(format) {
+            let value;
+            switch (format) {
+                case 'hex':
+                    value = document.getElementById('hexValue').value;
+                    break;
+                case 'rgb':
+                    value = document.getElementById('rgbValue').value;
+                    break;
+                case 'hsl':
+                    value = document.getElementById('hslValue').value;
+                    break;
+            }
+            
+            navigator.clipboard.writeText(value).then(() => {
+                showNotification(`${format.toUpperCase()} copied to clipboard!`);
+            });
+        }
+        
+        function copyAllFormats() {
+            const hex = document.getElementById('hexValue').value;
+            const rgb = document.getElementById('rgbValue').value;
+            const hsl = document.getElementById('hslValue').value;
+            
+            const allFormats = `HEX: ${hex}\nRGB: ${rgb}\nHSL: ${hsl}`;
+            
+            navigator.clipboard.writeText(allFormats).then(() => {
+                showNotification('All color formats copied to clipboard!');
+            });
+        }
+        
+        // Save color to history
+        function saveColor() {
+            const hex = document.getElementById('hexValue').value;
+            const rgb = document.getElementById('rgbValue').value;
+            const hsl = document.getElementById('hslValue').value;
+            
+            const colorData = {
+                hex,
+                rgb,
+                hsl,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Add to beginning of array and limit to 20 colors
+            colorHistory.unshift(colorData);
+            colorHistory = colorHistory.slice(0, 20);
+            
+            localStorage.setItem('colorHistory', JSON.stringify(colorHistory));
+            renderColorHistory();
+            showNotification('Color saved to history!');
+        }
+        
+        // Load color history
+        function loadColorHistory() {
+            renderColorHistory();
+        }
+        
+        // Render color history
+        function renderColorHistory() {
+            const historyContainer = document.getElementById('colorHistory');
+            const emptyState = document.getElementById('emptyHistory');
+            
+            if (colorHistory.length === 0) {
+                emptyState.style.display = 'block';
+                historyContainer.style.display = 'none';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            historyContainer.style.display = 'grid';
+            historyContainer.innerHTML = '';
+            
+            colorHistory.forEach((color, index) => {
+                const colorDiv = document.createElement('div');
+                colorDiv.className = 'history-color fade-in';
+                colorDiv.style.backgroundColor = color.rgb;
+                colorDiv.title = `${color.hex} - Click to use`;
+                
+                colorDiv.addEventListener('click', () => {
+                    document.getElementById('hexValue').value = color.hex;
+                    document.getElementById('rgbValue').value = color.rgb;
+                    document.getElementById('hslValue').value = color.hsl;
+                    document.getElementById('colorDisplay').style.backgroundColor = color.rgb;
+                    
+                    showNotification('Color loaded from history!');
+                });
+                
+                historyContainer.appendChild(colorDiv);
+            });
+        }
+        
+        // Clear history
+        function clearHistory() {
+            if (confirm('Are you sure you want to clear all color history?')) {
+                colorHistory = [];
+                localStorage.removeItem('colorHistory');
+                renderColorHistory();
+                showNotification('Color history cleared!');
+            }
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-24 right-6 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 fade-in';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
