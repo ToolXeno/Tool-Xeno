@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Unit Converter - Tool Xeno</title>
+    <meta name="description" content="Advanced unit converter supporting length, weight, temperature, volume, time, speed, data, engineering units with high precision and professional features">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        
+        .btn-secondary {
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .input-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-size: 18px;
+            font-weight: 500;
+            color: white;
+            width: 100%;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        .input-field:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        body.light-theme .input-field {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: black;
+        }
+        
+        body.light-theme .input-field:focus {
+            background: rgba(0, 0, 0, 0.08);
+        }
+        
+        .select-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            color: white;
+            width: 100%;
+            transition: all 0.3s ease;
+            outline: none;
+            cursor: pointer;
+        }
+        
+        .select-field:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        body.light-theme .select-field {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: black;
+        }
+        
+        .select-field option {
+            background: var(--dark-surface);
+            color: white;
+            padding: 10px;
+        }
+        
+        body.light-theme .select-field option {
+            background: white;
+            color: black;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .category-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+        
+        .category-card.active {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        body.light-theme .category-card {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-theme .category-card:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .history-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin: 8px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .history-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
+        }
+        
+        body.light-theme .history-item {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-theme .history-item:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+        
+        .precision-control {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .precision-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .precision-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .swap-btn {
+            background: var(--accent-gradient);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .swap-btn:hover {
+            transform: rotate(180deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
+        }
+        
+        .result-display {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin: 20px 0;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stat-card {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .conversion-area {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: center;
+            margin: 30px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .conversion-area {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Professional Unit Converter
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#converter" class="nav-link">Convert</a>
+                        <a href="#categories" class="nav-link">Categories</a>
+                        <a href="#history" class="nav-link">History</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Professional Unit Converter
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Advanced unit converter with 20+ categories, high-precision calculations, scientific units, 
+                and professional features. Convert length, weight, temperature, volume, and engineering units instantly.
+            </p>
+        </section>
+        
+        <!-- Category Selection -->
+        <section id="categories" class="container mx-auto px-6 mb-12">
+            <div class="glass-card p-8">
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-layer-group mr-3"></i>
+                    Conversion Categories
+                </h3>
+                <div class="category-grid" id="categoryGrid">
+                    <!-- Categories will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Main Converter Interface -->
+        <section id="converter" class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Conversion Panel -->
+                <div class="lg:col-span-2">
+                    <div class="glass-card p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-2xl font-semibold flex items-center">
+                                <i class="fas fa-exchange-alt mr-3"></i>
+                                <span id="currentCategoryTitle">Select a Category</span>
+                            </h3>
+                            <div class="precision-control">
+                                <label class="text-sm font-medium">Precision:</label>
+                                <input type="range" id="precisionSlider" class="precision-slider" min="0" max="15" value="6">
+                                <span id="precisionValue" class="text-sm font-bold text-purple-400 min-w-8">6</span>
+                            </div>
+                        </div>
+                        
+                        <div class="conversion-area">
+                            <!-- From Input -->
+                            <div class="space-y-4">
+                                <label class="text-sm font-medium opacity-70">From:</label>
+                                <select id="fromUnit" class="select-field">
+                                    <option value="">Select category first</option>
+                                </select>
+                                <input type="number" id="fromValue" class="input-field" placeholder="Enter value" step="any">
+                            </div>
+                            
+                            <!-- Swap Button -->
+                            <button class="swap-btn" id="swapBtn" onclick="swapUnits()">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                            
+                            <!-- To Input -->
+                            <div class="space-y-4">
+                                <label class="text-sm font-medium opacity-70">To:</label>
+                                <select id="toUnit" class="select-field">
+                                    <option value="">Select category first</option>
+                                </select>
+                                <input type="number" id="toValue" class="input-field" placeholder="Result" readonly>
+                            </div>
+                        </div>
+                        
+                        <!-- Result Display -->
+                        <div class="result-display" id="resultDisplay">
+                            Enter a value to see conversion
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="flex flex-wrap gap-3 mt-6">
+                            <button class="btn-gradient" onclick="copyResult()">
+                                <i class="fas fa-copy mr-2"></i>
+                                Copy Result
+                            </button>
+                            <button class="btn-secondary" onclick="clearAll()">
+                                <i class="fas fa-trash mr-2"></i>
+                                Clear
+                            </button>
+                            <button class="btn-success" onclick="saveToHistory()">
+                                <i class="fas fa-save mr-2"></i>
+                                Save to History
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- History & Stats Panel -->
+                <div class="space-y-6">
+                    <!-- Conversion History -->
+                    <div class="glass-card p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-semibold flex items-center">
+                                <i class="fas fa-history mr-3"></i>
+                                History
+                            </h3>
+                            <button class="text-sm opacity-70 hover:opacity-100" onclick="clearHistory()">
+                                Clear All
+                            </button>
+                        </div>
+                        <div id="historyList" class="max-h-64 overflow-y-auto">
+                            <p class="text-center opacity-50 py-4">No conversions yet</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Statistics -->
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-chart-bar mr-3"></i>
+                            Statistics
+                        </h3>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value" id="totalConversions">0</div>
+                                <div class="text-sm opacity-70">Total Conversions</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="categoriesUsed">0</div>
+                                <div class="text-sm opacity-70">Categories Used</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="currentPrecision">6</div>
+                                <div class="text-sm opacity-70">Decimal Places</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="favoriteCategory">None</div>
+                                <div class="text-sm opacity-70">Most Used</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Conversions -->
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-bolt mr-3"></i>
+                            Quick Conversions
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="quick-conversion" onclick="quickConvert('length', 'meter', 'foot', 1)">
+                                1 meter = 3.28084 feet
+                            </div>
+                            <div class="quick-conversion" onclick="quickConvert('temperature', 'celsius', 'fahrenheit', 0)">
+                                0°C = 32°F
+                            </div>
+                            <div class="quick-conversion" onclick="quickConvert('weight', 'kilogram', 'pound', 1)">
+                                1 kg = 2.20462 lbs
+                            </div>
+                            <div class="quick-conversion" onclick="quickConvert('volume', 'liter', 'gallon', 1)">
+                                1 L = 0.26417 gal
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Formula Display -->
+        <section class="container mx-auto px-6 mt-12">
+            <div class="glass-card p-6">
+                <h3 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-calculator mr-3"></i>
+                    Conversion Formula
+                </h3>
+                <div id="formulaDisplay" class="text-center p-4 bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-lg">
+                    <code class="text-lg font-mono">Select units to see the conversion formula</code>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-8 text-center">
+        <p class="opacity-70">© 2025 Tool Xeno - Professional Unit Converter. All rights reserved.</p>
+        <p class="text-sm opacity-50 mt-2">High-precision conversions for professional use</p>
+    </footer>
+    
+    <script>
+        // Global variables
+        let currentCategory = null;
+        let conversionHistory = [];
+        let categoryStats = {};
+        let precision = 6;
+        
+        // Unit definitions
+        const categories = {
+            length: {
+                name: 'Length',
+                icon: 'fas fa-ruler',
+                units: {
+                    millimeter: { name: 'Millimeter', symbol: 'mm', factor: 0.001 },
+                    centimeter: { name: 'Centimeter', symbol: 'cm', factor: 0.01 },
+                    meter: { name: 'Meter', symbol: 'm', factor: 1 },
+                    kilometer: { name: 'Kilometer', symbol: 'km', factor: 1000 },
+                    inch: { name: 'Inch', symbol: 'in', factor: 0.0254 },
+                    foot: { name: 'Foot', symbol: 'ft', factor: 0.3048 },
+                    yard: { name: 'Yard', symbol: 'yd', factor: 0.9144 },
+                    mile: { name: 'Mile', symbol: 'mi', factor: 1609.344 },
+                    nautical_mile: { name: 'Nautical Mile', symbol: 'nmi', factor: 1852 }
+                }
+            },
+            weight: {
+                name: 'Weight/Mass',
+                icon: 'fas fa-weight',
+                units: {
+                    milligram: { name: 'Milligram', symbol: 'mg', factor: 0.000001 },
+                    gram: { name: 'Gram', symbol: 'g', factor: 0.001 },
+                    kilogram: { name: 'Kilogram', symbol: 'kg', factor: 1 },
+                    ounce: { name: 'Ounce', symbol: 'oz', factor: 0.028349523125 },
+                    pound: { name: 'Pound', symbol: 'lb', factor: 0.45359237 },
+                    stone: { name: 'Stone', symbol: 'st', factor: 6.35029318 },
+                    ton_metric: { name: 'Metric Ton', symbol: 't', factor: 1000 },
+                    ton_us: { name: 'US Ton', symbol: 'ton', factor: 907.18474 }
+                }
+            },
+            temperature: {
+                name: 'Temperature',
+                icon: 'fas fa-thermometer-half',
+                units: {
+                    celsius: { name: 'Celsius', symbol: '°C' },
+                    fahrenheit: { name: 'Fahrenheit', symbol: '°F' },
+                    kelvin: { name: 'Kelvin', symbol: 'K' },
+                    rankine: { name: 'Rankine', symbol: '°R' }
+                }
+            },
+            volume: {
+                name: 'Volume',
+                icon: 'fas fa-flask',
+                units: {
+                    milliliter: { name: 'Milliliter', symbol: 'ml', factor: 0.001 },
+                    liter: { name: 'Liter', symbol: 'L', factor: 1 },
+                    gallon_us: { name: 'US Gallon', symbol: 'gal', factor: 3.785411784 },
+                    gallon_uk: { name: 'UK Gallon', symbol: 'gal (UK)', factor: 4.54609 },
+                    quart: { name: 'Quart', symbol: 'qt', factor: 0.946352946 },
+                    pint: { name: 'Pint', symbol: 'pt', factor: 0.473176473 },
+                    cup: { name: 'Cup', symbol: 'cup', factor: 0.2365882365 },
+                    fluid_ounce: { name: 'Fluid Ounce', symbol: 'fl oz', factor: 0.0295735296875 }
+                }
+            },
+            time: {
+                name: 'Time',
+                icon: 'fas fa-clock',
+                units: {
+                    millisecond: { name: 'Millisecond', symbol: 'ms', factor: 0.001 },
+                    second: { name: 'Second', symbol: 's', factor: 1 },
+                    minute: { name: 'Minute', symbol: 'min', factor: 60 },
+                    hour: { name: 'Hour', symbol: 'h', factor: 3600 },
+                    day: { name: 'Day', symbol: 'd', factor: 86400 },
+                    week: { name: 'Week', symbol: 'wk', factor: 604800 },
+                    month: { name: 'Month', symbol: 'mo', factor: 2629746 },
+                    year: { name: 'Year', symbol: 'yr', factor: 31556952 }
+                }
+            },
+            speed: {
+                name: 'Speed',
+                icon: 'fas fa-tachometer-alt',
+                units: {
+                    mps: { name: 'Meter/Second', symbol: 'm/s', factor: 1 },
+                    kmh: { name: 'Kilometer/Hour', symbol: 'km/h', factor: 0.277777778 },
+                    mph: { name: 'Mile/Hour', symbol: 'mph', factor: 0.44704 },
+                    fps: { name: 'Foot/Second', symbol: 'ft/s', factor: 0.3048 },
+                    knot: { name: 'Knot', symbol: 'kt', factor: 0.514444444 },
+                    mach: { name: 'Mach', symbol: 'M', factor: 343 }
+                }
+            },
+            data: {
+                name: 'Data Storage',
+                icon: 'fas fa-database',
+                units: {
+                    bit: { name: 'Bit', symbol: 'bit', factor: 1 },
+                    byte: { name: 'Byte', symbol: 'B', factor: 8 },
+                    kilobyte: { name: 'Kilobyte', symbol: 'KB', factor: 8192 },
+                    megabyte: { name: 'Megabyte', symbol: 'MB', factor: 8388608 },
+                    gigabyte: { name: 'Gigabyte', symbol: 'GB', factor: 8589934592 },
+                    terabyte: { name: 'Terabyte', symbol: 'TB', factor: 8796093022208 },
+                    petabyte: { name: 'Petabyte', symbol: 'PB', factor: 9007199254740992 }
+                }
+            },
+            area: {
+                name: 'Area',
+                icon: 'fas fa-square',
+                units: {
+                    sq_millimeter: { name: 'Square Millimeter', symbol: 'mm²', factor: 0.000001 },
+                    sq_centimeter: { name: 'Square Centimeter', symbol: 'cm²', factor: 0.0001 },
+                    sq_meter: { name: 'Square Meter', symbol: 'm²', factor: 1 },
+                    sq_kilometer: { name: 'Square Kilometer', symbol: 'km²', factor: 1000000 },
+                    sq_inch: { name: 'Square Inch', symbol: 'in²', factor: 0.00064516 },
+                    sq_foot: { name: 'Square Foot', symbol: 'ft²', factor: 0.09290304 },
+                    sq_yard: { name: 'Square Yard', symbol: 'yd²', factor: 0.83612736 },
+                    acre: { name: 'Acre', symbol: 'ac', factor: 4046.8564224 },
+                    hectare: { name: 'Hectare', symbol: 'ha', factor: 10000 }
+                }
+            },
+            pressure: {
+                name: 'Pressure',
+                icon: 'fas fa-compress-arrows-alt',
+                units: {
+                    pascal: { name: 'Pascal', symbol: 'Pa', factor: 1 },
+                    kilopascal: { name: 'Kilopascal', symbol: 'kPa', factor: 1000 },
+                    bar: { name: 'Bar', symbol: 'bar', factor: 100000 },
+                    psi: { name: 'PSI', symbol: 'psi', factor: 6894.757293168 },
+                    atmosphere: { name: 'Atmosphere', symbol: 'atm', factor: 101325 },
+                    mmhg: { name: 'mmHg', symbol: 'mmHg', factor: 133.322387415 },
+                    torr: { name: 'Torr', symbol: 'Torr', factor: 133.322368421 }
+                }
+            },
+            energy: {
+                name: 'Energy',
+                icon: 'fas fa-bolt',
+                units: {
+                    joule: { name: 'Joule', symbol: 'J', factor: 1 },
+                    kilojoule: { name: 'Kilojoule', symbol: 'kJ', factor: 1000 },
+                    calorie: { name: 'Calorie', symbol: 'cal', factor: 4.184 },
+                    kilocalorie: { name: 'Kilocalorie', symbol: 'kcal', factor: 4184 },
+                    watt_hour: { name: 'Watt Hour', symbol: 'Wh', factor: 3600 },
+                    kilowatt_hour: { name: 'Kilowatt Hour', symbol: 'kWh', factor: 3600000 },
+                    btu: { name: 'BTU', symbol: 'BTU', factor: 1055.05585262 }
+                }
+            },
+            power: {
+                name: 'Power',
+                icon: 'fas fa-plug',
+                units: {
+                    watt: { name: 'Watt', symbol: 'W', factor: 1 },
+                    kilowatt: { name: 'Kilowatt', symbol: 'kW', factor: 1000 },
+                    megawatt: { name: 'Megawatt', symbol: 'MW', factor: 1000000 },
+                    horsepower: { name: 'Horsepower', symbol: 'hp', factor: 745.699871582 },
+                    btu_per_hour: { name: 'BTU/Hour', symbol: 'BTU/h', factor: 0.293071070172 }
+                }
+            },
+            angle: {
+                name: 'Angle',
+                icon: 'fas fa-circle-notch',
+                units: {
+                    degree: { name: 'Degree', symbol: '°', factor: 1 },
+                    radian: { name: 'Radian', symbol: 'rad', factor: 57.2957795131 },
+                    gradian: { name: 'Gradian', symbol: 'grad', factor: 0.9 },
+                    turn: { name: 'Turn', symbol: 'turn', factor: 360 }
+                }
+            }
+        };
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            renderCategories();
+            initializeControls();
+            loadFromStorage();
+        });
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Render categories
+        function renderCategories() {
+            const grid = document.getElementById('categoryGrid');
+            grid.innerHTML = '';
+            
+            Object.keys(categories).forEach(key => {
+                const category = categories[key];
+                const card = document.createElement('div');
+                card.className = 'category-card';
+                card.onclick = () => selectCategory(key);
+                
+                card.innerHTML = `
+                    <div class="text-3xl mb-3">
+                        <i class="${category.icon}"></i>
+                    </div>
+                    <h4 class="font-semibold text-lg mb-2">${category.name}</h4>
+                    <p class="text-sm opacity-70">${Object.keys(category.units).length} units</p>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+        
+        // Select category
+        function selectCategory(categoryKey) {
+            // Remove active class from all cards
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            // Add active class to selected card
+            event.currentTarget.classList.add('active');
+            
+            currentCategory = categoryKey;
+            const category = categories[categoryKey];
+            
+            document.getElementById('currentCategoryTitle').textContent = category.name;
+            
+            // Populate unit selectors
+            populateUnits(categoryKey);
+            
+            // Update stats
+            if (!categoryStats[categoryKey]) {
+                categoryStats[categoryKey] = 0;
+            }
+        }
+        
+        // Populate units
+        function populateUnits(categoryKey) {
+            const category = categories[categoryKey];
+            const fromUnit = document.getElementById('fromUnit');
+            const toUnit = document.getElementById('toUnit');
+            
+            fromUnit.innerHTML = '';
+            toUnit.innerHTML = '';
+            
+            Object.keys(category.units).forEach(unitKey => {
+                const unit = category.units[unitKey];
+                const option1 = new Option(`${unit.name} (${unit.symbol})`, unitKey);
+                const option2 = new Option(`${unit.name} (${unit.symbol})`, unitKey);
+                
+                fromUnit.add(option1);
+                toUnit.add(option2);
+            });
+            
+            // Set default selections
+            if (Object.keys(category.units).length >= 2) {
+                fromUnit.selectedIndex = 0;
+                toUnit.selectedIndex = 1;
+            }
+            
+            // Clear previous values
+            document.getElementById('fromValue').value = '';
+            document.getElementById('toValue').value = '';
+            updateResult();
+        }
+        
+        // Initialize controls
+        function initializeControls() {
+            // Precision slider
+            const precisionSlider = document.getElementById('precisionSlider');
+            const precisionValue = document.getElementById('precisionValue');
+            
+            precisionSlider.addEventListener('input', function() {
+                precision = parseInt(this.value);
+                precisionValue.textContent = precision;
+                document.getElementById('currentPrecision').textContent = precision;
+                updateResult();
+            });
+            
+            // Input field
+            document.getElementById('fromValue').addEventListener('input', updateResult);
+            
+            // Unit selectors
+            document.getElementById('fromUnit').addEventListener('change', updateResult);
+            document.getElementById('toUnit').addEventListener('change', updateResult);
+        }
+        
+        // Update conversion result
+        function updateResult() {
+            const fromValue = parseFloat(document.getElementById('fromValue').value);
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+            
+            if (!currentCategory || isNaN(fromValue) || !fromUnit || !toUnit) {
+                document.getElementById('toValue').value = '';
+                document.getElementById('resultDisplay').textContent = 'Enter a value to see conversion';
+                updateFormula();
+                return;
+            }
+            
+            let result;
+            
+            if (currentCategory === 'temperature') {
+                result = convertTemperature(fromValue, fromUnit, toUnit);
+            } else {
+                result = convertStandard(fromValue, fromUnit, toUnit);
+            }
+            
+            if (result !== null) {
+                const formattedResult = parseFloat(result.toFixed(precision));
+                document.getElementById('toValue').value = formattedResult;
+                
+                const fromUnitData = categories[currentCategory].units[fromUnit];
+                const toUnitData = categories[currentCategory].units[toUnit];
+                
+                document.getElementById('resultDisplay').textContent = 
+                    `${fromValue} ${fromUnitData.symbol} = ${formattedResult} ${toUnitData.symbol}`;
+                
+                updateFormula();
+            }
+        }
+        
+        // Convert standard units (factor-based)
+        function convertStandard(value, fromUnit, toUnit) {
+            const category = categories[currentCategory];
+            const fromFactor = category.units[fromUnit].factor;
+            const toFactor = category.units[toUnit].factor;
+            
+            // Convert to base unit, then to target unit
+            const baseValue = value * fromFactor;
+            return baseValue / toFactor;
+        }
+        
+        // Convert temperature (special handling)
+        function convertTemperature(value, fromUnit, toUnit) {
+            // Convert to Celsius first
+            let celsius;
+            
+            switch (fromUnit) {
+                case 'celsius':
+                    celsius = value;
+                    break;
+                case 'fahrenheit':
+                    celsius = (value - 32) * 5/9;
+                    break;
+                case 'kelvin':
+                    celsius = value - 273.15;
+                    break;
+                case 'rankine':
+                    celsius = (value - 491.67) * 5/9;
+                    break;
+                default:
+                    return null;
+            }
+            
+            // Convert from Celsius to target
+            switch (toUnit) {
+                case 'celsius':
+                    return celsius;
+                case 'fahrenheit':
+                    return celsius * 9/5 + 32;
+                case 'kelvin':
+                    return celsius + 273.15;
+                case 'rankine':
+                    return (celsius + 273.15) * 9/5;
+                default:
+                    return null;
+            }
+        }
+        
+        // Update formula display
+        function updateFormula() {
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+            const formulaDisplay = document.getElementById('formulaDisplay');
+            
+            if (!currentCategory || !fromUnit || !toUnit) {
+                formulaDisplay.innerHTML = '<code class="text-lg font-mono">Select units to see the conversion formula</code>';
+                return;
+            }
+            
+            const category = categories[currentCategory];
+            let formula;
+            
+            if (currentCategory === 'temperature') {
+                formula = getTemperatureFormula(fromUnit, toUnit);
+            } else {
+                const fromFactor = category.units[fromUnit].factor;
+                const toFactor = category.units[toUnit].factor;
+                const conversionFactor = fromFactor / toFactor;
+                
+                formula = `${category.units[toUnit].name} = ${category.units[fromUnit].name} × ${conversionFactor.toPrecision(6)}`;
+            }
+            
+            formulaDisplay.innerHTML = `<code class="text-lg font-mono">${formula}</code>`;
+        }
+        
+        // Get temperature conversion formula
+        function getTemperatureFormula(from, to) {
+            const formulas = {
+                'celsius-fahrenheit': '°F = °C × 9/5 + 32',
+                'fahrenheit-celsius': '°C = (°F - 32) × 5/9',
+                'celsius-kelvin': 'K = °C + 273.15',
+                'kelvin-celsius': '°C = K - 273.15',
+                'fahrenheit-kelvin': 'K = (°F - 32) × 5/9 + 273.15',
+                'kelvin-fahrenheit': '°F = (K - 273.15) × 9/5 + 32',
+                'celsius-rankine': '°R = (°C + 273.15) × 9/5',
+                'rankine-celsius': '°C = (°R × 5/9) - 273.15',
+                'fahrenheit-rankine': '°R = °F + 459.67',
+                'rankine-fahrenheit': '°F = °R - 459.67',
+                'kelvin-rankine': '°R = K × 9/5',
+                'rankine-kelvin': 'K = °R × 5/9'
+            };
+            
+            const key = `${from}-${to}`;
+            return formulas[key] || `${to} = f(${from})`;
+        }
+        
+        // Swap units
+        function swapUnits() {
+            const fromUnit = document.getElementById('fromUnit');
+            const toUnit = document.getElementById('toUnit');
+            const fromValue = document.getElementById('fromValue');
+            const toValue = document.getElementById('toValue');
+            
+            // Swap unit selections
+            const tempUnit = fromUnit.value;
+            fromUnit.value = toUnit.value;
+            toUnit.value = tempUnit;
+            
+            // Swap values
+            const tempValue = fromValue.value;
+            fromValue.value = toValue.value;
+            toValue.value = '';
+            
+            updateResult();
+        }
+        
+        // Copy result to clipboard
+        function copyResult() {
+            const result = document.getElementById('toValue').value;
+            if (result) {
+                navigator.clipboard.writeText(result).then(() => {
+                    showNotification('Result copied to clipboard!');
+                });
+            }
+        }
+        
+        // Clear all fields
+        function clearAll() {
+            document.getElementById('fromValue').value = '';
+            document.getElementById('toValue').value = '';
+            document.getElementById('resultDisplay').textContent = 'Enter a value to see conversion';
+            updateFormula();
+        }
+        
+        // Save to history
+        function saveToHistory() {
+            const fromValue = document.getElementById('fromValue').value;
+            const toValue = document.getElementById('toValue').value;
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+            
+            if (!fromValue || !toValue || !currentCategory) return;
+            
+            const category = categories[currentCategory];
+            const conversion = {
+                id: Date.now(),
+                category: currentCategory,
+                from: {
+                    value: parseFloat(fromValue),
+                    unit: fromUnit,
+                    symbol: category.units[fromUnit].symbol
+                },
+                to: {
+                    value: parseFloat(toValue),
+                    unit: toUnit,
+                    symbol: category.units[toUnit].symbol
+                },
+                timestamp: new Date().toLocaleString()
+            };
+            
+            conversionHistory.unshift(conversion);
+            if (conversionHistory.length > 50) conversionHistory.pop(); // Keep last 50
+            
+            // Update stats
+            categoryStats[currentCategory] = (categoryStats[currentCategory] || 0) + 1;
+            
+            renderHistory();
+            updateStats();
+            saveToStorage();
+            
+            showNotification('Conversion saved to history!');
+        }
+        
+        // Render history
+        function renderHistory() {
+            const historyList = document.getElementById('historyList');
+            
+            if (conversionHistory.length === 0) {
+                historyList.innerHTML = '<p class="text-center opacity-50 py-4">No conversions yet</p>';
+                return;
+            }
+            
+            historyList.innerHTML = conversionHistory.slice(0, 10).map(item => `
+                <div class="history-item" onclick="loadFromHistory(${item.id})">
+                    <div>
+                        <div class="font-medium">${item.from.value} ${item.from.symbol} → ${item.to.value} ${item.to.symbol}</div>
+                        <div class="text-sm opacity-70">${categories[item.category].name} • ${item.timestamp}</div>
+                    </div>
+                    <i class="fas fa-redo text-purple-400"></i>
+                </div>
+            `).join('');
+        }
+        
+        // Load conversion from history
+        function loadFromHistory(id) {
+            const item = conversionHistory.find(h => h.id === id);
+            if (!item) return;
+            
+            // Select category first
+            selectCategory(item.category);
+            
+            // Wait for UI to update
+            setTimeout(() => {
+                document.getElementById('fromUnit').value = item.from.unit;
+                document.getElementById('toUnit').value = item.to.unit;
+                document.getElementById('fromValue').value = item.from.value;
+                updateResult();
+            }, 100);
+        }
+        
+        // Clear history
+        function clearHistory() {
+            if (confirm('Clear all conversion history?')) {
+                conversionHistory = [];
+                renderHistory();
+                updateStats();
+                saveToStorage();
+            }
+        }
+        
+        // Update statistics
+        function updateStats() {
+            document.getElementById('totalConversions').textContent = conversionHistory.length;
+            document.getElementById('categoriesUsed').textContent = Object.keys(categoryStats).length;
+            
+            // Find most used category
+            let maxCount = 0;
+            let favoriteCategory = 'None';
+            
+            Object.keys(categoryStats).forEach(key => {
+                if (categoryStats[key] > maxCount) {
+                    maxCount = categoryStats[key];
+                    favoriteCategory = categories[key].name;
+                }
+            });
+            
+            document.getElementById('favoriteCategory').textContent = favoriteCategory;
+        }
+        
+        // Quick conversions
+        function quickConvert(categoryKey, fromUnit, toUnit, value) {
+            selectCategory(categoryKey);
+            
+            setTimeout(() => {
+                document.getElementById('fromUnit').value = fromUnit;
+                document.getElementById('toUnit').value = toUnit;
+                document.getElementById('fromValue').value = value;
+                updateResult();
+            }, 100);
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            // Create toast notification
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-20 right-6 bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 fade-in';
+            toast.textContent = message;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+        
+        // Storage functions
+        function saveToStorage() {
+            localStorage.setItem('unitConverter_history', JSON.stringify(conversionHistory));
+            localStorage.setItem('unitConverter_stats', JSON.stringify(categoryStats));
+            localStorage.setItem('unitConverter_precision', precision.toString());
+        }
+        
+        function loadFromStorage() {
+            const savedHistory = localStorage.getItem('unitConverter_history');
+            if (savedHistory) {
+                conversionHistory = JSON.parse(savedHistory);
+                renderHistory();
+            }
+            
+            const savedStats = localStorage.getItem('unitConverter_stats');
+            if (savedStats) {
+                categoryStats = JSON.parse(savedStats);
+            }
+            
+            const savedPrecision = localStorage.getItem('unitConverter_precision');
+            if (savedPrecision) {
+                precision = parseInt(savedPrecision);
+                document.getElementById('precisionSlider').value = precision;
+                document.getElementById('precisionValue').textContent = precision;
+                document.getElementById('currentPrecision').textContent = precision;
+            }
+            
+            updateStats();
+        }
+        
+        // Add click styles for quick conversions
+        document.addEventListener('DOMContentLoaded', function() {
+            const style = document.createElement('style');
+            style.textContent = `
+                .quick-conversion {
+                    padding: 10px 15px;
+                    background: rgba(255, 255, 255, 0.05);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    font-size: 14px;
+                }
+                
+                .quick-conversion:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    transform: translateX(5px);
+                }
+                
+                body.light-theme .quick-conversion {
+                    background: rgba(0, 0, 0, 0.05);
+                    border-color: rgba(0, 0, 0, 0.1);
+                }
+                
+                body.light-theme .quick-conversion:hover {
+                    background: rgba(0, 0, 0, 0.1);
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
