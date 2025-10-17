@@ -244,6 +244,12 @@
             overflow: hidden;
         }
 
+        .qr-preview canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
         .format-selector {
             display: flex;
             gap: 10px;
@@ -338,6 +344,7 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .logo-upload-area:hover {
@@ -350,6 +357,7 @@
             max-height: 100px;
             border-radius: 10px;
             margin: 10px auto;
+            display: block;
         }
 
         .size-slider {
@@ -381,6 +389,10 @@
             cursor: pointer;
             border: none;
             box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        body.light-theme .size-slider {
+            background: rgba(0, 0, 0, 0.1);
         }
 
         .fade-in {
@@ -421,6 +433,38 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 5px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: inherit;
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        body.light-theme .input-field {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-theme .input-field:focus {
+            background: rgba(0, 0, 0, 0.08);
+            border-color: #667eea;
+        }
+
+        .hidden {
+            display: none !important;
         }
 
         @media (max-width: 768px) {
@@ -520,26 +564,26 @@
                     <!-- Content Input -->
                     <div class="mb-6" id="contentInput">
                         <label class="block text-sm font-medium mb-3">Content</label>
-                        <input type="text" id="urlInput" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="https://example.com" value="https://toolxeno.com">
-                        <textarea id="textInput" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none hidden" rows="3" placeholder="Enter your text here"></textarea>
+                        <input type="text" id="urlInput" class="input-field" placeholder="https://example.com" value="https://toolxeno.com">
+                        <textarea id="textInput" class="input-field hidden" rows="3" placeholder="Enter your text here"></textarea>
                         
                         <!-- Email Fields -->
                         <div id="emailInputs" class="hidden space-y-3">
-                            <input type="email" id="emailTo" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="Email address">
-                            <input type="text" id="emailSubject" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="Subject">
-                            <textarea id="emailBody" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none" rows="3" placeholder="Message"></textarea>
+                            <input type="email" id="emailTo" class="input-field" placeholder="Email address">
+                            <input type="text" id="emailSubject" class="input-field" placeholder="Subject">
+                            <textarea id="emailBody" class="input-field" rows="3" placeholder="Message"></textarea>
                         </div>
                         
                         <!-- Phone Fields -->
                         <div id="phoneInputs" class="hidden">
-                            <input type="tel" id="phoneNumber" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="+1234567890">
+                            <input type="tel" id="phoneNumber" class="input-field" placeholder="+1234567890">
                         </div>
                         
                         <!-- WiFi Fields -->
                         <div id="wifiInputs" class="hidden space-y-3">
-                            <input type="text" id="wifiSSID" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="Network Name (SSID)">
-                            <input type="password" id="wifiPassword" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="Password">
-                            <select id="wifiSecurity" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none">
+                            <input type="text" id="wifiSSID" class="input-field" placeholder="Network Name (SSID)">
+                            <input type="password" id="wifiPassword" class="input-field" placeholder="Password">
+                            <select id="wifiSecurity" class="input-field">
                                 <option value="WPA">WPA/WPA2</option>
                                 <option value="WEP">WEP</option>
                                 <option value="nopass">No Password</option>
@@ -548,11 +592,11 @@
                         
                         <!-- vCard Fields -->
                         <div id="vcardInputs" class="hidden space-y-3">
-                            <input type="text" id="vcardName" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="Full Name">
-                            <input type="text" id="vcardOrg" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="Organization">
-                            <input type="tel" id="vcardPhone" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="Phone Number">
-                            <input type="email" id="vcardEmail" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="Email Address">
-                            <input type="url" id="vcardUrl" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="Website">
+                            <input type="text" id="vcardName" class="input-field" placeholder="Full Name">
+                            <input type="text" id="vcardOrg" class="input-field" placeholder="Organization">
+                            <input type="tel" id="vcardPhone" class="input-field" placeholder="Phone Number">
+                            <input type="email" id="vcardEmail" class="input-field" placeholder="Email Address">
+                            <input type="url" id="vcardUrl" class="input-field" placeholder="Website">
                         </div>
                     </div>
                     
@@ -565,14 +609,14 @@
                                 <label class="block text-xs opacity-70 mb-2">Foreground Color</label>
                                 <div class="color-picker-wrapper">
                                     <input type="color" id="foregroundColor" class="color-picker" value="#000000">
-                                    <span class="text-sm">#000000</span>
+                                    <span class="text-sm" id="fgColorValue">#000000</span>
                                 </div>
                             </div>
                             <div>
                                 <label class="block text-xs opacity-70 mb-2">Background Color</label>
                                 <div class="color-picker-wrapper">
                                     <input type="color" id="backgroundColor" class="color-picker" value="#ffffff">
-                                    <span class="text-sm">#ffffff</span>
+                                    <span class="text-sm" id="bgColorValue">#ffffff</span>
                                 </div>
                             </div>
                         </div>
@@ -589,7 +633,7 @@
                         <!-- Error Correction Level -->
                         <div class="mb-4">
                             <label class="block text-sm font-medium mb-3">Error Correction Level</label>
-                            <select id="errorCorrection" class="w-full p-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none">
+                            <select id="errorCorrection" class="input-field">
                                 <option value="L">Low (7%)</option>
                                 <option value="M" selected>Medium (15%)</option>
                                 <option value="Q">Quartile (25%)</option>
@@ -601,7 +645,7 @@
                     <!-- Logo Upload -->
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-3">Logo (Optional)</label>
-                        <div class="logo-upload-area" id="logoUploadArea" onclick="document.getElementById('logoInput').click()">
+                        <div class="logo-upload-area" id="logoUploadArea">
                             <div id="logoPlaceholder">
                                 <i class="fas fa-image text-3xl mb-2 opacity-50"></i>
                                 <p class="text-sm opacity-70">Click to upload logo</p>
@@ -609,15 +653,15 @@
                             </div>
                             <div id="logoPreview" class="hidden">
                                 <img id="logoImage" class="logo-preview" alt="Logo Preview">
-                                <button type="button" onclick="removeLogo()" class="mt-2 text-red-400 hover:text-red-300 text-sm">
+                                <button type="button" id="removeLogo" class="mt-2 text-red-400 hover:text-red-300 text-sm">
                                     <i class="fas fa-trash mr-1"></i>Remove Logo
                                 </button>
                             </div>
-                            <input type="file" id="logoInput" accept="image/*" style="display: none;">
                         </div>
+                        <input type="file" id="logoInput" accept="image/*" class="hidden">
                         
                         <!-- Logo Size Control -->
-                        <div class="mt-4" id="logoSizeControl" style="display: none;">
+                        <div class="mt-4 hidden" id="logoSizeControl">
                             <div class="flex justify-between items-center mb-2">
                                 <label class="text-sm font-medium">Logo Size</label>
                                 <span id="logoSizeValue" class="text-lg font-bold text-purple-400">20%</span>
@@ -639,7 +683,6 @@
                             <div class="format-option active" data-format="png">PNG</div>
                             <div class="format-option" data-format="jpg">JPG</div>
                             <div class="format-option" data-format="svg">SVG</div>
-                            <div class="format-option" data-format="pdf">PDF</div>
                         </div>
                         <div class="grid grid-cols-2 gap-3">
                             <button id="downloadBtn" class="btn-success">
@@ -662,11 +705,11 @@
                     </h3>
                     
                     <div class="qr-preview mb-6" id="qrPreview">
-                        <div class="text-center opacity-50">
+                        <div class="text-center opacity-50" id="qrPlaceholder">
                             <i class="fas fa-qrcode text-6xl mb-4"></i>
                             <p>Your QR code will appear here</p>
                         </div>
-                        <canvas id="qrCanvas" style="display: none;"></canvas>
+                        <canvas id="qrCanvas" class="hidden"></canvas>
                     </div>
                     
                     <!-- QR Code Information -->
@@ -749,7 +792,7 @@
                         <i class="fas fa-download text-2xl text-white"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-3">Multiple Formats</h3>
-                    <p class="opacity-80">Download in PNG, JPG, SVG, and PDF formats for any use case</p>
+                    <p class="opacity-80">Download in PNG, JPG, and SVG formats for any use case</p>
                 </div>
                 
                 <div class="glass-card p-6 text-center">
@@ -791,6 +834,7 @@
         // Global variables
         let currentQRCode = null;
         let currentLogo = null;
+        let debounceTimer = null;
         let settings = {
             content: 'https://toolxeno.com',
             type: 'url',
@@ -806,7 +850,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             initializeParticles();
             initializeControls();
-            generateQRCode();
+            // Generate initial QR code
+            setTimeout(() => {
+                generateQRCode();
+            }, 100);
         });
         
         // Theme toggle
@@ -837,6 +884,12 @@
             }
         }
         
+        // Debounce function
+        function debounce(func, delay = 300) {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(func, delay);
+        }
+        
         // Initialize controls
         function initializeControls() {
             // Content type selection
@@ -850,21 +903,21 @@
                 });
             });
             
-            // Input event listeners
-            document.getElementById('urlInput').addEventListener('input', updateQRContent);
-            document.getElementById('textInput').addEventListener('input', updateQRContent);
+            // Input event listeners with debounce
+            document.getElementById('urlInput').addEventListener('input', () => debounce(updateQRContent));
+            document.getElementById('textInput').addEventListener('input', () => debounce(updateQRContent));
             
             // Color pickers
-            document.getElementById('foregroundColor').addEventListener('change', (e) => {
+            document.getElementById('foregroundColor').addEventListener('input', (e) => {
                 settings.foregroundColor = e.target.value;
-                e.target.nextElementSibling.textContent = e.target.value;
-                generateQRCode();
+                document.getElementById('fgColorValue').textContent = e.target.value;
+                debounce(generateQRCode);
             });
             
-            document.getElementById('backgroundColor').addEventListener('change', (e) => {
+            document.getElementById('backgroundColor').addEventListener('input', (e) => {
                 settings.backgroundColor = e.target.value;
-                e.target.nextElementSibling.textContent = e.target.value;
-                generateQRCode();
+                document.getElementById('bgColorValue').textContent = e.target.value;
+                debounce(generateQRCode);
             });
             
             // Size slider
@@ -874,7 +927,7 @@
             sizeSlider.addEventListener('input', () => {
                 settings.size = parseInt(sizeSlider.value);
                 sizeValue.textContent = settings.size + 'px';
-                generateQRCode();
+                debounce(generateQRCode);
             });
             
             // Logo size slider
@@ -884,7 +937,7 @@
             logoSizeSlider.addEventListener('input', () => {
                 settings.logoSize = parseInt(logoSizeSlider.value);
                 logoSizeValue.textContent = settings.logoSize + '%';
-                generateQRCode();
+                debounce(generateQRCode);
             });
             
             // Error correction
@@ -894,7 +947,16 @@
             });
             
             // Logo upload
+            document.getElementById('logoUploadArea').addEventListener('click', () => {
+                document.getElementById('logoInput').click();
+            });
+            
             document.getElementById('logoInput').addEventListener('change', handleLogoUpload);
+            
+            document.getElementById('removeLogo').addEventListener('click', (e) => {
+                e.stopPropagation();
+                removeLogo();
+            });
             
             // Format selection
             document.querySelectorAll('.format-option').forEach(option => {
@@ -912,27 +974,32 @@
             
             // Email inputs
             ['emailTo', 'emailSubject', 'emailBody'].forEach(id => {
-                document.getElementById(id).addEventListener('input', updateQRContent);
+                document.getElementById(id).addEventListener('input', () => debounce(updateQRContent));
             });
             
             // Phone input
-            document.getElementById('phoneNumber').addEventListener('input', updateQRContent);
+            document.getElementById('phoneNumber').addEventListener('input', () => debounce(updateQRContent));
             
             // WiFi inputs
             ['wifiSSID', 'wifiPassword', 'wifiSecurity'].forEach(id => {
-                document.getElementById(id).addEventListener('input', updateQRContent);
+                const element = document.getElementById(id);
+                if (id === 'wifiSecurity') {
+                    element.addEventListener('change', () => debounce(updateQRContent));
+                } else {
+                    element.addEventListener('input', () => debounce(updateQRContent));
+                }
             });
             
             // vCard inputs
             ['vcardName', 'vcardOrg', 'vcardPhone', 'vcardEmail', 'vcardUrl'].forEach(id => {
-                document.getElementById(id).addEventListener('input', updateQRContent);
+                document.getElementById(id).addEventListener('input', () => debounce(updateQRContent));
             });
         }
         
         // Show content input based on type
         function showContentInput(type) {
             // Hide all inputs
-            document.getElementById('urlInput').style.display = 'none';
+            document.getElementById('urlInput').classList.add('hidden');
             document.getElementById('textInput').classList.add('hidden');
             document.getElementById('emailInputs').classList.add('hidden');
             document.getElementById('phoneInputs').classList.add('hidden');
@@ -942,7 +1009,7 @@
             // Show relevant input
             switch (type) {
                 case 'url':
-                    document.getElementById('urlInput').style.display = 'block';
+                    document.getElementById('urlInput').classList.remove('hidden');
                     break;
                 case 'text':
                     document.getElementById('textInput').classList.remove('hidden');
@@ -966,40 +1033,49 @@
         function updateQRContent() {
             let content = '';
             
-            switch (settings.type) {
-                case 'url':
-                    content = document.getElementById('urlInput').value || 'https://toolxeno.com';
-                    break;
-                case 'text':
-                    content = document.getElementById('textInput').value || 'Hello World';
-                    break;
-                case 'email':
-                    const emailTo = document.getElementById('emailTo').value;
-                    const emailSubject = document.getElementById('emailSubject').value;
-                    const emailBody = document.getElementById('emailBody').value;
-                    content = `mailto:${emailTo}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-                    break;
-                case 'phone':
-                    content = `tel:${document.getElementById('phoneNumber').value}`;
-                    break;
-                case 'wifi':
-                    const ssid = document.getElementById('wifiSSID').value;
-                    const password = document.getElementById('wifiPassword').value;
-                    const security = document.getElementById('wifiSecurity').value;
-                    content = `WIFI:T:${security};S:${ssid};P:${password};;`;
-                    break;
-                case 'vcard':
-                    const name = document.getElementById('vcardName').value;
-                    const org = document.getElementById('vcardOrg').value;
-                    const phone = document.getElementById('vcardPhone').value;
-                    const email = document.getElementById('vcardEmail').value;
-                    const url = document.getElementById('vcardUrl').value;
-                    content = `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nORG:${org}\nTEL:${phone}\nEMAIL:${email}\nURL:${url}\nEND:VCARD`;
-                    break;
+            try {
+                switch (settings.type) {
+                    case 'url':
+                        content = document.getElementById('urlInput').value.trim() || 'https://toolxeno.com';
+                        break;
+                    case 'text':
+                        content = document.getElementById('textInput').value.trim() || 'Hello World';
+                        break;
+                    case 'email':
+                        const emailTo = document.getElementById('emailTo').value.trim();
+                        const emailSubject = document.getElementById('emailSubject').value.trim();
+                        const emailBody = document.getElementById('emailBody').value.trim();
+                        if (emailTo) {
+                            content = `mailto:${emailTo}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                        } else {
+                            content = 'mailto:example@email.com';
+                        }
+                        break;
+                    case 'phone':
+                        const phoneNum = document.getElementById('phoneNumber').value.trim();
+                        content = phoneNum ? `tel:${phoneNum}` : 'tel:+1234567890';
+                        break;
+                    case 'wifi':
+                        const ssid = document.getElementById('wifiSSID').value.trim();
+                        const password = document.getElementById('wifiPassword').value.trim();
+                        const security = document.getElementById('wifiSecurity').value;
+                        content = ssid ? `WIFI:T:${security};S:${ssid};P:${password};;` : 'WIFI:T:WPA;S:MyNetwork;P:password;;';
+                        break;
+                    case 'vcard':
+                        const name = document.getElementById('vcardName').value.trim();
+                        const org = document.getElementById('vcardOrg').value.trim();
+                        const phone = document.getElementById('vcardPhone').value.trim();
+                        const email = document.getElementById('vcardEmail').value.trim();
+                        const url = document.getElementById('vcardUrl').value.trim();
+                        content = `BEGIN:VCARD\nVERSION:3.0\nFN:${name || 'John Doe'}\nORG:${org}\nTEL:${phone}\nEMAIL:${email}\nURL:${url}\nEND:VCARD`;
+                        break;
+                }
+                
+                settings.content = content;
+                generateQRCode();
+            } catch (error) {
+                console.error('Error updating QR content:', error);
             }
-            
-            settings.content = content;
-            generateQRCode();
         }
         
         // Handle logo upload
@@ -1009,20 +1085,36 @@
             
             if (file.size > 2 * 1024 * 1024) {
                 alert('Logo file size must be less than 2MB');
+                event.target.value = '';
+                return;
+            }
+            
+            if (!file.type.match('image.*')) {
+                alert('Please upload an image file');
+                event.target.value = '';
                 return;
             }
             
             const reader = new FileReader();
             reader.onload = (e) => {
-                currentLogo = new Image();
-                currentLogo.onload = () => {
+                const img = new Image();
+                img.onload = () => {
+                    currentLogo = img;
                     document.getElementById('logoPlaceholder').style.display = 'none';
                     document.getElementById('logoPreview').classList.remove('hidden');
                     document.getElementById('logoImage').src = e.target.result;
-                    document.getElementById('logoSizeControl').style.display = 'block';
+                    document.getElementById('logoSizeControl').classList.remove('hidden');
                     generateQRCode();
                 };
-                currentLogo.src = e.target.result;
+                img.onerror = () => {
+                    alert('Error loading image. Please try another file.');
+                    event.target.value = '';
+                };
+                img.src = e.target.result;
+            };
+            reader.onerror = () => {
+                alert('Error reading file. Please try again.');
+                event.target.value = '';
             };
             reader.readAsDataURL(file);
         }
@@ -1030,70 +1122,95 @@
         // Remove logo
         function removeLogo() {
             currentLogo = null;
+            document.getElementById('logoInput').value = '';
             document.getElementById('logoPlaceholder').style.display = 'block';
             document.getElementById('logoPreview').classList.add('hidden');
-            document.getElementById('logoSizeControl').style.display = 'none';
+            document.getElementById('logoSizeControl').classList.add('hidden');
             generateQRCode();
         }
         
         // Generate QR Code
         function generateQRCode() {
-            if (!settings.content) return;
+            if (!settings.content) {
+                console.error('No content to generate QR code');
+                return;
+            }
             
             const canvas = document.getElementById('qrCanvas');
-            const options = {
-                errorCorrectionLevel: settings.errorCorrectionLevel,
-                type: 'image/png',
-                quality: 0.92,
-                margin: 2,
-                color: {
-                    dark: settings.foregroundColor,
-                    light: settings.backgroundColor,
-                },
-                width: settings.size,
-            };
             
-            QRCode.toCanvas(canvas, settings.content, options, (error) => {
-                if (error) {
-                    console.error(error);
-                    return;
-                }
+            try {
+                const options = {
+                    errorCorrectionLevel: settings.errorCorrectionLevel,
+                    type: 'image/png',
+                    quality: 0.95,
+                    margin: 1,
+                    color: {
+                        dark: settings.foregroundColor,
+                        light: settings.backgroundColor,
+                    },
+                    width: settings.size,
+                    height: settings.size
+                };
                 
-                // Add logo if present
-                if (currentLogo) {
-                    addLogoToQR(canvas);
-                }
-                
-                // Show canvas and hide placeholder
-                canvas.style.display = 'block';
-                document.querySelector('#qrPreview > div').style.display = 'none';
-                
-                // Show download options and info
-                document.getElementById('downloadOptions').classList.remove('hidden');
-                document.getElementById('qrInfo').classList.remove('hidden');
-                
-                // Update info
-                updateQRInfo();
-                
-                currentQRCode = canvas;
-            });
+                QRCode.toCanvas(canvas, settings.content, options, (error) => {
+                    if (error) {
+                        console.error('QR Code generation error:', error);
+                        alert('Error generating QR code. Please check your input.');
+                        return;
+                    }
+                    
+                    // Add logo if present
+                    if (currentLogo) {
+                        setTimeout(() => {
+                            addLogoToQR(canvas);
+                        }, 50);
+                    }
+                    
+                    // Show canvas and hide placeholder
+                    canvas.classList.remove('hidden');
+                    document.getElementById('qrPlaceholder').style.display = 'none';
+                    
+                    // Show download options and info
+                    document.getElementById('downloadOptions').classList.remove('hidden');
+                    document.getElementById('qrInfo').classList.remove('hidden');
+                    
+                    // Update info
+                    updateQRInfo();
+                    
+                    currentQRCode = canvas;
+                });
+            } catch (error) {
+                console.error('Error in generateQRCode:', error);
+                alert('An error occurred. Please try again.');
+            }
         }
         
         // Add logo to QR code
         function addLogoToQR(canvas) {
-            const ctx = canvas.getContext('2d');
-            const logoSize = (settings.size * settings.logoSize) / 100;
-            const logoX = (settings.size - logoSize) / 2;
-            const logoY = (settings.size - logoSize) / 2;
-            
-            // Draw white background circle for logo
-            ctx.fillStyle = '#ffffff';
-            ctx.beginPath();
-            ctx.arc(settings.size / 2, settings.size / 2, (logoSize / 2) + 5, 0, 2 * Math.PI);
-            ctx.fill();
-            
-            // Draw logo
-            ctx.drawImage(currentLogo, logoX, logoY, logoSize, logoSize);
+            try {
+                const ctx = canvas.getContext('2d');
+                const logoSize = (settings.size * settings.logoSize) / 100;
+                const logoX = (settings.size - logoSize) / 2;
+                const logoY = (settings.size - logoSize) / 2;
+                
+                // Save context state
+                ctx.save();
+                
+                // Draw white background circle for logo with padding
+                const padding = 8;
+                ctx.fillStyle = settings.backgroundColor;
+                ctx.beginPath();
+                ctx.arc(settings.size / 2, settings.size / 2, (logoSize / 2) + padding, 0, 2 * Math.PI);
+                ctx.fill();
+                
+                // Draw logo
+                ctx.drawImage(currentLogo, logoX, logoY, logoSize, logoSize);
+                
+                // Restore context state
+                ctx.restore();
+            } catch (error) {
+                console.error('Error adding logo to QR code:', error);
+            }
         }
         
         // Update QR info
@@ -1111,62 +1228,110 @@
         
         // Download QR Code
         function downloadQRCode() {
-            if (!currentQRCode) return;
-            
-            const link = document.createElement('a');
-            link.download = `qrcode-${Date.now()}.${settings.format === 'jpg' ? 'jpg' : 'png'}`;
-            
-            if (settings.format === 'svg') {
-                // Create SVG version
-                const svgData = createSVGQRCode();
-                const blob = new Blob([svgData], { type: 'image/svg+xml' });
-                link.href = URL.createObjectURL(blob);
-                link.download = `qrcode-${Date.now()}.svg`;
-            } else if (settings.format === 'pdf') {
-                // Create PDF version (simplified)
-                alert('PDF export coming soon! Please use PNG format for now.');
+            if (!currentQRCode) {
+                alert('Please generate a QR code first');
                 return;
-            } else {
-                // Canvas to image
-                const mimeType = settings.format === 'jpg' ? 'image/jpeg' : 'image/png';
-                link.href = currentQRCode.toDataURL(mimeType, 0.9);
             }
             
-            link.click();
+            try {
+                const link = document.createElement('a');
+                const timestamp = new Date().getTime();
+                
+                if (settings.format === 'svg') {
+                    // Generate SVG version using current canvas
+                    const svgData = canvasToSVG(currentQRCode);
+                    const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+                    link.href = URL.createObjectURL(blob);
+                    link.download = `qrcode-${timestamp}.svg`;
+                } else {
+                    // Canvas to image (PNG or JPG)
+                    const mimeType = settings.format === 'jpg' ? 'image/jpeg' : 'image/png';
+                    link.href = currentQRCode.toDataURL(mimeType, 0.95);
+                    link.download = `qrcode-${timestamp}.${settings.format}`;
+                }
+                
+                link.click();
+                
+                // Clean up blob URL
+                if (settings.format === 'svg') {
+                    setTimeout(() => URL.revokeObjectURL(link.href), 100);
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('Error downloading QR code. Please try again.');
+            }
         }
         
-        // Create SVG QR Code (simplified implementation)
-        function createSVGQRCode() {
-            return `<svg xmlns="http://www.w3.org/2000/svg" width="${settings.size}" height="${settings.size}" viewBox="0 0 ${settings.size} ${settings.size}">
-                <rect width="${settings.size}" height="${settings.size}" fill="${settings.backgroundColor}"/>
-                <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-family="Arial" font-size="16" fill="${settings.foregroundColor}">SVG QR Code</text>
-            </svg>`;
+        // Convert canvas to SVG
+        function canvasToSVG(canvas) {
+            const ctx = canvas.getContext('2d');
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            
+            let svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}" viewBox="0 0 ${canvas.width} ${canvas.height}">
+  <rect width="${canvas.width}" height="${canvas.height}" fill="${settings.backgroundColor}"/>`;
+            
+            // Sample pixels and create rectangles (simplified)
+            const pixelSize = 1;
+            for (let y = 0; y < canvas.height; y += pixelSize) {
+                for (let x = 0; x < canvas.width; x += pixelSize) {
+                    const index = (y * canvas.width + x) * 4;
+                    const r = data[index];
+                    const g = data[index + 1];
+                    const b = data[index + 2];
+                    const a = data[index + 3];
+                    
+                    // Only draw if pixel is not background color
+                    const color = `rgb(${r},${g},${b})`;
+                    const bgColor = settings.backgroundColor.toLowerCase();
+                    
+                    if (a > 128 && color !== bgColor && (r !== 255 || g !== 255 || b !== 255)) {
+                        svg += `\n  <rect x="${x}" y="${y}" width="${pixelSize}" height="${pixelSize}" fill="${color}"/>`;
+                    }
+                }
+            }
+            
+            svg += '\n</svg>';
+            return svg;
         }
         
         // Share QR Code
         function shareQRCode() {
-            if (!currentQRCode) return;
+            if (!currentQRCode) {
+                alert('Please generate a QR code first');
+                return;
+            }
             
-            currentQRCode.toBlob((blob) => {
-                const file = new File([blob], 'qrcode.png', { type: 'image/png' });
-                
-                if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-                    navigator.share({
-                        title: 'QR Code',
-                        text: 'Generated with Tool Xeno QR Code Generator',
-                        files: [file]
-                    }).catch(console.error);
-                } else {
-                    // Fallback: copy to clipboard or show share URL
-                    alert('Sharing not supported. Use download instead.');
-                }
-            });
+            try {
+                currentQRCode.toBlob((blob) => {
+                    if (!blob) {
+                        alert('Error creating image. Please try downloading instead.');
+                        return;
+                    }
+                    
+                    const file = new File([blob], 'qrcode.png', { type: 'image/png' });
+                    
+                    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+                        navigator.share({
+                            title: 'QR Code',
+                            text: 'Generated with Tool Xeno QR Code Generator',
+                            files: [file]
+                        }).then(() => {
+                            console.log('Share successful');
+                        }).catch((error) => {
+                            console.log('Share failed:', error);
+                            alert('Sharing cancelled or not supported. Please use download instead.');
+                        });
+                    } else {
+                        alert('Sharing not supported on this device/browser. Please use the download button instead.');
+                    }
+                }, 'image/png', 0.95);
+            } catch (error) {
+                console.error('Share error:', error);
+                alert('Error sharing QR code. Please try downloading instead.');
+            }
         }
-        
-        // Initialize with default QR code
-        setTimeout(() => {
-            generateQRCode();
-        }, 100);
     </script>
 </body>
 </html>
