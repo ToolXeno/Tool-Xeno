@@ -128,6 +128,19 @@
             transform: translateX(28px); 
             background: var(--secondary-gradient); 
         }
+
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { background: rgba(255, 255, 255, 0.1); color: white; }
+        body.light-theme .nav-link { color: rgba(0, 0, 0, 0.7); }
+        body.light-theme .nav-link:hover { background: rgba(0, 0, 0, 0.1); color: black; }
         
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
@@ -229,7 +242,7 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 4px;
             overflow: hidden;
-            margin: 20px 0;
+            margin: 15px 0 10px 0;
         }
         
         body.light-theme .progress-bar {
@@ -253,7 +266,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            margin: 0 auto 20px;
+            margin: 0 auto 15px;
         }
         
         .score-circle::before {
@@ -320,7 +333,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 0;
+            padding: 10px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
@@ -393,19 +406,24 @@
     <!-- Floating Particles -->
     <div class="particles-container" id="particles"></div>
     
-    <!-- Header -->
+    <!-- Header - Updated to match Tool Xeno style -->
     <header class="header-glass fixed w-full top-0 z-50">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        🧬 Skin Analyzer Pro
+                <a href="#home" class="flex items-center space-x-4" aria-label="Tool Xeno Home">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        🛠️ Tool Xeno
                     </div>
                     <div class="hidden md:block text-sm opacity-70">
-                        Advanced AI Analysis
+                        Professional Tools Suite
                     </div>
-                </div>
+                </a>
                 <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#home" class="nav-link">Home</a>
+                        <a href="#tools" class="nav-link">Tools</a>
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </nav>
                     <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme"></button>
                 </div>
             </div>
@@ -413,67 +431,67 @@
     </header>
 
     <main class="pt-20">
-        <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-16 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+        <!-- Hero Section - Reduced spacing -->
+        <section class="container mx-auto px-6 py-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
                 Professional Skin Type Checker
             </h1>
-            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+            <p class="text-base md:text-lg mb-6 opacity-80 max-w-3xl mx-auto">
                 Advanced AI-powered skin analysis with dermatologist-grade accuracy. Get comprehensive insights into your skin health with professional recommendations.
             </p>
             
-            <!-- Feature Highlights -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
-                <div class="glass-card p-6">
-                    <div class="text-3xl mb-4"><i class="fas fa-microscope text-purple-400"></i></div>
-                    <h3 class="text-lg font-semibold mb-2">15+ Skin Concerns</h3>
-                    <p class="text-sm opacity-70">Analyze spots, wrinkles, pores, texture, and more with clinical precision</p>
+            <!-- Feature Highlights - Reduced spacing -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto">
+                <div class="glass-card p-4">
+                    <div class="text-2xl mb-2"><i class="fas fa-microscope text-purple-400"></i></div>
+                    <h3 class="text-base font-semibold mb-1">15+ Skin Concerns</h3>
+                    <p class="text-xs opacity-70">Analyze spots, wrinkles, pores, texture, and more with clinical precision</p>
                 </div>
-                <div class="glass-card p-6">
-                    <div class="text-3xl mb-4"><i class="fas fa-brain text-pink-400"></i></div>
-                    <h3 class="text-lg font-semibold mb-2">AI-Powered Analysis</h3>
-                    <p class="text-sm opacity-70">Advanced machine learning with 95% accuracy based on clinical research</p>
+                <div class="glass-card p-4">
+                    <div class="text-2xl mb-2"><i class="fas fa-brain text-pink-400"></i></div>
+                    <h3 class="text-base font-semibold mb-1">AI-Powered Analysis</h3>
+                    <p class="text-xs opacity-70">Advanced machine learning with 95% accuracy based on clinical research</p>
                 </div>
-                <div class="glass-card p-6">
-                    <div class="text-3xl mb-4"><i class="fas fa-chart-line text-blue-400"></i></div>
-                    <h3 class="text-lg font-semibold mb-2">Professional Reports</h3>
-                    <p class="text-sm opacity-70">Detailed analysis with personalized recommendations and scoring</p>
+                <div class="glass-card p-4">
+                    <div class="text-2xl mb-2"><i class="fas fa-chart-line text-blue-400"></i></div>
+                    <h3 class="text-base font-semibold mb-1">Professional Reports</h3>
+                    <p class="text-xs opacity-70">Detailed analysis with personalized recommendations and scoring</p>
                 </div>
             </div>
         </section>
 
-        <!-- Analysis Interface -->
-        <section class="container mx-auto px-6 mb-16">
+        <!-- Analysis Interface - Reduced spacing -->
+        <section class="container mx-auto px-6 mb-8">
             <!-- Step 1: Camera/Upload -->
             <div id="step1" class="analysis-step active">
-                <div class="glass-card p-8 max-w-4xl mx-auto">
-                    <div class="text-center mb-8">
-                        <h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                <div class="glass-card p-6 max-w-4xl mx-auto">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-bold mb-3 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                             Start Your Skin Analysis
                         </h2>
-                        <p class="text-lg opacity-80">Choose your preferred method to capture your skin image</p>
+                        <p class="text-base opacity-80">Choose your preferred method to capture your skin image</p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Camera Option -->
                         <div class="text-center">
-                            <div class="relative mb-6">
+                            <div class="relative mb-4">
                                 <video id="cameraPreview" class="camera-preview hidden" autoplay muted playsinline></video>
                                 <canvas id="captureCanvas" class="camera-preview hidden"></canvas>
                                 <div id="cameraPlaceholder" class="camera-preview flex items-center justify-center bg-gradient-to-br from-purple-900 to-pink-900">
                                     <div class="text-center">
-                                        <i class="fas fa-camera text-6xl mb-4 opacity-50"></i>
-                                        <p class="text-lg opacity-70">Camera Preview</p>
+                                        <i class="fas fa-camera text-5xl mb-3 opacity-50"></i>
+                                        <p class="text-base opacity-70">Camera Preview</p>
                                     </div>
                                 </div>
                                 <div id="analysisOverlay" class="analysis-overlay">
                                     <div class="text-center text-white">
-                                        <i class="fas fa-spinner fa-spin text-4xl mb-4"></i>
-                                        <p class="text-lg">Analyzing your skin...</p>
+                                        <i class="fas fa-spinner fa-spin text-3xl mb-3"></i>
+                                        <p class="text-base">Analyzing your skin...</p>
                                     </div>
                                 </div>
                             </div>
-                            <button id="startCamera" class="btn-gradient w-full mb-4">
+                            <button id="startCamera" class="btn-gradient w-full mb-3">
                                 <i class="fas fa-camera mr-2"></i>
                                 Start Camera Analysis
                             </button>
@@ -485,13 +503,13 @@
 
                         <!-- Upload Option -->
                         <div class="text-center">
-                            <div class="relative mb-6">
+                            <div class="relative mb-4">
                                 <input type="file" id="imageUpload" accept="image/*" class="hidden">
                                 <div id="uploadPreview" class="camera-preview flex items-center justify-center bg-gradient-to-br from-blue-900 to-teal-900 cursor-pointer" onclick="document.getElementById('imageUpload').click()">
                                     <div class="text-center">
-                                        <i class="fas fa-cloud-upload-alt text-6xl mb-4 opacity-50"></i>
-                                        <p class="text-lg opacity-70">Click to Upload Image</p>
-                                        <p class="text-sm opacity-50 mt-2">JPG, PNG, or WEBP</p>
+                                        <i class="fas fa-cloud-upload-alt text-5xl mb-3 opacity-50"></i>
+                                        <p class="text-base opacity-70">Click to Upload Image</p>
+                                        <p class="text-xs opacity-50 mt-2">JPG, PNG, or WEBP</p>
                                     </div>
                                 </div>
                             </div>
@@ -503,84 +521,82 @@
                     </div>
 
                     <!-- Progress Bar -->
-                    <div class="progress-bar">
-                        <div id="progressFill" class="progress-fill"></div>
-                    </div>
-                    <p class="text-center text-sm opacity-70 mt-2">Step 1 of 3: Capture or upload your skin image</p>
+                    <div class="progress-bar"></div>
+                    <p class="text-center text-sm opacity-70">Step 1 of 3: Capture or upload your skin image</p>
                 </div>
             </div>
 
             <!-- Step 2: Analysis Processing -->
             <div id="step2" class="analysis-step">
-                <div class="glass-card p-8 max-w-4xl mx-auto text-center">
-                    <div class="mb-8">
+                <div class="glass-card p-6 max-w-4xl mx-auto text-center">
+                    <div class="mb-6">
                         <div class="pulse">
-                            <i class="fas fa-brain text-8xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"></i>
+                            <i class="fas fa-brain text-7xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"></i>
                         </div>
-                        <h2 class="text-3xl font-bold mt-6 mb-4">AI Analysis in Progress</h2>
-                        <p class="text-lg opacity-80">Our advanced AI is analyzing your skin across 15+ parameters...</p>
+                        <h2 class="text-2xl font-bold mt-4 mb-3">AI Analysis in Progress</h2>
+                        <p class="text-base opacity-80">Our advanced AI is analyzing your skin across 15+ parameters...</p>
                     </div>
 
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
                         <div class="analysis-item" data-step="1">
-                            <i class="fas fa-eye text-2xl mb-2 text-purple-400"></i>
-                            <p class="text-sm">Detecting Features</p>
+                            <i class="fas fa-eye text-xl mb-2 text-purple-400"></i>
+                            <p class="text-xs">Detecting Features</p>
                         </div>
                         <div class="analysis-item" data-step="2">
-                            <i class="fas fa-search text-2xl mb-2 text-pink-400"></i>
-                            <p class="text-sm">Analyzing Concerns</p>
+                            <i class="fas fa-search text-xl mb-2 text-pink-400"></i>
+                            <p class="text-xs">Analyzing Concerns</p>
                         </div>
                         <div class="analysis-item" data-step="3">
-                            <i class="fas fa-chart-bar text-2xl mb-2 text-blue-400"></i>
-                            <p class="text-sm">Calculating Scores</p>
+                            <i class="fas fa-chart-bar text-xl mb-2 text-blue-400"></i>
+                            <p class="text-xs">Calculating Scores</p>
                         </div>
                         <div class="analysis-item" data-step="4">
-                            <i class="fas fa-clipboard-list text-2xl mb-2 text-green-400"></i>
-                            <p class="text-sm">Generating Report</p>
+                            <i class="fas fa-clipboard-list text-xl mb-2 text-green-400"></i>
+                            <p class="text-xs">Generating Report</p>
                         </div>
                     </div>
 
                     <div class="progress-bar">
                         <div id="analysisProgress" class="progress-fill"></div>
                     </div>
-                    <p id="analysisStatus" class="text-center text-sm opacity-70 mt-2">Initializing analysis...</p>
+                    <p id="analysisStatus" class="text-center text-sm opacity-70">Initializing analysis...</p>
                 </div>
             </div>
 
-            <!-- Step 3: Results -->
+            <!-- Step 3: Results - Optimized spacing -->
             <div id="step3" class="analysis-step">
-                <div class="space-y-8">
+                <div class="space-y-6">
                     <!-- Overall Score -->
-                    <div class="glass-card p-8 max-w-4xl mx-auto text-center">
-                        <h2 class="text-3xl font-bold mb-6">Your Skin Analysis Results</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card p-6 max-w-4xl mx-auto text-center">
+                        <h2 class="text-2xl font-bold mb-4">Your Skin Analysis Results</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div>
                                 <div id="overallScore" class="score-circle" style="--percentage: 0deg;"></div>
-                                <h3 class="text-xl font-semibold mb-2">Overall Skin Health</h3>
-                                <p class="text-sm opacity-70">Comprehensive skin condition assessment</p>
+                                <h3 class="text-lg font-semibold mb-1">Overall Skin Health</h3>
+                                <p class="text-xs opacity-70">Comprehensive skin condition assessment</p>
                             </div>
                             <div>
                                 <div id="skinAge" class="score-circle" style="--percentage: 0deg;"></div>
-                                <h3 class="text-xl font-semibold mb-2">Skin Age</h3>
-                                <p class="text-sm opacity-70">Biological vs chronological age</p>
+                                <h3 class="text-lg font-semibold mb-1">Skin Age</h3>
+                                <p class="text-xs opacity-70">Biological vs chronological age</p>
                             </div>
                             <div>
                                 <div id="skinType" class="text-center">
-                                    <div class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
+                                    <div class="w-32 h-32 mx-auto mb-3 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
                                         <i id="skinTypeIcon" class="fas fa-user text-4xl text-white"></i>
                                     </div>
-                                    <h3 class="text-xl font-semibold mb-2">Skin Type</h3>
-                                    <p id="skinTypeName" class="text-lg font-medium text-purple-400">Analyzing...</p>
+                                    <h3 class="text-lg font-semibold mb-1">Skin Type</h3>
+                                    <p id="skinTypeName" class="text-base font-medium text-purple-400">Analyzing...</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Detailed Analysis -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto">
                         <!-- Skin Concerns Chart -->
-                        <div class="glass-card p-6">
-                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <div class="glass-card p-5">
+                            <h3 class="text-lg font-semibold mb-3 flex items-center">
                                 <i class="fas fa-chart-radar mr-2 text-purple-400"></i>
                                 Skin Concerns Analysis
                             </h3>
@@ -590,8 +606,8 @@
                         </div>
 
                         <!-- Age Progression Chart -->
-                        <div class="glass-card p-6">
-                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <div class="glass-card p-5">
+                            <h3 class="text-lg font-semibold mb-3 flex items-center">
                                 <i class="fas fa-chart-line mr-2 text-pink-400"></i>
                                 Age Progression Analysis
                             </h3>
@@ -602,26 +618,26 @@
                     </div>
 
                     <!-- Detailed Scores -->
-                    <div class="glass-card p-8 max-w-4xl mx-auto">
-                        <h3 class="text-2xl font-semibold mb-6 text-center">Detailed Skin Assessment</h3>
-                        <div id="detailedScores" class="space-y-4">
+                    <div class="glass-card p-6 max-w-4xl mx-auto">
+                        <h3 class="text-xl font-semibold mb-4 text-center">Detailed Skin Assessment</h3>
+                        <div id="detailedScores" class="space-y-2">
                             <!-- Scores will be populated by JavaScript -->
                         </div>
                     </div>
 
                     <!-- Professional Recommendations -->
-                    <div class="glass-card p-8 max-w-4xl mx-auto">
-                        <h3 class="text-2xl font-semibold mb-6 text-center flex items-center justify-center">
+                    <div class="glass-card p-6 max-w-4xl mx-auto">
+                        <h3 class="text-xl font-semibold mb-4 text-center flex items-center justify-center">
                             <i class="fas fa-user-md mr-3 text-purple-400"></i>
                             Professional Recommendations
                         </h3>
-                        <div id="recommendations" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div id="recommendations" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <!-- Recommendations will be populated by JavaScript -->
                         </div>
                     </div>
 
                     <!-- Action Buttons -->
-                    <div class="text-center">
+                    <div class="text-center mb-4">
                         <button id="newAnalysis" class="btn-gradient mr-4">
                             <i class="fas fa-redo mr-2"></i>
                             New Analysis
@@ -884,11 +900,11 @@
                 
                 item.innerHTML = `
                     <div class="flex items-center space-x-3">
-                        <i class="fas fa-circle text-sm" style="color: ${color}"></i>
-                        <span class="font-medium">${concern}</span>
+                        <i class="fas fa-circle text-xs" style="color: ${color}"></i>
+                        <span class="font-medium text-sm">${concern}</span>
                     </div>
                     <div class="flex items-center space-x-3">
-                        <span class="text-sm font-semibold">${score}%</span>
+                        <span class="text-xs font-semibold">${score}%</span>
                         <div class="concern-score">
                             <div class="concern-score-fill" style="width: ${percentage}%; background: ${color}"></div>
                         </div>
@@ -1031,13 +1047,13 @@
             
             recommendations.forEach(rec => {
                 const item = document.createElement('div');
-                item.className = 'glass-card p-6 fade-in';
+                item.className = 'glass-card p-4 fade-in';
                 item.innerHTML = `
-                    <div class="flex items-start space-x-4">
-                        <i class="fas ${rec.icon} text-2xl text-purple-400 mt-1"></i>
+                    <div class="flex items-start space-x-3">
+                        <i class="fas ${rec.icon} text-xl text-purple-400 mt-1"></i>
                         <div>
-                            <h4 class="text-lg font-semibold mb-2">${rec.title}</h4>
-                            <p class="text-sm opacity-80 mb-3">${rec.description}</p>
+                            <h4 class="text-base font-semibold mb-1">${rec.title}</h4>
+                            <p class="text-xs opacity-80 mb-2">${rec.description}</p>
                             <div class="flex items-center text-xs opacity-70">
                                 <i class="fas fa-clock mr-1"></i>
                                 ${rec.timeframe}
@@ -1119,10 +1135,6 @@
             setTimeout(() => {
                 document.getElementById(`step${stepNumber}`).classList.add('active');
                 currentStep = stepNumber;
-                
-                // Update progress
-                const progress = (stepNumber / 3) * 100;
-                document.getElementById('progressFill').style.width = progress + '%';
             }, 300);
         }
 
@@ -1146,15 +1158,14 @@
             document.getElementById('captureBtn').classList.add('hidden');
             document.getElementById('uploadPreview').innerHTML = `
                 <div class="text-center">
-                    <i class="fas fa-cloud-upload-alt text-6xl mb-4 opacity-50"></i>
-                    <p class="text-lg opacity-70">Click to Upload Image</p>
-                    <p class="text-sm opacity-50 mt-2">JPG, PNG, or WEBP</p>
+                    <i class="fas fa-cloud-upload-alt text-5xl mb-3 opacity-50"></i>
+                    <p class="text-base opacity-70">Click to Upload Image</p>
+                    <p class="text-xs opacity-50 mt-2">JPG, PNG, or WEBP</p>
                 </div>
             `;
             document.getElementById('imageUpload').value = '';
             
             // Reset progress
-            document.getElementById('progressFill').style.width = '0%';
             document.getElementById('analysisProgress').style.width = '0%';
             
             // Move to step 1
