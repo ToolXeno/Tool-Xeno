@@ -217,12 +217,12 @@
         .btn-gradient:active { transform: translateY(0); }
         
         .btn-secondary {
-            background: var(--secondary-gradient);
-            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
         }
         
         .btn-secondary:hover {
-            box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
         }
         
         .analysis-step {
@@ -242,7 +242,7 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 4px;
             overflow: hidden;
-            margin: 15px 0 10px 0;
+            margin: 10px 0 8px 0;
         }
         
         body.light-theme .progress-bar {
@@ -406,25 +406,25 @@
     <!-- Floating Particles -->
     <div class="particles-container" id="particles"></div>
     
-    <!-- Header - Updated to match Tool Xeno style -->
+    <!-- Header - Matching Tool Xeno Style from Image Compressor -->
     <header class="header-glass fixed w-full top-0 z-50">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <a href="#home" class="flex items-center space-x-4" aria-label="Tool Xeno Home">
+                <div class="flex items-center space-x-4">
                     <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                         🛠️ Tool Xeno
                     </div>
                     <div class="hidden md:block text-sm opacity-70">
-                        Professional Tools Suite
+                        Professional Skin Type Checker
                     </div>
-                </a>
+                </div>
                 <div class="flex items-center space-x-4">
                     <nav class="hidden md:flex space-x-2">
-                        <a href="#home" class="nav-link">Home</a>
-                        <a href="#tools" class="nav-link">Tools</a>
-                        <a href="#contact" class="nav-link">Contact</a>
+                        <a href="#analyze" class="nav-link">Analyze</a>
+                        <a href="#results" class="nav-link">Results</a>
+                        <a href="#about" class="nav-link">About</a>
                     </nav>
-                    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
                 </div>
             </div>
         </div>
@@ -441,7 +441,7 @@
             </p>
             
             <!-- Feature Highlights - Reduced spacing -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 max-w-4xl mx-auto">
                 <div class="glass-card p-4">
                     <div class="text-2xl mb-2"><i class="fas fa-microscope text-purple-400"></i></div>
                     <h3 class="text-base font-semibold mb-1">15+ Skin Concerns</h3>
@@ -465,8 +465,8 @@
             <!-- Step 1: Camera/Upload -->
             <div id="step1" class="analysis-step active">
                 <div class="glass-card p-6 max-w-4xl mx-auto">
-                    <div class="text-center mb-6">
-                        <h2 class="text-2xl font-bold mb-3 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    <div class="text-center mb-4">
+                        <h2 class="text-2xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                             Start Your Skin Analysis
                         </h2>
                         <p class="text-base opacity-80">Choose your preferred method to capture your skin image</p>
@@ -475,7 +475,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Camera Option -->
                         <div class="text-center">
-                            <div class="relative mb-4">
+                            <div class="relative mb-3">
                                 <video id="cameraPreview" class="camera-preview hidden" autoplay muted playsinline></video>
                                 <canvas id="captureCanvas" class="camera-preview hidden"></canvas>
                                 <div id="cameraPlaceholder" class="camera-preview flex items-center justify-center bg-gradient-to-br from-purple-900 to-pink-900">
@@ -491,19 +491,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <button id="startCamera" class="btn-gradient w-full mb-3">
+                            <button id="startCamera" class="btn-gradient w-full mb-2">
                                 <i class="fas fa-camera mr-2"></i>
                                 Start Camera Analysis
                             </button>
                             <button id="captureBtn" class="btn-secondary w-full hidden">
-                                <i class="fas fa-capture mr-2"></i>
+                                <i class="fas fa-camera mr-2"></i>
                                 Capture & Analyze
                             </button>
                         </div>
 
                         <!-- Upload Option -->
                         <div class="text-center">
-                            <div class="relative mb-4">
+                            <div class="relative mb-3">
                                 <input type="file" id="imageUpload" accept="image/*" class="hidden">
                                 <div id="uploadPreview" class="camera-preview flex items-center justify-center bg-gradient-to-br from-blue-900 to-teal-900 cursor-pointer" onclick="document.getElementById('imageUpload').click()">
                                     <div class="text-center">
@@ -521,8 +521,8 @@
                     </div>
 
                     <!-- Progress Bar -->
-                    <div class="progress-bar"></div>
-                    <p class="text-center text-sm opacity-70">Step 1 of 3: Capture or upload your skin image</p>
+                    <div class="progress-bar mt-4"></div>
+                    <p class="text-center text-sm opacity-70 mt-1">Step 1 of 3: Capture or upload your skin image</p>
                 </div>
             </div>
 
