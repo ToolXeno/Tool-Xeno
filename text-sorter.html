@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Text Shortener - Tool Xeno</title>
-    <meta name="description" content="Professional text shortener with AI-powered summarization, customizable length control, keyword preservation, and multiple compression modes.">
+    <title>Professional Text Sorter - Tool Xeno</title>
+    <meta name="description" content="Professional text sorter with advanced features - sort alphabetically, numerically, by length, reverse order, remove duplicates, and more.">
     
     <!-- External Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -208,6 +208,15 @@
         .btn-success:hover {
             box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
         }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+        }
+        
+        .btn-danger:hover {
+            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
+        }
         
         .nav-link {
             padding: 8px 16px;
@@ -232,75 +241,41 @@
             color: black; 
         }
         
-        .text-area {
+        .textarea-custom {
             width: 100%;
-            min-height: 200px;
-            resize: vertical;
-            padding: 20px;
+            min-height: 300px;
+            background: rgba(255, 255, 255, 0.05);
             border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
             color: var(--dark-text);
-            font-family: inherit;
-            font-size: 16px;
-            line-height: 1.6;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            resize: vertical;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
         }
         
-        .text-area:focus {
+        .textarea-custom:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
         
-        body.light-theme .text-area {
-            background: rgba(0, 0, 0, 0.05);
+        body.light-theme .textarea-custom {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.1);
             color: var(--light-text);
-            border-color: var(--light-border);
         }
         
-        .slider-container {
-            position: relative;
-            width: 100%;
-            margin: 20px 0;
-        }
-        
-        .range-slider {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 8px;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            outline: none;
-            transition: all 0.3s ease;
-        }
-        
-        .range-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary-gradient);
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
-        }
-        
-        .range-slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary-gradient);
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+        body.light-theme .textarea-custom:focus {
+            border-color: #667eea;
         }
         
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
             margin: 20px 0;
         }
         
@@ -313,13 +288,18 @@
             transition: all 0.3s ease;
         }
         
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+        
         body.light-theme .stat-card {
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(0, 0, 0, 0.03);
             border-color: rgba(0, 0, 0, 0.1);
         }
         
         .stat-value {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 800;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
@@ -328,86 +308,9 @@
             margin-bottom: 5px;
         }
         
-        .mode-selector {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-        
-        .mode-option {
-            padding: 10px 20px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            font-size: 14px;
-        }
-        
-        .mode-option.active {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-        }
-        
-        body.light-theme .mode-option {
-            border-color: rgba(0, 0, 0, 0.2);
-        }
-        
-        body.light-theme .mode-option.active {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-        }
-        
-        .toggle-switch {
-            position: relative;
-            width: 50px;
-            height: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .toggle-switch.active {
-            background: var(--primary-gradient);
-        }
-        
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 21px;
-            height: 21px;
-            background: white;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .toggle-switch.active::after {
-            transform: translateX(25px);
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-            margin: 10px 0;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--success-gradient);
-            border-radius: 4px;
-            transition: width 0.3s ease;
-            width: 0%;
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.7;
         }
         
         .fade-in {
@@ -419,25 +322,186 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .keyword-tag {
-            display: inline-block;
-            background: rgba(102, 126, 234, 0.2);
-            color: #667eea;
-            padding: 4px 8px;
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .toggle-switch.active {
+            background: var(--primary-gradient);
+            border-color: transparent;
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 19px;
+            height: 19px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .toggle-switch.active::after {
+            transform: translateX(25px);
+        }
+        
+        body.light-theme .toggle-switch {
+            background: rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .option-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .option-item:last-child {
+            border-bottom: none;
+        }
+        
+        body.light-theme .option-item {
+            border-bottom-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .sort-mode-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .sort-mode-option {
+            padding: 15px 10px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-            margin: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         
-        .pulse-animation {
-            animation: pulse 2s infinite;
+        .sort-mode-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: -1;
         }
         
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(102, 126, 234, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0); }
+        .sort-mode-option.active {
+            border-color: #667eea;
+            color: white;
+        }
+        
+        .sort-mode-option.active::before {
+            left: 0;
+            opacity: 1;
+        }
+        
+        .sort-mode-option:hover:not(.active) {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        body.light-theme .sort-mode-option {
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+        
+        body.light-theme .sort-mode-option:hover:not(.active) {
+            border-color: #667eea;
+        }
+        
+        .sort-mode-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .sort-mode-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .action-buttons button {
+            flex: 1;
+            min-width: 140px;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            pointer-events: none;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        .toast.success {
+            background: var(--success-gradient);
+        }
+        
+        .toast.error {
+            background: var(--secondary-gradient);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
         
         @media (max-width: 768px) {
@@ -445,8 +509,38 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .mode-selector {
-                justify-content: center;
+            .sort-mode-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .action-buttons button {
+                width: 100%;
+            }
+            
+            .toast {
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container {
+                gap: 8px;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+            
+            .text-3xl {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -456,23 +550,34 @@
     <!-- Floating Particles -->
     <div class="particles-container" id="particles"></div>
     
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Success!</span>
+    </div>
+    
     <!-- Header -->
     <header class="header-glass fixed w-full top-0 z-50">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        Tool Xeno
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-sort-alpha-down"></i>
                     </div>
-                    <div class="hidden md:block text-sm opacity-70">
-                        Professional Text Shortener
+                    <div>
+                        <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                            Tool Xeno
+                        </div>
+                        <div class="hidden md:block text-sm opacity-70">
+                            Professional Text Sorter
+                        </div>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
                     <nav class="hidden md:flex space-x-2">
-                        <a href="#shorten" class="nav-link">Shorten</a>
-                        <a href="#modes" class="nav-link">Modes</a>
-                        <a href="#settings" class="nav-link">Settings</a>
+                        <a href="#sort" class="nav-link">Sort</a>
+                        <a href="#options" class="nav-link">Options</a>
+                        <a href="#stats" class="nav-link">Stats</a>
                     </nav>
                     <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
                 </div>
@@ -485,225 +590,242 @@
         <!-- Hero Section -->
         <section class="container mx-auto px-6 py-16 text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                Professional Text Shortener
+                Professional Text Sorter
             </h1>
             <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
-                Advanced text summarization with AI-powered algorithms, customizable length control, 
-                keyword preservation, and multiple compression modes for perfect content optimization.
+                Advanced text sorting tool with alphabetical, numerical, length-based sorting, 
+                duplicate removal, case handling, and custom separator support.
             </p>
         </section>
         
-        <!-- Main Interface -->
-        <section id="shorten" class="container mx-auto px-6">
-            <!-- Input Section -->
-            <div class="glass-card p-8 mb-8">
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-2xl font-semibold flex items-center">
-                        <i class="fas fa-compress-alt mr-3"></i>
-                        Text Input
-                    </h3>
-                    <button id="pasteBtn" class="btn-secondary">
-                        <i class="fas fa-clipboard mr-2"></i>
-                        Paste
-                    </button>
-                </div>
-                
-                <textarea 
-                    id="inputText" 
-                    class="text-area" 
-                    placeholder="Enter or paste your long text here... The tool will analyze and shorten it while preserving the key information and meaning."
-                    oninput="analyzeText()"
-                ></textarea>
-                
-                <!-- Quick Actions -->
-                <div class="flex flex-wrap gap-3 mt-4">
-                    <button id="clearBtn" class="btn-gradient">
-                        <i class="fas fa-trash mr-2"></i>
-                        Clear
-                    </button>
-                    <button id="loadSampleBtn" class="btn-secondary">
-                        <i class="fas fa-file-text mr-2"></i>
-                        Load Sample
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Settings & Output Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Settings Panel -->
-                <div class="glass-card p-6">
-                    <h3 class="text-xl font-semibold mb-6 flex items-center">
-                        <i class="fas fa-cogs mr-3"></i>
-                        Shortening Settings
-                    </h3>
-                    
-                    <!-- Shortening Mode -->
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium mb-3">Shortening Mode</label>
-                        <div class="mode-selector">
-                            <div class="mode-option active" data-mode="extractive">
-                                <i class="fas fa-list mr-2"></i>Extractive
-                            </div>
-                            <div class="mode-option" data-mode="abstractive">
-                                <i class="fas fa-brain mr-2"></i>Abstractive
-                            </div>
-                            <div class="mode-option" data-mode="keyword">
-                                <i class="fas fa-key mr-2"></i>Keyword Focus
-                            </div>
+        <!-- Main Sorter Interface -->
+        <section id="sort" class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Input Panel -->
+                <div class="glass-card p-6 fade-in">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-semibold flex items-center">
+                            <i class="fas fa-edit mr-3"></i>
+                            Input Text
+                        </h3>
+                        <div class="flex gap-2">
+                            <button onclick="pasteFromClipboard()" class="btn-gradient px-4 py-2 text-sm" title="Paste from clipboard">
+                                <i class="fas fa-clipboard"></i>
+                            </button>
+                            <button onclick="clearInput()" class="btn-danger px-4 py-2 text-sm" title="Clear input">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </div>
                     </div>
-                    
-                    <!-- Length Control -->
-                    <div class="mb-6">
-                        <div class="flex justify-between items-center mb-3">
-                            <label class="text-sm font-medium">Target Length</label>
-                            <span id="lengthValue" class="text-lg font-bold text-purple-400">50%</span>
-                        </div>
-                        <input type="range" id="lengthSlider" class="range-slider" min="20" max="80" value="50">
-                        <div class="flex justify-between text-xs opacity-70 mt-1">
-                            <span>Very Short</span>
-                            <span>Moderate</span>
-                            <span>Detailed</span>
-                        </div>
+                    <textarea 
+                        id="inputText" 
+                        class="textarea-custom" 
+                        placeholder="Enter or paste your text here...&#10;Each line will be treated as a separate item.&#10;&#10;Example:&#10;Banana&#10;Apple&#10;Cherry&#10;10&#10;25&#10;3"
+                        oninput="updateStats()"></textarea>
+                    <div class="mt-3 text-sm opacity-70">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Enter each item on a new line
                     </div>
-                    
-                    <!-- Advanced Options -->
-                    <div class="space-y-4 mb-6">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <label class="text-sm font-medium">Preserve Keywords</label>
-                                <p class="text-xs opacity-70">Keep important terms</p>
-                            </div>
-                            <div class="toggle-switch active" data-option="keywords"></div>
-                        </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <label class="text-sm font-medium">Maintain Structure</label>
-                                <p class="text-xs opacity-70">Keep original flow</p>
-                            </div>
-                            <div class="toggle-switch active" data-option="structure"></div>
-                        </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <label class="text-sm font-medium">Smart Compression</label>
-                                <p class="text-xs opacity-70">AI-optimized reduction</p>
-                            </div>
-                            <div class="toggle-switch active" data-option="smart"></div>
-                        </div>
-                    </div>
-                    
-                    <!-- Action Button -->
-                    <button id="shortenBtn" class="btn-gradient w-full pulse-animation" disabled>
-                        <i class="fas fa-magic mr-2"></i>
-                        Shorten Text
-                    </button>
                 </div>
                 
                 <!-- Output Panel -->
-                <div class="glass-card p-6">
-                    <div class="flex items-center justify-between mb-6">
+                <div class="glass-card p-6 fade-in">
+                    <div class="flex items-center justify-between mb-4">
                         <h3 class="text-xl font-semibold flex items-center">
-                            <i class="fas fa-eye mr-3"></i>
-                            Shortened Result
+                            <i class="fas fa-check-circle mr-3"></i>
+                            Sorted Output
                         </h3>
-                        <button id="copyBtn" class="btn-success" style="display: none;">
-                            <i class="fas fa-copy mr-2"></i>
-                            Copy Result
-                        </button>
-                    </div>
-                    
-                    <div id="outputContainer" class="min-h-[200px] flex items-center justify-center opacity-50">
-                        <div class="text-center">
-                            <i class="fas fa-file-alt text-4xl mb-4"></i>
-                            <p>Your shortened text will appear here</p>
+                        <div class="flex gap-2">
+                            <button onclick="copyToClipboard()" class="btn-success px-4 py-2 text-sm" title="Copy to clipboard">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button onclick="downloadAsFile()" class="btn-secondary px-4 py-2 text-sm" title="Download as file">
+                                <i class="fas fa-download"></i>
+                            </button>
                         </div>
                     </div>
-                    
-                    <textarea id="outputText" class="text-area hidden" readonly></textarea>
-                    
-                    <!-- Processing Status -->
-                    <div id="processingStatus" class="hidden mt-4">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="font-medium">Processing...</span>
-                            <span id="progressText">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progressFill"></div>
-                        </div>
-                    </div>
-                    
-                    <!-- Keywords Preview -->
-                    <div id="keywordsContainer" class="hidden mt-4">
-                        <label class="text-sm font-medium mb-2 block">Preserved Keywords</label>
-                        <div id="keywordsList" class="flex flex-wrap"></div>
+                    <textarea 
+                        id="outputText" 
+                        class="textarea-custom" 
+                        placeholder="Sorted text will appear here..."
+                        readonly></textarea>
+                    <div class="mt-3 text-sm opacity-70">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Results are updated in real-time
                     </div>
                 </div>
             </div>
             
-            <!-- Statistics Section -->
-            <div class="glass-card p-8 mt-8">
-                <h3 class="text-xl font-semibold mb-6 flex items-center">
-                    <i class="fas fa-chart-line mr-3"></i>
-                    Compression Statistics
+            <!-- Statistics -->
+            <div id="stats" class="glass-card p-6 mb-8 fade-in">
+                <h3 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-chart-bar mr-3"></i>
+                    Statistics
                 </h3>
-                
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-value" id="originalWords">0</div>
-                        <div class="text-sm opacity-70">Original Words</div>
+                        <div class="stat-value" id="totalLines">0</div>
+                        <div class="stat-label">Total Lines</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value" id="shortenedWords">0</div>
-                        <div class="text-sm opacity-70">Shortened Words</div>
+                        <div class="stat-value" id="uniqueLines">0</div>
+                        <div class="stat-label">Unique Lines</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value" id="compressionRatio">0%</div>
-                        <div class="text-sm opacity-70">Compression Ratio</div>
+                        <div class="stat-value" id="duplicateLines">0</div>
+                        <div class="stat-label">Duplicates</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value" id="readingTime">0 min</div>
-                        <div class="text-sm opacity-70">Reading Time Saved</div>
+                        <div class="stat-value" id="totalChars">0</div>
+                        <div class="stat-label">Total Characters</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value" id="sentences">0</div>
-                        <div class="text-sm opacity-70">Sentences</div>
+                        <div class="stat-value" id="emptyLines">0</div>
+                        <div class="stat-label">Empty Lines</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value" id="characters">0</div>
-                        <div class="text-sm opacity-70">Characters</div>
+                        <div class="stat-value" id="avgLength">0</div>
+                        <div class="stat-label">Avg Length</div>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Sorting Options -->
+            <div id="options" class="glass-card p-6 mb-8 fade-in">
+                <h3 class="text-xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-sliders-h mr-3"></i>
+                    Sorting Options
+                </h3>
+                
+                <!-- Sort Mode Selection -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium mb-3">Sort Mode</label>
+                    <div class="sort-mode-selector" id="sortModeSelector">
+                        <div class="sort-mode-option active" data-mode="alphabetical" onclick="selectSortMode('alphabetical')">
+                            <i class="fas fa-sort-alpha-down sort-mode-icon"></i>
+                            <div class="sort-mode-label">Alphabetical</div>
+                        </div>
+                        <div class="sort-mode-option" data-mode="numerical" onclick="selectSortMode('numerical')">
+                            <i class="fas fa-sort-numeric-down sort-mode-icon"></i>
+                            <div class="sort-mode-label">Numerical</div>
+                        </div>
+                        <div class="sort-mode-option" data-mode="length" onclick="selectSortMode('length')">
+                            <i class="fas fa-ruler-horizontal sort-mode-icon"></i>
+                            <div class="sort-mode-label">By Length</div>
+                        </div>
+                        <div class="sort-mode-option" data-mode="reverse" onclick="selectSortMode('reverse')">
+                            <i class="fas fa-exchange-alt sort-mode-icon"></i>
+                            <div class="sort-mode-label">Reverse</div>
+                        </div>
+                        <div class="sort-mode-option" data-mode="random" onclick="selectSortMode('random')">
+                            <i class="fas fa-random sort-mode-icon"></i>
+                            <div class="sort-mode-label">Random</div>
+                        </div>
+                        <div class="sort-mode-option" data-mode="natural" onclick="selectSortMode('natural')">
+                            <i class="fas fa-sort-amount-down sort-mode-icon"></i>
+                            <div class="sort-mode-label">Natural</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Advanced Options -->
+                <div class="space-y-4">
+                    <div class="option-item">
+                        <div>
+                            <label class="text-sm font-medium">Ascending Order</label>
+                            <p class="text-xs opacity-70">Sort from A to Z or lowest to highest</p>
+                        </div>
+                        <div class="toggle-switch active" id="ascendingToggle" onclick="toggleOption('ascending')"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div>
+                            <label class="text-sm font-medium">Case Sensitive</label>
+                            <p class="text-xs opacity-70">Treat uppercase and lowercase as different</p>
+                        </div>
+                        <div class="toggle-switch" id="caseSensitiveToggle" onclick="toggleOption('caseSensitive')"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div>
+                            <label class="text-sm font-medium">Remove Duplicates</label>
+                            <p class="text-xs opacity-70">Keep only unique lines</p>
+                        </div>
+                        <div class="toggle-switch" id="removeDuplicatesToggle" onclick="toggleOption('removeDuplicates')"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div>
+                            <label class="text-sm font-medium">Ignore Empty Lines</label>
+                            <p class="text-xs opacity-70">Remove blank lines from output</p>
+                        </div>
+                        <div class="toggle-switch active" id="ignoreEmptyToggle" onclick="toggleOption('ignoreEmpty')"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div>
+                            <label class="text-sm font-medium">Trim Whitespace</label>
+                            <p class="text-xs opacity-70">Remove leading and trailing spaces</p>
+                        </div>
+                        <div class="toggle-switch active" id="trimToggle" onclick="toggleOption('trim')"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div>
+                            <label class="text-sm font-medium">Add Line Numbers</label>
+                            <p class="text-xs opacity-70">Prefix each line with its number</p>
+                        </div>
+                        <div class="toggle-switch" id="addNumbersToggle" onclick="toggleOption('addNumbers')"></div>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons mt-8">
+                    <button onclick="sortText()" class="btn-gradient">
+                        <i class="fas fa-sort mr-2"></i>
+                        Sort Now
+                    </button>
+                    <button onclick="undoSort()" class="btn-secondary">
+                        <i class="fas fa-undo mr-2"></i>
+                        Undo
+                    </button>
+                    <button onclick="swapInputOutput()" class="btn-success">
+                        <i class="fas fa-exchange-alt mr-2"></i>
+                        Swap I/O
+                    </button>
+                    <button onclick="resetAll()" class="btn-danger">
+                        <i class="fas fa-sync mr-2"></i>
+                        Reset All
+                    </button>
                 </div>
             </div>
         </section>
     </main>
     
-    <!-- Footer -->
-    <footer class="container mx-auto px-6 py-8 text-center opacity-70">
-        <p>&copy; 2025 Tool Xeno. Professional Text Shortener Tool.</p>
-    </footer>
-    
     <script>
-        // Global variables
-        let currentText = '';
-        let shortenedText = '';
-        let settings = {
-            mode: 'extractive',
-            length: 50,
-            preserveKeywords: true,
-            maintainStructure: true,
-            smartCompression: true
+        // Global state
+        let sortOptions = {
+            mode: 'alphabetical',
+            ascending: true,
+            caseSensitive: false,
+            removeDuplicates: false,
+            ignoreEmpty: true,
+            trim: true,
+            addNumbers: false
         };
         
-        // Sample text for demo
-        const sampleText = `Artificial Intelligence (AI) has revolutionized numerous industries and transformed the way we live, work, and interact with technology. From healthcare and finance to transportation and entertainment, AI applications have become increasingly sophisticated and widespread. Machine learning algorithms can now process vast amounts of data to identify patterns, make predictions, and automate complex tasks that once required human intelligence. Natural language processing enables computers to understand and generate human language, while computer vision allows machines to interpret visual information. The rapid advancement of AI technologies has also raised important questions about ethics, privacy, job displacement, and the future of human-machine collaboration. As we continue to develop more powerful AI systems, it becomes crucial to establish guidelines and frameworks that ensure responsible development and deployment of these technologies. The potential benefits of AI are immense, including improved healthcare outcomes, enhanced cybersecurity, more efficient resource management, and breakthrough scientific discoveries. However, we must also address the challenges and risks associated with AI implementation to create a future where artificial intelligence serves humanity's best interests while preserving human values and autonomy.`;
+        let historyStack = [];
         
         // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
             initializeParticles();
-            initializeControls();
-            setupEventListeners();
+            loadSavedTheme();
+            updateStats();
+            
+            // Auto-sort on input change
+            document.getElementById('inputText').addEventListener('input', function() {
+                debounce(sortText, 500)();
+            });
         });
         
         // Theme toggle
@@ -713,8 +835,10 @@
         }
         
         // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-theme');
+        function loadSavedTheme() {
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-theme');
+            }
         }
         
         // Initialize floating particles
@@ -734,45 +858,173 @@
             }
         }
         
-        // Initialize controls
-        function initializeControls() {
-            // Mode selection
-            document.querySelectorAll('.mode-option').forEach(option => {
-                option.addEventListener('click', () => {
-                    document.querySelectorAll('.mode-option').forEach(o => o.classList.remove('active'));
-                    option.classList.add('active');
-                    settings.mode = option.dataset.mode;
-                });
+        // Select sort mode
+        function selectSortMode(mode) {
+            sortOptions.mode = mode;
+            
+            // Update UI
+            document.querySelectorAll('.sort-mode-option').forEach(option => {
+                option.classList.remove('active');
             });
+            document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
             
-            // Length slider
-            const lengthSlider = document.getElementById('lengthSlider');
-            const lengthValue = document.getElementById('lengthValue');
+            sortText();
+        }
+        
+        // Toggle option
+        function toggleOption(option) {
+            const toggle = document.getElementById(option + 'Toggle');
+            toggle.classList.toggle('active');
+            sortOptions[option] = toggle.classList.contains('active');
             
-            lengthSlider.addEventListener('input', () => {
-                settings.length = parseInt(lengthSlider.value);
-                lengthValue.textContent = settings.length + '%';
+            sortText();
+        }
+        
+        // Main sort function
+        function sortText() {
+            const input = document.getElementById('inputText').value;
+            
+            if (!input.trim()) {
+                document.getElementById('outputText').value = '';
+                updateStats();
+                return;
+            }
+            
+            // Save to history
+            const currentOutput = document.getElementById('outputText').value;
+            if (currentOutput && historyStack[historyStack.length - 1] !== currentOutput) {
+                historyStack.push(currentOutput);
+                if (historyStack.length > 10) historyStack.shift();
+            }
+            
+            // Split into lines
+            let lines = input.split('\n');
+            
+            // Apply preprocessing
+            if (sortOptions.trim) {
+                lines = lines.map(line => line.trim());
+            }
+            
+            if (sortOptions.ignoreEmpty) {
+                lines = lines.filter(line => line !== '');
+            }
+            
+            if (sortOptions.removeDuplicates) {
+                lines = [...new Set(lines)];
+            }
+            
+            // Apply sorting
+            let sortedLines = [...lines];
+            
+            switch (sortOptions.mode) {
+                case 'alphabetical':
+                    sortedLines = sortAlphabetically(sortedLines);
+                    break;
+                case 'numerical':
+                    sortedLines = sortNumerically(sortedLines);
+                    break;
+                case 'length':
+                    sortedLines = sortByLength(sortedLines);
+                    break;
+                case 'reverse':
+                    sortedLines = lines.reverse();
+                    break;
+                case 'random':
+                    sortedLines = shuffleArray(sortedLines);
+                    break;
+                case 'natural':
+                    sortedLines = sortNaturally(sortedLines);
+                    break;
+            }
+            
+            // Apply ascending/descending
+            if (!sortOptions.ascending && sortOptions.mode !== 'reverse' && sortOptions.mode !== 'random') {
+                sortedLines = sortedLines.reverse();
+            }
+            
+            // Add line numbers if enabled
+            if (sortOptions.addNumbers) {
+                sortedLines = sortedLines.map((line, index) => `${index + 1}. ${line}`);
+            }
+            
+            // Update output
+            document.getElementById('outputText').value = sortedLines.join('\n');
+            updateStats();
+        }
+        
+        // Alphabetical sorting
+        function sortAlphabetically(lines) {
+            return lines.sort((a, b) => {
+                if (!sortOptions.caseSensitive) {
+                    return a.toLowerCase().localeCompare(b.toLowerCase());
+                }
+                return a.localeCompare(b);
             });
-            
-            // Toggle switches
-            document.querySelectorAll('.toggle-switch').forEach(toggle => {
-                toggle.addEventListener('click', () => {
-                    toggle.classList.toggle('active');
-                    const option = toggle.dataset.option;
-                    settings[option === 'keywords' ? 'preserveKeywords' : 
-                            option === 'structure' ? 'maintainStructure' : 'smartCompression'] = 
-                            toggle.classList.contains('active');
+        }
+        
+        // Numerical sorting
+        function sortNumerically(lines) {
+            return lines.sort((a, b) => {
+                const numA = parseFloat(a);
+                const numB = parseFloat(b);
+                
+                // Handle non-numeric values
+                if (isNaN(numA) && isNaN(numB)) return 0;
+                if (isNaN(numA)) return 1;
+                if (isNaN(numB)) return -1;
+                
+                return numA - numB;
+            });
+        }
+        
+        // Length-based sorting
+        function sortByLength(lines) {
+            return lines.sort((a, b) => a.length - b.length);
+        }
+        
+        // Natural sorting (handles numbers within text)
+        function sortNaturally(lines) {
+            return lines.sort((a, b) => {
+                return a.localeCompare(b, undefined, {
+                    numeric: true,
+                    sensitivity: sortOptions.caseSensitive ? 'case' : 'base'
                 });
             });
         }
         
-        // Setup event listeners
-        function setupEventListeners() {
-            document.getElementById('pasteBtn').addEventListener('click', pasteFromClipboard);
-            document.getElementById('clearBtn').addEventListener('click', clearText);
-            document.getElementById('loadSampleBtn').addEventListener('click', loadSample);
-            document.getElementById('shortenBtn').addEventListener('click', shortenText);
-            document.getElementById('copyBtn').addEventListener('click', copyResult);
+        // Shuffle array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+        
+        // Update statistics
+        function updateStats() {
+            const input = document.getElementById('inputText').value;
+            const lines = input.split('\n');
+            
+            const totalLines = lines.length;
+            const nonEmptyLines = lines.filter(line => line.trim() !== '');
+            const uniqueLines = new Set(nonEmptyLines.map(line => 
+                sortOptions.caseSensitive ? line.trim() : line.trim().toLowerCase()
+            )).size;
+            const duplicateLines = nonEmptyLines.length - uniqueLines;
+            const emptyLines = totalLines - nonEmptyLines.length;
+            const totalChars = input.length;
+            const avgLength = nonEmptyLines.length > 0 
+                ? Math.round(nonEmptyLines.reduce((sum, line) => sum + line.trim().length, 0) / nonEmptyLines.length) 
+                : 0;
+            
+            document.getElementById('totalLines').textContent = totalLines;
+            document.getElementById('uniqueLines').textContent = uniqueLines;
+            document.getElementById('duplicateLines').textContent = duplicateLines;
+            document.getElementById('totalChars').textContent = totalChars;
+            document.getElementById('emptyLines').textContent = emptyLines;
+            document.getElementById('avgLength').textContent = avgLength;
         }
         
         // Paste from clipboard
@@ -780,293 +1032,149 @@
             try {
                 const text = await navigator.clipboard.readText();
                 document.getElementById('inputText').value = text;
-                analyzeText();
+                updateStats();
+                sortText();
+                showToast('Text pasted from clipboard!', 'success');
             } catch (err) {
-                console.error('Failed to paste:', err);
+                showToast('Failed to paste from clipboard', 'error');
             }
         }
         
-        // Clear text
-        function clearText() {
-            document.getElementById('inputText').value = '';
-            document.getElementById('outputText').value = '';
-            document.getElementById('outputContainer').innerHTML = `
-                <div class="text-center opacity-50">
-                    <i class="fas fa-file-alt text-4xl mb-4"></i>
-                    <p>Your shortened text will appear here</p>
-                </div>
-            `;
-            document.getElementById('copyBtn').style.display = 'none';
-            document.getElementById('keywordsContainer').classList.add('hidden');
-            currentText = '';
-            shortenedText = '';
-            updateStatistics();
-        }
-        
-        // Load sample text
-        function loadSample() {
-            document.getElementById('inputText').value = sampleText;
-            analyzeText();
-        }
-        
-        // Analyze input text
-        function analyzeText() {
-            currentText = document.getElementById('inputText').value;
-            const shortenBtn = document.getElementById('shortenBtn');
+        // Copy to clipboard
+        async function copyToClipboard() {
+            const output = document.getElementById('outputText').value;
             
-            if (currentText.trim().length > 50) {
-                shortenBtn.disabled = false;
-                shortenBtn.classList.add('pulse-animation');
-            } else {
-                shortenBtn.disabled = true;
-                shortenBtn.classList.remove('pulse-animation');
+            if (!output) {
+                showToast('Nothing to copy!', 'error');
+                return;
             }
             
-            updateStatistics();
+            try {
+                await navigator.clipboard.writeText(output);
+                showToast('Copied to clipboard!', 'success');
+            } catch (err) {
+                showToast('Failed to copy to clipboard', 'error');
+            }
         }
         
-        // Shorten text
-        async function shortenText() {
-            if (!currentText.trim()) return;
+        // Download as file
+        function downloadAsFile() {
+            const output = document.getElementById('outputText').value;
             
-            showProcessingStatus();
+            if (!output) {
+                showToast('Nothing to download!', 'error');
+                return;
+            }
             
-            // Simulate processing with progress
-            await simulateProcessing();
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `sorted-text-${Date.now()}.txt`;
+            link.click();
+            URL.revokeObjectURL(url);
             
-            // Apply shortening algorithm
-            shortenedText = applyShorteningAlgorithm(currentText);
-            
-            // Display result
-            displayResult();
-            hideProcessingStatus();
+            showToast('File downloaded successfully!', 'success');
         }
         
-        // Show processing status
-        function showProcessingStatus() {
-            const status = document.getElementById('processingStatus');
-            status.classList.remove('hidden');
+        // Clear input
+        function clearInput() {
+            if (confirm('Are you sure you want to clear all input?')) {
+                document.getElementById('inputText').value = '';
+                document.getElementById('outputText').value = '';
+                updateStats();
+                showToast('Input cleared!', 'success');
+            }
+        }
+        
+        // Undo last sort
+        function undoSort() {
+            if (historyStack.length === 0) {
+                showToast('Nothing to undo!', 'error');
+                return;
+            }
             
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 15;
-                if (progress > 90) progress = 90;
+            const lastOutput = historyStack.pop();
+            document.getElementById('outputText').value = lastOutput;
+            showToast('Undo successful!', 'success');
+        }
+        
+        // Swap input and output
+        function swapInputOutput() {
+            const input = document.getElementById('inputText').value;
+            const output = document.getElementById('outputText').value;
+            
+            document.getElementById('inputText').value = output;
+            document.getElementById('outputText').value = input;
+            
+            updateStats();
+            showToast('Input and output swapped!', 'success');
+        }
+        
+        // Reset all
+        function resetAll() {
+            if (confirm('Are you sure you want to reset everything?')) {
+                document.getElementById('inputText').value = '';
+                document.getElementById('outputText').value = '';
+                historyStack = [];
                 
-                document.getElementById('progressFill').style.width = progress + '%';
-                document.getElementById('progressText').textContent = Math.round(progress) + '%';
+                // Reset options to default
+                sortOptions = {
+                    mode: 'alphabetical',
+                    ascending: true,
+                    caseSensitive: false,
+                    removeDuplicates: false,
+                    ignoreEmpty: true,
+                    trim: true,
+                    addNumbers: false
+                };
                 
-                if (progress >= 90) {
-                    clearInterval(interval);
-                }
-            }, 100);
+                // Update UI
+                document.querySelectorAll('.sort-mode-option').forEach(option => {
+                    option.classList.remove('active');
+                });
+                document.querySelector('[data-mode="alphabetical"]').classList.add('active');
+                
+                document.getElementById('ascendingToggle').classList.add('active');
+                document.getElementById('caseSensitiveToggle').classList.remove('active');
+                document.getElementById('removeDuplicatesToggle').classList.remove('active');
+                document.getElementById('ignoreEmptyToggle').classList.add('active');
+                document.getElementById('trimToggle').classList.add('active');
+                document.getElementById('addNumbersToggle').classList.remove('active');
+                
+                updateStats();
+                showToast('Everything has been reset!', 'success');
+            }
         }
         
-        // Hide processing status
-        function hideProcessingStatus() {
-            document.getElementById('progressFill').style.width = '100%';
-            document.getElementById('progressText').textContent = '100%';
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.className = `toast ${type}`;
             
             setTimeout(() => {
-                document.getElementById('processingStatus').classList.add('hidden');
-            }, 500);
+                toast.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
         }
         
-        // Simulate processing delay
-        function simulateProcessing() {
-            return new Promise(resolve => {
-                setTimeout(resolve, 2000 + Math.random() * 1000);
-            });
-        }
-        
-        // Apply shortening algorithm
-        function applyShorteningAlgorithm(text) {
-            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
-            const targetLength = Math.ceil(sentences.length * (settings.length / 100));
-            
-            let result = '';
-            
-            switch (settings.mode) {
-                case 'extractive':
-                    result = extractiveSummarization(sentences, targetLength);
-                    break;
-                case 'abstractive':
-                    result = abstractiveSummarization(sentences, targetLength);
-                    break;
-                case 'keyword':
-                    result = keywordBasedSummarization(sentences, targetLength);
-                    break;
-            }
-            
-            if (settings.smartCompression) {
-                result = applySmartCompression(result);
-            }
-            
-            return result.trim();
-        }
-        
-        // Extractive summarization
-        function extractiveSummarization(sentences, targetLength) {
-            // Score sentences based on word frequency and position
-            const wordFreq = {};
-            const allWords = sentences.join(' ').toLowerCase().split(/\W+/);
-            
-            allWords.forEach(word => {
-                if (word.length > 3) {
-                    wordFreq[word] = (wordFreq[word] || 0) + 1;
-                }
-            });
-            
-            const scoredSentences = sentences.map((sentence, index) => {
-                const words = sentence.toLowerCase().split(/\W+/);
-                let score = 0;
-                
-                words.forEach(word => {
-                    if (wordFreq[word]) {
-                        score += wordFreq[word];
-                    }
-                });
-                
-                // Boost score for early sentences
-                if (index < sentences.length * 0.3) score *= 1.5;
-                
-                return { sentence: sentence.trim(), score, index };
-            });
-            
-            return scoredSentences
-                .sort((a, b) => b.score - a.score)
-                .slice(0, targetLength)
-                .sort((a, b) => a.index - b.index)
-                .map(s => s.sentence)
-                .join('. ') + '.';
-        }
-        
-        // Abstractive summarization (simplified)
-        function abstractiveSummarization(sentences, targetLength) {
-            const keyPoints = extractKeyPoints(sentences);
-            const compressed = keyPoints.slice(0, targetLength);
-            
-            return compressed.map(point => {
-                // Simplify sentence structure
-                return point.replace(/\b(very|really|quite|rather|extremely)\s+/gi, '')
-                          .replace(/\b(in order to|for the purpose of)\b/gi, 'to')
-                          .replace(/\b(due to the fact that|because of the fact that)\b/gi, 'because');
-            }).join('. ') + '.';
-        }
-        
-        // Keyword-based summarization
-        function keywordBasedSummarization(sentences, targetLength) {
-            const keywords = extractKeywords(sentences.join(' '));
-            
-            const keywordSentences = sentences.filter(sentence => {
-                const sentenceWords = sentence.toLowerCase().split(/\W+/);
-                return keywords.some(keyword => 
-                    sentenceWords.some(word => word.includes(keyword) || keyword.includes(word))
-                );
-            });
-            
-            if (settings.preserveKeywords) {
-                displayKeywords(keywords);
-            }
-            
-            return keywordSentences.slice(0, targetLength).join('. ') + '.';
-        }
-        
-        // Extract key points
-        function extractKeyPoints(sentences) {
-            return sentences.filter(sentence => {
-                const words = sentence.split(' ');
-                return words.length >= 8 && words.length <= 25; // Medium length sentences
-            });
-        }
-        
-        // Extract keywords
-        function extractKeywords(text) {
-            const words = text.toLowerCase().split(/\W+/);
-            const stopwords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'this', 'that', 'these', 'those', 'is', 'are', 'was', 'were', 'be', 'been', 'have', 'has', 'had', 'will', 'would', 'could', 'should'];
-            
-            const wordCount = {};
-            words.forEach(word => {
-                if (word.length > 3 && !stopwords.includes(word)) {
-                    wordCount[word] = (wordCount[word] || 0) + 1;
-                }
-            });
-            
-            return Object.entries(wordCount)
-                .sort(([,a], [,b]) => b - a)
-                .slice(0, 8)
-                .map(([word]) => word);
-        }
-        
-        // Apply smart compression
-        function applySmartCompression(text) {
-            return text
-                .replace(/\b(in addition|furthermore|moreover)\b/gi, 'also')
-                .replace(/\b(as a result|consequently|therefore)\b/gi, 'so')
-                .replace(/\b(it is important to note that|it should be mentioned that)\b/gi, '')
-                .replace(/\s+/g, ' ')
-                .trim();
-        }
-        
-        // Display keywords
-        function displayKeywords(keywords) {
-            const container = document.getElementById('keywordsContainer');
-            const list = document.getElementById('keywordsList');
-            
-            list.innerHTML = keywords.map(keyword => 
-                `<span class="keyword-tag">${keyword}</span>`
-            ).join('');
-            
-            container.classList.remove('hidden');
-        }
-        
-        // Display result
-        function displayResult() {
-            const outputContainer = document.getElementById('outputContainer');
-            const outputText = document.getElementById('outputText');
-            
-            outputContainer.classList.add('hidden');
-            outputText.classList.remove('hidden');
-            outputText.value = shortenedText;
-            
-            document.getElementById('copyBtn').style.display = 'block';
-            
-            updateStatistics();
-        }
-        
-        // Copy result
-        async function copyResult() {
-            try {
-                await navigator.clipboard.writeText(shortenedText);
-                const btn = document.getElementById('copyBtn');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                }, 2000);
-            } catch (err) {
-                console.error('Failed to copy:', err);
-            }
-        }
-        
-        // Update statistics
-        function updateStatistics() {
-            const originalWords = currentText ? currentText.split(/\s+/).filter(w => w.length > 0).length : 0;
-            const shortenedWords = shortenedText ? shortenedText.split(/\s+/).filter(w => w.length > 0).length : 0;
-            const compressionRatio = originalWords > 0 ? Math.round(((originalWords - shortenedWords) / originalWords) * 100) : 0;
-            const originalTime = Math.round(originalWords / 200); // 200 words per minute
-            const shortenedTime = Math.round(shortenedWords / 200);
-            const timeSaved = originalTime - shortenedTime;
-            
-            document.getElementById('originalWords').textContent = originalWords;
-            document.getElementById('shortenedWords').textContent = shortenedWords;
-            document.getElementById('compressionRatio').textContent = compressionRatio + '%';
-            document.getElementById('readingTime').textContent = Math.max(0, timeSaved) + ' min';
-            
-            const sentences = currentText ? currentText.split(/[.!?]+/).filter(s => s.trim().length > 0).length : 0;
-            const characters = currentText ? currentText.length : 0;
-            
-            document.getElementById('sentences').textContent = sentences;
-            document.getElementById('characters').textContent = characters.toLocaleString();
+        // Debounce function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
         }
     </script>
 </body>
