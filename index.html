@@ -165,7 +165,6 @@
             text-decoration: none;
             color: inherit;
             display: block;
-            /* DEBUG FIX: Added will-change to hint browser for performance optimization, fixing scroll lag/blink */
             will-change: transform, box-shadow, border-color;
         }
         
@@ -289,6 +288,7 @@
         .category-color { background: linear-gradient(135deg, #a8edea, #fed6e3); }
         .category-seo { background: linear-gradient(135deg, #ff9a9e, #fecfef); }
         .category-utility { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+        .category-audio { background: linear-gradient(135deg, #ff6a00, #ee0979); }
         
         .nav-link {
             padding: 8px 16px;
@@ -369,6 +369,476 @@
         @media (max-width: 768px) {
             .section-title { font-size: 2rem; }
             .section-subtitle { font-size: 1rem; }
+        }
+        
+        /* ============================================
+           PROFESSIONAL CHATBOT STYLES (Intercom/Drift inspired)
+           ============================================ */
+        
+        #chatbot-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Chatbot Button (Floating Action Button) */
+        #chatbot-button {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #chatbot-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+        }
+        
+        #chatbot-button:active {
+            transform: scale(0.95);
+        }
+        
+        #chatbot-button i {
+            color: white;
+            font-size: 28px;
+            transition: transform 0.3s ease;
+        }
+        
+        #chatbot-button.open i {
+            transform: rotate(180deg);
+        }
+        
+        /* Notification Badge */
+        .chat-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            border: 3px solid var(--dark-bg);
+            animation: pulse-badge 2s infinite;
+        }
+        
+        body.light-theme .chat-badge {
+            border-color: var(--light-bg);
+        }
+        
+        @keyframes pulse-badge {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Chatbot Window */
+        #chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 400px;
+            max-width: calc(100vw - 48px);
+            height: 600px;
+            max-height: calc(100vh - 120px);
+            background: var(--dark-surface);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            transform-origin: bottom right;
+            animation: chatWindowOpen 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        body.light-theme #chatbot-window {
+            background: var(--light-surface);
+            border-color: var(--light-border);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        #chatbot-window.active {
+            display: flex;
+        }
+        
+        @keyframes chatWindowOpen {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        /* Chat Header */
+        #chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+        
+        #chat-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        #chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        #chat-header-text h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        #chat-status {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse-dot 2s infinite;
+        }
+        
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        #chat-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #chat-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Chat Messages */
+        #chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            scroll-behavior: smooth;
+        }
+        
+        #chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        #chat-messages::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        #chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(102, 126, 234, 0.5);
+            border-radius: 10px;
+        }
+        
+        body.light-theme #chat-messages::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .chat-message {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            animation: messageSlideIn 0.3s ease;
+        }
+        
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chat-message.user {
+            flex-direction: row-reverse;
+        }
+        
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+        
+        .message-avatar.bot {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .message-avatar.user {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+        }
+        
+        .message-content {
+            max-width: 75%;
+            position: relative;
+        }
+        
+        .message-bubble {
+            padding: 12px 16px;
+            border-radius: 16px;
+            line-height: 1.5;
+            font-size: 14px;
+            word-wrap: break-word;
+        }
+        
+        .chat-message.bot .message-bubble {
+            background: rgba(102, 126, 234, 0.1);
+            border-bottom-left-radius: 4px;
+            color: var(--dark-text);
+        }
+        
+        body.light-theme .chat-message.bot .message-bubble {
+            background: var(--light-surface-elevated);
+            color: var(--light-text);
+        }
+        
+        .chat-message.user .message-bubble {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .message-time {
+            font-size: 11px;
+            opacity: 0.6;
+            margin-top: 4px;
+            padding: 0 4px;
+        }
+        
+        /* Quick Replies */
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .quick-reply-btn {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        body.light-theme .quick-reply-btn {
+            background: white;
+            border-color: #667eea;
+        }
+        
+        .quick-reply-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        /* Typing Indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 0;
+        }
+        
+        .typing-indicator .message-bubble {
+            display: flex;
+            gap: 6px;
+            padding: 16px;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #667eea;
+            animation: typingAnimation 1.4s infinite;
+        }
+        
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.7; }
+            30% { transform: translateY(-10px); opacity: 1; }
+        }
+        
+        /* Chat Input */
+        #chat-input-area {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+            flex-shrink: 0;
+            background: var(--dark-surface-elevated);
+        }
+        
+        body.light-theme #chat-input-area {
+            background: var(--light-surface);
+            border-top-color: var(--light-border);
+        }
+        
+        #chat-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 12px 16px;
+            color: inherit;
+            font-family: inherit;
+            font-size: 14px;
+            resize: none;
+            max-height: 120px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        
+        body.light-theme #chat-input {
+            background: var(--light-surface-elevated);
+            border-color: var(--light-border);
+        }
+        
+        #chat-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        #chat-send {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+        
+        #chat-send:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        #chat-send:active {
+            transform: scale(0.95);
+        }
+        
+        #chat-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Powered By Footer */
+        #chat-footer {
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 11px;
+            opacity: 0.5;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        body.light-theme #chat-footer {
+            border-top-color: var(--light-border);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            #chatbot-container {
+                bottom: 16px;
+                right: 16px;
+            }
+            
+            #chatbot-button {
+                width: 56px;
+                height: 56px;
+            }
+            
+            #chatbot-button i {
+                font-size: 24px;
+            }
+            
+            #chatbot-window {
+                width: calc(100vw - 32px);
+                height: calc(100vh - 100px);
+                bottom: 72px;
+            }
         }
     </style>
 </head>
@@ -453,12 +923,10 @@
             
             <!-- Beauty Tools -->
             <div class="section-header">
-                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
                 <h2 class="section-title"><i class="fas fa-gem mr-4"></i>Beauty Tools</h2>
-                <p class="section-subtitle">Professional skin analysis and beauty enhancement tools</p>
+                <p class="section-subtitle">Professional skin and hair analysis with AI-powered technology</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16" data-category="beauty">
-                <!-- FIX: Updated href to point to a specific .html file -->
                 <a href="glass-skin-checker.html" class="glass-card p-6 fade-in tool-card">
                     <div class="text-3xl mb-4 text-center"><i class="fas fa-gem"></i></div>
                     <h3 class="text-lg font-semibold mb-2 text-center">Glass Skin Checker</h3>
@@ -467,7 +935,6 @@
                         <span class="tool-category category-beauty">beauty</span>
                     </div>
                 </a>
-                <!-- FIX: Updated href to point to a specific .html file -->
                 <a href="skin-type-checker.html" class="glass-card p-6 fade-in tool-card">
                     <div class="text-3xl mb-4 text-center"><i class="fas fa-user-check"></i></div>
                     <h3 class="text-lg font-semibold mb-2 text-center">Skin Type Checker</h3>
@@ -476,11 +943,42 @@
                         <span class="tool-category category-beauty">beauty</span>
                     </div>
                 </a>
+                <a href="hair-type-analyzer.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-cut"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Hair Type Analyzer</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">AI-powered hair analysis with personalized care recommendations</p>
+                    <div class="text-center">
+                        <span class="tool-category category-beauty">beauty</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Audio Tools (NEW SECTION) -->
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-microphone mr-4"></i>Audio Tools</h2>
+                <p class="section-subtitle">Professional audio processing and speech conversion tools</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16" data-category="audio">
+                <a href="audio-to-text.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-microphone-alt"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Audio to Text</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Convert speech to text with advanced speech recognition</p>
+                    <div class="text-center">
+                        <span class="tool-category category-audio">audio</span>
+                    </div>
+                </a>
+                <a href="text-to-audio.html" class="glass-card p-6 fade-in tool-card">
+                    <div class="text-3xl mb-4 text-center"><i class="fas fa-volume-up"></i></div>
+                    <h3 class="text-lg font-semibold mb-2 text-center">Text to Audio</h3>
+                    <p class="text-sm opacity-70 text-center mb-4">Generate natural-sounding speech from text with multiple voices</p>
+                    <div class="text-center">
+                        <span class="tool-category category-audio">audio</span>
+                    </div>
+                </a>
             </div>
             
             <!-- Image Tools -->
             <div class="section-header">
-                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
                 <h2 class="section-title"><i class="fas fa-images mr-4"></i>Image Tools</h2>
                 <p class="section-subtitle">Powerful image processing and editing utilities</p>
             </div>
@@ -537,7 +1035,6 @@
             
             <!-- Document Tools -->
             <div class="section-header">
-                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
                 <h2 class="section-title"><i class="fas fa-file-alt mr-4"></i>Document Tools</h2>
                 <p class="section-subtitle">Professional PDF and document processing tools</p>
             </div>
@@ -594,7 +1091,6 @@
             
             <!-- Calculator Tools -->
             <div class="section-header">
-                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
                 <h2 class="section-title"><i class="fas fa-calculator mr-4"></i>Calculator Tools</h2>
                 <p class="section-subtitle">Advanced calculators for all your computational needs</p>
             </div>
@@ -651,7 +1147,6 @@
             
             <!-- Text Tools -->
             <div class="section-header">
-                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
                 <h2 class="section-title"><i class="fas fa-font mr-4"></i>Text Tools</h2>
                 <p class="section-subtitle">Powerful text processing and manipulation utilities</p>
             </div>
@@ -708,7 +1203,6 @@
             
             <!-- Web/Developer Tools -->
             <div class="section-header">
-                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
                 <h2 class="section-title"><i class="fas fa-code mr-4"></i>Web/Developer Tools</h2>
                 <p class="section-subtitle">Essential tools for web developers and programmers</p>
             </div>
@@ -765,7 +1259,6 @@
             
             <!-- Color Tools -->
             <div class="section-header">
-                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
                 <h2 class="section-title"><i class="fas fa-palette mr-4"></i>Color Tools</h2>
                 <p class="section-subtitle">Professional color analysis and manipulation tools</p>
             </div>
@@ -822,7 +1315,6 @@
             
             <!-- SEO & Marketing Tools -->
             <div class="section-header">
-                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
                 <h2 class="section-title"><i class="fas fa-chart-line mr-4"></i>SEO & Marketing Tools</h2>
                 <p class="section-subtitle">Optimize your content for search engines and marketing</p>
             </div>
@@ -855,7 +1347,6 @@
             
             <!-- Utility Tools -->
             <div class="section-header">
-                <!-- ENHANCEMENT: Replaced emoji with a professional Font Awesome icon -->
                 <h2 class="section-title"><i class="fas fa-tools mr-4"></i>Utility Tools</h2>
                 <p class="section-subtitle">Essential utilities for everyday digital tasks</p>
             </div>
@@ -965,9 +1456,9 @@
                     <div class="text-4xl mb-4">📧</div>
                     <h3 class="text-xl font-semibold mb-4">Contact Us</h3>
                     <p class="mb-6 opacity-80">For support, feature requests, or general inquiries, reach out to us via email.</p>
-                    <a href="mailto:toolture@gmail.com" class="btn-gradient">
+                    <a href="/cdn-cgi/l/email-protection#2d5942424159585f486d4a404c4441034e4240" class="btn-gradient">
                         <i class="fas fa-envelope mr-2"></i>
-                        toolture@gmail.com
+                        <span class="__cf_email__" data-cfemail="d2a6bdbdbea6a7a0b792b5bfb3bbbefcb1bdbf">[email&#160;protected]</span>
                     </a>
                 </div>
             </div>
@@ -988,7 +1479,7 @@
                 <div class="flex flex-wrap justify-center gap-6 mb-6">
                     <a href="#home" class="nav-link text-sm">Home</a>
                     <a href="#tools" class="nav-link text-sm">Tools</a>
-                    <a href="mailto:toolture@gmail.com" class="nav-link text-sm">Contact</a>
+                    <a href="/cdn-cgi/l/email-protection#42362d2d2e3637302702252f232b2e6c212d2f" class="nav-link text-sm">Contact</a>
                     <a href="privacy-policy.html" class="nav-link text-sm">Privacy Policy</a>
                     <a href="terms-of-use.html" class="nav-link text-sm">Terms of Use</a>
                 </div>
@@ -1000,8 +1491,62 @@
         </footer>
     </main>
     
-    <script>
-        // Theme Management
+    <!-- ============================================
+         PROFESSIONAL AI CHATBOT (Intercom/Drift inspired)
+         ============================================ -->
+    <div id="chatbot-container">
+        <!-- Chatbot Button -->
+        <button id="chatbot-button" onclick="toggleChatbot()" aria-label="Open Tool Xeno Assistant">
+            <i class="fas fa-comments"></i>
+            <span class="chat-badge" id="chat-badge">1</span>
+        </button>
+        
+        <!-- Chatbot Window -->
+        <div id="chatbot-window">
+            <!-- Chat Header -->
+            <div id="chat-header">
+                <div id="chat-header-left">
+                    <div id="chat-avatar">🛠️</div>
+                    <div id="chat-header-text">
+                        <h3>Tool Xeno Assistant</h3>
+                        <div id="chat-status">
+                            <span class="status-dot"></span>
+                            <span>Always available</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="chat-close" onclick="toggleChatbot()" aria-label="Close chat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Chat Messages -->
+            <div id="chat-messages"></div>
+            
+            <!-- Chat Input -->
+            <div id="chat-input-area">
+                <textarea 
+                    id="chat-input" 
+                    placeholder="Ask me anything about our tools..." 
+                    rows="1"
+                    onkeydown="handleChatInputKeydown(event)"
+                ></textarea>
+                <button id="chat-send" onclick="sendMessage()" aria-label="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            
+            <!-- Powered By Footer -->
+            <div id="chat-footer">
+                Powered by Tool Xeno AI
+            </div>
+        </div>
+    </div>
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // ============================================
+        // THEME MANAGEMENT
+        // ============================================
         function toggleTheme() {
             document.body.classList.toggle('light-theme');
             const isLight = document.body.classList.contains('light-theme');
@@ -1014,12 +1559,13 @@
             }
         }
         
-        // Particle System
+        // ============================================
+        // PARTICLE SYSTEM
+        // ============================================
         function initializeParticles() {
             const particlesContainer = document.getElementById('particles');
             if (!particlesContainer) return;
             
-            // FIX: Reduced particle count for performance
             const particleCount = window.innerWidth < 768 ? 20 : 50;
             
             for (let i = 0; i < particleCount; i++) {
@@ -1037,7 +1583,9 @@
             }
         }
         
-        // Search Functionality
+        // ============================================
+        // SEARCH FUNCTIONALITY
+        // ============================================
         function filterTools() {
             const searchTerm = document.getElementById('toolSearch').value.toLowerCase();
             const toolCards = document.querySelectorAll('.tool-card');
@@ -1068,7 +1616,9 @@
             });
         }
         
-        // Smooth Scrolling for Navigation
+        // ============================================
+        // NAVIGATION
+        // ============================================
         function initializeNavigation() {
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -1082,7 +1632,9 @@
             });
         }
         
-        // Scroll Animations
+        // ============================================
+        // SCROLL ANIMATIONS
+        // ============================================
         function initializeScrollAnimations() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1094,12 +1646,402 @@
             }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
             document.querySelectorAll('.tool-card, .glass-card').forEach(el => {
-                // FIX: Removed redundant class removal that could cause blinking
                 observer.observe(el);
             });
         }
         
-        // Initialize everything when DOM is loaded
+        // ============================================
+        // PROFESSIONAL AI CHATBOT
+        // ============================================
+        
+        // Tool Knowledge Base
+        const toolKnowledge = {
+            // Beauty Tools
+            'glass skin checker': {
+                category: 'Beauty',
+                description: 'Advanced skin analysis tool that evaluates your skin clarity, texture, and translucency using professional dermatology metrics.',
+                features: ['AI-powered skin scoring', 'Pore size analysis', 'Texture evaluation', 'Clarity measurement', 'Professional recommendations'],
+                uses: 'Upload a selfie to get instant professional skin analysis with a glass skin score and personalized skincare recommendations.'
+            },
+            'skin type checker': {
+                category: 'Beauty',
+                description: 'Professional 15-point skin analysis system that identifies your exact skin type and provides customized skincare routines.',
+                features: ['15-point analysis system', 'Oily/Dry/Combination detection', 'Sensitivity assessment', 'Age-appropriate recommendations', 'PDF reports'],
+                uses: 'Perfect for determining your skin type and getting personalized product recommendations from dermatology experts.'
+            },
+            'hair type analyzer': {
+                category: 'Beauty',
+                description: 'AI-powered hair analysis tool using computer vision to identify your hair type, texture, porosity, and curl pattern.',
+                features: ['Andre Walker hair typing', 'Porosity assessment', 'Density measurement', 'Curl pattern detection', 'Care routine suggestions'],
+                uses: 'Upload hair photos to discover your hair type (1A-4C) and get personalized hair care products and styling recommendations.'
+            },
+            
+            // Audio Tools
+            'audio to text': {
+                category: 'Audio',
+                description: 'Professional speech-to-text converter using advanced Web Speech API for accurate transcription of audio recordings.',
+                features: ['Real-time transcription', 'Multiple language support', 'Punctuation detection', 'Speaker identification', 'Export to TXT/DOCX'],
+                uses: 'Record meetings, lectures, interviews and instantly convert them to searchable text. Great for content creators and journalists.'
+            },
+            'text to audio': {
+                category: 'Audio',
+                description: 'Natural text-to-speech converter with multiple voices, accents, and languages for creating professional audio content.',
+                features: ['40+ natural voices', 'Speed control', 'Pitch adjustment', 'Multiple accents', 'Download as MP3/WAV'],
+                uses: 'Create voiceovers for videos, audiobooks, podcasts, or accessibility features. Perfect for content creators and educators.'
+            },
+            
+            // Image Tools
+            'image converter': {
+                category: 'Image',
+                description: 'Convert images between all major formats (JPG, PNG, WebP, GIF, SVG) with quality preservation.',
+                features: ['20+ format support', 'Batch conversion', 'Quality control', 'Resize on convert', 'Fast processing'],
+                uses: 'Convert photos for web optimization, social media, or print. Ideal for photographers and web designers.'
+            },
+            'image compressor': {
+                category: 'Image',
+                description: 'Reduce image file size by up to 90% without visible quality loss using intelligent compression algorithms.',
+                features: ['Smart compression', 'Quality preview', 'Batch processing', 'Before/after comparison', 'Lossless option'],
+                uses: 'Optimize images for faster website loading, email attachments, or storage savings.'
+            },
+            
+            // Document Tools
+            'pdf to word': {
+                category: 'Document',
+                description: 'Convert PDF documents to editable Word format while preserving formatting, images, and layout.',
+                features: ['Layout preservation', 'Image extraction', 'Table conversion', 'Font matching', 'Fast processing'],
+                uses: 'Edit PDF documents, extract content, or repurpose existing documents for reports and presentations.'
+            },
+            
+            // Calculator Tools
+            'bmi calculator': {
+                category: 'Calculator',
+                description: 'Calculate Body Mass Index with WHO standards, get health category, and receive personalized fitness recommendations.',
+                features: ['Metric/Imperial units', 'Age-adjusted ranges', 'Health category', 'Ideal weight range', 'Fitness tips'],
+                uses: 'Track fitness progress, set weight goals, or assess health status for medical consultations.'
+            },
+            
+            // Developer Tools
+            'json formatter': {
+                category: 'Developer',
+                description: 'Format, validate, and beautify JSON data with syntax highlighting and error detection.',
+                features: ['Syntax validation', 'Auto-formatting', 'Error highlighting', 'Minify/Beautify', 'Tree view'],
+                uses: 'Debug API responses, validate JSON files, or format configuration files for web development.'
+            }
+        };
+        
+        // Chatbot State
+        let chatbotOpen = false;
+        let conversationHistory = [];
+        
+        // Toggle Chatbot
+        function toggleChatbot() {
+            chatbotOpen = !chatbotOpen;
+            const chatWindow = document.getElementById('chatbot-window');
+            const chatButton = document.getElementById('chatbot-button');
+            const chatBadge = document.getElementById('chat-badge');
+            
+            if (chatbotOpen) {
+                chatWindow.classList.add('active');
+                chatButton.classList.add('open');
+                chatBadge.style.display = 'none';
+                
+                // Initialize chat if empty
+                if (conversationHistory.length === 0) {
+                    initializeChat();
+                }
+                
+                // Focus input
+                setTimeout(() => {
+                    document.getElementById('chat-input').focus();
+                }, 300);
+            } else {
+                chatWindow.classList.remove('active');
+                chatButton.classList.remove('open');
+            }
+        }
+        
+        // Initialize Chat with Welcome Message
+        function initializeChat() {
+            addBotMessage(
+                "👋 Hi! I'm your Tool Xeno Assistant. I can help you with:",
+                [
+                    "Find the right tool",
+                    "Tool features",
+                    "How to use tools",
+                    "Tool recommendations"
+                ]
+            );
+        }
+        
+        // Add Bot Message
+        function addBotMessage(text, quickReplies = null) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message bot';
+            
+            const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            
+            let quickRepliesHtml = '';
+            if (quickReplies) {
+                quickRepliesHtml = '<div class="quick-replies">';
+                quickReplies.forEach(reply => {
+                    quickRepliesHtml += `<button class="quick-reply-btn" onclick="handleQuickReply('${reply}')">${reply}</button>`;
+                });
+                quickRepliesHtml += '</div>';
+            }
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar bot">🛠️</div>
+                <div class="message-content">
+                    <div class="message-bubble">${text}</div>
+                    ${quickRepliesHtml}
+                    <div class="message-time">${currentTime}</div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+            
+            conversationHistory.push({ role: 'bot', content: text });
+        }
+        
+        // Add User Message
+        function addUserMessage(text) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message user';
+            
+            const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar user">👤</div>
+                <div class="message-content">
+                    <div class="message-bubble">${text}</div>
+                    <div class="message-time">${currentTime}</div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+            
+            conversationHistory.push({ role: 'user', content: text });
+        }
+        
+        // Show Typing Indicator
+        function showTypingIndicator() {
+            const messagesContainer = document.getElementById('chat-messages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'chat-message bot typing-indicator';
+            typingDiv.id = 'typing-indicator';
+            
+            typingDiv.innerHTML = `
+                <div class="message-avatar bot">🛠️</div>
+                <div class="message-content">
+                    <div class="message-bubble">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(typingDiv);
+            scrollToBottom();
+        }
+        
+        // Hide Typing Indicator
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+        
+        // Scroll to Bottom
+        function scrollToBottom() {
+            const messagesContainer = document.getElementById('chat-messages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // Handle Quick Reply
+        function handleQuickReply(text) {
+            addUserMessage(text);
+            processUserMessage(text);
+        }
+        
+        // Send Message
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+            
+            addUserMessage(message);
+            input.value = '';
+            input.style.height = 'auto';
+            
+            processUserMessage(message);
+        }
+        
+        // Handle Input Keydown
+        function handleChatInputKeydown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+            
+            // Auto-resize textarea
+            const input = event.target;
+            input.style.height = 'auto';
+            input.style.height = input.scrollHeight + 'px';
+        }
+        
+        // Process User Message (AI Logic)
+        function processUserMessage(message) {
+            showTypingIndicator();
+            
+            // Simulate AI processing delay
+            setTimeout(() => {
+                hideTypingIndicator();
+                
+                const lowerMessage = message.toLowerCase();
+                
+                // Intent Detection
+                if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                    addBotMessage(
+                        "Hello! 👋 How can I help you with Tool Xeno today?",
+                        ["Show all tools", "Beauty tools", "Audio tools", "Image tools"]
+                    );
+                }
+                else if (lowerMessage.includes('find') || lowerMessage.includes('search') || lowerMessage.includes('looking for')) {
+                    addBotMessage(
+                        "I can help you find the perfect tool! What type of tool are you looking for?",
+                        ["Beauty analysis", "Audio conversion", "Image editing", "PDF tools"]
+                    );
+                }
+                else if (lowerMessage.includes('beauty') || lowerMessage.includes('skin') || lowerMessage.includes('hair')) {
+                    addBotMessage(
+                        "🌟 **Beauty Tools Available:**\n\n" +
+                        "• **Glass Skin Checker** - AI skin analysis\n" +
+                        "• **Skin Type Checker** - 15-point analysis\n" +
+                        "• **Hair Type Analyzer** - Professional hair assessment\n\n" +
+                        "Which one interests you?",
+                        ["Glass Skin Checker", "Skin Type Checker", "Hair Type Analyzer"]
+                    );
+                }
+                else if (lowerMessage.includes('audio') || lowerMessage.includes('speech') || lowerMessage.includes('voice')) {
+                    addBotMessage(
+                        "🎙️ **Audio Tools Available:**\n\n" +
+                        "• **Audio to Text** - Speech recognition & transcription\n" +
+                        "• **Text to Audio** - Natural text-to-speech conversion\n\n" +
+                        "Both support multiple languages and formats!",
+                        ["Audio to Text details", "Text to Audio details"]
+                    );
+                }
+                else if (lowerMessage.includes('image') || lowerMessage.includes('photo') || lowerMessage.includes('picture')) {
+                    addBotMessage(
+                        "🖼️ **Image Tools Available:**\n\n" +
+                        "• Image Converter - 20+ formats\n" +
+                        "• Image Compressor - Up to 90% reduction\n" +
+                        "• Image Resizer - Precise dimensions\n" +
+                        "• Image Cropper - Advanced editing\n" +
+                        "• OCR - Extract text from images\n\n" +
+                        "What would you like to do?",
+                        ["Compress image", "Convert format", "Resize image"]
+                    );
+                }
+                else if (lowerMessage.includes('pdf') || lowerMessage.includes('document')) {
+                    addBotMessage(
+                        "📄 **Document Tools:**\n\n" +
+                        "• PDF ↔ Word Converter\n" +
+                        "• PDF Compressor\n" +
+                        "• PDF Merger & Splitter\n" +
+                        "• PDF Lock/Unlock\n" +
+                        "• eSign PDF\n\n" +
+                        "All tools work client-side for maximum security!",
+                        ["More details", "Show all tools"]
+                    );
+                }
+                // Specific Tool Queries
+                else if (checkToolMention(lowerMessage)) {
+                    const toolInfo = findToolInfo(lowerMessage);
+                    if (toolInfo) {
+                        addBotMessage(
+                            `**${toolInfo.name}** (${toolInfo.category})\n\n` +
+                            `${toolInfo.description}\n\n` +
+                            `**Features:**\n${toolInfo.features.map(f => `• ${f}`).join('\n')}\n\n` +
+                            `**Best Uses:** ${toolInfo.uses}`,
+                            ["Try this tool", "Show similar tools", "Main menu"]
+                        );
+                    }
+                }
+                else if (lowerMessage.includes('how') || lowerMessage.includes('use')) {
+                    addBotMessage(
+                        "All our tools are super easy to use! Just:\n\n" +
+                        "1️⃣ Click on the tool you need\n" +
+                        "2️⃣ Upload your file or input data\n" +
+                        "3️⃣ Click process/convert\n" +
+                        "4️⃣ Download your result\n\n" +
+                        "Everything runs in your browser - 100% private!",
+                        ["Show tool categories", "Find a specific tool"]
+                    );
+                }
+                else if (lowerMessage.includes('free') || lowerMessage.includes('cost') || lowerMessage.includes('price')) {
+                    addBotMessage(
+                        "All Tool Xeno tools are **100% FREE** forever! 🎉\n\n" +
+                        "• No hidden fees\n" +
+                        "• No subscriptions\n" +
+                        "• No registration required\n" +
+                        "• No usage limits\n\n" +
+                        "Professional tools for everyone!",
+                        ["Explore tools"]
+                    );
+                }
+                else if (lowerMessage.includes('safe') || lowerMessage.includes('secure') || lowerMessage.includes('privacy')) {
+                    addBotMessage(
+                        "🔒 **100% Secure & Private:**\n\n" +
+                        "All processing happens **locally in your browser**.\n\n" +
+                        "• Your files NEVER leave your device\n" +
+                        "• No server uploads\n" +
+                        "• No data collection\n" +
+                        "• Complete privacy guaranteed\n\n" +
+                        "Client-side technology at its best!",
+                        ["Learn more", "Show tools"]
+                    );
+                }
+                else {
+                    // Default fallback with suggestions
+                    addBotMessage(
+                        "I'm here to help! You can ask me about:\n\n" +
+                        "• Specific tools and their features\n" +
+                        "• How to use any tool\n" +
+                        "• Tool recommendations\n" +
+                        "• Technical specifications\n\n" +
+                        "What would you like to know?",
+                        ["Show all tools", "Beauty tools", "Audio tools", "Developer tools"]
+                    );
+                }
+            }, 800 + Math.random() * 400); // Realistic delay
+        }
+        
+        // Check if message mentions a tool
+        function checkToolMention(message) {
+            return Object.keys(toolKnowledge).some(tool => message.includes(tool));
+        }
+        
+        // Find tool information
+        function findToolInfo(message) {
+            for (const [toolName, info] of Object.entries(toolKnowledge)) {
+                if (message.includes(toolName)) {
+                    return { name: toolName.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), ...info };
+                }
+            }
+            return null;
+        }
+        
+        // ============================================
+        // INITIALIZATION
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             initializeTheme();
             initializeParticles();
