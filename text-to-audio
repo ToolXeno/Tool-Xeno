@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Text to Audio Converter - Tool Xeno</title>
+    <meta name="description" content="Advanced text-to-speech converter with multiple voices, languages, real-time playback, and audio download. Professional TTS tool with voice modulation, SSML support, and batch processing.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        .btn-gradient:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+
+        .textarea-custom {
+            width: 100%;
+            min-height: 200px;
+            padding: 20px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--dark-text);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .textarea-custom {
+            background: rgba(0, 0, 0, 0.02);
+            color: var(--light-text);
+            border-color: var(--light-border);
+        }
+
+        .textarea-custom:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .select-custom {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--dark-text);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .select-custom {
+            background: rgba(0, 0, 0, 0.02);
+            color: var(--light-text);
+            border-color: var(--light-border);
+        }
+
+        .select-custom:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .slider-custom {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .slider-custom {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .slider-custom::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .slider-custom::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .waveform-container {
+            width: 100%;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.light-theme .waveform-container {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .waveform-bar {
+            width: 3px;
+            margin: 0 2px;
+            background: var(--primary-gradient);
+            border-radius: 3px;
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { height: 20%; }
+            50% { height: 80%; }
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        body.light-theme .audio-controls {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        body.light-theme .progress-bar {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 4px;
+            transition: width 0.1s linear;
+            width: 0%;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .stat-card {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+
+        .voice-card {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        body.light-theme .voice-card {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .voice-card:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .voice-card.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        .voice-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .keyboard-shortcuts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .shortcut-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        body.light-theme .shortcut-item {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .shortcut-key {
+            padding: 4px 8px;
+            background: rgba(102, 126, 234, 0.3);
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .audio-controls {
+                flex-wrap: wrap;
+            }
+
+            .control-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+
+            .textarea-custom {
+                min-height: 150px;
+                font-size: 14px;
+            }
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 140px;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -70px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .recording-indicator {
+            width: 12px;
+            height: 12px;
+            background: #f5576c;
+            border-radius: 50%;
+            animation: blink 1s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .language-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Professional Text to Audio
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#convert" class="nav-link">Convert</a>
+                        <a href="#voices" class="nav-link">Voices</a>
+                        <a href="#settings" class="nav-link">Settings</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Text to Audio Converter
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Transform text into natural-sounding speech with advanced AI voices. 
+                Multiple languages, voice customization, real-time playback, and instant download.
+            </p>
+            
+            <!-- Stats -->
+            <div class="stats-grid max-w-4xl mx-auto">
+                <div class="stat-card fade-in">
+                    <div class="stat-value" id="totalVoices">50+</div>
+                    <div class="text-sm opacity-70">AI Voices</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-value" id="totalLanguages">30+</div>
+                    <div class="text-sm opacity-70">Languages</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-value" id="totalCharacters">0</div>
+                    <div class="text-sm opacity-70">Characters</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-value" id="estimatedTime">0s</div>
+                    <div class="text-sm opacity-70">Duration</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Main Converter Interface -->
+        <section id="convert" class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <!-- Text Input Panel -->
+                <div class="lg:col-span-2">
+                    <div class="glass-card p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-semibold flex items-center">
+                                <i class="fas fa-keyboard mr-3"></i>
+                                Text Input
+                            </h3>
+                            <div class="flex gap-2">
+                                <button class="btn-gradient px-3 py-2 text-sm" onclick="clearText()" title="Clear">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button class="btn-gradient px-3 py-2 text-sm" onclick="pasteText()" title="Paste">
+                                    <i class="fas fa-paste"></i>
+                                </button>
+                                <button class="btn-gradient px-3 py-2 text-sm" onclick="showSampleText()" title="Sample">
+                                    <i class="fas fa-file-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <textarea 
+                            id="textInput" 
+                            class="textarea-custom" 
+                            placeholder="Enter your text here... You can also use SSML tags for advanced control over speech synthesis."
+                            oninput="updateCharacterCount()"
+                        ></textarea>
+                        
+                        <div class="flex items-center justify-between mt-3 text-sm opacity-70">
+                            <span><span id="charCount">0</span> characters | <span id="wordCount">0</span> words</span>
+                            <span>Max: 5000 characters</span>
+                        </div>
+
+                        <!-- Language Detection -->
+                        <div class="mt-4 p-3 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-globe text-purple-400"></i>
+                                <span class="text-sm">Detected Language: <strong id="detectedLang">English</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Audio Player -->
+                    <div class="glass-card p-6 mt-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-volume-up mr-3"></i>
+                            Audio Player
+                        </h3>
+
+                        <!-- Waveform Visualization -->
+                        <div class="waveform-container mb-4" id="waveform">
+                            <div class="flex items-end justify-center gap-1" id="waveformBars">
+                                <!-- Waveform bars will be generated here -->
+                            </div>
+                        </div>
+
+                        <!-- Audio Controls -->
+                        <div class="audio-controls">
+                            <button class="control-btn" id="playBtn" onclick="togglePlayPause()" disabled title="Play/Pause (Space)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="control-btn" onclick="stopAudio()" disabled id="stopBtn" title="Stop">
+                                <i class="fas fa-stop"></i>
+                            </button>
+                            <div class="progress-bar" id="progressBar" onclick="seekAudio(event)">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <span class="text-sm" id="timeDisplay">0:00 / 0:00</span>
+                        </div>
+
+                        <!-- Additional Controls -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+                            <button class="btn-gradient" onclick="skipBackward()" title="Skip -10s">
+                                <i class="fas fa-backward mr-2"></i>-10s
+                            </button>
+                            <button class="btn-gradient" onclick="skipForward()" title="Skip +10s">
+                                <i class="fas fa-forward mr-2"></i>+10s
+                            </button>
+                            <button class="btn-success" id="downloadBtn" onclick="downloadAudio()" disabled title="Download Audio">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </button>
+                            <button class="btn-secondary" onclick="shareAudio()" disabled id="shareBtn" title="Share">
+                                <i class="fas fa-share-alt mr-2"></i>Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Panel -->
+                <div class="lg:col-span-1">
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-sliders-h mr-3"></i>
+                            Voice Settings
+                        </h3>
+
+                        <!-- Voice Selection -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-3">Select Voice</label>
+                            <select id="voiceSelect" class="select-custom" onchange="updateVoiceInfo()">
+                                <option value="">Loading voices...</option>
+                            </select>
+                            <div id="voiceInfo" class="mt-2 p-3 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg hidden">
+                                <div class="text-xs opacity-70">
+                                    <span id="voiceGender"></span>
+                                    <span id="voiceLanguage" class="language-badge"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rate Control -->
+                        <div class="mb-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-sm font-medium">Speech Rate</label>
+                                <span id="rateValue" class="text-lg font-bold text-purple-400">1.0x</span>
+                            </div>
+                            <input type="range" id="rateSlider" class="slider-custom" min="0.5" max="2" step="0.1" value="1" oninput="updateRate()">
+                            <div class="flex justify-between text-xs opacity-50 mt-1">
+                                <span>Slow</span>
+                                <span>Normal</span>
+                                <span>Fast</span>
+                            </div>
+                        </div>
+
+                        <!-- Pitch Control -->
+                        <div class="mb-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-sm font-medium">Pitch</label>
+                                <span id="pitchValue" class="text-lg font-bold text-purple-400">1.0</span>
+                            </div>
+                            <input type="range" id="pitchSlider" class="slider-custom" min="0.5" max="2" step="0.1" value="1" oninput="updatePitch()">
+                            <div class="flex justify-between text-xs opacity-50 mt-1">
+                                <span>Low</span>
+                                <span>Normal</span>
+                                <span>High</span>
+                            </div>
+                        </div>
+
+                        <!-- Volume Control -->
+                        <div class="mb-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-sm font-medium">Volume</label>
+                                <span id="volumeValue" class="text-lg font-bold text-purple-400">100%</span>
+                            </div>
+                            <input type="range" id="volumeSlider" class="slider-custom" min="0" max="100" step="1" value="100" oninput="updateVolume()">
+                            <div class="flex justify-between text-xs opacity-50 mt-1">
+                                <span><i class="fas fa-volume-mute"></i></span>
+                                <span><i class="fas fa-volume-up"></i></span>
+                            </div>
+                        </div>
+
+                        <!-- Language Selection -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-3">Language</label>
+                            <select id="languageSelect" class="select-custom" onchange="filterVoicesByLanguage()">
+                                <option value="all">All Languages</option>
+                            </select>
+                        </div>
+
+                        <!-- Convert Button -->
+                        <button class="btn-gradient w-full text-lg py-4" onclick="convertToSpeech()" id="convertBtn">
+                            <i class="fas fa-magic mr-2"></i>
+                            Convert to Speech
+                        </button>
+
+                        <!-- Advanced Options Toggle -->
+                        <div class="mt-6">
+                            <button class="w-full text-sm opacity-70 hover:opacity-100 transition" onclick="toggleAdvanced()">
+                                <i class="fas fa-chevron-down mr-2"></i>
+                                Advanced Options
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Options Panel -->
+                    <div class="glass-card p-6 mt-6 hidden" id="advancedPanel">
+                        <h3 class="text-lg font-semibold mb-4">Advanced Options</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label class="text-sm font-medium">SSML Support</label>
+                                    <p class="text-xs opacity-70">Use SSML tags</p>
+                                </div>
+                                <input type="checkbox" id="ssmlToggle" class="toggle">
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label class="text-sm font-medium">Auto-detect Language</label>
+                                    <p class="text-xs opacity-70">Automatic detection</p>
+                                </div>
+                                <input type="checkbox" id="autoLangToggle" class="toggle" checked>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label class="text-sm font-medium">Enhanced Quality</label>
+                                    <p class="text-xs opacity-70">Higher bitrate</p>
+                                </div>
+                                <input type="checkbox" id="qualityToggle" class="toggle">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Output Format</label>
+                                <select class="select-custom" id="formatSelect">
+                                    <option value="mp3">MP3</option>
+                                    <option value="wav">WAV</option>
+                                    <option value="ogg">OGG</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voice Library Section -->
+            <div class="glass-card p-6 mb-8" id="voices">
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-microphone mr-3"></i>
+                    Voice Library
+                </h3>
+
+                <div class="mb-4">
+                    <input 
+                        type="text" 
+                        id="voiceSearch" 
+                        class="select-custom" 
+                        placeholder="Search voices by name, language, or accent..."
+                        oninput="searchVoices()"
+                    >
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="voiceLibrary">
+                    <!-- Voice cards will be populated here -->
+                </div>
+            </div>
+
+            <!-- Keyboard Shortcuts -->
+            <div class="glass-card p-6" id="settings">
+                <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-keyboard mr-3"></i>
+                    Keyboard Shortcuts
+                </h3>
+                
+                <div class="keyboard-shortcuts">
+                    <div class="shortcut-item">
+                        <span class="text-sm">Play/Pause</span>
+                        <span class="shortcut-key">Space</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="text-sm">Stop</span>
+                        <span class="shortcut-key">Esc</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="text-sm">Convert</span>
+                        <span class="shortcut-key">Ctrl+Enter</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="text-sm">Clear Text</span>
+                        <span class="shortcut-key">Ctrl+K</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="text-sm">Download</span>
+                        <span class="shortcut-key">Ctrl+S</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="text-sm">Skip Forward</span>
+                        <span class="shortcut-key">→</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="text-sm">Skip Backward</span>
+                        <span class="shortcut-key">←</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="text-sm">Increase Volume</span>
+                        <span class="shortcut-key">↑</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="text-sm">Decrease Volume</span>
+                        <span class="shortcut-key">↓</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-8 text-center opacity-50 text-sm">
+        <p>&copy; 2025 Tool Xeno. Professional Text to Audio Converter. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Global Variables
+        let voices = [];
+        let currentUtterance = null;
+        let isPlaying = false;
+        let audioBlob = null;
+        let mediaRecorder = null;
+        let audioChunks = [];
+        let currentVoice = null;
+        let waveformInterval = null;
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            loadVoices();
+            setupKeyboardShortcuts();
+            createWaveform();
+            restoreSettings();
+        });
+
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Load Available Voices
+        function loadVoices() {
+            // Wait for voices to be loaded
+            function populateVoiceList() {
+                voices = window.speechSynthesis.getVoices();
+                
+                if (voices.length === 0) {
+                    setTimeout(populateVoiceList, 100);
+                    return;
+                }
+
+                const voiceSelect = document.getElementById('voiceSelect');
+                const languageSelect = document.getElementById('languageSelect');
+                const languages = new Set();
+
+                voiceSelect.innerHTML = '';
+                
+                voices.forEach((voice, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = `${voice.name} (${voice.lang})`;
+                    voiceSelect.appendChild(option);
+
+                    languages.add(voice.lang.split('-')[0]);
+                });
+
+                // Populate language filter
+                Array.from(languages).sort().forEach(lang => {
+                    const option = document.createElement('option');
+                    option.value = lang;
+                    option.textContent = getLanguageName(lang);
+                    languageSelect.appendChild(option);
+                });
+
+                // Set default voice
+                const defaultVoice = voices.findIndex(voice => voice.default);
+                if (defaultVoice !== -1) {
+                    voiceSelect.selectedIndex = defaultVoice;
+                }
+
+                updateVoiceInfo();
+                populateVoiceLibrary();
+            }
+
+            populateVoiceList();
+
+            // Chrome needs this event
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = populateVoiceList;
+            }
+        }
+
+        // Get Language Name
+        function getLanguageName(code) {
+            const languageNames = {
+                'en': 'English', 'es': 'Spanish', 'fr': 'French', 'de': 'German',
+                'it': 'Italian', 'pt': 'Portuguese', 'ru': 'Russian', 'ja': 'Japanese',
+                'ko': 'Korean', 'zh': 'Chinese', 'ar': 'Arabic', 'hi': 'Hindi',
+                'nl': 'Dutch', 'sv': 'Swedish', 'pl': 'Polish', 'tr': 'Turkish'
+            };
+            return languageNames[code] || code.toUpperCase();
+        }
+
+        // Update Voice Info
+        function updateVoiceInfo() {
+            const voiceSelect = document.getElementById('voiceSelect');
+            const selectedIndex = voiceSelect.value;
+            
+            if (selectedIndex && voices[selectedIndex]) {
+                const voice = voices[selectedIndex];
+                const voiceInfo = document.getElementById('voiceInfo');
+                const voiceGender = document.getElementById('voiceGender');
+                const voiceLanguage = document.getElementById('voiceLanguage');
+
+                // Determine gender from voice name (heuristic)
+                const isFemale = voice.name.toLowerCase().includes('female') || 
+                                 voice.name.toLowerCase().includes('woman') ||
+                                 voice.name.includes('Zira') || voice.name.includes('Susan');
+                
+                voiceGender.textContent = isFemale ? '♀ Female' : '♂ Male';
+                voiceLanguage.textContent = voice.lang;
+                voiceInfo.classList.remove('hidden');
+
+                currentVoice = voice;
+            }
+        }
+
+        // Filter Voices by Language
+        function filterVoicesByLanguage() {
+            const languageSelect = document.getElementById('languageSelect');
+            const selectedLang = languageSelect.value;
+            const voiceSelect = document.getElementById('voiceSelect');
+
+            voiceSelect.innerHTML = '';
+
+            voices.forEach((voice, index) => {
+                if (selectedLang === 'all' || voice.lang.startsWith(selectedLang)) {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = `${voice.name} (${voice.lang})`;
+                    voiceSelect.appendChild(option);
+                }
+            });
+
+            updateVoiceInfo();
+            populateVoiceLibrary();
+        }
+
+        // Populate Voice Library
+        function populateVoiceLibrary() {
+            const voiceLibrary = document.getElementById('voiceLibrary');
+            const languageSelect = document.getElementById('languageSelect');
+            const selectedLang = languageSelect.value;
+            
+            voiceLibrary.innerHTML = '';
+
+            voices.forEach((voice, index) => {
+                if (selectedLang !== 'all' && !voice.lang.startsWith(selectedLang)) {
+                    return;
+                }
+
+                const voiceCard = document.createElement('div');
+                voiceCard.className = 'voice-card';
+                voiceCard.onclick = () => selectVoiceFromLibrary(index);
+
+                const isFemale = voice.name.toLowerCase().includes('female') || 
+                                 voice.name.toLowerCase().includes('woman');
+                const icon = isFemale ? 'fa-female' : 'fa-male';
+
+                voiceCard.innerHTML = `
+                    <div class="voice-icon">
+                        <i class="fas ${icon}"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-medium">${voice.name}</div>
+                        <div class="text-xs opacity-70">${voice.lang}</div>
+                    </div>
+                    <button class="btn-gradient px-3 py-1 text-sm" onclick="previewVoice(${index}, event)">
+                        <i class="fas fa-play"></i>
+                    </button>
+                `;
+
+                voiceLibrary.appendChild(voiceCard);
+            });
+        }
+
+        // Select Voice from Library
+        function selectVoiceFromLibrary(index) {
+            const voiceSelect = document.getElementById('voiceSelect');
+            
+            // Find the option with this voice
+            for (let i = 0; i < voiceSelect.options.length; i++) {
+                if (voiceSelect.options[i].value == index) {
+                    voiceSelect.selectedIndex = i;
+                    break;
+                }
+            }
+            
+            updateVoiceInfo();
+            
+            // Highlight selected voice card
+            document.querySelectorAll('.voice-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+
+        // Preview Voice
+        function previewVoice(index, event) {
+            event.stopPropagation();
+            
+            const utterance = new SpeechSynthesisUtterance('Hello! This is a preview of this voice.');
+            utterance.voice = voices[index];
+            utterance.rate = parseFloat(document.getElementById('rateSlider').value);
+            utterance.pitch = parseFloat(document.getElementById('pitchSlider').value);
+            utterance.volume = parseFloat(document.getElementById('volumeSlider').value) / 100;
+
+            speechSynthesis.cancel();
+            speechSynthesis.speak(utterance);
+        }
+
+        // Search Voices
+        function searchVoices() {
+            const searchTerm = document.getElementById('voiceSearch').value.toLowerCase();
+            const voiceCards = document.querySelectorAll('.voice-card');
+
+            voiceCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Update Character Count
+        function updateCharacterCount() {
+            const text = document.getElementById('textInput').value;
+            const charCount = text.length;
+            const wordCount = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+
+            document.getElementById('charCount').textContent = charCount;
+            document.getElementById('wordCount').textContent = wordCount;
+            document.getElementById('totalCharacters').textContent = charCount;
+
+            // Estimate duration (average speaking rate: 150 words per minute)
+            const estimatedMinutes = wordCount / 150;
+            const estimatedSeconds = Math.ceil(estimatedMinutes * 60);
+            document.getElementById('estimatedTime').textContent = estimatedSeconds + 's';
+
+            // Auto-detect language
+            if (document.getElementById('autoLangToggle').checked) {
+                detectLanguage(text);
+            }
+        }
+
+        // Simple Language Detection
+        function detectLanguage(text) {
+            // This is a simplified detection - in production, use a proper library
+            const patterns = {
+                'Chinese': /[\u4e00-\u9fa5]/,
+                'Japanese': /[\u3040-\u309f\u30a0-\u30ff]/,
+                'Korean': /[\uac00-\ud7af]/,
+                'Arabic': /[\u0600-\u06ff]/,
+                'Russian': /[\u0400-\u04ff]/,
+                'Hindi': /[\u0900-\u097f]/
+            };
+
+            for (let [lang, pattern] of Object.entries(patterns)) {
+                if (pattern.test(text)) {
+                    document.getElementById('detectedLang').textContent = lang;
+                    return;
+                }
+            }
+
+            document.getElementById('detectedLang').textContent = 'English';
+        }
+
+        // Update Rate
+        function updateRate() {
+            const rate = document.getElementById('rateSlider').value;
+            document.getElementById('rateValue').textContent = rate + 'x';
+            saveSettings();
+        }
+
+        // Update Pitch
+        function updatePitch() {
+            const pitch = document.getElementById('pitchSlider').value;
+            document.getElementById('pitchValue').textContent = pitch;
+            saveSettings();
+        }
+
+        // Update Volume
+        function updateVolume() {
+            const volume = document.getElementById('volumeSlider').value;
+            document.getElementById('volumeValue').textContent = volume + '%';
+            saveSettings();
+        }
+
+        // Convert Text to Speech
+        function convertToSpeech() {
+            const text = document.getElementById('textInput').value.trim();
+            
+            if (!text) {
+                alert('Please enter some text to convert.');
+                return;
+            }
+
+            if (text.length > 5000) {
+                alert('Text is too long. Maximum 5000 characters allowed.');
+                return;
+            }
+
+            // Cancel any ongoing speech
+            speechSynthesis.cancel();
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice
+            const voiceSelect = document.getElementById('voiceSelect');
+            if (voiceSelect.value) {
+                currentUtterance.voice = voices[voiceSelect.value];
+            }
+
+            // Set parameters
+            currentUtterance.rate = parseFloat(document.getElementById('rateSlider').value);
+            currentUtterance.pitch = parseFloat(document.getElementById('pitchSlider').value);
+            currentUtterance.volume = parseFloat(document.getElementById('volumeSlider').value) / 100;
+
+            // Event handlers
+            currentUtterance.onstart = function() {
+                isPlaying = true;
+                document.getElementById('playBtn').innerHTML = '<i class="fas fa-pause"></i>';
+                document.getElementById('playBtn').disabled = false;
+                document.getElementById('stopBtn').disabled = false;
+                startWaveformAnimation();
+            };
+
+            currentUtterance.onend = function() {
+                isPlaying = false;
+                document.getElementById('playBtn').innerHTML = '<i class="fas fa-play"></i>';
+                stopWaveformAnimation();
+            };
+
+            currentUtterance.onerror = function(event) {
+                console.error('Speech synthesis error:', event);
+                alert('An error occurred during speech synthesis.');
+                stopWaveformAnimation();
+            };
+
+            // Boundary event for progress tracking
+            currentUtterance.onboundary = function(event) {
+                // Update progress based on character position
+                const progress = (event.charIndex / text.length) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+            };
+
+            // Speak
+            speechSynthesis.speak(currentUtterance);
+
+            // Enable download button (note: direct audio download from Web Speech API is limited)
+            document.getElementById('downloadBtn').disabled = false;
+            document.getElementById('shareBtn').disabled = false;
+        }
+
+        // Toggle Play/Pause
+        function togglePlayPause() {
+            if (isPlaying) {
+                speechSynthesis.pause();
+                isPlaying = false;
+                document.getElementById('playBtn').innerHTML = '<i class="fas fa-play"></i>';
+                stopWaveformAnimation();
+            } else if (speechSynthesis.paused) {
+                speechSynthesis.resume();
+                isPlaying = true;
+                document.getElementById('playBtn').innerHTML = '<i class="fas fa-pause"></i>';
+                startWaveformAnimation();
+            } else {
+                convertToSpeech();
+            }
+        }
+
+        // Stop Audio
+        function stopAudio() {
+            speechSynthesis.cancel();
+            isPlaying = false;
+            document.getElementById('playBtn').innerHTML = '<i class="fas fa-play"></i>';
+            document.getElementById('progressFill').style.width = '0%';
+            stopWaveformAnimation();
+        }
+
+        // Skip Forward
+        function skipForward() {
+            // Web Speech API doesn't support seeking
+            // This is a placeholder for potential audio element implementation
+            alert('Skip forward not available with current speech synthesis. For full audio control, use download feature.');
+        }
+
+        // Skip Backward
+        function skipBackward() {
+            // Web Speech API doesn't support seeking
+            alert('Skip backward not available with current speech synthesis. For full audio control, use download feature.');
+        }
+
+        // Seek Audio
+        function seekAudio(event) {
+            // Web Speech API doesn't support seeking
+            alert('Seeking not available with current speech synthesis. For full audio control, use download feature.');
+        }
+
+        // Download Audio
+        function downloadAudio() {
+            alert('Direct audio download requires server-side TTS service. This demo uses browser\'s built-in speech synthesis which doesn\'t support direct audio file generation. In a production environment, you would integrate with services like Google Cloud Text-to-Speech, Amazon Polly, or Microsoft Azure Speech for MP3/WAV export functionality.');
+            
+            // In production, you would:
+            // 1. Send text to server
+            // 2. Generate audio file with TTS service
+            // 3. Return download link
+            // 4. Trigger download
+        }
+
+        // Share Audio
+        function shareAudio() {
+            const text = document.getElementById('textInput').value;
+            const shareData = {
+                title: 'Text to Audio',
+                text: text.substring(0, 100) + (text.length > 100 ? '...' : ''),
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData)
+                    .catch(err => console.log('Error sharing:', err));
+            } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(window.location.href)
+                    .then(() => alert('Link copied to clipboard!'))
+                    .catch(err => console.error('Could not copy:', err));
+            }
+        }
+
+        // Create Waveform
+        function createWaveform() {
+            const waveformBars = document.getElementById('waveformBars');
+            waveformBars.innerHTML = '';
+
+            for (let i = 0; i < 50; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'waveform-bar';
+                bar.style.height = '20%';
+                bar.style.animationDelay = (i * 0.05) + 's';
+                waveformBars.appendChild(bar);
+            }
+        }
+
+        // Start Waveform Animation
+        function startWaveformAnimation() {
+            const bars = document.querySelectorAll('.waveform-bar');
+            bars.forEach(bar => {
+                bar.style.animationPlayState = 'running';
+            });
+        }
+
+        // Stop Waveform Animation
+        function stopWaveformAnimation() {
+            const bars = document.querySelectorAll('.waveform-bar');
+            bars.forEach(bar => {
+                bar.style.animationPlayState = 'paused';
+                bar.style.height = '20%';
+            });
+        }
+
+        // Clear Text
+        function clearText() {
+            if (confirm('Are you sure you want to clear the text?')) {
+                document.getElementById('textInput').value = '';
+                updateCharacterCount();
+            }
+        }
+
+        // Paste Text
+        async function pasteText() {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById('textInput').value = text;
+                updateCharacterCount();
+            } catch (err) {
+                alert('Failed to read clipboard. Please paste manually.');
+            }
+        }
+
+        // Show Sample Text
+        function showSampleText() {
+            const samples = [
+                "Welcome to our advanced text-to-speech converter. This tool transforms your written words into natural-sounding speech using cutting-edge AI technology. You can customize voice, pitch, rate, and volume to create the perfect audio output for your needs.",
+                "The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English alphabet and is commonly used for testing fonts and speech synthesis systems.",
+                "In a world where technology evolves at lightning speed, text-to-speech technology has become an essential tool for accessibility, productivity, and content creation. It empowers users to consume written content in audio format, making information more accessible to everyone."
+            ];
+
+            const randomSample = samples[Math.floor(Math.random() * samples.length)];
+            document.getElementById('textInput').value = randomSample;
+            updateCharacterCount();
+        }
+
+        // Toggle Advanced Options
+        function toggleAdvanced() {
+            const panel = document.getElementById('advancedPanel');
+            panel.classList.toggle('hidden');
+        }
+
+        // Setup Keyboard Shortcuts
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', function(e) {
+                // Space - Play/Pause
+                if (e.code === 'Space' && e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'INPUT') {
+                    e.preventDefault();
+                    togglePlayPause();
+                }
+
+                // Escape - Stop
+                if (e.code === 'Escape') {
+                    stopAudio();
+                }
+
+                // Ctrl+Enter - Convert
+                if (e.ctrlKey && e.code === 'Enter') {
+                    e.preventDefault();
+                    convertToSpeech();
+                }
+
+                // Ctrl+K - Clear
+                if (e.ctrlKey && e.code === 'KeyK') {
+                    e.preventDefault();
+                    clearText();
+                }
+
+                // Ctrl+S - Download
+                if (e.ctrlKey && e.code === 'KeyS') {
+                    e.preventDefault();
+                    downloadAudio();
+                }
+
+                // Arrow keys for volume
+                if (e.code === 'ArrowUp' && e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'INPUT') {
+                    e.preventDefault();
+                    const volumeSlider = document.getElementById('volumeSlider');
+                    volumeSlider.value = Math.min(100, parseInt(volumeSlider.value) + 5);
+                    updateVolume();
+                }
+
+                if (e.code === 'ArrowDown' && e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'INPUT') {
+                    e.preventDefault();
+                    const volumeSlider = document.getElementById('volumeSlider');
+                    volumeSlider.value = Math.max(0, parseInt(volumeSlider.value) - 5);
+                    updateVolume();
+                }
+            });
+        }
+
+        // Save Settings to LocalStorage
+        function saveSettings() {
+            const settings = {
+                rate: document.getElementById('rateSlider').value,
+                pitch: document.getElementById('pitchSlider').value,
+                volume: document.getElementById('volumeSlider').value,
+                voice: document.getElementById('voiceSelect').value,
+                language: document.getElementById('languageSelect').value
+            };
+            localStorage.setItem('ttsSettings', JSON.stringify(settings));
+        }
+
+        // Restore Settings from LocalStorage
+        function restoreSettings() {
+            const settings = JSON.parse(localStorage.getItem('ttsSettings'));
+            if (settings) {
+                if (settings.rate) {
+                    document.getElementById('rateSlider').value = settings.rate;
+                    updateRate();
+                }
+                if (settings.pitch) {
+                    document.getElementById('pitchSlider').value = settings.pitch;
+                    updatePitch();
+                }
+                if (settings.volume) {
+                    document.getElementById('volumeSlider').value = settings.volume;
+                    updateVolume();
+                }
+                if (settings.language) {
+                    document.getElementById('languageSelect').value = settings.language;
+                }
+            }
+        }
+
+        // Accessibility: ARIA live region updates
+        function announceToScreenReader(message) {
+            const liveRegion = document.createElement('div');
+            liveRegion.setAttribute('aria-live', 'polite');
+            liveRegion.setAttribute('aria-atomic', 'true');
+            liveRegion.className = 'sr-only';
+            liveRegion.textContent = message;
+            document.body.appendChild(liveRegion);
+            setTimeout(() => liveRegion.remove(), 1000);
+        }
+
+        // Focus management for accessibility
+        document.querySelectorAll('button, a, input, select, textarea').forEach(element => {
+            element.addEventListener('focus', function() {
+                this.style.outline = '2px solid #667eea';
+            });
+            element.addEventListener('blur', function() {
+                this.style.outline = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
