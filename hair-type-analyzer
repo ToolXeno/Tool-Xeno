@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Hair Type Analyzer - Tool Xeno</title>
+    <meta name="description" content="Advanced AI-powered hair type analyzer - discover your exact hair type (1A-4C), porosity, density, and get personalized care recommendations.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 14px 28px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        .btn-gradient:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 4px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+
+        .question-container {
+            animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .answer-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 12px 0;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .answer-option:hover {
+            border-color: rgba(102, 126, 234, 0.5);
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateX(5px);
+        }
+
+        .answer-option.selected {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.2);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        body.light-theme .answer-option {
+            background: rgba(0, 0, 0, 0.03);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-theme .answer-option:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .answer-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .answer-option.selected .answer-icon {
+            background: var(--primary-gradient);
+            border-color: #667eea;
+        }
+
+        .answer-option.selected .answer-icon::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .result-card {
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hair-type-visual {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            background: var(--primary-gradient);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .stat-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            margin: 10px;
+        }
+
+        body.light-theme .stat-badge {
+            background: rgba(0, 0, 0, 0.03);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .recommendation-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        body.light-theme .recommendation-item {
+            background: rgba(0, 0, 0, 0.03);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .score-indicator {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 5px;
+        }
+
+        .score-high {
+            background: rgba(17, 153, 142, 0.2);
+            color: #38ef7d;
+            border: 1px solid rgba(17, 153, 142, 0.4);
+        }
+
+        .score-medium {
+            background: rgba(245, 166, 35, 0.2);
+            color: #f5a623;
+            border: 1px solid rgba(245, 166, 35, 0.4);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .answer-option {
+                padding: 15px;
+            }
+
+            .hair-type-visual {
+                width: 150px;
+                height: 150px;
+                font-size: 60px;
+            }
+
+            .stat-badge {
+                margin: 5px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        💇 Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Professional Hair Type Analyzer
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center" id="heroSection">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                💎 Professional Hair Type Analyzer
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Discover your exact hair type, porosity, and density with our AI-powered dermatologist-approved questionnaire. 
+                Get personalized care recommendations tailored to your unique hair profile.
+            </p>
+            
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-5xl mx-auto">
+                <div class="glass-card p-6">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="text-xl font-semibold mb-2">AI-Driven Analysis</h3>
+                    <p class="text-sm opacity-70">Intelligent algorithms for accurate hair type detection</p>
+                </div>
+                <div class="glass-card p-6">
+                    <div class="text-4xl mb-4">🔬</div>
+                    <h3 class="text-xl font-semibold mb-2">Dermatologist Approved</h3>
+                    <p class="text-sm opacity-70">Professionally crafted questions for salon-grade results</p>
+                </div>
+                <div class="glass-card p-6">
+                    <div class="text-4xl mb-4">💧</div>
+                    <h3 class="text-xl font-semibold mb-2">Complete Profile</h3>
+                    <p class="text-sm opacity-70">Type, porosity, density, and personalized recommendations</p>
+                </div>
+            </div>
+
+            <button class="btn-gradient text-lg" onclick="startQuiz()">
+                <i class="fas fa-play-circle mr-2"></i>
+                Start Hair Analysis
+            </button>
+        </section>
+        
+        <!-- Quiz Section -->
+        <section class="container mx-auto px-6" id="quizSection" style="display: none;">
+            <div class="glass-card p-8 max-w-4xl mx-auto">
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-sm font-medium">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">12</span></span>
+                        <span class="text-sm font-medium"><span id="progressPercent">0</span>% Complete</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <!-- Question Container -->
+                <div id="questionContainer">
+                    <!-- Questions will be dynamically inserted here -->
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between mt-8">
+                    <button class="btn-gradient" id="prevBtn" onclick="previousQuestion()" style="display: none;">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Previous
+                    </button>
+                    <div></div>
+                    <button class="btn-gradient" id="nextBtn" onclick="nextQuestion()" disabled>
+                        Next
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="container mx-auto px-6" id="resultsSection" style="display: none;">
+            <div class="max-w-6xl mx-auto">
+                <!-- Main Result Card -->
+                <div class="glass-card p-8 mb-8 result-card text-center">
+                    <h2 class="text-3xl font-bold mb-6">✨ Your Hair Profile</h2>
+                    
+                    <div class="hair-type-visual" id="hairTypeVisual">
+                        💇‍♀️
+                    </div>
+
+                    <h3 class="text-4xl font-bold mb-4" id="hairTypeName">Type 3B - Curly</h3>
+                    <p class="text-xl opacity-80 mb-6" id="hairTypeDescription">
+                        Your hair has well-defined spiral curls with a bouncy texture
+                    </p>
+
+                    <!-- Score Indicators -->
+                    <div class="flex flex-wrap justify-center gap-3 mb-8">
+                        <div class="score-indicator score-high" id="curlScore">
+                            <i class="fas fa-circle-notch mr-2"></i>Curl Pattern: Strong
+                        </div>
+                        <div class="score-indicator score-high" id="porosityScore">
+                            <i class="fas fa-droplet mr-2"></i>Porosity: Medium
+                        </div>
+                        <div class="score-indicator score-medium" id="densityScore">
+                            <i class="fas fa-layer-group mr-2"></i>Density: Medium
+                        </div>
+                    </div>
+
+                    <!-- Detailed Stats -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="stat-badge">
+                            <div class="text-3xl mb-2">📏</div>
+                            <div class="font-semibold" id="textureResult">Medium</div>
+                            <div class="text-sm opacity-70">Texture</div>
+                        </div>
+                        <div class="stat-badge">
+                            <div class="text-3xl mb-2">💧</div>
+                            <div class="font-semibold" id="oilResult">Balanced</div>
+                            <div class="text-sm opacity-70">Scalp Oil</div>
+                        </div>
+                        <div class="stat-badge">
+                            <div class="text-3xl mb-2">🌿</div>
+                            <div class="font-semibold" id="healthResult">Good</div>
+                            <div class="text-sm opacity-70">Hair Health</div>
+                        </div>
+                        <div class="stat-badge">
+                            <div class="text-3xl mb-2">⚡</div>
+                            <div class="font-semibold" id="frizzResult">Low</div>
+                            <div class="text-sm opacity-70">Frizz Level</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Care Routine -->
+                    <div class="glass-card p-6 result-card">
+                        <h3 class="text-2xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-spa mr-3"></i>
+                            Care Routine
+                        </h3>
+                        <div id="careRoutine">
+                            <!-- Dynamic recommendations will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Product Recommendations -->
+                    <div class="glass-card p-6 result-card">
+                        <h3 class="text-2xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-shopping-bag mr-3"></i>
+                            Product Recommendations
+                        </h3>
+                        <div id="productRecommendations">
+                            <!-- Dynamic recommendations will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Styling Tips -->
+                    <div class="glass-card p-6 result-card">
+                        <h3 class="text-2xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-magic mr-3"></i>
+                            Styling Tips
+                        </h3>
+                        <div id="stylingTips">
+                            <!-- Dynamic tips will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Science Insights -->
+                    <div class="glass-card p-6 result-card">
+                        <h3 class="text-2xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-flask mr-3"></i>
+                            Science Behind Your Hair
+                        </h3>
+                        <div id="scienceInsights">
+                            <!-- Dynamic insights will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="text-center mt-8">
+                    <button class="btn-gradient mr-4" onclick="downloadResults()">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Results
+                    </button>
+                    <button class="btn-gradient" onclick="restartQuiz()">
+                        <i class="fas fa-redo mr-2"></i>
+                        Take Quiz Again
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        // Hair Analysis Quiz Data
+        const questions = [
+            {
+                id: 1,
+                question: "What best describes your hair's natural pattern when air-dried?",
+                category: "curl_pattern",
+                answers: [
+                    { text: "Completely straight with no bends", value: "1a", points: { straight: 10 } },
+                    { text: "Straight with slight wave at the ends", value: "1b", points: { straight: 8, wavy: 2 } },
+                    { text: "Loose S-shaped waves", value: "2a", points: { wavy: 10 } },
+                    { text: "Defined S-shaped waves", value: "2b", points: { wavy: 8, curly: 2 } },
+                    { text: "Well-defined spiral curls", value: "3a", points: { curly: 10 } },
+                    { text: "Tight spiral curls or corkscrew", value: "3b", points: { curly: 8, coily: 2 } },
+                    { text: "Very tight coils or Z-pattern", value: "4a", points: { coily: 10 } },
+                    { text: "Extremely tight coils with minimal definition", value: "4c", points: { coily: 12 } }
+                ]
+            },
+            {
+                id: 2,
+                question: "How long does it take for your hair to dry naturally after washing?",
+                category: "porosity",
+                answers: [
+                    { text: "More than 4 hours - stays wet for a long time", value: "low", points: { low_porosity: 10 } },
+                    { text: "2-3 hours - moderate drying time", value: "normal", points: { normal_porosity: 10 } },
+                    { text: "Less than 1 hour - dries very quickly", value: "high", points: { high_porosity: 10 } }
+                ]
+            },
+            {
+                id: 3,
+                question: "When you apply water to your hair, what happens?",
+                category: "porosity",
+                answers: [
+                    { text: "Water beads up and sits on top", value: "low", points: { low_porosity: 8 } },
+                    { text: "Water absorbs slowly but evenly", value: "normal", points: { normal_porosity: 8 } },
+                    { text: "Water absorbs instantly like a sponge", value: "high", points: { high_porosity: 8 } }
+                ]
+            },
+            {
+                id: 4,
+                question: "How does your hair feel when you run your fingers through it?",
+                category: "texture",
+                answers: [
+                    { text: "Very fine and silky, barely noticeable", value: "fine", points: { fine_texture: 10 } },
+                    { text: "Smooth with moderate thickness", value: "medium", points: { medium_texture: 10 } },
+                    { text: "Thick and coarse, very noticeable", value: "coarse", points: { coarse_texture: 10 } }
+                ]
+            },
+            {
+                id: 5,
+                question: "How much hair do you have on your head (density)?",
+                category: "density",
+                answers: [
+                    { text: "I can see my scalp easily through my hair", value: "low", points: { low_density: 10 } },
+                    { text: "Moderate coverage, some scalp visible", value: "medium", points: { medium_density: 10 } },
+                    { text: "Very full, scalp barely visible", value: "high", points: { high_density: 10 } }
+                ]
+            },
+            {
+                id: 6,
+                question: "How does your hair respond to humidity?",
+                category: "frizz",
+                answers: [
+                    { text: "No change, stays smooth", value: "low", points: { low_frizz: 10 } },
+                    { text: "Slight frizz and volume increase", value: "medium", points: { medium_frizz: 10 } },
+                    { text: "Becomes very frizzy and unmanageable", value: "high", points: { high_frizz: 10 } }
+                ]
+            },
+            {
+                id: 7,
+                question: "How often does your scalp feel oily?",
+                category: "scalp",
+                answers: [
+                    { text: "Rarely or never - scalp feels dry", value: "dry", points: { dry_scalp: 10 } },
+                    { text: "Every 2-3 days - balanced", value: "normal", points: { normal_scalp: 10 } },
+                    { text: "Daily - gets oily very quickly", value: "oily", points: { oily_scalp: 10 } }
+                ]
+            },
+            {
+                id: 8,
+                question: "How does your hair react to hair products?",
+                category: "porosity_product",
+                answers: [
+                    { text: "Products sit on top, hair feels coated", value: "low", points: { low_porosity: 6 } },
+                    { text: "Products absorb well with good results", value: "normal", points: { normal_porosity: 6 } },
+                    { text: "Products absorb immediately, need frequent reapplication", value: "high", points: { high_porosity: 6 } }
+                ]
+            },
+            {
+                id: 9,
+                question: "What is your hair's elasticity when wet?",
+                category: "health",
+                answers: [
+                    { text: "Stretches well and returns to original length", value: "good", points: { good_health: 10 } },
+                    { text: "Stretches moderately with some return", value: "fair", points: { fair_health: 10 } },
+                    { text: "Breaks easily with minimal stretch", value: "poor", points: { poor_health: 10 } }
+                ]
+            },
+            {
+                id: 10,
+                question: "How does your hair behave when you twist or curl it?",
+                category: "curl_retention",
+                answers: [
+                    { text: "Won't hold curls at all", value: "none", points: { straight: 6 } },
+                    { text: "Holds curls for a short time", value: "some", points: { wavy: 6 } },
+                    { text: "Holds curls well throughout the day", value: "good", points: { curly: 6 } },
+                    { text: "Naturally curls without manipulation", value: "natural", points: { coily: 6 } }
+                ]
+            },
+            {
+                id: 11,
+                question: "How does your hair look when you wake up in the morning?",
+                category: "behavior",
+                answers: [
+                    { text: "Completely flat, no volume", value: "flat", points: { straight: 4 } },
+                    { text: "Slightly tousled with some bends", value: "wavy", points: { wavy: 4 } },
+                    { text: "Curls are flattened but still visible", value: "curly", points: { curly: 4 } },
+                    { text: "Matted or very tangled", value: "coily", points: { coily: 4 } }
+                ]
+            },
+            {
+                id: 12,
+                question: "What challenges do you face most with your hair?",
+                category: "challenges",
+                answers: [
+                    { text: "Lacks volume and body", value: "volume", points: { straight: 3, fine_texture: 3 } },
+                    { text: "Frizz and flyaways", value: "frizz", points: { wavy: 3, high_porosity: 3 } },
+                    { text: "Dryness and lack of moisture", value: "dryness", points: { curly: 3, coily: 3 } },
+                    { text: "Tangling and knots", value: "tangles", points: { coily: 4, high_density: 2 } },
+                    { text: "Product buildup", value: "buildup", points: { low_porosity: 4 } }
+                ]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let scoreCard = {};
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            loadSavedTheme();
+        });
+
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+
+        function loadSavedTheme() {
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-theme');
+            }
+        }
+
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Start quiz
+        function startQuiz() {
+            document.getElementById('heroSection').style.display = 'none';
+            document.getElementById('quizSection').style.display = 'block';
+            document.getElementById('totalQuestions').textContent = questions.length;
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            scoreCard = {};
+            displayQuestion();
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const question = questions[currentQuestionIndex];
+            const container = document.getElementById('questionContainer');
+            
+            container.innerHTML = `
+                <div class="question-container">
+                    <h3 class="text-2xl font-semibold mb-6">${question.question}</h3>
+                    <div class="answers-grid">
+                        ${question.answers.map((answer, index) => `
+                            <div class="answer-option" onclick="selectAnswer(${index})" data-answer="${index}">
+                                <div class="answer-icon"></div>
+                                <div class="flex-1">
+                                    <div class="font-medium">${answer.text}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            // Update progress
+            updateProgress();
+            
+            // Update navigation buttons
+            updateNavigationButtons();
+
+            // Restore previous answer if exists
+            if (userAnswers[currentQuestionIndex] !== undefined) {
+                selectAnswer(userAnswers[currentQuestionIndex], true);
+            }
+        }
+
+        // Select answer
+        function selectAnswer(answerIndex, skipSave = false) {
+            // Remove previous selection
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            // Add selection to clicked option
+            const selectedOption = document.querySelector(`[data-answer="${answerIndex}"]`);
+            if (selectedOption) {
+                selectedOption.classList.add('selected');
+            }
+
+            // Save answer
+            if (!skipSave) {
+                userAnswers[currentQuestionIndex] = answerIndex;
+            }
+
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressPercent').textContent = Math.round(progress);
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+        }
+
+        // Update navigation buttons
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            // Show/hide previous button
+            if (currentQuestionIndex > 0) {
+                prevBtn.style.display = 'inline-flex';
+            } else {
+                prevBtn.style.display = 'none';
+            }
+
+            // Change next button to submit on last question
+            if (currentQuestionIndex === questions.length - 1) {
+                nextBtn.innerHTML = '<i class="fas fa-check mr-2"></i>See Results';
+            } else {
+                nextBtn.innerHTML = 'Next<i class="fas fa-arrow-right ml-2"></i>';
+            }
+
+            // Disable next if no answer selected
+            if (userAnswers[currentQuestionIndex] === undefined) {
+                nextBtn.disabled = true;
+            }
+        }
+
+        // Next question
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                calculateResults();
+            }
+        }
+
+        // Previous question
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Calculate results
+        function calculateResults() {
+            // Calculate score from all answers
+            userAnswers.forEach((answerIndex, questionIndex) => {
+                const question = questions[questionIndex];
+                const answer = question.answers[answerIndex];
+                
+                // Add points to scoreCard
+                for (let [key, value] of Object.entries(answer.points)) {
+                    scoreCard[key] = (scoreCard[key] || 0) + value;
+                }
+            });
+
+            // Determine hair type based on scores
+            const hairType = determineHairType();
+            
+            // Display results
+            displayResults(hairType);
+        }
+
+        // Determine hair type from scores
+        function determineHairType() {
+            // Determine curl pattern
+            const curlScores = {
+                straight: scoreCard.straight || 0,
+                wavy: scoreCard.wavy || 0,
+                curly: scoreCard.curly || 0,
+                coily: scoreCard.coily || 0
+            };
+            const curlType = Object.keys(curlScores).reduce((a, b) => curlScores[a] > curlScores[b] ? a : b);
+
+            // Determine porosity
+            const porosityScores = {
+                low: scoreCard.low_porosity || 0,
+                normal: scoreCard.normal_porosity || 0,
+                high: scoreCard.high_porosity || 0
+            };
+            const porosity = Object.keys(porosityScores).reduce((a, b) => porosityScores[a] > porosityScores[b] ? a : b);
+
+            // Determine density
+            const densityScores = {
+                low: scoreCard.low_density || 0,
+                medium: scoreCard.medium_density || 0,
+                high: scoreCard.high_density || 0
+            };
+            const density = Object.keys(densityScores).reduce((a, b) => densityScores[a] > densityScores[b] ? a : b);
+
+            // Determine texture
+            const textureScores = {
+                fine: scoreCard.fine_texture || 0,
+                medium: scoreCard.medium_texture || 0,
+                coarse: scoreCard.coarse_texture || 0
+            };
+            const texture = Object.keys(textureScores).reduce((a, b) => textureScores[a] > textureScores[b] ? a : b);
+
+            // Determine scalp type
+            const scalpScores = {
+                dry: scoreCard.dry_scalp || 0,
+                normal: scoreCard.normal_scalp || 0,
+                oily: scoreCard.oily_scalp || 0
+            };
+            const scalpType = Object.keys(scalpScores).reduce((a, b) => scalpScores[a] > scalpScores[b] ? a : b);
+
+            // Determine frizz level
+            const frizzScores = {
+                low: scoreCard.low_frizz || 0,
+                medium: scoreCard.medium_frizz || 0,
+                high: scoreCard.high_frizz || 0
+            };
+            const frizzLevel = Object.keys(frizzScores).reduce((a, b) => frizzScores[a] > frizzScores[b] ? a : b);
+
+            // Determine health
+            const healthScores = {
+                good: scoreCard.good_health || 0,
+                fair: scoreCard.fair_health || 0,
+                poor: scoreCard.poor_health || 0
+            };
+            const health = Object.keys(healthScores).reduce((a, b) => healthScores[a] > healthScores[b] ? a : b);
+
+            return {
+                curlType,
+                porosity,
+                density,
+                texture,
+                scalpType,
+                frizzLevel,
+                health,
+                scores: scoreCard
+            };
+        }
+
+        // Display results
+        function displayResults(hairType) {
+            document.getElementById('quizSection').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Hair type mapping
+            const hairTypeData = {
+                straight: {
+                    name: "Type 1 - Straight Hair",
+                    code: "1B",
+                    emoji: "➖",
+                    description: "Your hair is naturally straight with minimal to no curl pattern. It tends to be sleek and shiny.",
+                    science: "Straight hair has a round follicle shape, allowing sebum to travel easily down the hair shaft, creating natural shine."
+                },
+                wavy: {
+                    name: "Type 2 - Wavy Hair",
+                    code: "2B",
+                    emoji: "〰️",
+                    description: "Your hair has a defined S-shaped wave pattern with moderate volume and body.",
+                    science: "Wavy hair results from an oval follicle shape, creating natural bends and waves in the hair shaft."
+                },
+                curly: {
+                    name: "Type 3 - Curly Hair",
+                    code: "3B",
+                    emoji: "🌀",
+                    description: "Your hair forms well-defined spiral curls with a bouncy, voluminous texture.",
+                    science: "Curly hair has a flat follicle shape with asymmetric keratin distribution, creating natural spiral patterns."
+                },
+                coily: {
+                    name: "Type 4 - Coily Hair",
+                    code: "4B",
+                    emoji: "🔀",
+                    description: "Your hair has tight coils or Z-pattern curls with a dense, springy texture.",
+                    science: "Coily hair has the flattest follicle shape and produces highly compressed curls with maximum shrinkage potential."
+                }
+            };
+
+            const currentType = hairTypeData[hairType.curlType];
+
+            // Update visual elements
+            document.getElementById('hairTypeVisual').textContent = currentType.emoji;
+            document.getElementById('hairTypeName').textContent = `${currentType.name} (${currentType.code})`;
+            document.getElementById('hairTypeDescription').textContent = currentType.description;
+
+            // Update score indicators
+            document.getElementById('curlScore').innerHTML = `<i class="fas fa-circle-notch mr-2"></i>Curl Pattern: ${capitalizeFirst(hairType.curlType)}`;
+            document.getElementById('porosityScore').innerHTML = `<i class="fas fa-droplet mr-2"></i>Porosity: ${capitalizeFirst(hairType.porosity)}`;
+            document.getElementById('densityScore').innerHTML = `<i class="fas fa-layer-group mr-2"></i>Density: ${capitalizeFirst(hairType.density)}`;
+
+            // Update detailed stats
+            document.getElementById('textureResult').textContent = capitalizeFirst(hairType.texture);
+            document.getElementById('oilResult').textContent = capitalizeFirst(hairType.scalpType);
+            document.getElementById('healthResult').textContent = capitalizeFirst(hairType.health);
+            document.getElementById('frizzResult').textContent = capitalizeFirst(hairType.frizzLevel);
+
+            // Generate care routine
+            generateCareRoutine(hairType);
+            
+            // Generate product recommendations
+            generateProductRecommendations(hairType);
+            
+            // Generate styling tips
+            generateStylingTips(hairType);
+            
+            // Generate science insights
+            generateScienceInsights(hairType, currentType.science);
+        }
+
+        // Generate care routine
+        function generateCareRoutine(hairType) {
+            const routines = {
+                straight: {
+                    wash: "Wash 2-3 times per week with volumizing shampoo",
+                    condition: "Use lightweight conditioner on ends only",
+                    treatment: "Weekly clarifying treatment to remove buildup"
+                },
+                wavy: {
+                    wash: "Wash 2-3 times per week with sulfate-free shampoo",
+                    condition: "Apply conditioner mid-length to ends",
+                    treatment: "Bi-weekly deep conditioning mask"
+                },
+                curly: {
+                    wash: "Co-wash or low-poo method 1-2 times per week",
+                    condition: "Deep condition weekly with moisturizing mask",
+                    treatment: "Protein treatment every 4-6 weeks"
+                },
+                coily: {
+                    wash: "Gentle cleansing 1 time per week, co-wash mid-week",
+                    condition: "Deep condition every wash day",
+                    treatment: "Pre-poo oil treatment and protein balance"
+                }
+            };
+
+            const porosityRoutines = {
+                low: "Use heat when deep conditioning, avoid heavy products",
+                normal: "Balanced routine with regular moisture-protein balance",
+                high: "Seal with oils, use protein treatments, avoid heat"
+            };
+
+            const routine = routines[hairType.curlType];
+            const container = document.getElementById('careRoutine');
+            
+            container.innerHTML = `
+                <div class="recommendation-item">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-shower text-2xl mr-3"></i>
+                        <strong>Washing</strong>
+                    </div>
+                    <p class="opacity-80">${routine.wash}</p>
+                </div>
+                <div class="recommendation-item">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-pump-soap text-2xl mr-3"></i>
+                        <strong>Conditioning</strong>
+                    </div>
+                    <p class="opacity-80">${routine.condition}</p>
+                </div>
+                <div class="recommendation-item">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-spa text-2xl mr-3"></i>
+                        <strong>Treatments</strong>
+                    </div>
+                    <p class="opacity-80">${routine.treatment}</p>
+                </div>
+                <div class="recommendation-item">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-droplet text-2xl mr-3"></i>
+                        <strong>Porosity Care</strong>
+                    </div>
+                    <p class="opacity-80">${porosityRoutines[hairType.porosity]}</p>
+                </div>
+            `;
+        }
+
+        // Generate product recommendations
+        function generateProductRecommendations(hairType) {
+            const products = {
+                straight: {
+                    shampoo: "Volumizing or clarifying shampoo",
+                    conditioner: "Lightweight, protein-rich conditioner",
+                    styling: "Root lifting spray, light mousse",
+                    ingredients: "Biotin, collagen, rice protein"
+                },
+                wavy: {
+                    shampoo: "Sulfate-free moisturizing shampoo",
+                    conditioner: "Medium-weight curl enhancing conditioner",
+                    styling: "Sea salt spray, curl cream, gel",
+                    ingredients: "Aloe vera, glycerin, seaweed extract"
+                },
+                curly: {
+                    shampoo: "Low-poo or co-wash cleanser",
+                    conditioner: "Rich, moisturizing conditioner",
+                    styling: "Leave-in conditioner, curl defining cream, gel",
+                    ingredients: "Shea butter, argan oil, coconut oil"
+                },
+                coily: {
+                    shampoo: "Creamy, sulfate-free shampoo",
+                    conditioner: "Ultra-moisturizing deep conditioner",
+                    styling: "Butter-based styling cream, curl custard, oils",
+                    ingredients: "Mango butter, jojoba oil, castor oil"
+                }
+            };
+
+            const currentProducts = products[hairType.curlType];
+            const container = document.getElementById('productRecommendations');
+            
+            container.innerHTML = `
+                <div class="recommendation-item">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-bottle-droplet text-2xl mr-3"></i>
+                        <strong>Shampoo</strong>
+                    </div>
+                    <p class="opacity-80">${currentProducts.shampoo}</p>
+                </div>
+                <div class="recommendation-item">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-pump-soap text-2xl mr-3"></i>
+                        <strong>Conditioner</strong>
+                    </div>
+                    <p class="opacity-80">${currentProducts.conditioner}</p>
+                </div>
+                <div class="recommendation-item">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-spray-can text-2xl mr-3"></i>
+                        <strong>Styling Products</strong>
+                    </div>
+                    <p class="opacity-80">${currentProducts.styling}</p>
+                </div>
+                <div class="recommendation-item">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-leaf text-2xl mr-3"></i>
+                        <strong>Key Ingredients</strong>
+                    </div>
+                    <p class="opacity-80">${currentProducts.ingredients}</p>
+                </div>
+            `;
+        }
+
+        // Generate styling tips
+        function generateStylingTips(hairType) {
+            const tips = {
+                straight: [
+                    "Apply products to roots for maximum volume",
+                    "Blow dry upside down to add body",
+                    "Use dry shampoo between washes",
+                    "Avoid heavy oils that can weigh hair down"
+                ],
+                wavy: [
+                    "Scrunch products into damp hair",
+                    "Air dry or diffuse on low heat",
+                    "Sleep on a silk pillowcase to maintain waves",
+                    "Refresh with water spray and curl cream"
+                ],
+                curly: [
+                    "Apply products to soaking wet hair",
+                    "Use the 'squish to condish' method",
+                    "Plop with a microfiber towel",
+                    "Diffuse on low heat or air dry"
+                ],
+                coily: [
+                    "Section hair and apply products thoroughly",
+                    "Use the LOC or LCO method (Liquid, Oil, Cream)",
+                    "Protective styling to retain length",
+                    "Moisturize daily and refresh with water"
+                ]
+            };
+
+            const currentTips = tips[hairType.curlType];
+            const container = document.getElementById('stylingTips');
+            
+            container.innerHTML = currentTips.map((tip, index) => `
+                <div class="recommendation-item">
+                    <div class="flex items-start">
+                        <div class="text-2xl mr-3">${index + 1}.</div>
+                        <p class="opacity-80 flex-1">${tip}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Generate science insights
+        function generateScienceInsights(hairType, mainScience) {
+            const porosityScience = {
+                low: "Your hair cuticles lie flat, making it harder for moisture to penetrate but easier to retain once inside. This is why pre-treating with heat helps.",
+                normal: "Your hair has slightly raised cuticles that allow optimal moisture balance. This is the ideal porosity for most styling and treatments.",
+                high: "Your cuticles are raised or damaged, allowing easy moisture entry but also quick loss. Sealing with oils helps lock in hydration."
+            };
+
+            const densityScience = {
+                low: "Lower follicle density means less hair volume but easier manageability. Focus on volumizing techniques and avoiding heavy products.",
+                medium: "Balanced follicle density provides good volume without excessive weight. You have flexibility in product choices.",
+                high: "High follicle density creates fullness but may be prone to tangling. Layering products and sectioning helps distribution."
+            };
+
+            const container = document.getElementById('scienceInsights');
+            
+            container.innerHTML = `
+                <div class="recommendation-item">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-microscope text-2xl mr-3"></i>
+                        <strong>Curl Pattern Science</strong>
+                    </div>
+                    <p class="opacity-80">${mainScience}</p>
+                </div>
+                <div class="recommendation-item">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-droplet text-2xl mr-3"></i>
+                        <strong>Porosity Explained</strong>
+                    </div>
+                    <p class="opacity-80">${porosityScience[hairType.porosity]}</p>
+                </div>
+                <div class="recommendation-item">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-layer-group text-2xl mr-3"></i>
+                        <strong>Density Impact</strong>
+                    </div>
+                    <p class="opacity-80">${densityScience[hairType.density]}</p>
+                </div>
+            `;
+        }
+
+        // Capitalize first letter
+        function capitalizeFirst(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        // Download results
+        function downloadResults() {
+            const resultsSection = document.getElementById('resultsSection');
+            const hairTypeName = document.getElementById('hairTypeName').textContent;
+            
+            // Create a simplified text version
+            let resultsText = `
+═══════════════════════════════════════════
+    HAIR TYPE ANALYSIS RESULTS
+═══════════════════════════════════════════
+
+${hairTypeName}
+${document.getElementById('hairTypeDescription').textContent}
+
+─────────────────────────────────────────
+HAIR PROFILE
+─────────────────────────────────────────
+Texture: ${document.getElementById('textureResult').textContent}
+Scalp Oil: ${document.getElementById('oilResult').textContent}
+Hair Health: ${document.getElementById('healthResult').textContent}
+Frizz Level: ${document.getElementById('frizzResult').textContent}
+
+─────────────────────────────────────────
+CARE ROUTINE
+─────────────────────────────────────────
+${document.getElementById('careRoutine').innerText}
+
+─────────────────────────────────────────
+PRODUCT RECOMMENDATIONS
+─────────────────────────────────────────
+${document.getElementById('productRecommendations').innerText}
+
+─────────────────────────────────────────
+STYLING TIPS
+─────────────────────────────────────────
+${document.getElementById('stylingTips').innerText}
+
+─────────────────────────────────────────
+SCIENCE INSIGHTS
+─────────────────────────────────────────
+${document.getElementById('scienceInsights').innerText}
+
+═══════════════════════════════════════════
+Generated by Tool Xeno - Hair Type Analyzer
+Visit us for more professional beauty tools
+═══════════════════════════════════════════
+            `;
+
+            // Create download
+            const blob = new Blob([resultsText], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'hair-analysis-results.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('heroSection').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
