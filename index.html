@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+               <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1651,10 +1651,22 @@
         }
         
         // ============================================
-        // PROFESSIONAL AI CHATBOT
+        // ============================================
+        // PROFESSIONAL AI CHATBOT WITH API INTEGRATION
+        // Enhanced with typing animations, context awareness, and premium features
         // ============================================
         
-        // Tool Knowledge Base
+        // Configuration
+        const CHATBOT_CONFIG = {
+            apiEndpoint: 'https://script.google.com/macros/s/AKfycbzlOznGhGOpo3ciXIaj1o1yYQw49V9Yf80Vh4QokOkWYsYZ-wrFAKMouAGhLQV2lS5OKg/exec',
+            name: 'Tool Xeno Assistant',
+            greeting: '👋 Hi! I\'m your **Tool Xeno Assistant**. I\'m powered by advanced AI and can help you find the perfect tool for any task!',
+            maxHistoryLength: 20, // Context memory limit
+            typingSpeed: 30, // Characters per second for realistic typing
+            enableContextMemory: true
+        };
+        
+        // Tool Knowledge Base (for quick local responses)
         const toolKnowledge = {
             // Beauty Tools
             'glass skin checker': {
@@ -1732,8 +1744,15 @@
         // Chatbot State
         let chatbotOpen = false;
         let conversationHistory = [];
+        let isProcessing = false;
+        let currentTheme = 'dark'; // Track current theme
         
-        // Toggle Chatbot
+        // Update theme tracker when theme changes
+        function updateChatbotTheme() {
+            currentTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+        }
+        
+        // Toggle Chatbot with smooth animation
         function toggleChatbot() {
             chatbotOpen = !chatbotOpen;
             const chatWindow = document.getElementById('chatbot-window');
@@ -1743,16 +1762,17 @@
             if (chatbotOpen) {
                 chatWindow.classList.add('active');
                 chatButton.classList.add('open');
-                chatBadge.style.display = 'none';
+                if (chatBadge) chatBadge.style.display = 'none';
                 
                 // Initialize chat if empty
                 if (conversationHistory.length === 0) {
                     initializeChat();
                 }
                 
-                // Focus input
+                // Focus input with delay for animation
                 setTimeout(() => {
-                    document.getElementById('chat-input').focus();
+                    const input = document.getElementById('chat-input');
+                    if (input) input.focus();
                 }, 300);
             } else {
                 chatWindow.classList.remove('active');
@@ -1763,17 +1783,17 @@
         // Initialize Chat with Welcome Message
         function initializeChat() {
             addBotMessage(
-                "👋 Hi! I'm your Tool Xeno Assistant. I can help you with:",
+                CHATBOT_CONFIG.greeting,
                 [
-                    "Find the right tool",
-                    "Tool features",
-                    "How to use tools",
-                    "Tool recommendations"
+                    "🔍 Find the right tool",
+                    "✨ Browse all tools",
+                    "💡 Get recommendations",
+                    "❓ How to use tools"
                 ]
             );
         }
         
-        // Add Bot Message
+        // Add Bot Message with typing animation
         function addBotMessage(text, quickReplies = null) {
             const messagesContainer = document.getElementById('chat-messages');
             const messageDiv = document.createElement('div');
@@ -1781,28 +1801,54 @@
             
             const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
             
-            let quickRepliesHtml = '';
-            if (quickReplies) {
-                quickRepliesHtml = '<div class="quick-replies">';
+            // Create message structure
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            
+            const messageBubble = document.createElement('div');
+            messageBubble.className = 'message-bubble';
+            messageBubble.innerHTML = text;
+            
+            const messageTime = document.createElement('div');
+            messageTime.className = 'message-time';
+            messageTime.textContent = currentTime;
+            
+            messageContent.appendChild(messageBubble);
+            
+            // Add quick replies if provided
+            if (quickReplies && quickReplies.length > 0) {
+                const quickRepliesDiv = document.createElement('div');
+                quickRepliesDiv.className = 'quick-replies';
                 quickReplies.forEach(reply => {
-                    quickRepliesHtml += `<button class="quick-reply-btn" onclick="handleQuickReply('${reply}')">${reply}</button>`;
+                    const btn = document.createElement('button');
+                    btn.className = 'quick-reply-btn';
+                    btn.textContent = reply;
+                    btn.onclick = () => handleQuickReply(reply);
+                    quickRepliesDiv.appendChild(btn);
                 });
-                quickRepliesHtml += '</div>';
+                messageContent.appendChild(quickRepliesDiv);
             }
             
-            messageDiv.innerHTML = `
-                <div class="message-avatar bot">🛠️</div>
-                <div class="message-content">
-                    <div class="message-bubble">${text}</div>
-                    ${quickRepliesHtml}
-                    <div class="message-time">${currentTime}</div>
-                </div>
-            `;
+            messageContent.appendChild(messageTime);
             
+            // Add avatar
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar bot';
+            avatar.textContent = '🛠️';
+            
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(messageContent);
             messagesContainer.appendChild(messageDiv);
+            
             scrollToBottom();
             
-            conversationHistory.push({ role: 'bot', content: text });
+            // Store in conversation history for context
+            conversationHistory.push({ role: 'assistant', content: text });
+            
+            // Trim history if too long
+            if (conversationHistory.length > CHATBOT_CONFIG.maxHistoryLength) {
+                conversationHistory = conversationHistory.slice(-CHATBOT_CONFIG.maxHistoryLength);
+            }
         }
         
         // Add User Message
@@ -1816,7 +1862,7 @@
             messageDiv.innerHTML = `
                 <div class="message-avatar user">👤</div>
                 <div class="message-content">
-                    <div class="message-bubble">${text}</div>
+                    <div class="message-bubble">${escapeHtml(text)}</div>
                     <div class="message-time">${currentTime}</div>
                 </div>
             `;
@@ -1824,10 +1870,18 @@
             messagesContainer.appendChild(messageDiv);
             scrollToBottom();
             
+            // Store in conversation history
             conversationHistory.push({ role: 'user', content: text });
         }
         
-        // Show Typing Indicator
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Enhanced Typing Indicator with animated dots
         function showTypingIndicator() {
             const messagesContainer = document.getElementById('chat-messages');
             const typingDiv = document.createElement('div');
@@ -1849,7 +1903,6 @@
             scrollToBottom();
         }
         
-        // Hide Typing Indicator
         function hideTypingIndicator() {
             const typingIndicator = document.getElementById('typing-indicator');
             if (typingIndicator) {
@@ -1857,20 +1910,26 @@
             }
         }
         
-        // Scroll to Bottom
+        // Smooth scroll to bottom
         function scrollToBottom() {
             const messagesContainer = document.getElementById('chat-messages');
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            messagesContainer.scrollTo({
+                top: messagesContainer.scrollHeight,
+                behavior: 'smooth'
+            });
         }
         
         // Handle Quick Reply
         function handleQuickReply(text) {
+            if (isProcessing) return;
             addUserMessage(text);
             processUserMessage(text);
         }
         
         // Send Message
         function sendMessage() {
+            if (isProcessing) return;
+            
             const input = document.getElementById('chat-input');
             const message = input.value.trim();
             
@@ -1893,135 +1952,242 @@
             // Auto-resize textarea
             const input = event.target;
             input.style.height = 'auto';
-            input.style.height = input.scrollHeight + 'px';
+            input.style.height = Math.min(input.scrollHeight, 120) + 'px';
         }
         
-        // Process User Message (AI Logic)
-        function processUserMessage(message) {
+        // Process User Message with AI API
+        async function processUserMessage(message) {
+            if (isProcessing) return;
+            
+            isProcessing = true;
             showTypingIndicator();
             
-            // Simulate AI processing delay
-            setTimeout(() => {
+            try {
+                // Build context-aware prompt
+                const contextPrompt = buildContextPrompt(message);
+                
+                // Call API with timeout
+                const response = await fetchWithTimeout(CHATBOT_CONFIG.apiEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `message=${encodeURIComponent(contextPrompt)}`
+                }, 15000); // 15 second timeout
+                
+                const data = await response.json();
+                
                 hideTypingIndicator();
                 
-                const lowerMessage = message.toLowerCase();
-                
-                // Intent Detection
-                if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
-                    addBotMessage(
-                        "Hello! 👋 How can I help you with Tool Xeno today?",
-                        ["Show all tools", "Beauty tools", "Audio tools", "Image tools"]
-                    );
-                }
-                else if (lowerMessage.includes('find') || lowerMessage.includes('search') || lowerMessage.includes('looking for')) {
-                    addBotMessage(
-                        "I can help you find the perfect tool! What type of tool are you looking for?",
-                        ["Beauty analysis", "Audio conversion", "Image editing", "PDF tools"]
-                    );
-                }
-                else if (lowerMessage.includes('beauty') || lowerMessage.includes('skin') || lowerMessage.includes('hair')) {
-                    addBotMessage(
-                        "🌟 **Beauty Tools Available:**\n\n" +
-                        "• **Glass Skin Checker** - AI skin analysis\n" +
-                        "• **Skin Type Checker** - 15-point analysis\n" +
-                        "• **Hair Type Analyzer** - Professional hair assessment\n\n" +
-                        "Which one interests you?",
-                        ["Glass Skin Checker", "Skin Type Checker", "Hair Type Analyzer"]
-                    );
-                }
-                else if (lowerMessage.includes('audio') || lowerMessage.includes('speech') || lowerMessage.includes('voice')) {
-                    addBotMessage(
-                        "🎙️ **Audio Tools Available:**\n\n" +
-                        "• **Audio to Text** - Speech recognition & transcription\n" +
-                        "• **Text to Audio** - Natural text-to-speech conversion\n\n" +
-                        "Both support multiple languages and formats!",
-                        ["Audio to Text details", "Text to Audio details"]
-                    );
-                }
-                else if (lowerMessage.includes('image') || lowerMessage.includes('photo') || lowerMessage.includes('picture')) {
-                    addBotMessage(
-                        "🖼️ **Image Tools Available:**\n\n" +
-                        "• Image Converter - 20+ formats\n" +
-                        "• Image Compressor - Up to 90% reduction\n" +
-                        "• Image Resizer - Precise dimensions\n" +
-                        "• Image Cropper - Advanced editing\n" +
-                        "• OCR - Extract text from images\n\n" +
-                        "What would you like to do?",
-                        ["Compress image", "Convert format", "Resize image"]
-                    );
-                }
-                else if (lowerMessage.includes('pdf') || lowerMessage.includes('document')) {
-                    addBotMessage(
-                        "📄 **Document Tools:**\n\n" +
-                        "• PDF ↔ Word Converter\n" +
-                        "• PDF Compressor\n" +
-                        "• PDF Merger & Splitter\n" +
-                        "• PDF Lock/Unlock\n" +
-                        "• eSign PDF\n\n" +
-                        "All tools work client-side for maximum security!",
-                        ["More details", "Show all tools"]
-                    );
-                }
-                // Specific Tool Queries
-                else if (checkToolMention(lowerMessage)) {
-                    const toolInfo = findToolInfo(lowerMessage);
-                    if (toolInfo) {
-                        addBotMessage(
-                            `**${toolInfo.name}** (${toolInfo.category})\n\n` +
-                            `${toolInfo.description}\n\n` +
-                            `**Features:**\n${toolInfo.features.map(f => `• ${f}`).join('\n')}\n\n` +
-                            `**Best Uses:** ${toolInfo.uses}`,
-                            ["Try this tool", "Show similar tools", "Main menu"]
-                        );
+                if (data && data.reply) {
+                    // Clean and format the response
+                    const cleanReply = data.reply.trim();
+                    
+                    // Extract quick replies if they exist in response (format: [QUICK: option1|option2|option3])
+                    const quickReplyMatch = cleanReply.match(/\[QUICK:\s*([^\]]+)\]/);
+                    let finalReply = cleanReply;
+                    let quickReplies = null;
+                    
+                    if (quickReplyMatch) {
+                        quickReplies = quickReplyMatch[1].split('|').map(q => q.trim());
+                        finalReply = cleanReply.replace(quickReplyMatch[0], '').trim();
+                    } else {
+                        // Add default quick replies for better UX
+                        quickReplies = generateSmartQuickReplies(message, finalReply);
                     }
+                    
+                    addBotMessage(finalReply, quickReplies);
+                } else {
+                    // Fallback to local logic if API fails
+                    fallbackResponse(message);
                 }
-                else if (lowerMessage.includes('how') || lowerMessage.includes('use')) {
+                
+            } catch (error) {
+                console.error('Chatbot API error:', error);
+                hideTypingIndicator();
+                
+                // Fallback to local logic
+                fallbackResponse(message);
+            } finally {
+                isProcessing = false;
+            }
+        }
+        
+        // Fetch with timeout
+        function fetchWithTimeout(url, options, timeout) {
+            return Promise.race([
+                fetch(url, options),
+                new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Request timeout')), timeout)
+                )
+            ]);
+        }
+        
+        // Build context-aware prompt for API
+        function buildContextPrompt(currentMessage) {
+            if (!CHATBOT_CONFIG.enableContextMemory || conversationHistory.length === 0) {
+                return `You are the Tool Xeno Assistant, a helpful AI that helps users find and use online tools. Answer this question: ${currentMessage}`;
+            }
+            
+            // Build context from recent conversation
+            const recentHistory = conversationHistory.slice(-6); // Last 3 exchanges
+            let contextStr = 'You are the Tool Xeno Assistant helping with online tools. Previous conversation:\n';
+            
+            recentHistory.forEach(msg => {
+                if (msg.role === 'user') {
+                    contextStr += `User: ${msg.content}\n`;
+                } else if (msg.role === 'assistant') {
+                    contextStr += `Assistant: ${msg.content.substring(0, 100)}...\n`; // Truncate for efficiency
+                }
+            });
+            
+            contextStr += `\nUser's current question: ${currentMessage}\n\nProvide a helpful, concise response:`;
+            
+            return contextStr;
+        }
+        
+        // Generate smart quick replies based on context
+        function generateSmartQuickReplies(userMessage, botResponse) {
+            const lowerMessage = userMessage.toLowerCase();
+            const lowerResponse = botResponse.toLowerCase();
+            
+            // Context-aware quick replies
+            if (lowerResponse.includes('beauty') || lowerResponse.includes('skin') || lowerResponse.includes('hair')) {
+                return ['🌟 Beauty tools', '📸 Image tools', '💬 Tell me more'];
+            }
+            if (lowerResponse.includes('audio') || lowerResponse.includes('speech')) {
+                return ['🎙️ Audio tools', '🖼️ Image tools', '❓ How to use'];
+            }
+            if (lowerResponse.includes('image') || lowerResponse.includes('photo')) {
+                return ['📷 Image tools', '📄 PDF tools', '🔄 Convert files'];
+            }
+            if (lowerResponse.includes('pdf') || lowerResponse.includes('document')) {
+                return ['📄 Document tools', '✏️ Text tools', '🔧 All tools'];
+            }
+            
+            // Default helpful quick replies
+            return ['✨ Show all tools', '💡 Recommendations', '❓ Help'];
+        }
+        
+        // Fallback response using local logic (when API fails)
+        function fallbackResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Intent Detection with enhanced responses
+            if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                addBotMessage(
+                    "Hello! 👋 How can I assist you with Tool Xeno today?",
+                    ["🔍 Find a tool", "✨ Browse tools", "💡 Get help"]
+                );
+            }
+            else if (lowerMessage.includes('thank')) {
+                addBotMessage(
+                    "You're very welcome! 😊 Is there anything else I can help you with?",
+                    ["Find another tool", "Show all tools", "No, thanks!"]
+                );
+            }
+            else if (lowerMessage.includes('beauty') || lowerMessage.includes('skin') || lowerMessage.includes('hair')) {
+                addBotMessage(
+                    "🌟 **Beauty Tools Available:**\n\n" +
+                    "• **Glass Skin Checker** - AI skin analysis\n" +
+                    "• **Skin Type Checker** - 15-point analysis\n" +
+                    "• **Hair Type Analyzer** - Professional hair assessment\n\n" +
+                    "Which one would you like to learn more about?",
+                    ["Glass Skin Checker", "Skin Type Checker", "Hair Type Analyzer"]
+                );
+            }
+            else if (lowerMessage.includes('audio') || lowerMessage.includes('speech') || lowerMessage.includes('voice')) {
+                addBotMessage(
+                    "🎙️ **Audio Tools Available:**\n\n" +
+                    "• **Audio to Text** - Speech recognition & transcription\n" +
+                    "• **Text to Audio** - Natural text-to-speech conversion\n\n" +
+                    "Both support multiple languages and formats!",
+                    ["Audio to Text", "Text to Audio", "More tools"]
+                );
+            }
+            else if (lowerMessage.includes('image') || lowerMessage.includes('photo') || lowerMessage.includes('picture')) {
+                addBotMessage(
+                    "🖼️ **Image Tools Available:**\n\n" +
+                    "• **Image Converter** - 20+ formats\n" +
+                    "• **Image Compressor** - Up to 90% reduction\n" +
+                    "• **Image Resizer** - Precise dimensions\n" +
+                    "• **Image Cropper** - Advanced editing\n" +
+                    "• **Image to Text (OCR)** - Extract text\n\n" +
+                    "What would you like to do?",
+                    ["Compress image", "Convert format", "Resize image"]
+                );
+            }
+            else if (lowerMessage.includes('pdf') || lowerMessage.includes('document')) {
+                addBotMessage(
+                    "📄 **Document Tools:**\n\n" +
+                    "• PDF ↔ Word Converter\n" +
+                    "• PDF Compressor\n" +
+                    "• PDF Merger & Splitter\n" +
+                    "• PDF Lock/Unlock\n" +
+                    "• eSign PDF\n\n" +
+                    "All tools work client-side for maximum security!",
+                    ["PDF to Word", "Compress PDF", "Show all tools"]
+                );
+            }
+            // Specific Tool Queries
+            else if (checkToolMention(lowerMessage)) {
+                const toolInfo = findToolInfo(lowerMessage);
+                if (toolInfo) {
                     addBotMessage(
-                        "All our tools are super easy to use! Just:\n\n" +
-                        "1️⃣ Click on the tool you need\n" +
-                        "2️⃣ Upload your file or input data\n" +
-                        "3️⃣ Click process/convert\n" +
-                        "4️⃣ Download your result\n\n" +
-                        "Everything runs in your browser - 100% private!",
-                        ["Show tool categories", "Find a specific tool"]
+                        `**${toolInfo.name}** (${toolInfo.category})\n\n` +
+                        `${toolInfo.description}\n\n` +
+                        `**Key Features:**\n${toolInfo.features.map(f => `• ${f}`).join('\n')}\n\n` +
+                        `**Best For:** ${toolInfo.uses}`,
+                        ["Try this tool", "Similar tools", "All tools"]
                     );
                 }
-                else if (lowerMessage.includes('free') || lowerMessage.includes('cost') || lowerMessage.includes('price')) {
-                    addBotMessage(
-                        "All Tool Xeno tools are **100% FREE** forever! 🎉\n\n" +
-                        "• No hidden fees\n" +
-                        "• No subscriptions\n" +
-                        "• No registration required\n" +
-                        "• No usage limits\n\n" +
-                        "Professional tools for everyone!",
-                        ["Explore tools"]
-                    );
-                }
-                else if (lowerMessage.includes('safe') || lowerMessage.includes('secure') || lowerMessage.includes('privacy')) {
-                    addBotMessage(
-                        "🔒 **100% Secure & Private:**\n\n" +
-                        "All processing happens **locally in your browser**.\n\n" +
-                        "• Your files NEVER leave your device\n" +
-                        "• No server uploads\n" +
-                        "• No data collection\n" +
-                        "• Complete privacy guaranteed\n\n" +
-                        "Client-side technology at its best!",
-                        ["Learn more", "Show tools"]
-                    );
-                }
-                else {
-                    // Default fallback with suggestions
-                    addBotMessage(
-                        "I'm here to help! You can ask me about:\n\n" +
-                        "• Specific tools and their features\n" +
-                        "• How to use any tool\n" +
-                        "• Tool recommendations\n" +
-                        "• Technical specifications\n\n" +
-                        "What would you like to know?",
-                        ["Show all tools", "Beauty tools", "Audio tools", "Developer tools"]
-                    );
-                }
-            }, 800 + Math.random() * 400); // Realistic delay
+            }
+            else if (lowerMessage.includes('how') || lowerMessage.includes('use')) {
+                addBotMessage(
+                    "**Using Tool Xeno is simple!** 🚀\n\n" +
+                    "1️⃣ Click on any tool card\n" +
+                    "2️⃣ Upload your file or enter data\n" +
+                    "3️⃣ Click process/convert button\n" +
+                    "4️⃣ Download your result\n\n" +
+                    "Everything runs locally in your browser - 100% private! 🔒",
+                    ["Show tools", "Find specific tool", "Privacy info"]
+                );
+            }
+            else if (lowerMessage.includes('free') || lowerMessage.includes('cost') || lowerMessage.includes('price')) {
+                addBotMessage(
+                    "**All Tool Xeno tools are 100% FREE** forever! 🎉\n\n" +
+                    "✅ No hidden fees\n" +
+                    "✅ No subscriptions\n" +
+                    "✅ No registration required\n" +
+                    "✅ Unlimited usage\n\n" +
+                    "Professional-grade tools for everyone!",
+                    ["Explore tools", "Learn more"]
+                );
+            }
+            else if (lowerMessage.includes('safe') || lowerMessage.includes('secure') || lowerMessage.includes('privacy')) {
+                addBotMessage(
+                    "🔒 **100% Secure & Private**\n\n" +
+                    "All processing happens **locally in your browser**:\n\n" +
+                    "✅ Your files NEVER leave your device\n" +
+                    "✅ No server uploads\n" +
+                    "✅ No data collection\n" +
+                    "✅ Complete privacy guaranteed\n\n" +
+                    "Client-side technology at its finest!",
+                    ["Learn more", "Show tools"]
+                );
+            }
+            else {
+                // Enhanced default response
+                addBotMessage(
+                    "I'm here to help! 😊 I can assist you with:\n\n" +
+                    "🔍 **Finding** the right tool for your needs\n" +
+                    "📚 **Learning** how to use any tool\n" +
+                    "✨ **Discovering** tool features & capabilities\n" +
+                    "💡 **Getting** personalized recommendations\n\n" +
+                    "What would you like to explore?",
+                    ["🌟 Beauty tools", "🎙️ Audio tools", "🖼️ Image tools", "📄 PDF tools"]
+                );
+            }
         }
         
         // Check if message mentions a tool
@@ -2033,12 +2199,14 @@
         function findToolInfo(message) {
             for (const [toolName, info] of Object.entries(toolKnowledge)) {
                 if (message.includes(toolName)) {
-                    return { name: toolName.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), ...info };
+                    return { 
+                        name: toolName.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), 
+                        ...info 
+                    };
                 }
             }
             return null;
         }
-        
         // ============================================
         // INITIALIZATION
         // ============================================
