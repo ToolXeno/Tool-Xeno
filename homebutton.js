@@ -1,5 +1,5 @@
-// ✅ Tool Xeno - Universal Floating Home Button (Auto-Working Final Version)
-document.addEventListener("DOMContentLoaded", () => {
+// ✅ ToolXeno - Final Universal Floating Home Button (Stable Version 2.0)
+window.addEventListener("load", () => {
   // Load FontAwesome if missing
   if (!document.querySelector('link[href*="font-awesome"]')) {
     const fa = document.createElement("link");
@@ -8,22 +8,22 @@ document.addEventListener("DOMContentLoaded", () => {
     document.head.appendChild(fa);
   }
 
-  // Create the button
+  // Create button
   const btn = document.createElement("a");
-  btn.href = window.location.origin + "/index.html"; // works anywhere
+  btn.href = window.location.origin + "/index.html"; // works anywhere (root or subfolder)
   btn.className = "toolxeno-home-button";
   btn.setAttribute("aria-label", "Go to Tool Xeno Home");
   btn.innerHTML = `<i class="fas fa-home"></i><span>Home</span>`;
   document.body.appendChild(btn);
 
-  // Add styling
+  // Add styles
   const style = document.createElement("style");
   style.textContent = `
     .toolxeno-home-button {
       position: fixed;
       bottom: 26px;
       right: 26px;
-      z-index: 999999;
+      z-index: 99999999 !important;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       padding: 12px 22px;
       border-radius: 50px;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #fff;
+      color: #ffffff;
       font-family: 'Inter', sans-serif;
       font-weight: 600;
       font-size: 15px;
@@ -43,21 +43,33 @@ document.addEventListener("DOMContentLoaded", () => {
       -webkit-tap-highlight-color: transparent;
       transition: all .3s ease;
     }
+
     .toolxeno-home-button:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 32px rgba(102,126,234,0.55);
     }
-    .toolxeno-home-button:active { transform: translateY(-1px); }
-    .toolxeno-home-button i { font-size: 16px; line-height: 1; }
-    .toolxeno-home-button span { line-height: 1; }
+
+    .toolxeno-home-button:active {
+      transform: translateY(-1px);
+    }
+
+    .toolxeno-home-button i {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .toolxeno-home-button span {
+      line-height: 1;
+    }
 
     /* Light Theme Support */
     body.light-theme .toolxeno-home-button {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #fff;
+      color: #ffffff;
       border: 1px solid rgba(0,0,0,0.1);
       box-shadow: 0 4px 18px rgba(102,126,234,0.3);
     }
+
     body.light-theme .toolxeno-home-button:hover {
       box-shadow: 0 8px 28px rgba(102,126,234,0.5);
     }
@@ -72,9 +84,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    /* Extra Small Devices: Icon Only */
+    /* Extra Small Devices - Icon Only */
     @media (max-width: 480px) {
-      .toolxeno-home-button span { display: none; }
+      .toolxeno-home-button span {
+        display: none;
+      }
       .toolxeno-home-button {
         width: 52px;
         height: 52px;
@@ -82,7 +96,9 @@ document.addEventListener("DOMContentLoaded", () => {
         border-radius: 50%;
         justify-content: center;
       }
-      .toolxeno-home-button i { font-size: 18px; }
+      .toolxeno-home-button i {
+        font-size: 18px;
+      }
     }
   `;
   document.head.appendChild(style);
