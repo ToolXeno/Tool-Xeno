@@ -91,59 +91,6 @@
             "@type": "Organization",
             "name": "Tool Xeno"
           }
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Is Tool Xeno fast?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes, Tool Xeno is lightning fast. All processing is done on the client-side (in your browser), which ensures maximum speed and privacy. There are no server delays, so you get instant results."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Is my data secure on Tool Xeno?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Absolutely. Your data is 100% secure because it never leaves your device. All processing happens locally in your browser, guaranteeing complete privacy."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Are the tools professional quality?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes, our tools are professional grade. They include advanced features that rival paid enterprise solutions, so you don't have to compromise on quality."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Does Tool Xeno work on mobile devices?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes, Tool Xeno is fully mobile-optimized. Our responsive design works perfectly on all devices, including desktops, tablets, and smartphones, ensuring the same great experience everywhere."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Is Tool Xeno really free?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes, Tool Xeno is completely free. All tools are available to use with no hidden costs, subscriptions, or premium tiers. Our mission is to provide professional tools for everyone."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Do I need to register to use the tools?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "No registration is required. You can start using our tools immediately without the need to create an account or provide any personal information."
-              }
-            }
-          ]
         }
       ]
     }
@@ -162,7 +109,7 @@
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --dark-bg: #0a0a0a;
-            --light-bg: #f8fafc; /* light slate 50 */
+            --light-bg: #f8fafc;
         }
 
         html, body { 
@@ -180,7 +127,6 @@
             color: #ffffff;
         }
         
-        /* Lock scroll when mobile menu is open */
         body.menu-open {
             overflow: hidden;
         }
@@ -190,15 +136,15 @@
         .header-glass {
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            background: rgba(17, 24, 39, 0.6); /* dark gray 900 with opacity */
+            background: rgba(17, 24, 39, 0.6);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: background-color 0.35s ease, border-color 0.35s ease;
         }
 
-        html.light .header-glass { background: rgba(255, 255, 255, 0.75); border-bottom-color: #e5e7eb; /* light gray 200 */ }
+        html.light .header-glass { background: rgba(255, 255, 255, 0.75); border-bottom-color: #e5e7eb; }
         
         .glass-card {
-            background: rgba(31, 41, 55, 0.5); /* dark gray 800 with opacity */
+            background: rgba(31, 41, 55, 0.5);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -215,12 +161,31 @@
         
         html.light .glass-card { 
             background-color: #ffffff;
-            border-color: #e5e7eb; /* light gray 200 */
+            border-color: #e5e7eb;
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
         }
         html.light .glass-card:hover { 
             box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            border-color: #d1d5db; /* light gray 300 */
+            border-color: #d1d5db;
+        }
+
+        .icon-wrapper {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .glass-card:hover .icon-wrapper {
+            transform: scale(1.15) rotate(3deg);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        html.light .icon-wrapper {
+            background-color: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        html.light .glass-card:hover .icon-wrapper {
+            background-color: #f8fafc;
+            box-shadow: 0 6px 10px -1px rgba(0, 0, 0, 0.15);
         }
 
         .btn-gradient {
@@ -254,7 +219,6 @@
              will-change: transform;
         }
 
-        /* Improved Scroll Animation */
         .scroll-animate {
             opacity: 0;
             transform: translateY(20px) scale(0.98);
@@ -266,12 +230,11 @@
             transform: translateY(0) scale(1);
         }
         
-        /* Smooth Theme Toggle */
         .theme-toggle {
             position: relative;
             width: 56px;
             height: 28px;
-            background: #374151; /* gray-700 */
+            background: #374151;
             border-radius: 14px;
             cursor: pointer;
             transition: all 0.3s ease-out;
@@ -290,27 +253,25 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         html.light .theme-toggle {
-            background: #e2e8f0; /* slate-200 */
-            border-color: #cbd5e1; /* slate-300 */
+            background: #e2e8f0;
+            border-color: #cbd5e1;
         }
         html.light .theme-toggle::after {
             transform: translateX(28px);
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
 
-        /* Light Theme Overrides */
-        html.light .nav-link { color: #475569; /* slate-600 */ }
-        html.light .nav-link:hover { background-color: #e2e8f0; /* slate-200 */ color: #0f172a; /* slate-900 */ }
+        html.light .nav-link { color: #475569; }
+        html.light .nav-link:hover { background-color: #e2e8f0; color: #0f172a; }
         html.light .footer-link { color: #475569; }
         html.light .footer-link:hover { color: #0f172a; }
         html.light .search-input {
             background-color: white;
-            border-color: #cbd5e1; /* slate-300 */
-            color: #1e293b; /* slate-800 */
+            border-color: #cbd5e1;
+            color: #1e293b;
         }
-        html.light .search-input::placeholder { color: #94a3b8; /* slate-400 */ }
+        html.light .search-input::placeholder { color: #94a3b8; }
         
-        /* Mobile Menu Light Theme */
         html.light #mobile-menu { background-color: rgba(248, 250, 252, 0.98); }
         html.light .mobile-nav-link { color: #1e293b; }
         html.light .mobile-nav-link:hover { color: #7c3aed; }
@@ -339,7 +300,6 @@
                         <a href="#contact" class="nav-link text-white/70 hover:bg-white/10 hover:text-white px-4 py-2 rounded-lg transition-colors duration-300">Contact</a>
                     </nav>
                     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light and dark theme"></button>
-                    <!-- Mobile Menu Button -->
                     <button id="mobile-menu-open" class="md:hidden p-2 text-white/80 hover:text-white focus:outline-none transition-colors" aria-label="Open Menu">
                         <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
@@ -348,7 +308,6 @@
         </div>
     </header>
 
-    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="fixed inset-0 z-[60] bg-gray-900/98 backdrop-blur-xl transform translate-x-full transition-transform duration-300 md:hidden flex flex-col items-center justify-center">
         <button id="mobile-menu-close" class="absolute top-6 right-6 p-2 text-white/70 hover:text-white focus:outline-none transition-colors" aria-label="Close Menu">
             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -370,22 +329,26 @@
             </p>
 
             <div class="flex flex-wrap justify-center items-center gap-5 md:gap-7 my-8">
+                <!-- All-in-one Tools (Grid) -->
                 <div class="tool-icon-animation w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-white text-2xl md:text-3xl shadow-lg" style="background: linear-gradient(135deg, #667eea, #764ba2)">
-                    <svg class="w-7 h-7 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <svg class="w-7 h-7 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"></path></svg>
                 </div>
+                <!-- Speed / Lightning -->
                 <div class="tool-icon-animation w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-white text-2xl md:text-3xl shadow-lg" style="background: linear-gradient(135deg, #4facfe, #00f2fe); animation-delay: 0.5s">
-                    <svg class="w-7 h-7 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                     <svg class="w-7 h-7 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"></path></svg>
                 </div>
+                <!-- Security / Shield -->
                 <div class="tool-icon-animation w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-white text-2xl md:text-3xl shadow-lg" style="background: linear-gradient(135deg, #43e97b, #38f9d7); animation-delay: 1s">
-                    <svg class="w-7 h-7 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    <svg class="w-7 h-7 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"></path></svg>
                 </div>
+                <!-- Magic / Ease -->
                 <div class="tool-icon-animation w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-white text-2xl md:text-3xl shadow-lg" style="background: linear-gradient(135deg, #fa709a, #fee140); animation-delay: 1.5s">
-                    <svg class="w-7 h-7 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    <svg class="w-7 h-7 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"></path></svg>
                 </div>
             </div>
 
             <a href="#tools" class="btn-gradient relative overflow-hidden inline-flex items-center justify-center text-lg px-8 py-4 mb-12 rounded-2xl text-white font-semibold transition-transform duration-300">
-                <svg class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <svg class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
                 Explore Tools
             </a>
         </section>
@@ -404,29 +367,33 @@
                 <div class="text-center my-10 md:my-16">
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 inline-flex items-center flex-wrap justify-center gap-2">
                         <span class="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent flex items-center">
-                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"></path></svg>
                             Beauty Tools
                         </span>
                     </h2>
-                    <p class="text-lg opacity-80 max-w-xl mx-auto">
-                        Professional skin and hair analysis with AI-powered technology
-                    </p>
+                    <p class="text-lg opacity-80 max-w-xl mx-auto">Professional skin and hair analysis with AI-powered technology</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     <a href="glass-skin-checker.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Glass Skin Checker" data-description="Advanced skin analysis tool with professional scoring" data-category="beauty">
-                        <div class="text-4xl mb-4">💎</div>
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-pink-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path></svg>
+                        </div>
                         <h3 class="text-lg font-semibold mb-2">Glass Skin Checker</h3>
                         <p class="text-sm opacity-70 mb-4 h-10">Advanced skin analysis tool with professional scoring</p>
                         <div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-400 to-red-400">beauty</span></div>
                     </a>
                     <a href="skin-type-checker.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Skin Type Checker" data-description="Professional 15-point skin analysis with personalized reports" data-category="beauty">
-                        <div class="text-4xl mb-4">✅</div>
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-pink-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"></path></svg>
+                        </div>
                         <h3 class="text-lg font-semibold mb-2">Skin Type Checker</h3>
                         <p class="text-sm opacity-70 mb-4 h-10">Professional 15-point skin analysis with personalized reports</p>
                         <div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-400 to-red-400">beauty</span></div>
                     </a>
                     <a href="hair-type-analyzer.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Hair Type Analyzer" data-description="AI-powered hair analysis with personalized care recommendations" data-category="beauty">
-                        <div class="text-4xl mb-4">✂️</div>
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-pink-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
                         <h3 class="text-lg font-semibold mb-2">Hair Type Analyzer</h3>
                         <p class="text-sm opacity-70 mb-4 h-10">AI-powered hair analysis with personalized care recommendations</p>
                         <div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-400 to-red-400">beauty</span></div>
@@ -439,23 +406,25 @@
                 <div class="text-center my-10 md:my-16">
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 inline-flex items-center flex-wrap justify-center gap-2">
                         <span class="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent flex items-center">
-                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd"></path></svg>
+                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"></path></svg>
                             Audio Tools
                         </span>
                     </h2>
-                    <p class="text-lg opacity-80 max-w-xl mx-auto">
-                        Professional audio processing and speech conversion tools
-                    </p>
+                    <p class="text-lg opacity-80 max-w-xl mx-auto">Professional audio processing and speech conversion tools</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     <a href="audio-to-text.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Audio to Text" data-description="Convert speech to text with advanced speech recognition" data-category="audio">
-                        <div class="text-4xl mb-4">🎙️</div>
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-orange-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"></path></svg>
+                        </div>
                         <h3 class="text-lg font-semibold mb-2">Audio to Text</h3>
                         <p class="text-sm opacity-70 mb-4 h-10">Convert speech to text with advanced speech recognition</p>
                         <div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-orange-500 to-pink-600">audio</span></div>
                     </a>
                     <a href="text-to-audio.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Text to Audio" data-description="Generate natural-sounding speech from text with multiple voices" data-category="audio">
-                        <div class="text-4xl mb-4">🔊</div>
+                         <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-orange-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"></path></svg>
+                        </div>
                         <h3 class="text-lg font-semibold mb-2">Text to Audio</h3>
                         <p class="text-sm opacity-70 mb-4 h-10">Generate natural-sounding speech from text with multiple voices</p>
                         <div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-orange-500 to-pink-600">audio</span></div>
@@ -468,21 +437,49 @@
                 <div class="text-center my-10 md:my-16">
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 inline-flex items-center flex-wrap justify-center gap-2">
                         <span class="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent flex items-center">
-                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
+                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"></path></svg>
                             Image Tools
                         </span>
                     </h2>
-                    <p class="text-lg opacity-80 max-w-xl mx-auto">
-                        Powerful image processing and editing utilities
-                    </p>
+                    <p class="text-lg opacity-80 max-w-xl mx-auto">Powerful image processing and editing utilities</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <a href="image-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Image Converter" data-description="Convert between different image formats instantly" data-category="image"><div class="text-4xl mb-4">🔄</div><h3 class="text-lg font-semibold mb-2">Image Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Convert between different image formats instantly</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-500 to-purple-600">image</span></div></a>
-                    <a href="image-compressor.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Image Compressor" data-description="Reduce image file size without quality loss" data-category="image"><div class="text-4xl mb-4">📦</div><h3 class="text-lg font-semibold mb-2">Image Compressor</h3><p class="text-sm opacity-70 mb-4 h-10">Reduce image file size without quality loss</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-500 to-purple-600">image</span></div></a>
-                    <a href="image-resizer.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Image Resizer" data-description="Resize images to any dimension with precision" data-category="image"><div class="text-4xl mb-4">📏</div><h3 class="text-lg font-semibold mb-2">Image Resizer</h3><p class="text-sm opacity-70 mb-4 h-10">Resize images to any dimension with precision</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-500 to-purple-600">image</span></div></a>
-                    <a href="image-cropper.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Image Cropper" data-description="Crop and trim images with advanced tools" data-category="image"><div class="text-4xl mb-4">✂️</div><h3 class="text-lg font-semibold mb-2">Image Cropper</h3><p class="text-sm opacity-70 mb-4 h-10">Crop and trim images with advanced tools</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-500 to-purple-600">image</span></div></a>
-                    <a href="image-to-text.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Image to Text (OCR)" data-description="Extract text from images using OCR technology" data-category="image"><div class="text-4xl mb-4">📝</div><h3 class="text-lg font-semibold mb-2">Image to Text (OCR)</h3><p class="text-sm opacity-70 mb-4 h-10">Extract text from images using OCR technology</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-500 to-purple-600">image</span></div></a>
-                    <a href="image-rotator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Image Rotator/Flipper" data-description="Rotate and flip images in any direction" data-category="image"><div class="text-4xl mb-4">🔁</div><h3 class="text-lg font-semibold mb-2">Image Rotator/Flipper</h3><p class="text-sm opacity-70 mb-4 h-10">Rotate and flip images in any direction</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-500 to-purple-600">image</span></div></a>
+                    <a href="image-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Image Converter" data-description="Convert between different image formats instantly" data-category="image">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-indigo-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Image Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Convert between different image formats instantly</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-500 to-purple-600">image</span></div>
+                    </a>
+                    <a href="image-compressor.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Image Compressor" data-description="Reduce image file size without quality loss" data-category="image">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-indigo-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5M15 15l5.25 5.25"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Image Compressor</h3><p class="text-sm opacity-70 mb-4 h-10">Reduce image file size without quality loss</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-500 to-purple-600">image</span></div>
+                    </a>
+                    <a href="image-resizer.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Image Resizer" data-description="Resize images to any dimension with precision" data-category="image">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-indigo-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Image Resizer</h3><p class="text-sm opacity-70 mb-4 h-10">Resize images to any dimension with precision</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-500 to-purple-600">image</span></div>
+                    </a>
+                    <a href="image-cropper.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Image Cropper" data-description="Crop and trim images with advanced tools" data-category="image">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-indigo-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 3.75v2.25H5.25a.75.75 0 000 1.5h2.25v9.75a.75.75 0 00.75.75h9.75v2.25a.75.75 0 001.5 0v-2.25h2.25a.75.75 0 000-1.5h-2.25V6.75a.75.75 0 00-.75-.75h-9.75V3.75a.75.75 0 00-1.5 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Image Cropper</h3><p class="text-sm opacity-70 mb-4 h-10">Crop and trim images with advanced tools</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-500 to-purple-600">image</span></div>
+                    </a>
+                    <a href="image-to-text.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Image to Text (OCR)" data-description="Extract text from images using OCR technology" data-category="image">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-indigo-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Image to Text (OCR)</h3><p class="text-sm opacity-70 mb-4 h-10">Extract text from images using OCR technology</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-500 to-purple-600">image</span></div>
+                    </a>
+                    <a href="image-rotator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Image Rotator/Flipper" data-description="Rotate and flip images in any direction" data-category="image">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-indigo-500">
+                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Image Rotator/Flipper</h3><p class="text-sm opacity-70 mb-4 h-10">Rotate and flip images in any direction</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-500 to-purple-600">image</span></div>
+                    </a>
                 </div>
             </div>
 
@@ -491,21 +488,49 @@
                 <div class="text-center my-10 md:my-16">
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 inline-flex items-center flex-wrap justify-center gap-2">
                         <span class="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent flex items-center">
-                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
+                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"></path></svg>
                             Document Tools
                         </span>
                     </h2>
-                    <p class="text-lg opacity-80 max-w-xl mx-auto">
-                        Professional PDF and document processing tools
-                    </p>
+                    <p class="text-lg opacity-80 max-w-xl mx-auto">Professional PDF and document processing tools</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <a href="pdf-word-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="PDF to Word / Word to PDF" data-description="Convert between PDF and Word formats seamlessly" data-category="document"><div class="text-4xl mb-4">📄</div><h3 class="text-lg font-semibold mb-2">PDF to Word / Word to PDF</h3><p class="text-sm opacity-70 mb-4 h-10">Convert between PDF and Word formats seamlessly</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-500 to-rose-500">document</span></div></a>
-                    <a href="pdf-compressor.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="PDF Compressor" data-description="Reduce PDF file size while maintaining quality" data-category="document"><div class="text-4xl mb-4">🗜️</div><h3 class="text-lg font-semibold mb-2">PDF Compressor</h3><p class="text-sm opacity-70 mb-4 h-10">Reduce PDF file size while maintaining quality</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-500 to-rose-500">document</span></div></a>
-                    <a href="pdf-merger-splitter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="PDF Merger & Splitter" data-description="Merge multiple PDFs or split them into pages" data-category="document"><div class="text-4xl mb-4">📑</div><h3 class="text-lg font-semibold mb-2">PDF Merger & Splitter</h3><p class="text-sm opacity-70 mb-4 h-10">Merge multiple PDFs or split them into pages</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-500 to-rose-500">document</span></div></a>
-                    <a href="document-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Document Converter" data-description="Convert between various document formats" data-category="document"><div class="text-4xl mb-4">🔀</div><h3 class="text-lg font-semibold mb-2">Document Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Convert between various document formats</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-500 to-rose-500">document</span></div></a>
-                    <a href="pdf-lock-unlock.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="PDF Lock/Unlock" data-description="Add password protection or remove it from PDFs" data-category="document"><div class="text-4xl mb-4">🔒</div><h3 class="text-lg font-semibold mb-2">PDF Lock/Unlock</h3><p class="text-sm opacity-70 mb-4 h-10">Add password protection or remove it from PDFs</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-500 to-rose-500">document</span></div></a>
-                    <a href="esign-pdf.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="eSign PDF" data-description="Add digital signatures to PDF documents" data-category="document"><div class="text-4xl mb-4">✍️</div><h3 class="text-lg font-semibold mb-2">eSign PDF</h3><p class="text-sm opacity-70 mb-4 h-10">Add digital signatures to PDF documents</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-500 to-rose-500">document</span></div></a>
+                    <a href="pdf-word-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="PDF to Word / Word to PDF" data-description="Convert between PDF and Word formats seamlessly" data-category="document">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-red-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m-6 3.75l3 3m0 0l3-3m-3 3V1.5m6 9h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">PDF to Word / Word to PDF</h3><p class="text-sm opacity-70 mb-4 h-10">Convert between PDF and Word formats seamlessly</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-500 to-rose-500">document</span></div>
+                    </a>
+                    <a href="pdf-compressor.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="PDF Compressor" data-description="Reduce PDF file size while maintaining quality" data-category="document">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-red-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">PDF Compressor</h3><p class="text-sm opacity-70 mb-4 h-10">Reduce PDF file size while maintaining quality</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-500 to-rose-500">document</span></div>
+                    </a>
+                    <a href="pdf-merger-splitter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="PDF Merger & Splitter" data-description="Merge multiple PDFs or split them into pages" data-category="document">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-red-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 8.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v8.25A2.25 2.25 0 006 16.5h2.25m8.25-8.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-7.5A2.25 2.25 0 018.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 00-2.25 2.25v6"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">PDF Merger & Splitter</h3><p class="text-sm opacity-70 mb-4 h-10">Merge multiple PDFs or split them into pages</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-500 to-rose-500">document</span></div>
+                    </a>
+                    <a href="document-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Document Converter" data-description="Convert between various document formats" data-category="document">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-red-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Document Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Convert between various document formats</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-500 to-rose-500">document</span></div>
+                    </a>
+                    <a href="pdf-lock-unlock.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="PDF Lock/Unlock" data-description="Add password protection or remove it from PDFs" data-category="document">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-red-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">PDF Lock/Unlock</h3><p class="text-sm opacity-70 mb-4 h-10">Add password protection or remove it from PDFs</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-500 to-rose-500">document</span></div>
+                    </a>
+                    <a href="esign-pdf.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="eSign PDF" data-description="Add digital signatures to PDF documents" data-category="document">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-red-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">eSign PDF</h3><p class="text-sm opacity-70 mb-4 h-10">Add digital signatures to PDF documents</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-pink-500 to-rose-500">document</span></div>
+                    </a>
                 </div>
             </div>
 
@@ -514,21 +539,49 @@
                 <div class="text-center my-10 md:my-16">
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 inline-flex items-center flex-wrap justify-center gap-2">
                         <span class="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent flex items-center">
-                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-3 3a1 1 0 100 2h.01a1 1 0 100-2H10zm-4 1a1 1 0 011-1h.01a1 1 0 110 2H7a1 1 0 01-1-1zm1-4a1 1 0 100 2h.01a1 1 0 100-2H7zm2 1a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm4-4a1 1 0 100 2h.01a1 1 0 100-2H13zM9 9a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zM7 8a1 1 0 000 2h.01a1 1 0 000-2H7z" clip-rule="evenodd"></path></svg>
+                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5a2.25 2.25 0 012.25 2.25v12a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-12A2.25 2.25 0 018.25 6z"></path></svg>
                             Calculator Tools
                         </span>
                     </h2>
-                    <p class="text-lg opacity-80 max-w-xl mx-auto">
-                        Advanced calculators for all your computational needs
-                    </p>
+                    <p class="text-lg opacity-80 max-w-xl mx-auto">Advanced calculators for all your computational needs</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <a href="scientific-calculator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Scientific Calculator" data-description="Advanced scientific calculations with functions" data-category="calculator"><div class="text-4xl mb-4">🔢</div><h3 class="text-lg font-semibold mb-2">Scientific Calculator</h3><p class="text-sm opacity-70 mb-4 h-10">Advanced scientific calculations with functions</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-sky-400 to-cyan-400">calculator</span></div></a>
-                    <a href="age-calculator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Age Calculator" data-description="Calculate precise age and life statistics" data-category="calculator"><div class="text-4xl mb-4">🎂</div><h3 class="text-lg font-semibold mb-2">Age Calculator</h3><p class="text-sm opacity-70 mb-4 h-10">Calculate precise age and life statistics</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-sky-400 to-cyan-400">calculator</span></div></a>
-                    <a href="bmi-calculator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="BMI Calculator" data-description="Calculate Body Mass Index and health status" data-category="calculator"><div class="text-4xl mb-4">⚖️</div><h3 class="text-lg font-semibold mb-2">BMI Calculator</h3><p class="text-sm opacity-70 mb-4 h-10">Calculate Body Mass Index and health status</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-sky-400 to-cyan-400">calculator</span></div></a>
-                    <a href="loan-emi-calculator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Loan EMI Calculator" data-description="Calculate loan EMI with amortization schedule" data-category="calculator"><div class="text-4xl mb-4">📈</div><h3 class="text-lg font-semibold mb-2">Loan EMI Calculator</h3><p class="text-sm opacity-70 mb-4 h-10">Calculate loan EMI with amortization schedule</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-sky-400 to-cyan-400">calculator</span></div></a>
-                    <a href="gst-calculator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="GST Calculator" data-description="Calculate GST inclusive and exclusive amounts" data-category="calculator"><div class="text-4xl mb-4">💵</div><h3 class="text-lg font-semibold mb-2">GST Calculator</h3><p class="text-sm opacity-70 mb-4 h-10">Calculate GST inclusive and exclusive amounts</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-sky-400 to-cyan-400">calculator</span></div></a>
-                    <a href="currency-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Currency Converter" data-description="Convert between world currencies with live rates" data-category="calculator"><div class="text-4xl mb-4">💱</div><h3 class="text-lg font-semibold mb-2">Currency Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Convert between world currencies with live rates</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-sky-400 to-cyan-400">calculator</span></div></a>
+                    <a href="scientific-calculator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Scientific Calculator" data-description="Advanced scientific calculations with functions" data-category="calculator">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-green-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5a2.25 2.25 0 012.25 2.25v12a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-12A2.25 2.25 0 018.25 6z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Scientific Calculator</h3><p class="text-sm opacity-70 mb-4 h-10">Advanced scientific calculations with functions</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-sky-400 to-cyan-400">calculator</span></div>
+                    </a>
+                    <a href="age-calculator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Age Calculator" data-description="Calculate precise age and life statistics" data-category="calculator">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-green-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75l-1.5.75a3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0L3 16.5m15-3.379a48.474 48.474 0 00-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 013 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 016 13.12M12.265 3.11a.375.375 0 11-.53 0L12 2.845l.265.265zm-3 0a.375.375 0 11-.53 0L9 2.845l.265.265zm6 0a.375.375 0 11-.53 0L15 2.845l.265.265z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Age Calculator</h3><p class="text-sm opacity-70 mb-4 h-10">Calculate precise age and life statistics</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-sky-400 to-cyan-400">calculator</span></div>
+                    </a>
+                    <a href="bmi-calculator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="BMI Calculator" data-description="Calculate Body Mass Index and health status" data-category="calculator">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-green-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">BMI Calculator</h3><p class="text-sm opacity-70 mb-4 h-10">Calculate Body Mass Index and health status</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-sky-400 to-cyan-400">calculator</span></div>
+                    </a>
+                    <a href="loan-emi-calculator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Loan EMI Calculator" data-description="Calculate loan EMI with amortization schedule" data-category="calculator">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-green-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Loan EMI Calculator</h3><p class="text-sm opacity-70 mb-4 h-10">Calculate loan EMI with amortization schedule</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-sky-400 to-cyan-400">calculator</span></div>
+                    </a>
+                    <a href="gst-calculator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="GST Calculator" data-description="Calculate GST inclusive and exclusive amounts" data-category="calculator">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-green-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9.75 2.25l4.5-4.5m0 4.5l-4.5-4.5"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">GST Calculator</h3><p class="text-sm opacity-70 mb-4 h-10">Calculate GST inclusive and exclusive amounts</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-sky-400 to-cyan-400">calculator</span></div>
+                    </a>
+                    <a href="currency-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Currency Converter" data-description="Convert between world currencies with live rates" data-category="calculator">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-green-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Currency Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Convert between world currencies with live rates</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-sky-400 to-cyan-400">calculator</span></div>
+                    </a>
                 </div>
             </div>
 
@@ -537,21 +590,49 @@
                 <div class="text-center my-10 md:my-16">
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 inline-flex items-center flex-wrap justify-center gap-2">
                         <span class="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent flex items-center">
-                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7"></path></svg>
                             Text Tools
                         </span>
                     </h2>
-                    <p class="text-lg opacity-80 max-w-xl mx-auto">
-                        Powerful text processing and manipulation utilities
-                    </p>
+                    <p class="text-lg opacity-80 max-w-xl mx-auto">Powerful text processing and manipulation utilities</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <a href="text-case-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Text Case Converter" data-description="Convert text between different cases and formats" data-category="text"><div class="text-4xl mb-4">🔤</div><h3 class="text-lg font-semibold mb-2">Text Case Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Convert text between different cases and formats</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-emerald-400 to-teal-500">text</span></div></a>
-                    <a href="word-counter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Word & Character Counter" data-description="Count words, characters, and analyze text" data-category="text"><div class="text-4xl mb-4">📊</div><h3 class="text-lg font-semibold mb-2">Word & Character Counter</h3><p class="text-sm opacity-70 mb-4 h-10">Count words, characters, and analyze text</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-emerald-400 to-teal-500">text</span></div></a>
-                    <a href="remove-duplicate-lines.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Remove Duplicate Lines" data-description="Remove duplicate lines from text efficiently" data-category="text"><div class="text-4xl mb-4">📋</div><h3 class="text-lg font-semibold mb-2">Remove Duplicate Lines</h3><p class="text-sm opacity-70 mb-4 h-10">Remove duplicate lines from text efficiently</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-emerald-400 to-teal-500">text</span></div></a>
-                    <a href="text-sorter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Text Sorter" data-description="Sort lines of text alphabetically or numerically" data-category="text"><div class="text-4xl mb-4">🔣</div><h3 class="text-lg font-semibold mb-2">Text Sorter</h3><p class="text-sm opacity-70 mb-4 h-10">Sort lines of text alphabetically or numerically</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-emerald-400 to-teal-500">text</span></div></a>
-                    <a href="text-reverser.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Text Reverser" data-description="Reverse text, words, or character order" data-category="text"><div class="text-4xl mb-4">↔️</div><h3 class="text-lg font-semibold mb-2">Text Reverser</h3><p class="text-sm opacity-70 mb-4 h-10">Reverse text, words, or character order</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-emerald-400 to-teal-500">text</span></div></a>
-                    <a href="text-encryptor.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Text Encryptor/Decryptor" data-description="Encrypt and decrypt text with various methods" data-category="text"><div class="text-4xl mb-4">🔐</div><h3 class="text-lg font-semibold mb-2">Text Encryptor/Decryptor</h3><p class="text-sm opacity-70 mb-4 h-10">Encrypt and decrypt text with various methods</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-emerald-400 to-teal-500">text</span></div></a>
+                    <a href="text-case-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Text Case Converter" data-description="Convert text between different cases and formats" data-category="text">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-emerald-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5h10M9 5v14M15 11h6M18 11v8"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Text Case Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Convert text between different cases and formats</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-emerald-400 to-teal-500">text</span></div>
+                    </a>
+                    <a href="word-counter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Word & Character Counter" data-description="Count words, characters, and analyze text" data-category="text">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-emerald-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Word & Character Counter</h3><p class="text-sm opacity-70 mb-4 h-10">Count words, characters, and analyze text</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-emerald-400 to-teal-500">text</span></div>
+                    </a>
+                    <a href="remove-duplicate-lines.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Remove Duplicate Lines" data-description="Remove duplicate lines from text efficiently" data-category="text">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-emerald-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Remove Duplicate Lines</h3><p class="text-sm opacity-70 mb-4 h-10">Remove duplicate lines from text efficiently</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-emerald-400 to-teal-500">text</span></div>
+                    </a>
+                    <a href="text-sorter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Text Sorter" data-description="Sort lines of text alphabetically or numerically" data-category="text">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-emerald-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Text Sorter</h3><p class="text-sm opacity-70 mb-4 h-10">Sort lines of text alphabetically or numerically</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-emerald-400 to-teal-500">text</span></div>
+                    </a>
+                    <a href="text-reverser.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Text Reverser" data-description="Reverse text, words, or character order" data-category="text">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-emerald-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Text Reverser</h3><p class="text-sm opacity-70 mb-4 h-10">Reverse text, words, or character order</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-emerald-400 to-teal-500">text</span></div>
+                    </a>
+                    <a href="text-encryptor.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Text Encryptor/Decryptor" data-description="Encrypt and decrypt text with various methods" data-category="text">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-emerald-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Text Encryptor/Decryptor</h3><p class="text-sm opacity-70 mb-4 h-10">Encrypt and decrypt text with various methods</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-emerald-400 to-teal-500">text</span></div>
+                    </a>
                 </div>
             </div>
 
@@ -560,21 +641,49 @@
                 <div class="text-center my-10 md:my-16">
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 inline-flex items-center flex-wrap justify-center gap-2">
                         <span class="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent flex items-center">
-                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"></path></svg>
                             Web/Developer Tools
                         </span>
                     </h2>
-                    <p class="text-lg opacity-80 max-w-xl mx-auto">
-                        Essential tools for web developers and programmers
-                    </p>
+                    <p class="text-lg opacity-80 max-w-xl mx-auto">Essential tools for web developers and programmers</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <a href="code-minifier.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="HTML/CSS/JS Minifier" data-description="Minify and optimize web code for better performance" data-category="developer"><div class="text-4xl mb-4">⚡</div><h3 class="text-lg font-semibold mb-2">HTML/CSS/JS Minifier</h3><p class="text-sm opacity-70 mb-4 h-10">Minify and optimize web code for better performance</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-amber-400 to-orange-500">developer</span></div></a>
-                    <a href="json-formatter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="JSON Formatter & Validator" data-description="Format, validate, and beautify JSON data" data-category="developer"><div class="text-4xl mb-4">{ }</div><h3 class="text-lg font-semibold mb-2">JSON Formatter & Validator</h3><p class="text-sm opacity-70 mb-4 h-10">Format, validate, and beautify JSON data</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-amber-400 to-orange-500">developer</span></div></a>
-                    <a href="base64-encoder.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Base64 Encoder/Decoder" data-description="Encode and decode data in Base64 format" data-category="developer"><div class="text-4xl mb-4">🔑</div><h3 class="text-lg font-semibold mb-2">Base64 Encoder/Decoder</h3><p class="text-sm opacity-70 mb-4 h-10">Encode and decode data in Base64 format</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-amber-400 to-orange-500">developer</span></div></a>
-                    <a href="url-encoder.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="URL Encoder/Decoder" data-description="Encode and decode URLs for web development" data-category="developer"><div class="text-4xl mb-4">🔗</div><h3 class="text-lg font-semibold mb-2">URL Encoder/Decoder</h3><p class="text-sm opacity-70 mb-4 h-10">Encode and decode URLs for web development</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-amber-400 to-orange-500">developer</span></div></a>
-                    <a href="color-picker.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Color Picker & Converter" data-description="Pick colors and convert between formats" data-category="developer"><div class="text-4xl mb-4">🎨</div><h3 class="text-lg font-semibold mb-2">Color Picker & Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Pick colors and convert between formats</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-amber-400 to-orange-500">developer</span></div></a>
-                    <a href="regex-tester.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Regex Tester" data-description="Test and debug regular expressions" data-category="developer"><div class="text-4xl mb-4">🔍</div><h3 class="text-lg font-semibold mb-2">Regex Tester</h3><p class="text-sm opacity-70 mb-4 h-10">Test and debug regular expressions</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-amber-400 to-orange-500">developer</span></div></a>
+                    <a href="code-minifier.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="HTML/CSS/JS Minifier" data-description="Minify and optimize web code for better performance" data-category="developer">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-amber-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5M15 15l5.25 5.25"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">HTML/CSS/JS Minifier</h3><p class="text-sm opacity-70 mb-4 h-10">Minify and optimize web code for better performance</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-amber-400 to-orange-500">developer</span></div>
+                    </a>
+                    <a href="json-formatter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="JSON Formatter & Validator" data-description="Format, validate, and beautify JSON data" data-category="developer">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-amber-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">JSON Formatter & Validator</h3><p class="text-sm opacity-70 mb-4 h-10">Format, validate, and beautify JSON data</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-amber-400 to-orange-500">developer</span></div>
+                    </a>
+                    <a href="base64-encoder.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Base64 Encoder/Decoder" data-description="Encode and decode data in Base64 format" data-category="developer">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-amber-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Base64 Encoder/Decoder</h3><p class="text-sm opacity-70 mb-4 h-10">Encode and decode data in Base64 format</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-amber-400 to-orange-500">developer</span></div>
+                    </a>
+                    <a href="url-encoder.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="URL Encoder/Decoder" data-description="Encode and decode URLs for web development" data-category="developer">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-amber-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">URL Encoder/Decoder</h3><p class="text-sm opacity-70 mb-4 h-10">Encode and decode URLs for web development</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-amber-400 to-orange-500">developer</span></div>
+                    </a>
+                    <a href="color-picker.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Color Picker & Converter" data-description="Pick colors and convert between formats" data-category="developer">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-amber-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5M8.288 14.212A5.25 5.25 0 1117.25 10.5"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Color Picker & Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Pick colors and convert between formats</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-amber-400 to-orange-500">developer</span></div>
+                    </a>
+                    <a href="regex-tester.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Regex Tester" data-description="Test and debug regular expressions" data-category="developer">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-amber-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Regex Tester</h3><p class="text-sm opacity-70 mb-4 h-10">Test and debug regular expressions</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-amber-400 to-orange-500">developer</span></div>
+                    </a>
                 </div>
             </div>
 
@@ -583,21 +692,49 @@
                 <div class="text-center my-10 md:my-16">
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 inline-flex items-center flex-wrap justify-center gap-2">
                         <span class="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent flex items-center">
-                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 5a1 1 0 011-1h.01a1 1 0 110 2H5a1 1 0 01-1-1zM2 9a1 1 0 011-1h1a1 1 0 110 2H3a1 1 0 01-1-1zM4 13a1 1 0 011-1h.01a1 1 0 110 2H5a1 1 0 01-1-1zM7 16a1 1 0 011-1h.01a1 1 0 110 2H8a1 1 0 01-1-1zM9 18a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM13 16a1 1 0 011-1h.01a1 1 0 110 2H14a1 1 0 01-1-1zM16 13a1 1 0 011-1h.01a1 1 0 110 2H17a1 1 0 01-1-1zM18 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM16 5a1 1 0 011-1h.01a1 1 0 110 2H17a1 1 0 01-1-1zM13 2a1 1 0 011-1h.01a1 1 0 110 2H14a1 1 0 01-1-1zM10 4a6 6 0 100 12 6 6 0 000-12z" clip-rule="evenodd"></path></svg>
+                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.153 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z"></path></svg>
                             Color Tools
                         </span>
                     </h2>
-                    <p class="text-lg opacity-80 max-w-xl mx-auto">
-                        Professional color analysis and manipulation tools
-                    </p>
+                    <p class="text-lg opacity-80 max-w-xl mx-auto">Professional color analysis and manipulation tools</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <a href="color-picker-from-image.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Color Picker from Image" data-description="Extract colors from any image or photo" data-category="color"><div class="text-4xl mb-4">🖼️</div><h3 class="text-lg font-semibold mb-2">Color Picker from Image</h3><p class="text-sm opacity-70 mb-4 h-10">Extract colors from any image or photo</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-teal-300 to-blue-400">color</span></div></a>
-                    <a href="hex-rgb-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="HEX to RGB Converter" data-description="Convert between HEX and RGB color formats" data-category="color"><div class="text-4xl mb-4">🎨</div><h3 class="text-lg font-semibold mb-2">HEX to RGB Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Convert between HEX and RGB color formats</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-teal-300 to-blue-400">color</span></div></a>
-                    <a href="gradient-generator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Gradient Generator" data-description="Create beautiful CSS gradients with ease" data-category="color"><div class="text-4xl mb-4">🌈</div><h3 class="text-lg font-semibold mb-2">Gradient Generator</h3><p class="text-sm opacity-70 mb-4 h-10">Create beautiful CSS gradients with ease</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-teal-300 to-blue-400">color</span></div></a>
-                    <a href="contrast-checker.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Contrast Checker" data-description="Check color contrast for accessibility" data-category="color"><div class="text-4xl mb-4">🌓</div><h3 class="text-lg font-semibold mb-2">Contrast Checker</h3><p class="text-sm opacity-70 mb-4 h-10">Check color contrast for accessibility</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-teal-300 to-blue-400">color</span></div></a>
-                    <a href="palette-generator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Palette Generator" data-description="Generate harmonious color palettes" data-category="color"><div class="text-4xl mb-4">🎨</div><h3 class="text-lg font-semibold mb-2">Palette Generator</h3><p class="text-sm opacity-70 mb-4 h-10">Generate harmonious color palettes</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-teal-300 to-blue-400">color</span></div></a>
-                    <a href="color-blindness-simulator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Color Blindness Simulator" data-description="Simulate different types of color blindness" data-category="color"><div class="text-4xl mb-4">👁️‍🗨️</div><h3 class="text-lg font-semibold mb-2">Color Blindness Simulator</h3><p class="text-sm opacity-70 mb-4 h-10">Simulate different types of color blindness</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-teal-300 to-blue-400">color</span></div></a>
+                    <a href="color-picker-from-image.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Color Picker from Image" data-description="Extract colors from any image or photo" data-category="color">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-teal-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Color Picker from Image</h3><p class="text-sm opacity-70 mb-4 h-10">Extract colors from any image or photo</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-teal-300 to-blue-400">color</span></div>
+                    </a>
+                    <a href="hex-rgb-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="HEX to RGB Converter" data-description="Convert between HEX and RGB color formats" data-category="color">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-teal-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">HEX to RGB Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Convert between HEX and RGB color formats</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-teal-300 to-blue-400">color</span></div>
+                    </a>
+                    <a href="gradient-generator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Gradient Generator" data-description="Create beautiful CSS gradients with ease" data-category="color">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-teal-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v16.5h16.5V3.75H3.75z M3.75 20.25L20.25 3.75"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Gradient Generator</h3><p class="text-sm opacity-70 mb-4 h-10">Create beautiful CSS gradients with ease</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-teal-300 to-blue-400">color</span></div>
+                    </a>
+                    <a href="contrast-checker.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Contrast Checker" data-description="Check color contrast for accessibility" data-category="color">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-teal-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Contrast Checker</h3><p class="text-sm opacity-70 mb-4 h-10">Check color contrast for accessibility</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-teal-300 to-blue-400">color</span></div>
+                    </a>
+                    <a href="palette-generator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Palette Generator" data-description="Generate harmonious color palettes" data-category="color">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-teal-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Palette Generator</h3><p class="text-sm opacity-70 mb-4 h-10">Generate harmonious color palettes</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-teal-300 to-blue-400">color</span></div>
+                    </a>
+                    <a href="color-blindness-simulator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Color Blindness Simulator" data-description="Simulate different types of color blindness" data-category="color">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-teal-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Color Blindness Simulator</h3><p class="text-sm opacity-70 mb-4 h-10">Simulate different types of color blindness</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-teal-300 to-blue-400">color</span></div>
+                    </a>
                 </div>
             </div>
 
@@ -606,18 +743,31 @@
                 <div class="text-center my-10 md:my-16">
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 inline-flex items-center flex-wrap justify-center gap-2">
                         <span class="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent flex items-center">
-                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.022 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"></path></svg>
                             SEO & Marketing Tools
                         </span>
                     </h2>
-                    <p class="text-lg opacity-80 max-w-xl mx-auto">
-                        Optimize your content for search engines and marketing
-                    </p>
+                    <p class="text-lg opacity-80 max-w-xl mx-auto">Optimize your content for search engines and marketing</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <a href="keyword-density-checker.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Keyword Density Checker" data-description="Analyze keyword density in your content" data-category="seo"><div class="text-4xl mb-4">📊</div><h3 class="text-lg font-semibold mb-2">Keyword Density Checker</h3><p class="text-sm opacity-70 mb-4 h-10">Analyze keyword density in your content</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-rose-300 to-pink-400">seo</span></div></a>
-                    <a href="meta-tag-analyzer.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Meta Tag Analyzer" data-description="Analyze and optimize meta tags for SEO" data-category="seo"><div class="text-4xl mb-4">🏷️</div><h3 class="text-lg font-semibold mb-2">Meta Tag Analyzer</h3><p class="text-sm opacity-70 mb-4 h-10">Analyze and optimize meta tags for SEO</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-rose-300 to-pink-400">seo</span></div></a>
-                    <a href="word-counter-seo.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Word Counter" data-description="Count words for SEO optimization" data-category="seo"><div class="text-4xl mb-4">🧮</div><h3 class="text-lg font-semibold mb-2">Word Counter</h3><p class="text-sm opacity-70 mb-4 h-10">Count words for SEO optimization</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-rose-300 to-pink-400">seo</span></div></a>
+                    <a href="keyword-density-checker.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Keyword Density Checker" data-description="Analyze keyword density in your content" data-category="seo">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-pink-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Keyword Density Checker</h3><p class="text-sm opacity-70 mb-4 h-10">Analyze keyword density in your content</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-rose-300 to-pink-400">seo</span></div>
+                    </a>
+                    <a href="meta-tag-analyzer.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Meta Tag Analyzer" data-description="Analyze and optimize meta tags for SEO" data-category="seo">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-pink-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a22.53 22.53 0 005.293-3.838 22.53 22.53 0 003.838-5.293c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3zM6 6h.008v.008H6V6z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Meta Tag Analyzer</h3><p class="text-sm opacity-70 mb-4 h-10">Analyze and optimize meta tags for SEO</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-rose-300 to-pink-400">seo</span></div>
+                    </a>
+                    <a href="word-counter-seo.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Word Counter" data-description="Count words for SEO optimization" data-category="seo">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-pink-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Word Counter</h3><p class="text-sm opacity-70 mb-4 h-10">Count words for SEO optimization</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-rose-300 to-pink-400">seo</span></div>
+                    </a>
                 </div>
             </div>
 
@@ -626,21 +776,49 @@
                 <div class="text-center my-10 md:my-16">
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 inline-flex items-center flex-wrap justify-center gap-2">
                         <span class="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent flex items-center">
-                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.532 1.532 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.532 1.532 0 01-.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
+                            <svg class="w-7 h-7 md:w-8 md:h-8 mr-2 md:mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"></path></svg>
                             Utility Tools
                         </span>
                     </h2>
-                    <p class="text-lg opacity-80 max-w-xl mx-auto">
-                        Essential utilities for everyday digital tasks
-                    </p>
+                    <p class="text-lg opacity-80 max-w-xl mx-auto">Essential utilities for everyday digital tasks</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <a href="qr-code-generator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="QR Code Generator & Scanner" data-description="Generate and scan QR codes instantly" data-category="utility"><div class="text-4xl mb-4">📱</div><h3 class="text-lg font-semibold mb-2">QR Code Generator & Scanner</h3><p class="text-sm opacity-70 mb-4 h-10">Generate and scan QR codes instantly</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-orange-300 to-amber-400">utility</span></div></a>
-                    <a href="barcode-generator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Barcode Generator" data-description="Create various types of barcodes" data-category="utility"><div class="text-4xl mb-4">║▌║</div><h3 class="text-lg font-semibold mb-2">Barcode Generator</h3><p class="text-sm opacity-70 mb-4 h-10">Create various types of barcodes</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-orange-300 to-amber-400">utility</span></div></a>
-                    <a href="uuid-generator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="UUID Generator" data-description="Generate unique identifiers instantly" data-category="utility"><div class="text-4xl mb-4">🆔</div><h3 class="text-lg font-semibold mb-2">UUID Generator</h3><p class="text-sm opacity-70 mb-4 h-10">Generate unique identifiers instantly</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-orange-300 to-amber-400">utility</span></div></a>
-                    <a href="unit-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Unit Converter" data-description="Convert between various units of measurement" data-category="utility"><div class="text-4xl mb-4">🔄</div><h3 class="text-lg font-semibold mb-2">Unit Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Convert between various units of measurement</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-orange-300 to-amber-400">utility</span></div></a>
-                    <a href="timezone-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Time Zone Converter" data-description="Convert time between different time zones" data-category="utility"><div class="text-4xl mb-4">🌍</div><h3 class="text-lg font-semibold mb-2">Time Zone Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Convert time between different time zones</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-orange-300 to-amber-400">utility</span></div></a>
-                    <a href="password-generator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Random Number/Password Generator" data-description="Generate secure passwords and random numbers" data-category="utility"><div class="text-4xl mb-4">🎲</div><h3 class="text-lg font-semibold mb-2">Random Number/Password Generator</h3><p class="text-sm opacity-70 mb-4 h-10">Generate secure passwords and random numbers</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-orange-300 to-amber-400">utility</span></div></a>
+                    <a href="qr-code-generator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="QR Code Generator & Scanner" data-description="Generate and scan QR codes instantly" data-category="utility">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-cyan-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75zM6.75 16.5h.75v.75h-.75v-.75zM16.5 6.75h.75v.75h-.75v-.75zM13.5 13.5h.75v.75h-.75v-.75zM13.5 19.5h.75v.75h-.75v-.75zM19.5 13.5h.75v.75h-.75v-.75zM16.5 16.5h.75v.75h-.75v-.75zM19.5 19.5h.75v.75h-.75v-.75zM16.5 13.5h1.5v1.5h-1.5v-1.5z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">QR Code Generator & Scanner</h3><p class="text-sm opacity-70 mb-4 h-10">Generate and scan QR codes instantly</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-orange-300 to-amber-400">utility</span></div>
+                    </a>
+                    <a href="barcode-generator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Barcode Generator" data-description="Create various types of barcodes" data-category="utility">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-cyan-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Barcode Generator</h3><p class="text-sm opacity-70 mb-4 h-10">Create various types of barcodes</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-orange-300 to-amber-400">utility</span></div>
+                    </a>
+                    <a href="uuid-generator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="UUID Generator" data-description="Generate unique identifiers instantly" data-category="utility">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-cyan-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.875 14.25l1.214 1.942a2.25 2.25 0 001.908 1.058h2.006c.776 0 1.497-.4 1.908-1.058l1.214-1.942M2.41 9h4.636a2.25 2.25 0 011.872 1.002l.164.246a2.25 2.25 0 001.872 1.002h2.092a2.25 2.25 0 001.872-1.002l.164-.246A2.25 2.25 0 0116.954 9h4.636M2.41 9a2.25 2.25 0 00-.16.832V12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 12V9.832c0-.287-.055-.57-.16-.832M2.41 9a2.25 2.25 0 01.382-.632l3.285-3.832a2.25 2.25 0 011.708-.786h8.43c.657 0 1.281.287 1.709.786l3.284 3.832c.163.19.291.404.382.632M4.5 20.25h15A2.25 2.25 0 0021.75 18v-2.625c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125V18a2.25 2.25 0 002.25 2.25z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">UUID Generator</h3><p class="text-sm opacity-70 mb-4 h-10">Generate unique identifiers instantly</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-orange-300 to-amber-400">utility</span></div>
+                    </a>
+                    <a href="unit-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Unit Converter" data-description="Convert between various units of measurement" data-category="utility">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-cyan-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Unit Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Convert between various units of measurement</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-orange-300 to-amber-400">utility</span></div>
+                    </a>
+                    <a href="timezone-converter.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Time Zone Converter" data-description="Convert time between different time zones" data-category="utility">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-cyan-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Time Zone Converter</h3><p class="text-sm opacity-70 mb-4 h-10">Convert time between different time zones</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-orange-300 to-amber-400">utility</span></div>
+                    </a>
+                    <a href="password-generator.html" class="glass-card tool-card block p-6 rounded-2xl text-center" data-title="Random Number/Password Generator" data-description="Generate secure passwords and random numbers" data-category="utility">
+                        <div class="icon-wrapper w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-lg text-cyan-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Random Number/Password Generator</h3><p class="text-sm opacity-70 mb-4 h-10">Generate secure passwords and random numbers</p><div class="text-center"><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-orange-300 to-amber-400">utility</span></div>
+                    </a>
                 </div>
             </div>
 
@@ -657,9 +835,7 @@
                         Why Choose Tool Xeno?
                     </span>
                 </h2>
-                <p class="text-lg opacity-80 max-w-xl mx-auto">
-                    Professional-grade tools with enterprise-level features.
-                </p>
+                <p class="text-lg opacity-80 max-w-xl mx-auto">Professional-grade tools with enterprise-level features.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="glass-card p-8 text-center rounded-2xl">
@@ -702,9 +878,7 @@
                         Get in Touch
                     </span>
                 </h2>
-                <p class="text-lg opacity-80 max-w-xl mx-auto">
-                    Have questions or suggestions? We'd love to hear from you.
-                </p>
+                <p class="text-lg opacity-80 max-w-xl mx-auto">Have questions or suggestions? We'd love to hear from you.</p>
             </div>
             <div class="max-w-2xl mx-auto text-center">
                 <div class="glass-card p-8 rounded-2xl">
