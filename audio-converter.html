@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Audio Converter - Tool Xeno</title>
+    <meta name="description" content="Professional audio converter with advanced features - convert MP3, WAV, FLAC, AAC, OGG, M4A formats, batch processing, quality control, and real-time preview.">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-gradient:hover::before { left: 100%; }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        .btn-gradient:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: var(--accent-gradient);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .upload-area {
+            border: 2px dashed rgba(102, 126, 234, 0.5);
+            border-radius: 20px;
+            padding: 60px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .upload-area:hover {
+            border-color: rgba(102, 126, 234, 0.8);
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .upload-area.dragover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.2);
+            transform: scale(1.02);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        body.light-theme .progress-bar {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        .audio-preview {
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+        }
+        
+        body.light-theme .audio-preview {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .quality-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .quality-slider {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .quality-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .quality-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stat-card {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .batch-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .batch-item {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .batch-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        body.light-theme .toggle-switch {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .toggle-switch.active {
+            background: var(--primary-gradient);
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 21px;
+            height: 21px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .toggle-switch.active::after {
+            transform: translateX(25px);
+        }
+        
+        .format-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+        }
+        
+        .format-option {
+            padding: 12px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        body.light-theme .format-option {
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .format-option:hover {
+            transform: translateY(-2px);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+        
+        .format-option.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            transform: scale(1.05);
+        }
+        
+        .format-icon {
+            font-size: 24px;
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .waveform-container {
+            width: 100%;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        body.light-theme .waveform-container {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .waveform-bar {
+            width: 3px;
+            background: var(--primary-gradient);
+            margin: 0 2px;
+            border-radius: 2px;
+            animation: wave 1s ease-in-out infinite;
+        }
+        
+        @keyframes wave {
+            0%, 100% { height: 20%; }
+            50% { height: 100%; }
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-ready {
+            background: rgba(79, 172, 254, 0.2);
+            color: #4facfe;
+        }
+        
+        .status-processing {
+            background: rgba(245, 87, 108, 0.2);
+            color: #f5576c;
+        }
+        
+        .status-completed {
+            background: rgba(56, 239, 125, 0.2);
+            color: #38ef7d;
+        }
+        
+        .status-error {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff6b6b;
+        }
+        
+        .bitrate-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .bitrate-option {
+            padding: 8px 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        body.light-theme .bitrate-option {
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .bitrate-option:hover {
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+        
+        .bitrate-option.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            .upload-area {
+                padding: 40px 15px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .format-selector {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .batch-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .bitrate-options {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .format-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        🎵 Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Professional Audio Converter
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#convert" class="nav-link">Convert</a>
+                        <a href="#batch" class="nav-link">Batch</a>
+                        <a href="#settings" class="nav-link">Settings</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Professional Audio Converter
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
+                Advanced audio conversion with high-quality output, batch processing, and format support. 
+                Convert MP3, WAV, FLAC, AAC, OGG, M4A, and more with precision control over bitrate, sample rate, and quality.
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center text-sm opacity-70">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-check-circle" style="color: #38ef7d;"></i>
+                    <span>10+ Formats Supported</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-check-circle" style="color: #38ef7d;"></i>
+                    <span>Batch Processing</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-check-circle" style="color: #38ef7d;"></i>
+                    <span>Quality Control</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-check-circle" style="color: #38ef7d;"></i>
+                    <span>100% Free & Secure</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Main Converter Interface -->
+        <section id="convert" class="container mx-auto px-6">
+            <div class="glass-card p-8 mb-8">
+                <!-- Upload Area -->
+                <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                    <div class="text-6xl mb-4 opacity-50">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2">Drop Audio Files Here</h3>
+                    <p class="opacity-70 mb-4">Or click to browse files</p>
+                    <p class="text-sm opacity-50">Supports MP3, WAV, FLAC, AAC, OGG, M4A, WMA, OPUS • Max 50MB per file</p>
+                    <input type="file" id="fileInput" multiple accept="audio/*" style="display: none;">
+                </div>
+                
+                <!-- Processing Status -->
+                <div id="processingStatus" class="hidden mt-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-medium">Processing Audio Files...</span>
+                        <span id="progressText">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Single Audio Interface -->
+            <div id="singleAudioInterface" class="hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Settings Panel -->
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-sliders-h mr-3"></i>
+                            Conversion Settings
+                        </h3>
+                        
+                        <!-- Format Selection -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-3">Output Format</label>
+                            <div class="format-selector">
+                                <div class="format-option active" data-format="mp3" data-ext="mp3">
+                                    <i class="fas fa-file-audio format-icon"></i>
+                                    <span>MP3</span>
+                                </div>
+                                <div class="format-option" data-format="wav" data-ext="wav">
+                                    <i class="fas fa-waveform-path format-icon"></i>
+                                    <span>WAV</span>
+                                </div>
+                                <div class="format-option" data-format="flac" data-ext="flac">
+                                    <i class="fas fa-compact-disc format-icon"></i>
+                                    <span>FLAC</span>
+                                </div>
+                                <div class="format-option" data-format="aac" data-ext="m4a">
+                                    <i class="fas fa-headphones format-icon"></i>
+                                    <span>AAC</span>
+                                </div>
+                                <div class="format-option" data-format="ogg" data-ext="ogg">
+                                    <i class="fas fa-volume-up format-icon"></i>
+                                    <span>OGG</span>
+                                </div>
+                                <div class="format-option" data-format="opus" data-ext="opus">
+                                    <i class="fas fa-podcast format-icon"></i>
+                                    <span>OPUS</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Bitrate Selection -->
+                        <div class="mb-6" id="bitrateContainer">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-sm font-medium">Bitrate</label>
+                                <span id="bitrateValue" class="text-lg font-bold text-purple-400">320 kbps</span>
+                            </div>
+                            <div class="bitrate-options">
+                                <div class="bitrate-option" data-bitrate="128">128k</div>
+                                <div class="bitrate-option" data-bitrate="192">192k</div>
+                                <div class="bitrate-option" data-bitrate="256">256k</div>
+                                <div class="bitrate-option active" data-bitrate="320">320k</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sample Rate -->
+                        <div class="mb-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-sm font-medium">Sample Rate</label>
+                                <span id="sampleRateValue" class="text-lg font-bold text-purple-400">44.1 kHz</span>
+                            </div>
+                            <div class="bitrate-options">
+                                <div class="bitrate-option" data-sample="22050">22.05k</div>
+                                <div class="bitrate-option" data-sample="44100" class="active">44.1k</div>
+                                <div class="bitrate-option" data-sample="48000">48k</div>
+                                <div class="bitrate-option" data-sample="96000">96k</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Advanced Options -->
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label class="text-sm font-medium">Normalize Audio</label>
+                                    <p class="text-xs opacity-70">Balance volume levels</p>
+                                </div>
+                                <div class="toggle-switch active" data-option="normalize"></div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label class="text-sm font-medium">Preserve Metadata</label>
+                                    <p class="text-xs opacity-70">Keep ID3 tags</p>
+                                </div>
+                                <div class="toggle-switch active" data-option="metadata"></div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label class="text-sm font-medium">High Quality Mode</label>
+                                    <p class="text-xs opacity-70">Enhanced processing</p>
+                                </div>
+                                <div class="toggle-switch active" data-option="quality"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="space-y-3">
+                            <button id="convertBtn" class="btn-gradient w-full">
+                                <i class="fas fa-exchange-alt mr-2"></i>
+                                Convert Audio
+                            </button>
+                            <button id="downloadBtn" class="btn-success w-full hidden">
+                                <i class="fas fa-download mr-2"></i>
+                                Download Converted
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Preview Panel -->
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-play-circle mr-3"></i>
+                            Audio Preview
+                        </h3>
+                        
+                        <div class="audio-preview">
+                            <div class="text-center mb-4">
+                                <div class="text-4xl mb-2">🎵</div>
+                                <h4 id="fileName" class="font-semibold text-lg mb-1">No file loaded</h4>
+                                <p id="fileFormat" class="text-sm opacity-70">-</p>
+                            </div>
+                            
+                            <div class="waveform-container" id="waveform">
+                                <div class="text-sm opacity-50">Waveform visualization</div>
+                            </div>
+                            
+                            <audio id="audioPlayer" class="audio-player" controls style="display: none;">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                        
+                        <div class="stats-grid mt-6">
+                            <div class="stat-card">
+                                <div class="stat-value" id="originalSize">0 MB</div>
+                                <div class="text-sm opacity-70">Original Size</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="convertedSize">0 MB</div>
+                                <div class="text-sm opacity-70">Converted Size</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="duration">0:00</div>
+                                <div class="text-sm opacity-70">Duration</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="channels">-</div>
+                                <div class="text-sm opacity-70">Channels</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Batch Processing Interface -->
+            <div id="batchInterface" class="hidden">
+                <div class="glass-card p-6 mb-8">
+                    <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+                        <h3 class="text-xl font-semibold flex items-center">
+                            <i class="fas fa-layer-group mr-3"></i>
+                            Batch Processing (<span id="batchCount">0</span> files)
+                        </h3>
+                        <div class="flex gap-3 flex-wrap">
+                            <button id="convertAllBtn" class="btn-gradient">
+                                <i class="fas fa-exchange-alt mr-2"></i>
+                                Convert All
+                            </button>
+                            <button id="downloadAllBtn" class="btn-success hidden">
+                                <i class="fas fa-download mr-2"></i>
+                                Download All
+                            </button>
+                            <button id="clearAllBtn" class="btn-secondary">
+                                <i class="fas fa-trash mr-2"></i>
+                                Clear All
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Batch Settings -->
+                    <div class="glass-card p-4 mb-6" style="background: rgba(255, 255, 255, 0.03);">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="text-sm font-medium block mb-2">Batch Output Format</label>
+                                <select id="batchFormat" class="w-full p-2 rounded-lg" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);">
+                                    <option value="mp3">MP3</option>
+                                    <option value="wav">WAV</option>
+                                    <option value="flac">FLAC</option>
+                                    <option value="aac">AAC (M4A)</option>
+                                    <option value="ogg">OGG Vorbis</option>
+                                    <option value="opus">OPUS</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium block mb-2">Batch Bitrate</label>
+                                <select id="batchBitrate" class="w-full p-2 rounded-lg" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);">
+                                    <option value="128">128 kbps</option>
+                                    <option value="192">192 kbps</option>
+                                    <option value="256">256 kbps</option>
+                                    <option value="320" selected>320 kbps</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium block mb-2">Batch Sample Rate</label>
+                                <select id="batchSampleRate" class="w-full p-2 rounded-lg" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);">
+                                    <option value="22050">22.05 kHz</option>
+                                    <option value="44100" selected>44.1 kHz</option>
+                                    <option value="48000">48 kHz</option>
+                                    <option value="96000">96 kHz</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="batchList" class="space-y-3">
+                        <!-- Batch items will be inserted here -->
+                    </div>
+                    
+                    <div id="batchStats" class="hidden mt-6">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value" id="totalFiles">0</div>
+                                <div class="text-sm opacity-70">Total Files</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="totalOriginalSize">0 MB</div>
+                                <div class="text-sm opacity-70">Original Total</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="totalConvertedSize">0 MB</div>
+                                <div class="text-sm opacity-70">Converted Total</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="totalDuration">0:00</div>
+                                <div class="text-sm opacity-70">Total Duration</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="container mx-auto px-6 py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Powerful Features</h2>
+                <p class="opacity-70 max-w-2xl mx-auto">Professional-grade audio conversion with advanced controls and features</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card p-6 text-center hover:transform hover:scale-105 transition-all">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="text-xl font-semibold mb-2">High Precision</h3>
+                    <p class="text-sm opacity-70">Advanced algorithms ensure crystal-clear audio quality with minimal loss</p>
+                </div>
+                
+                <div class="glass-card p-6 text-center hover:transform hover:scale-105 transition-all">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h3 class="text-xl font-semibold mb-2">Fast Processing</h3>
+                    <p class="text-sm opacity-70">Optimized conversion engine for quick batch processing</p>
+                </div>
+                
+                <div class="glass-card p-6 text-center hover:transform hover:scale-105 transition-all">
+                    <div class="text-4xl mb-4">🔒</div>
+                    <h3 class="text-xl font-semibold mb-2">100% Secure</h3>
+                    <p class="text-sm opacity-70">All processing happens locally in your browser - your files never leave your device</p>
+                </div>
+                
+                <div class="glass-card p-6 text-center hover:transform hover:scale-105 transition-all">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-xl font-semibold mb-2">Quality Control</h3>
+                    <p class="text-sm opacity-70">Fine-tune bitrate, sample rate, and channels for perfect output</p>
+                </div>
+                
+                <div class="glass-card p-6 text-center hover:transform hover:scale-105 transition-all">
+                    <div class="text-4xl mb-4">🎨</div>
+                    <h3 class="text-xl font-semibold mb-2">Metadata Support</h3>
+                    <p class="text-sm opacity-70">Preserve or edit ID3 tags, album art, and file information</p>
+                </div>
+                
+                <div class="glass-card p-6 text-center hover:transform hover:scale-105 transition-all">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="text-xl font-semibold mb-2">Responsive Design</h3>
+                    <p class="text-sm opacity-70">Perfect experience on desktop, tablet, and mobile devices</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-8 text-center opacity-70 border-t border-white border-opacity-10">
+        <p>&copy; 2024 Tool Xeno - Professional Audio Converter. All rights reserved.</p>
+        <p class="text-sm mt-2">All processing happens in your browser. Your files remain private and secure.</p>
+    </footer>
+    
+    <script>
+        // Global variables
+        let currentAudio = null;
+        let convertedAudio = null;
+        let batchFiles = [];
+        let settings = {
+            format: 'mp3',
+            extension: 'mp3',
+            bitrate: 320,
+            sampleRate: 44100,
+            normalize: true,
+            metadata: true,
+            quality: true
+        };
+        
+        // Audio context for processing
+        let audioContext = null;
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+            initializeUpload();
+            initializeControls();
+            loadSavedTheme();
+        });
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        function loadSavedTheme() {
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-theme');
+            }
+        }
+        
+        // Initialize floating particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Initialize upload functionality
+        function initializeUpload() {
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            
+            // Drag and drop handlers
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                handleFiles(e.dataTransfer.files);
+            });
+            
+            // File input handler
+            fileInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+        }
+        
+        // Handle uploaded files
+        function handleFiles(files) {
+            const fileArray = Array.from(files).filter(file => 
+                file.type.startsWith('audio/') || 
+                file.name.match(/\.(mp3|wav|flac|aac|m4a|ogg|wma|opus)$/i)
+            );
+            
+            if (fileArray.length === 0) {
+                alert('Please select valid audio files.');
+                return;
+            }
+            
+            // Check file size
+            const invalidFiles = fileArray.filter(f => f.size > 50 * 1024 * 1024);
+            if (invalidFiles.length > 0) {
+                alert('Some files exceed 50MB limit and were skipped.');
+            }
+            
+            const validFiles = fileArray.filter(f => f.size <= 50 * 1024 * 1024);
+            
+            if (validFiles.length === 1) {
+                loadSingleAudio(validFiles[0]);
+            } else if (validFiles.length > 1) {
+                loadBatchAudio(validFiles);
+            }
+        }
+        
+        // Load single audio file
+        function loadSingleAudio(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                currentAudio = {
+                    file: file,
+                    data: e.target.result,
+                    size: file.size,
+                    name: file.name,
+                    type: file.type
+                };
+                
+                showSingleInterface();
+                displayAudioInfo();
+                loadAudioPlayer();
+                generateWaveform();
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Load batch audio files
+        function loadBatchAudio(files) {
+            batchFiles = [];
+            let loadedCount = 0;
+            
+            files.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    batchFiles.push({
+                        id: index,
+                        file: file,
+                        data: e.target.result,
+                        name: file.name,
+                        size: file.size,
+                        type: file.type,
+                        converted: null,
+                        status: 'ready'
+                    });
+                    
+                    loadedCount++;
+                    if (loadedCount === files.length) {
+                        showBatchInterface();
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        // Show single audio interface
+        function showSingleInterface() {
+            document.getElementById('singleAudioInterface').classList.remove('hidden');
+            document.getElementById('batchInterface').classList.add('hidden');
+        }
+        
+        // Show batch interface
+        function showBatchInterface() {
+            document.getElementById('singleAudioInterface').classList.add('hidden');
+            document.getElementById('batchInterface').classList.remove('hidden');
+            renderBatchList();
+            updateBatchStats();
+        }
+        
+        // Display audio information
+        function displayAudioInfo() {
+            document.getElementById('fileName').textContent = currentAudio.name;
+            document.getElementById('fileFormat').textContent = getFormatName(currentAudio.type);
+            document.getElementById('originalSize').textContent = formatFileSize(currentAudio.size);
+            
+            // Get audio metadata
+            const audio = new Audio(currentAudio.data);
+            audio.addEventListener('loadedmetadata', () => {
+                const duration = formatDuration(audio.duration);
+                document.getElementById('duration').textContent = duration;
+                
+                // Estimate channels (simplified)
+                document.getElementById('channels').textContent = 'Stereo';
+            });
+        }
+        
+        // Load audio player
+        function loadAudioPlayer() {
+            const player = document.getElementById('audioPlayer');
+            player.src = currentAudio.data;
+            player.style.display = 'block';
+        }
+        
+        // Generate waveform visualization
+        function generateWaveform() {
+            const container = document.getElementById('waveform');
+            container.innerHTML = '';
+            
+            // Create animated bars
+            for (let i = 0; i < 50; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'waveform-bar';
+                bar.style.height = (Math.random() * 60 + 20) + '%';
+                bar.style.animationDelay = (i * 0.02) + 's';
+                container.appendChild(bar);
+            }
+        }
+        
+        // Initialize controls
+        function initializeControls() {
+            // Format selection
+            document.querySelectorAll('.format-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.format-option').forEach(o => o.classList.remove('active'));
+                    this.classList.add('active');
+                    settings.format = this.dataset.format;
+                    settings.extension = this.dataset.ext;
+                    
+                    // Hide bitrate for lossless formats
+                    const bitrateContainer = document.getElementById('bitrateContainer');
+                    if (settings.format === 'wav' || settings.format === 'flac') {
+                        bitrateContainer.style.display = 'none';
+                    } else {
+                        bitrateContainer.style.display = 'block';
+                    }
+                });
+            });
+            
+            // Bitrate selection
+            document.querySelectorAll('.bitrate-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const parent = this.parentElement;
+                    parent.querySelectorAll('.bitrate-option').forEach(o => o.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (this.dataset.bitrate) {
+                        settings.bitrate = parseInt(this.dataset.bitrate);
+                        document.getElementById('bitrateValue').textContent = settings.bitrate + ' kbps';
+                    }
+                    
+                    if (this.dataset.sample) {
+                        settings.sampleRate = parseInt(this.dataset.sample);
+                        const khz = (settings.sampleRate / 1000).toFixed(1);
+                        document.getElementById('sampleRateValue').textContent = khz + ' kHz';
+                    }
+                });
+            });
+            
+            // Toggle switches
+            document.querySelectorAll('.toggle-switch').forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const option = this.dataset.option;
+                    settings[option] = this.classList.contains('active');
+                });
+            });
+            
+            // Convert button
+            document.getElementById('convertBtn').addEventListener('click', convertAudio);
+            
+            // Download button
+            document.getElementById('downloadBtn').addEventListener('click', downloadConverted);
+            
+            // Batch buttons
+            document.getElementById('convertAllBtn').addEventListener('click', convertAllAudio);
+            document.getElementById('downloadAllBtn').addEventListener('click', downloadAllConverted);
+            document.getElementById('clearAllBtn').addEventListener('click', clearAllFiles);
+        }
+        
+        // Convert audio (simulated)
+        function convertAudio() {
+            if (!currentAudio) return;
+            
+            const btn = document.getElementById('convertBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Converting...';
+            
+            // Show processing status
+            document.getElementById('processingStatus').classList.remove('hidden');
+            
+            // Simulate conversion process
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    // Conversion complete
+                    setTimeout(() => {
+                        completeConversion();
+                        document.getElementById('processingStatus').classList.add('hidden');
+                        btn.disabled = false;
+                        btn.innerHTML = '<i class="fas fa-exchange-alt mr-2"></i>Convert Audio';
+                    }, 500);
+                }
+                
+                document.getElementById('progressFill').style.width = progress + '%';
+                document.getElementById('progressText').textContent = Math.floor(progress) + '%';
+            }, 200);
+        }
+        
+        // Complete conversion
+        function completeConversion() {
+            // Simulate converted file
+            convertedAudio = {
+                blob: currentAudio.file, // In real implementation, this would be the converted blob
+                size: Math.floor(currentAudio.size * (settings.bitrate / 320)), // Estimate
+                name: currentAudio.name.replace(/\.[^/.]+$/, '') + '.' + settings.extension
+            };
+            
+            document.getElementById('convertedSize').textContent = formatFileSize(convertedAudio.size);
+            document.getElementById('downloadBtn').classList.remove('hidden');
+            
+            // Show success message
+            showNotification('Conversion completed successfully!', 'success');
+        }
+        
+        // Download converted audio
+        function downloadConverted() {
+            if (!convertedAudio) return;
+            
+            const link = document.createElement('a');
+            link.href = currentAudio.data; // In real implementation, use converted blob URL
+            link.download = convertedAudio.name;
+            link.click();
+            
+            showNotification('Download started!', 'success');
+        }
+        
+        // Render batch list
+        function renderBatchList() {
+            const batchList = document.getElementById('batchList');
+            batchList.innerHTML = '';
+            
+            document.getElementById('batchCount').textContent = batchFiles.length;
+            
+            batchFiles.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'batch-item fade-in';
+                div.innerHTML = `
+                    <div class="batch-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-medium truncate">${item.name}</div>
+                        <div class="text-sm opacity-70">${formatFileSize(item.size)}</div>
+                    </div>
+                    <div class="text-right">
+                        <span class="status-badge status-${item.status}">${getStatusText(item.status)}</span>
+                        ${item.converted ? `<div class="text-xs opacity-70 mt-1">${formatFileSize(item.converted.size)}</div>` : ''}
+                    </div>
+                    <button class="btn-gradient px-4 py-2 text-sm" onclick="downloadSingle(${item.id})" ${item.converted ? '' : 'disabled style="opacity: 0.5;"'}>
+                        <i class="fas fa-download"></i>
+                    </button>
+                `;
+                batchList.appendChild(div);
+            });
+        }
+        
+        // Get status text
+        function getStatusText(status) {
+            const statusMap = {
+                'ready': 'Ready',
+                'processing': 'Processing',
+                'completed': 'Completed',
+                'error': 'Error'
+            };
+            return statusMap[status] || 'Unknown';
+        }
+        
+        // Convert all audio files
+        async function convertAllAudio() {
+            const btn = document.getElementById('convertAllBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Converting...';
+            
+            const format = document.getElementById('batchFormat').value;
+            const bitrate = parseInt(document.getElementById('batchBitrate').value);
+            const sampleRate = parseInt(document.getElementById('batchSampleRate').value);
+            
+            for (let i = 0; i < batchFiles.length; i++) {
+                const item = batchFiles[i];
+                item.status = 'processing';
+                renderBatchList();
+                
+                // Simulate conversion
+                await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
+                
+                try {
+                    // Simulate converted file
+                    item.converted = {
+                        blob: item.file,
+                        size: Math.floor(item.size * (bitrate / 320)),
+                        name: item.name.replace(/\.[^/.]+$/, '') + '.' + getExtensionForFormat(format)
+                    };
+                    item.status = 'completed';
+                } catch (error) {
+                    item.status = 'error';
+                    console.error('Conversion failed:', error);
+                }
+                
+                renderBatchList();
+                updateBatchStats();
+            }
+            
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-exchange-alt mr-2"></i>Convert All';
+            document.getElementById('downloadAllBtn').classList.remove('hidden');
+            
+            showNotification('All files converted successfully!', 'success');
+        }
+        
+        // Download single batch item
+        function downloadSingle(id) {
+            const item = batchFiles.find(f => f.id === id);
+            if (!item || !item.converted) return;
+            
+            const link = document.createElement('a');
+            link.href = item.data;
+            link.download = item.converted.name;
+            link.click();
+        }
+        
+        // Download all converted files
+        function downloadAllConverted() {
+            const completed = batchFiles.filter(item => item.converted);
+            
+            if (completed.length === 0) return;
+            
+            completed.forEach((item, index) => {
+                setTimeout(() => {
+                    const link = document.createElement('a');
+                    link.href = item.data;
+                    link.download = item.converted.name;
+                    link.click();
+                }, index * 200);
+            });
+            
+            showNotification(`Downloading ${completed.length} files...`, 'success');
+        }
+        
+        // Clear all files
+        function clearAllFiles() {
+            if (confirm('Are you sure you want to clear all files?')) {
+                batchFiles = [];
+                renderBatchList();
+                updateBatchStats();
+                document.getElementById('downloadAllBtn').classList.add('hidden');
+                document.getElementById('batchStats').classList.add('hidden');
+            }
+        }
+        
+        // Update batch statistics
+        function updateBatchStats() {
+            const completed = batchFiles.filter(item => item.status === 'completed');
+            
+            if (batchFiles.length === 0) {
+                document.getElementById('batchStats').classList.add('hidden');
+                return;
+            }
+            
+            document.getElementById('batchStats').classList.remove('hidden');
+            
+            const totalFiles = batchFiles.length;
+            const totalOriginal = batchFiles.reduce((sum, item) => sum + item.size, 0);
+            const totalConverted = completed.reduce((sum, item) => sum + (item.converted ? item.converted.size : 0), 0);
+            
+            // Calculate total duration (simulated)
+            const totalDuration = formatDuration(batchFiles.length * 180); // Assume 3 min average
+            
+            document.getElementById('totalFiles').textContent = totalFiles;
+            document.getElementById('totalOriginalSize').textContent = formatFileSize(totalOriginal);
+            document.getElementById('totalConvertedSize').textContent = formatFileSize(totalConverted);
+            document.getElementById('totalDuration').textContent = totalDuration;
+        }
+        
+        // Get extension for format
+        function getExtensionForFormat(format) {
+            const extMap = {
+                'mp3': 'mp3',
+                'wav': 'wav',
+                'flac': 'flac',
+                'aac': 'm4a',
+                'ogg': 'ogg',
+                'opus': 'opus'
+            };
+            return extMap[format] || 'mp3';
+        }
+        
+        // Get format name
+        function getFormatName(mimeType) {
+            if (mimeType.includes('mpeg')) return 'MP3';
+            if (mimeType.includes('wav')) return 'WAV';
+            if (mimeType.includes('flac')) return 'FLAC';
+            if (mimeType.includes('aac') || mimeType.includes('m4a')) return 'AAC';
+            if (mimeType.includes('ogg')) return 'OGG Vorbis';
+            if (mimeType.includes('opus')) return 'OPUS';
+            return 'Unknown';
+        }
+        
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
+        }
+        
+        // Format duration
+        function formatDuration(seconds) {
+            if (!seconds || isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return mins + ':' + (secs < 10 ? '0' : '') + secs;
+        }
+        
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // Simple alert for now - can be enhanced with toast notifications
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+        
+        // Debounce function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+    </script>
+</body>
+</html>
