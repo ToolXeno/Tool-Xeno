@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Powerful Image Processing & Editing Tools - Professional Image Utilities | Tool Xeno</title>
+    <meta name="description" content="Comprehensive suite of powerful image processing and editing utilities. Convert formats, compress files, resize, crop, extract text with OCR, and rotate images with professional tools.">
+    <meta name="keywords" content="image tools, image converter, image compressor, image resizer, image cropper, OCR, image to text, image rotator, image editor, image processing">
+    <meta name="author" content="Tool Xeno">
+    <link rel="canonical" href="https://toolxeno.com/image-tools">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Powerful Image Processing & Editing Tools">
+    <meta property="og:description" content="Professional image utilities for conversion, compression, resizing, cropping, OCR, and rotation.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://toolxeno.com/image-tools">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Powerful Image Processing & Editing Tools">
+    <meta name="twitter:description" content="Professional image processing utilities for all your editing needs.">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Powerful Image Processing & Editing Tools - Professional Image Utilities",
+        "description": "Comprehensive guide to professional image processing and editing utilities.",
+        "author": {
+            "@type": "Organization",
+            "name": "Tool Xeno"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Tool Xeno",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://toolxeno.com/logo.png"
+            }
+        },
+        "datePublished": "2024-12-09",
+        "dateModified": "2024-12-09",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://toolxeno.com/image-tools"
+        }
+    }
+    </script>
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.7;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .article-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            margin-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+        }
+        
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+        }
+        
+        body.light-theme .tool-card {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        body.light-theme .feature-item {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon-large {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .article-content h2 { font-size: 1.5rem; }
+            .article-content h3 { font-size: 1.25rem; }
+            .article-content p { font-size: 1rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Powerful Image Processing Tools
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#overview" class="nav-link">Overview</a>
+                        <a href="#tools" class="nav-link">Tools</a>
+                        <a href="#features" class="nav-link">Features</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent fade-in">
+                Powerful Image Processing & Editing Utilities
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto fade-in">
+                Complete suite of professional image tools for all your editing needs - from format conversion and compression to resizing, cropping, OCR, and rotation.
+            </p>
+        </section>
+        
+        <!-- Article Content -->
+        <article class="container mx-auto px-6">
+            <div class="glass-card p-8 md:p-12 fade-in">
+                <div class="article-content">
+                    <section id="overview">
+                        <p>
+                            Images are fundamental to digital communication, whether you're creating content, managing a website, sharing memories, or working on professional projects. Having the right tools to process and edit images efficiently can make all the difference in your workflow. Our comprehensive suite of image processing utilities provides everything you need to work with images professionally, all in one place.
+                        </p>
+                        
+                        <p>
+                            From simple tasks like converting between formats to more complex operations like extracting text from images, our tools are designed to deliver professional results while remaining incredibly easy to use. Each tool in our image processing suite addresses specific needs that professionals and casual users encounter regularly, ensuring you have the perfect solution regardless of your image editing requirements.
+                        </p>
+                    </section>
+                    
+                    <section id="tools">
+                        <h2>Our Comprehensive Image Tool Suite</h2>
+                        
+                        <p>
+                            We've developed six specialized image tools that cover virtually every common image processing need. Each tool excels in its specific function while maintaining the simplicity and reliability that defines the Tool Xeno experience.
+                        </p>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-exchange-alt"></i> Image Converter</h3>
+                            <p>
+                                The Image Converter is your go-to solution for transforming images between different formats instantly. In today's diverse digital landscape, images come in many formats - JPEG, PNG, WebP, GIF, BMP, and more. Different platforms and applications often require specific formats, and our converter makes format transformation effortless.
+                            </p>
+                            <p>
+                                Whether you need to convert a PNG with transparency to JPEG for web use, transform multiple JPEGs to WebP for better compression, or convert any format to another, our tool handles it seamlessly. The conversion process is instant, maintaining image quality while ensuring compatibility across all your platforms and devices.
+                            </p>
+                            <p><strong>Key features:</strong></p>
+                            <ul>
+                                <li>Support for all major image formats including JPEG, PNG, WebP, GIF, BMP, and more</li>
+                                <li>Instant conversion with no waiting or processing delays</li>
+                                <li>Quality preservation using advanced algorithms</li>
+                                <li>Batch conversion for processing multiple images simultaneously</li>
+                                <li>Smart format recommendations based on image characteristics</li>
+                                <li>Complete privacy with client-side processing</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-compress"></i> Image Compressor</h3>
+                            <p>
+                                Our Image Compressor is engineered to reduce image file sizes without quality loss, making it invaluable for anyone working with images on the web, in emails, or in any size-constrained environment. Large image files slow down websites, consume storage space, and take longer to share - our compressor solves all these problems.
+                            </p>
+                            <p>
+                                Using sophisticated compression algorithms, the tool analyzes each image to find the optimal balance between file size and visual quality. You can achieve size reductions of up to 90% while maintaining image clarity that's virtually indistinguishable from the original. This is particularly crucial for website optimization, where image size directly impacts loading speed and user experience.
+                            </p>
+                            <p><strong>Why our Image Compressor stands out:</strong></p>
+                            <ul>
+                                <li>Reduce image file size by up to 90% without visible quality loss</li>
+                                <li>Advanced compression that preserves image details and sharpness</li>
+                                <li>Multiple compression levels to balance size and quality</li>
+                                <li>Real-time preview to compare before and after results</li>
+                                <li>Batch processing for compressing multiple images at once</li>
+                                <li>Support for JPEG, PNG, and WebP formats</li>
+                                <li>Maintains image metadata options for photographers</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-expand-arrows-alt"></i> Image Resizer</h3>
+                            <p>
+                                The Image Resizer provides precision control over image dimensions, allowing you to resize images to any dimension with accuracy. Whether you're preparing images for specific platform requirements, creating thumbnails, or optimizing images for different display sizes, this tool gives you exact control.
+                            </p>
+                            <p>
+                                Unlike basic resizing tools that can distort images or produce poor quality results, our resizer uses advanced scaling algorithms that preserve image quality and proportions. You can resize by specific dimensions, percentage, or maintain aspect ratios automatically. The tool is perfect for everything from social media image preparation to professional photography workflows.
+                            </p>
+                            <p><strong>Precision resizing features:</strong></p>
+                            <ul>
+                                <li>Resize images to any dimension with pixel-perfect precision</li>
+                                <li>Multiple resizing modes: exact dimensions, percentage, or aspect ratio</li>
+                                <li>Advanced interpolation algorithms for quality preservation</li>
+                                <li>Automatic aspect ratio locking to prevent distortion</li>
+                                <li>Preset sizes for common use cases like social media platforms</li>
+                                <li>Batch resizing for processing multiple images uniformly</li>
+                                <li>Real-time preview of resized dimensions</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-crop"></i> Image Cropper</h3>
+                            <p>
+                                The Image Cropper offers advanced tools for cropping and trimming images with professional precision. Whether you need to remove unwanted areas, focus on specific subjects, adjust composition, or prepare images for specific aspect ratios, our cropper provides the control and flexibility you need.
+                            </p>
+                            <p>
+                                The tool features an intuitive interface with powerful capabilities. You can crop freely, use preset aspect ratios, or input exact dimensions. Advanced features include rotation during cropping, flip options, and visual guides to help achieve perfect composition. It's equally suited for quick crops and precise professional work.
+                            </p>
+                            <p><strong>Advanced cropping capabilities:</strong></p>
+                            <ul>
+                                <li>Intuitive drag-and-resize cropping interface</li>
+                                <li>Preset aspect ratios for common formats and platforms</li>
+                                <li>Custom dimension input for exact crop sizes</li>
+                                <li>Visual guides and grid overlays for perfect composition</li>
+                                <li>Rotation and flip options during cropping</li>
+                                <li>Maintains image quality throughout the cropping process</li>
+                                <li>Undo and redo functionality for easy adjustment</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-file-alt"></i> Image to Text (OCR)</h3>
+                            <p>
+                                Our Image to Text tool leverages advanced OCR (Optical Character Recognition) technology to extract text from images with remarkable accuracy. This powerful capability transforms static text in images into editable, searchable, and copyable text - invaluable for digitizing documents, extracting information from screenshots, processing receipts, and countless other applications.
+                            </p>
+                            <p>
+                                The OCR engine recognizes text in multiple languages, handles various fonts and text sizes, and can even work with text at different angles or in challenging conditions. Whether you're processing scanned documents, extracting text from photos, or converting image-based PDFs to editable text, our OCR tool delivers professional-quality results.
+                            </p>
+                            <p><strong>Powerful OCR features:</strong></p>
+                            <ul>
+                                <li>Advanced OCR technology for accurate text extraction</li>
+                                <li>Support for multiple languages and character sets</li>
+                                <li>Recognition of various fonts, sizes, and text styles</li>
+                                <li>Handles text at angles and in different orientations</li>
+                                <li>Processes both printed and some handwritten text</li>
+                                <li>Maintains text formatting and structure where possible</li>
+                                <li>Instant, editable text output ready for use</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-sync-alt"></i> Image Rotator/Flipper</h3>
+                            <p>
+                                The Image Rotator/Flipper provides simple yet essential functionality for rotating and flipping images in any direction. These operations are fundamental in image editing, whether you're correcting orientation, creating mirror effects, adjusting composition, or preparing images for specific layouts.
+                            </p>
+                            <p>
+                                Our tool offers comprehensive rotation and flip options with precision control. Rotate images by exact degrees, use quick presets for 90, 180, or 270-degree rotations, or flip horizontally and vertically. All operations maintain image quality and can be combined for complex transformations. The interface is intuitive with real-time preview, making it easy to achieve exactly the orientation you need.
+                            </p>
+                            <p><strong>Rotation and flip capabilities:</strong></p>
+                            <ul>
+                                <li>Rotate images to any angle with precise degree control</li>
+                                <li>Quick presets for common rotations (90°, 180°, 270°)</li>
+                                <li>Horizontal and vertical flip options</li>
+                                <li>Combine multiple operations for complex transformations</li>
+                                <li>Real-time preview of orientation changes</li>
+                                <li>Maintains image quality during transformations</li>
+                                <li>Batch processing for rotating multiple images uniformly</li>
+                            </ul>
+                        </div>
+                    </section>
+                    
+                    <section id="features">
+                        <h2>Why Choose Our Image Processing Tools?</h2>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-bolt"></i></div>
+                                <h4 class="font-semibold mb-2">Lightning Fast</h4>
+                                <p>Instant processing with client-side technology - no upload delays or server waiting times</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-shield-alt"></i></div>
+                                <h4 class="font-semibold mb-2">100% Private</h4>
+                                <p>All processing happens locally on your device - your images never leave your browser</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-gem"></i></div>
+                                <h4 class="font-semibold mb-2">Professional Quality</h4>
+                                <p>Advanced algorithms ensure professional-grade results for all operations</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-infinity"></i></div>
+                                <h4 class="font-semibold mb-2">Unlimited Use</h4>
+                                <p>Process as many images as you need with no restrictions or hidden costs</p>
+                            </div>
+                        </div>
+                        
+                        <h3>The Comprehensive Solution</h3>
+                        <p>
+                            What makes our image tool suite particularly valuable is how the tools work together seamlessly. You might start by converting an image to the right format, then compress it for web use, resize it for your specific needs, crop it to perfect the composition, and finally rotate it to the correct orientation - all within the same ecosystem with consistent quality and performance.
+                        </p>
+                        
+                        <p>
+                            This integrated approach saves time and maintains quality throughout your workflow. Instead of juggling multiple applications or online services, you have everything you need in one place. The tools share a consistent interface, so once you're familiar with one, you can use them all efficiently.
+                        </p>
+                        
+                        <h3>Built for Everyone</h3>
+                        <p>
+                            Our image tools are designed to serve both professionals and casual users effectively. Professionals appreciate the advanced features, precision controls, and batch processing capabilities that support high-volume workflows. Casual users love the simplicity and instant results that make image editing accessible to everyone.
+                        </p>
+                        
+                        <p>
+                            Whether you're a web developer optimizing images for faster loading times, a content creator preparing visuals for social media, a photographer processing client photos, or someone who just needs to occasionally edit images, our tools provide the right balance of power and usability.
+                        </p>
+                        
+                        <h3>Privacy and Security First</h3>
+                        <p>
+                            In an era where data privacy is increasingly important, our commitment to client-side processing means your images remain completely private. Unlike online services that upload your images to remote servers, our tools process everything locally on your device. Your images never leave your computer, giving you complete control and peace of mind.
+                        </p>
+                        
+                        <p>
+                            This approach also provides practical benefits. Without uploads and downloads, processing is instantaneous. You're not limited by internet speed or file size restrictions. You can work with sensitive images without concerns about third-party access. And you can use the tools even without a reliable internet connection once the page is loaded.
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Transform Your Image Workflow</h2>
+                        <p>
+                            Stop struggling with complex photo editing software or limiting online tools. Our comprehensive image processing suite gives you professional capabilities in an accessible, efficient package. Convert between formats instantly, compress images without quality loss, resize with precision, crop with advanced tools, extract text using OCR, and rotate or flip in any direction - all with tools designed for both power and simplicity.
+                        </p>
+                        
+                        <p>
+                            The best part? All these powerful tools are completely free to use with no registration required, no hidden costs, and no limitations on usage. Your images remain completely private with client-side processing, and you get professional-grade results every time. It's everything you need for image processing, all in one place.
+                        </p>
+                        
+                        <div class="text-center mt-8">
+                            <a href="https://toolxeno.com" class="btn-gradient text-lg">
+                                <i class="fas fa-images mr-2"></i>
+                                Try Our Image Tools Now
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </article>
+    </main>
+    
+    <script>
+        // Initialize particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+        });
+    </script>
+</body>
+</html>

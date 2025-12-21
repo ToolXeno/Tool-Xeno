@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Audio Processing Tools - Audio to Text & Format Converter | Tool Xeno</title>
+    <meta name="description" content="Professional audio processing and speech conversion tools. Convert audio to text with advanced speech recognition and convert between different audio formats instantly.">
+    <meta name="keywords" content="audio tools, audio to text, speech to text, audio converter, audio format converter, audio processing, speech recognition">
+    <meta name="author" content="Tool Xeno">
+    <link rel="canonical" href="https://toolxeno.com/audio-tools">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Professional Audio Processing Tools - Audio to Text & Format Converter">
+    <meta property="og:description" content="Professional audio processing and speech conversion tools with advanced features.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://toolxeno.com/audio-tools">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Professional Audio Processing Tools">
+    <meta name="twitter:description" content="Convert audio to text and between formats with professional-grade tools.">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Professional Audio Processing Tools - Audio to Text & Format Converter",
+        "description": "Comprehensive guide to professional audio processing and speech conversion tools.",
+        "author": {
+            "@type": "Organization",
+            "name": "Tool Xeno"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Tool Xeno",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://toolxeno.com/logo.png"
+            }
+        },
+        "datePublished": "2024-12-09",
+        "dateModified": "2024-12-09",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://toolxeno.com/audio-tools"
+        }
+    }
+    </script>
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.7;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .article-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            margin-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+        }
+        
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+        }
+        
+        body.light-theme .tool-card {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        body.light-theme .feature-item {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon-large {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .article-content h2 { font-size: 1.5rem; }
+            .article-content h3 { font-size: 1.25rem; }
+            .article-content p { font-size: 1rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Professional Audio Processing Tools
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#overview" class="nav-link">Overview</a>
+                        <a href="#tools" class="nav-link">Tools</a>
+                        <a href="#use-cases" class="nav-link">Use Cases</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent fade-in">
+                Professional Audio Processing Tools
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto fade-in">
+                Transform your audio workflow with our suite of professional audio processing and speech conversion tools designed for accuracy, speed, and ease of use.
+            </p>
+        </section>
+        
+        <!-- Article Content -->
+        <article class="container mx-auto px-6">
+            <div class="glass-card p-8 md:p-12 fade-in">
+                <div class="article-content">
+                    <section id="overview">
+                        <p>
+                            In the digital age, audio processing has become an essential part of content creation, documentation, and communication. Whether you're a content creator, journalist, student, or business professional, having access to reliable audio tools can significantly enhance your productivity and workflow efficiency.
+                        </p>
+                        
+                        <p>
+                            Our professional audio processing tools are designed to handle the most common yet critical audio tasks with precision and ease. From converting spoken words into written text to transforming audio files between different formats, we provide the tools you need to work with audio content effectively and efficiently.
+                        </p>
+                    </section>
+                    
+                    <section id="tools">
+                        <h2>Our Professional Audio Processing Tools</h2>
+                        
+                        <p>
+                            We've developed two powerful audio tools that address the most frequent needs in audio processing. Each tool leverages advanced technology to deliver professional-grade results while maintaining the simplicity and accessibility that Tool Xeno is known for.
+                        </p>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-microphone-alt"></i> Audio to Text</h3>
+                            <p>
+                                Our Audio to Text tool represents a breakthrough in speech recognition technology. This advanced tool converts speech to text with remarkable accuracy, making it invaluable for anyone who works with spoken content. Whether you're transcribing interviews, creating captions for videos, documenting meetings, or converting lectures into written notes, our speech recognition system delivers professional results.
+                            </p>
+                            <p>
+                                What sets our Audio to Text tool apart is its sophisticated speech recognition algorithm that understands context, punctuation, and speaker intent. Unlike basic transcription tools that simply convert sounds to words, our system analyzes speech patterns to produce coherent, properly formatted text that reads naturally.
+                            </p>
+                            <p>
+                                The tool supports multiple languages and can handle various accents and speaking styles. It automatically identifies sentence boundaries, adds appropriate punctuation, and formats the text for readability. This means you spend less time editing and more time working with your content.
+                            </p>
+                            <p><strong>Key features and benefits:</strong></p>
+                            <ul>
+                                <li>Advanced speech recognition technology for accurate transcription</li>
+                                <li>Support for multiple languages and accents</li>
+                                <li>Automatic punctuation and formatting for natural-sounding text</li>
+                                <li>Context-aware processing for better accuracy</li>
+                                <li>Fast processing speeds even for lengthy audio files</li>
+                                <li>Clean, editable text output ready for immediate use</li>
+                                <li>Privacy-focused processing with no server uploads</li>
+                            </ul>
+                            <p>
+                                The applications for our Audio to Text tool are virtually limitless. Students can transcribe lectures for easier studying and note-taking. Journalists can quickly convert interviews into written form for article writing. Content creators can generate captions and transcripts for their videos, improving accessibility and SEO. Business professionals can document meetings and calls without manual note-taking.
+                            </p>
+                            <p>
+                                What makes this tool particularly valuable is its time-saving potential. Manual transcription typically takes four to six times longer than the audio itself - meaning a one-hour recording could take four to six hours to transcribe manually. Our Audio to Text tool completes the same task in minutes, not hours, freeing you to focus on more important work.
+                            </p>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-exchange-alt"></i> Audio Format Converter</h3>
+                            <p>
+                                The Audio Format Converter is designed for anyone who needs to work with audio files across different platforms, devices, or applications. In today's diverse digital ecosystem, audio files come in many formats - MP3, WAV, AAC, FLAC, OGG, and more. Each format has its strengths, and different situations call for different formats.
+                            </p>
+                            <p>
+                                Our converter makes it incredibly simple to transform your audio files between different formats instantly. Whether you need to convert a high-quality WAV file to a smaller MP3 for easier sharing, transform an OGG file to AAC for better device compatibility, or convert any format to another, our tool handles it seamlessly.
+                            </p>
+                            <p>
+                                The conversion process maintains audio quality while providing options for customization. You can adjust bitrate, sample rate, and other parameters to find the perfect balance between file size and audio quality for your specific needs.
+                            </p>
+                            <p><strong>Why you'll love our Audio Format Converter:</strong></p>
+                            <ul>
+                                <li>Support for all major audio formats including MP3, WAV, AAC, FLAC, OGG, and more</li>
+                                <li>Instant conversion without lengthy processing times</li>
+                                <li>Quality preservation with advanced encoding algorithms</li>
+                                <li>Customizable output settings for bitrate and sample rate</li>
+                                <li>Batch conversion capability for multiple files</li>
+                                <li>Client-side processing for complete privacy and security</li>
+                                <li>No file size limitations or conversion quotas</li>
+                            </ul>
+                            <p>
+                                The need for audio format conversion arises in countless scenarios. Perhaps you've downloaded a podcast in an unsupported format for your device. Maybe you're a musician who needs to convert studio recordings to different formats for various distribution channels. You might be creating content and need to optimize audio files for web use. Or you could be archiving audio and want to balance quality with storage space.
+                            </p>
+                            <p>
+                                Our Audio Format Converter addresses all these scenarios and more. It's particularly valuable for content creators who need to ensure their audio works across all platforms. Different social media platforms, podcast directories, and streaming services often have specific format requirements. With our converter, you can quickly create the exact format you need without the hassle of installing and learning complex audio editing software.
+                            </p>
+                        </div>
+                    </section>
+                    
+                    <section id="use-cases">
+                        <h2>Real-World Applications</h2>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-graduation-cap"></i></div>
+                                <h4 class="font-semibold mb-2">Education</h4>
+                                <p>Transcribe lectures, create study materials, and convert educational audio into various formats</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-briefcase"></i></div>
+                                <h4 class="font-semibold mb-2">Business</h4>
+                                <p>Document meetings, transcribe calls, and ensure audio compatibility across platforms</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-video"></i></div>
+                                <h4 class="font-semibold mb-2">Content Creation</h4>
+                                <p>Generate captions, transcripts, and optimize audio for different platforms</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-newspaper"></i></div>
+                                <h4 class="font-semibold mb-2">Journalism</h4>
+                                <p>Quickly transcribe interviews and convert recordings for various publishing needs</p>
+                            </div>
+                        </div>
+                        
+                        <h3>The Technology Behind Our Tools</h3>
+                        <p>
+                            Our audio tools are built on cutting-edge technology that prioritizes both performance and privacy. The Audio to Text tool uses advanced machine learning models trained on diverse speech patterns to achieve high accuracy across different speakers, accents, and audio conditions. These models have been refined through extensive testing to understand natural speech patterns, including pauses, inflections, and conversational nuances.
+                        </p>
+                        
+                        <p>
+                            The Audio Format Converter employs sophisticated encoding and decoding algorithms that preserve audio quality during the conversion process. Unlike simple converters that can degrade audio quality, our tool uses professional-grade codecs and processing techniques to maintain the integrity of your audio files.
+                        </p>
+                        
+                        <p>
+                            Importantly, both tools operate using client-side processing whenever possible. This means your audio files are processed on your device rather than being uploaded to external servers. This approach ensures your privacy, provides faster processing times, and eliminates concerns about file size limitations or upload quotas.
+                        </p>
+                        
+                        <h3>Seamless Integration into Your Workflow</h3>
+                        <p>
+                            We've designed our audio tools to integrate effortlessly into your existing workflow. Both tools feature intuitive interfaces that require no technical expertise. Simply upload your audio file, select your desired output, and let the tool handle the rest. Within moments, you'll have professional-quality results ready for your use.
+                        </p>
+                        
+                        <p>
+                            The tools work together seamlessly as well. For example, you might convert an audio file to a more manageable format using the Audio Format Converter, then use the Audio to Text tool to transcribe it. This flexibility allows you to handle complex audio processing tasks without switching between multiple applications or services.
+                        </p>
+                        
+                        <h3>Professional Results, User-Friendly Experience</h3>
+                        <p>
+                            One of the biggest challenges in audio processing tools is balancing professional capabilities with ease of use. Many professional audio tools require extensive technical knowledge and come with steep learning curves. On the other hand, simple consumer tools often sacrifice quality and features for simplicity.
+                        </p>
+                        
+                        <p>
+                            Our audio tools bridge this gap perfectly. They deliver professional-grade results that rival expensive specialized software, but with interfaces so intuitive that anyone can use them effectively on their first try. You don't need to understand technical concepts like bitrates, sample rates, or codec specifications to get great results - though advanced users can access these settings if desired.
+                        </p>
+                        
+                        <h3>Speed and Efficiency</h3>
+                        <p>
+                            In today's fast-paced environment, waiting for audio processing to complete can be a significant bottleneck. Our tools are optimized for speed without compromising quality. The Audio to Text tool can transcribe hours of audio in just minutes. The Audio Format Converter processes files nearly instantaneously, even for large files or batch operations.
+                        </p>
+                        
+                        <p>
+                            This efficiency translates directly into productivity gains. Tasks that once took hours can now be completed in minutes. This time savings compounds across multiple uses, potentially saving you dozens of hours each month depending on how frequently you work with audio content.
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Transform Your Audio Workflow Today</h2>
+                        <p>
+                            Whether you're dealing with speech that needs to be converted to text or audio files that need format conversion, our professional audio processing tools provide the capabilities you need in a package that's accessible, efficient, and reliable. No more struggling with complex software or settling for subpar results from basic tools.
+                        </p>
+                        
+                        <p>
+                            The Audio to Text tool gives you the power of advanced speech recognition, turning hours of manual transcription into minutes of automated processing. The Audio Format Converter ensures that your audio files work wherever and whenever you need them, with support for all major formats and instant conversion capabilities.
+                        </p>
+                        
+                        <p>
+                            Best of all, these tools are completely free to use with no hidden costs, registration requirements, or usage limits. Your privacy is protected through client-side processing, and you get professional-grade results every time. It's audio processing the way it should be - powerful, simple, and accessible to everyone.
+                        </p>
+                        
+                        <div class="text-center mt-8">
+                            <a href="https://toolxeno.com" class="btn-gradient text-lg">
+                                <i class="fas fa-headphones mr-2"></i>
+                                Try Our Audio Tools Now
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </article>
+    </main>
+    
+    <script>
+        // Initialize particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+        });
+    </script>
+</body>
+</html>
