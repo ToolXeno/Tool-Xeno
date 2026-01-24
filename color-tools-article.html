@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Color Analysis & Manipulation Tools - Color Utilities | Tool Xeno</title>
+    <meta name="description" content="Comprehensive color tool suite featuring color picker from image, HEX to RGB converter, gradient generator, contrast checker, palette generator, and color blindness simulator. Free professional color utilities.">
+    <meta name="keywords" content="color tools, color picker, hex to rgb, gradient generator, contrast checker, palette generator, color blindness simulator, color converter, color utilities">
+    <meta name="author" content="Tool Xeno">
+    <link rel="canonical" href="https://toolxeno.com/color-tools">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Professional Color Analysis & Manipulation Tools">
+    <meta property="og:description" content="Professional color utilities for extraction, conversion, gradient creation, contrast checking, palette generation, and accessibility testing.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://toolxeno.com/color-tools">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Professional Color Analysis & Manipulation Tools">
+    <meta name="twitter:description" content="Professional color processing utilities for designers and developers.">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Professional Color Analysis & Manipulation Tools - Color Utilities",
+        "description": "Comprehensive guide to professional color utilities for extraction, conversion, generation, and accessibility testing.",
+        "author": {
+            "@type": "Organization",
+            "name": "Tool Xeno"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Tool Xeno",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://toolxeno.com/logo.png"
+            }
+        },
+        "datePublished": "2024-12-11",
+        "dateModified": "2024-12-11",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://toolxeno.com/color-tools"
+        }
+    }
+    </script>
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.7;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .article-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            margin-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+        }
+        
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+        }
+        
+        body.light-theme .tool-card {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        body.light-theme .feature-item {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon-large {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .article-content h2 { font-size: 1.5rem; }
+            .article-content h3 { font-size: 1.25rem; }
+            .article-content p { font-size: 1rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Professional Color Analysis Tools
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#overview" class="nav-link">Overview</a>
+                        <a href="#tools" class="nav-link">Tools</a>
+                        <a href="#features" class="nav-link">Features</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent fade-in">
+                Professional Color Analysis & Manipulation Tools
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto fade-in">
+                Complete color tool suite featuring image color extraction, format conversion, gradient generation, contrast checking, palette creation, and accessibility simulation.
+            </p>
+        </section>
+        
+        <!-- Article Content -->
+        <article class="container mx-auto px-6">
+            <div class="glass-card p-8 md:p-12 fade-in">
+                <div class="article-content">
+                    <section id="overview">
+                        <p>
+                            Color is fundamental to visual communication, design, and user experience. Whether you're designing a website, creating brand materials, developing an application interface, or simply working with digital content, having sophisticated color tools makes the difference between amateur and professional results. Colors convey emotion, establish hierarchy, ensure readability, and define visual identity.
+                        </p>
+                        
+                        <p>
+                            Our comprehensive color tool suite brings together six specialized utilities that address every aspect of color work—from extracting colors from existing images to ensuring your color choices meet accessibility standards. These tools are designed for designers, developers, content creators, and anyone who works with color professionally, offering advanced capabilities through interfaces that remain intuitive and efficient.
+                        </p>
+                    </section>
+                    
+                    <section id="tools">
+                        <h2>Complete Color Toolkit</h2>
+                        
+                        <p>
+                            We've developed six specialized color tools that cover the entire spectrum of color-related tasks encountered in design and development work. Each tool delivers professional functionality while maintaining the simplicity that makes color work enjoyable rather than frustrating.
+                        </p>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-image"></i> Color Picker from Image</h3>
+                            <p>
+                                The Color Picker from Image extracts colors from any image or photo, making it invaluable for creating consistent color schemes based on existing visuals. Whether you're matching brand colors from a logo, extracting a palette from a photograph for design inspiration, identifying specific colors in competitor designs, or building cohesive color schemes from existing imagery, this tool makes color extraction effortless.
+                            </p>
+                            <p>
+                                Simply upload an image, and the tool analyzes it to identify dominant colors, generates a complete color palette, and lets you pick any specific color by clicking directly on the image. You get precise color values in all major formats (HEX, RGB, HSL) instantly. This is particularly powerful for designers working on branding projects, developers implementing design specs, and anyone needing to match or extract colors from visual references. The tool ensures color consistency across your projects by giving you exact values rather than approximate guesses.
+                            </p>
+                            <p><strong>Image color extraction features:</strong></p>
+                            <ul>
+                                <li>Extract colors from any image or photo instantly</li>
+                                <li>Identify dominant colors automatically with intelligent analysis</li>
+                                <li>Generate complete color palettes from images</li>
+                                <li>Click-to-pick any specific color directly from the image</li>
+                                <li>Get color values in HEX, RGB, and HSL formats simultaneously</li>
+                                <li>Adjust extraction sensitivity for more or fewer colors</li>
+                                <li>Save extracted palettes for future reference</li>
+                                <li>Support for various image formats including JPG, PNG, WebP</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-exchange-alt"></i> HEX to RGB Converter</h3>
+                            <p>
+                                Our HEX to RGB Converter provides instant conversion between HEX and RGB color formats, the two most common color representations in digital design and development. Different tools and platforms use different color formats—CSS might use HEX codes, design software might prefer RGB values, and certain APIs require specific formats. This converter eliminates the confusion and manual calculation by providing instant, accurate conversions in both directions.
+                            </p>
+                            <p>
+                                The tool handles conversion from HEX to RGB and RGB to HEX seamlessly, displaying results in multiple formats for maximum flexibility. It also provides conversions to HSL and other color spaces, giving you comprehensive color information from any input. Whether you're translating design specs into code, matching colors across different platforms, or simply need to work with color values in different formats, this converter delivers the precision and convenience you need.
+                            </p>
+                            <p><strong>Color conversion capabilities:</strong></p>
+                            <ul>
+                                <li>Convert between HEX and RGB color formats instantly</li>
+                                <li>Bidirectional conversion supporting both HEX-to-RGB and RGB-to-HEX</li>
+                                <li>Additional conversions to HSL, HSV, and CMYK formats</li>
+                                <li>Visual color preview showing the actual color</li>
+                                <li>Support for alpha transparency in RGBA and HEX formats</li>
+                                <li>Copy converted values directly to clipboard</li>
+                                <li>Batch conversion for processing multiple colors</li>
+                                <li>Color name lookup for common colors</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-fill-drip"></i> Gradient Generator</h3>
+                            <p>
+                                The Gradient Generator creates beautiful CSS gradients with ease, eliminating the complexity of manually crafting gradient code. Gradients add depth, visual interest, and modern aesthetics to designs, but writing gradient CSS syntax by hand is tedious and getting the colors positioned correctly requires trial and error. Our generator provides a visual interface where you can see your gradient in real-time while the tool generates perfect CSS code automatically.
+                            </p>
+                            <p>
+                                You can create linear gradients in any direction, radial gradients with various shapes, and complex multi-color gradients with precise color stop positioning. The tool lets you adjust gradient angles, add multiple color stops, control color positions, and experiment with different gradient types until you achieve exactly the look you want. The generated CSS is production-ready, with vendor prefixes included for maximum browser compatibility. It's perfect for web designers, CSS developers, and anyone creating modern interfaces with gradient backgrounds.
+                            </p>
+                            <p><strong>Gradient creation features:</strong></p>
+                            <ul>
+                                <li>Create beautiful CSS gradients with visual controls</li>
+                                <li>Support for linear, radial, and conic gradient types</li>
+                                <li>Add unlimited color stops with precise positioning</li>
+                                <li>Adjust gradient angles and directions visually</li>
+                                <li>Real-time preview of gradient as you design</li>
+                                <li>Generate production-ready CSS code automatically</li>
+                                <li>Preset gradient library for quick starting points</li>
+                                <li>Cross-browser compatible code with vendor prefixes</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-adjust"></i> Contrast Checker</h3>
+                            <p>
+                                Our Contrast Checker ensures your color combinations meet accessibility standards by verifying that text and background colors have sufficient contrast for readability. Web Content Accessibility Guidelines (WCAG) specify minimum contrast ratios to ensure content is readable by people with visual impairments, including color blindness and low vision. This tool automatically calculates contrast ratios and tells you whether your color combinations pass WCAG standards at different conformance levels.
+                            </p>
+                            <p>
+                                Simply input your foreground and background colors, and the tool instantly calculates the contrast ratio, shows whether it passes AA and AAA standards for normal and large text, and provides recommendations if your colors fail accessibility requirements. It's essential for designers creating inclusive interfaces, developers implementing accessible websites, and anyone committed to ensuring their content is readable by all users. The tool helps you make informed color choices that balance aesthetics with accessibility.
+                            </p>
+                            <p><strong>Accessibility checking features:</strong></p>
+                            <ul>
+                                <li>Check color contrast for accessibility compliance</li>
+                                <li>Calculate precise contrast ratios between colors</li>
+                                <li>Verify WCAG 2.1 AA and AAA conformance levels</li>
+                                <li>Test for normal text, large text, and UI components</li>
+                                <li>Visual pass/fail indicators for quick assessment</li>
+                                <li>Suggestions for improving contrast when colors fail</li>
+                                <li>Live preview showing how text appears on backgrounds</li>
+                                <li>Batch checking for testing multiple color combinations</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-palette"></i> Palette Generator</h3>
+                            <p>
+                                The Palette Generator creates harmonious color palettes automatically based on color theory principles, saving you from the challenge of manually selecting complementary colors. Creating effective color schemes requires understanding color relationships—which colors work well together, which create visual harmony, and which achieve the mood you're targeting. Our generator does this complex analysis for you, producing professional palettes instantly.
+                            </p>
+                            <p>
+                                Start with any base color, and the tool generates complete palettes using various color harmony rules: complementary, analogous, triadic, tetradic, split-complementary, and more. Each palette is designed according to established color theory, ensuring the colors work together harmoniously. You can adjust saturation and brightness, lock specific colors while regenerating others, and export palettes in various formats. It's perfect for designers beginning projects, developers needing cohesive color schemes, and anyone who wants professional-looking color combinations without deep color theory knowledge.
+                            </p>
+                            <p><strong>Palette generation capabilities:</strong></p>
+                            <ul>
+                                <li>Generate harmonious color palettes automatically</li>
+                                <li>Multiple color harmony algorithms: complementary, analogous, triadic, more</li>
+                                <li>Adjust palette based on any base color you choose</li>
+                                <li>Control saturation, brightness, and hue variations</li>
+                                <li>Lock specific colors while regenerating others</li>
+                                <li>Export palettes in multiple formats for different tools</li>
+                                <li>Save favorite palettes for reuse in future projects</li>
+                                <li>Generate random palettes for creative inspiration</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-eye"></i> Color Blindness Simulator</h3>
+                            <p>
+                                The Color Blindness Simulator shows how your designs appear to people with different types of color vision deficiency, ensuring your color choices work for all users. Approximately 8% of men and 0.5% of women have some form of color blindness, meaning millions of users may perceive colors differently than you intend. This tool simulates various types of color blindness so you can verify your designs remain clear and functional for everyone.
+                            </p>
+                            <p>
+                                The simulator supports multiple color blindness types including protanopia (red-blind), deuteranopia (green-blind), tritanopia (blue-blind), and various other forms of color vision deficiency. You can test images, color schemes, or entire interfaces to see how they appear with different types of color blindness. This insight helps you make design decisions that don't rely solely on color to convey information, ensuring truly inclusive and accessible designs. It's essential for anyone serious about accessibility and universal design.
+                            </p>
+                            <p><strong>Color blindness simulation features:</strong></p>
+                            <ul>
+                                <li>Simulate different types of color blindness accurately</li>
+                                <li>Support for protanopia, deuteranopia, tritanopia, and more</li>
+                                <li>Test images, color schemes, and interface designs</li>
+                                <li>Side-by-side comparison with normal color vision</li>
+                                <li>Real-time simulation as you adjust colors</li>
+                                <li>Detailed information about each color blindness type</li>
+                                <li>Percentage sliders to simulate varying severity levels</li>
+                                <li>Export simulated versions for documentation and review</li>
+                            </ul>
+                        </div>
+                    </section>
+                    
+                    <section id="features">
+                        <h2>Why These Color Tools Excel</h2>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-magic"></i></div>
+                                <h4 class="font-semibold mb-2">Instant Results</h4>
+                                <p>Real-time color processing with immediate visual feedback</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-universal-access"></i></div>
+                                <h4 class="font-semibold mb-2">Accessibility First</h4>
+                                <p>Built-in tools ensure your colors work for all users</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-graduation-cap"></i></div>
+                                <h4 class="font-semibold mb-2">Professional Quality</h4>
+                                <p>Color theory-based algorithms deliver expert-level results</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-lock"></i></div>
+                                <h4 class="font-semibold mb-2">Complete Privacy</h4>
+                                <p>All processing happens locally—your images stay on your device</p>
+                            </div>
+                        </div>
+                        
+                        <h3>Integrated Color Workflow</h3>
+                        <p>
+                            These six color tools work together seamlessly as a comprehensive color management suite. You might start by extracting colors from an inspiration image, convert those colors between formats for different platforms, check their contrast for accessibility, generate a complete palette based on extracted colors, create gradients for your interface, and simulate how everything looks with color blindness—all within the same efficient, privacy-focused environment designed for color professionals.
+                        </p>
+                        
+                        <p>
+                            This integrated approach eliminates the need to juggle multiple applications or websites for different color tasks. The tools share consistent interfaces with visual previews, instant feedback, and export options that make moving between color tasks seamless. You can maintain focus on your creative work rather than wrestling with tool limitations or compatibility issues.
+                        </p>
+                        
+                        <h3>For Designers and Developers</h3>
+                        <p>
+                            Our color tools serve creative professionals across disciplines. Graphic designers use the Image Color Picker and Palette Generator for branding projects. Web developers rely on the Gradient Generator and HEX/RGB Converter for CSS work. UI/UX designers depend on the Contrast Checker and Color Blindness Simulator for accessible interfaces. Content creators use the tools for consistent visual identities. Everyone benefits from professional color capabilities without expensive design software.
+                        </p>
+                        
+                        <p>
+                            The tools balance sophisticated functionality with approachable interfaces. Professional designers appreciate the color theory foundation and precision controls, while beginners enjoy the guidance and automatic generation features that help them create professional results even without extensive color knowledge. Whether you're matching specific brand colors or exploring creative possibilities, these tools adapt to your needs.
+                        </p>
+                        
+                        <h3>Privacy and Local Processing</h3>
+                        <p>
+                            Your images and color work remain completely private because all processing happens locally in your browser. Unlike online services that upload your images to remote servers, our tools process everything on your device. This means your proprietary brand materials, client photos, unpublished designs, and all visual content stays under your control where it belongs.
+                        </p>
+                        
+                        <p>
+                            Local processing provides practical advantages beyond privacy. Color operations happen instantaneously without network delays. You can work with sensitive brand materials without concerns about unauthorized access or data breaches. There are no file size restrictions imposed by server limitations. Once loaded, the tools function even without internet connectivity, giving you complete independence for creative work anywhere.
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Master Color in Your Projects</h2>
+                        <p>
+                            Stop struggling with inadequate color tools or expensive design software for basic color tasks. Our comprehensive color tool suite delivers professional capabilities in an accessible, efficient package. Extract colors from images, convert between formats effortlessly, generate beautiful gradients, check accessibility compliance, create harmonious palettes, and simulate color blindness—all with tools designed for both creative power and practical simplicity.
+                        </p>
+                        
+                        <p>
+                            Best of all, these powerful color tools are completely free to use with no registration required, no hidden costs, and no limitations on usage. Your images and color work remain completely private with local processing, and you get instant results with visual feedback every time. It's everything you need for professional color work, all in one place.
+                        </p>
+                        
+                        <div class="text-center mt-8">
+                            <a href="https://toolxeno.com" class="btn-gradient text-lg">
+                                <i class="fas fa-palette mr-2"></i>
+                                Try Our Color Tools Now
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </article>
+    </main>
+    
+    <script>
+        // Initialize particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+        });
+    </script>
+</body>
+</html>

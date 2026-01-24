@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Powerful Text Processing & Manipulation Tools - Professional Text Utilities | Tool Xeno</title>
+    <meta name="description" content="Comprehensive text tool suite featuring case converter, word counter, duplicate line remover, text sorter, text reverser, and encryption tools. Fast, secure, and free text processing utilities.">
+    <meta name="keywords" content="text tools, case converter, word counter, character counter, duplicate remover, text sorter, text reverser, text encryptor, text decryptor, text processing">
+    <meta name="author" content="Tool Xeno">
+    <link rel="canonical" href="https://toolxeno.com/text-tools">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Powerful Text Processing & Manipulation Tools">
+    <meta property="og:description" content="Professional text utilities for case conversion, word counting, sorting, reversing, and encryption with complete privacy.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://toolxeno.com/text-tools">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Powerful Text Processing & Manipulation Tools">
+    <meta name="twitter:description" content="Professional text processing utilities for all your manipulation needs.">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Powerful Text Processing & Manipulation Tools - Professional Text Utilities",
+        "description": "Comprehensive guide to professional text processing utilities for case conversion, analysis, sorting, manipulation, and encryption.",
+        "author": {
+            "@type": "Organization",
+            "name": "Tool Xeno"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Tool Xeno",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://toolxeno.com/logo.png"
+            }
+        },
+        "datePublished": "2024-12-11",
+        "dateModified": "2024-12-11",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://toolxeno.com/text-tools"
+        }
+    }
+    </script>
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.7;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .article-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            margin-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+        }
+        
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+        }
+        
+        body.light-theme .tool-card {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        body.light-theme .feature-item {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon-large {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .article-content h2 { font-size: 1.5rem; }
+            .article-content h3 { font-size: 1.25rem; }
+            .article-content p { font-size: 1rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Powerful Text Processing Tools
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#overview" class="nav-link">Overview</a>
+                        <a href="#tools" class="nav-link">Tools</a>
+                        <a href="#features" class="nav-link">Features</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent fade-in">
+                Powerful Text Processing & Manipulation Utilities
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto fade-in">
+                Complete text tool suite featuring case conversion, word counting, duplicate removal, sorting, reversing, and encryption capabilities for efficient text processing.
+            </p>
+        </section>
+        
+        <!-- Article Content -->
+        <article class="container mx-auto px-6">
+            <div class="glass-card p-8 md:p-12 fade-in">
+                <div class="article-content">
+                    <section id="overview">
+                        <p>
+                            Text manipulation is a daily necessity for writers, developers, content creators, students, and professionals across countless fields. Whether you're formatting content for publication, cleaning up data, analyzing documents, or simply transforming text to meet specific requirements, having the right tools can dramatically improve your efficiency and productivity.
+                        </p>
+                        
+                        <p>
+                            Our comprehensive text tool suite brings together six essential utilities that handle the most common text processing tasks with speed and precision. From converting text between different cases to encrypting sensitive information, these tools are designed to work seamlessly while maintaining the simplicity that makes them accessible to everyone, regardless of technical expertise.
+                        </p>
+                    </section>
+                    
+                    <section id="tools">
+                        <h2>Essential Text Processing Tools</h2>
+                        
+                        <p>
+                            We've developed six specialized text tools that address the fundamental text manipulation needs encountered in content creation, development, data processing, and everyday text handling. Each tool delivers powerful functionality through an intuitive interface.
+                        </p>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-font"></i> Text Case Converter</h3>
+                            <p>
+                                The Text Case Converter transforms text between different case formats instantly, making it indispensable for anyone working with text formatting. Whether you need to convert text to uppercase for headlines, lowercase for consistency, title case for proper formatting, sentence case for natural readability, or even alternating case for special effects, this tool handles it all effortlessly.
+                            </p>
+                            <p>
+                                Text case conversion is more than just a convenience—it's essential for maintaining consistent formatting across documents, preparing content for different platforms, fixing improperly formatted text, and ensuring your text meets specific style requirements. The tool preserves your original text while providing instant conversion to any case format you need, saving you from tedious manual retyping or complex find-and-replace operations.
+                            </p>
+                            <p><strong>Case conversion capabilities:</strong></p>
+                            <ul>
+                                <li>Convert text between different cases and formats instantly</li>
+                                <li>Support for uppercase, lowercase, title case, and sentence case</li>
+                                <li>Capitalize first letter of each word for proper title formatting</li>
+                                <li>Alternating case and other specialty case transformations</li>
+                                <li>Preserve or remove extra spaces during conversion</li>
+                                <li>Handle special characters and punctuation appropriately</li>
+                                <li>Process large text volumes without performance degradation</li>
+                                <li>Maintain original text structure while transforming case</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-sort-numeric-up"></i> Word & Character Counter</h3>
+                            <p>
+                                Our Word & Character Counter provides comprehensive text analysis that goes far beyond simple counting. It delivers detailed statistics about your text including word count, character count (with and without spaces), sentence count, paragraph count, reading time estimates, and more. This information is invaluable for writers meeting word limits, content creators optimizing for platforms, students working on assignments, and anyone who needs to understand text metrics.
+                            </p>
+                            <p>
+                                The tool updates in real-time as you type or paste text, giving you instant feedback on your content. It's particularly useful when working with platform-specific limits like Twitter's character restrictions, meeting academic essay requirements, optimizing content for SEO purposes, or simply understanding how much content you've created. The detailed breakdown helps you make informed decisions about your text without guesswork.
+                            </p>
+                            <p><strong>Comprehensive text analysis features:</strong></p>
+                            <ul>
+                                <li>Count words, characters, and analyze text comprehensively</li>
+                                <li>Character count both with and without spaces included</li>
+                                <li>Sentence and paragraph counting for structural analysis</li>
+                                <li>Estimated reading time based on average reading speed</li>
+                                <li>Real-time counting that updates as you type or edit</li>
+                                <li>Keyword density analysis for SEO optimization</li>
+                                <li>Average word length and sentence length statistics</li>
+                                <li>Detection of repeated words and common writing patterns</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-clone"></i> Remove Duplicate Lines</h3>
+                            <p>
+                                The Remove Duplicate Lines tool efficiently identifies and eliminates duplicate lines from text, saving you from tedious manual searching and deletion. When working with lists, data exports, log files, or any text containing repetitive lines, this tool instantly cleans up your content by removing duplicates while preserving the unique lines and their original order.
+                            </p>
+                            <p>
+                                This utility is particularly valuable for data cleaning tasks, processing exported lists, consolidating information from multiple sources, preparing data for further processing, and ensuring list uniqueness. You can choose whether to keep the first or last occurrence of duplicate lines, and the tool handles large text volumes efficiently without performance issues. It's a simple concept executed perfectly, delivering clean, duplicate-free text in seconds.
+                            </p>
+                            <p><strong>Duplicate removal capabilities:</strong></p>
+                            <ul>
+                                <li>Remove duplicate lines from text efficiently and accurately</li>
+                                <li>Preserve original line order while eliminating duplicates</li>
+                                <li>Option to keep first or last occurrence of duplicates</li>
+                                <li>Case-sensitive or case-insensitive duplicate detection</li>
+                                <li>Handle whitespace variations in duplicate detection</li>
+                                <li>Process large text files with thousands of lines</li>
+                                <li>Show statistics on duplicates found and removed</li>
+                                <li>Export cleaned text with duplicates eliminated</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-sort-alpha-down"></i> Text Sorter</h3>
+                            <p>
+                                The Text Sorter organizes lines of text in various orders, providing flexible sorting options that adapt to your specific needs. Whether you need alphabetical sorting for lists, numerical sorting for data, reverse order sorting, or random shuffling, this tool handles it all with precision. Sorting text manually is tedious and error-prone, but our tool accomplishes it instantly.
+                            </p>
+                            <p>
+                                Text sorting is essential for organizing lists, preparing data for analysis, creating indexes, alphabetizing entries, ranking items numerically, and countless other tasks where order matters. The tool offers multiple sorting algorithms including alphabetical (A-Z or Z-A), numerical (ascending or descending), length-based sorting, and randomization. You can also choose whether sorting should be case-sensitive, making it adaptable to virtually any sorting requirement.
+                            </p>
+                            <p><strong>Flexible sorting features:</strong></p>
+                            <ul>
+                                <li>Sort lines of text alphabetically or numerically with ease</li>
+                                <li>Ascending and descending order options for any sorting type</li>
+                                <li>Case-sensitive or case-insensitive sorting modes</li>
+                                <li>Natural sorting that handles numbers within text intelligently</li>
+                                <li>Sort by line length for specialized organization</li>
+                                <li>Reverse order to flip existing arrangements</li>
+                                <li>Random shuffle to create unpredictable orders</li>
+                                <li>Handle large lists with thousands of entries efficiently</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-exchange-alt"></i> Text Reverser</h3>
+                            <p>
+                                The Text Reverser provides multiple ways to reverse text, offering flexibility for different reversal needs. You can reverse entire text blocks, reverse the order of words while maintaining their spelling, reverse individual characters, or even reverse line order. While text reversal might seem like a novelty, it has practical applications in encryption, data transformation, creating mirror text, testing systems, and various creative uses.
+                            </p>
+                            <p>
+                                This tool is useful for developers testing palindrome detection, content creators making stylized text, educators demonstrating text manipulation concepts, and anyone needing to reverse text for any purpose. The different reversal modes give you precise control over exactly how the text is reversed, and the tool maintains formatting and special characters appropriately during the reversal process.
+                            </p>
+                            <p><strong>Text reversal capabilities:</strong></p>
+                            <ul>
+                                <li>Reverse text, words, or character order with flexibility</li>
+                                <li>Reverse entire text content as complete string</li>
+                                <li>Reverse word order while maintaining word spelling</li>
+                                <li>Reverse individual characters within each word</li>
+                                <li>Reverse line order for multi-line text</li>
+                                <li>Preserve or reverse special characters and punctuation</li>
+                                <li>Handle Unicode characters and emojis correctly</li>
+                                <li>Process large text volumes without delay</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-lock"></i> Text Encryptor/Decryptor</h3>
+                            <p>
+                                Our Text Encryptor/Decryptor provides secure methods to encrypt and decrypt text using various encryption techniques. Protecting sensitive information is crucial in today's digital world, and this tool gives you straightforward encryption capabilities without requiring cryptography expertise. You can encrypt text using different methods, each with varying levels of security appropriate for different use cases.
+                            </p>
+                            <p>
+                                The tool supports multiple encryption approaches including Base64 encoding for simple obfuscation, more secure encryption methods for sensitive data, and reversible encryption that allows authorized decryption. While this tool provides valuable encryption functionality, remember that truly sensitive data requiring maximum security should use dedicated security systems. For everyday encryption needs, email privacy, file protection, and general text security, this tool offers convenient and effective protection.
+                            </p>
+                            <p><strong>Encryption and decryption features:</strong></p>
+                            <ul>
+                                <li>Encrypt and decrypt text with various security methods</li>
+                                <li>Multiple encryption algorithms for different security levels</li>
+                                <li>Password-protected encryption for secure text storage</li>
+                                <li>Base64 encoding/decoding for simple text transformation</li>
+                                <li>Caesar cipher and substitution cipher options</li>
+                                <li>Custom key generation for unique encryption</li>
+                                <li>Secure local processing keeps your data private</li>
+                                <li>Reversible encryption with correct key or password</li>
+                            </ul>
+                        </div>
+                    </section>
+                    
+                    <section id="features">
+                        <h2>Why These Text Tools Stand Out</h2>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-bolt"></i></div>
+                                <h4 class="font-semibold mb-2">Instant Processing</h4>
+                                <p>Real-time text manipulation with zero delay—see results as you type</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-shield-alt"></i></div>
+                                <h4 class="font-semibold mb-2">Complete Privacy</h4>
+                                <p>All text processing happens locally—your content never leaves your device</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-feather"></i></div>
+                                <h4 class="font-semibold mb-2">Effortless to Use</h4>
+                                <p>Intuitive interfaces that require no learning curve or technical knowledge</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-infinity"></i></div>
+                                <h4 class="font-semibold mb-2">No Limitations</h4>
+                                <p>Process unlimited text with no file size restrictions or usage caps</p>
+                            </div>
+                        </div>
+                        
+                        <h3>Integrated Text Processing Ecosystem</h3>
+                        <p>
+                            These six text tools work together seamlessly as part of a comprehensive text manipulation suite. You might start by pasting text and using the Word Counter to analyze it, then use the Case Converter to adjust formatting, remove duplicate lines to clean it up, sort it alphabetically for organization, and finally encrypt it for security—all within the same efficient, privacy-focused environment.
+                        </p>
+                        
+                        <p>
+                            This integrated approach eliminates the need to juggle multiple applications or websites for different text operations. The tools share a consistent interface philosophy, so learning one makes using all of them intuitive. You can move smoothly between different text processing tasks without context switching or workflow disruption.
+                        </p>
+                        
+                        <h3>For Content Creators and Professionals</h3>
+                        <p>
+                            Our text tools serve diverse users across many fields. Writers use the Word Counter to meet requirements and the Case Converter for formatting. Developers rely on the Text Sorter and Duplicate Remover for data processing. Content creators depend on the Case Converter for social media formatting. Students utilize multiple tools for assignments. Data analysts clean information with the Duplicate Remover and Sorter. Security-conscious users encrypt sensitive text. Everyone benefits from tools that simply work.
+                        </p>
+                        
+                        <p>
+                            The tools balance professional capabilities with straightforward operation. Advanced users appreciate the flexibility and options available, while casual users enjoy the simple, get-it-done approach that doesn't require reading documentation or watching tutorials. Just paste your text, click the action you need, and get instant results.
+                        </p>
+                        
+                        <h3>Privacy Through Local Processing</h3>
+                        <p>
+                            Your text content remains completely private because all processing happens locally in your browser. Unlike online services that upload your text to remote servers, our tools process everything on your device. This means your documents, personal information, sensitive data, and all text content stays under your control where it belongs.
+                        </p>
+                        
+                        <p>
+                            Local processing delivers practical advantages beyond privacy. Text manipulation happens instantaneously without network delays. There are no file size restrictions imposed by server limitations. You can process confidential information without concerns about data interception or server logging. Once loaded, the tools work even without internet connectivity, giving you complete independence.
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Streamline Your Text Processing</h2>
+                        <p>
+                            Stop wrestling with inadequate text editors or relying on multiple disparate tools. Our comprehensive text processing suite delivers professional capabilities in an accessible, efficient package. Convert case formats instantly, analyze text with detailed statistics, remove duplicates efficiently, sort lines in any order, reverse text flexibly, and encrypt content securely—all with tools designed for both power and simplicity.
+                        </p>
+                        
+                        <p>
+                            Best of all, these powerful text tools are completely free to use with no registration required, no hidden costs, and no limitations on usage. Your text remains completely private with local processing, and you get instant results every time. It's everything you need for comprehensive text manipulation, all in one place.
+                        </p>
+                        
+                        <div class="text-center mt-8">
+                            <a href="https://toolxeno.com" class="btn-gradient text-lg">
+                                <i class="fas fa-text-width mr-2"></i>
+                                Try Our Text Tools Now
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </article>
+    </main>
+    
+    <script>
+        // Initialize particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+        });
+    </script>
+</body>
+</html>

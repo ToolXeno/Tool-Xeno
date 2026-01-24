@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essential Web Developer Tools - Professional Programming Utilities | Tool Xeno</title>
+    <meta name="description" content="Complete web developer tool suite featuring HTML/CSS/JS minifier, JSON formatter, Base64 encoder/decoder, URL encoder/decoder, color picker, and regex tester. Free professional development utilities.">
+    <meta name="keywords" content="web developer tools, HTML minifier, CSS minifier, JavaScript minifier, JSON formatter, Base64 encoder, URL encoder, color picker, regex tester, developer utilities">
+    <meta name="author" content="Tool Xeno">
+    <link rel="canonical" href="https://toolxeno.com/web-developer-tools">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Essential Web Developer Tools - Professional Programming Utilities">
+    <meta property="og:description" content="Professional web development utilities for code optimization, data formatting, encoding, color selection, and regex testing.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://toolxeno.com/web-developer-tools">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Essential Web Developer Tools - Professional Programming Utilities">
+    <meta name="twitter:description" content="Professional development utilities for programmers and web developers.">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Essential Web Developer Tools - Professional Programming Utilities",
+        "description": "Comprehensive guide to professional web development utilities for code optimization, data formatting, encoding, and testing.",
+        "author": {
+            "@type": "Organization",
+            "name": "Tool Xeno"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Tool Xeno",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://toolxeno.com/logo.png"
+            }
+        },
+        "datePublished": "2024-12-11",
+        "dateModified": "2024-12-11",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://toolxeno.com/web-developer-tools"
+        }
+    }
+    </script>
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-surface-elevated: #252525;
+            --dark-text: #ffffff;
+            --dark-text-secondary: #a0a0a0;
+            --dark-border: #333333;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-elevated: #f1f5f9;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.7;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+        }
+        
+        body.light-theme { 
+            background-color: var(--light-bg); 
+            color: var(--light-text); 
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.05;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+        }
+        
+        body.light-theme .particle { 
+            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); } 
+            100% { transform: translateY(-100px) rotate(360deg); } 
+        }
+        
+        .header-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        
+        body.light-theme .header-glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border-bottom-color: rgba(0, 0, 0, 0.1); 
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-theme .theme-toggle { 
+            background: var(--light-surface-elevated); 
+            border-color: var(--light-border); 
+        }
+        
+        body.light-theme .theme-toggle::after { 
+            transform: translateX(28px); 
+            background: var(--secondary-gradient); 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        body.light-theme .glass-card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-color: rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        
+        body.light-theme .nav-link { 
+            color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        body.light-theme .nav-link:hover { 
+            background: rgba(0, 0, 0, 0.1); 
+            color: black; 
+        }
+        
+        .article-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            margin-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+        }
+        
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+        }
+        
+        body.light-theme .tool-card {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        body.light-theme .feature-item {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon-large {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .article-content h2 { font-size: 1.5rem; }
+            .article-content h3 { font-size: 1.25rem; }
+            .article-content p { font-size: 1rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header-glass fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        Tool Xeno
+                    </div>
+                    <div class="hidden md:block text-sm opacity-70">
+                        Essential Web Developer Tools
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-2">
+                        <a href="#overview" class="nav-link">Overview</a>
+                        <a href="#tools" class="nav-link">Tools</a>
+                        <a href="#features" class="nav-link">Features</a>
+                    </nav>
+                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent fade-in">
+                Essential Tools for Web Developers & Programmers
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto fade-in">
+                Professional developer toolkit featuring code minification, JSON formatting, Base64 encoding, URL encoding, color selection, and regex testing for efficient web development.
+            </p>
+        </section>
+        
+        <!-- Article Content -->
+        <article class="container mx-auto px-6">
+            <div class="glass-card p-8 md:p-12 fade-in">
+                <div class="article-content">
+                    <section id="overview">
+                        <p>
+                            Web development and programming require a diverse array of tools to handle the countless tasks that arise during development, testing, and deployment. From optimizing code for production to formatting data for debugging, from encoding content for safe transmission to testing complex patterns, developers need reliable utilities that save time and prevent errors.
+                        </p>
+                        
+                        <p>
+                            Our comprehensive web developer tool suite brings together six essential utilities that address the most common development needs. These tools are designed by developers for developers, offering professional capabilities without the complexity that often accompanies development utilities. Whether you're a seasoned programmer or just starting your coding journey, these tools provide the functionality you need with the simplicity you want.
+                        </p>
+                    </section>
+                    
+                    <section id="tools">
+                        <h2>Professional Developer Utilities</h2>
+                        
+                        <p>
+                            We've developed six specialized tools that cover fundamental web development tasks encountered daily by programmers, front-end developers, back-end developers, and full-stack engineers. Each tool excels at its specific function while maintaining the reliability and speed that developers demand.
+                        </p>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-compress-arrows-alt"></i> HTML/CSS/JS Minifier</h3>
+                            <p>
+                                The HTML/CSS/JS Minifier optimizes your web code for production by removing unnecessary characters, whitespace, comments, and redundant code without changing functionality. Code minification is essential for modern web development because it significantly reduces file sizes, leading to faster page load times, reduced bandwidth consumption, and improved user experience—all critical factors in website performance and SEO rankings.
+                            </p>
+                            <p>
+                                This minifier handles HTML, CSS, and JavaScript with intelligent algorithms that preserve code functionality while achieving maximum compression. It removes comments, unnecessary whitespace, line breaks, and can even shorten variable names in JavaScript for additional space savings. The tool is perfect for preparing code for production deployment, optimizing third-party libraries, reducing bundle sizes, and meeting performance budgets for web applications.
+                            </p>
+                            <p><strong>Code optimization features:</strong></p>
+                            <ul>
+                                <li>Minify and optimize web code for better performance instantly</li>
+                                <li>Support for HTML, CSS, and JavaScript minification</li>
+                                <li>Remove comments, whitespace, and redundant code automatically</li>
+                                <li>Preserve code functionality while maximizing compression</li>
+                                <li>Variable name shortening in JavaScript for additional savings</li>
+                                <li>Batch minification for processing multiple files efficiently</li>
+                                <li>Comparison statistics showing size reduction achieved</li>
+                                <li>Source map generation for debugging minified code</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-brackets-curly"></i> JSON Formatter & Validator</h3>
+                            <p>
+                                Our JSON Formatter & Validator is an indispensable tool for working with JSON data, providing both beautiful formatting and comprehensive validation. JSON (JavaScript Object Notation) is the de facto standard for data exchange in web development, APIs, and modern applications, but raw JSON can be difficult to read and errors in JSON structure can cause application failures. This tool solves both problems elegantly.
+                            </p>
+                            <p>
+                                The formatter takes compressed or poorly formatted JSON and transforms it into beautifully indented, easy-to-read structure with proper nesting and alignment. The validator checks JSON syntax, identifies errors with specific line numbers and descriptions, and ensures your JSON is properly structured before using it in production. Whether you're debugging API responses, preparing configuration files, or learning JSON structure, this tool makes working with JSON effortless.
+                            </p>
+                            <p><strong>JSON processing capabilities:</strong></p>
+                            <ul>
+                                <li>Format, validate, and beautify JSON data with precision</li>
+                                <li>Transform compressed JSON into readable, indented structure</li>
+                                <li>Comprehensive syntax validation with detailed error reporting</li>
+                                <li>Highlight errors with specific line numbers and descriptions</li>
+                                <li>Multiple indentation options for preferred formatting style</li>
+                                <li>Minify JSON for production with whitespace removal</li>
+                                <li>JSON to XML and other format conversions</li>
+                                <li>Tree view visualization for understanding JSON structure</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-exchange-alt"></i> Base64 Encoder/Decoder</h3>
+                            <p>
+                                The Base64 Encoder/Decoder provides essential encoding and decoding capabilities that are fundamental to web development. Base64 encoding converts binary data into ASCII text format, making it safe for transmission through systems that handle only text. This encoding is used extensively in web development for embedding images in CSS or HTML, transmitting binary data in JSON, encoding credentials in HTTP headers, and countless other applications.
+                            </p>
+                            <p>
+                                Our tool handles both encoding (converting data to Base64) and decoding (converting Base64 back to original data) with support for various input types including text, files, and binary data. It's perfect for developers working with data URIs, authentication systems, email attachments in APIs, and any scenario requiring safe data encoding. The tool provides instant conversion in both directions with clear output ready for immediate use in your code.
+                            </p>
+                            <p><strong>Encoding and decoding features:</strong></p>
+                            <ul>
+                                <li>Encode and decode data in Base64 format accurately</li>
+                                <li>Support for text, files, and binary data encoding</li>
+                                <li>Instant conversion in both encoding and decoding directions</li>
+                                <li>Handle large files efficiently without performance issues</li>
+                                <li>Data URI generation for embedding in HTML/CSS</li>
+                                <li>UTF-8 and other character encoding support</li>
+                                <li>Copy encoded output directly to clipboard</li>
+                                <li>Decode Base64 from URLs and embedded content</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-link"></i> URL Encoder/Decoder</h3>
+                            <p>
+                                The URL Encoder/Decoder ensures your URLs are properly formatted for web usage by encoding special characters and decoding encoded URLs back to readable format. URLs must follow specific formatting rules, and certain characters need encoding to be transmitted safely. This tool handles URL encoding (also called percent-encoding) automatically, making your URLs safe for HTTP transmission and preventing errors caused by special characters.
+                            </p>
+                            <p>
+                                Whether you're building query strings, handling form data, constructing API endpoints, or debugging URL issues, this tool provides the encoding and decoding functionality you need. It properly encodes spaces, special characters, international characters, and reserved URL characters while decoding makes URLs human-readable again for debugging and analysis. The tool is essential for web development, especially when working with user input, search functionality, or complex routing.
+                            </p>
+                            <p><strong>URL processing capabilities:</strong></p>
+                            <ul>
+                                <li>Encode and decode URLs for web development needs</li>
+                                <li>Proper encoding of spaces, special characters, and symbols</li>
+                                <li>Support for international characters and Unicode in URLs</li>
+                                <li>Query string parameter encoding for form submissions</li>
+                                <li>Decode percent-encoded URLs to readable format</li>
+                                <li>Handle full URLs, path segments, or query parameters</li>
+                                <li>Preserve URL structure during encoding process</li>
+                                <li>RFC 3986 compliant encoding for standards adherence</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-palette"></i> Color Picker & Converter</h3>
+                            <p>
+                                Our Color Picker & Converter provides comprehensive color selection and conversion capabilities essential for web design and development. Colors in web development come in various formats—HEX, RGB, HSL, HSV—and converting between these formats manually is tedious and error-prone. This tool provides an intuitive visual color picker along with instant conversion between all major color formats.
+                            </p>
+                            <p>
+                                The visual picker lets you select colors by clicking or inputting values, immediately providing the color in all common formats. You can convert existing colors between formats, adjust color properties like hue and saturation, generate color variations, and ensure your colors meet accessibility standards. It's perfect for front-end developers, designers working with CSS, and anyone needing precise color values for web projects. The tool bridges the gap between visual color selection and the technical color codes required in development.
+                            </p>
+                            <p><strong>Color selection and conversion features:</strong></p>
+                            <ul>
+                                <li>Pick colors and convert between formats effortlessly</li>
+                                <li>Visual color picker with intuitive click-and-select interface</li>
+                                <li>Convert between HEX, RGB, HSL, and HSV formats instantly</li>
+                                <li>Generate color variations and complementary colors</li>
+                                <li>Color palette creation from selected base colors</li>
+                                <li>Accessibility contrast checking for WCAG compliance</li>
+                                <li>Recently used colors for quick access</li>
+                                <li>CSS color code generation ready for immediate use</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <h3><i class="fas fa-search"></i> Regex Tester</h3>
+                            <p>
+                                The Regex Tester provides a powerful environment for testing and debugging regular expressions, those complex patterns used for text matching and manipulation in programming. Regular expressions (regex) are incredibly powerful but notoriously difficult to write correctly. This tool lets you test your regex patterns against sample text in real-time, showing matches, groups, and providing immediate feedback on pattern correctness.
+                            </p>
+                            <p>
+                                Whether you're validating form inputs, parsing text data, finding patterns in logs, or implementing search functionality, regex is often the solution—but getting the pattern right can be frustrating. Our tester shows matched text highlighting, capture groups, match counts, and detailed explanations of what your regex does. You can test different regex flags, experiment with patterns, and refine your expressions until they work perfectly. It's an essential tool for any developer working with text processing, validation, or data extraction.
+                            </p>
+                            <p><strong>Regex testing and debugging features:</strong></p>
+                            <ul>
+                                <li>Test and debug regular expressions interactively</li>
+                                <li>Real-time pattern matching with live result updates</li>
+                                <li>Visual highlighting of matched text in sample input</li>
+                                <li>Display capture groups and backreferences clearly</li>
+                                <li>Support for regex flags including global, case-insensitive, multiline</li>
+                                <li>Match count and detailed match information display</li>
+                                <li>Regex pattern explanation with syntax breakdown</li>
+                                <li>Common regex pattern library for quick reference</li>
+                            </ul>
+                        </div>
+                    </section>
+                    
+                    <section id="features">
+                        <h2>Why Developers Choose These Tools</h2>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-rocket"></i></div>
+                                <h4 class="font-semibold mb-2">Lightning Fast</h4>
+                                <p>Client-side processing delivers instant results with zero server delays</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-lock"></i></div>
+                                <h4 class="font-semibold mb-2">100% Secure</h4>
+                                <p>All processing happens locally—your code never leaves your browser</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-star"></i></div>
+                                <h4 class="font-semibold mb-2">Professional Grade</h4>
+                                <p>Advanced features that rival paid development tools and IDEs</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon-large"><i class="fas fa-mobile-alt"></i></div>
+                                <h4 class="font-semibold mb-2">Always Available</h4>
+                                <p>Work anywhere with responsive tools that function on any device</p>
+                            </div>
+                        </div>
+                        
+                        <h3>Integrated Development Toolkit</h3>
+                        <p>
+                            These six developer tools work together as a comprehensive development utility suite. You might minify your code before deployment, format and validate JSON API responses during testing, encode data in Base64 for transmission, properly encode URLs for API calls, select colors for your interface, and test regex patterns for validation—all within the same efficient, privacy-focused environment that understands developer workflows.
+                        </p>
+                        
+                        <p>
+                            This integrated approach eliminates the need to bookmark multiple websites or install various utilities. The tools share consistent interfaces designed with developers in mind, featuring syntax highlighting, instant feedback, and keyboard shortcuts that speed up your workflow. You can move fluidly between different development tasks without losing context or momentum.
+                        </p>
+                        
+                        <h3>Built for Developers of All Levels</h3>
+                        <p>
+                            Our developer tools serve programmers across the experience spectrum. Junior developers appreciate the intuitive interfaces and helpful features that make learning easier. Senior developers value the speed, reliability, and professional capabilities that support production workflows. Front-end developers rely on the minifier and color picker. Back-end developers use the JSON formatter and Base64 encoder. Full-stack developers benefit from the entire toolkit.
+                        </p>
+                        
+                        <p>
+                            The tools balance powerful functionality with straightforward operation. They include helpful features like syntax highlighting and error messages that guide less experienced developers, while providing the speed and options that professionals require. There's no learning curve—just tools that work the way developers expect them to work.
+                        </p>
+                        
+                        <h3>Privacy for Your Code</h3>
+                        <p>
+                            Your code and data remain completely private because all processing happens locally in your browser. Unlike online services that upload your code to remote servers, our tools process everything on your device. This means your proprietary code, API keys in Base64, sensitive URLs, regex patterns, and all development work stays under your control where it belongs.
+                        </p>
+                        
+                        <p>
+                            Local processing provides practical advantages beyond privacy. Operations happen instantaneously without network latency. You can work with confidential code without concerns about data leaks or corporate policy violations. There are no file size limits imposed by server constraints. Once loaded, the tools function even offline, giving you complete independence from internet connectivity.
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Enhance Your Development Workflow</h2>
+                        <p>
+                            Stop juggling multiple websites or installing bloated software for basic development tasks. Our comprehensive developer tool suite delivers professional capabilities in an accessible, efficient package. Minify code for production, format and validate JSON data, encode in Base64, properly encode URLs, select and convert colors, and test regex patterns—all with tools designed for developers by developers.
+                        </p>
+                        
+                        <p>
+                            Best of all, these powerful development tools are completely free to use with no registration required, no hidden costs, and no limitations on usage. Your code remains completely private with client-side processing, and you get instant results every time. It's everything you need for efficient web development, all in one place.
+                        </p>
+                        
+                        <div class="text-center mt-8">
+                            <a href="https://toolxeno.com" class="btn-gradient text-lg">
+                                <i class="fas fa-code mr-2"></i>
+                                Try Our Developer Tools Now
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </article>
+    </main>
+    
+    <script>
+        // Initialize particles
+        function initializeParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeParticles();
+        });
+    </script>
+</body>
+</html>
