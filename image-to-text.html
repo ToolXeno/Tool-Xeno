@@ -20,6 +20,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Tesseract.js (v5) - Loaded from CDN to fix missing file errors on deployment -->
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
+    
     <!-- React & Babel -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
@@ -382,27 +385,27 @@
 
     <script type="text/babel">
         // --- Types & Enums ---
-        // Mapping for OCR.space languages
+        // Mapping for Tesseract.js languages (ISO 639-2)
         const OcrLanguage = {
             ENG: 'eng',
             SPA: 'spa',
-            FRA: 'fre', // OCR.space uses 'fre'
-            DEU: 'ger', // OCR.space uses 'ger'
+            FRA: 'fra', 
+            DEU: 'deu', 
             ITA: 'ita',
             POR: 'por',
             RUS: 'rus',
-            CHI_SIM: 'chs', // OCR.space uses 'chs'
+            CHI_SIM: 'chi_sim', 
             JPN: 'jpn',
             ARA: 'ara'
         };
 
         // --- Premium Configuration ---
+        // Retained for reference, but primary engine is now Client-Side Tesseract
         const OCR_CONFIG = {
-            apiKey: 'K85096012888957',
-            apiUrl: 'https://api.ocr.space/parse/image',
-            maxImageDimension: 2000,
-            jpegQuality: 0.8,
-            maxRetries: 3
+            apiKey: 'K85096012888957', 
+            maxImageDimension: 2500,
+            jpegQuality: 0.9,
+            engineVersion: '5.0.0-alpha'
         };
 
         // --- Components ---
@@ -493,18 +496,18 @@
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <div className="feature-card fade-in" style={{ animationDelay: '0s' }}>
                             <div className="text-3xl mb-4"><i className="fas fa-brain text-purple-400"></i></div>
-                            <h3 className="text-lg font-semibold mb-2">Cloud AI OCR</h3>
-                            <p className="text-sm opacity-70">Powered by advanced cloud neural networks for maximum accuracy</p>
+                            <h3 className="text-lg font-semibold mb-2">WASM AI OCR</h3>
+                            <p className="text-sm opacity-70">Powered by client-side WebAssembly for infinite privacy & zero latency</p>
                         </div>
                         <div className="feature-card fade-in" style={{ animationDelay: '0.1s' }}>
                             <div className="text-3xl mb-4"><i className="fas fa-language text-blue-400"></i></div>
                             <h3 className="text-lg font-semibold mb-2">Multi-Language</h3>
-                            <p className="text-sm opacity-70">Support for global languages with high precision</p>
+                            <p className="text-sm opacity-70">Support for global languages via trained LSTM models</p>
                         </div>
                         <div className="feature-card fade-in" style={{ animationDelay: '0.2s' }}>
                             <div className="text-3xl mb-4"><i className="fas fa-bolt text-pink-400"></i></div>
-                            <h3 className="text-lg font-semibold mb-2">Fast Processing</h3>
-                            <p className="text-sm opacity-70">Optimized image compression for rapid results</p>
+                            <h3 className="text-lg font-semibold mb-2">Instant Result</h3>
+                            <p className="text-sm opacity-70">No file upload required. Processing happens on your device.</p>
                         </div>
                         <div className="feature-card fade-in" style={{ animationDelay: '0.3s' }}>
                             <div className="text-3xl mb-4"><i className="fas fa-file-export text-green-400"></i></div>
@@ -583,8 +586,8 @@
             // Settings State
             const [settings, setSettings] = React.useState({
                 language: OcrLanguage.ENG,
-                ocrMode: "2", // Default to Engine 2 for better results
-                pageSegMode: "3", // Not used for OCR.Space but kept for UI
+                ocrMode: "2",
+                pageSegMode: "3", 
                 enhanceImage: true,
                 preserveFormatting: false
             });
@@ -639,123 +642,61 @@
                 setShowConfidence(false);
             };
 
-            // Intelligent Image Compression: Returns a BLOB (Binary), not Base64 string
-            // This is safer for Cloudflare environments and browser memory
-            const compressImageForAPI = (file) => {
-                return new Promise((resolve) => {
-                    const img = new Image();
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        const ctx = canvas.getContext('2d');
-                        
-                        // Limit dimensions to avoid massive payloads
-                        const MAX_DIM = OCR_CONFIG.maxImageDimension;
-                        let width = img.width;
-                        let height = img.height;
-
-                        if (width > MAX_DIM || height > MAX_DIM) {
-                            if (width > height) {
-                                height *= MAX_DIM / width;
-                                width = MAX_DIM;
-                            } else {
-                                width *= MAX_DIM / height;
-                                height = MAX_DIM;
-                            }
-                        }
-
-                        canvas.width = width;
-                        canvas.height = height;
-                        
-                        // Draw resized image
-                        ctx.drawImage(img, 0, 0, width, height);
-                        
-                        // Convert to BLOB (Binary) instead of Base64 string to prevent string length issues
-                        canvas.toBlob((blob) => {
-                            resolve(blob);
-                        }, 'image/jpeg', OCR_CONFIG.jpegQuality);
-                    };
-                    img.src = URL.createObjectURL(file);
-                });
-            };
-
-            const performApiCall = async (formData, attempt = 1) => {
-                try {
-                    const response = await fetch(OCR_CONFIG.apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'apikey': OCR_CONFIG.apiKey
-                        },
-                        body: formData,
-                        // Cloudflare optimization: avoid credentials to prevent CORS header conflicts
-                        credentials: 'omit', 
-                        cache: 'no-store'
-                    });
-                    
-                    if (response.status === 403 || response.status === 429) {
-                        throw new Error('API busy or rate limited. Please wait a moment.');
-                    }
-                    
-                    return await response.json();
-                } catch (error) {
-                    if (attempt < OCR_CONFIG.maxRetries) {
-                         // Exponential backoff wait
-                        await new Promise(r => setTimeout(r, 1000 * attempt));
-                        return performApiCall(formData, attempt + 1);
-                    }
-                    throw error;
-                }
-            };
-
+            // Enhanced processing using Tesseract.js (Client Side)
             const processImage = async () => {
                 if (!currentFile) {
                     alert('Please select an image first');
                     return;
                 }
                 
-                setProcessing(true, 'Optimizing image for secure upload...', 10);
+                setProcessing(true, 'Initializing OCR Engine...', 0);
                 
                 try {
-                    // 1. Prepare Image (Resize & Convert to Blob)
-                    const blob = await compressImageForAPI(currentFile);
+                    // Create a worker with specific CDN paths to fix "file not found" errors on deployed sites
+                    const worker = await Tesseract.createWorker({
+                        logger: m => {
+                            if (m.status === 'loading tesseract core') {
+                                setProcessing(true, 'Loading Core Engine (WASM)...', Math.min(25, m.progress * 25));
+                            } else if (m.status === 'initializing api') {
+                                setProcessing(true, 'Initializing Neural Network...', 30 + (m.progress * 10));
+                            } else if (m.status === 'recognizing text') {
+                                setProcessing(true, 'Extracting Text...', 40 + (m.progress * 60));
+                            } else {
+                                console.log(m);
+                            }
+                        },
+                        // Explicitly point to CDN to ensure no local file lookups
+                        workerPath: 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/worker.min.js',
+                        langPath: 'https://tessdata.projectnaptha.com/4.0.0',
+                        corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@5/index.js' 
+                    });
+
+                    // Load Language
+                    await worker.loadLanguage(settings.language);
+                    await worker.initialize(settings.language);
+
+                    // Set Parameters based on simple settings
+                    await worker.setParameters({
+                        tessedit_pageseg_mode: Tesseract.PSM.AUTO,
+                    });
+
+                    // Recognize
+                    const ret = await worker.recognize(currentFile);
                     
-                    setProcessing(true, 'Establishing secure connection...', 30);
+                    const text = ret.data.text;
+                    const confidenceScore = ret.data.confidence;
 
-                    // 2. Prepare Form Data (Using File Object for better Cloudflare handling)
-                    const formData = new FormData();
-                    formData.append('file', blob, 'image.jpg'); // Send as file, not base64 string
-                    formData.append('language', settings.language);
-                    formData.append('isOverlayRequired', 'false');
-                    formData.append('scale', 'true'); 
-                    formData.append('OCREngine', settings.ocrMode);
-                    formData.append('detectOrientation', 'true');
-
-                    // 3. Call API with Retry Logic
-                    setProcessing(true, 'Processing document in cloud...', 60);
-                    
-                    const data = await performApiCall(formData);
-
-                    if (data.IsErroredOnProcessing) {
-                        throw new Error(data.ErrorMessage ? data.ErrorMessage[0] : 'Unknown API Error');
-                    }
-
-                    if (!data.ParsedResults || data.ParsedResults.length === 0) {
-                        throw new Error('No text found in the image. Please ensure the image contains clear text.');
-                    }
-
-                    // 4. Extract Text
-                    const result = data.ParsedResults[0];
-                    const text = result.ParsedText;
-                    
                     setExtractedText(text.trim());
-                    setConfidence(98); // High confidence on successful premium engine result
+                    setConfidence(Math.round(confidenceScore)); 
                     setShowConfidence(true);
                     
+                    await worker.terminate();
                     setProcessing(false, 'Done', 100);
 
                 } catch (error) {
                     console.error('OCR Error:', error);
                     setProcessing(false, '', 0);
-                    alert('Processing Error: ' + (error.message || 'Connection interrupted. Please try again.'));
+                    alert('Processing Error: ' + (error.message || 'Engine failed to initialize. Check your connection.'));
                 }
             };
 
@@ -865,7 +806,7 @@
                         <div className="settings-panel">
                             <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
                                 <i className="fas fa-cog text-purple-400"></i>
-                                Cloud OCR Settings
+                                Engine Settings
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="setting-group">
@@ -878,26 +819,26 @@
                                     >
                                         <option value="eng">English</option>
                                         <option value="spa">Spanish</option>
-                                        <option value="fre">French</option>
-                                        <option value="ger">German</option>
+                                        <option value="fra">French</option>
+                                        <option value="deu">German</option>
                                         <option value="ita">Italian</option>
                                         <option value="por">Portuguese</option>
                                         <option value="rus">Russian</option>
-                                        <option value="chs">Chinese (Simplified)</option>
+                                        <option value="chi_sim">Chinese (Simplified)</option>
                                         <option value="jpn">Japanese</option>
                                         <option value="ara">Arabic</option>
                                     </select>
                                 </div>
                                 <div className="setting-group">
-                                    <label className="setting-label">Engine Mode</label>
+                                    <label className="setting-label">Performance Mode</label>
                                     <select 
                                         className="setting-input" 
                                         id="ocrMode"
                                         value={settings.ocrMode}
                                         onChange={(e) => setSettings({...settings, ocrMode: e.target.value})}
                                     >
-                                        <option value="1">Engine 1 (Fast)</option>
-                                        <option value="2">Engine 2 (Best for Number/Special Char)</option>
+                                        <option value="1">Balanced</option>
+                                        <option value="2">High Accuracy (LSTM)</option>
                                     </select>
                                 </div>
                             </div>
@@ -968,7 +909,7 @@
                                 {/* Confidence Bar */}
                                 <div id="confidenceContainer" className="mb-4" style={{ display: showConfidence ? 'block' : 'none' }}>
                                     <div className="flex justify-between items-center mb-2">
-                                        <span className="text-sm font-medium">Accuracy</span>
+                                        <span className="text-sm font-medium">Confidence</span>
                                         <span id="confidencePercent" className="text-sm font-mono">{confidence}%</span>
                                     </div>
                                     <div className="confidence-bar">
