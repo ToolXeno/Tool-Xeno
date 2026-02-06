@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enterprise OCR Tool - Tool Xeno</title>
     <meta name="description" content="Professional enterprise-grade OCR tool. High-accuracy text extraction, cloud processing, and secure document handling.">
+    
+    <!-- ✅ CSP for Cloudflare/WASM Compatibility -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' * data: blob: 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' * data: blob:; worker-src 'self' * data: blob:; img-src 'self' * data: blob:;">
 
     <!-- ✅ Tool Xeno Favicons -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -20,8 +23,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Tesseract.js (v5) - Loaded from CDN to fix missing file errors on deployment -->
-    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
+    <!-- Tesseract.js (v5) - Cloudflare Optimized -->
+    <!-- data-cfasync="false" prevents Cloudflare Rocket Loader from breaking the script -->
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js' data-cfasync="false"></script>
     
     <!-- React & Babel -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
@@ -399,15 +403,6 @@
             ARA: 'ara'
         };
 
-        // --- Premium Configuration ---
-        // Retained for reference, but primary engine is now Client-Side Tesseract
-        const OCR_CONFIG = {
-            apiKey: 'K85096012888957', 
-            maxImageDimension: 2500,
-            jpegQuality: 0.9,
-            engineVersion: '5.0.0-alpha'
-        };
-
         // --- Components ---
 
         // ParticleBackground.tsx
@@ -642,7 +637,7 @@
                 setShowConfidence(false);
             };
 
-            // Enhanced processing using Tesseract.js (Client Side)
+            // Enhanced processing using Tesseract.js (Client Side - Robust v5)
             const processImage = async () => {
                 if (!currentFile) {
                     alert('Please select an image first');
@@ -652,8 +647,10 @@
                 setProcessing(true, 'Initializing OCR Engine...', 0);
                 
                 try {
-                    // Create a worker with specific CDN paths to fix "file not found" errors on deployed sites
-                    const worker = await Tesseract.createWorker({
+                    // Create worker with Explicit V5 Configuration
+                    // We explicitly set workerPath and corePath to avoid automatic path resolution errors
+                    // that happen when files are served from different domains or behind Cloudflare.
+                    const worker = await Tesseract.createWorker(settings.language, 1, {
                         logger: m => {
                             if (m.status === 'loading tesseract core') {
                                 setProcessing(true, 'Loading Core Engine (WASM)...', Math.min(25, m.progress * 25));
@@ -665,15 +662,12 @@
                                 console.log(m);
                             }
                         },
-                        // Explicitly point to CDN to ensure no local file lookups
+                        // Explicit CDN Paths to guarantee availability
                         workerPath: 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/worker.min.js',
+                        corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@5.1.0/tesseract-core.wasm.js',
                         langPath: 'https://tessdata.projectnaptha.com/4.0.0',
-                        corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@5/index.js' 
+                        errorHandler: (err) => console.error("Worker Error:", err)
                     });
-
-                    // Load Language
-                    await worker.loadLanguage(settings.language);
-                    await worker.initialize(settings.language);
 
                     // Set Parameters based on simple settings
                     await worker.setParameters({
@@ -690,13 +684,15 @@
                     setConfidence(Math.round(confidenceScore)); 
                     setShowConfidence(true);
                     
+                    // CRITICAL: Terminate worker to free memory and avoid zombie processes
                     await worker.terminate();
+                    
                     setProcessing(false, 'Done', 100);
 
                 } catch (error) {
                     console.error('OCR Error:', error);
                     setProcessing(false, '', 0);
-                    alert('Processing Error: ' + (error.message || 'Engine failed to initialize. Check your connection.'));
+                    alert('Processing Error: ' + (error.message || 'Engine failed to initialize. Please check your internet connection or try a different browser.'));
                 }
             };
 
