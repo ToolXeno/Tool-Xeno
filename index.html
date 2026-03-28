@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en-US" dir="ltr">
 <head>
   <meta charset="UTF-8" />
@@ -116,6 +116,8 @@
   <link rel="prefetch" href="https://toolxeno.com/beauty-tools-article.html" />
   <link rel="prefetch" href="https://toolxeno.com/image-tools-article.html" />
   <link rel="prefetch" href="https://toolxeno.com/developer-tools-article.html" />
+  <link rel="prefetch" href="https://toolxeno.com/pdf-word-converter.html" />
+  <link rel="prefetch" href="https://toolxeno.com/image-compressor.html" />
 
   <!-- ===== OPEN GRAPH ===== -->
   <meta property="og:type" content="website" />
@@ -301,7 +303,6 @@
   <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" /></noscript>
 
   <!-- ===== PERFORMANCE: RESOURCE HINTS ===== -->
-    
   <!-- ===== FAVICON (inline SVG) ===== -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%237928ca'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>" />
 
@@ -413,7 +414,6 @@
       opacity: 1;
     }
 
-    /* Animated gradient orbs */
     .bg-orbs {
       position: fixed;
       inset: 0;
@@ -429,39 +429,45 @@
       animation: orbFloat linear infinite;
       will-change: transform;
     }
-    .orb-1 { width: 600px; height: 600px; background: var(--accent1); top: -200px; left: -200px; animation-duration: 20s; animation-name: orbFloat1; }
-    .orb-2 { width: 500px; height: 500px; background: var(--accent3); top: 30%; right: -150px; animation-duration: 25s; animation-name: orbFloat2; }
-    .orb-3 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: 30%; animation-duration: 18s; animation-name: orbFloat3; }
-    .orb-4 { width: 300px; height: 300px; background: var(--accent4); top: 60%; left: 10%; animation-duration: 22s; animation-name: orbFloat4; }
+    .orb-1 { width: 700px; height: 700px; background: radial-gradient(circle, var(--accent1), transparent 70%); top: -250px; left: -200px; animation-duration: 22s; animation-name: orbFloat1; opacity: 0.14; }
+    .orb-2 { width: 600px; height: 600px; background: radial-gradient(circle, var(--accent3), transparent 70%); top: 25%; right: -180px; animation-duration: 27s; animation-name: orbFloat2; opacity: 0.12; }
+    .orb-3 { width: 500px; height: 500px; background: radial-gradient(circle, var(--accent2), transparent 70%); bottom: -120px; left: 28%; animation-duration: 20s; animation-name: orbFloat3; opacity: 0.10; }
+    .orb-4 { width: 350px; height: 350px; background: radial-gradient(circle, var(--accent4), transparent 70%); top: 55%; left: 8%; animation-duration: 24s; animation-name: orbFloat4; opacity: 0.10; }
 
     @keyframes orbFloat1 { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(60px,40px) scale(1.1); } 66% { transform: translate(-40px,60px) scale(0.95); } }
     @keyframes orbFloat2 { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(-80px,50px) scale(1.05); } 66% { transform: translate(40px,-60px) scale(1.1); } }
     @keyframes orbFloat3 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(70px,-40px) scale(1.15); } }
     @keyframes orbFloat4 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-50px,-80px) scale(1.1); } }
 
-    /* Grid mesh overlay */
     .bg-grid {
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 70px 70px;
+      mask-image: radial-gradient(ellipse 90% 90% at 50% 40%, black 30%, transparent 100%);
+      animation: gridShift 40s linear infinite;
+    }
+    @keyframes gridShift {
+      0% { background-position: 0 0; }
+      100% { background-position: 70px 70px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bg-grid { animation: none !important; }
     }
 
-    /* Particles canvas */
     #particles-canvas {
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      opacity: 0.4;
+      opacity: 0.55;
+      will-change: auto;
     }
 
-    /* All page content sits above background */
     .page-wrapper {
       position: relative;
       z-index: 1;
@@ -547,7 +553,6 @@
 
     .header-actions { display: flex; align-items: center; gap: 10px; margin-left: 16px; }
 
-    /* ===== PREMIUM THEME BUTTON (NO ICON) ===== */
     .btn-theme {
       position: relative;
       padding: 9px 24px;
@@ -608,11 +613,9 @@
     }
     .btn-cta-sm:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,124,240,0.4); }
 
-    /* Mobile hamburger */
     .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; }
     .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); display: block; }
 
-    /* Mobile nav drawer */
     .mobile-nav {
       display: none;
       position: fixed;
@@ -753,7 +756,6 @@
     }
     .btn-secondary:hover { background: var(--card-hover); border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
 
-    /* Trust badges */
     .hero-trust {
       display: flex;
       align-items: center;
@@ -777,7 +779,6 @@
     }
     .trust-sep { width: 4px; height: 4px; background: var(--line); border-radius: 50%; }
 
-    /* Floating tool cards preview in hero */
     .hero-visual {
       position: absolute;
       inset: 0;
@@ -882,7 +883,6 @@
     .tools-header { text-align: center; margin-bottom: 48px; }
     .tools-header .section-sub { margin: 0 auto; }
 
-    /* ===== ENHANCED NEON SEARCH BAR (MORE VISIBLE) ===== */
     .search-wrap {
       width: min(100%, 620px);
       max-width: 620px;
@@ -1017,7 +1017,6 @@
       color: var(--muted);
     }
 
-    /* Category filters */
     .category-filters {
       display: flex;
       align-items: center;
@@ -1055,12 +1054,18 @@
     }
     .cat-btn:not(.active) .cat-count { background: var(--bg2); }
 
-    /* Tools grid */
     .tools-grid {
       display: grid;
       align-items: stretch;
       grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
       gap: 16px;
+    }
+    .tool-card {
+      animation: cardFadeIn 0.4s ease both;
+    }
+    @keyframes cardFadeIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .tool-card {
@@ -1123,15 +1128,15 @@
       opacity: 0.15;
     }
 
-    .cat-beauty .tool-card-icon { background: rgba(255,105,180,0.15); color: #ff69b4; }
-    .cat-audio .tool-card-icon { background: rgba(0,223,216,0.12); color: var(--accent2); }
-    .cat-image .tool-card-icon { background: rgba(0,124,240,0.12); color: var(--accent1); }
-    .cat-document .tool-card-icon { background: rgba(249,115,22,0.12); color: #f97316; }
-    .cat-calculator .tool-card-icon { background: rgba(34,197,94,0.12); color: #22c55e; }
-    .cat-text .tool-card-icon { background: rgba(168,85,247,0.12); color: #a855f7; }
-    .cat-developer .tool-card-icon { background: rgba(0,223,216,0.12); color: var(--accent2); }
-    .cat-color .tool-card-icon { background: rgba(251,191,36,0.12); color: #fbbf24; }
-    .cat-seo .tool-card-icon { background: rgba(0,124,240,0.12); color: var(--accent1); }
+    .cat-beauty .tool-card-icon { background: linear-gradient(135deg, rgba(255,105,180,0.22), rgba(255,20,147,0.12)); color: #ff69b4; border-color: rgba(255,105,180,0.25); }
+    .cat-audio .tool-card-icon { background: linear-gradient(135deg, rgba(0,223,216,0.20), rgba(0,223,216,0.08)); color: var(--accent2); border-color: rgba(0,223,216,0.22); }
+    .cat-image .tool-card-icon { background: linear-gradient(135deg, rgba(0,124,240,0.22), rgba(0,124,240,0.08)); color: var(--accent1); border-color: rgba(0,124,240,0.22); }
+    .cat-document .tool-card-icon { background: linear-gradient(135deg, rgba(249,115,22,0.22), rgba(249,115,22,0.08)); color: #f97316; border-color: rgba(249,115,22,0.22); }
+    .cat-calculator .tool-card-icon { background: linear-gradient(135deg, rgba(34,197,94,0.22), rgba(34,197,94,0.08)); color: #22c55e; border-color: rgba(34,197,94,0.22); }
+    .cat-text .tool-card-icon { background: linear-gradient(135deg, rgba(168,85,247,0.22), rgba(168,85,247,0.08)); color: #a855f7; border-color: rgba(168,85,247,0.22); }
+    .cat-developer .tool-card-icon { background: linear-gradient(135deg, rgba(0,223,216,0.20), rgba(0,124,240,0.10)); color: var(--accent2); border-color: rgba(0,223,216,0.22); }
+    .cat-color .tool-card-icon { background: linear-gradient(135deg, rgba(251,191,36,0.22), rgba(251,191,36,0.08)); color: #fbbf24; border-color: rgba(251,191,36,0.22); }
+    .cat-seo .tool-card-icon { background: linear-gradient(135deg, rgba(0,124,240,0.22), rgba(121,40,202,0.10)); color: var(--accent1); border-color: rgba(0,124,240,0.22); }
 
     .tool-card-name {
       font-size: 0.95rem;
@@ -1163,7 +1168,6 @@
     }
     .tool-card:hover .tool-card-arrow { opacity: 1; transform: translateX(0); }
 
-    /* Category section headings */
     .cat-section-header {
       display: flex;
       align-items: center;
@@ -1198,7 +1202,6 @@
     }
     .cat-section-link:hover { gap: 8px; }
 
-    /* No results */
     .no-results {
       text-align: center;
       padding: 80px 24px;
@@ -1313,7 +1316,7 @@
       margin-top: 48px;
     }
     .guide-card {
-      padding: 24px;
+      padding: 26px;
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -1324,27 +1327,25 @@
       position: relative;
       overflow: hidden;
     }
-    .guide-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); border-color: rgba(255,255,255,0.12); }
-    .guide-card-emoji { font-size: 2rem; margin-bottom: 12px; display: block; }
-    .guide-card-category {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--accent1);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
+    .guide-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(2,6,23,0.22), 0 0 0 1px rgba(0,124,240,0.12); border-color: rgba(0,124,240,0.18); }
+    /* guide-card-emoji styled below with premium icon container */
+    /* guide-card-category styled below */
     .guide-card-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
     .guide-card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
     .guide-card-read {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
       margin-top: 16px;
-      font-size: 0.78rem;
-      font-weight: 600;
+      font-size: 0.8rem;
+      font-weight: 700;
       color: var(--accent1);
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      justify-content: space-between;
+      transition: color var(--transition), gap var(--transition);
     }
+    .guide-card:hover .guide-card-read { color: var(--accent2); }
 
     /* =============================================
        FAQ SECTION
@@ -1561,7 +1562,6 @@
     :focus-visible { outline: 2px solid var(--accent1); outline-offset: 3px; border-radius: 4px; }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
 
-    /* Skip link */
     .skip-link {
       position: absolute;
       top: -100px;
@@ -1595,22 +1595,15 @@
     .btn-primary, .btn-secondary { will-change: transform; }
     .feature-card { will-change: transform; }
 
-    /* Remove will-change after animation (no JS needed – CSS reset) */
     @media (prefers-reduced-motion: reduce) {
       .tool-card, .btn-primary, .btn-secondary, .feature-card { will-change: auto; }
     }
 
-    /* =============================================
-       FONT DISPLAY OVERRIDE
-    ============================================= */
     @font-face {
       font-family: 'Plus Jakarta Sans';
       font-display: swap;
     }
 
-    /* =============================================
-       IMAGE OPTIMIZATION
-    ============================================= */
     img {
       max-width: 100%;
       height: auto;
@@ -1621,9 +1614,6 @@
       content-visibility: auto;
     }
 
-    /* =============================================
-       ANCHOR FOCUS RING IMPROVEMENTS
-    ============================================= */
     a:focus-visible,
     button:focus-visible {
       outline: 2px solid var(--accent1);
@@ -1631,9 +1621,6 @@
       border-radius: 4px;
     }
 
-    /* =============================================
-       SEARCH INPUT: PLACEHOLDER ANIMATION
-    ============================================= */
     .search-input::placeholder {
       color: var(--muted);
       transition: color 0.2s ease, opacity 0.2s ease;
@@ -1642,23 +1629,14 @@
       opacity: 0.5;
     }
 
-    /* =============================================
-       TOOL CARD: PERFORMANCE CLIPPING
-    ============================================= */
     .tools-grid {
       contain: layout style;
     }
 
-    /* =============================================
-       STATS COUNTER: SMOOTH
-    ============================================= */
     .stat-value {
       font-variant-numeric: tabular-nums;
     }
 
-    /* =============================================
-       PREFERS-REDUCED-MOTION
-    ============================================= */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -1673,9 +1651,6 @@
       .search-wrap::before, .search-wrap::after { animation: none !important; }
     }
 
-    /* =============================================
-       MOBILE: HORIZONTAL SCROLL CATEGORY FILTERS
-    ============================================= */
     @media (max-width: 768px) {
       .category-filters {
         flex-wrap: nowrap;
@@ -1715,9 +1690,6 @@
       .hero { padding: 40px 12px 32px; }
     }
 
-    /* =============================================
-       EMAIL / CONTACT SECTION
-    ============================================= */
     .contact-section {
       padding: 80px 24px;
       position: relative;
@@ -1827,27 +1799,16 @@
       .contact-email-link { padding: 12px 22px; font-size: 0.9rem; }
     }
 
-    /* =============================================
-       PERFORMANCE: LAZY IMAGE PLACEHOLDER
-    ============================================= */
     img[loading="lazy"] { background: var(--bg2); }
 
-
-    /* =============================================
-       RESPONSIVE: ENHANCED BREAKPOINTS
-    ============================================= */
-
-    /* 1440px+ (large desktop) */
     @media (min-width: 1440px) {
       :root { --max: 1360px; }
     }
 
-    /* 1200px (desktop) */
     @media (max-width: 1200px) {
       .tools-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
     }
 
-    /* Container padding on all sections */
     @media (max-width: 640px) {
       section { padding: 48px 16px; }
       .stats-band { padding: 0 16px 56px; }
@@ -1855,27 +1816,23 @@
       .contact-section { padding: 48px 16px; }
     }
 
-    /* Landscape phones */
     @media (max-width: 812px) and (orientation: landscape) {
       .hero { min-height: auto; padding: 40px 24px 32px; }
       .scroll-indicator { display: none; }
     }
 
-    /* High-DPI (retina) screens */
     @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
       .bg-grid {
-        background-size: 30px 30px; /* sharper grid on retina */
+        background-size: 30px 30px;
       }
     }
 
-    /* iPad Pro / large tablet */
     @media (min-width: 769px) and (max-width: 1024px) {
       .tools-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
       .features-grid { grid-template-columns: 1fr 1fr; }
       .guides-grid { grid-template-columns: 1fr 1fr; }
     }
 
-    /* Hover-capable devices only for card hover effects */
     @media (hover: none) {
       .tool-card:hover { transform: none; }
       .btn-primary:hover { transform: none; }
@@ -1883,7 +1840,6 @@
       .btn-cta-sm:hover { transform: none; }
     }
 
-    /* Very small phones (320px) */
     @media (max-width: 340px) {
       :root { --header-h: 58px; }
       .logo-text { font-size: 1rem; }
@@ -1892,9 +1848,6 @@
       .stat-value { font-size: 1.6rem; }
     }
 
-    /* =============================================
-       PRINT STYLES
-    ============================================= */
     @media print {
       .bg-orbs, .bg-grid, #particles-canvas, .floating-chip,
       .scroll-indicator, .hamburger, .mobile-nav, .btn-theme { display: none !important; }
@@ -1902,28 +1855,15 @@
       .header { position: static !important; }
     }
 
-    /* =============================================
-       CUSTOM SCROLLBAR
-    ============================================= */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg0); }
     ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
-    /* =============================================
-       SELECTION
-    ============================================= */
     ::selection { background: rgba(0,124,240,0.25); color: var(--text); }
 
-    /* =============================================
-       PERFORMANCE: CONTENT VISIBILITY
-    ============================================= */
     .cv-auto { content-visibility: auto; contain-intrinsic-size: 0 500px; }
 
-
-    /* =============================================
-       FINAL RESPONSIVE + PERFORMANCE REFINEMENTS
-    ============================================= */
     .hero,
     .stats-band,
     .cta-section,
@@ -1967,11 +1907,6 @@
       }
     }
 
-  
-
-    /* =============================================
-       2026 REFINEMENT LAYER
-    ============================================= */
     html { scroll-padding-top: calc(var(--header-h) + 18px); }
     section[id] { scroll-margin-top: calc(var(--header-h) + 18px); }
 
@@ -2172,7 +2107,7 @@
 
     .tools-grid {
       gap: 18px;
-      contain: layout style paint;
+      contain: layout style;
     }
     .tool-card {
       padding: 20px;
@@ -2201,22 +2136,34 @@
       height: 50px;
       border-radius: 16px;
       margin-bottom: 0;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 4px 14px rgba(0,0,0,0.18);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform var(--transition), box-shadow var(--transition);
+      font-size: 1.45rem;
+    }
+    .tool-card:hover .tool-card-icon {
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), 0 8px 22px rgba(0,0,0,0.24);
     }
     .tool-card-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 6px 10px;
+      padding: 5px 11px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--text2);
-      font-size: 0.72rem;
+      background: rgba(0,124,240,0.08);
+      border: 1px solid rgba(0,124,240,0.18);
+      color: var(--accent1);
+      font-size: 0.68rem;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       flex-shrink: 0;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .tool-card:hover .tool-card-pill {
+      background: rgba(0,124,240,0.14);
+      border-color: rgba(0,124,240,0.28);
     }
     .tool-card-name {
       font-size: 1rem;
@@ -2247,23 +2194,24 @@
       gap: 22px;
     }
     .guide-card {
-      padding: 24px 22px 22px 28px;
+      padding: 28px 26px;
       border-radius: 22px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.035));
-      border-color: rgba(255,255,255,0.08);
-      box-shadow: 0 16px 34px rgba(2,6,23,0.16);
+      background: linear-gradient(145deg, rgba(255,255,255,0.062), rgba(255,255,255,0.028));
+      border-color: rgba(255,255,255,0.09);
+      box-shadow: 0 8px 32px rgba(2,6,23,0.18), inset 0 1px 0 rgba(255,255,255,0.06);
     }
     .guide-card::before {
       content: '';
       position: absolute;
-      left: 0;
-      top: 14px;
-      bottom: 14px;
-      width: 8px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(0,124,240,0.95), rgba(121,40,202,0.75));
-      opacity: 0.9;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+      opacity: 0;
+      border-radius: 22px 22px 0 0;
+      transition: opacity var(--transition);
+    }
+    .guide-card:hover::before {
+      opacity: 0.7;
     }
     .guide-card::after {
       content: '';
@@ -2295,26 +2243,37 @@
       justify-content: center;
       border-radius: 16px;
       font-size: 1.4rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+      background: linear-gradient(135deg, rgba(0,124,240,0.18), rgba(121,40,202,0.14));
+      border: 1px solid rgba(0,124,240,0.22);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 6px 16px rgba(0,124,240,0.12);
+      color: var(--accent1);
+      transition: all var(--transition);
+    }
+    .guide-card:hover .guide-card-emoji {
+      background: linear-gradient(135deg, rgba(0,124,240,0.25), rgba(121,40,202,0.20));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 8px 20px rgba(0,124,240,0.20);
+      transform: scale(1.06);
     }
     .guide-card-badge {
       display: inline-flex;
       align-items: center;
-      padding: 6px 10px;
+      padding: 5px 12px;
       border-radius: 999px;
-      background: rgba(121,40,202,0.10);
-      border: 1px solid rgba(121,40,202,0.22);
-      color: #cfb6ff;
-      font-size: 0.72rem;
+      background: linear-gradient(135deg, rgba(0,124,240,0.14), rgba(121,40,202,0.10));
+      border: 1px solid rgba(0,124,240,0.22);
+      color: #8fdcff;
+      font-size: 0.68rem;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
     }
     .guide-card-category {
       margin-bottom: 10px;
-      color: #8fdcff;
+      color: var(--accent1);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
     .guide-card-title {
       font-size: 1rem;
@@ -2373,7 +2332,7 @@
     }
 
     .footer {
-      background: linear-gradient(180deg, rgba(10,15,30,0.96), rgba(3,7,18,1));
+      background: var(--bg1);
     }
     .footer-grid {
       gap: 38px;
@@ -2404,6 +2363,104 @@
     .footer-link:hover,
     .footer-bottom-link:hover {
       color: var(--text);
+    }
+
+    /* ===== LIGHT THEME FIXES (IMPROVED VISIBILITY) ===== */
+    [data-theme="light"] {
+      .hero::before {
+        background: radial-gradient(circle, rgba(0,124,240,0.08) 0%, rgba(121,40,202,0.05) 36%, rgba(248,250,252,0) 72%);
+      }
+      .hero::after {
+        background: linear-gradient(90deg, rgba(0,124,240,0), rgba(0,124,240,0.25), rgba(121,40,202,0.25), rgba(0,124,240,0));
+        opacity: 0.3;
+      }
+      .hero-badge {
+        background: rgba(0,124,240,0.1);
+        border-color: rgba(0,124,240,0.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 4px 12px rgba(0,0,0,0.05);
+        color: #0066cc;
+      }
+      .hero-sub {
+        color: #2c3e50;
+      }
+      .hero-trust {
+        background: rgba(255,255,255,0.8);
+        border-color: rgba(0,0,0,0.08);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      }
+      .trust-item {
+        color: #334155;
+      }
+      .floating-chip {
+        background: rgba(255,255,255,0.95);
+        border-color: rgba(0,0,0,0.1);
+        color: #1e293b;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      }
+      .section-sub {
+        color: #475569;
+      }
+      .tool-card {
+        background: rgba(255,255,255,0.9);
+        border-color: rgba(0,0,0,0.08);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+      }
+      .tool-card-desc {
+        color: #475569;
+      }
+      .guide-card {
+        background: rgba(255,255,255,0.9);
+        border-color: rgba(0,0,0,0.08);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+      }
+      .guide-card-desc {
+        color: #475569;
+      }
+      .footer-link,
+      .footer-bottom-link {
+        color: #4b5563;
+      }
+      .footer-link:hover,
+      .footer-bottom-link:hover {
+        color: #0f172a;
+      }
+      .guide-card-category {
+        color: #0b6bcb;
+      }
+      .tool-card-arrow {
+        color: #0b6bcb;
+      }
+      .btn-secondary {
+        background: rgba(255,255,255,0.9);
+        border-color: rgba(0,0,0,0.1);
+        color: #1e293b;
+      }
+      .btn-secondary:hover {
+        background: #ffffff;
+        border-color: var(--accent1);
+        color: var(--accent1);
+      }
+      .contact-email-link {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        color: var(--accent1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      }
+      .contact-email-link:hover {
+        background: #f1f5f9;
+        border-color: var(--accent1);
+        color: var(--accent1);
+      }
+      .footer-email {
+        background: #f1f5f9;
+        border-color: #e2e8f0;
+        color: #1e293b;
+      }
+      .footer-email:hover {
+        background: #e2e8f0;
+        border-color: var(--accent1);
+        color: var(--accent1);
+      }
     }
 
     @media (max-width: 768px) {
@@ -2461,10 +2518,8 @@
   </style>
 </head>
 <body>
-  <!-- Skip link -->
   <a class="skip-link" href="#tools">Skip to tools</a>
 
-  <!-- ===== ANIMATED BACKGROUND ===== -->
   <div class="bg-orbs" aria-hidden="true">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
@@ -2476,7 +2531,6 @@
 
   <div class="page-wrapper">
 
-    <!-- ===== HEADER ===== -->
     <header class="header" role="banner">
       <div class="header-inner">
         <a href="/" class="logo" aria-label="Tool Xeno – Home">
@@ -2502,7 +2556,6 @@
       </div>
     </header>
 
-    <!-- Mobile Nav -->
     <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" role="dialog" aria-modal="true">
       <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
       <a href="#tools" class="mobile-nav-link" onclick="closeMobileNav()">🛠 Tools Directory</a>
@@ -2510,14 +2563,12 @@
       <a href="#guides" class="mobile-nav-link" onclick="closeMobileNav()">📖 Guides</a>
       <a href="#faq" class="mobile-nav-link" onclick="closeMobileNav()">❓ FAQ</a>
       <a href="#contact" class="mobile-nav-link" onclick="closeMobileNav()">📬 Contact</a>
-      <a href="/cdn-cgi/l/email-protection#384c575754405d565778484a574c575616555d" class="mobile-nav-link">📧 <span class="__cf_email__" data-cfemail="295d464645514c474669595b465d464707444c">[email&#160;protected]</span></a>
+      <a href="/cdn-cgi/l/email-protection#e69289898a9e838889a6969489928988c88b83" class="mobile-nav-link">📧 <span class="__cf_email__" data-cfemail="b1c5dededdc9d4dfdef1c1c3dec5dedf9fdcd4">[email&#160;protected]</span></a>
     </nav>
 
     <main id="main">
 
-      <!-- ===== HERO ===== -->
       <section class="hero" aria-labelledby="hero-heading" itemscope itemtype="https://schema.org/WebPageElement">
-        <!-- Floating chips -->
         <div class="hero-visual" aria-hidden="true">
           <div class="floating-chip" style="top:18%;left:6%;--dur:7s;--rot:-3deg">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -2588,7 +2639,6 @@
         </div>
       </section>
 
-      <!-- ===== STATS ===== -->
       <div class="stats-band" aria-label="Key statistics">
         <div class="stats-inner" role="list">
           <div class="stat-item reveal" role="listitem">
@@ -2610,7 +2660,6 @@
         </div>
       </div>
 
-      <!-- ===== TOOLS SECTION ===== -->
       <section id="tools" aria-labelledby="tools-heading">
         <div class="section-inner">
           <div class="tools-header">
@@ -2619,7 +2668,6 @@
             <p class="section-sub">Search, filter, and launch the right tool fast — no signup, no clutter, no waiting.</p>
           </div>
 
-          <!-- Search -->
           <p class="sr-only" id="search-desc">Type a keyword to instantly filter all tools. Try &ldquo;PDF&rdquo;, &ldquo;image&rdquo;, or &ldquo;calculator&rdquo;.</p>
           <div class="search-wrap" role="search" aria-label="Search tools" aria-describedby="search-desc">
             <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -2637,28 +2685,24 @@
           </div>
           <p class="search-tip" id="search-tip" aria-live="polite"></p>
 
-          <!-- Category filters -->
           <div class="category-filters" role="group" aria-label="Filter tools by category" id="cat-filters">
             <button class="cat-btn active" data-cat="all" aria-pressed="true">All <span class="cat-count">45</span></button>
-            <button class="cat-btn" data-cat="beauty" aria-pressed="false">💄 Beauty <span class="cat-count">3</span></button>
-            <button class="cat-btn" data-cat="audio" aria-pressed="false">🎵 Audio <span class="cat-count">3</span></button>
-            <button class="cat-btn" data-cat="image" aria-pressed="false">🖼 Image <span class="cat-count">6</span></button>
-            <button class="cat-btn" data-cat="document" aria-pressed="false">📄 Document <span class="cat-count">6</span></button>
-            <button class="cat-btn" data-cat="calculator" aria-pressed="false">🧮 Calculator <span class="cat-count">6</span></button>
-            <button class="cat-btn" data-cat="text" aria-pressed="false">📝 Text <span class="cat-count">6</span></button>
-            <button class="cat-btn" data-cat="developer" aria-pressed="false">💻 Developer <span class="cat-count">6</span></button>
-            <button class="cat-btn" data-cat="color" aria-pressed="false">🎨 Color <span class="cat-count">6</span></button>
-            <button class="cat-btn" data-cat="seo" aria-pressed="false">📊 SEO <span class="cat-count">3</span></button>
+            <button class="cat-btn" data-cat="beauty" aria-pressed="false">Beauty <span class="cat-count">3</span></button>
+            <button class="cat-btn" data-cat="audio" aria-pressed="false">Audio <span class="cat-count">3</span></button>
+            <button class="cat-btn" data-cat="image" aria-pressed="false">Image <span class="cat-count">6</span></button>
+            <button class="cat-btn" data-cat="document" aria-pressed="false">Document <span class="cat-count">6</span></button>
+            <button class="cat-btn" data-cat="calculator" aria-pressed="false">Calculator <span class="cat-count">6</span></button>
+            <button class="cat-btn" data-cat="text" aria-pressed="false">Text <span class="cat-count">6</span></button>
+            <button class="cat-btn" data-cat="developer" aria-pressed="false">Developer <span class="cat-count">6</span></button>
+            <button class="cat-btn" data-cat="color" aria-pressed="false">Color <span class="cat-count">6</span></button>
+            <button class="cat-btn" data-cat="seo" aria-pressed="false">SEO <span class="cat-count">3</span></button>
           </div>
 
-          <!-- Tools grid -->
           <div class="tools-grid" id="tools-grid" role="list" aria-label="Tools directory" aria-live="polite">
-            <!-- Injected by JS -->
           </div>
         </div>
       </section>
 
-      <!-- ===== FEATURES ===== -->
       <section id="features" aria-labelledby="features-heading" class="cv-auto">
         <div class="section-inner">
           <div class="section-label" aria-hidden="true">⚡ Why Tool Xeno</div>
@@ -2703,7 +2747,6 @@
         </div>
       </section>
 
-      <!-- ===== HOW IT WORKS ===== -->
       <section id="how-it-works" aria-labelledby="how-heading" class="cv-auto">
         <div class="section-inner" style="text-align:center">
           <div class="section-label" aria-hidden="true">🚀 Quick Start</div>
@@ -2736,7 +2779,6 @@
         </div>
       </section>
 
-      <!-- ===== GUIDES ===== -->
       <section id="guides" aria-labelledby="guides-heading" class="cv-auto">
         <div class="section-inner">
           <div class="section-label" aria-hidden="true">📖 Learning Hub</div>
@@ -2744,12 +2786,10 @@
           <p class="section-sub">Clear, practical walkthroughs presented in a cleaner, easier-to-scan format.</p>
 
           <div class="guides-grid" id="guides-grid" aria-label="Tool guides">
-            <!-- Injected by JS -->
           </div>
         </div>
       </section>
 
-      <!-- ===== FAQ ===== -->
       <section id="faq" aria-labelledby="faq-heading" class="cv-auto">
         <div class="section-inner">
           <div class="faq-header">
@@ -2759,12 +2799,10 @@
           </div>
 
           <div class="faq-list" role="list" id="faq-list">
-            <!-- Injected by JS -->
           </div>
         </div>
       </section>
 
-      <!-- ===== CTA ===== -->
       <div class="cta-section" aria-labelledby="cta-heading">
         <div class="cta-inner">
           <div class="section-label" style="margin:0 auto 20px;display:inline-flex" aria-hidden="true">✨ Get Started Now</div>
@@ -2783,8 +2821,6 @@
         </div>
       </div>
 
-
-      <!-- ===== CONTACT / EMAIL SECTION ===== -->
       <section id="contact" aria-labelledby="contact-heading" class="contact-section cv-auto">
         <div class="contact-inner reveal">
           <div class="contact-icon" aria-hidden="true">✉️</div>
@@ -2794,12 +2830,12 @@
             Have a tool suggestion, found a bug, or just want to say hello?
             Drop us an email — we read every message and reply within 24 hours.
           </p>
-          <a href="/cdn-cgi/l/email-protection#ea9e858586928f8485aa9a98859e8584c4878f" class="contact-email-link" aria-label="Send email to toolxeno@proton.me">
+          <a href="/cdn-cgi/l/email-protection#92e6fdfdfeeaf7fcfdd2e2e0fde6fdfcbcfff7" class="contact-email-link" aria-label="Send email to toolxeno@proton.me">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <span><span class="__cf_email__" data-cfemail="2d59424241554843426d5d5f42594243034048">[email&#160;protected]</span></span>
+            <span><span class="__cf_email__" data-cfemail="196d767675617c777659696b766d767737747c">[email&#160;protected]</span></span>
           </a>
           <p class="contact-email-text">
-            Prefer email? Write to <a href="/cdn-cgi/l/email-protection#e89c878784908d8687a8989a879c8786c6858d"><span class="__cf_email__" data-cfemail="85f1eaeae9fde0ebeac5f5f7eaf1eaebabe8e0">[email&#160;protected]</span></a>
+            Prefer email? Write to <a href="/cdn-cgi/l/email-protection#9ce8f3f3f0e4f9f2f3dceceef3e8f3f2b2f1f9"><span class="__cf_email__" data-cfemail="53273c3c3f2b363d3c1323213c273c3d7d3e36">[email&#160;protected]</span></a>
           </p>
           <div class="contact-legal-links" style="margin:18px 0 2px;color:var(--muted);font-size:0.88rem">
             Quick links: <a href="https://toolxeno.com/privacy.html" style="color:var(--accent1);text-decoration:underline;text-underline-offset:3px">Privacy Policy</a> · <a href="https://toolxeno.com/terms.html" style="color:var(--accent3);text-decoration:underline;text-underline-offset:3px">Terms of Use</a>
@@ -2827,7 +2863,6 @@
 
     </main>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="footer" role="contentinfo">
       <div class="footer-grid">
         <div class="footer-brand">
@@ -2836,11 +2871,11 @@
             <span class="logo-text">Tool Xeno</span>
           </a>
           <p>Fast, privacy-first tools for PDFs, images, text, code, and more — designed to feel polished, lightweight, and effortless on every device.</p>
-          <a href="/cdn-cgi/l/email-protection#a3d7cccccfdbc6cdcce3d3d1ccd7cccd8dcec6" class="footer-email" aria-label="Email toolxeno@proton.me"><span class="__cf_email__" data-cfemail="a2d6cdcdcedac7cccde2d2d0cdd6cdcc8ccfc7">[email&#160;protected]</span></a>
+          <a href="/cdn-cgi/l/email-protection#bbcfd4d4d7c3ded5d4fbcbc9d4cfd4d595d6de" class="footer-email" aria-label="Email toolxeno@proton.me"><span class="__cf_email__" data-cfemail="dfabb0b0b3a7bab1b09fafadb0abb0b1f1b2ba">[email&#160;protected]</span></a>
           <div class="footer-social" aria-label="Social links">
             <a href="#tools" class="social-btn" aria-label="Browse tools">🛠</a>
             <a href="#guides" class="social-btn" aria-label="Read guides">📖</a>
-            <a href="/cdn-cgi/l/email-protection#f2869d9d9e8a979c9db282809d869d9cdc9f97" class="social-btn" aria-label="Email us at toolxeno@proton.me">✉</a>
+            <a href="/cdn-cgi/l/email-protection#f3879c9c9f8b969d9cb383819c879c9ddd9e96" class="social-btn" aria-label="Email us at toolxeno@proton.me">✉</a>
           </div>
         </div>
 
@@ -2885,14 +2920,13 @@
           <a href="https://toolxeno.com/terms.html" class="footer-bottom-link">Terms</a>
           <a href="https://toolxeno.com/privacy.html" class="footer-bottom-link" rel="privacy-policy">Privacy</a>
           <a href="https://toolxeno.com/sitemap.xml" class="footer-bottom-link">Sitemap</a>
-          <a href="/cdn-cgi/l/email-protection#2f5b404043574a41406f5f5d405b404101424a" class="footer-bottom-link">Contact</a>
+          <a href="/cdn-cgi/l/email-protection#31455e5e5d49545f5e7141435e455e5f1f5c54" class="footer-bottom-link">Contact</a>
         </div>
       </div>
     </footer>
 
-  </div><!-- .page-wrapper -->
+  </div>
 
-  <!-- ===== JAVASCRIPT ===== -->
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     /* ===========================================
        DATA
@@ -3014,13 +3048,13 @@
         </div>`;
         return;
       }
-      grid.innerHTML = tools.map(t => `
-        <a href="${t.href}" class="tool-card cat-${t.cat}" role="listitem" aria-label="${t.title}: ${t.desc}" itemprop="url" itemscope itemtype="https://schema.org/SoftwareApplication">
+      grid.innerHTML = tools.map((t, i) => `
+        <a href="${t.href}" class="tool-card cat-${t.cat}" role="listitem" aria-label="${t.title}: ${t.desc}" style="animation-delay:${Math.min(i * 0.045, 0.5)}s" itemprop="url" itemscope itemtype="https://schema.org/SoftwareApplication">
           <meta itemprop="name" content="${t.title}">
           <meta itemprop="description" content="${t.desc}">
           <meta itemprop="applicationCategory" content="UtilitiesApplication">
           <div class="tool-card-top">
-            <div class="tool-card-icon" aria-hidden="true" style="font-size:1.28rem">${t.icon}</div>
+            <div class="tool-card-icon" aria-hidden="true">${t.icon}</div>
             <span class="tool-card-pill">${getCatLabel(t.cat)}</span>
           </div>
           <div class="tool-card-name" itemprop="name">${t.title}</div>
@@ -3036,11 +3070,13 @@
     /* ===========================================
        RENDER GUIDES
     =========================================== */
+    const BOOK_SVG = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`;
+
     function renderGuides() {
-      document.getElementById('guides-grid').innerHTML = GUIDES.map(g => `
-        <a href="${g.href}" class="guide-card" aria-label="${g.title} – ${g.desc}" title="${g.title}" rel="bookmark">
+      document.getElementById('guides-grid').innerHTML = GUIDES.map((g, i) => `
+        <a href="${g.href}" class="guide-card reveal" style="animation-delay:${i * 0.08}s" aria-label="${g.title} – ${g.desc}" title="${g.title}" rel="bookmark">
           <div class="guide-card-top">
-            <span class="guide-card-emoji" aria-hidden="true">${g.emoji}</span>
+            <span class="guide-card-emoji" aria-hidden="true">${BOOK_SVG}</span>
             <span class="guide-card-badge">Guide</span>
           </div>
           <div class="guide-card-category">${g.cat}</div>
@@ -3052,6 +3088,8 @@
           </div>
         </a>
       `).join('');
+      // Observe newly added guide cards for reveal animation
+      document.querySelectorAll('#guides-grid .reveal').forEach(el => revealObserver.observe(el));
     }
 
     /* ===========================================
@@ -3152,10 +3190,8 @@
         e.preventDefault();
         searchInput.focus();
         searchInput.select();
-        // Scroll to search
         searchInput.closest('.search-wrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-      // Esc to clear
       if (e.key === 'Escape' && document.activeElement === searchInput) {
         searchInput.blur();
       }
@@ -3188,7 +3224,6 @@
       header.style.background = '';
     });
 
-    // Restore saved theme
     const savedTheme = localStorage.getItem('tx-theme');
     if (savedTheme === 'light') {
       isDark = false;
@@ -3228,7 +3263,7 @@
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.10, rootMargin: '0px 0px -30px 0px' });
 
     function initReveal() {
       document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
@@ -3261,98 +3296,166 @@
     }
 
     /* ===========================================
-       PARTICLES CANVAS
+       PREMIUM PARTICLES CANVAS — Advanced & Smooth
     =========================================== */
     function initParticles() {
       const canvas = document.getElementById('particles-canvas');
+      if (!canvas) return;
       const ctx = canvas.getContext('2d', { alpha: true });
+      if (!ctx) return;
       let particles = [];
       let animId;
+      let mouseX = -9999, mouseY = -9999;
+      const COLORS = ['#007cf0','#00dfd8','#7928ca','#ff0080','#ffffff'];
+      const CONNECT_DIST = 140;
+      const CONNECT_DIST_SQ = CONNECT_DIST * CONNECT_DIST;
+      const MOUSE_DIST = 160;
+      const MOUSE_DIST_SQ = MOUSE_DIST * MOUSE_DIST;
 
       function resize() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       }
 
+      function getCount() {
+        const w = window.innerWidth;
+        if (w < 480) return 18;
+        if (w < 768) return 32;
+        if (w < 1200) return 55;
+        return 80;
+      }
+
       class Particle {
-        constructor() { this.reset(); }
-        reset() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 1.5 + 0.5;
-          this.speedX = (Math.random() - 0.5) * 0.3;
-          this.speedY = (Math.random() - 0.5) * 0.3;
-          this.opacity = Math.random() * 0.4 + 0.1;
-          const colors = ['#007cf0','#00dfd8','#7928ca','#ffffff'];
-          this.color = colors[Math.floor(Math.random() * colors.length)];
+        constructor() { this.reset(true); }
+        reset(initial) {
+          this.x = initial ? Math.random() * canvas.width : (Math.random() > 0.5 ? Math.random() * canvas.width : (Math.random() > 0.5 ? -5 : canvas.width + 5));
+          this.y = initial ? Math.random() * canvas.height : (Math.random() > 0.5 ? Math.random() * canvas.height : (Math.random() > 0.5 ? -5 : canvas.height + 5));
+          this.size = Math.random() * 2.2 + 0.4;
+          const speed = (Math.random() * 0.45 + 0.08) * (1 / (this.size * 0.5 + 0.5));
+          const angle = Math.random() * Math.PI * 2;
+          this.speedX = Math.cos(angle) * speed;
+          this.speedY = Math.sin(angle) * speed;
+          this.baseOpacity = Math.random() * 0.55 + 0.12;
+          this.opacity = this.baseOpacity;
+          this.pulseSpeed = Math.random() * 0.008 + 0.004;
+          this.pulseOffset = Math.random() * Math.PI * 2;
+          this.colorIdx = Math.floor(Math.random() * COLORS.length);
+          this.color = COLORS[this.colorIdx];
+          this.glowing = Math.random() < 0.22;
+          this.life = 0;
         }
-        update() {
+        update(t) {
+          this.life++;
           this.x += this.speedX;
           this.y += this.speedY;
-          if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+          this.opacity = this.baseOpacity * (0.75 + 0.25 * Math.sin(t * this.pulseSpeed + this.pulseOffset));
+          // Mouse repulsion (gentle)
+          const mdx = this.x - mouseX;
+          const mdy = this.y - mouseY;
+          const mDistSq = mdx * mdx + mdy * mdy;
+          if (mDistSq < MOUSE_DIST_SQ && mDistSq > 0) {
+            const mDist = Math.sqrt(mDistSq);
+            const force = (1 - mDist / MOUSE_DIST) * 0.6;
+            this.x += (mdx / mDist) * force;
+            this.y += (mdy / mDist) * force;
+          }
+          if (this.x < -10 || this.x > canvas.width + 10 || this.y < -10 || this.y > canvas.height + 10) this.reset(false);
         }
         draw() {
+          ctx.globalAlpha = this.opacity;
+          if (this.glowing) {
+            const grd = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 3.5);
+            grd.addColorStop(0, this.color);
+            grd.addColorStop(0.4, this.color + '88');
+            grd.addColorStop(1, this.color + '00');
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 3.5, 0, Math.PI * 2);
+            ctx.fillStyle = grd;
+            ctx.fill();
+          }
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
           ctx.fillStyle = this.color;
-          ctx.globalAlpha = this.opacity;
           ctx.fill();
         }
       }
 
       function init() {
         resize();
-        const count = window.innerWidth < 480 ? 8 : window.innerWidth < 768 ? 14 : 26;
-      particles = Array.from({ length: count }, () => new Particle());
+        particles = Array.from({ length: getCount() }, () => new Particle());
       }
 
+      let frameCount = 0;
       function animate() {
+        animId = requestAnimationFrame(animate);
+        frameCount++;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.globalAlpha = 1;
 
         // Draw connections
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
+        const len = particles.length;
+        for (let i = 0; i < len; i++) {
+          for (let j = i + 1; j < len; j++) {
             const dx = particles[i].x - particles[j].x;
             const dy = particles[i].y - particles[j].y;
             const distSq = dx * dx + dy * dy;
-            if (distSq < 9216) {
+            if (distSq < CONNECT_DIST_SQ) {
+              const alpha = (1 - distSq / CONNECT_DIST_SQ) * 0.12;
+              ctx.globalAlpha = alpha;
+              ctx.strokeStyle = '#007cf0';
+              ctx.lineWidth = 0.6;
               ctx.beginPath();
               ctx.moveTo(particles[i].x, particles[i].y);
               ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.strokeStyle = '#007cf0';
-              ctx.globalAlpha = (1 - distSq / 9216) * 0.06;
-              ctx.lineWidth = 0.5;
               ctx.stroke();
             }
           }
         }
 
-        particles.forEach(p => { p.update(); p.draw(); });
-        animId = requestAnimationFrame(animate);
+        // Draw and update particles
+        for (let i = 0; i < len; i++) {
+          particles[i].update(frameCount);
+          particles[i].draw();
+        }
+        ctx.globalAlpha = 1;
       }
 
       init();
-      if (reducedMotionQuery.matches || isReducedData || isLowPowerDevice) {
+      if (reducedMotionQuery.matches || isReducedData) {
         canvas.style.display = 'none';
         return;
       }
       animate();
-      // Debounced resize handler for performance
+
+      // Mouse tracking
+      window.addEventListener('mousemove', e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      }, { passive: true });
+      window.addEventListener('mouseleave', () => { mouseX = -9999; mouseY = -9999; }, { passive: true });
+
+      // Touch tracking
+      window.addEventListener('touchmove', e => {
+        if (e.touches.length > 0) {
+          mouseX = e.touches[0].clientX;
+          mouseY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
       let resizeTimer;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
           resize();
-          // Re-init particles on significant resize
-          particles = Array.from({ length: window.innerWidth < 480 ? 8 : window.innerWidth < 768 ? 14 : 26 }, () => new Particle());
+          const newCount = getCount();
+          while (particles.length < newCount) particles.push(new Particle());
+          while (particles.length > newCount) particles.pop();
         }, 200);
       }, { passive: true });
 
-      // Pause when tab hidden (performance)
       document.addEventListener('visibilitychange', () => {
-        if (document.hidden) cancelAnimationFrame(animId);
-        else animate();
+        if (document.hidden) { cancelAnimationFrame(animId); animId = null; }
+        else if (!animId) animate();
       });
     }
 
@@ -3389,10 +3492,8 @@
       initReveal();
       initSectionNav();
       updateHeaderState();
-      // Dynamic footer year
       const yr = document.getElementById('footer-year');
       if (yr) yr.textContent = '© ' + new Date().getFullYear();
-      // Defer heavy visual effects using requestIdleCallback for better LCP/FID
       if (!(reducedMotionQuery.matches || isReducedData || isLowPowerDevice)) {
         if ('requestIdleCallback' in window) {
           requestIdleCallback(() => initParticles(), { timeout: 2000 });
