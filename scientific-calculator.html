@@ -1,1056 +1,816 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US" dir="ltr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="theme-color" content="#007cf0">
+  <meta name="color-scheme" content="dark light">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="application-name" content="Tool Xeno">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+  <title>Scientific Calculator – Free Online Calculator with 50+ Functions | Tool Xeno</title>
+  <meta name="description" content="Free professional scientific calculator online. 50+ functions: trigonometry, logarithms, exponents, roots, combinatorics. DEG/RAD/GRAD modes. Works offline, 100% private.">
+  <meta name="keywords" content="scientific calculator, online calculator, free calculator, trigonometry calculator, logarithm calculator, math calculator, engineering calculator">
+  <link rel="canonical" href="https://toolxeno.com/scientific-calculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Scientific Calculator – Free Online Calculator | Tool Xeno">
+  <meta property="og:description" content="Professional scientific calculator with 50+ functions. Trig, log, exp, roots, combinatorics. Free, private, works offline.">
+  <meta property="og:site_name" content="Tool Xeno">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Scientific Calculator – Tool Xeno">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Scientific Calculator","url":"https://toolxeno.com/scientific-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Professional scientific calculator with 50+ functions, DEG/RAD/GRAD modes, and memory functions."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://toolxeno.com/"},{"@type":"ListItem","position":2,"name":"Scientific Calculator","item":"https://toolxeno.com/scientific-calculator.html"}]}]}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg0:#030712;--bg1:#0a0f1e;--bg2:#0f172a;--bg3:#1e293b;
+      --card:rgba(255,255,255,0.04);--card-hover:rgba(255,255,255,0.08);
+      --card-solid:#1e293b;--glass:rgba(255,255,255,0.03);
+      --text:#f1f5f9;--text2:#cbd5e1;--muted:#94a3b8;
+      --line:rgba(255,255,255,0.1);--line-strong:rgba(255,255,255,0.2);
+      --accent1:#007cf0;--accent2:#00dfd8;--accent3:#7928ca;--accent4:#ff0080;
+      --shadow:0 24px 60px rgba(0,0,0,0.6);--shadow-sm:0 8px 24px rgba(0,0,0,0.3);
+      --radius:20px;--radius-sm:12px;--radius-xs:8px;
+      --max:1240px;
+      --ring:0 0 0 3px rgba(0,124,240,0.4);
+      --grad:linear-gradient(135deg,var(--accent1),var(--accent2));
+      --grad-purple:linear-gradient(135deg,var(--accent3),var(--accent4));
+      --grad-text:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));
+      --font:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+      --mono:'JetBrains Mono',monospace;
+      --transition:0.25s cubic-bezier(0.4,0,0.2,1);
+      --header-h:72px;
+    }
+    [data-theme="light"]{
+      --bg0:#f8fafc;--bg1:#f1f5f9;--bg2:#e2e8f0;--bg3:#cbd5e1;
+      --card:rgba(255,255,255,0.9);--card-hover:rgba(255,255,255,1);
+      --card-solid:#ffffff;--glass:rgba(255,255,255,0.8);
+      --text:#0f172a;--text2:#334155;--muted:#64748b;
+      --line:rgba(0,0,0,0.1);--line-strong:rgba(0,0,0,0.15);
+      --shadow:0 24px 60px rgba(0,0,0,0.1);--shadow-sm:0 8px 24px rgba(0,0,0,0.06);
+    }
+    html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
+    body{font-family:var(--font);background:var(--bg0);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    button{font-family:var(--font);cursor:pointer;border:none;background:none}
+    ul{list-style:none}
 
-  gtag('config', 'G-Y4JDC5DCBV');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Scientific Calculator - Tool Xeno</title>
-    <meta name="description" content="Professional scientific calculator with advanced mathematical functions, memory operations, and modern UI design - supports trigonometry, logarithms, and equation history.">
+    /* ===== BACKGROUND ===== */
+    .bg-orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:0.15;will-change:transform}
+    .orb-1{width:600px;height:600px;background:var(--accent1);top:-200px;left:-200px;animation:of1 20s linear infinite}
+    .orb-2{width:500px;height:500px;background:var(--accent3);top:30%;right:-150px;animation:of2 25s linear infinite}
+    .orb-3{width:400px;height:400px;background:var(--accent2);bottom:-100px;left:30%;animation:of3 18s linear infinite}
+    .orb-4{width:300px;height:300px;background:var(--accent4);top:60%;left:10%;animation:of4 22s linear infinite}
+    @keyframes of1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,40px) scale(1.1)}66%{transform:translate(-40px,60px) scale(.95)}}
+    @keyframes of2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-80px,50px) scale(1.05)}66%{transform:translate(40px,-60px) scale(1.1)}}
+    @keyframes of3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(70px,-40px) scale(1.15)}}
+    @keyframes of4{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-80px) scale(1.1)}}
+    .bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%)}
+    .page-wrapper{position:relative;z-index:1}
 
-   <!-- ✅ Tool Xeno Favicons -->
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="manifest" href="/site.webmanifest" />
+    /* ===== HEADER ===== */
+    .header{position:sticky;top:0;z-index:1000;height:var(--header-h);display:flex;align-items:center;backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);background:rgba(3,7,18,.85);border-bottom:1px solid var(--line);transition:background var(--transition)}
+    [data-theme="light"] .header{background:rgba(248,250,252,.90)}
+    .header-inner{max-width:var(--max);width:100%;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:24px}
+    .logo{display:flex;align-items:center;gap:10px;font-size:1.2rem;font-weight:800;letter-spacing:-.5px;flex-shrink:0}
+    .logo-icon{width:36px;height:36px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:900;color:#fff;box-shadow:0 4px 14px rgba(0,124,240,.4)}
+    .logo-text{background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .nav-primary{display:flex;align-items:center;gap:4px;margin-left:auto}
+    .nav-link{padding:7px 13px;font-size:.875rem;font-weight:500;color:var(--text2);border-radius:var(--radius-xs);transition:color var(--transition),background var(--transition)}
+    .nav-link:hover{color:var(--text);background:var(--card)}
+    .header-actions{display:flex;align-items:center;gap:10px;margin-left:12px}
+    .btn-theme{padding:8px 20px;font-size:.85rem;font-weight:600;background:var(--card);backdrop-filter:blur(8px);border-radius:40px;color:var(--text2);border:1px solid var(--line);transition:all .3s;cursor:pointer}
+    .btn-theme:hover{color:var(--text);border-color:var(--accent1);background:rgba(0,124,240,.1)}
+    .hamburger{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer;margin-left:auto}
+    .hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all var(--transition);display:block}
+    .mobile-nav{display:none;position:fixed;inset:0;z-index:2000;background:rgba(3,7,18,.98);backdrop-filter:blur(24px);flex-direction:column;align-items:center;justify-content:center;gap:8px}
+    .mobile-nav.open{display:flex}
+    .mobile-nav-link{font-size:1.4rem;font-weight:700;color:var(--text2);padding:12px 32px;border-radius:var(--radius-sm);transition:all var(--transition)}
+    .mobile-nav-link:hover{color:var(--accent1);background:rgba(0,124,240,.1)}
+    .mobile-close{position:absolute;top:24px;right:24px;font-size:1.5rem;color:var(--muted);padding:8px;border-radius:8px;transition:color var(--transition);cursor:pointer}
+    .mobile-close:hover{color:var(--text)}
 
-    <meta name="google-adsense-account" content="ca-pub-2713998296337545">
+    /* ===== HERO ===== */
+    .hero{padding:60px 24px 40px;text-align:center}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(0,124,240,.15);border:1px solid rgba(0,124,240,.3);border-radius:100px;font-size:.78rem;font-weight:600;color:var(--accent1);letter-spacing:.5px;text-transform:uppercase;margin-bottom:20px}
+    .hero-badge-dot{width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+    .hero-h1{font-size:clamp(1.8rem,5vw,3.5rem);font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:16px;max-width:700px;margin-left:auto;margin-right:auto}
+    .hero-h1 .grad-text{background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:clamp(.9rem,1.5vw,1rem);color:var(--text2);max-width:560px;margin:0 auto 24px;line-height:1.6}
+    .hero-trust{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 16px}
+    .trust-item{display:flex;align-items:center;gap:5px;font-size:.8rem;font-weight:500;color:var(--muted)}
+    .trust-dot{color:var(--accent2)}
 
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    /* ===== TOOL SECTION ===== */
+    .tool-section{padding:20px 24px 60px;max-width:1400px;margin:0 auto}
+    .tool-container{background:var(--card-solid);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;max-width:420px;margin:0 auto}
+
+    /* ===== CALCULATOR ===== */
+    .calc-wrap{padding:20px;display:flex;flex-direction:column;gap:0}
     
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            --warning-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            
-            --dark-bg: #0a0a0a;
-            --dark-surface: #1a1a1a;
-            --dark-surface-elevated: #252525;
-            --dark-text: #ffffff;
-            --dark-text-secondary: #a0a0a0;
-            --dark-border: #333333;
-            
-            --light-bg: #f8fafc;
-            --light-surface: #ffffff;
-            --light-surface-elevated: #f1f5f9;
-            --light-text: #1e293b;
-            --light-text-secondary: #64748b;
-            --light-border: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            line-height: 1.6;
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-            min-height: 100vh;
-        }
-        
-        body.light-theme { 
-            background-color: var(--light-bg); 
-            color: var(--light-text); 
-        }
+    /* Mode Bar */
+    .mode-bar{display:flex;align-items:center;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+    .mode-btn{padding:6px 14px;font-size:.72rem;font-weight:700;border-radius:8px;transition:all .15s;cursor:pointer;letter-spacing:.3px;border:1px solid var(--line);color:var(--muted);background:var(--glass)}
+    .mode-btn:hover{color:var(--text);background:var(--card-hover)}
+    .mode-btn.active{color:#fff;background:var(--accent1);border-color:var(--accent1)}
+    .mode-btn.active-deg{color:#60a5fa;background:rgba(0,124,240,.2);border-color:rgba(0,124,240,.4)}
+    .mode-btn.active-inv{color:#c4b5fd;background:rgba(121,40,202,.2);border-color:rgba(121,40,202,.4)}
+    .mode-btn.active-mem{color:var(--accent2);background:rgba(0,223,216,.15);border-color:rgba(0,223,216,.3)}
 
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.05;
-            background: radial-gradient(circle, #667eea 0%, transparent 70%);
-        }
-        
-        body.light-theme .particle { 
-            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(100vh) rotate(0deg); } 
-            100% { transform: translateY(-100px) rotate(360deg); } 
-        }
-        
-        .header-glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.35s ease, border-color 0.35s ease;
-        }
-        
-        body.light-theme .header-glass { 
-            background: rgba(255, 255, 255, 0.9); 
-            border-bottom-color: rgba(0, 0, 0, 0.1); 
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--dark-surface);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.light-theme .theme-toggle { 
-            background: var(--light-surface-elevated); 
-            border-color: var(--light-border); 
-        }
-        
-        body.light-theme .theme-toggle::after { 
-            transform: translateX(28px); 
-            background: var(--secondary-gradient); 
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
-        
-        body.light-theme .glass-card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-color: rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
-        }
+    /* Display */
+    .calc-display{background:var(--bg1);border:1px solid var(--line);border-radius:var(--radius-sm);padding:18px 20px 14px;margin-bottom:14px;min-height:100px;display:flex;flex-direction:column;justify-content:flex-end}
+    .display-expr{font-family:var(--mono);font-size:.82rem;color:var(--muted);text-align:right;min-height:22px;word-break:break-all;white-space:nowrap;overflow-x:auto;scrollbar-width:none;line-height:1.4}
+    .display-expr::-webkit-scrollbar{display:none}
+    .display-result{font-family:var(--mono);font-size:2.4rem;font-weight:700;text-align:right;color:var(--text);line-height:1.2;letter-spacing:-1px;word-break:break-all;white-space:nowrap;overflow-x:auto;scrollbar-width:none;transition:font-size .1s,color .15s}
+    .display-result::-webkit-scrollbar{display:none}
+    .display-result.preview{color:var(--muted);font-size:1.6rem}
+    .display-status{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+    .paren-ind{font-size:.65rem;color:var(--muted);opacity:.7;font-weight:600}
 
-        .display {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            min-height: 120px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    /* Scientific Panel */
+    .sci-panel{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(0.4,0,0.2,1),opacity .25s,margin .25s;opacity:0;margin-bottom:0}
+    .sci-panel.open{max-height:500px;opacity:1;margin-bottom:10px}
+    .sci-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+    .sci-section{margin-bottom:8px}
+    .sci-section:last-child{margin-bottom:0}
+    .sci-label{font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);opacity:.5;margin-bottom:4px;padding-left:4px}
 
-        body.light-theme .display {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
+    /* Button base */
+    .cb{display:flex;align-items:center;justify-content:center;font-weight:600;border:none;cursor:pointer;transition:background .08s,transform .08s,box-shadow .15s;border-radius:var(--radius-xs);position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent;user-select:none;touch-action:manipulation}
+    .cb:active{transform:scale(.93)}
+    .cb:focus-visible{outline:none;box-shadow:var(--ring)}
+    .cb .inv-label{display:none}
+    body.inv-mode .cb .inv-label{display:inline}
+    body.inv-mode .cb .pri-label{display:none}
 
-        .display-main {
-            font-size: 2.5rem;
-            font-weight: 600;
-            text-align: right;
-            word-break: break-all;
-            min-height: 60px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: flex-end;
-        }
+    /* Scientific buttons */
+    .cb-sci{height:38px;font-size:.7rem;color:var(--text2);background:var(--bg2);border:1px solid var(--line);letter-spacing:-.2px}
+    .cb-sci:hover{background:var(--bg3);color:var(--text);border-color:var(--line-strong)}
+    .cb-sci.inv-on{color:var(--accent3)}
 
-        .display-secondary {
-            font-size: 1rem;
-            opacity: 0.7;
-            text-align: right;
-            margin-bottom: 5px;
-            min-height: 20px;
-        }
+    /* Number buttons */
+    .cb-num{height:52px;font-size:1.15rem;color:var(--text);background:var(--bg2);border:1px solid var(--line);font-family:var(--mono);font-weight:600}
+    .cb-num:hover{background:var(--bg3);border-color:var(--line-strong)}
 
-        .calc-button {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: var(--dark-text);
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 60px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
+    /* Operator buttons */
+    .cb-op{height:52px;font-size:1.2rem;color:#fff;background:var(--accent1);border:1px solid transparent;font-weight:700}
+    .cb-op:hover{background:#0069cc;box-shadow:0 4px 12px rgba(0,124,240,.3)}
 
-        .calc-button:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
-        }
+    /* Equals */
+    .cb-eq{height:52px;font-size:1.25rem;color:#fff;background:var(--grad);border:none;font-weight:800}
+    .cb-eq:hover{box-shadow:0 4px 16px rgba(0,124,240,.4);transform:translateY(-1px)}
+    .cb-eq:active{transform:scale(.93) translateY(0)}
 
-        .calc-button:active {
-            transform: translateY(0);
-        }
+    /* Function buttons */
+    .cb-fn{height:52px;font-size:.92rem;color:var(--text2);background:var(--bg2);border:1px solid var(--line);font-weight:600}
+    .cb-fn:hover{background:var(--bg3);color:var(--text);border-color:var(--line-strong)}
 
-        .calc-button.operator {
-            background: var(--primary-gradient);
-            color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
+    /* Clear button */
+    .cb-cl{height:52px;font-size:.88rem;color:#ef4444;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);font-weight:700}
+    .cb-cl:hover{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.35)}
 
-        .calc-button.operator:hover {
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
+    /* Memory buttons */
+    .cb-mem{height:30px;font-size:.62rem;font-weight:700;color:var(--accent2);background:rgba(0,223,216,.06);border:1px solid rgba(0,223,216,.15);letter-spacing:.3px;border-radius:6px}
+    .cb-mem:hover{background:rgba(0,223,216,.12);border-color:rgba(0,223,216,.3)}
 
-        .calc-button.equals {
-            background: var(--success-gradient);
-            color: white;
-            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
-        }
+    /* Number Grid */
+    .num-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:6px}
 
-        .calc-button.equals:hover {
-            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
-        }
+    /* Memory Grid */
+    .mem-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:8px}
 
-        .calc-button.clear {
-            background: var(--warning-gradient);
-            color: white;
-            box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
-        }
+    /* History */
+    .hist-toggle{width:100%;display:flex;align-items:center;justify-content:center;gap:5px;height:30px;font-size:.65rem;font-weight:600;color:var(--muted);background:var(--glass);border:1px solid var(--line);border-radius:8px;transition:all .15s;margin-top:6px;cursor:pointer}
+    .hist-toggle:hover{color:var(--text);background:var(--card-hover)}
+    .hist-toggle .arr{transition:transform .2s;display:inline-block}
+    .hist-toggle.open .arr{transform:rotate(180deg)}
+    .hist-panel{max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .hist-panel.open{max-height:180px}
+    .hist-list{max-height:180px;overflow-y:auto;scrollbar-width:none;margin-top:4px}
+    .hist-list::-webkit-scrollbar{display:none}
+    .hist-item{display:flex;align-items:center;padding:8px 12px;gap:8px;cursor:pointer;border-bottom:1px solid var(--line);transition:background .08s;border-radius:6px}
+    .hist-item:hover{background:var(--glass)}
+    .hist-expr{flex:1;font-size:.7rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--mono)}
+    .hist-res{font-size:.82rem;font-weight:700;color:var(--text);white-space:nowrap;font-family:var(--mono)}
+    .hist-copy{font-size:.6rem;color:var(--muted);padding:3px 7px;border-radius:4px;background:var(--glass);border:1px solid var(--line);cursor:pointer;flex-shrink:0;transition:all .1s}
+    .hist-copy:hover{color:var(--text);background:var(--card-hover)}
+    .hist-empty{text-align:center;padding:20px;font-size:.75rem;color:var(--muted)}
 
-        .calc-button.clear:hover {
-            box-shadow: 0 8px 25px rgba(255, 154, 158, 0.4);
-        }
+    /* Toast */
+    .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--card-solid);color:var(--text);padding:8px 18px;border-radius:10px;border:1px solid var(--line);font-size:.78rem;font-weight:600;z-index:9999;opacity:0;transition:all .25s;pointer-events:none}
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 
-        .calc-button.function {
-            background: var(--accent-gradient);
-            color: white;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
-        }
+    /* ===== FEATURES ===== */
+    .features-section,.faq-section{padding:60px 24px}
+    .section-inner{max-width:var(--max);margin:0 auto}
+    .section-label{display:inline-block;margin-bottom:10px;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent1)}
+    .section-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-1px;line-height:1.15;margin-bottom:12px}
+    .section-sub{font-size:.95rem;color:var(--text2);max-width:500px;line-height:1.6}
+    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+    @media(max-width:900px){.features-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.features-grid{grid-template-columns:1fr}}
+    .feature-card{background:var(--card-solid);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;transition:all var(--transition)}
+    .feature-card:hover{transform:translateY(-3px);border-color:rgba(0,124,240,.3);box-shadow:var(--shadow-sm)}
+    .feature-icon{font-size:2rem;margin-bottom:12px}
+    .feature-title{font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--text)}
+    .feature-desc{font-size:.85rem;color:var(--text2);line-height:1.6}
 
-        .calc-button.function:hover {
-            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
-        }
+    /* ===== FAQ ===== */
+    .faq-list{display:flex;flex-direction:column;gap:10px;max-width:700px;margin:36px auto 0}
+    .faq-item{background:var(--card-solid);border:1px solid var(--line);border-radius:var(--radius-xs);overflow:hidden}
+    .faq-q{width:100%;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.9rem;font-weight:600;color:var(--text);background:none;text-align:left;cursor:pointer;transition:color var(--transition)}
+    .faq-q:hover{color:var(--accent1)}
+    .faq-q-icon{width:22px;height:22px;background:var(--glass);border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:all var(--transition)}
+    .faq-item.open .faq-q-icon{transform:rotate(45deg);background:rgba(0,124,240,.15);border-color:var(--accent1);color:var(--accent1)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .faq-a-inner{padding:0 20px 16px;font-size:.85rem;color:var(--text2);line-height:1.7}
+    .faq-item.open .faq-a{max-height:300px}
+    .section-divider{height:1px;background:var(--line);max-width:var(--max);margin:0 auto}
 
-        body.light-theme .calc-button {
-            background: rgba(0, 0, 0, 0.05);
-            color: var(--light-text);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
+    /* ===== FOOTER ===== */
+    .footer{border-top:1px solid var(--line);padding:36px 24px 24px;background:rgba(3,7,18,.6)}
+    [data-theme="light"] .footer{background:rgba(241,245,249,.8)}
+    .footer-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+    .footer-brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .footer-brand-icon{width:32px;height:32px;background:var(--grad);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:900;color:#fff}
+    .footer-brand-name{background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .footer-links{display:flex;gap:20px;flex-wrap:wrap}
+    .footer-link{font-size:.85rem;color:var(--muted);transition:color var(--transition)}
+    .footer-link:hover{color:var(--text)}
+    .footer-back-btn{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:600;color:var(--accent1);padding:8px 16px;border-radius:var(--radius-xs);background:rgba(0,124,240,.1);border:1px solid rgba(0,124,240,.2);transition:all var(--transition)}
+    .footer-back-btn:hover{background:rgba(0,124,240,.15)}
+    .footer-copy{font-size:.78rem;color:var(--muted);width:100%;text-align:center;padding-top:20px;border-top:1px solid var(--line);margin-top:12px}
 
-        body.light-theme .calc-button:hover {
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        .button-grid {
-            display: grid;
-            gap: 15px;
-            grid-template-columns: repeat(5, 1fr);
-        }
-
-        .history-panel {
-            max-height: 300px;
-            overflow-y: auto;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-
-        body.light-theme .history-panel {
-            background: rgba(0, 0, 0, 0.05);
-        }
-
-        .history-item {
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .history-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        body.light-theme .history-item {
-            background: rgba(0, 0, 0, 0.05);
-        }
-
-        body.light-theme .history-item:hover {
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        .mode-selector {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .mode-option {
-            padding: 8px 16px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .mode-option.active {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-        }
-
-        body.light-theme .mode-option {
-            border-color: rgba(0, 0, 0, 0.2);
-        }
-
-        body.light-theme .mode-option.active {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-        }
-
-        @media (max-width: 1024px) {
-            .button-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            .calc-button {
-                height: 50px;
-                font-size: 1rem;
-            }
-            .display-main {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .button-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 10px;
-            }
-            .calc-button {
-                height: 45px;
-                font-size: 0.9rem;
-            }
-            .display-main {
-                font-size: 1.8rem;
-            }
-        }
-
-        .memory-indicator {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            width: 8px;
-            height: 8px;
-            background: var(--success-gradient);
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .memory-indicator.active {
-            opacity: 1;
-        }
-
-        .angle-indicator {
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            font-size: 0.8rem;
-            opacity: 0.7;
-            font-weight: 600;
-        }
-    </style>
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:768px){
+      .nav-primary,.header-actions{display:none}
+      .hamburger{display:flex}
+      .hero{padding:40px 20px 24px}
+      .tool-section{padding:16px 16px 40px}
+      .calc-wrap{padding:16px}
+      .display-result{font-size:2rem}
+    }
+    @media(max-width:480px){
+      .hero{padding:32px 16px 20px}
+      .tool-section{padding:12px 12px 32px}
+      .calc-wrap{padding:14px}
+      .display-result{font-size:1.8rem}
+      .cb-num,.cb-op,.cb-eq,.cb-fn,.cb-cl{height:48px}
+      .cb-sci{height:34px;font-size:.65rem}
+      .sci-grid{gap:3px}
+      .num-grid{gap:4px}
+    }
+    @media(max-width:360px){
+      .cb-num,.cb-op,.cb-eq,.cb-fn,.cb-cl{height:44px;font-size:1rem}
+      .display-result{font-size:1.6rem}
+      .calc-display{padding:14px 16px 10px;min-height:80px}
+    }
+  </style>
 </head>
-
 <body>
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Header -->
-    <header class="header-glass fixed w-full top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        <i class="fas fa-calculator mr-2"></i>Tool Xeno
-                    </div>
-                    <div class="hidden md:block text-sm opacity-70">
-                        Professional Scientific Calculator
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
-                </div>
-            </div>
+  <!-- Background -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="https://toolxeno.com/" class="logo" aria-label="Tool Xeno – Home">
+          <div class="logo-icon" aria-hidden="true">X</div>
+          <span class="logo-text">Tool Xeno</span>
+        </a>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <a href="https://toolxeno.com/" class="nav-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="nav-link">All Tools</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">☀️ Light</button>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </header>
-    
-    <!-- Main Content -->
-    <main class="pt-20 pb-10">
-        <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-12 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                Scientific Calculator
-            </h1>
-            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
-                Professional scientific calculator with advanced mathematical functions, memory operations, and equation history. 
-                Supports trigonometry, logarithms, statistics, and multiple number systems.
-            </p>
-        </section>
-        
-        <!-- Calculator Interface -->
-        <section class="container mx-auto px-6">
-            <div class="max-w-6xl mx-auto">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    
-                    <!-- Main Calculator -->
-                    <div class="lg:col-span-2">
-                        <div class="glass-card p-6 relative">
-                            <div class="memory-indicator" id="memoryIndicator"></div>
-                            <div class="angle-indicator" id="angleIndicator">DEG</div>
-                            
-                            <!-- Mode Selector -->
-                            <div class="mode-selector">
-                                <div class="mode-option active" data-mode="deg">DEG</div>
-                                <div class="mode-option" data-mode="rad">RAD</div>
-                                <div class="mode-option" data-mode="grad">GRAD</div>
-                            </div>
 
-                            <!-- Display -->
-                            <div class="display">
-                                <div class="display-secondary" id="displaySecondary"></div>
-                                <div class="display-main" id="displayMain">0</div>
-                            </div>
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+      <a href="https://toolxeno.com/" class="mobile-nav-link">🏠 Home</a>
+      <a href="https://toolxeno.com/#tools" class="mobile-nav-link">🛠️ All Tools</a>
+      <a href="#features" class="mobile-nav-link">⚡ Features</a>
+      <a href="#faq" class="mobile-nav-link">❓ FAQ</a>
+    </nav>
 
-                            <!-- Button Grid -->
-                            <div class="button-grid">
-                                <!-- Row 1 -->
-                                <button class="calc-button clear" onclick="clearAll()">AC</button>
-                                <button class="calc-button clear" onclick="clearEntry()">CE</button>
-                                <button class="calc-button" onclick="backspace()">⌫</button>
-                                <button class="calc-button function" onclick="addFunction('(')">(</button>
-                                <button class="calc-button function" onclick="addFunction(')')">)</button>
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Free · No Signup · Works Offline
+      </div>
+      <h1 class="hero-h1" id="hero-heading">
+        Professional Scientific<br><span class="grad-text">Calculator</span>
+      </h1>
+      <p class="hero-sub">
+        50+ scientific functions with 100% accurate results. Simple mode for everyday use — expand to scientific for advanced calculations.
+      </p>
+      <div class="hero-trust">
+        <span class="trust-item"><span class="trust-dot">✦</span> 50+ Functions</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> DEG / RAD / GRAD</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> Keyboard Support</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> 100% Private</span>
+      </div>
+    </section>
 
-                                <!-- Row 2 -->
-                                <button class="calc-button function" onclick="addFunction('sin(')">sin</button>
-                                <button class="calc-button function" onclick="addFunction('cos(')">cos</button>
-                                <button class="calc-button function" onclick="addFunction('tan(')">tan</button>
-                                <button class="calc-button function" onclick="addFunction('log(')">log</button>
-                                <button class="calc-button function" onclick="addFunction('ln(')">ln</button>
+    <!-- TOOL -->
+    <main class="tool-section" aria-label="Scientific Calculator">
+      <div class="tool-container">
+        <div class="calc-wrap">
 
-                                <!-- Row 3 -->
-                                <button class="calc-button function" onclick="addFunction('asin(')">sin⁻¹</button>
-                                <button class="calc-button function" onclick="addFunction('acos(')">cos⁻¹</button>
-                                <button class="calc-button function" onclick="addFunction('atan(')">tan⁻¹</button>
-                                <button class="calc-button function" onclick="addFunction('sqrt(')">√</button>
-                                <button class="calc-button function" onclick="addFunction('^2')">x²</button>
+          <!-- Mode Bar -->
+          <div class="mode-bar" role="toolbar" aria-label="Calculator modes">
+            <button class="mode-btn active-deg" id="btnAng" onclick="cycleAng()" aria-label="Angle mode: DEG">DEG</button>
+            <button class="mode-btn" id="btnSci" onclick="toggleSci()" aria-label="Toggle scientific mode">⚙ SCI</button>
+            <button class="mode-btn" id="btnInv" onclick="toggleInv()" aria-label="Toggle inverse functions">2nd</button>
+            <button class="mode-btn" id="btnMem" onclick="mem('R')" style="display:none" aria-label="Memory recall">M</button>
+            <button class="mode-btn" style="margin-left:auto;font-size:.7rem;color:var(--accent1);background:rgba(0,124,240,.1);border-color:rgba(0,124,240,.25)" onclick="clr()">AC</button>
+          </div>
 
-                                <!-- Row 4 -->
-                                <button class="calc-button function" onclick="addFunction('pow(')">xʸ</button>
-                                <button class="calc-button function" onclick="addFunction('exp(')">eˣ</button>
-                                <button class="calc-button function" onclick="addFunction('factorial(')">x!</button>
-                                <button class="calc-button function" onclick="addConstant('π')">π</button>
-                                <button class="calc-button function" onclick="addConstant('e')">e</button>
-
-                                <!-- Row 5 -->
-                                <button class="calc-button function" onclick="memoryRecall()">MR</button>
-                                <button class="calc-button function" onclick="memoryStore()">MS</button>
-                                <button class="calc-button function" onclick="memoryAdd()">M+</button>
-                                <button class="calc-button function" onclick="memoryClear()">MC</button>
-                                <button class="calc-button operator" onclick="addOperator('/'">÷</button>
-
-                                <!-- Row 6 -->
-                                <button class="calc-button" onclick="addNumber('7')">7</button>
-                                <button class="calc-button" onclick="addNumber('8')">8</button>
-                                <button class="calc-button" onclick="addNumber('9')">9</button>
-                                <button class="calc-button operator" onclick="addOperator('*')">×</button>
-                                <button class="calc-button function" onclick="addFunction('abs(')">|x|</button>
-
-                                <!-- Row 7 -->
-                                <button class="calc-button" onclick="addNumber('4')">4</button>
-                                <button class="calc-button" onclick="addNumber('5')">5</button>
-                                <button class="calc-button" onclick="addNumber('6')">6</button>
-                                <button class="calc-button operator" onclick="addOperator('-')">−</button>
-                                <button class="calc-button function" onclick="addFunction('1/')">\1/x</button>
-
-                                <!-- Row 8 -->
-                                <button class="calc-button" onclick="addNumber('1')">1</button>
-                                <button class="calc-button" onclick="addNumber('2')">2</button>
-                                <button class="calc-button" onclick="addNumber('3')">3</button>
-                                <button class="calc-button operator" onclick="addOperator('+')">+</button>
-                                <button class="calc-button function" onclick="toggleSign()">±</button>
-
-                                <!-- Row 9 -->
-                                <button class="calc-button" onclick="addNumber('0')" style="grid-column: span 2;">0</button>
-                                <button class="calc-button" onclick="addDecimal()">.</button>
-                                <button class="calc-button equals" onclick="calculate()" style="grid-column: span 2;">=</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- History & Memory Panel -->
-                    <div class="lg:col-span-1">
-                        <div class="glass-card p-6">
-                            <h3 class="text-xl font-semibold mb-4 flex items-center">
-                                <i class="fas fa-history mr-3"></i>
-                                History
-                            </h3>
-                            
-                            <div class="history-panel" id="historyPanel">
-                                <p class="text-center opacity-50">No calculations yet</p>
-                            </div>
-
-                            <div class="flex gap-2 mb-6">
-                                <button class="calc-button function flex-1" onclick="clearHistory()">
-                                    <i class="fas fa-trash mr-2"></i>Clear
-                                </button>
-                                <button class="calc-button function flex-1" onclick="exportHistory()">
-                                    <i class="fas fa-download mr-2"></i>Export
-                                </button>
-                            </div>
-
-                            <!-- Quick Functions -->
-                            <h4 class="text-lg font-semibold mb-3">Quick Functions</h4>
-                            <div class="grid grid-cols-2 gap-3">
-                                <button class="calc-button function" onclick="addFunction('sinh(')">sinh</button>
-                                <button class="calc-button function" onclick="addFunction('cosh(')">cosh</button>
-                                <button class="calc-button function" onclick="addFunction('tanh(')">tanh</button>
-                                <button class="calc-button function" onclick="addFunction('cbrt(')">∛x</button>
-                                <button class="calc-button function" onclick="addFunction('log10(')">log₁₀</button>
-                                <button class="calc-button function" onclick="addFunction('log2(')">log₂</button>
-                            </div>
-
-                            <!-- Constants -->
-                            <h4 class="text-lg font-semibold mt-4 mb-3">Constants</h4>
-                            <div class="grid grid-cols-2 gap-3">
-                                <button class="calc-button function" onclick="addConstant('299792458')">c</button>
-                                <button class="calc-button function" onclick="addConstant('6.62607015e-34')">h</button>
-                                <button class="calc-button function" onclick="addConstant('9.80665')">g</button>
-                                <button class="calc-button function" onclick="addConstant('6.02214076e23')">Nₐ</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <!-- Display -->
+          <div class="calc-display" role="region" aria-label="Calculator display" aria-live="polite">
+            <div class="display-expr" id="xExpr" aria-label="Expression">&nbsp;</div>
+            <div class="display-result" id="xRes" aria-label="Result">0</div>
+            <div class="display-status">
+              <span class="paren-ind" id="xParen"></span>
             </div>
-        </section>
+          </div>
+
+          <!-- Scientific Panel (expandable) -->
+          <div class="sci-panel" id="sciPanel">
+            <!-- Powers & Exponents -->
+            <div class="sci-section">
+              <div class="sci-label">Powers & Exponents</div>
+              <div class="sci-grid">
+                <button class="cb cb-sci" onclick="iFn('sq')" aria-label="Square"><span class="pri-label">x²</span><span class="inv-label">x³</span></button>
+                <button class="cb cb-sci" onclick="iFn('pw')" aria-label="Power"><span class="pri-label">xⁿ</span><span class="inv-label">ⁿ√x</span></button>
+                <button class="cb cb-sci" onclick="iFn('ex')" aria-label="Exponential"><span class="pri-label">eˣ</span><span class="inv-label">2ˣ</span></button>
+                <button class="cb cb-sci" onclick="iFn('tx')" aria-label="10 to the power"><span class="pri-label">10ˣ</span><span class="inv-label">yˣ</span></button>
+                <button class="cb cb-sci" onclick="doExp()" aria-label="Scientific notation">EXP</button>
+              </div>
+            </div>
+            <!-- Trigonometric -->
+            <div class="sci-section">
+              <div class="sci-label">Trigonometric</div>
+              <div class="sci-grid" style="grid-template-columns:repeat(6,1fr)">
+                <button class="cb cb-sci" onclick="iFn('si')" aria-label="Sine"><span class="pri-label">sin</span><span class="inv-label">sin⁻¹</span></button>
+                <button class="cb cb-sci" onclick="iFn('co')" aria-label="Cosine"><span class="pri-label">cos</span><span class="inv-label">cos⁻¹</span></button>
+                <button class="cb cb-sci" onclick="iFn('ta')" aria-label="Tangent"><span class="pri-label">tan</span><span class="inv-label">tan⁻¹</span></button>
+                <button class="cb cb-sci" onclick="iFn('sh')" aria-label="Hyperbolic sine"><span class="pri-label">sinh</span><span class="inv-label">asinh</span></button>
+                <button class="cb cb-sci" onclick="iFn('ch')" aria-label="Hyperbolic cosine"><span class="pri-label">cosh</span><span class="inv-label">acosh</span></button>
+                <button class="cb cb-sci" onclick="iFn('th')" aria-label="Hyperbolic tangent"><span class="pri-label">tanh</span><span class="inv-label">atanh</span></button>
+              </div>
+            </div>
+            <!-- Logarithms & Roots -->
+            <div class="sci-section">
+              <div class="sci-label">Logarithms & Roots</div>
+              <div class="sci-grid">
+                <button class="cb cb-sci" onclick="iFn('ln')" aria-label="Natural log"><span class="pri-label">ln</span><span class="inv-label">e</span></button>
+                <button class="cb cb-sci" onclick="iFn('lg')" aria-label="Log base 10"><span class="pri-label">log</span><span class="inv-label">10ˣ</span></button>
+                <button class="cb cb-sci" onclick="iFn('l2')" aria-label="Log base 2"><span class="pri-label">log₂</span><span class="inv-label">2ˣ</span></button>
+                <button class="cb cb-sci" onclick="iFn('rt')" aria-label="Square root"><span class="pri-label">√</span><span class="inv-label">³√</span></button>
+                <button class="cb cb-sci" onclick="iFn('rc')" aria-label="Reciprocal"><span class="pri-label">1/x</span><span class="inv-label">n!</span></button>
+              </div>
+            </div>
+            <!-- Constants & Combinatorics -->
+            <div class="sci-section">
+              <div class="sci-label">Constants & Combinatorics</div>
+              <div class="sci-grid" style="grid-template-columns:repeat(6,1fr)">
+                <button class="cb cb-sci" onclick="iFn('pi')" aria-label="Pi"><span class="pri-label">π</span><span class="inv-label">φ</span></button>
+                <button class="cb cb-sci" onclick="iFn('el')" aria-label="Euler's number"><span class="pri-label">e</span><span class="inv-label">RND</span></button>
+                <button class="cb cb-sci" onclick="iFn('fa')" aria-label="Factorial"><span class="pri-label">n!</span><span class="inv-label">%</span></button>
+                <button class="cb cb-sci" onclick="iFn('ab')" aria-label="Absolute value"><span class="pri-label">|x|</span><span class="inv-label">mod</span></button>
+                <button class="cb cb-sci" onclick="iFn('pr')" aria-label="Permutation"><span class="pri-label">nPr</span><span class="inv-label">nCr</span></button>
+                <button class="cb cb-sci" onclick="togHist()" aria-label="History">HIST</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Basic Number Pad (always visible) -->
+          <div class="num-grid">
+            <button class="cb cb-fn" onclick="padd('(')" aria-label="Open parenthesis">(</button>
+            <button class="cb cb-fn" onclick="padd(')')" aria-label="Close parenthesis">)</button>
+            <button class="cb cb-cl" onclick="del()" aria-label="Delete">⌫</button>
+            <button class="cb cb-op" onclick="op('/')" aria-label="Divide">÷</button>
+          </div>
+          <div class="num-grid">
+            <button class="cb cb-num" onclick="num('7')">7</button>
+            <button class="cb cb-num" onclick="num('8')">8</button>
+            <button class="cb cb-num" onclick="num('9')">9</button>
+            <button class="cb cb-op" onclick="op('*')" aria-label="Multiply">×</button>
+          </div>
+          <div class="num-grid">
+            <button class="cb cb-num" onclick="num('4')">4</button>
+            <button class="cb cb-num" onclick="num('5')">5</button>
+            <button class="cb cb-num" onclick="num('6')">6</button>
+            <button class="cb cb-op" onclick="op('-')" aria-label="Subtract">−</button>
+          </div>
+          <div class="num-grid">
+            <button class="cb cb-num" onclick="num('1')">1</button>
+            <button class="cb cb-num" onclick="num('2')">2</button>
+            <button class="cb cb-num" onclick="num('3')">3</button>
+            <button class="cb cb-op" onclick="op('+')" aria-label="Add">+</button>
+          </div>
+          <div class="num-grid">
+            <button class="cb cb-fn" onclick="neg()" aria-label="Negate">±</button>
+            <button class="cb cb-num" onclick="num('0')">0</button>
+            <button class="cb cb-fn" onclick="dot()" aria-label="Decimal point">.</button>
+            <button class="cb cb-eq" onclick="eq()" aria-label="Equals">=</button>
+          </div>
+
+          <!-- Memory Row -->
+          <div class="mem-grid">
+            <button class="cb cb-mem" onclick="mem('C')" aria-label="Memory clear">MC</button>
+            <button class="cb cb-mem" onclick="mem('R')" aria-label="Memory recall">MR</button>
+            <button class="cb cb-mem" onclick="mem('+')" aria-label="Memory add">M+</button>
+            <button class="cb cb-mem" onclick="mem('-')" aria-label="Memory subtract">M−</button>
+            <button class="cb cb-mem" onclick="togHist()" aria-label="Toggle history">HIST</button>
+          </div>
+
+          <!-- History (compact) -->
+          <div id="histWrap">
+            <div class="hist-panel" id="hPan">
+              <div class="hist-list" id="hList">
+                <div class="hist-empty">No history yet</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="text-center py-8 opacity-70">
-        <p>&copy; 2025 Tool Xeno. All rights reserved. Professional Scientific Calculator Tool.</p>
+    <div class="section-divider"></div>
+
+    <!-- FEATURES -->
+    <section id="features" class="features-section">
+      <div class="section-inner">
+        <div class="section-label">⚡ Features</div>
+        <h2 class="section-title">Professional-Grade Scientific Calculator</h2>
+        <p class="section-sub">All the functions you need, with precision you can trust.</p>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🔢</div>
+            <h3 class="feature-title">50+ Functions</h3>
+            <p class="feature-desc">Trigonometry, logarithms, exponents, roots, combinatorics, and more — all at your fingertips.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📐</div>
+            <h3 class="feature-title">DEG / RAD / GRAD</h3>
+            <p class="feature-desc">Three angle modes with instant switching. Perfect for engineering and scientific calculations.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🧠</div>
+            <h3 class="feature-title">Smart Modes</h3>
+            <p class="feature-desc">Simple mode for everyday math. Expand to scientific mode for advanced calculations when needed.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⌨️</div>
+            <h3 class="feature-title">Keyboard Support</h3>
+            <p class="feature-desc">Full keyboard input for fast calculations. Numbers, operators, and shortcuts all supported.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3 class="feature-title">100% Private</h3>
+            <p class="feature-desc">All calculations happen locally in your browser. No data is ever sent to any server.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3 class="feature-title">Dark & Light Theme</h3>
+            <p class="feature-desc">Beautiful themes that match the Tool Xeno design system. Switch anytime, preference saved.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq-section">
+      <div class="section-inner">
+        <div class="section-label">❓ FAQ</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q">How do I switch between simple and scientific mode?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Click the "⚙ SCI" button in the mode bar above the display. The scientific panel will slide open with all advanced functions. Click again to close it and return to simple mode.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">What angle modes are supported?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">The calculator supports three angle modes: Degrees (DEG), Radians (RAD), and Gradians (GRAD). Click the "DEG" button to cycle through them. The current mode is shown on the button.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How does the 2nd (inverse) button work?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Click "2nd" to activate inverse functions. For example, sin becomes sin⁻¹ (arcsine), ln becomes e (Euler's number), √ becomes ³√ (cube root), and more. Click "2nd" again to deactivate.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Is this calculator accurate?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes! The calculator uses IEEE 754 double-precision arithmetic with up to 14 significant digits. Factorials use the Lanczos approximation for non-integer values. All trigonometric functions use native Math library functions.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Does it work offline?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Absolutely! The calculator is entirely self-contained. No server calls, no API requests, no external dependencies. Once loaded, it works completely offline.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Can I use my keyboard?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes! Type numbers (0-9), operators (+, -, *, /), parentheses, decimal point, and press Enter for equals. Backspace to delete, Escape to clear. The ^ key works for powers, and ! for factorial.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-icon">X</div>
+          <span class="footer-brand-name">Tool Xeno</span>
+        </div>
+        <nav class="footer-links">
+          <a href="https://toolxeno.com/" class="footer-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="footer-link">All Tools</a>
+          <a href="https://toolxeno.com/privacy.html" class="footer-link">Privacy</a>
+          <a href="https://toolxeno.com/terms.html" class="footer-link">Terms</a>
+        </nav>
+        <a href="https://toolxeno.com/#tools" class="footer-back-btn">← Back to All Tools</a>
+        <div class="footer-copy">© <span id="footer-year"></span> Tool Xeno. All calculations are performed locally in your browser.</div>
+      </div>
     </footer>
+  </div>
 
-    <script>
-        // Global Variables
-        let currentExpression = '';
-        let lastResult = 0;
-        let memory = 0;
-        let angleMode = 'deg'; // deg, rad, grad
-        let history = [];
-        let justCalculated = false;
+  <div class="toast" id="toast"></div>
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeParticles();
-            initializeModeSelector();
-            loadHistory();
-        });
+  <script>
+  // ============================================================
+  //  THEME TOGGLE
+  // ============================================================
+  const themeBtn=document.getElementById('theme-toggle');
+  const html=document.documentElement;
+  let isDark=true;
+  function applyTheme(dark){isDark=dark;html.setAttribute('data-theme',dark?'dark':'light');themeBtn.textContent=dark?'☀️ Light':'🌙 Dark';localStorage.setItem('tx-theme',dark?'dark':'light')}
+  const saved=localStorage.getItem('tx-theme');
+  if(saved==='light')applyTheme(false);else applyTheme(true);
+  themeBtn.addEventListener('click',()=>applyTheme(!isDark));
 
-        // Theme Toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
-        }
+  // ============================================================
+  //  MOBILE NAV
+  // ============================================================
+  document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('mobile-nav').classList.add('open')});
+  document.getElementById('mobile-close').addEventListener('click',()=>{document.getElementById('mobile-nav').classList.remove('open')});
+  document.querySelectorAll('.mobile-nav-link').forEach(l=>{l.addEventListener('click',()=>document.getElementById('mobile-nav').classList.remove('open'))});
 
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-theme');
-        }
+  // ============================================================
+  //  FOOTER YEAR + FAQ
+  // ============================================================
+  document.getElementById('footer-year').textContent=new Date().getFullYear();
+  document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',function(){const item=this.parentElement;const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(el=>el.classList.remove('open'));if(!isOpen)item.classList.add('open')})});
 
-        // Initialize floating particles
-        function initializeParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                container.appendChild(particle);
-            }
-        }
+  // ============================================================
+  //  SCIENTIFIC CALCULATOR ENGINE
+  // ============================================================
+  let S={expr:'',res:null,hasRes:false,ang:'DEG',inv:false,sciOpen:false,mem:0,hasMem:false,hist:[],hid:0,pc:0};
+  const $e=document.getElementById('xExpr');
+  const $r=document.getElementById('xRes');
+  const $a=document.getElementById('btnAng');
+  const $m=document.getElementById('btnMem');
+  const $p=document.getElementById('xParen');
 
-        // Initialize mode selector
-        function initializeModeSelector() {
-            document.querySelectorAll('.mode-option').forEach(option => {
-                option.addEventListener('click', () => {
-                    document.querySelectorAll('.mode-option').forEach(o => o.classList.remove('active'));
-                    option.classList.add('active');
-                    angleMode = option.dataset.mode;
-                    document.getElementById('angleIndicator').textContent = angleMode.toUpperCase();
-                });
-            });
-        }
+  // Math helpers
+  const PI=Math.PI,E=Math.E,PHI=(1+Math.sqrt(5))/2;
+  function toR(v){return S.ang==='DEG'?v*PI/180:S.ang==='GRAD'?v*PI/200:v}
+  function frR(v){return S.ang==='DEG'?v*180/PI:S.ang==='GRAD'?v*200/PI:v}
+  function fact(n){if(n<0)return NaN;if(n>170)return Infinity;if(n!==(n|0))return _g(n+1);let r=1;for(let i=2;i<=n;i++)r*=i;return r}
+  function _g(z){if(z<.5)return PI/(Math.sin(PI*z)*_g(1-z));z--;const c=[.99999999999980993,676.5203681218851,-1259.1392167224028,771.32342877765313,-176.61502916214059,12.507343278686905,-.13857109526572012,9.9843695780195716e-6,1.5056327351493116e-7];let x=c[0];for(let i=1;i<9;i++)x+=c[i]/(z+i);const t=z+8.5;return Math.sqrt(2*PI)*Math.pow(t,z+.5)*Math.exp(-t)*x}
+  function nPr(n,r){return r>n||r<0||n<0?NaN:fact(n)/fact(n-r)}
+  function nCr(n,r){return r>n||r<0||n<0?NaN:fact(n)/(fact(r)*fact(n-r))}
 
-        // Display functions
-        function updateDisplay() {
-            const displayMain = document.getElementById('displayMain');
-            const displaySecondary = document.getElementById('displaySecondary');
-            
-            if (currentExpression === '') {
-                displayMain.textContent = lastResult || '0';
-            } else {
-                displayMain.textContent = currentExpression || '0';
-            }
-            
-            displaySecondary.textContent = '';
-        }
+  // Evaluation engine
+  function calc(raw){
+    let s=raw.trim();if(!s)return 0;
+    s=s.replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-');
+    s=s.replace(/\|([^|]+)\|/g,'_AB($1)');
+    const F={
+      'sin⁻¹(':'_ASI(','cos⁻¹(':'_ACO(','tan⁻¹(':'_ATA(',
+      'asinh(':'_ASH(','acosh(':'_ACH(','atanh(':'_ATH(',
+      'sinh(':'_SH(','cosh(':'_CH(','tanh(':'_TH(',
+      'sin(':'_SI(','cos(':'_CO(','tan(':'_TA(',
+      'ln(':'_LN(','log₂(':'_L2(','log(':'_LG(',
+      '√(':'_SQ(','³√(':'_CB(','P(':'_PR(','C(':'_CR('
+    };
+    const sk=Object.keys(F).sort((a,b)=>b.length-a.length);
+    for(const k of sk)while(s.includes(k))s=s.replace(k,F[k]);
+    s=s.replace(/π/g,'('+PI+')');
+    s=s.replace(/(?<![a-zA-Z_])e(?![a-zA-Z\d_(])/g,'('+E+')');
+    s=s.replace(/\^/g,'**');
+    s=s.replace(/(\d+(?:\.\d+)?)!/g,'_F($1)');
+    let o=(s.match(/\(/g)||[]).length,cl=(s.match(/\)/g)||[]).length;
+    while(cl<o){s+=')';cl++}
+    s=s.replace(/(\d)\(/g,'$1*(');
+    s=s.replace(/\)(\d)/g,')*$1');
+    s=s.replace(/\)\(/g,')*(');
+    s=s.replace(/(\d)_/g,'$1*_');
+    s=s.replace(/%/g,'/100');
+    const ctx={
+      _SI:x=>Math.sin(toR(x)),_CO:x=>Math.cos(toR(x)),_TA:x=>Math.tan(toR(x)),
+      _ASI:x=>frR(Math.asin(x)),_ACO:x=>frR(Math.acos(x)),_ATA:x=>frR(Math.atan(x)),
+      _SH:Math.sinh,_CH:Math.cosh,_TH:Math.tanh,
+      _ASH:Math.asinh,_ACH:Math.acosh,_ATH:Math.atanh,
+      _LN:Math.log,_LG:Math.log10,_L2:Math.log2,
+      _SQ:Math.sqrt,_CB:Math.cbrt,_AB:Math.abs,
+      _F:fact,_PR:nPr,_CR:nCr
+    };
+    try{const fn=new Function(...Object.keys(ctx),'"use strict";return('+s+')');const r=fn(...Object.values(ctx));return typeof r==='number'?r:NaN}
+    catch{return NaN}
+  }
 
-        function updateSecondaryDisplay(text) {
-            document.getElementById('displaySecondary').textContent = text;
-        }
+  function fmt(n){
+    if(isNaN(n))return'Error';if(!isFinite(n))return n>0?'∞':'-∞';
+    if(n===0)return'0';const a=Math.abs(n);
+    if(a>=1e15||(a<1e-10&&a>0))return n.toExponential(10).replace(/\.?0+e/,'e');
+    const r=parseFloat(n.toPrecision(14));let s=r.toString();
+    if(s.length>15)s=parseFloat(r.toFixed(10)).toString();
+    return s;
+  }
 
-        // Number input
-        function addNumber(num) {
-            if (justCalculated) {
-                currentExpression = '';
-                justCalculated = false;
-            }
-            currentExpression += num;
-            updateDisplay();
-        }
+  // Render
+  function render(){
+    $e.textContent=S.hasRes&&S.res!==null?S.expr+' =':S.expr||'\u00A0';
+    $e.scrollLeft=$e.scrollWidth;
+    if(S.res!==null&&S.hasRes){$r.textContent=S.res;$r.classList.remove('preview')}
+    else if(S.expr){
+      try{const v=calc(S.expr);if(!isNaN(v)&&isFinite(v)){$r.textContent='= '+fmt(v);$r.classList.add('preview')}else{$r.textContent='0';$r.classList.add('preview')}}
+      catch{$r.textContent='0';$r.classList.add('preview')}
+    }else{$r.textContent='0';$r.classList.remove('preview')}
+    $a.textContent=S.ang;
+    $m.style.display=S.hasMem?'inline-flex':'none';
+    $p.textContent=S.pc>0?S.pc+' open':'' ;
+  }
 
-        function addDecimal() {
-            if (justCalculated) {
-                currentExpression = '0';
-                justCalculated = false;
-            }
-            
-            const lastNumber = currentExpression.split(/[+\-*/()]/).pop();
-            if (!lastNumber.includes('.')) {
-                if (currentExpression === '' || /[+\-*/()]$/.test(currentExpression)) {
-                    currentExpression += '0';
-                }
-                currentExpression += '.';
-                updateDisplay();
-            }
-        }
+  // Input handlers
+  function num(n){if(S.hasRes){S.expr='';S.res=null;S.hasRes=false}S.expr+=n;render()}
+  function dot(){
+    if(S.hasRes){S.expr='0.';S.res=null;S.hasRes=false;render();return}
+    const p=S.expr.split(/[+\-×÷^(%!|]/);const l=p[p.length-1];
+    if(l&&l.includes('.'))return;
+    S.expr+=(!S.expr||/[\d]$/.test(S.expr))?'.':'0.';render();
+  }
+  function op(o){
+    const d=o==='*'?'×':o==='/'?'÷':o==='-'?'−':o;
+    if(S.hasRes){S.expr=S.res+d;S.hasRes=false;S.res=null;render();return}
+    const l=S.expr.slice(-1);
+    if(['+','−','×','÷','^'].includes(l))S.expr=S.expr.slice(0,-1)+d;
+    else S.expr+=d;render();
+  }
+  function padd(c){
+    if(S.hasRes){S.expr='';S.res=null;S.hasRes=false}
+    if(c==='('){
+      const l=S.expr.slice(-1);if(/[\d)π]$/.test(l))S.expr+='×(';
+      else S.expr+='(';S.pc++;
+    }else if(c===')'&&S.pc>0){S.expr+=')';S.pc--}
+    render();
+  }
+  function clr(){S.expr='';S.res=null;S.hasRes=false;S.pc=0;render()}
+  function del(){
+    if(S.hasRes){clr();return}
+    const r=S.expr.slice(-1);if(r==='(')S.pc--;if(r===')')S.pc++;
+    S.expr=S.expr.slice(0,-1);render();
+  }
+  function neg(){
+    if(S.hasRes&&S.res!==null){const n=parseFloat(S.res);if(!isNaN(n)){S.res=fmt(-n);S.expr=String(-n)}render();return}
+    const m=S.expr.match(/(.*?)(-?\d+\.?\d*)$/);
+    if(m){const[,p,n]=m;if(n.startsWith('-'))S.expr=p+n.slice(1);else S.expr=p+'(-'+n}
+    render();
+  }
+  function doExp(){if(S.hasRes){S.expr='';S.res=null;S.hasRes=false}S.expr+='×10^';render()}
+  function eq(){
+    if(!S.expr)return;let e=S.expr;
+    let o=(e.match(/\(/g)||[]).length,c=(e.match(/\)/g)||[]).length;
+    while(c<o){e+=')';c++}
+    const v=calc(e);const f=fmt(v);S.res=f;S.hasRes=true;S.pc=0;render();
+    if(!isNaN(v)){S.hist.unshift({e:e+' =',r:f,id:++S.hid});if(S.hist.length>50)S.hist.pop();rHist()}
+  }
 
-        // Operators
-        function addOperator(op) {
-            if (justCalculated) {
-                currentExpression = lastResult.toString();
-                justCalculated = false;
-            }
-            
-            if (currentExpression !== '') {
-                // Replace last operator if exists
-                if (/[+\-*/]$/.test(currentExpression)) {
-                    currentExpression = currentExpression.slice(0, -1);
-                }
-                currentExpression += op;
-                updateDisplay();
-            }
-        }
+  // Scientific functions
+  function wrap(fnText){
+    if(S.hasRes){S.expr=fnText+(S.res||'0')+')';S.hasRes=false;S.res=null;S.pc++;render();return}
+    S.expr+=fnText;S.pc++;render();
+  }
+  function iFn(fn){
+    const I=S.inv;
+    switch(fn){
+      case'sq':I?(S.hasRes?(S.expr='('+S.res+')³',S.hasRes=false,S.res=null):S.expr+='³'):(S.hasRes?(S.expr='('+S.res+')²',S.hasRes=false,S.res=null):S.expr+='²');render();break;
+      case'pw':I?wrap('³√('):op('^');break;
+      case'ex':I?wrap('2^('):wrap('Math.exp(');break;
+      case'tx':I?op('^'):wrap('10^(');break;
+      case'si':wrap(I?'sin⁻¹(':'sin(');break;
+      case'co':wrap(I?'cos⁻¹(':'cos(');break;
+      case'ta':wrap(I?'tan⁻¹(':'tan(');break;
+      case'sh':wrap(I?'asinh(':'sinh(');break;
+      case'ch':wrap(I?'acosh(':'cosh(');break;
+      case'th':wrap(I?'atanh(':'tanh(');break;
+      case'ln':if(I){if(S.hasRes){S.expr='';S.hasRes=false;S.res=null}S.expr+=String(E);render()}else wrap('ln(');break;
+      case'lg':I?wrap('10^('):wrap('log(');break;
+      case'l2':I?wrap('2^('):wrap('log₂(');break;
+      case'rt':I?wrap('³√('):wrap('√(');break;
+      case'rc':I?(S.hasRes?S.expr=(S.res||'0')+'!':S.expr+='!'):(S.hasRes?(S.expr='1÷('+S.res+')',S.pc=1):(S.expr+='1÷(',S.pc++));if(S.hasRes)S.hasRes=false;render();break;
+      case'pi':S.expr+=I?String(PHI):'π';render();break;
+      case'el':S.expr+=I?String((Math.random()*1e8)|0):'e';render();break;
+      case'fa':I?S.expr+='%':S.hasRes?(S.expr=(S.res||'0')+'!',S.hasRes=false):S.expr+='!';render();break;
+      case'ab':S.expr+=I?'mod':'|';render();break;
+      case'pr':wrap(I?'C(':'P(');break;
+    }
+  }
 
-        // Functions
-        function addFunction(func) {
-            if (justCalculated) {
-                if (func.includes('(')) {
-                    currentExpression = func;
-                } else {
-                    currentExpression = lastResult.toString() + func;
-                }
-                justCalculated = false;
-            } else {
-                currentExpression += func;
-            }
-            updateDisplay();
-        }
+  // Modes
+  function cycleAng(){
+    S.ang=S.ang==='DEG'?'RAD':S.ang==='RAD'?'GRAD':'DEG';
+    $a.textContent=S.ang;$a.classList.toggle('active-deg',true);render();
+  }
+  function toggleSci(){
+    S.sciOpen=!S.sciOpen;
+    const p=document.getElementById('sciPanel');
+    const b=document.getElementById('btnSci');
+    p.classList.toggle('open',S.sciOpen);
+    b.classList.toggle('active',S.sciOpen);
+  }
+  function toggleInv(){
+    S.inv=!S.inv;
+    document.getElementById('btnInv').classList.toggle('active-inv',S.inv);
+    document.body.classList.toggle('inv-mode',S.inv);
+  }
 
-        // Constants
-        function addConstant(constant) {
-            if (justCalculated) {
-                currentExpression = '';
-                justCalculated = false;
-            }
-            
-            let value;
-            switch(constant) {
-                case 'π':
-                    value = Math.PI.toString();
-                    break;
-                case 'e':
-                    value = Math.E.toString();
-                    break;
-                default:
-                    value = constant;
-            }
-            
-            currentExpression += value;
-            updateDisplay();
-        }
+  // Memory
+  function mem(a){
+    if(a==='C'){S.mem=0;S.hasMem=false}
+    else if(a==='R'&&S.hasMem){if(S.hasRes){S.expr='';S.hasRes=false;S.res=null}S.expr+=String(S.mem)}
+    else{
+      const v=S.hasRes?parseFloat(S.res):calc(S.expr);
+      if(!isNaN(v)){S.mem=a==='+'?S.mem+v:S.mem-v;S.hasMem=true;if(S.hasRes)clr()}
+    }
+    render();
+  }
 
-        // Clear functions
-        function clearAll() {
-            currentExpression = '';
-            lastResult = 0;
-            updateDisplay();
-            updateSecondaryDisplay('');
-        }
+  // History
+  function togHist(){
+    const p=document.getElementById('hPan');
+    const btns=document.querySelectorAll('.hist-toggle');
+    const open=p.classList.toggle('open');
+    btns.forEach(b=>b.classList.toggle('open',open));
+  }
+  function rHist(){
+    const l=document.getElementById('hList');
+    l.innerHTML=S.hist.length?S.hist.map(h=>'<div class="hist-item" onclick="reH('+h.id+')"><span class="hist-expr">'+esc(h.e)+'</span><span class="hist-res">'+esc(h.r)+'</span><button class="hist-copy" onclick="event.stopPropagation();cpH('+h.id+')" aria-label="Copy result">⎘</button></div>').join(''):'<div class="hist-empty">No history yet</div>';
+  }
+  function reH(id){const h=S.hist.find(x=>x.id===id);if(!h)return;S.expr=h.e.replace(' =','');S.res=h.r;S.hasRes=true;render()}
+  function cpH(id){const h=S.hist.find(x=>x.id===id);if(!h)return;navigator.clipboard.writeText(h.r).catch(()=>{});toast('Copied!')}
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+  function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1200)}
 
-        function clearEntry() {
-            currentExpression = '';
-            updateDisplay();
-        }
+  // Keyboard support
+  document.addEventListener('keydown',function(e){
+    const t=e.target.tagName;if(t==='INPUT'||t==='TEXTAREA')return;
+    const k=e.key;
+    if(/^[0-9]$/.test(k)){e.preventDefault();num(k)}
+    else if(k==='.'){e.preventDefault();dot()}
+    else if(k==='+'){e.preventDefault();op('+')}
+    else if(k=='-'){e.preventDefault();op('-')}
+    else if(k=='*'){e.preventDefault();op('*')}
+    else if(k=='/'){e.preventDefault();op('/')}
+    else if(k=='^'){e.preventDefault();op('^')}
+    else if(k=='('){e.preventDefault();padd('(')}
+    else if(k==')'){e.preventDefault();padd(')')}
+    else if(k=='Enter'||k=='='){e.preventDefault();eq()}
+    else if(k=='Backspace'){e.preventDefault();del()}
+    else if(k=='Escape'||k=='Delete'){e.preventDefault();clr()}
+    else if(k=='!'){e.preventDefault();S.expr+='!';render()}
+    else if(k=='%'){e.preventDefault();S.expr+='%';render()}
+  });
 
-        function backspace() {
-            if (currentExpression.length > 0) {
-                currentExpression = currentExpression.slice(0, -1);
-                updateDisplay();
-            }
-        }
-
-        // Sign toggle
-        function toggleSign() {
-            if (currentExpression !== '') {
-                if (currentExpression.startsWith('-')) {
-                    currentExpression = currentExpression.substring(1);
-                } else {
-                    currentExpression = '-' + currentExpression;
-                }
-                updateDisplay();
-            } else if (lastResult !== 0) {
-                lastResult = -lastResult;
-                updateDisplay();
-            }
-        }
-
-        // Memory functions
-        function memoryStore() {
-            memory = lastResult || parseFloat(currentExpression) || 0;
-            updateMemoryIndicator();
-        }
-
-        function memoryRecall() {
-            if (justCalculated) {
-                currentExpression = '';
-                justCalculated = false;
-            }
-            currentExpression += memory.toString();
-            updateDisplay();
-        }
-
-        function memoryAdd() {
-            memory += lastResult || parseFloat(currentExpression) || 0;
-            updateMemoryIndicator();
-        }
-
-        function memoryClear() {
-            memory = 0;
-            updateMemoryIndicator();
-        }
-
-        function updateMemoryIndicator() {
-            const indicator = document.getElementById('memoryIndicator');
-            if (memory !== 0) {
-                indicator.classList.add('active');
-            } else {
-                indicator.classList.remove('active');
-            }
-        }
-
-        // Calculation
-        function calculate() {
-            if (currentExpression === '') return;
-
-            try {
-                updateSecondaryDisplay(currentExpression + ' =');
-                
-                // Replace mathematical functions and constants
-                let expression = currentExpression
-                    .replace(/π/g, Math.PI)
-                    .replace(/e(?![0-9])/g, Math.E)
-                    .replace(/×/g, '*')
-                    .replace(/÷/g, '/')
-                    .replace(/−/g, '-');
-
-                // Handle mathematical functions
-                expression = handleMathFunctions(expression);
-
-                // Evaluate the expression
-                const result = evaluateExpression(expression);
-                
-                if (isNaN(result) || !isFinite(result)) {
-                    throw new Error('Invalid calculation');
-                }
-
-                lastResult = result;
-                addToHistory(currentExpression, result);
-                
-                currentExpression = '';
-                justCalculated = true;
-                updateDisplay();
-
-            } catch (error) {
-                updateSecondaryDisplay('Error');
-                setTimeout(() => updateSecondaryDisplay(''), 2000);
-            }
-        }
-
-        // Handle mathematical functions
-        function handleMathFunctions(expression) {
-            // Convert angle functions based on mode
-            expression = expression.replace(/sin\(/g, (match) => {
-                return angleMode === 'deg' ? 'Math.sin(Math.PI/180*(' :
-                       angleMode === 'grad' ? 'Math.sin(Math.PI/200*(' : 'Math.sin(';
-            });
-            
-            expression = expression.replace(/cos\(/g, (match) => {
-                return angleMode === 'deg' ? 'Math.cos(Math.PI/180*(' :
-                       angleMode === 'grad' ? 'Math.cos(Math.PI/200*(' : 'Math.cos(';
-            });
-            
-            expression = expression.replace(/tan\(/g, (match) => {
-                return angleMode === 'deg' ? 'Math.tan(Math.PI/180*(' :
-                       angleMode === 'grad' ? 'Math.tan(Math.PI/200*(' : 'Math.tan(';
-            });
-
-            // Handle inverse trig functions
-            expression = expression.replace(/asin\(/g, (match) => {
-                return angleMode === 'deg' ? '(180/Math.PI)*Math.asin(' :
-                       angleMode === 'grad' ? '(200/Math.PI)*Math.asin(' : 'Math.asin(';
-            });
-            
-            expression = expression.replace(/acos\(/g, (match) => {
-                return angleMode === 'deg' ? '(180/Math.PI)*Math.acos(' :
-                       angleMode === 'grad' ? '(200/Math.PI)*Math.acos(' : 'Math.acos(';
-            });
-            
-            expression = expression.replace(/atan\(/g, (match) => {
-                return angleMode === 'deg' ? '(180/Math.PI)*Math.atan(' :
-                       angleMode === 'grad' ? '(200/Math.PI)*Math.atan(' : 'Math.atan(';
-            });
-
-            // Handle other functions
-            expression = expression.replace(/ln\(/g, 'Math.log(');
-            expression = expression.replace(/log\(/g, 'Math.log10(');
-            expression = expression.replace(/log10\(/g, 'Math.log10(');
-            expression = expression.replace(/log2\(/g, 'Math.log2(');
-            expression = expression.replace(/sqrt\(/g, 'Math.sqrt(');
-            expression = expression.replace(/cbrt\(/g, 'Math.cbrt(');
-            expression = expression.replace(/abs\(/g, 'Math.abs(');
-            expression = expression.replace(/exp\(/g, 'Math.exp(');
-            expression = expression.replace(/sinh\(/g, 'Math.sinh(');
-            expression = expression.replace(/cosh\(/g, 'Math.cosh(');
-            expression = expression.replace(/tanh\(/g, 'Math.tanh(');
-            
-            // Handle power functions
-            expression = expression.replace(/pow\(/g, 'Math.pow(');
-            expression = expression.replace(/\^2/g, '**2');
-            expression = expression.replace(/\^/g, '**');
-            
-            // Handle factorial
-            expression = expression.replace(/factorial\((\d+)\)/g, (match, num) => {
-                return factorial(parseInt(num));
-            });
-            
-            // Handle reciprocal
-            expression = expression.replace(/1\//g, '1/');
-
-            return expression;
-        }
-
-        // Factorial function
-        function factorial(n) {
-            if (n < 0) return NaN;
-            if (n === 0 || n === 1) return 1;
-            let result = 1;
-            for (let i = 2; i <= n; i++) {
-                result *= i;
-            }
-            return result;
-        }
-
-        // Safe expression evaluation
-        function evaluateExpression(expression) {
-            // Simple safety check - only allow numbers, operators, Math functions, and parentheses
-            const safePattern = /^[0-9+\-*/().Math\s,PI\^a-z]*$/;
-            if (!safePattern.test(expression)) {
-                throw new Error('Invalid expression');
-            }
-            
-            return Function('"use strict"; return (' + expression + ')')();
-        }
-
-        // History functions
-        function addToHistory(expression, result) {
-            const historyItem = {
-                expression: expression,
-                result: result,
-                timestamp: new Date().toLocaleTimeString()
-            };
-            
-            history.unshift(historyItem);
-            
-            // Keep only last 20 items
-            if (history.length > 20) {
-                history = history.slice(0, 20);
-            }
-            
-            updateHistoryDisplay();
-            saveHistory();
-        }
-
-        function updateHistoryDisplay() {
-            const historyPanel = document.getElementById('historyPanel');
-            
-            if (history.length === 0) {
-                historyPanel.innerHTML = '<p class="text-center opacity-50">No calculations yet</p>';
-                return;
-            }
-            
-            historyPanel.innerHTML = history.map(item => `
-                <div class="history-item" onclick="useHistoryItem('${item.expression}', ${item.result})">
-                    <div class="text-sm opacity-70">${item.expression}</div>
-                    <div class="font-semibold">${formatNumber(item.result)}</div>
-                    <div class="text-xs opacity-50">${item.timestamp}</div>
-                </div>
-            `).join('');
-        }
-
-        function useHistoryItem(expression, result) {
-            currentExpression = expression;
-            lastResult = result;
-            updateDisplay();
-        }
-
-        function clearHistory() {
-            history = [];
-            updateHistoryDisplay();
-            localStorage.removeItem('calculatorHistory');
-        }
-
-        function exportHistory() {
-            if (history.length === 0) return;
-            
-            const historyText = history.map(item => 
-                `${item.expression} = ${item.result} (${item.timestamp})`
-            ).join('\n');
-            
-            const blob = new Blob([historyText], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'calculator_history.txt';
-            link.click();
-            URL.revokeObjectURL(url);
-        }
-
-        function saveHistory() {
-            localStorage.setItem('calculatorHistory', JSON.stringify(history));
-        }
-
-        function loadHistory() {
-            const saved = localStorage.getItem('calculatorHistory');
-            if (saved) {
-                history = JSON.parse(saved);
-                updateHistoryDisplay();
-            }
-        }
-
-        // Utility functions
-        function formatNumber(num) {
-            if (Math.abs(num) > 1e15 || (Math.abs(num) < 1e-6 && num !== 0)) {
-                return num.toExponential(6);
-            }
-            
-            const rounded = Math.round(num * 1e10) / 1e10;
-            return rounded.toString();
-        }
-
-        // Keyboard support
-        document.addEventListener('keydown', function(event) {
-            const key = event.key;
-            
-            if (key >= '0' && key <= '9') {
-                addNumber(key);
-            } else if (key === '.') {
-                addDecimal();
-            } else if (['+', '-', '*', '/'].includes(key)) {
-                addOperator(key);
-            } else if (key === 'Enter' || key === '=') {
-                calculate();
-            } else if (key === 'Escape') {
-                clearAll();
-            } else if (key === 'Backspace') {
-                backspace();
-            } else if (key === '(') {
-                addFunction('(');
-            } else if (key === ')') {
-                addFunction(')');
-            }
-        });
-
-        // Initialize memory indicator
-        updateMemoryIndicator();
-    </script>
-<script src="/homebutton.js"></script>
+  render();
+  </script>
 </body>
 </html>
