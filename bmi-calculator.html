@@ -513,6 +513,31 @@
       gap: 12px;
     }
 
+    /* Activity Level Select */
+    .activity-select {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      color: var(--text);
+      transition: all var(--transition);
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .activity-select:focus {
+      outline: none;
+      border-color: var(--accent1);
+      box-shadow: var(--ring);
+    }
+
     /* Calculate Button */
     .calc-btn {
       width: 100%;
@@ -590,6 +615,55 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Health Summary Card */
+    .health-summary-card {
+      position: relative;
+      padding: 18px;
+      background: var(--glass);
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      background-clip: padding-box;
+      overflow: hidden;
+    }
+    .health-summary-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-sm);
+      padding: 1px;
+      background: var(--grad-purple);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .health-summary-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .health-summary-text {
+      font-size: 0.85rem;
+      color: var(--text2);
+      line-height: 1.65;
+    }
+    .age-group-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: rgba(0,124,240,0.12);
+      color: var(--accent1);
+      border: 1px solid rgba(0,124,240,0.2);
+      margin-bottom: 10px;
+    }
+
     /* BMI Score Card */
     .bmi-score-card {
       text-align: center;
@@ -658,6 +732,29 @@
       border-radius: 50%;
     }
 
+    /* BMI Value with pulsing glow */
+    .bmi-value-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+    .bmi-value-glow {
+      position: absolute;
+      inset: -20px -30px;
+      border-radius: 50%;
+      filter: blur(30px);
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
+    }
+    .bmi-value-glow.active {
+      opacity: 0.35;
+      animation: bmiGlowPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes bmiGlowPulse {
+      0%, 100% { opacity: 0.25; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.08); }
+    }
+
     .bmi-value-display {
       font-size: 3.2rem;
       font-weight: 900;
@@ -665,6 +762,8 @@
       line-height: 1;
       margin-bottom: 4px;
       transition: color 0.3s ease;
+      position: relative;
+      z-index: 1;
     }
     .bmi-category-badge {
       display: inline-flex;
@@ -734,8 +833,15 @@
       border-radius: var(--radius-xs);
       padding: 14px;
       transition: all var(--transition);
+      border-left: 3px solid transparent;
     }
     .metric-card:hover { border-color: rgba(0,124,240,0.3); }
+    .metric-card.cat-underweight { border-left-color: var(--bmi-under); }
+    .metric-card.cat-normal { border-left-color: var(--bmi-normal); }
+    .metric-card.cat-overweight { border-left-color: var(--bmi-over); }
+    .metric-card.cat-obese1 { border-left-color: var(--bmi-obese1); }
+    .metric-card.cat-obese2 { border-left-color: var(--bmi-obese2); }
+    .metric-card.cat-obese3 { border-left-color: var(--bmi-obese3); }
     .metric-icon-label {
       display: flex;
       align-items: center;
@@ -806,6 +912,47 @@
     .risk-high { background: rgba(231,111,81,0.15); color: #e76f51; }
     .risk-critical { background: rgba(230,57,70,0.15); color: #e63946; }
 
+    /* Recommendations Card */
+    .recommendations-card {
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+    }
+    .recommendations-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .recommendation-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .recommendation-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+    .recommendation-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      background: rgba(0,124,240,0.12);
+      color: var(--accent1);
+    }
+
     /* Ideal Weight Card */
     .ideal-weight-card {
       background: var(--glass);
@@ -866,7 +1013,7 @@
     /* Print / Share Buttons */
     .action-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 8px;
     }
     .action-btn {
@@ -1131,6 +1278,7 @@
       border: 1px solid var(--line);
       border-radius: var(--radius-sm);
       padding: 18px;
+      margin-top: 12px;
     }
     .percentile-card.visible { display: block; }
     .percentile-title {
@@ -1267,15 +1415,17 @@
       .input-panel { display: none !important; }
       .results-content.visible { display: block !important; }
       body { background: #fff !important; color: #000 !important; }
-      .bmi-score-card, .metric-card, .health-risk-card, .ideal-weight-card {
+      .bmi-score-card, .metric-card, .health-risk-card, .ideal-weight-card, .health-summary-card, .recommendations-card {
         background: #f5f5f5 !important;
         border: 1px solid #ddd !important;
         color: #000 !important;
         break-inside: avoid;
       }
-      .metric-value, .health-risk-title, .ideal-weight-title, .metric-name, .risk-item, .metric-desc, .ideal-weight-range {
+      .health-summary-card::before { display: none; }
+      .metric-value, .health-risk-title, .ideal-weight-title, .metric-name, .risk-item, .metric-desc, .ideal-weight-range, .health-summary-title, .health-summary-text, .recommendations-title, .recommendation-item {
         color: #333 !important;
       }
+      .bmi-value-glow { display: none !important; }
     }
   </style>
 </head>
@@ -1405,6 +1555,18 @@
               </div>
             </div>
 
+            <!-- Activity Level -->
+            <div class="input-group">
+              <label class="input-label" for="input-activity">🏃 Activity Level</label>
+              <select id="input-activity" class="activity-select" aria-label="Activity level">
+                <option value="1.2">Sedentary (little or no exercise)</option>
+                <option value="1.375">Lightly Active (1–3 days/week)</option>
+                <option value="1.55" selected>Moderately Active (3–5 days/week)</option>
+                <option value="1.725">Very Active (6–7 days/week)</option>
+                <option value="1.9">Extra Active (physical job or 2× training)</option>
+              </select>
+            </div>
+
             <!-- Waist -->
             <div class="input-group">
               <label class="input-label" for="input-waist">📏 Waist Circumference <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
@@ -1434,8 +1596,15 @@
 
             <!-- Results Content -->
             <div class="results-content" id="results-content">
+              <!-- Health Summary Card -->
+              <div class="health-summary-card" id="health-summary-card">
+                <div class="health-summary-title">🏥 Your Health Summary</div>
+                <div class="health-summary-text" id="health-summary-text">—</div>
+              </div>
+
               <!-- BMI Score Card -->
               <div class="bmi-score-card">
+                <div class="age-group-label" id="age-group-label">Adult</div>
                 <div class="bmi-gauge-wrapper">
                   <div class="bmi-gauge-bg">
                     <div class="bmi-gauge-arc"></div>
@@ -1445,7 +1614,10 @@
                   </div>
                   <div class="bmi-gauge-center"></div>
                 </div>
-                <div class="bmi-value-display" id="bmi-value">0.0</div>
+                <div class="bmi-value-wrapper">
+                  <div class="bmi-value-glow" id="bmi-value-glow"></div>
+                  <div class="bmi-value-display" id="bmi-value">0.0</div>
+                </div>
                 <div class="bmi-category-badge" id="bmi-category">—</div>
                 <div class="bmi-scale">
                   <div class="bmi-scale-segments">
@@ -1484,7 +1656,7 @@
               </div>
 
               <!-- Metrics Grid -->
-              <div class="metrics-grid">
+              <div class="metrics-grid" id="metrics-grid">
                 <div class="metric-card">
                   <div class="metric-icon-label">
                     <span class="metric-icon">📊</span>
@@ -1555,10 +1727,17 @@
                 <div class="risk-items" id="risk-items"></div>
               </div>
 
+              <!-- Recommendations -->
+              <div class="recommendations-card" id="recommendations-card">
+                <div class="recommendations-title">💡 Personalized Recommendations</div>
+                <div class="recommendation-items" id="recommendation-items"></div>
+              </div>
+
               <!-- Actions -->
               <div class="action-row">
                 <button class="action-btn" id="btn-print" type="button">🖨️ Print Results</button>
                 <button class="action-btn" id="btn-copy" type="button">📋 Copy Summary</button>
+                <button class="action-btn" id="btn-download" type="button">📥 Download Calculator</button>
               </div>
             </div>
           </div>
@@ -1795,6 +1974,30 @@
   }
 
   // ============================================================
+  //  ANIMATED COUNTING EFFECT
+  // ============================================================
+  function animateCount(element, targetValue, duration, color) {
+    const start = performance.now();
+    const startVal = 0;
+
+    function update(currentTime) {
+      const elapsed = currentTime - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = startVal + (targetValue - startVal) * eased;
+      element.textContent = current.toFixed(1);
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+
+    element.style.color = color;
+    requestAnimationFrame(update);
+  }
+
+  // ============================================================
   //  BMI CALCULATOR
   // ============================================================
   (function() {
@@ -1813,6 +2016,7 @@
     const inputWeightLb = document.getElementById('input-weight-lb');
     const inputWaist = document.getElementById('input-waist');
     const inputWaistIn = document.getElementById('input-waist-in');
+    const inputActivity = document.getElementById('input-activity');
 
     const resultsPlaceholder = document.getElementById('results-placeholder');
     const resultsContent = document.getElementById('results-content');
@@ -1876,15 +2080,23 @@
       return (parseFloat(inputWaistIn.value) || 0) * 2.54;
     }
 
-    // BMI categories
+    // BMI categories (WHO for adults 20+)
     function getBMICategory(bmi) {
-      if (bmi < 16) return { label: 'Severely Underweight', color: 'var(--bmi-under)', bg: 'rgba(0,180,216,0.15)', border: 'rgba(0,180,216,0.3)' };
-      if (bmi < 18.5) return { label: 'Underweight', color: 'var(--bmi-under)', bg: 'rgba(0,180,216,0.15)', border: 'rgba(0,180,216,0.3)' };
-      if (bmi < 25) return { label: 'Normal (Healthy Weight)', color: 'var(--bmi-normal)', bg: 'rgba(45,198,83,0.15)', border: 'rgba(45,198,83,0.3)' };
-      if (bmi < 30) return { label: 'Overweight', color: 'var(--bmi-over)', bg: 'rgba(244,162,97,0.15)', border: 'rgba(244,162,97,0.3)' };
-      if (bmi < 35) return { label: 'Obese Class I', color: 'var(--bmi-obese1)', bg: 'rgba(231,111,81,0.15)', border: 'rgba(231,111,81,0.3)' };
-      if (bmi < 40) return { label: 'Obese Class II', color: 'var(--bmi-obese2)', bg: 'rgba(230,57,70,0.15)', border: 'rgba(230,57,70,0.3)' };
-      return { label: 'Obese Class III', color: 'var(--bmi-obese3)', bg: 'rgba(157,2,8,0.15)', border: 'rgba(157,2,8,0.3)' };
+      if (bmi < 16) return { label: 'Severely Underweight', color: 'var(--bmi-under)', bg: 'rgba(0,180,216,0.15)', border: 'rgba(0,180,216,0.3)', catClass: 'cat-underweight' };
+      if (bmi < 18.5) return { label: 'Underweight', color: 'var(--bmi-under)', bg: 'rgba(0,180,216,0.15)', border: 'rgba(0,180,216,0.3)', catClass: 'cat-underweight' };
+      if (bmi < 25) return { label: 'Normal (Healthy Weight)', color: 'var(--bmi-normal)', bg: 'rgba(45,198,83,0.15)', border: 'rgba(45,198,83,0.3)', catClass: 'cat-normal' };
+      if (bmi < 30) return { label: 'Overweight', color: 'var(--bmi-over)', bg: 'rgba(244,162,97,0.15)', border: 'rgba(244,162,97,0.3)', catClass: 'cat-overweight' };
+      if (bmi < 35) return { label: 'Obese Class I', color: 'var(--bmi-obese1)', bg: 'rgba(231,111,81,0.15)', border: 'rgba(231,111,81,0.3)', catClass: 'cat-obese1' };
+      if (bmi < 40) return { label: 'Obese Class II', color: 'var(--bmi-obese2)', bg: 'rgba(230,57,70,0.15)', border: 'rgba(230,57,70,0.3)', catClass: 'cat-obese2' };
+      return { label: 'Obese Class III', color: 'var(--bmi-obese3)', bg: 'rgba(157,2,8,0.15)', border: 'rgba(157,2,8,0.3)', catClass: 'cat-obese3' };
+    }
+
+    // CDC percentile category for children (2-19)
+    function getPercentileCategory(percentile) {
+      if (percentile < 5) return { label: 'Underweight', color: 'var(--bmi-under)', bg: 'rgba(0,180,216,0.15)', border: 'rgba(0,180,216,0.3)', catClass: 'cat-underweight' };
+      if (percentile < 85) return { label: 'Healthy Weight', color: 'var(--bmi-normal)', bg: 'rgba(45,198,83,0.15)', border: 'rgba(45,198,83,0.3)', catClass: 'cat-normal' };
+      if (percentile < 95) return { label: 'Overweight', color: 'var(--bmi-over)', bg: 'rgba(244,162,97,0.15)', border: 'rgba(244,162,97,0.3)', catClass: 'cat-overweight' };
+      return { label: 'Obese', color: 'var(--bmi-obese1)', bg: 'rgba(231,111,81,0.15)', border: 'rgba(231,111,81,0.3)', catClass: 'cat-obese1' };
     }
 
     // ============================================================
@@ -1906,12 +2118,12 @@
       }
     };
 
-    // Approximate error function (Abramowitz & Stegun)
+    // BUG FIX #2: Corrected erf() function (Abramowitz & Stegun approximation)
     function erf(x) {
       const sign = x >= 0 ? 1 : -1;
       x = Math.abs(x);
       const t = 1 / (1 + 0.3275911 * x);
-      const y = 1 - (((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t) / (1.061405429 * t - 1.453152027) * t + 1.421413741) * t + 0.254829592) * t;
+      const y = 1 - (((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t);
       return sign * y;
     }
 
@@ -1955,7 +2167,111 @@
       return normalCDF(z) * 100;
     }
 
-    // Calculate
+    // ============================================================
+    //  HEALTH SUMMARY & RECOMMENDATIONS GENERATORS
+    // ============================================================
+    function getAgeGroupLabel(age) {
+      if (age < 2) return 'Infant';
+      if (age <= 12) return 'Child';
+      if (age <= 17) return 'Teen';
+      if (age <= 19) return 'Young Adult';
+      if (age <= 64) return 'Adult';
+      return 'Senior';
+    }
+
+    function generateHealthSummary(bmi, age, gender, category, percentile) {
+      const genderText = gender === 'male' ? (age < 18 ? 'boy' : 'man') : (age < 18 ? 'girl' : 'woman');
+      const ageGroup = getAgeGroupLabel(age);
+
+      if (age <= 19) {
+        // Children/teens - use percentile
+        if (percentile < 5) {
+          return `As a ${ageGroup.toLowerCase()} aged ${age}, this ${genderText}'s BMI-for-age percentile is at the ${percentile.toFixed(0)}th percentile, which is below the healthy range (5th–85th percentile). This may indicate undernutrition or a growth concern. Consulting a pediatrician is recommended for a thorough growth assessment.`;
+        } else if (percentile < 85) {
+          return `As a ${ageGroup.toLowerCase()} aged ${age}, this ${genderText}'s BMI-for-age is at the ${percentile.toFixed(0)}th percentile, placing them within the healthy weight range (5th–85th percentile). This suggests age-appropriate growth and weight for their height. Continue supporting healthy eating habits and regular physical activity.`;
+        } else if (percentile < 95) {
+          return `As a ${ageGroup.toLowerCase()} aged ${age}, this ${genderText}'s BMI-for-age is at the ${percentile.toFixed(0)}th percentile, in the overweight range (85th–95th percentile). This suggests they weigh more than 85% of peers their age and gender. A pediatrician can help assess whether lifestyle changes are needed.`;
+        } else {
+          return `As a ${ageGroup.toLowerCase()} aged ${age}, this ${genderText}'s BMI-for-age is at the ${percentile.toFixed(0)}th percentile, in the obese range (≥95th percentile). This indicates a higher body weight relative to height compared to peers. A pediatrician or registered dietitian can provide personalized guidance for healthy growth.`;
+        }
+      }
+
+      if (age >= 65) {
+        // Senior considerations
+        if (bmi < 18.5) {
+          return `As a senior aged ${age}, a BMI of ${bmi.toFixed(1)} is considered underweight. For older adults, maintaining adequate weight is important as some research suggests a slightly higher BMI (22–27) may be protective. Unintentional weight loss can signal underlying health issues. Consult your healthcare provider.`;
+        } else if (bmi < 25) {
+          return `As a senior aged ${age}, your BMI of ${bmi.toFixed(1)} falls within the normal range. Some research suggests that for adults over 65, a BMI between 22 and 27 may offer additional protective benefits. Focus on maintaining muscle mass through strength training and adequate protein intake.`;
+        } else if (bmi < 30) {
+          return `As a senior aged ${age}, your BMI of ${bmi.toFixed(1)} is in the overweight range. Interestingly, some research suggests that for adults over 65, a slightly higher BMI (up to 27) may be protective against certain health conditions. Still, maintaining an active lifestyle and balanced diet remains important.`;
+        } else {
+          return `As a senior aged ${age}, your BMI of ${bmi.toFixed(1)} is in the obese range. While some studies suggest a modest "obesity paradox" in older adults, a very high BMI still carries significant cardiovascular and metabolic risks. Work with your healthcare provider on a safe management plan.`;
+        }
+      }
+
+      // Standard adults (20-64)
+      if (bmi < 16) {
+        return `Your BMI of ${bmi.toFixed(1)} indicates severe underweight, which is associated with significant health risks including malnutrition, weakened immunity, and bone loss. This requires prompt medical attention to assess underlying causes and develop a recovery plan.`;
+      } else if (bmi < 18.5) {
+        return `Your BMI of ${bmi.toFixed(1)} falls in the underweight category. While some people are naturally lean, being underweight can indicate nutritional deficiencies or underlying health conditions. Consider consulting a healthcare provider to evaluate your weight and ensure adequate nutrition.`;
+      } else if (bmi < 25) {
+        return `Your BMI of ${bmi.toFixed(1)} is within the healthy weight range (18.5–24.9). This is associated with the lowest risk of weight-related health conditions. Maintain your current lifestyle with balanced nutrition and regular physical activity to stay in this optimal range.`;
+      } else if (bmi < 30) {
+        return `Your BMI of ${bmi.toFixed(1)} places you in the overweight category. This modestly increases your risk for conditions like type 2 diabetes and heart disease. Even a 5–10% weight reduction can significantly improve health markers and lower disease risk.`;
+      } else if (bmi < 35) {
+        return `Your BMI of ${bmi.toFixed(1)} falls in the Obese Class I range. This significantly elevates risk for cardiovascular disease, type 2 diabetes, and sleep apnea. A structured approach combining diet, exercise, and medical guidance can lead to meaningful health improvements.`;
+      } else if (bmi < 40) {
+        return `Your BMI of ${bmi.toFixed(1)} is in the Obese Class II range, indicating serious health risks. These include substantially higher rates of heart disease, stroke, and metabolic disorders. Medical supervision is strongly recommended for a comprehensive weight management plan.`;
+      } else {
+        return `Your BMI of ${bmi.toFixed(1)} falls in the Obese Class III (morbid obesity) range. This level is associated with life-threatening health risks and significantly reduced life expectancy. Urgent medical intervention, possibly including bariatric surgery evaluation, is strongly advised.`;
+      }
+    }
+
+    function generateRecommendations(bmi, age, gender, percentile) {
+      let recs = [];
+
+      if (age <= 19) {
+        // Children/teens recommendations
+        recs.push({ icon: '🥗', text: 'Focus on balanced meals with plenty of fruits, vegetables, whole grains, and lean proteins. Avoid sugary drinks and processed snacks.' });
+        recs.push({ icon: '🏃', text: 'Encourage at least 60 minutes of physical activity daily through play, sports, or family activities. Limit screen time to 2 hours per day.' });
+        recs.push({ icon: '😴', text: 'Ensure adequate sleep: 9–12 hours for children (6–12), 8–10 hours for teens (13–17). Good sleep supports healthy growth.' });
+        if (percentile >= 85) {
+          recs.push({ icon: '👨‍⚕️', text: 'Schedule a consultation with a pediatrician or registered dietitian for personalized guidance on healthy weight management.' });
+        } else {
+          recs.push({ icon: '👨‍⚕️', text: 'Regular pediatric checkups help track growth patterns. Discuss any concerns about weight or development with your child\'s doctor.' });
+        }
+      } else if (bmi < 18.5) {
+        recs.push({ icon: '🥜', text: 'Increase caloric intake with nutrient-dense foods: nuts, avocados, whole grains, dairy, and healthy fats. Aim for 300–500 extra calories per day.' });
+        recs.push({ icon: '💪', text: 'Incorporate strength training 2–3 times per week to build lean muscle mass. Progressive resistance exercise is key for healthy weight gain.' });
+        recs.push({ icon: '📅', text: 'Eat 5–6 smaller meals throughout the day instead of 2–3 large ones. This makes it easier to consume more calories comfortably.' });
+        recs.push({ icon: '👨‍⚕️', text: 'Consult a healthcare provider to rule out underlying conditions such as thyroid disorders, celiac disease, or other causes of unintended weight loss.' });
+      } else if (bmi < 25) {
+        recs.push({ icon: '🥗', text: 'Continue eating a balanced diet rich in vegetables, fruits, lean proteins, and whole grains. Aim for at least 5 servings of fruits and vegetables daily.' });
+        recs.push({ icon: '🏃', text: 'Maintain at least 150 minutes of moderate aerobic activity or 75 minutes of vigorous activity per week, plus strength training twice weekly.' });
+        recs.push({ icon: '💧', text: 'Stay well-hydrated — aim for about 8 glasses (2 liters) of water daily. Proper hydration supports metabolism and overall health.' });
+        recs.push({ icon: '🔍', text: 'Schedule regular health screenings even when feeling healthy. Preventive care catches potential issues early when they\'re most treatable.' });
+      } else if (bmi < 30) {
+        recs.push({ icon: '📉', text: 'Aim for a gradual weight loss of 0.5–1 kg (1–2 lbs) per week. This sustainable rate is more likely to lead to long-term success.' });
+        recs.push({ icon: '🥗', text: 'Reduce portion sizes and limit processed foods, sugary drinks, and refined carbohydrates. Focus on whole, nutrient-dense foods.' });
+        recs.push({ icon: '🚶', text: 'Increase daily movement: take walks, use stairs, stand more often. Aim for 10,000 steps daily as a general target.' });
+        recs.push({ icon: '📊', text: 'Track your food intake and physical activity for a few weeks. Awareness is the first step toward making lasting lifestyle changes.' });
+      } else {
+        recs.push({ icon: '👨‍⚕️', text: 'Consult with a healthcare provider for a comprehensive weight management plan. Medical supervision is important at this BMI level.' });
+        recs.push({ icon: '🍽️', text: 'Work with a registered dietitian to create a sustainable, calorie-controlled meal plan that doesn\'t feel restrictive.' });
+        recs.push({ icon: '🏊', text: 'Choose low-impact exercises to protect joints: swimming, cycling, water aerobics, or walking. Start gradually and build up over time.' });
+        recs.push({ icon: '🧠', text: 'Consider behavioral therapy or support groups. Psychological support significantly improves long-term weight management outcomes.' });
+      }
+
+      if (age >= 65 && bmi < 22) {
+        recs.push({ icon: '🦴', text: 'Prioritize calcium and vitamin D intake for bone health. Consider supplements if dietary intake is insufficient, and discuss with your doctor.' });
+      }
+
+      return recs;
+    }
+
+    // ============================================================
+    //  CALCULATE BMI
+    // ============================================================
     document.getElementById('btn-calculate').addEventListener('click', calculateBMI);
 
     // Enter key support
@@ -1971,9 +2287,9 @@
       const weightKg = getWeightKg();
       const waistCm = getWaistCm();
 
-      // Validate
-      if (!age || age < 18 || age > 120) {
-        showToast('Please enter a valid age (18–120)', '⚠️');
+      // BUG FIX #1: Changed age < 18 to age < 2 so children (2-17) work
+      if (!age || age < 2 || age > 120) {
+        showToast('Please enter a valid age (2–120)', '⚠️');
         return;
       }
       if (!heightCm || heightCm < 50 || heightCm > 300) {
@@ -1986,6 +2302,8 @@
       }
 
       const heightM = heightCm / 100;
+      const isChild = age <= 19;
+      const isSenior = age >= 65;
 
       // Core calculations
       const bmi = weightKg / (heightM * heightM);
@@ -1994,7 +2312,8 @@
 
       // Body fat % (Deurenberg et al.)
       const genderVal = currentGender === 'male' ? 1 : 0;
-      const bodyFatPct = (1.20 * bmi) + (0.23 * age) - (10.8 * genderVal) - 5.4;
+      let bodyFatPct = (1.20 * bmi) + (0.23 * age) - (10.8 * genderVal) - 5.4;
+      if (bodyFatPct < 3) bodyFatPct = 3;
       const leanMass = weightKg * (1 - bodyFatPct / 100);
 
       // Calorie needs (Mifflin-St Jeor)
@@ -2004,24 +2323,67 @@
       } else {
         bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) - 161;
       }
-      // Assume sedentary multiplier (1.2) as baseline
-      const dailyCalories = Math.round(bmr * 1.2);
+      const activityMultiplier = parseFloat(inputActivity.value) || 1.2;
+      const dailyCalories = Math.round(bmr * activityMultiplier);
+
+      // Activity label
+      const activityLabels = {
+        '1.2': 'Sedentary',
+        '1.375': 'Lightly Active',
+        '1.55': 'Moderately Active',
+        '1.725': 'Very Active',
+        '1.9': 'Extra Active'
+      };
+      const activityLabel = activityLabels[inputActivity.value] || 'Moderately Active';
 
       // Ideal weight range (BMI 18.5–24.9)
       const idealMin = 18.5 * heightM * heightM;
       const idealMax = 24.9 * heightM * heightM;
 
       // Category
-      const category = getBMICategory(bmi);
+      let category;
+      let percentile = null;
+
+      // BUG FIX #3: Integrate percentile calculation for ages 2-19
+      if (isChild) {
+        percentile = calcBMIPercentile(bmi, currentGender, age);
+        category = getPercentileCategory(percentile);
+      } else {
+        category = getBMICategory(bmi);
+      }
 
       // Show results
       resultsPlaceholder.style.display = 'none';
       resultsContent.classList.add('visible');
 
-      // BMI Value
+      // Health Summary
+      const healthSummary = generateHealthSummary(bmi, age, currentGender, category, percentile);
+      document.getElementById('health-summary-text').textContent = healthSummary;
+
+      // Age Group Label
+      const ageGroupLabel = document.getElementById('age-group-label');
+      ageGroupLabel.textContent = getAgeGroupLabel(age) + ' (Age ' + age + ')';
+
+      // BMI Value - Animated counting
       const bmiValueEl = document.getElementById('bmi-value');
-      bmiValueEl.textContent = bmi.toFixed(1);
-      bmiValueEl.style.color = category.color;
+      animateCount(bmiValueEl, bmi, 800, category.color);
+
+      // Pulsing glow
+      const glowEl = document.getElementById('bmi-value-glow');
+      glowEl.classList.remove('active');
+      // Get resolved color for the glow
+      const colorMap = {
+        'var(--bmi-under)': '#00b4d8',
+        'var(--bmi-normal)': '#2dc653',
+        'var(--bmi-over)': '#f4a261',
+        'var(--bmi-obese1)': '#e76f51',
+        'var(--bmi-obese2)': '#e63946',
+        'var(--bmi-obese3)': '#9d0208'
+      };
+      glowEl.style.background = colorMap[category.color] || category.color;
+      requestAnimationFrame(() => {
+        glowEl.classList.add('active');
+      });
 
       // Category badge
       const catBadge = document.getElementById('bmi-category');
@@ -2039,26 +2401,82 @@
       document.getElementById('bmi-marker').style.left = markerPercent + '%';
 
       // Range text
-      document.getElementById('bmi-range-text').textContent =
-        bmi < 18.5 ? `You need to gain ${(idealMin - weightKg).toFixed(1)} kg to reach healthy range`
-        : bmi > 24.9 ? `You need to lose ${(weightKg - idealMax).toFixed(1)} kg to reach healthy range`
-        : 'You are within the healthy BMI range';
+      if (isChild && percentile !== null) {
+        document.getElementById('bmi-range-text').textContent =
+          `BMI-for-age percentile: ${percentile.toFixed(0)}th (CDC Growth Charts)`;
+      } else {
+        document.getElementById('bmi-range-text').textContent =
+          bmi < 18.5 ? `You need to gain ${(idealMin - weightKg).toFixed(1)} kg to reach healthy range`
+          : bmi > 24.9 ? `You need to lose ${(weightKg - idealMax).toFixed(1)} kg to reach healthy range`
+          : 'You are within the healthy BMI range';
+      }
+
+      // Percentile card for children
+      if (isChild && percentile !== null) {
+        const percentileCard = document.getElementById('percentile-card');
+        percentileCard.classList.add('visible');
+
+        document.getElementById('percentile-value').textContent = percentile.toFixed(1) + 'th';
+        document.getElementById('percentile-value').style.color = category.color;
+
+        // Percentile marker (0-100 maps to bar width)
+        const pMarkerPercent = Math.min(100, Math.max(0, percentile));
+        document.getElementById('percentile-marker').style.left = pMarkerPercent + '%';
+
+        // Percentile status
+        const pStatus = document.getElementById('percentile-status');
+        pStatus.textContent = category.label;
+        pStatus.style.background = category.bg;
+        pStatus.style.color = category.color;
+        pStatus.style.border = `1px solid ${category.border}`;
+
+        // Percentile note for children
+        document.getElementById('percentile-note').textContent =
+          `Based on CDC 2000 BMI-for-age growth charts for ${currentGender === 'male' ? 'boys' : 'girls'} aged ${age}. ` +
+          `This ${getAgeGroupLabel(age).toLowerCase()}'s BMI places them at the ${percentile.toFixed(0)}th percentile among same-age, same-gender peers. ` +
+          `For children, BMI is interpreted differently than for adults — percentile matters more than the absolute number. ` +
+          `Please consult a pediatrician for a comprehensive growth assessment.`;
+      } else {
+        document.getElementById('percentile-card').classList.remove('visible');
+      }
 
       // Metrics
       document.getElementById('metric-bmi-prime').textContent = bmiPrime.toFixed(3);
       document.getElementById('metric-ponderal').textContent = ponderalIndex.toFixed(1) + ' kg/m³';
 
-      document.getElementById('metric-calories').textContent = dailyCalories.toLocaleString() + ' kcal';
-      document.getElementById('metric-calories-desc').textContent =
-        bmi < 18.5 ? 'Est. to gain weight' : bmi > 24.9 ? 'Est. to lose weight' : 'Est. maintenance';
+      // Calories with activity level
+      if (isChild && age < 18) {
+        document.getElementById('metric-calories').textContent = dailyCalories.toLocaleString() + ' kcal';
+        document.getElementById('metric-calories-desc').textContent =
+          `Est. for adults (${activityLabel}). Children's needs vary by growth stage.`;
+      } else if (isChild) {
+        document.getElementById('metric-calories').textContent = dailyCalories.toLocaleString() + ' kcal';
+        document.getElementById('metric-calories-desc').textContent =
+          `Est. maintenance (${activityLabel})`;
+      } else {
+        document.getElementById('metric-calories').textContent = dailyCalories.toLocaleString() + ' kcal';
+        document.getElementById('metric-calories-desc').textContent =
+          `Est. maintenance (${activityLabel})`;
+      }
 
+      // Body fat with age note
       document.getElementById('metric-bodyfat').textContent = bodyFatPct.toFixed(1) + '%';
       const bfCat = currentGender === 'male'
         ? (bodyFatPct < 14 ? 'Athletic' : bodyFatPct < 18 ? 'Fit' : bodyFatPct < 25 ? 'Average' : 'High')
         : (bodyFatPct < 21 ? 'Athletic' : bodyFatPct < 25 ? 'Fit' : bodyFatPct < 32 ? 'Average' : 'High');
-      document.getElementById('metric-bodyfat-desc').textContent = `Category: ${bfCat}`;
+      if (isChild && age < 18) {
+        document.getElementById('metric-bodyfat-desc').textContent = `Category: ${bfCat} (age-adjusted estimate)`;
+      } else {
+        document.getElementById('metric-bodyfat-desc').textContent = `Category: ${bfCat}`;
+      }
 
       document.getElementById('metric-lean').textContent = leanMass.toFixed(1) + ' kg';
+
+      // Apply gradient borders to metric cards
+      document.querySelectorAll('#metrics-grid .metric-card').forEach(card => {
+        card.classList.remove('cat-underweight', 'cat-normal', 'cat-overweight', 'cat-obese1', 'cat-obese2', 'cat-obese3');
+        if (category.catClass) card.classList.add(category.catClass);
+      });
 
       // Waist-to-height ratio
       if (waistCm > 0) {
@@ -2094,7 +2512,38 @@
       const riskItems = document.getElementById('risk-items');
       let risks = [];
 
-      if (bmi < 16) {
+      if (isChild && percentile !== null) {
+        // Children/teens health risks based on percentile
+        if (percentile < 5) {
+          risks = [
+            { level: 'high', text: 'Below 5th percentile — may indicate undernutrition, growth delay, or underlying medical condition' },
+            { level: 'medium', text: 'Potential nutrient deficiencies affecting growth, bone development, and immune function' },
+            { level: 'medium', text: 'May experience fatigue, difficulty concentrating, or delayed puberty' },
+            { level: 'low', text: 'A pediatrician can assess growth patterns and recommend appropriate interventions' }
+          ];
+        } else if (percentile < 85) {
+          risks = [
+            { level: 'low', text: 'Healthy BMI-for-age percentile (5th–85th) — lower risk of weight-related health issues' },
+            { level: 'low', text: 'Age-appropriate growth trajectory suggests balanced nutrition and activity levels' },
+            { level: 'low', text: 'Continue encouraging healthy habits: balanced meals, daily activity, adequate sleep' },
+            { level: 'low', text: 'Regular pediatric wellness visits help ensure continued healthy growth' }
+          ];
+        } else if (percentile < 95) {
+          risks = [
+            { level: 'medium', text: '85th–95th percentile — overweight range for age and gender' },
+            { level: 'medium', text: 'Increased risk of developing type 2 diabetes, high blood pressure, or elevated cholesterol' },
+            { level: 'low', text: 'Early intervention with family-based lifestyle changes can prevent progression' },
+            { level: 'low', text: 'Focus on healthy habits rather than restrictive dieting for growing children' }
+          ];
+        } else {
+          risks = [
+            { level: 'high', text: 'At or above 95th percentile — obese range with significant health concerns' },
+            { level: 'high', text: 'Substantially elevated risk for metabolic syndrome, type 2 diabetes, and cardiovascular issues' },
+            { level: 'medium', text: 'Higher likelihood of sleep apnea, joint problems, and social/emotional challenges' },
+            { level: 'medium', text: 'Pediatrician-guided weight management program recommended' }
+          ];
+        }
+      } else if (bmi < 16) {
         risks = [
           { level: 'critical', text: 'Severe malnutrition risk — immediate medical consultation recommended' },
           { level: 'critical', text: 'Weakened immune system and increased infection susceptibility' },
@@ -2145,6 +2594,11 @@
         ];
       }
 
+      // Add senior note if applicable
+      if (isSenior && bmi >= 25 && bmi < 30) {
+        risks.push({ level: 'low', text: 'Note: Some research suggests BMI 22–27 may be protective for adults 65+. Discuss with your healthcare provider.' });
+      }
+
       // Add waist-to-height risk if available
       if (waistCm > 0) {
         const whr = waistCm / heightCm;
@@ -2162,6 +2616,15 @@
         </div>
       `).join('');
 
+      // Recommendations
+      const recs = generateRecommendations(bmi, age, currentGender, percentile);
+      document.getElementById('recommendation-items').innerHTML = recs.map(r => `
+        <div class="recommendation-item">
+          <span class="recommendation-icon">${r.icon}</span>
+          <span>${r.text}</span>
+        </div>
+      `).join('');
+
       showToast('BMI calculated successfully!', '📊');
     }
 
@@ -2175,8 +2638,11 @@
       inputWeightLb.value = '';
       inputWaist.value = '';
       inputWaistIn.value = '';
+      inputActivity.value = '1.55';
       resultsPlaceholder.style.display = '';
       resultsContent.classList.remove('visible');
+      document.getElementById('percentile-card').classList.remove('visible');
+      document.getElementById('bmi-value-glow').classList.remove('active');
       showToast('Form cleared', '🔄');
     });
 
@@ -2201,6 +2667,25 @@
       }).catch(() => {
         showToast('Could not copy — try manually', '⚠️');
       });
+    });
+
+    // Download
+    document.getElementById('btn-download').addEventListener('click', () => {
+      try {
+        const htmlContent = document.documentElement.outerHTML;
+        const blob = new Blob(['<!DOCTYPE html>\n' + htmlContent], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'bmi-calculator.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('Calculator downloaded!', '📥');
+      } catch (err) {
+        showToast('Download failed — try manually', '⚠️');
+      }
     });
 
   })();
