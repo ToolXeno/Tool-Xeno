@@ -1,989 +1,2584 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US" dir="ltr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#007cf0" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Image Cropper – Tool Xeno" />
+  <meta name="application-name" content="Tool Xeno" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="rating" content="general" />
+  <meta name="revisit-after" content="7 days" />
 
-  gtag('config', 'G-Y4JDC5DCBV');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Image Cropper Tool - Tool Xeno</title>
-    <meta name="description" content="Professional image cropping tool with advanced features including free-form selection, aspect ratio presets, rotation, zoom controls, grid guides, and high-quality output.">
+  <!-- SEO -->
+  <title>Image Cropper – Free Online Photo Crop Tool with Filters | Tool Xeno</title>
+  <meta name="description" content="Free professional image cropper online. Crop photos with precision using aspect ratio presets, rotate, flip, zoom. Apply filters like brightness, contrast, saturation. Export as PNG, JPG, WebP. 100% private, no signup." />
+  <meta name="keywords" content="image cropper, photo crop tool, online image editor, aspect ratio cropper, crop photos free, image filters, rotate image, resize image, picture cropper, free crop tool" />
+  <meta name="author" content="Tool Xeno" />
+  <link rel="canonical" href="https://toolxeno.com/image-cropper.html" />
+  <link rel="alternate" hreflang="en" href="https://toolxeno.com/image-cropper.html" />
 
-<!-- ✅ Tool Xeno Favicons -->
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="manifest" href="/site.webmanifest" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolxeno.com/image-cropper.html" />
+  <meta property="og:title" content="Image Cropper – Free Online Photo Crop Tool | Tool Xeno" />
+  <meta property="og:description" content="Professional image cropper with aspect ratio presets, filters, rotate, flip. Export in PNG, JPG, WebP. Free, private, in-browser." />
+  <meta property="og:site_name" content="Tool Xeno" />
+  <meta property="og:locale" content="en_US" />
 
-    <meta name="google-adsense-account" content="ca-pub-2713998296337545">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Image Cropper – Tool Xeno" />
+  <meta name="twitter:description" content="Crop photos with precision. Aspect ratios, filters, rotate, flip. Free, private, in-browser." />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Image Cropper",
+        "url": "https://toolxeno.com/image-cropper.html",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Professional online image cropper with aspect ratio presets, rotation, flip, zoom, and image filters."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolxeno.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Image Tools", "item": "https://toolxeno.com/#tools" },
+          { "@type": "ListItem", "position": 3, "name": "Image Cropper", "item": "https://toolxeno.com/image-cropper.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%237928ca'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>" />
+
+  <style>
+    /* =============================================
+       CSS RESET & VARIABLES
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg0: #030712;
+      --bg1: #0a0f1e;
+      --bg2: #0f172a;
+      --bg3: #1e293b;
+      --card: rgba(255,255,255,0.04);
+      --card-hover: rgba(255,255,255,0.08);
+      --card-solid: #1e293b;
+      --glass: rgba(255,255,255,0.03);
+      --text: #f1f5f9;
+      --text2: #cbd5e1;
+      --muted: #94a3b8;
+      --line: rgba(255,255,255,0.1);
+      --line-strong: rgba(255,255,255,0.2);
+      --accent1: #007cf0;
+      --accent2: #00dfd8;
+      --accent3: #7928ca;
+      --accent4: #ff0080;
+      --shadow: 0 24px 60px rgba(0,0,0,0.6);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.3);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --max: 1240px;
+      --ring: 0 0 0 3px rgba(0,124,240,0.4);
+      --grad: linear-gradient(135deg, var(--accent1), var(--accent2));
+      --grad-purple: linear-gradient(135deg, var(--accent3), var(--accent4));
+      --grad-text: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+      --grad-bg: linear-gradient(135deg, rgba(0,124,240,0.08) 0%, rgba(121,40,202,0.08) 100%);
+      --font: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+      --header-h: 72px;
+    }
+
+    [data-theme="light"] {
+      --bg0: #f8fafc;
+      --bg1: #f1f5f9;
+      --bg2: #e2e8f0;
+      --bg3: #cbd5e1;
+      --card: rgba(255,255,255,0.9);
+      --card-hover: rgba(255,255,255,1);
+      --card-solid: #ffffff;
+      --glass: rgba(255,255,255,0.8);
+      --text: #0f172a;
+      --text2: #334155;
+      --muted: #64748b;
+      --line: rgba(0,0,0,0.1);
+      --line-strong: rgba(0,0,0,0.15);
+      --shadow: 0 24px 60px rgba(0,0,0,0.1);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg0);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
     
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            
-            --dark-bg: #0a0a0a;
-            --dark-surface: #1a1a1a;
-            --dark-surface-elevated: #252525;
-            --dark-text: #ffffff;
-            --dark-text-secondary: #a0a0a0;
-            --dark-border: #333333;
-            
-            --light-bg: #f8fafc;
-            --light-surface: #ffffff;
-            --light-surface-elevated: #f1f5f9;
-            --light-text: #1e293b;
-            --light-text-secondary: #64748b;
-            --light-border: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            line-height: 1.6;
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-            min-height: 100vh;
-        }
-        
-        body.light-theme { 
-            background-color: var(--light-bg); 
-            color: var(--light-text); 
-        }
+    input[type="range"] { 
+      -webkit-appearance: none; 
+      appearance: none; 
+      background: transparent; 
+      cursor: pointer; 
+      width: 100%;
+    }
+    input[type="range"]::-webkit-slider-track { 
+      height: 4px; 
+      background: var(--bg3); 
+      border-radius: 2px; 
+    }
+    input[type="range"]::-webkit-slider-thumb { 
+      -webkit-appearance: none; 
+      appearance: none; 
+      width: 16px; 
+      height: 16px; 
+      background: var(--grad); 
+      border-radius: 50%; 
+      margin-top: -6px; 
+      box-shadow: 0 2px 6px rgba(0,124,240,0.5); 
+      border: 2px solid #fff;
+    }
+    input[type="range"]::-moz-range-track { 
+      height: 4px; 
+      background: var(--bg3); 
+      border-radius: 2px; 
+    }
+    input[type="range"]::-moz-range-thumb { 
+      width: 16px; 
+      height: 16px; 
+      background: var(--grad); 
+      border-radius: 50%; 
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,124,240,0.5); 
+    }
 
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.05;
-            background: radial-gradient(circle, #667eea 0%, transparent 70%);
-        }
-        
-        body.light-theme .particle { 
-            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(100vh) rotate(0deg); } 
-            100% { transform: translateY(-100px) rotate(360deg); } 
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
-        
-        body.light-theme .glass-card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-color: rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
-        }
-        
-        .btn-gradient {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .btn-gradient:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
-        }
-        
-        .btn-secondary {
-            background: var(--secondary-gradient);
-            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
-        }
-        
-        .btn-secondary:hover {
-            box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
-        }
-        
-        .btn-accent {
-            background: var(--accent-gradient);
-            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
-        }
-        
-        .btn-accent:hover {
-            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
-        }
-        
-        .upload-area {
-            border: 2px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            padding: 40px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.02);
-        }
-        
-        .upload-area:hover {
-            border-color: rgba(102, 126, 234, 0.5);
-            background: rgba(102, 126, 234, 0.05);
-        }
-        
-        body.light-theme .upload-area {
-            border-color: rgba(0, 0, 0, 0.2);
-            background: rgba(0, 0, 0, 0.02);
-        }
-        
-        body.light-theme .upload-area:hover {
-            border-color: rgba(102, 126, 234, 0.5);
-            background: rgba(102, 126, 234, 0.05);
-        }
-        
-        .crop-canvas-container {
-            position: relative;
-            display: inline-block;
-            border-radius: 16px;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.1);
-        }
-        
-        .crop-selection {
-            position: absolute;
-            border: 2px solid #667eea;
-            cursor: move;
-            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
-        }
-        
-        .crop-handle {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: #667eea;
-            border: 2px solid white;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-        
-        .crop-handle.nw { top: -6px; left: -6px; cursor: nw-resize; }
-        .crop-handle.ne { top: -6px; right: -6px; cursor: ne-resize; }
-        .crop-handle.sw { bottom: -6px; left: -6px; cursor: sw-resize; }
-        .crop-handle.se { bottom: -6px; right: -6px; cursor: se-resize; }
-        .crop-handle.n { top: -6px; left: 50%; transform: translateX(-50%); cursor: n-resize; }
-        .crop-handle.s { bottom: -6px; left: 50%; transform: translateX(-50%); cursor: s-resize; }
-        .crop-handle.w { top: 50%; left: -6px; transform: translateY(-50%); cursor: w-resize; }
-        .crop-handle.e { top: 50%; right: -6px; transform: translateY(-50%); cursor: e-resize; }
-        
-        .grid-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0.3;
-        }
-        
-        .grid-line {
-            position: absolute;
-            background: white;
-        }
-        
-        .grid-line.horizontal {
-            width: 100%;
-            height: 1px;
-        }
-        
-        .grid-line.vertical {
-            width: 1px;
-            height: 100%;
-        }
-        
-        .control-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 16px 0;
-        }
-        
-        .slider {
-            flex: 1;
-            appearance: none;
-            height: 6px;
-            border-radius: 3px;
-            background: rgba(255, 255, 255, 0.1);
-            outline: none;
-        }
-        
-        .slider::-webkit-slider-thumb {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary-gradient);
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-        
-        .slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary-gradient);
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-        
-        .aspect-ratio-btn {
-            padding: 8px 16px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            color: inherit;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-        }
-        
-        .aspect-ratio-btn.active {
-            background: var(--primary-gradient);
-            border-color: transparent;
-            color: white;
-        }
-        
-        body.light-theme .aspect-ratio-btn {
-            border-color: rgba(0, 0, 0, 0.2);
-            background: rgba(0, 0, 0, 0.05);
-        }
-        
-        .preview-canvas {
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            max-width: 100%;
-            height: auto;
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--dark-surface);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.light-theme .theme-toggle { 
-            background: var(--light-surface-elevated); 
-            border-color: var(--light-border); 
-        }
-        
-        body.light-theme .theme-toggle::after { 
-            transform: translateX(28px); 
-            background: var(--secondary-gradient); 
-        }
-        
-        @media (max-width: 768px) {
-            .control-group {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 8px;
-            }
-            
-            .upload-area {
-                padding: 20px;
-            }
-            
-            .crop-canvas-container {
-                max-width: 100%;
-            }
-        }
-    </style>
+    /* =============================================
+       ANIMATED BACKGROUND
+    ============================================= */
+    .bg-orbs {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+    }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(100px); opacity: 0.15;
+      will-change: transform;
+    }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent1); top: -200px; left: -200px; animation: orbFloat1 20s linear infinite; }
+    .orb-2 { width: 500px; height: 500px; background: var(--accent3); top: 30%; right: -150px; animation: orbFloat2 25s linear infinite; }
+    .orb-3 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: 30%; animation: orbFloat3 18s linear infinite; }
+    .orb-4 { width: 300px; height: 300px; background: var(--accent4); top: 60%; left: 10%; animation: orbFloat4 22s linear infinite; }
+
+    @keyframes orbFloat1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(60px,40px) scale(1.1);} 66%{transform:translate(-40px,60px) scale(0.95);} }
+    @keyframes orbFloat2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-80px,50px) scale(1.05);} 66%{transform:translate(40px,-60px) scale(1.1);} }
+    @keyframes orbFloat3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(70px,-40px) scale(1.15);} }
+    @keyframes orbFloat4 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,-80px) scale(1.1);} }
+
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+
+    .page-wrapper { position: relative; z-index: 1; }
+
+    /* =============================================
+       HEADER
+    ============================================= */
+    .header {
+      position: sticky; top: 0; z-index: 1000;
+      height: var(--header-h);
+      display: flex; align-items: center;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(3,7,18,0.85);
+      border-bottom: 1px solid var(--line);
+      transition: background var(--transition);
+    }
+    [data-theme="light"] .header { background: rgba(248,250,252,0.90); }
+
+    .header-inner {
+      max-width: var(--max); width: 100%; margin: 0 auto;
+      padding: 0 24px; display: flex; align-items: center; gap: 24px;
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--grad); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 900; color: #fff;
+      box-shadow: 0 4px 14px rgba(0,124,240,0.4);
+    }
+    .logo-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .nav-primary { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .nav-link {
+      padding: 7px 13px; font-size: 0.875rem; font-weight: 500;
+      color: var(--text2); border-radius: var(--radius-xs);
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav-link:hover { color: var(--text); background: var(--card); }
+
+    .header-actions { display: flex; align-items: center; gap: 10px; margin-left: 12px; }
+
+    .btn-theme {
+      padding: 8px 20px; font-size: 0.85rem; font-weight: 600;
+      font-family: var(--font); background: var(--card);
+      backdrop-filter: blur(8px); border-radius: 40px;
+      color: var(--text2); border: 1px solid var(--line);
+      transition: all 0.3s ease; cursor: pointer;
+    }
+    .btn-theme:hover {
+      color: var(--text); border-color: var(--accent1);
+      background: rgba(0,124,240,0.1);
+    }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; margin-left: auto; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); display: block; }
+
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(3,7,18,0.98); backdrop-filter: blur(24px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-link { font-size: 1.4rem; font-weight: 700; color: var(--text2); padding: 12px 32px; border-radius: var(--radius-sm); transition: all var(--transition); }
+    .mobile-nav-link:hover { color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; font-size: 1.5rem; color: var(--muted); padding: 8px; border-radius: 8px; transition: color var(--transition); cursor: pointer; }
+    .mobile-close:hover { color: var(--text); }
+
+    /* =============================================
+       HERO SECTION
+    ============================================= */
+    .hero {
+      padding: 60px 24px 40px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px;
+      background: rgba(0,124,240,0.15);
+      border: 1px solid rgba(0,124,240,0.3);
+      border-radius: 100px;
+      font-size: 0.78rem; font-weight: 600; color: var(--accent1);
+      letter-spacing: 0.5px; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
+
+    .hero-h1 {
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      font-weight: 800; line-height: 1.1; letter-spacing: -1.5px;
+      margin-bottom: 16px;
+      max-width: 700px; margin-left: auto; margin-right: auto;
+    }
+    .hero-h1 .grad-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .hero-sub {
+      font-size: clamp(0.9rem, 1.5vw, 1rem); color: var(--text2);
+      max-width: 500px; margin: 0 auto 24px; line-height: 1.6;
+    }
+
+    .hero-trust {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 8px 16px;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.8rem; font-weight: 500; color: var(--muted);
+    }
+    .trust-dot { color: var(--accent2); }
+
+    /* =============================================
+       TOOL SECTION
+    ============================================= */
+    .tool-section {
+      padding: 20px 24px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .tool-container {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    /* =============================================
+       UPLOAD ZONE
+    ============================================= */
+    .upload-container {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 400px;
+    }
+
+    .upload-zone {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed var(--line-strong);
+      border-radius: var(--radius-sm);
+      padding: 60px 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition);
+      background: var(--glass);
+      flex: 1;
+    }
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--accent1);
+      background: rgba(0,124,240,0.08);
+    }
+
+    .upload-icon {
+      font-size: 4rem;
+      margin-bottom: 16px;
+      opacity: 0.8;
+    }
+    .upload-title {
+      font-size: 1.3rem; font-weight: 700;
+      margin-bottom: 8px; color: var(--text);
+    }
+    .upload-subtitle {
+      font-size: 0.95rem; color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .upload-btn {
+      padding: 14px 32px;
+      font-size: 1rem; font-weight: 600;
+      background: var(--grad); color: #fff;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 20px rgba(0,124,240,0.35);
+      transition: all var(--transition);
+    }
+    .upload-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,124,240,0.45); }
+
+    .upload-formats {
+      margin-top: 20px;
+      font-size: 0.8rem; color: var(--muted);
+    }
+
+    /* =============================================
+       EDITOR LAYOUT
+    ============================================= */
+    .editor-container {
+      display: none;
+      flex-direction: column;
+    }
+    .editor-container.active { display: flex; }
+
+    .editor-main {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 0;
+    }
+    @media (max-width: 1000px) {
+      .editor-main { grid-template-columns: 1fr; }
+    }
+
+    /* Canvas Area */
+    .canvas-area {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: var(--bg1);
+      min-height: 550px;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding: 10px 14px;
+      background: var(--card-solid);
+      border-radius: var(--radius-xs);
+      border: 1px solid var(--line);
+    }
+    .toolbar-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .toolbar-divider {
+      width: 1px; height: 24px;
+      background: var(--line);
+      margin: 0 6px;
+    }
+    .tool-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text2);
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      transition: all var(--transition);
+    }
+    .tool-btn:hover {
+      color: var(--text);
+      background: var(--card-hover);
+      border-color: var(--accent1);
+    }
+    .tool-btn.active {
+      color: var(--accent1);
+      background: rgba(0,124,240,0.15);
+      border-color: var(--accent1);
+    }
+    .tool-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .zoom-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: auto;
+    }
+    .zoom-btn {
+      width: 30px; height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--text2);
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      transition: all var(--transition);
+    }
+    .zoom-btn:hover { color: var(--text); background: var(--card-hover); }
+    .zoom-value {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      min-width: 50px;
+      text-align: center;
+    }
+
+    /* Canvas Wrapper - FIXED TO SHOW IMAGE PROPERLY */
+    .canvas-wrapper {
+      flex: 1;
+      position: relative;
+      background: repeating-conic-gradient(var(--bg2) 0% 25%, var(--bg3) 0% 50%) 50% / 16px 16px;
+      border-radius: var(--radius-xs);
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+    }
+    [data-theme="light"] .canvas-wrapper {
+      background: repeating-conic-gradient(#e2e8f0 0% 25%, #f1f5f9 0% 50%) 50% / 16px 16px;
+    }
+
+    .canvas-inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #main-canvas {
+      display: block;
+    }
+
+    /* Crop Overlay */
+    .crop-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      pointer-events: none;
+    }
+
+    .crop-box {
+      position: absolute;
+      border: 2px solid var(--accent1);
+      box-shadow: 0 0 0 9999px rgba(0,0,0,0.5);
+      cursor: move;
+      pointer-events: auto;
+      touch-action: none;
+    }
+    [data-theme="light"] .crop-box {
+      box-shadow: 0 0 0 9999px rgba(0,0,0,0.4);
+    }
+    .crop-box.circle {
+      border-radius: 50%;
+    }
+
+    .crop-handle {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: var(--accent1);
+      border: 2px solid #fff;
+      border-radius: 50%;
+      pointer-events: auto;
+    }
+    .crop-handle.tl { top: -7px; left: -7px; cursor: nwse-resize; }
+    .crop-handle.tr { top: -7px; right: -7px; cursor: nesw-resize; }
+    .crop-handle.bl { bottom: -7px; left: -7px; cursor: nesw-resize; }
+    .crop-handle.br { bottom: -7px; right: -7px; cursor: nwse-resize; }
+
+    /* Grid Lines */
+    .crop-grid {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+    }
+    .crop-grid-line {
+      position: absolute;
+      background: rgba(255,255,255,0.4);
+    }
+    .crop-grid-line.h { width: 100%; height: 1px; }
+    .crop-grid-line.v { height: 100%; width: 1px; }
+    .crop-grid-line.h:nth-child(1) { top: 33.33%; }
+    .crop-grid-line.h:nth-child(2) { top: 66.66%; }
+    .crop-grid-line.v:nth-child(3) { left: 33.33%; }
+    .crop-grid-line.v:nth-child(4) { left: 66.66%; }
+
+    /* Image Info */
+    .image-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--card-solid);
+      border-radius: var(--radius-xs);
+      border: 1px solid var(--line);
+    }
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.8rem;
+      color: var(--text2);
+    }
+    .info-item strong { color: var(--text); font-weight: 600; }
+
+    /* =============================================
+       SIDEBAR - ENHANCED FOR FILTERS
+    ============================================= */
+    .sidebar {
+      background: var(--card-solid);
+      border-left: 1px solid var(--line);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+      max-height: calc(100vh - 180px);
+    }
+    @media (max-width: 1000px) {
+      .sidebar {
+        border-left: none;
+        border-top: 1px solid var(--line);
+        max-height: none;
+      }
+    }
+
+    .panel {
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+    }
+
+    .panel-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text);
+    }
+
+    /* Aspect Ratio */
+    .ratio-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+    .ratio-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 8px 4px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text2);
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+    .ratio-btn:hover {
+      color: var(--text);
+      background: var(--card-hover);
+    }
+    .ratio-btn.active {
+      color: var(--accent1);
+      background: rgba(0,124,240,0.15);
+      border-color: var(--accent1);
+    }
+    .ratio-shape {
+      width: 20px;
+      height: 15px;
+      border: 2px solid currentColor;
+      border-radius: 2px;
+    }
+    .ratio-btn[data-ratio="1:1"] .ratio-shape { width: 15px; height: 15px; }
+    .ratio-btn[data-ratio="4:3"] .ratio-shape { width: 20px; height: 15px; }
+    .ratio-btn[data-ratio="16:9"] .ratio-shape { width: 22px; height: 12px; }
+    .ratio-btn[data-ratio="3:2"] .ratio-shape { width: 18px; height: 12px; }
+    .ratio-btn[data-ratio="2:3"] .ratio-shape { width: 12px; height: 18px; }
+    .ratio-btn[data-ratio="9:16"] .ratio-shape { width: 11px; height: 20px; }
+    .ratio-btn[data-ratio="circle"] .ratio-shape { width: 15px; height: 15px; border-radius: 50%; }
+    .ratio-btn[data-ratio="free"] .ratio-shape { border-style: dashed; }
+
+    .custom-dimensions {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 6px;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .dim-input {
+      width: 100%;
+      padding: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      color: var(--text);
+      text-align: center;
+      font-family: var(--font);
+    }
+    .dim-input:focus {
+      outline: none;
+      border-color: var(--accent1);
+      box-shadow: var(--ring);
+    }
+    .dim-separator { color: var(--muted); font-weight: 700; font-size: 0.85rem; }
+    .dim-apply-btn {
+      grid-column: 1 / -1;
+      padding: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent1);
+      background: rgba(0,124,240,0.1);
+      border: 1px solid rgba(0,124,240,0.3);
+      border-radius: var(--radius-xs);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .dim-apply-btn:hover { background: rgba(0,124,240,0.2); }
+
+    /* =============================================
+       PROFESSIONAL FILTER SECTION
+    ============================================= */
+    .filter-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+    .filter-tab {
+      flex: 1;
+      padding: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text2);
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      cursor: pointer;
+      transition: all var(--transition);
+      text-align: center;
+    }
+    .filter-tab:hover { color: var(--text); }
+    .filter-tab.active {
+      color: var(--accent1);
+      background: rgba(0,124,240,0.15);
+      border-color: var(--accent1);
+    }
+
+    .filter-content {
+      display: none;
+    }
+    .filter-content.active {
+      display: block;
+    }
+
+    /* Filter Groups */
+    .filter-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 400px) {
+      .filter-grid { grid-template-columns: 1fr; }
+    }
+
+    .filter-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .filter-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .filter-name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text2);
+    }
+    .filter-value {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--accent1);
+      background: rgba(0,124,240,0.15);
+      padding: 1px 6px;
+      border-radius: 3px;
+    }
+    .filter-reset {
+      font-size: 0.65rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+    .filter-reset:hover { color: var(--accent1); }
+
+    /* Filter Presets Grid */
+    .filter-presets-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .preset-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 6px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text2);
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .preset-btn:hover {
+      color: var(--text);
+      background: var(--card-hover);
+    }
+    .preset-btn.active {
+      color: var(--accent1);
+      background: rgba(0,124,240,0.15);
+      border-color: var(--accent1);
+    }
+    .preset-preview {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* Adjust Section */
+    .adjust-section {
+      margin-bottom: 12px;
+    }
+    .adjust-section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    /* Export Options */
+    .export-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .format-select {
+      width: 100%;
+      padding: 10px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      color: var(--text);
+      font-family: var(--font);
+      cursor: pointer;
+    }
+    .format-select:focus {
+      outline: none;
+      border-color: var(--accent1);
+    }
+    .format-select option {
+      background: var(--card-solid);
+      color: var(--text);
+    }
+
+    .quality-control {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .quality-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .quality-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text2);
+    }
+    .quality-value {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent2);
+    }
+
+    .export-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      background: var(--grad);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 16px rgba(0,124,240,0.35);
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .export-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,124,240,0.45);
+    }
+    .export-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .action-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .action-btn {
+      padding: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text2);
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .action-btn:hover:not(:disabled) {
+      color: var(--text);
+      background: var(--card-hover);
+    }
+    .action-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* =============================================
+       FEATURES & FAQ
+    ============================================= */
+    .features-section, .faq-section {
+      padding: 60px 24px;
+    }
+    .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent1);
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--text2);
+      max-width: 500px;
+      line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 36px;
+    }
+    @media (max-width: 900px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .features-grid { grid-template-columns: 1fr; } }
+
+    .feature-card {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      transition: all var(--transition);
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0,124,240,0.3);
+      box-shadow: var(--shadow-sm);
+    }
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+    .feature-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .feature-desc {
+      font-size: 0.85rem;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 700px;
+      margin: 36px auto 0;
+    }
+    .faq-item {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      background: none;
+      text-align: left;
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+    .faq-q:hover { color: var(--accent1); }
+    .faq-q-icon {
+      width: 22px; height: 22px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      transition: all var(--transition);
+    }
+    .faq-item.open .faq-q-icon {
+      transform: rotate(45deg);
+      background: rgba(0,124,240,0.15);
+      border-color: var(--accent1);
+      color: var(--accent1);
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-a-inner {
+      padding: 0 20px 16px;
+      font-size: 0.85rem;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    .section-divider {
+      height: 1px;
+      background: var(--line);
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 36px 24px 24px;
+      background: rgba(3,7,18,0.6);
+    }
+    [data-theme="light"] .footer { background: rgba(241,245,249,0.8); }
+
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+    }
+    .footer-brand-icon {
+      width: 32px; height: 32px;
+      background: var(--grad);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 900;
+      color: #fff;
+    }
+    .footer-brand-name {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-link {
+      font-size: 0.85rem;
+      color: var(--muted);
+      transition: color var(--transition);
+    }
+    .footer-link:hover { color: var(--text); }
+    .footer-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent1);
+      padding: 8px 16px;
+      border-radius: var(--radius-xs);
+      background: rgba(0,124,240,0.1);
+      border: 1px solid rgba(0,124,240,0.2);
+      transition: all var(--transition);
+    }
+    .footer-back-btn:hover { background: rgba(0,124,240,0.15); }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--muted);
+      width: 100%;
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      margin-top: 12px;
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 768px) {
+      .nav-primary, .header-actions { display: none; }
+      .hamburger { display: flex; }
+      
+      .upload-zone { padding: 40px 20px; }
+      .upload-icon { font-size: 3rem; }
+      .upload-title { font-size: 1.1rem; }
+      
+      .toolbar { padding: 8px; gap: 4px; }
+      .tool-btn { padding: 6px 8px; font-size: 0.75rem; }
+      .tool-btn span { display: none; }
+      .toolbar-divider { display: none; }
+      
+      .ratio-grid { grid-template-columns: repeat(4, 1fr); }
+      .filter-presets-grid { grid-template-columns: repeat(3, 1fr); }
+      .action-buttons { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .ratio-grid { grid-template-columns: repeat(3, 1fr); }
+      .filter-presets-grid { grid-template-columns: repeat(2, 1fr); }
+      .filter-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Header -->
-    <header class="glass-card fixed w-full top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        🛠️ Tool Xeno
-                    </div>
-                    <div class="hidden md:block text-sm opacity-70">
-                        Advanced Image Cropper
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme"></button>
-                </div>
-            </div>
+  <!-- Background -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="https://toolxeno.com/" class="logo" aria-label="Tool Xeno – Home">
+          <div class="logo-icon" aria-hidden="true">X</div>
+          <span class="logo-text">Tool Xeno</span>
+        </a>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <a href="https://toolxeno.com/" class="nav-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="nav-link">All Tools</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">☀️ Light</button>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </header>
-    
-    <!-- Main Content -->
-    <main class="pt-20 min-h-screen">
-        <div class="container mx-auto px-6 py-8">
-            <!-- Hero Section -->
-            <div class="text-center mb-12">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                    Advanced Image Cropper
-                </h1>
-                <p class="text-lg md:text-xl opacity-80 max-w-2xl mx-auto mb-8">
-                    Professional image cropping with advanced features, aspect ratio presets, rotation controls, and high-quality output
-                </p>
-            </div>
-            
-            <!-- Upload Area -->
-            <div class="glass-card p-8 mb-8" id="uploadSection">
-                <div class="upload-area" id="uploadArea">
-                    <i class="fas fa-cloud-upload-alt text-4xl mb-4 opacity-60"></i>
-                    <h3 class="text-xl font-semibold mb-2">Drop your image here</h3>
-                    <p class="opacity-70 mb-4">or click to browse files</p>
-                    <button class="btn-gradient">
-                        <i class="fas fa-folder-open"></i>
-                        Select Image
-                    </button>
-                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
-                </div>
-            </div>
-            
-            <!-- Cropping Interface -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8" id="croppingInterface" style="display: none;">
-                <!-- Controls Panel -->
-                <div class="lg:col-span-1">
-                    <div class="glass-card p-6">
-                        <h3 class="text-xl font-semibold mb-6">Cropping Controls</h3>
-                        
-                        <!-- Aspect Ratio Presets -->
-                        <div class="mb-6">
-                            <label class="block text-sm font-medium mb-3">Aspect Ratio</label>
-                            <div class="grid grid-cols-2 gap-2">
-                                <button class="aspect-ratio-btn active" data-ratio="free">Free</button>
-                                <button class="aspect-ratio-btn" data-ratio="1:1">1:1</button>
-                                <button class="aspect-ratio-btn" data-ratio="4:3">4:3</button>
-                                <button class="aspect-ratio-btn" data-ratio="16:9">16:9</button>
-                                <button class="aspect-ratio-btn" data-ratio="3:2">3:2</button>
-                                <button class="aspect-ratio-btn" data-ratio="5:4">5:4</button>
-                            </div>
-                        </div>
-                        
-                        <!-- Zoom Control -->
-                        <div class="control-group">
-                            <label class="text-sm font-medium min-w-16">Zoom</label>
-                            <input type="range" id="zoomSlider" class="slider" min="0.1" max="3" step="0.1" value="1">
-                            <span id="zoomValue" class="text-sm min-w-12">100%</span>
-                        </div>
-                        
-                        <!-- Rotation Control -->
-                        <div class="control-group">
-                            <label class="text-sm font-medium min-w-16">Rotate</label>
-                            <input type="range" id="rotateSlider" class="slider" min="-180" max="180" step="1" value="0">
-                            <span id="rotateValue" class="text-sm min-w-12">0°</span>
-                        </div>
-                        
-                        <!-- Grid Toggle -->
-                        <div class="control-group">
-                            <label class="text-sm font-medium">Show Grid</label>
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" id="gridToggle" class="sr-only peer" checked>
-                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r peer-checked:from-purple-400 peer-checked:to-pink-400"></div>
-                            </label>
-                        </div>
-                        
-                        <!-- Action Buttons -->
-                        <div class="space-y-3 mt-8">
-                            <button class="btn-gradient w-full" id="cropBtn">
-                                <i class="fas fa-crop"></i>
-                                Crop Image
-                            </button>
-                            <button class="btn-secondary w-full" id="resetBtn">
-                                <i class="fas fa-undo"></i>
-                                Reset
-                            </button>
-                            <button class="btn-accent w-full" id="downloadBtn" style="display: none;">
-                                <i class="fas fa-download"></i>
-                                Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Canvas Area -->
-                <div class="lg:col-span-2">
-                    <div class="glass-card p-6">
-                        <h3 class="text-xl font-semibold mb-4">Image Editor</h3>
-                        <div class="text-center">
-                            <div class="crop-canvas-container" id="canvasContainer">
-                                <canvas id="imageCanvas"></canvas>
-                                <div class="crop-selection" id="cropSelection">
-                                    <div class="crop-handle nw"></div>
-                                    <div class="crop-handle ne"></div>
-                                    <div class="crop-handle sw"></div>
-                                    <div class="crop-handle se"></div>
-                                    <div class="crop-handle n"></div>
-                                    <div class="crop-handle s"></div>
-                                    <div class="crop-handle w"></div>
-                                    <div class="crop-handle e"></div>
-                                    <div class="grid-overlay" id="gridOverlay">
-                                        <div class="grid-line horizontal" style="top: 33.33%"></div>
-                                        <div class="grid-line horizontal" style="top: 66.67%"></div>
-                                        <div class="grid-line vertical" style="left: 33.33%"></div>
-                                        <div class="grid-line vertical" style="left: 66.67%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Preview Area -->
-                    <div class="glass-card p-6 mt-6" id="previewSection" style="display: none;">
-                        <h3 class="text-xl font-semibold mb-4">Preview</h3>
-                        <div class="text-center">
-                            <canvas id="previewCanvas" class="preview-canvas"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+      <a href="https://toolxeno.com/" class="mobile-nav-link">🏠 Home</a>
+      <a href="https://toolxeno.com/#tools" class="mobile-nav-link">🛠️ All Tools</a>
+      <a href="#features" class="mobile-nav-link">⚡ Features</a>
+      <a href="#faq" class="mobile-nav-link">❓ FAQ</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Free · No Signup · Privacy-First
+      </div>
+      <h1 class="hero-h1" id="hero-heading">
+        Professional Image<br><span class="grad-text">Cropper & Editor</span>
+      </h1>
+      <p class="hero-sub">
+        Crop, rotate, flip, and apply professional filters. Export in multiple formats with full quality control — all in your browser, 100% private.
+      </p>
+      <div class="hero-trust">
+        <span class="trust-item"><span class="trust-dot">✦</span> Aspect Ratio Presets</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> 15+ Filters</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> Circle Crop</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> High Quality Export</span>
+      </div>
+    </section>
+
+    <!-- TOOL SECTION -->
+    <main class="tool-section" aria-label="Image Cropper Tool">
+      <div class="tool-container">
+        <!-- Upload Container -->
+        <div class="upload-container" id="upload-container">
+          <div class="upload-zone" id="upload-zone" role="button" tabindex="0">
+            <div class="upload-icon">🖼️</div>
+            <div class="upload-title">Drop your image here</div>
+            <div class="upload-subtitle">or click to browse from your device</div>
+            <button class="upload-btn" type="button">📁 Choose File</button>
+            <div class="upload-formats">Supports JPG, PNG, WebP, GIF, BMP • Max 50MB</div>
+            <input type="file" id="file-input" accept="image/*" hidden>
+          </div>
         </div>
+
+        <!-- Editor Container -->
+        <div class="editor-container" id="editor-container">
+          <div class="editor-main">
+            <!-- Canvas Area -->
+            <div class="canvas-area">
+              <div class="toolbar">
+                <div class="toolbar-group">
+                  <button class="tool-btn" id="btn-undo" title="Undo" disabled>↩️ <span>Undo</span></button>
+                  <button class="tool-btn" id="btn-redo" title="Redo" disabled>↪️ <span>Redo</span></button>
+                </div>
+                <div class="toolbar-divider"></div>
+                <div class="toolbar-group">
+                  <button class="tool-btn" id="btn-rotate-l" title="Rotate Left">↺ <span>-90°</span></button>
+                  <button class="tool-btn" id="btn-rotate-r" title="Rotate Right">↻ <span>+90°</span></button>
+                  <button class="tool-btn" id="btn-flip-h" title="Flip Horizontal">↔️ <span>Flip H</span></button>
+                  <button class="tool-btn" id="btn-flip-v" title="Flip Vertical">↕️ <span>Flip V</span></button>
+                </div>
+                <div class="toolbar-divider"></div>
+                <div class="toolbar-group">
+                  <button class="tool-btn" id="btn-grid" title="Toggle Grid">⊞ <span>Grid</span></button>
+                </div>
+                <div class="zoom-controls">
+                  <button class="zoom-btn" id="btn-zoom-out">−</button>
+                  <span class="zoom-value" id="zoom-value">100%</span>
+                  <button class="zoom-btn" id="btn-zoom-in">+</button>
+                </div>
+              </div>
+
+              <div class="canvas-wrapper" id="canvas-wrapper">
+                <div class="canvas-inner" id="canvas-inner">
+                  <canvas id="main-canvas"></canvas>
+                  <div class="crop-overlay" id="crop-overlay">
+                    <div class="crop-box" id="crop-box">
+                      <div class="crop-grid" id="crop-grid" style="display:none;">
+                        <div class="crop-grid-line h"></div>
+                        <div class="crop-grid-line h"></div>
+                        <div class="crop-grid-line v"></div>
+                        <div class="crop-grid-line v"></div>
+                      </div>
+                      <div class="crop-handle tl" data-handle="tl"></div>
+                      <div class="crop-handle tr" data-handle="tr"></div>
+                      <div class="crop-handle bl" data-handle="bl"></div>
+                      <div class="crop-handle br" data-handle="br"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="image-info">
+                <div class="info-item">📐 Original: <strong id="info-original">—</strong></div>
+                <div class="info-item">✂️ Selection: <strong id="info-selection">—</strong></div>
+                <div class="info-item">📁 File: <strong id="info-filename">—</strong></div>
+              </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+              <!-- Aspect Ratio -->
+              <div class="panel">
+                <div class="panel-title">📐 Aspect Ratio</div>
+                <div class="ratio-grid">
+                  <button class="ratio-btn active" data-ratio="free"><div class="ratio-shape"></div>Free</button>
+                  <button class="ratio-btn" data-ratio="1:1"><div class="ratio-shape"></div>1:1</button>
+                  <button class="ratio-btn" data-ratio="4:3"><div class="ratio-shape"></div>4:3</button>
+                  <button class="ratio-btn" data-ratio="16:9"><div class="ratio-shape"></div>16:9</button>
+                  <button class="ratio-btn" data-ratio="3:2"><div class="ratio-shape"></div>3:2</button>
+                  <button class="ratio-btn" data-ratio="2:3"><div class="ratio-shape"></div>2:3</button>
+                  <button class="ratio-btn" data-ratio="9:16"><div class="ratio-shape"></div>9:16</button>
+                  <button class="ratio-btn" data-ratio="circle"><div class="ratio-shape"></div>Circle</button>
+                </div>
+                <div class="custom-dimensions">
+                  <input type="number" class="dim-input" id="custom-width" placeholder="W" min="1">
+                  <span class="dim-separator">×</span>
+                  <input type="number" class="dim-input" id="custom-height" placeholder="H" min="1">
+                  <button class="dim-apply-btn" id="apply-custom">Apply Custom</button>
+                </div>
+              </div>
+
+              <!-- Professional Filters -->
+              <div class="panel">
+                <div class="panel-title">🎨 Filters & Adjustments</div>
+                
+                <!-- Filter Tabs -->
+                <div class="filter-tabs">
+                  <button class="filter-tab active" data-tab="adjust">Adjust</button>
+                  <button class="filter-tab" data-tab="effects">Effects</button>
+                  <button class="filter-tab" data-tab="presets">Presets</button>
+                </div>
+
+                <!-- Adjust Tab -->
+                <div class="filter-content active" id="tab-adjust">
+                  <div class="adjust-section">
+                    <div class="adjust-section-title">Light</div>
+                    <div class="filter-grid">
+                      <div class="filter-item">
+                        <div class="filter-header">
+                          <span class="filter-name">☀️ Brightness</span>
+                          <span class="filter-value" id="val-brightness">0</span>
+                        </div>
+                        <input type="range" id="filter-brightness" min="-100" max="100" value="0">
+                      </div>
+                      <div class="filter-item">
+                        <div class="filter-header">
+                          <span class="filter-name">◐ Contrast</span>
+                          <span class="filter-value" id="val-contrast">0</span>
+                        </div>
+                        <input type="range" id="filter-contrast" min="-100" max="100" value="0">
+                      </div>
+                      <div class="filter-item">
+                        <div class="filter-header">
+                          <span class="filter-name">🔆 Exposure</span>
+                          <span class="filter-value" id="val-exposure">0</span>
+                        </div>
+                        <input type="range" id="filter-exposure" min="-100" max="100" value="0">
+                      </div>
+                      <div class="filter-item">
+                        <div class="filter-header">
+                          <span class="filter-name">🌑 Shadows</span>
+                          <span class="filter-value" id="val-shadows">0</span>
+                        </div>
+                        <input type="range" id="filter-shadows" min="-100" max="100" value="0">
+                      </div>
+                      <div class="filter-item">
+                        <div class="filter-header">
+                          <span class="filter-name">💡 Highlights</span>
+                          <span class="filter-value" id="val-highlights">0</span>
+                        </div>
+                        <input type="range" id="filter-highlights" min="-100" max="100" value="0">
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="adjust-section">
+                    <div class="adjust-section-title">Color</div>
+                    <div class="filter-grid">
+                      <div class="filter-item">
+                        <div class="filter-header">
+                          <span class="filter-name">💧 Saturation</span>
+                          <span class="filter-value" id="val-saturation">0</span>
+                        </div>
+                        <input type="range" id="filter-saturation" min="-100" max="100" value="0">
+                      </div>
+                      <div class="filter-item">
+                        <div class="filter-header">
+                          <span class="filter-name">🌈 Vibrance</span>
+                          <span class="filter-value" id="val-vibrance">0</span>
+                        </div>
+                        <input type="range" id="filter-vibrance" min="-100" max="100" value="0">
+                      </div>
+                      <div class="filter-item">
+                        <div class="filter-header">
+                          <span class="filter-name">🎨 Hue</span>
+                          <span class="filter-value" id="val-hue">0°</span>
+                        </div>
+                        <input type="range" id="filter-hue" min="0" max="360" value="0">
+                      </div>
+                      <div class="filter-item">
+                        <div class="filter-header">
+                          <span class="filter-name">🔥 Warmth</span>
+                          <span class="filter-value" id="val-warmth">0</span>
+                        </div>
+                        <input type="range" id="filter-warmth" min="-100" max="100" value="0">
+                      </div>
+                      <div class="filter-item">
+                        <div class="filter-header">
+                          <span class="filter-name">🎭 Tint</span>
+                          <span class="filter-value" id="val-tint">0</span>
+                        </div>
+                        <input type="range" id="filter-tint" min="-100" max="100" value="0">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="adjust-section">
+                    <div class="adjust-section-title">Detail</div>
+                    <div class="filter-grid">
+                      <div class="filter-item">
+                        <div class="filter-header">
+                          <span class="filter-name">🔍 Sharpen</span>
+                          <span class="filter-value" id="val-sharpen">0</span>
+                        </div>
+                        <input type="range" id="filter-sharpen" min="0" max="100" value="0">
+                      </div>
+                      <div class="filter-item">
+                        <div class="filter-header">
+                          <span class="filter-name">🌫️ Blur</span>
+                          <span class="filter-value" id="val-blur">0</span>
+                        </div>
+                        <input type="range" id="filter-blur" min="0" max="20" value="0">
+                      </div>
+                      <div class="filter-item">
+                        <div class="filter-header">
+                          <span class="filter-name">✨ Clarity</span>
+                          <span class="filter-value" id="val-clarity">0</span>
+                        </div>
+                        <input type="range" id="filter-clarity" min="-100" max="100" value="0">
+                      </div>
+                      <div class="filter-item">
+                        <div class="filter-header">
+                          <span class="filter-name">🔅 Vignette</span>
+                          <span class="filter-value" id="val-vignette">0</span>
+                        </div>
+                        <input type="range" id="filter-vignette" min="0" max="100" value="0">
+                      </div>
+                    </div>
+                  </div>
+
+                  <button class="dim-apply-btn" id="reset-filters" style="margin-top: 10px;">🔄 Reset All Filters</button>
+                </div>
+
+                <!-- Effects Tab -->
+                <div class="filter-content" id="tab-effects">
+                  <div class="filter-grid">
+                    <div class="filter-item" style="grid-column: 1/-1;">
+                      <div class="filter-header">
+                        <span class="filter-name">⬛ Grayscale</span>
+                        <span class="filter-value" id="val-grayscale">0%</span>
+                      </div>
+                      <input type="range" id="filter-grayscale" min="0" max="100" value="0">
+                    </div>
+                    <div class="filter-item" style="grid-column: 1/-1;">
+                      <div class="filter-header">
+                        <span class="filter-name">🟤 Sepia</span>
+                        <span class="filter-value" id="val-sepia">0%</span>
+                      </div>
+                      <input type="range" id="filter-sepia" min="0" max="100" value="0">
+                    </div>
+                    <div class="filter-item" style="grid-column: 1/-1;">
+                      <div class="filter-header">
+                        <span class="filter-name">🔃 Invert</span>
+                        <span class="filter-value" id="val-invert">0%</span>
+                      </div>
+                      <input type="range" id="filter-invert" min="0" max="100" value="0">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Presets Tab -->
+                <div class="filter-content" id="tab-presets">
+                  <div class="filter-presets-grid">
+                    <button class="preset-btn active" data-preset="none">
+                      <div class="preset-preview">🔄</div>
+                      None
+                    </button>
+                    <button class="preset-btn" data-preset="grayscale">
+                      <div class="preset-preview">⬛</div>
+                      B&W
+                    </button>
+                    <button class="preset-btn" data-preset="sepia">
+                      <div class="preset-preview">🟤</div>
+                      Sepia
+                    </button>
+                    <button class="preset-btn" data-preset="vintage">
+                      <div class="preset-preview">📷</div>
+                      Vintage
+                    </button>
+                    <button class="preset-btn" data-preset="warm">
+                      <div class="preset-preview">🌅</div>
+                      Warm
+                    </button>
+                    <button class="preset-btn" data-preset="cool">
+                      <div class="preset-preview">❄️</div>
+                      Cool
+                    </button>
+                    <button class="preset-btn" data-preset="dramatic">
+                      <div class="preset-preview">🎭</div>
+                      Dramatic
+                    </button>
+                    <button class="preset-btn" data-preset="fade">
+                      <div class="preset-preview">🌁</div>
+                      Fade
+                    </button>
+                    <button class="preset-btn" data-preset="vivid">
+                      <div class="preset-preview">🌈</div>
+                      Vivid
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Export -->
+              <div class="panel">
+                <div class="panel-title">💾 Export</div>
+                <div class="export-options">
+                  <select class="format-select" id="export-format">
+                    <option value="png">PNG — Lossless</option>
+                    <option value="jpeg">JPEG — Compressed</option>
+                    <option value="webp">WebP — Modern</option>
+                  </select>
+                  <div class="quality-control" id="quality-control" style="display:none;">
+                    <div class="quality-header">
+                      <span class="quality-label">Quality</span>
+                      <span class="quality-value" id="quality-value">92%</span>
+                    </div>
+                    <input type="range" id="quality-slider" min="10" max="100" value="92">
+                  </div>
+                  <button class="export-btn" id="btn-export">✂️ Crop & Export</button>
+                  <div class="action-buttons">
+                    <button class="action-btn" id="btn-reset">🔄 Reset</button>
+                    <button class="action-btn" id="btn-new">📁 New Image</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
-    
-    <script>
-        // Theme Toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+
+    <div class="section-divider"></div>
+
+    <!-- FEATURES -->
+    <section id="features" class="features-section">
+      <div class="section-inner">
+        <div class="section-label">⚡ Features</div>
+        <h2 class="section-title">Professional-Grade Image Cropping</h2>
+        <p class="section-sub">Advanced tools for precise image editing in your browser.</p>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📐</div>
+            <h3 class="feature-title">Aspect Ratios</h3>
+            <p class="feature-desc">Preset ratios for social media, print, and web. Custom dimensions supported.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔄</div>
+            <h3 class="feature-title">Transform Tools</h3>
+            <p class="feature-desc">Rotate 90° in either direction, flip horizontally or vertically.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3 class="feature-title">15+ Pro Filters</h3>
+            <p class="feature-desc">Brightness, contrast, exposure, shadows, highlights, sharpen, vibrance & more.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">✨</div>
+            <h3 class="feature-title">Quality Export</h3>
+            <p class="feature-desc">Export as PNG, JPEG, or WebP with adjustable quality settings.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3 class="feature-title">Precision Tools</h3>
+            <p class="feature-desc">Rule of thirds grid, corner handles, live dimension display.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3 class="feature-title">100% Private</h3>
+            <p class="feature-desc">All processing happens locally. Your images never leave your device.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq-section">
+      <div class="section-inner">
+        <div class="section-label">❓ FAQ</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q">How do I crop an image?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Upload your image, select an aspect ratio or use free crop mode, adjust the crop area by dragging, then click "Crop & Export" to download.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">What export formats are available?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">PNG (lossless), JPEG (compressed with quality control), and WebP (modern format with excellent compression).</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Is my image data private?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes! All processing is done entirely in your browser. Your images are never uploaded to any server.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Can I crop images into a circle?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes! Select the "Circle" option in the Aspect Ratio panel. The result exports as PNG with transparent corners.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-icon">X</div>
+          <span class="footer-brand-name">Tool Xeno</span>
+        </div>
+        <nav class="footer-links">
+          <a href="https://toolxeno.com/" class="footer-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="footer-link">All Tools</a>
+          <a href="https://toolxeno.com/privacy.html" class="footer-link">Privacy</a>
+          <a href="https://toolxeno.com/terms.html" class="footer-link">Terms</a>
+        </nav>
+        <a href="https://toolxeno.com/#tools" class="footer-back-btn">← Back to All Tools</a>
+        <div class="footer-copy">© <span id="footer-year"></span> Tool Xeno. All processing is performed locally in your browser.</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+  // ============================================================
+  //  THEME TOGGLE
+  // ============================================================
+  const themeBtn = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  let isDark = true;
+
+  function applyTheme(dark) {
+    isDark = dark;
+    html.setAttribute('data-theme', dark ? 'dark' : 'light');
+    themeBtn.textContent = dark ? '☀️ Light' : '🌙 Dark';
+    localStorage.setItem('tx-theme', dark ? 'dark' : 'light');
+  }
+
+  const saved = localStorage.getItem('tx-theme');
+  if (saved === 'light') applyTheme(false);
+  else applyTheme(true);
+
+  themeBtn.addEventListener('click', () => applyTheme(!isDark));
+
+  // ============================================================
+  //  MOBILE NAV
+  // ============================================================
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-nav').classList.add('open');
+  });
+  document.getElementById('mobile-close').addEventListener('click', () => {
+    document.getElementById('mobile-nav').classList.remove('open');
+  });
+  document.querySelectorAll('.mobile-nav-link').forEach(l => {
+    l.addEventListener('click', () => document.getElementById('mobile-nav').classList.remove('open'));
+  });
+
+  // ============================================================
+  //  FOOTER YEAR
+  // ============================================================
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  // ============================================================
+  //  FAQ ACCORDION
+  // ============================================================
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const item = this.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // ============================================================
+  //  IMAGE CROPPER - MAIN APPLICATION
+  // ============================================================
+  (function() {
+    'use strict';
+
+    // State - Enhanced with more filters
+    const state = {
+      image: null,
+      fileName: 'image',
+      rotation: 0,
+      flipH: false,
+      flipV: false,
+      zoom: 1,
+      aspectRatio: null,
+      isCircle: false,
+      showGrid: false,
+      display: { x: 0, y: 0, width: 0, height: 0 },
+      crop: { x: 0, y: 0, width: 0, height: 0 },
+      // Enhanced filters
+      filters: {
+        brightness: 0, contrast: 0, saturation: 0, blur: 0, hue: 0,
+        exposure: 0, shadows: 0, highlights: 0, vibrance: 0, warmth: 0,
+        tint: 0, sharpen: 0, clarity: 0, vignette: 0,
+        grayscale: 0, sepia: 0, invert: 0
+      },
+      dragging: false,
+      dragType: null,
+      dragStart: { x: 0, y: 0 },
+      cropStart: { x: 0, y: 0, width: 0, height: 0 }
+    };
+
+    // DOM Elements
+    const uploadContainer = document.getElementById('upload-container');
+    const uploadZone = document.getElementById('upload-zone');
+    const fileInput = document.getElementById('file-input');
+    const editorContainer = document.getElementById('editor-container');
+    const canvas = document.getElementById('main-canvas');
+    const ctx = canvas.getContext('2d');
+    const canvasInner = document.getElementById('canvas-inner');
+    const cropBox = document.getElementById('crop-box');
+    const cropGrid = document.getElementById('crop-grid');
+    const canvasWrapper = document.getElementById('canvas-wrapper');
+
+    // Info
+    const infoOriginal = document.getElementById('info-original');
+    const infoSelection = document.getElementById('info-selection');
+    const infoFilename = document.getElementById('info-filename');
+
+    // Buttons
+    const btnUndo = document.getElementById('btn-undo');
+    const btnRedo = document.getElementById('btn-redo');
+    const btnRotateL = document.getElementById('btn-rotate-l');
+    const btnRotateR = document.getElementById('btn-rotate-r');
+    const btnFlipH = document.getElementById('btn-flip-h');
+    const btnFlipV = document.getElementById('btn-flip-v');
+    const btnGrid = document.getElementById('btn-grid');
+    const btnZoomIn = document.getElementById('btn-zoom-in');
+    const btnZoomOut = document.getElementById('btn-zoom-out');
+    const btnExport = document.getElementById('btn-export');
+    const btnReset = document.getElementById('btn-reset');
+    const btnNew = document.getElementById('btn-new');
+
+    // Export
+    const exportFormat = document.getElementById('export-format');
+    const qualityControl = document.getElementById('quality-control');
+    const qualitySlider = document.getElementById('quality-slider');
+
+    // ============================================================
+    // FILE UPLOAD
+    // ============================================================
+    uploadZone.addEventListener('click', () => fileInput.click());
+    uploadZone.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') fileInput.click();
+    });
+
+    uploadZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadZone.classList.add('dragover');
+    });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+    uploadZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadZone.classList.remove('dragover');
+      if (e.dataTransfer.files[0]?.type.startsWith('image/')) {
+        loadImage(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files[0]) loadImage(e.target.files[0]);
+    });
+
+    function loadImage(file) {
+      if (file.size > 50 * 1024 * 1024) {
+        alert('File size must be under 50MB');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          state.image = img;
+          state.fileName = file.name.replace(/\.[^/.]+$/, '');
+          infoFilename.textContent = file.name;
+          resetState();
+          initEditor();
+          uploadContainer.style.display = 'none';
+          editorContainer.classList.add('active');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function resetState() {
+      state.rotation = 0;
+      state.flipH = false;
+      state.flipV = false;
+      state.zoom = 1;
+      state.aspectRatio = null;
+      state.isCircle = false;
+      state.showGrid = false;
+      state.filters = {
+        brightness: 0, contrast: 0, saturation: 0, blur: 0, hue: 0,
+        exposure: 0, shadows: 0, highlights: 0, vibrance: 0, warmth: 0,
+        tint: 0, sharpen: 0, clarity: 0, vignette: 0,
+        grayscale: 0, sepia: 0, invert: 0
+      };
+      
+      // Reset all filter inputs
+      Object.keys(state.filters).forEach(key => {
+        const input = document.getElementById(`filter-${key}`);
+        if (input) input.value = 0;
+      });
+      updateAllFilterValues();
+      
+      document.querySelectorAll('.ratio-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('[data-ratio="free"]').classList.add('active');
+      cropBox.classList.remove('circle');
+      cropGrid.style.display = 'none';
+      btnGrid.classList.remove('active');
+    }
+
+    // ============================================================
+    // EDITOR INITIALIZATION - FIXED FOR PROPER IMAGE DISPLAY
+    // ============================================================
+    function initEditor() {
+      const img = state.image;
+      if (!img) return;
+      
+      // Get canvas wrapper dimensions
+      const wrapperRect = canvasWrapper.getBoundingClientRect();
+      const maxW = wrapperRect.width - 20;
+      const maxH = wrapperRect.height - 20;
+      
+      let imgW = img.width;
+      let imgH = img.height;
+      
+      // Swap dimensions if rotated 90 or 270
+      if (state.rotation === 90 || state.rotation === 270) {
+        imgW = img.height;
+        imgH = img.width;
+      }
+      
+      // Calculate scale to fit - use maximum available space (80% fill)
+      const scaleX = (maxW * 0.9) / imgW;
+      const scaleY = (maxH * 0.9) / imgH;
+      const scale = Math.min(scaleX, scaleY, 1);
+      
+      state.display.width = Math.floor(imgW * scale);
+      state.display.height = Math.floor(imgH * scale);
+      
+      // Set canvas size
+      canvas.width = state.display.width;
+      canvas.height = state.display.height;
+      
+      // Draw image
+      drawImage();
+      
+      // Initialize crop box to full image
+      state.crop.x = 0;
+      state.crop.y = 0;
+      state.crop.width = state.display.width;
+      state.crop.height = state.display.height;
+      
+      updateCropBox();
+      updateInfo();
+    }
+
+    function drawImage() {
+      const img = state.image;
+      if (!img) return;
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.save();
+      
+      // Build filter string with all filters
+      let filterStr = '';
+      const f = state.filters;
+      
+      // Base adjustments
+      const brightness = 100 + f.brightness + (f.exposure * 0.5);
+      filterStr += `brightness(${brightness}%) `;
+      filterStr += `contrast(${100 + f.contrast}%) `;
+      filterStr += `saturate(${100 + f.saturation + f.vibrance}%) `;
+      filterStr += `blur(${f.blur}px) `;
+      filterStr += `hue-rotate(${f.hue}deg) `;
+      filterStr += `grayscale(${f.grayscale}%) `;
+      filterStr += `sepia(${f.sepia}%) `;
+      filterStr += `invert(${f.invert}%) `;
+      
+      ctx.filter = filterStr.trim();
+      
+      // Apply transforms
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.rotate((state.rotation * Math.PI) / 180);
+      ctx.scale(state.flipH ? -1 : 1, state.flipV ? -1 : 1);
+      
+      // Calculate source dimensions
+      let srcW, srcH;
+      if (state.rotation === 90 || state.rotation === 270) {
+        srcW = img.height;
+        srcH = img.width;
+      } else {
+        srcW = img.width;
+        srcH = img.height;
+      }
+      
+      const drawScale = state.display.width / (state.rotation === 90 || state.rotation === 270 ? img.height : img.width);
+      
+      ctx.drawImage(
+        img,
+        -srcW * drawScale / 2,
+        -srcH * drawScale / 2,
+        srcW * drawScale,
+        srcH * drawScale
+      );
+      
+      ctx.restore();
+      
+      // Apply sharpen using convolution
+      if (f.sharpen > 0) {
+        applySharpen(f.sharpen / 100);
+      }
+      
+      // Apply clarity
+      if (f.clarity !== 0) {
+        applyClarity(f.clarity / 100);
+      }
+      
+      // Apply vignette
+      if (f.vignette > 0) {
+        applyVignette(f.vignette / 100);
+      }
+      
+      // Apply warmth/tint through color overlay
+      if (f.warmth !== 0 || f.tint !== 0) {
+        applyColorOverlay(f.warmth, f.tint);
+      }
+    }
+
+    function applySharpen(amount) {
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+      const w = canvas.width;
+      const h = canvas.height;
+      
+      const kernel = [
+        0, -amount, 0,
+        -amount, 1 + 4 * amount, -amount,
+        0, -amount, 0
+      ];
+      
+      const output = new Uint8ClampedArray(data.length);
+      
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const idx = (y * w + x) * 4;
+          let r = 0, g = 0, b = 0;
+          
+          for (let ky = -1; ky <= 1; ky++) {
+            for (let kx = -1; kx <= 1; kx++) {
+              const px = Math.min(w - 1, Math.max(0, x + kx));
+              const py = Math.min(h - 1, Math.max(0, y + ky));
+              const pidx = (py * w + px) * 4;
+              const kval = kernel[(ky + 1) * 3 + (kx + 1)];
+              r += data[pidx] * kval;
+              g += data[pidx + 1] * kval;
+              b += data[pidx + 2] * kval;
+            }
+          }
+          
+          output[idx] = Math.min(255, Math.max(0, r));
+          output[idx + 1] = Math.min(255, Math.max(0, g));
+          output[idx + 2] = Math.min(255, Math.max(0, b));
+          output[idx + 3] = data[idx + 3];
+        }
+      }
+      
+      imageData.data.set(output);
+      ctx.putImageData(imageData, 0, 0);
+    }
+
+    function applyClarity(amount) {
+      // Simplified clarity - local contrast enhancement
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+      
+      for (let i = 0; i < data.length; i += 4) {
+        const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+        const factor = 1 + amount * (avg - 128) / 128;
+        data[i] = Math.min(255, Math.max(0, data[i] * factor));
+        data[i + 1] = Math.min(255, Math.max(0, data[i + 1] * factor));
+        data[i + 2] = Math.min(255, Math.max(0, data[i + 2] * factor));
+      }
+      
+      ctx.putImageData(imageData, 0, 0);
+    }
+
+    function applyVignette(amount) {
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const radius = Math.max(canvas.width, canvas.height) / 2;
+      
+      const gradient = ctx.createRadialGradient(centerX, centerY, radius * 0.3, centerX, centerY, radius);
+      gradient.addColorStop(0, 'rgba(0,0,0,0)');
+      gradient.addColorStop(1, `rgba(0,0,0,${amount})`);
+      
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function applyColorOverlay(warmth, tint) {
+      ctx.save();
+      ctx.globalCompositeOperation = 'overlay';
+      ctx.globalAlpha = Math.abs(warmth) / 200 + Math.abs(tint) / 200;
+      
+      if (warmth > 0) {
+        ctx.fillStyle = '#ff9500';
+      } else if (warmth < 0) {
+        ctx.fillStyle = '#0095ff';
+      } else if (tint > 0) {
+        ctx.fillStyle = '#ff00ff';
+      } else if (tint < 0) {
+        ctx.fillStyle = '#00ff00';
+      } else {
+        ctx.restore();
+        return;
+      }
+      
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.restore();
+    }
+
+    function updateCropBox() {
+      cropBox.style.left = state.crop.x + 'px';
+      cropBox.style.top = state.crop.y + 'px';
+      cropBox.style.width = state.crop.width + 'px';
+      cropBox.style.height = state.crop.height + 'px';
+    }
+
+    function updateInfo() {
+      const img = state.image;
+      if (!img) return;
+      
+      const scaleX = img.width / state.display.width;
+      const scaleY = img.height / state.display.height;
+      
+      infoOriginal.textContent = `${img.width} × ${img.height}px`;
+      infoSelection.textContent = `${Math.round(state.crop.width * scaleX)} × ${Math.round(state.crop.height * scaleY)}px`;
+    }
+
+    function updateAllFilterValues() {
+      const f = state.filters;
+      document.getElementById('val-brightness').textContent = f.brightness;
+      document.getElementById('val-contrast').textContent = f.contrast;
+      document.getElementById('val-saturation').textContent = f.saturation;
+      document.getElementById('val-blur').textContent = f.blur;
+      document.getElementById('val-hue').textContent = f.hue + '°';
+      document.getElementById('val-exposure').textContent = f.exposure;
+      document.getElementById('val-shadows').textContent = f.shadows;
+      document.getElementById('val-highlights').textContent = f.highlights;
+      document.getElementById('val-vibrance').textContent = f.vibrance;
+      document.getElementById('val-warmth').textContent = f.warmth;
+      document.getElementById('val-tint').textContent = f.tint;
+      document.getElementById('val-sharpen').textContent = f.sharpen;
+      document.getElementById('val-clarity').textContent = f.clarity;
+      document.getElementById('val-vignette').textContent = f.vignette;
+      document.getElementById('val-grayscale').textContent = f.grayscale + '%';
+      document.getElementById('val-sepia').textContent = f.sepia + '%';
+      document.getElementById('val-invert').textContent = f.invert + '%';
+    }
+
+    // ============================================================
+    // CROP INTERACTION
+    // ============================================================
+    cropBox.addEventListener('mousedown', startDrag);
+    cropBox.addEventListener('touchstart', startDrag, { passive: false });
+
+    document.querySelectorAll('.crop-handle').forEach(handle => {
+      handle.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+        startResize(e, handle.dataset.handle);
+      });
+      handle.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+        startResize(e, handle.dataset.handle);
+      }, { passive: false });
+    });
+
+    document.addEventListener('mousemove', onDrag);
+    document.addEventListener('touchmove', onDrag, { passive: false });
+    document.addEventListener('mouseup', endDrag);
+    document.addEventListener('touchend', endDrag);
+
+    function getPos(e) {
+      const touch = e.touches ? e.touches[0] : e;
+      return { x: touch.clientX, y: touch.clientY };
+    }
+
+    function startDrag(e) {
+      if (e.target.classList.contains('crop-handle')) return;
+      e.preventDefault();
+      state.dragging = true;
+      state.dragType = 'move';
+      state.dragStart = getPos(e);
+      state.cropStart = { ...state.crop };
+    }
+
+    function startResize(e, handle) {
+      e.preventDefault();
+      state.dragging = true;
+      state.dragType = handle;
+      state.dragStart = getPos(e);
+      state.cropStart = { ...state.crop };
+    }
+
+    function onDrag(e) {
+      if (!state.dragging) return;
+      e.preventDefault();
+      
+      const pos = getPos(e);
+      const dx = pos.x - state.dragStart.x;
+      const dy = pos.y - state.dragStart.y;
+      
+      if (state.dragType === 'move') {
+        let newX = state.cropStart.x + dx;
+        let newY = state.cropStart.y + dy;
+        
+        newX = Math.max(0, Math.min(state.display.width - state.crop.width, newX));
+        newY = Math.max(0, Math.min(state.display.height - state.crop.height, newY));
+        
+        state.crop.x = newX;
+        state.crop.y = newY;
+      } else {
+        resizeCrop(dx, dy);
+      }
+      
+      updateCropBox();
+      updateInfo();
+    }
+
+    function resizeCrop(dx, dy) {
+      const min = 30;
+      const start = state.cropStart;
+      const disp = state.display;
+      const ar = state.aspectRatio;
+      
+      let x = start.x, y = start.y, w = start.width, h = start.height;
+      
+      switch (state.dragType) {
+        case 'tl':
+          x = Math.max(0, Math.min(x + w - min, x + dx));
+          y = Math.max(0, Math.min(y + h - min, y + dy));
+          w = start.x + start.width - x;
+          h = start.y + start.height - y;
+          break;
+        case 'tr':
+          y = Math.max(0, Math.min(y + h - min, y + dy));
+          w = Math.max(min, Math.min(disp.width - x, w + dx));
+          h = start.y + start.height - y;
+          break;
+        case 'bl':
+          x = Math.max(0, Math.min(x + w - min, x + dx));
+          w = start.x + start.width - x;
+          h = Math.max(min, Math.min(disp.height - y, h + dy));
+          break;
+        case 'br':
+          w = Math.max(min, Math.min(disp.width - x, w + dx));
+          h = Math.max(min, Math.min(disp.height - y, h + dy));
+          break;
+      }
+      
+      // Apply aspect ratio
+      if (ar) {
+        const ratio = ar.w / ar.h;
+        if (w / h > ratio) {
+          w = h * ratio;
+        } else {
+          h = w / ratio;
+        }
+        if (state.dragType === 'tl' || state.dragType === 'bl') {
+          x = start.x + start.width - w;
+        }
+        if (state.dragType === 'tl' || state.dragType === 'tr') {
+          y = start.y + start.height - h;
+        }
+      }
+      
+      // Bounds
+      x = Math.max(0, x);
+      y = Math.max(0, y);
+      w = Math.min(w, disp.width - x);
+      h = Math.min(h, disp.height - y);
+      
+      state.crop = { x, y, width: w, height: h };
+    }
+
+    function endDrag() {
+      state.dragging = false;
+      state.dragType = null;
+    }
+
+    // ============================================================
+    // ASPECT RATIO
+    // ============================================================
+    document.querySelectorAll('.ratio-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.ratio-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const ratio = btn.dataset.ratio;
+        
+        if (ratio === 'free') {
+          state.aspectRatio = null;
+          state.isCircle = false;
+          cropBox.classList.remove('circle');
+        } else if (ratio === 'circle') {
+          state.aspectRatio = { w: 1, h: 1 };
+          state.isCircle = true;
+          cropBox.classList.add('circle');
+          const size = Math.min(state.crop.width, state.crop.height);
+          state.crop.width = size;
+          state.crop.height = size;
+        } else {
+          const [w, h] = ratio.split(':').map(Number);
+          state.aspectRatio = { w, h };
+          state.isCircle = false;
+          cropBox.classList.remove('circle');
+          
+          const currentRatio = state.crop.width / state.crop.height;
+          const targetRatio = w / h;
+          
+          if (currentRatio > targetRatio) {
+            state.crop.width = state.crop.height * targetRatio;
+          } else {
+            state.crop.height = state.crop.width / targetRatio;
+          }
         }
         
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-theme');
-        }
+        // Center
+        state.crop.x = (state.display.width - state.crop.width) / 2;
+        state.crop.y = (state.display.height - state.crop.height) / 2;
         
-        // Floating Particles
-        function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = particle.style.height = Math.random() * 4 + 2 + 'px';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                container.appendChild(particle);
-            }
-        }
-        createParticles();
+        updateCropBox();
+        updateInfo();
+      });
+    });
+
+    document.getElementById('apply-custom').addEventListener('click', () => {
+      const w = parseInt(document.getElementById('custom-width').value);
+      const h = parseInt(document.getElementById('custom-height').value);
+      
+      if (w > 0 && h > 0) {
+        state.aspectRatio = { w, h };
+        state.isCircle = false;
+        cropBox.classList.remove('circle');
         
-        // Image Cropper Class
-        class ImageCropper {
-            constructor() {
-                this.canvas = document.getElementById('imageCanvas');
-                this.ctx = this.canvas.getContext('2d');
-                this.previewCanvas = document.getElementById('previewCanvas');
-                this.previewCtx = this.previewCanvas.getContext('2d');
-                this.image = null;
-                this.scale = 1;
-                this.rotation = 0;
-                this.zoom = 1;
-                this.cropArea = { x: 0, y: 0, width: 0, height: 0 };
-                this.isDragging = false;
-                this.isResizing = false;
-                this.dragStart = { x: 0, y: 0 };
-                this.currentHandle = null;
-                this.aspectRatio = null;
-                
-                this.initializeEvents();
-            }
-            
-            initializeEvents() {
-                // File input
-                const imageInput = document.getElementById('imageInput');
-                const uploadArea = document.getElementById('uploadArea');
-                
-                uploadArea.addEventListener('click', () => imageInput.click());
-                uploadArea.addEventListener('dragover', this.handleDragOver.bind(this));
-                uploadArea.addEventListener('drop', this.handleDrop.bind(this));
-                imageInput.addEventListener('change', this.handleFileSelect.bind(this));
-                
-                // Controls
-                document.getElementById('zoomSlider').addEventListener('input', this.handleZoom.bind(this));
-                document.getElementById('rotateSlider').addEventListener('input', this.handleRotate.bind(this));
-                document.getElementById('gridToggle').addEventListener('change', this.toggleGrid.bind(this));
-                document.getElementById('cropBtn').addEventListener('click', this.cropImage.bind(this));
-                document.getElementById('resetBtn').addEventListener('click', this.resetImage.bind(this));
-                document.getElementById('downloadBtn').addEventListener('click', this.downloadImage.bind(this));
-                
-                // Aspect ratio buttons
-                document.querySelectorAll('.aspect-ratio-btn').forEach(btn => {
-                    btn.addEventListener('click', this.setAspectRatio.bind(this));
-                });
-                
-                // Canvas events
-                this.canvas.addEventListener('mousedown', this.handleMouseDown.bind(this));
-                this.canvas.addEventListener('mousemove', this.handleMouseMove.bind(this));
-                this.canvas.addEventListener('mouseup', this.handleMouseUp.bind(this));
-                
-                // Touch events for mobile
-                this.canvas.addEventListener('touchstart', this.handleTouchStart.bind(this));
-                this.canvas.addEventListener('touchmove', this.handleTouchMove.bind(this));
-                this.canvas.addEventListener('touchend', this.handleTouchEnd.bind(this));
-                
-                // Crop selection events
-                const selection = document.getElementById('cropSelection');
-                selection.addEventListener('mousedown', this.handleSelectionMouseDown.bind(this));
-                
-                // Handle events
-                document.querySelectorAll('.crop-handle').forEach(handle => {
-                    handle.addEventListener('mousedown', this.handleHandleMouseDown.bind(this));
-                });
-            }
-            
-            handleDragOver(e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-            
-            handleDrop(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                const files = e.dataTransfer.files;
-                if (files.length > 0 && files[0].type.startsWith('image/')) {
-                    this.loadImage(files[0]);
-                }
-            }
-            
-            handleFileSelect(e) {
-                const file = e.target.files[0];
-                if (file && file.type.startsWith('image/')) {
-                    this.loadImage(file);
-                }
-            }
-            
-            loadImage(file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    this.image = new Image();
-                    this.image.onload = () => {
-                        this.setupCanvas();
-                        this.drawImage();
-                        this.initializeCropArea();
-                        document.getElementById('uploadSection').style.display = 'none';
-                        document.getElementById('croppingInterface').style.display = 'grid';
-                    };
-                    this.image.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-            
-            setupCanvas() {
-                const maxWidth = 800;
-                const maxHeight = 600;
-                
-                let { width, height } = this.image;
-                
-                if (width > maxWidth || height > maxHeight) {
-                    const ratio = Math.min(maxWidth / width, maxHeight / height);
-                    width *= ratio;
-                    height *= ratio;
-                }
-                
-                this.canvas.width = width;
-                this.canvas.height = height;
-                this.canvas.style.maxWidth = '100%';
-                this.scale = width / this.image.width;
-            }
-            
-            drawImage() {
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                this.ctx.save();
-                
-                const centerX = this.canvas.width / 2;
-                const centerY = this.canvas.height / 2;
-                
-                this.ctx.translate(centerX, centerY);
-                this.ctx.rotate(this.rotation * Math.PI / 180);
-                this.ctx.scale(this.zoom, this.zoom);
-                
-                const drawWidth = this.canvas.width;
-                const drawHeight = this.canvas.height;
-                
-                this.ctx.drawImage(
-                    this.image,
-                    -drawWidth / 2,
-                    -drawHeight / 2,
-                    drawWidth,
-                    drawHeight
-                );
-                
-                this.ctx.restore();
-            }
-            
-            initializeCropArea() {
-                const padding = 50;
-                this.cropArea = {
-                    x: padding,
-                    y: padding,
-                    width: this.canvas.width - padding * 2,
-                    height: this.canvas.height - padding * 2
-                };
-                this.updateCropSelection();
-            }
-            
-            updateCropSelection() {
-                const selection = document.getElementById('cropSelection');
-                const canvasRect = this.canvas.getBoundingClientRect();
-                
-                selection.style.left = (this.cropArea.x / this.canvas.width * canvasRect.width) + 'px';
-                selection.style.top = (this.cropArea.y / this.canvas.height * canvasRect.height) + 'px';
-                selection.style.width = (this.cropArea.width / this.canvas.width * canvasRect.width) + 'px';
-                selection.style.height = (this.cropArea.height / this.canvas.height * canvasRect.height) + 'px';
-            }
-            
-            handleZoom(e) {
-                this.zoom = parseFloat(e.target.value);
-                document.getElementById('zoomValue').textContent = Math.round(this.zoom * 100) + '%';
-                this.drawImage();
-            }
-            
-            handleRotate(e) {
-                this.rotation = parseFloat(e.target.value);
-                document.getElementById('rotateValue').textContent = this.rotation + '°';
-                this.drawImage();
-            }
-            
-            toggleGrid() {
-                const grid = document.getElementById('gridOverlay');
-                grid.style.display = document.getElementById('gridToggle').checked ? 'block' : 'none';
-            }
-            
-            setAspectRatio(e) {
-                document.querySelectorAll('.aspect-ratio-btn').forEach(btn => btn.classList.remove('active'));
-                e.target.classList.add('active');
-                
-                const ratio = e.target.dataset.ratio;
-                if (ratio === 'free') {
-                    this.aspectRatio = null;
-                } else {
-                    const [w, h] = ratio.split(':').map(Number);
-                    this.aspectRatio = w / h;
-                    this.applyCropAspectRatio();
-                }
-            }
-            
-            applyCropAspectRatio() {
-                if (!this.aspectRatio) return;
-                
-                const currentRatio = this.cropArea.width / this.cropArea.height;
-                
-                if (currentRatio > this.aspectRatio) {
-                    // Too wide, adjust width
-                    const newWidth = this.cropArea.height * this.aspectRatio;
-                    this.cropArea.x += (this.cropArea.width - newWidth) / 2;
-                    this.cropArea.width = newWidth;
-                } else {
-                    // Too tall, adjust height
-                    const newHeight = this.cropArea.width / this.aspectRatio;
-                    this.cropArea.y += (this.cropArea.height - newHeight) / 2;
-                    this.cropArea.height = newHeight;
-                }
-                
-                this.updateCropSelection();
-            }
-            
-            getMousePos(e) {
-                const rect = this.canvas.getBoundingClientRect();
-                return {
-                    x: (e.clientX - rect.left) * (this.canvas.width / rect.width),
-                    y: (e.clientY - rect.top) * (this.canvas.height / rect.height)
-                };
-            }
-            
-            handleMouseDown(e) {
-                const pos = this.getMousePos(e);
-                this.isDragging = true;
-                this.dragStart = pos;
-            }
-            
-            handleMouseMove(e) {
-                if (!this.isDragging) return;
-                
-                const pos = this.getMousePos(e);
-                const dx = pos.x - this.dragStart.x;
-                const dy = pos.y - this.dragStart.y;
-                
-                if (this.isResizing && this.currentHandle) {
-                    this.resizeCropArea(dx, dy);
-                } else {
-                    this.moveCropArea(dx, dy);
-                }
-                
-                this.dragStart = pos;
-                this.updateCropSelection();
-            }
-            
-            handleMouseUp() {
-                this.isDragging = false;
-                this.isResizing = false;
-                this.currentHandle = null;
-            }
-            
-            handleSelectionMouseDown(e) {
-                e.stopPropagation();
-                const pos = this.getMousePos(e);
-                this.isDragging = true;
-                this.dragStart = pos;
-            }
-            
-            handleHandleMouseDown(e) {
-                e.stopPropagation();
-                this.isResizing = true;
-                this.currentHandle = e.target.classList[1]; // Get handle position (nw, ne, etc.)
-                const pos = this.getMousePos(e);
-                this.dragStart = pos;
-            }
-            
-            moveCropArea(dx, dy) {
-                this.cropArea.x += dx;
-                this.cropArea.y += dy;
-                
-                // Keep crop area within canvas bounds
-                this.cropArea.x = Math.max(0, Math.min(this.cropArea.x, this.canvas.width - this.cropArea.width));
-                this.cropArea.y = Math.max(0, Math.min(this.cropArea.y, this.canvas.height - this.cropArea.height));
-            }
-            
-            resizeCropArea(dx, dy) {
-                const handle = this.currentHandle;
-                let newX = this.cropArea.x;
-                let newY = this.cropArea.y;
-                let newWidth = this.cropArea.width;
-                let newHeight = this.cropArea.height;
-                
-                if (handle.includes('w')) {
-                    newX += dx;
-                    newWidth -= dx;
-                }
-                if (handle.includes('e')) {
-                    newWidth += dx;
-                }
-                if (handle.includes('n')) {
-                    newY += dy;
-                    newHeight -= dy;
-                }
-                if (handle.includes('s')) {
-                    newHeight += dy;
-                }
-                
-                // Maintain aspect ratio if set
-                if (this.aspectRatio) {
-                    if (handle.includes('w') || handle.includes('e')) {
-                        newHeight = newWidth / this.aspectRatio;
-                        if (handle.includes('n')) {
-                            newY = this.cropArea.y + this.cropArea.height - newHeight;
-                        }
-                    } else {
-                        newWidth = newHeight * this.aspectRatio;
-                        if (handle.includes('w')) {
-                            newX = this.cropArea.x + this.cropArea.width - newWidth;
-                        }
-                    }
-                }
-                
-                // Validate bounds
-                if (newWidth > 10 && newHeight > 10 && 
-                    newX >= 0 && newY >= 0 && 
-                    newX + newWidth <= this.canvas.width && 
-                    newY + newHeight <= this.canvas.height) {
-                    this.cropArea.x = newX;
-                    this.cropArea.y = newY;
-                    this.cropArea.width = newWidth;
-                    this.cropArea.height = newHeight;
-                }
-            }
-            
-            // Touch event handlers
-            handleTouchStart(e) {
-                e.preventDefault();
-                const touch = e.touches[0];
-                const mouseEvent = new MouseEvent('mousedown', {
-                    clientX: touch.clientX,
-                    clientY: touch.clientY
-                });
-                this.handleMouseDown(mouseEvent);
-            }
-            
-            handleTouchMove(e) {
-                e.preventDefault();
-                const touch = e.touches[0];
-                const mouseEvent = new MouseEvent('mousemove', {
-                    clientX: touch.clientX,
-                    clientY: touch.clientY
-                });
-                this.handleMouseMove(mouseEvent);
-            }
-            
-            handleTouchEnd(e) {
-                e.preventDefault();
-                this.handleMouseUp();
-            }
-            
-            cropImage() {
-                const cropCanvas = document.createElement('canvas');
-                const cropCtx = cropCanvas.getContext('2d');
-                
-                // Set canvas size to crop area size at original image resolution
-                const scaleX = this.image.width / this.canvas.width;
-                const scaleY = this.image.height / this.canvas.height;
-                
-                cropCanvas.width = this.cropArea.width * scaleX / this.zoom;
-                cropCanvas.height = this.cropArea.height * scaleY / this.zoom;
-                
-                // Calculate source area in original image coordinates
-                const sourceX = (this.cropArea.x - this.canvas.width / 2) * scaleX / this.zoom + this.image.width / 2;
-                const sourceY = (this.cropArea.y - this.canvas.height / 2) * scaleY / this.zoom + this.image.height / 2;
-                const sourceWidth = this.cropArea.width * scaleX / this.zoom;
-                const sourceHeight = this.cropArea.height * scaleY / this.zoom;
-                
-                // Draw cropped image with rotation
-                cropCtx.save();
-                cropCtx.translate(cropCanvas.width / 2, cropCanvas.height / 2);
-                cropCtx.rotate(this.rotation * Math.PI / 180);
-                cropCtx.drawImage(
-                    this.image,
-                    sourceX - sourceWidth / 2,
-                    sourceY - sourceHeight / 2,
-                    sourceWidth,
-                    sourceHeight,
-                    -cropCanvas.width / 2,
-                    -cropCanvas.height / 2,
-                    cropCanvas.width,
-                    cropCanvas.height
-                );
-                cropCtx.restore();
-                
-                // Show preview
-                this.previewCanvas.width = cropCanvas.width;
-                this.previewCanvas.height = cropCanvas.height;
-                this.previewCtx.drawImage(cropCanvas, 0, 0);
-                
-                document.getElementById('previewSection').style.display = 'block';
-                document.getElementById('downloadBtn').style.display = 'inline-flex';
-                
-                // Store cropped image data
-                this.croppedImageData = cropCanvas.toDataURL('image/png');
-            }
-            
-            resetImage() {
-                if (this.image) {
-                    this.zoom = 1;
-                    this.rotation = 0;
-                    document.getElementById('zoomSlider').value = 1;
-                    document.getElementById('rotateSlider').value = 0;
-                    document.getElementById('zoomValue').textContent = '100%';
-                    document.getElementById('rotateValue').textContent = '0°';
-                    
-                    this.drawImage();
-                    this.initializeCropArea();
-                    
-                    // Reset aspect ratio
-                    document.querySelectorAll('.aspect-ratio-btn').forEach(btn => btn.classList.remove('active'));
-                    document.querySelector('[data-ratio="free"]').classList.add('active');
-                    this.aspectRatio = null;
-                    
-                    document.getElementById('previewSection').style.display = 'none';
-                    document.getElementById('downloadBtn').style.display = 'none';
-                }
-            }
-            
-            downloadImage() {
-                if (this.croppedImageData) {
-                    const link = document.createElement('a');
-                    link.download = 'cropped-image.png';
-                    link.href = this.croppedImageData;
-                    link.click();
-                }
-            }
-        }
+        document.querySelectorAll('.ratio-btn').forEach(b => b.classList.remove('active'));
         
-        // Initialize the cropper
-        const cropper = new ImageCropper();
+        const scale = Math.min(state.display.width / w, state.display.height / h);
+        state.crop.width = w * scale;
+        state.crop.height = h * scale;
+        state.crop.x = (state.display.width - state.crop.width) / 2;
+        state.crop.y = (state.display.height - state.crop.height) / 2;
         
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            if (cropper.image) {
-                cropper.updateCropSelection();
-            }
+        updateCropBox();
+        updateInfo();
+      }
+    });
+
+    // ============================================================
+    // FILTER TABS
+    // ============================================================
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        document.querySelectorAll('.filter-content').forEach(c => c.classList.remove('active'));
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    // ============================================================
+    // FILTER INPUTS - ALL FILTERS
+    // ============================================================
+    const filterInputs = [
+      'brightness', 'contrast', 'saturation', 'blur', 'hue',
+      'exposure', 'shadows', 'highlights', 'vibrance', 'warmth',
+      'tint', 'sharpen', 'clarity', 'vignette', 'grayscale', 'sepia', 'invert'
+    ];
+
+    filterInputs.forEach(name => {
+      const input = document.getElementById(`filter-${name}`);
+      if (input) {
+        input.addEventListener('input', () => {
+          state.filters[name] = parseFloat(input.value);
+          updateAllFilterValues();
+          drawImage();
         });
-    </script>
-<script src="/homebutton.js"></script>
+      }
+    });
+
+    // Reset filters button
+    document.getElementById('reset-filters').addEventListener('click', () => {
+      filterInputs.forEach(name => {
+        state.filters[name] = 0;
+        const input = document.getElementById(`filter-${name}`);
+        if (input) input.value = 0;
+      });
+      updateAllFilterValues();
+      drawImage();
+      
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('[data-preset="none"]').classList.add('active');
+    });
+
+    // Presets
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const preset = btn.dataset.preset;
+        
+        // Reset all filters
+        filterInputs.forEach(name => {
+          state.filters[name] = 0;
+          const input = document.getElementById(`filter-${name}`);
+          if (input) input.value = 0;
+        });
+        
+        // Apply preset
+        switch (preset) {
+          case 'grayscale':
+            state.filters.grayscale = 100;
+            break;
+          case 'sepia':
+            state.filters.sepia = 80;
+            state.filters.warmth = 10;
+            break;
+          case 'vintage':
+            state.filters.sepia = 30;
+            state.filters.contrast = 15;
+            state.filters.brightness = 5;
+            state.filters.warmth = 15;
+            state.filters.vignette = 20;
+            break;
+          case 'warm':
+            state.filters.warmth = 30;
+            state.filters.saturation = 10;
+            break;
+          case 'cool':
+            state.filters.warmth = -30;
+            state.filters.tint = 10;
+            break;
+          case 'dramatic':
+            state.filters.contrast = 35;
+            state.filters.saturation = 20;
+            state.filters.clarity = 20;
+            state.filters.vignette = 30;
+            break;
+          case 'fade':
+            state.filters.contrast = -15;
+            state.filters.brightness = 10;
+            state.filters.saturation = -20;
+            break;
+          case 'vivid':
+            state.filters.saturation = 40;
+            state.filters.vibrance = 30;
+            state.filters.contrast = 10;
+            break;
+        }
+        
+        // Update inputs
+        filterInputs.forEach(name => {
+          const input = document.getElementById(`filter-${name}`);
+          if (input) input.value = state.filters[name];
+        });
+        
+        updateAllFilterValues();
+        drawImage();
+      });
+    });
+
+    // ============================================================
+    // TRANSFORMS
+    // ============================================================
+    btnRotateL.addEventListener('click', () => {
+      state.rotation = (state.rotation - 90 + 360) % 360;
+      initEditor();
+    });
+
+    btnRotateR.addEventListener('click', () => {
+      state.rotation = (state.rotation + 90) % 360;
+      initEditor();
+    });
+
+    btnFlipH.addEventListener('click', () => {
+      state.flipH = !state.flipH;
+      drawImage();
+    });
+
+    btnFlipV.addEventListener('click', () => {
+      state.flipV = !state.flipV;
+      drawImage();
+    });
+
+    btnGrid.addEventListener('click', () => {
+      state.showGrid = !state.showGrid;
+      cropGrid.style.display = state.showGrid ? 'block' : 'none';
+      btnGrid.classList.toggle('active', state.showGrid);
+    });
+
+    btnZoomIn.addEventListener('click', () => {
+      state.zoom = Math.min(3, state.zoom + 0.1);
+      document.getElementById('zoom-value').textContent = Math.round(state.zoom * 100) + '%';
+    });
+
+    btnZoomOut.addEventListener('click', () => {
+      state.zoom = Math.max(0.5, state.zoom - 0.1);
+      document.getElementById('zoom-value').textContent = Math.round(state.zoom * 100) + '%';
+    });
+
+    // ============================================================
+    // EXPORT
+    // ============================================================
+    exportFormat.addEventListener('change', () => {
+      qualityControl.style.display = exportFormat.value === 'png' ? 'none' : 'block';
+    });
+
+    qualitySlider.addEventListener('input', () => {
+      document.getElementById('quality-value').textContent = qualitySlider.value + '%';
+    });
+
+    btnExport.addEventListener('click', () => {
+      if (!state.image) return;
+      
+      const format = exportFormat.value;
+      const quality = qualitySlider.value / 100;
+      
+      const img = state.image;
+      const scaleX = img.width / state.display.width;
+      const scaleY = img.height / state.display.height;
+      
+      const finalW = Math.round(state.crop.width * scaleX);
+      const finalH = Math.round(state.crop.height * scaleY);
+      
+      // Create export canvas
+      const expCanvas = document.createElement('canvas');
+      expCanvas.width = finalW;
+      expCanvas.height = finalH;
+      const expCtx = expCanvas.getContext('2d');
+      
+      // Build filter string
+      let filterStr = '';
+      const f = state.filters;
+      const brightness = 100 + f.brightness + (f.exposure * 0.5);
+      filterStr += `brightness(${brightness}%) `;
+      filterStr += `contrast(${100 + f.contrast}%) `;
+      filterStr += `saturate(${100 + f.saturation + f.vibrance}%) `;
+      filterStr += `blur(${f.blur}px) `;
+      filterStr += `hue-rotate(${f.hue}deg) `;
+      filterStr += `grayscale(${f.grayscale}%) `;
+      filterStr += `sepia(${f.sepia}%) `;
+      filterStr += `invert(${f.invert}%) `;
+      expCtx.filter = filterStr;
+      
+      // Circle crop
+      if (state.isCircle) {
+        expCtx.beginPath();
+        expCtx.arc(finalW / 2, finalH / 2, Math.min(finalW, finalH) / 2, 0, Math.PI * 2);
+        expCtx.clip();
+      }
+      
+      // Apply transforms
+      expCtx.save();
+      expCtx.translate(finalW / 2, finalH / 2);
+      expCtx.rotate((state.rotation * Math.PI) / 180);
+      expCtx.scale(state.flipH ? -1 : 1, state.flipV ? -1 : 1);
+      
+      expCtx.drawImage(img, -finalW / 2, -finalH / 2, finalW, finalH);
+      expCtx.restore();
+      
+      // Export
+      const mime = format === 'jpeg' ? 'image/jpeg' : format === 'webp' ? 'image/webp' : 'image/png';
+      const dataUrl = expCanvas.toDataURL(mime, format === 'png' ? 1 : quality);
+      
+      // Download
+      const link = document.createElement('a');
+      link.download = `${state.fileName}-cropped.${format}`;
+      link.href = dataUrl;
+      link.click();
+    });
+
+    // ============================================================
+    // RESET & NEW
+    // ============================================================
+    btnReset.addEventListener('click', () => {
+      resetState();
+      initEditor();
+    });
+
+    btnNew.addEventListener('click', () => {
+      state.image = null;
+      uploadContainer.style.display = 'flex';
+      editorContainer.classList.remove('active');
+      fileInput.value = '';
+    });
+
+    // ============================================================
+    // RESIZE HANDLER
+    // ============================================================
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (state.image) initEditor();
+      }, 200);
+    });
+
+  })();
+  </script>
 </body>
 </html>

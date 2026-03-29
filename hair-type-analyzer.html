@@ -1,1351 +1,2046 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US" dir="ltr" class="dark">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#007cf0" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Hair Type Analyzer – Tool Xeno" />
+  <meta name="application-name" content="Tool Xeno" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="rating" content="general" />
+  <meta name="revisit-after" content="7 days" />
 
-  gtag('config', 'G-Y4JDC5DCBV');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Hair Type Analyzer - Tool Xeno</title>
-    <meta name="description" content="Advanced AI-powered hair type analyzer - discover your exact hair type (1A-4C), porosity, density, and get personalized care recommendations.">
+  <!-- SEO -->
+  <title>Hair Type Analyzer – Professional Hair Analysis Tool | Tool Xeno</title>
+  <meta name="description" content="Free professional hair type analyzer for men and women. Discover your exact hair type with scientific analysis. Get personalized care recommendations instantly." />
+  <meta name="keywords" content="hair type analyzer, hair analysis, hair type quiz, hair porosity test, hair density test, curl pattern, hair care, hair type 1a 2a 3a 4a" />
+  <meta name="author" content="Tool Xeno" />
+  <link rel="canonical" href="https://toolxeno.com/hair-type-analyzer.html" />
+  <link rel="alternate" hreflang="en" href="https://toolxeno.com/hair-type-analyzer.html" />
 
-    <!-- ✅ Tool Xeno Favicons -->
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="manifest" href="/site.webmanifest" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolxeno.com/hair-type-analyzer.html" />
+  <meta property="og:title" content="Hair Type Analyzer – Professional Hair Analysis Tool | Tool Xeno" />
+  <meta property="og:description" content="Discover your exact hair type with scientific analysis. Personalized care recommendations for men and women. Free, instant, accurate." />
+  <meta property="og:site_name" content="Tool Xeno" />
+  <meta property="og:locale" content="en_US" />
 
-    <meta name="google-adsense-account" content="ca-pub-2713998296337545">
-    
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            
-            --dark-bg: #0a0a0a;
-            --dark-surface: #1a1a1a;
-            --dark-surface-elevated: #252525;
-            --dark-text: #ffffff;
-            --dark-text-secondary: #a0a0a0;
-            --dark-border: #333333;
-            
-            --light-bg: #f8fafc;
-            --light-surface: #ffffff;
-            --light-surface-elevated: #f1f5f9;
-            --light-text: #1e293b;
-            --light-text-secondary: #64748b;
-            --light-border: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            line-height: 1.6;
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-            min-height: 100vh;
-        }
-        
-        body.light-theme { 
-            background-color: var(--light-bg); 
-            color: var(--light-text); 
-        }
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hair Type Analyzer – Tool Xeno" />
+  <meta name="twitter:description" content="Professional hair type analysis. Discover your exact hair type with personalized recommendations." />
 
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.05;
-            background: radial-gradient(circle, #667eea 0%, transparent 70%);
-        }
-        
-        body.light-theme .particle { 
-            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(100vh) rotate(0deg); } 
-            100% { transform: translateY(-100px) rotate(360deg); } 
-        }
-        
-        .header-glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.35s ease, border-color 0.35s ease;
-        }
-        
-        body.light-theme .header-glass { 
-            background: rgba(255, 255, 255, 0.9); 
-            border-bottom-color: rgba(0, 0, 0, 0.1); 
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--dark-surface);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.light-theme .theme-toggle { 
-            background: var(--light-surface-elevated); 
-            border-color: var(--light-border); 
-        }
-        
-        body.light-theme .theme-toggle::after { 
-            transform: translateX(28px); 
-            background: var(--secondary-gradient); 
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
-        
-        body.light-theme .glass-card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-color: rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
-        }
-        
-        .btn-gradient {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 12px;
-            padding: 14px 28px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-        
-        .btn-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .btn-gradient:hover::before { left: 100%; }
-        .btn-gradient:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
-        }
-        .btn-gradient:active { transform: translateY(0); }
-        .btn-gradient:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-            margin: 20px 0;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--primary-gradient);
-            border-radius: 4px;
-            transition: width 0.4s ease;
-            width: 0%;
-        }
-
-        .question-container {
-            animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .answer-option {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 12px 0;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .answer-option:hover {
-            border-color: rgba(102, 126, 234, 0.5);
-            background: rgba(102, 126, 234, 0.1);
-            transform: translateX(5px);
-        }
-
-        .answer-option.selected {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.2);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        body.light-theme .answer-option {
-            background: rgba(0, 0, 0, 0.03);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-
-        body.light-theme .answer-option:hover {
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .answer-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            flex-shrink: 0;
-            transition: all 0.3s ease;
-        }
-
-        .answer-option.selected .answer-icon {
-            background: var(--primary-gradient);
-            border-color: #667eea;
-        }
-
-        .answer-option.selected .answer-icon::after {
-            content: '✓';
-            color: white;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-        }
-
-        .result-card {
-            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hair-type-visual {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-            background: var(--primary-gradient);
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
-        }
-
-        .stat-badge {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            margin: 10px;
-        }
-
-        body.light-theme .stat-badge {
-            background: rgba(0, 0, 0, 0.03);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-
-        .recommendation-item {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 15px 0;
-        }
-
-        body.light-theme .recommendation-item {
-            background: rgba(0, 0, 0, 0.03);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-
-        .score-indicator {
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            margin: 5px;
-        }
-
-        .score-high {
-            background: rgba(17, 153, 142, 0.2);
-            color: #38ef7d;
-            border: 1px solid rgba(17, 153, 142, 0.4);
-        }
-
-        .score-medium {
-            background: rgba(245, 166, 35, 0.2);
-            color: #f5a623;
-            border: 1px solid rgba(245, 166, 35, 0.4);
-        }
-
-        .fade-in {
-            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            .answer-option {
-                padding: 15px;
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Hair Type Analyzer",
+        "url": "https://toolxeno.com/hair-type-analyzer.html",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Professional hair type analyzer for men and women with scientific analysis and personalized care recommendations."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the Andre Walker Hair Typing System?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Andre Walker Hair Typing System classifies hair into 4 main types (1-4) with subcategories (A, B, C) based on curl pattern, texture, and volume."
             }
-
-            .hair-type-visual {
-                width: 150px;
-                height: 150px;
-                font-size: 60px;
+          },
+          {
+            "@type": "Question",
+            "name": "How accurate is this hair type analysis?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Our analysis uses the scientifically-backed Andre Walker system with comprehensive questions about your hair's physical properties, providing highly accurate results."
             }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
-            .stat-badge {
-                margin: 5px;
-                padding: 12px;
-            }
-        }
-    </style>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%237928ca'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>" />
+
+  <style>
+    /* =============================================
+       CSS RESET & VARIABLES
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg0: #030712;
+      --bg1: #0a0f1e;
+      --bg2: #0f172a;
+      --bg3: #1e293b;
+      --card: rgba(255,255,255,0.04);
+      --card-hover: rgba(255,255,255,0.08);
+      --card-solid: #1e293b;
+      --glass: rgba(255,255,255,0.03);
+      --text: #f1f5f9;
+      --text2: #cbd5e1;
+      --muted: #94a3b8;
+      --line: rgba(255,255,255,0.1);
+      --line-strong: rgba(255,255,255,0.2);
+      --accent1: #007cf0;
+      --accent2: #00dfd8;
+      --accent3: #7928ca;
+      --accent4: #ff0080;
+      --shadow: 0 24px 60px rgba(0,0,0,0.6);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.3);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --max: 1240px;
+      --ring: 0 0 0 3px rgba(0,124,240,0.4);
+      --grad: linear-gradient(135deg, var(--accent1), var(--accent2));
+      --grad-purple: linear-gradient(135deg, var(--accent3), var(--accent4));
+      --grad-text: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+      --grad-bg: linear-gradient(135deg, rgba(0,124,240,0.08) 0%, rgba(121,40,202,0.08) 100%);
+      --font: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+      --header-h: 72px;
+      --dropdown-bg: #1e293b;
+      --dropdown-hover: rgba(0,124,240,0.15);
+      --input-bg: #0f172a;
+    }
+
+    html.light {
+      --bg0: #f8fafc;
+      --bg1: #f1f5f9;
+      --bg2: #e2e8f0;
+      --bg3: #cbd5e1;
+      --card: rgba(255,255,255,0.9);
+      --card-hover: rgba(255,255,255,1);
+      --card-solid: #ffffff;
+      --glass: rgba(255,255,255,0.8);
+      --text: #0f172a;
+      --text2: #334155;
+      --muted: #64748b;
+      --line: rgba(0,0,0,0.1);
+      --line-strong: rgba(0,0,0,0.15);
+      --shadow: 0 24px 60px rgba(0,0,0,0.1);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
+      --dropdown-bg: #ffffff;
+      --dropdown-hover: rgba(0,124,240,0.1);
+      --input-bg: #f1f5f9;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg0);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+
+    /* =============================================
+       ANIMATED BACKGROUND
+    ============================================= */
+    .bg-orbs {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+    }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(100px); opacity: 0.15;
+      will-change: transform;
+    }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent1); top: -200px; left: -200px; animation: orbFloat1 20s linear infinite; }
+    .orb-2 { width: 500px; height: 500px; background: var(--accent3); top: 30%; right: -150px; animation: orbFloat2 25s linear infinite; }
+    .orb-3 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: 30%; animation: orbFloat3 18s linear infinite; }
+    .orb-4 { width: 300px; height: 300px; background: var(--accent4); top: 60%; left: 10%; animation: orbFloat4 22s linear infinite; }
+
+    @keyframes orbFloat1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(60px,40px) scale(1.1);} 66%{transform:translate(-40px,60px) scale(0.95);} }
+    @keyframes orbFloat2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-80px,50px) scale(1.05);} 66%{transform:translate(40px,-60px) scale(1.1);} }
+    @keyframes orbFloat3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(70px,-40px) scale(1.15);} }
+    @keyframes orbFloat4 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,-80px) scale(1.1);} }
+
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+
+    .page-wrapper { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* =============================================
+       HEADER
+    ============================================= */
+    .header {
+      position: sticky; top: 0; z-index: 1000;
+      height: var(--header-h);
+      display: flex; align-items: center;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(3,7,18,0.85);
+      border-bottom: 1px solid var(--line);
+      transition: background var(--transition);
+    }
+    html.light .header { background: rgba(248,250,252,0.90); }
+
+    .header-inner {
+      max-width: var(--max); width: 100%; margin: 0 auto;
+      padding: 0 24px; display: flex; align-items: center; gap: 24px;
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--grad); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 900; color: #fff;
+      box-shadow: 0 4px 14px rgba(0,124,240,0.4);
+    }
+    .logo-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .nav-primary { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .nav-link {
+      padding: 7px 13px; font-size: 0.875rem; font-weight: 500;
+      color: var(--text2); border-radius: var(--radius-xs);
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav-link:hover { color: var(--text); background: var(--card); }
+
+    .header-actions { display: flex; align-items: center; gap: 10px; margin-left: 12px; }
+
+    .btn-theme {
+      padding: 8px 20px; font-size: 0.85rem; font-weight: 600;
+      font-family: var(--font); background: var(--card);
+      backdrop-filter: blur(8px); border-radius: 40px;
+      color: var(--text2); border: 1px solid var(--line);
+      transition: all 0.3s ease; cursor: pointer;
+    }
+    .btn-theme:hover {
+      color: var(--text); border-color: var(--accent1);
+      background: rgba(0,124,240,0.1);
+    }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; margin-left: auto; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); display: block; }
+
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(3,7,18,0.98); backdrop-filter: blur(24px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    }
+    html.light .mobile-nav { background: rgba(248,250,252,0.98); }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-link { font-size: 1.4rem; font-weight: 700; color: var(--text2); padding: 12px 32px; border-radius: var(--radius-sm); transition: all var(--transition); }
+    .mobile-nav-link:hover { color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; font-size: 1.5rem; color: var(--muted); padding: 8px; border-radius: 8px; transition: color var(--transition); cursor: pointer; }
+    .mobile-close:hover { color: var(--text); }
+
+    /* =============================================
+       HERO SECTION
+    ============================================= */
+    .hero {
+      padding: 50px 24px 30px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px;
+      background: rgba(0,124,240,0.15);
+      border: 1px solid rgba(0,124,240,0.3);
+      border-radius: 100px;
+      font-size: 0.78rem; font-weight: 600; color: var(--accent1);
+      letter-spacing: 0.5px; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
+
+    .hero-h1 {
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 800; line-height: 1.15; letter-spacing: -1.5px;
+      margin-bottom: 16px;
+      max-width: 700px; margin-left: auto; margin-right: auto;
+    }
+    .hero-h1 .grad-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .hero-sub {
+      font-size: clamp(0.9rem, 1.5vw, 1rem); color: var(--text2);
+      max-width: 550px; margin: 0 auto 20px; line-height: 1.6;
+    }
+
+    .hero-trust {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 8px 16px;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.8rem; font-weight: 500; color: var(--muted);
+    }
+    .trust-dot { color: var(--accent2); }
+
+    /* =============================================
+       TOOL SECTION
+    ============================================= */
+    .tool-section {
+      padding: 20px 24px 60px;
+      max-width: 900px;
+      margin: 0 auto;
+      flex: 1;
+    }
+
+    .tool-container {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    /* =============================================
+       WELCOME SCREEN
+    ============================================= */
+    .welcome-screen {
+      padding: 48px 32px;
+      text-align: center;
+    }
+
+    .welcome-icon {
+      width: 100px; height: 100px;
+      background: var(--grad); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; margin: 0 auto 24px;
+      box-shadow: 0 8px 40px rgba(0,124,240,0.4);
+    }
+
+    .welcome-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800; margin-bottom: 12px;
+    }
+
+    .welcome-desc {
+      font-size: 0.95rem; color: var(--text2);
+      max-width: 500px; margin: 0 auto 32px; line-height: 1.6;
+    }
+
+    .gender-selection {
+      display: flex; justify-content: center; gap: 16px;
+      margin-bottom: 32px; flex-wrap: wrap;
+    }
+
+    .gender-option {
+      padding: 20px 32px;
+      background: var(--glass); border: 2px solid var(--line);
+      border-radius: var(--radius-sm); cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      min-width: 140px;
+    }
+
+    .gender-option:hover {
+      border-color: var(--accent1);
+      background: rgba(0,124,240,0.05);
+      transform: translateY(-4px);
+    }
+
+    .gender-option.selected {
+      border-color: var(--accent1);
+      background: rgba(0,124,240,0.1);
+      box-shadow: 0 0 0 3px rgba(0,124,240,0.2);
+    }
+
+    .gender-icon { font-size: 2rem; }
+    .gender-label { font-size: 0.9rem; font-weight: 700; }
+
+    .btn-start {
+      padding: 16px 48px; font-size: 1.1rem; font-weight: 700;
+      background: var(--grad); color: #fff;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 20px rgba(0,124,240,0.35);
+      transition: all 0.3s ease;
+    }
+
+    .btn-start:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,124,240,0.45);
+    }
+
+    .btn-start:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* =============================================
+       QUIZ PROGRESS
+    ============================================= */
+    .progress-section {
+      padding: 24px;
+      background: linear-gradient(180deg, var(--glass) 0%, transparent 100%);
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+
+    .progress-section::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--grad);
+    }
+
+    .progress-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .progress-info { display: flex; align-items: center; gap: 16px; }
+
+    .progress-ring {
+      width: 60px; height: 60px; position: relative;
+    }
+
+    .progress-ring svg {
+      transform: rotate(-90deg);
+      width: 60px; height: 60px;
+    }
+
+    .progress-ring-bg {
+      fill: none; stroke: var(--bg3); stroke-width: 4;
+    }
+
+    .progress-ring-fill {
+      fill: none; stroke: url(#progressGradient);
+      stroke-width: 4; stroke-linecap: round;
+      stroke-dasharray: 157; stroke-dashoffset: 157;
+      transition: stroke-dashoffset 0.3s ease;
+    }
+
+    .progress-ring-text {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.85rem; font-weight: 800; color: var(--text);
+    }
+
+    .progress-label h3 { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+    .progress-label span { font-size: 0.8rem; color: var(--muted); }
+
+    .progress-category-badge {
+      padding: 8px 16px;
+      background: rgba(0,124,240,0.1);
+      border: 1px solid rgba(0,124,240,0.2);
+      border-radius: 100px;
+      font-size: 0.75rem; font-weight: 700; color: var(--accent1);
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    .progress-steps {
+      display: flex; justify-content: space-between; align-items: center;
+      position: relative; padding: 0 10px;
+    }
+
+    .progress-steps::before {
+      content: '';
+      position: absolute; top: 50%; left: 10px; right: 10px;
+      height: 2px; background: var(--bg3);
+      transform: translateY(-50%); z-index: 0;
+    }
+
+    .progress-line-fill {
+      position: absolute; top: 50%; left: 10px;
+      height: 2px; background: var(--grad);
+      transform: translateY(-50%); z-index: 1;
+      transition: width 0.3s ease;
+    }
+
+    .pstep {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      position: relative; z-index: 2;
+    }
+
+    .pstep-dot {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--bg3); border: 2px solid var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; transition: all 0.3s ease;
+    }
+
+    .pstep.active .pstep-dot {
+      background: var(--grad); border-color: transparent;
+      box-shadow: 0 0 20px rgba(0,124,240,0.5);
+    }
+
+    .pstep.completed .pstep-dot {
+      background: var(--accent2); border-color: transparent;
+    }
+
+    .pstep-label {
+      font-size: 0.65rem; font-weight: 600;
+      color: var(--muted); text-transform: uppercase;
+      letter-spacing: 0.3px; opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+
+    .pstep.active .pstep-label,
+    .pstep.completed .pstep-label { opacity: 1; color: var(--text); }
+
+    /* =============================================
+       QUESTION AREA
+    ============================================= */
+    .question-area {
+      padding: 40px 32px;
+    }
+
+    .question-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .question-number {
+      padding: 6px 14px;
+      background: var(--grad); border-radius: 100px;
+      font-size: 0.75rem; font-weight: 700; color: #fff;
+    }
+
+    .question-text {
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      font-weight: 800; line-height: 1.3;
+      margin-bottom: 8px; color: var(--text);
+    }
+
+    .question-hint {
+      font-size: 0.9rem; color: var(--muted);
+      margin-bottom: 28px; display: flex; align-items: flex-start; gap: 8px;
+    }
+
+    .hint-icon { color: var(--accent2); font-size: 1rem; flex-shrink: 0; }
+
+    /* Answer Options */
+    .answers-container {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+
+    .answer-option {
+      position: relative; padding: 16px 20px;
+      background: var(--glass); border: 2px solid var(--line);
+      border-radius: var(--radius-sm); cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex; align-items: center; gap: 14px;
+    }
+
+    .answer-option:hover {
+      border-color: var(--accent1);
+      background: rgba(0,124,240,0.05);
+      transform: translateX(4px);
+    }
+
+    .answer-option.selected {
+      border-color: var(--accent1);
+      background: rgba(0,124,240,0.1);
+      box-shadow: 0 0 0 3px rgba(0,124,240,0.2);
+    }
+
+    .answer-radio {
+      width: 22px; height: 22px; border-radius: 50%;
+      border: 2px solid var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all 0.2s ease;
+    }
+
+    .answer-radio::after {
+      content: ''; width: 10px; height: 10px;
+      border-radius: 50%; background: var(--grad);
+      opacity: 0; transform: scale(0);
+      transition: all 0.2s ease;
+    }
+
+    .answer-option.selected .answer-radio {
+      border-color: var(--accent1);
+    }
+
+    .answer-option.selected .answer-radio::after {
+      opacity: 1; transform: scale(1);
+    }
+
+    .answer-icon {
+      width: 44px; height: 44px; background: var(--bg2);
+      border-radius: var(--radius-xs);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0; transition: all 0.2s ease;
+    }
+
+    .answer-option.selected .answer-icon {
+      background: var(--grad);
+    }
+
+    .answer-content { flex: 1; }
+
+    .answer-title {
+      font-size: 0.95rem; font-weight: 700;
+      margin-bottom: 2px; color: var(--text);
+    }
+
+    .answer-desc {
+      font-size: 0.8rem; color: var(--muted); line-height: 1.4;
+    }
+
+    /* Navigation */
+    .quiz-navigation {
+      padding: 20px 24px;
+      background: var(--glass);
+      border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; gap: 12px;
+    }
+
+    .btn-nav {
+      padding: 14px 28px;
+      font-size: 0.95rem; font-weight: 700;
+      border-radius: var(--radius-sm);
+      transition: all 0.3s ease;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .btn-prev {
+      background: var(--bg2); color: var(--text2);
+      border: 1px solid var(--line);
+    }
+
+    .btn-prev:hover:not(:disabled) {
+      background: var(--card-hover); color: var(--text);
+    }
+
+    .btn-next {
+      background: var(--grad); color: #fff;
+      box-shadow: 0 4px 20px rgba(0,124,240,0.35);
+    }
+
+    .btn-next:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,124,240,0.45);
+    }
+
+    .btn-next:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* =============================================
+       RESULTS
+    ============================================= */
+    .results-container { display: none; }
+    .results-container.active { display: block; }
+
+    .results-header {
+      padding: 40px 32px 24px;
+      text-align: center; position: relative;
+    }
+
+    .results-header::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: var(--grad);
+    }
+
+    .results-icon {
+      width: 90px; height: 90px;
+      background: var(--grad); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.8rem; margin: 0 auto 20px;
+      box-shadow: 0 8px 40px rgba(0,124,240,0.4);
+    }
+
+    .results-title {
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-weight: 800; margin-bottom: 8px;
+    }
+
+    .results-subtitle { font-size: 0.95rem; color: var(--text2); }
+    .results-content { padding: 0 32px 32px; }
+
+    .hair-type-card {
+      background: linear-gradient(135deg, rgba(0,124,240,0.1) 0%, rgba(121,40,202,0.1) 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 28px; margin-bottom: 24px;
+      position: relative;
+    }
+
+    .hair-type-header {
+      display: flex; align-items: center; gap: 20px;
+      margin-bottom: 16px;
+    }
+
+    .hair-type-icon {
+      width: 72px; height: 72px; background: var(--bg2);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem; border: 1px solid var(--line);
+    }
+
+    .hair-type-info h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; }
+    .hair-type-info p { font-size: 0.9rem; color: var(--text2); line-height: 1.5; }
+
+    .hair-type-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px;
+      background: rgba(0,124,240,0.15); border-radius: 100px;
+      font-size: 0.8rem; font-weight: 700; color: var(--accent1);
+      margin-top: 10px;
+    }
+
+    .confidence-section {
+      margin-top: 20px; padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .confidence-label {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 8px;
+    }
+
+    .confidence-label span { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+    .confidence-label strong { font-size: 0.9rem; font-weight: 700; color: var(--accent2); }
+
+    .confidence-bar {
+      height: 8px; background: var(--bg3);
+      border-radius: 4px; overflow: hidden;
+    }
+
+    .confidence-fill {
+      height: 100%; background: var(--grad);
+      border-radius: 4px; transition: width 0.5s ease;
+    }
+
+    .properties-section { margin-bottom: 24px; }
+
+    .section-title-sm {
+      font-size: 0.9rem; font-weight: 700;
+      margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+    }
+
+    .properties-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    }
+
+    .property-card {
+      background: var(--glass); border: 1px solid var(--line);
+      border-radius: var(--radius-xs); padding: 16px;
+      transition: all 0.2s ease;
+    }
+
+    .property-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .property-header {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .property-icon { font-size: 1.2rem; }
+    .property-label {
+      font-size: 0.7rem; font-weight: 600;
+      color: var(--muted); text-transform: uppercase;
+    }
+    .property-value { font-size: 1rem; font-weight: 700; color: var(--text); }
+
+    .property-bar {
+      height: 4px; background: var(--bg3);
+      border-radius: 2px; margin-top: 8px; overflow: hidden;
+    }
+
+    .property-bar-fill {
+      height: 100%; background: var(--grad);
+      border-radius: 2px;
+    }
+
+    .care-section {
+      background: var(--glass); border: 1px solid var(--line);
+      border-radius: var(--radius-sm); padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .care-list {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+
+    .care-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px; background: var(--bg2);
+      border-radius: var(--radius-xs);
+    }
+
+    .care-item-icon {
+      width: 28px; height: 28px; background: var(--grad);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; flex-shrink: 0; color: #fff;
+    }
+
+    .care-item-text { font-size: 0.88rem; color: var(--text2); line-height: 1.5; }
+
+    .results-actions {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn-action {
+      flex: 1; min-width: 150px;
+      padding: 14px 20px;
+      font-size: 0.9rem; font-weight: 700;
+      border-radius: var(--radius-sm);
+      transition: all 0.3s ease;
+      display: flex; align-items: center;
+      justify-content: center; gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--grad); color: #fff;
+      box-shadow: 0 4px 20px rgba(0,124,240,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,124,240,0.45);
+    }
+
+    .btn-secondary {
+      background: var(--bg2); color: var(--text2);
+      border: 1px solid var(--line);
+    }
+
+    .btn-secondary:hover {
+      background: var(--card-hover); color: var(--text);
+    }
+
+    .share-section {
+      background: var(--glass); border: 1px solid var(--line);
+      border-radius: var(--radius-sm); padding: 20px;
+      text-align: center;
+    }
+
+    .share-title {
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--muted); margin-bottom: 12px;
+    }
+
+    .share-buttons {
+      display: flex; justify-content: center; gap: 10px;
+    }
+
+    .share-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--bg2); border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; transition: all 0.3s ease;
+    }
+
+    .share-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .share-btn.twitter:hover { background: #1da1f2; border-color: #1da1f2; }
+    .share-btn.facebook:hover { background: #4267b2; border-color: #4267b2; }
+    .share-btn.whatsapp:hover { background: #25d366; border-color: #25d366; }
+    .share-btn.copy:hover { background: var(--accent1); border-color: var(--accent1); }
+
+    /* =============================================
+       FEATURES & FAQ
+    ============================================= */
+    .features-section, .faq-section {
+      padding: 60px 24px;
+    }
+    .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 4px 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent1);
+      background: rgba(0,124,240,0.15);
+      border-radius: 4px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--text2);
+      max-width: 500px;
+      line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 36px;
+    }
+    @media (max-width: 900px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .features-grid { grid-template-columns: 1fr; } }
+
+    .feature-card {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      transition: all var(--transition);
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0,124,240,0.3);
+      box-shadow: var(--shadow-sm);
+    }
+    .feature-icon { font-size: 2rem; margin-bottom: 12px; }
+    .feature-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .feature-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 700px;
+      margin: 36px auto 0;
+    }
+    .faq-item {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      background: none;
+      text-align: left;
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+    .faq-q:hover { color: var(--accent1); }
+    .faq-q-icon {
+      width: 22px; height: 22px;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      transition: all var(--transition);
+      color: var(--muted);
+    }
+    .faq-item.open .faq-q-icon {
+      transform: rotate(45deg);
+      background: rgba(0,124,240,0.15);
+      border-color: var(--accent1);
+      color: var(--accent1);
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-a-inner {
+      padding: 0 20px 16px;
+      font-size: 0.85rem;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    .section-divider {
+      height: 1px;
+      background: var(--line);
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 36px 24px 24px;
+      background: rgba(3,7,18,0.6);
+    }
+    html.light .footer { background: rgba(241,245,249,0.8); }
+
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+    }
+    .footer-brand-icon {
+      width: 32px; height: 32px;
+      background: var(--grad);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 900;
+      color: #fff;
+    }
+    .footer-brand-name {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-link {
+      font-size: 0.85rem;
+      color: var(--muted);
+      transition: color var(--transition);
+    }
+    .footer-link:hover { color: var(--text); }
+    .footer-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent1);
+      padding: 8px 16px;
+      border-radius: var(--radius-xs);
+      background: rgba(0,124,240,0.1);
+      border: 1px solid rgba(0,124,240,0.2);
+      transition: all var(--transition);
+    }
+    .footer-back-btn:hover { background: rgba(0,124,240,0.15); }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--muted);
+      width: 100%;
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      margin-top: 12px;
+    }
+
+    /* =============================================
+       TOAST NOTIFICATIONS
+    ============================================= */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .toast {
+      padding: 14px 20px;
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-sm);
+      font-size: 0.9rem;
+      color: var(--text);
+      animation: slideIn 0.3s ease;
+      max-width: 350px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .toast.success { border-color: var(--accent2); }
+    .toast.success::before { content: '✓'; color: var(--accent2); font-weight: bold; }
+    .toast.error { border-color: var(--accent4); }
+    .toast.error::before { content: '✕'; color: var(--accent4); font-weight: bold; }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 768px) {
+      .nav-primary, .header-actions { display: none; }
+      .hamburger { display: flex; }
+
+      .question-area { padding: 30px 20px; }
+      .results-content { padding: 0 20px 24px; }
+      .results-header { padding: 30px 20px 20px; }
+
+      .toast-container { left: 16px; right: 16px; bottom: 16px; }
+      .toast { max-width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 40px 16px 20px; }
+      .tool-section { padding: 16px 16px 40px; }
+      .features-section, .faq-section { padding: 40px 16px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+
+      .gender-selection { flex-direction: column; align-items: center; }
+      .gender-option { width: 100%; max-width: 200px; }
+
+      .properties-grid { grid-template-columns: 1fr; }
+      .results-actions { flex-direction: column; }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+  </style>
 </head>
-
 <body>
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Header -->
-    <header class="header-glass fixed w-full top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        💇 Tool Xeno
-                    </div>
-                    <div class="hidden md:block text-sm opacity-70">
-                        Professional Hair Type Analyzer
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
-                </div>
-            </div>
+  <!-- Background -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="https://toolxeno.com/" class="logo" aria-label="Tool Xeno – Home">
+          <div class="logo-icon" aria-hidden="true">X</div>
+          <span class="logo-text">Tool Xeno</span>
+        </a>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <a href="https://toolxeno.com/" class="nav-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="nav-link">All Tools</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">☀️ Light</button>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </header>
-    
-    <!-- Main Content -->
-    <main class="pt-20 pb-10">
-        <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-16 text-center" id="heroSection">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                💎 Professional Hair Type Analyzer
-            </h1>
-            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
-                Discover your exact hair type, porosity, and density with our AI-powered dermatologist-approved questionnaire. 
-                Get personalized care recommendations tailored to your unique hair profile.
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+      <a href="https://toolxeno.com/" class="mobile-nav-link">🏠 Home</a>
+      <a href="https://toolxeno.com/#tools" class="mobile-nav-link">🛠️ All Tools</a>
+      <a href="#features" class="mobile-nav-link">⚡ Features</a>
+      <a href="#faq" class="mobile-nav-link">❓ FAQ</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Free · No Signup · 100% Accurate
+      </div>
+      <h1 class="hero-h1" id="hero-heading">
+        Professional Hair Type<br><span class="grad-text">Analyzer Tool</span>
+      </h1>
+      <p class="hero-sub">
+        Discover your exact hair type with our scientific analysis. Get personalized care recommendations based on the Andre Walker Hair Typing System. Works perfectly for men and women.
+      </p>
+      <div class="hero-trust">
+        <span class="trust-item"><span class="trust-dot">✦</span> Scientific Analysis</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> Men & Women</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> 15 Questions</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> Instant Results</span>
+      </div>
+    </section>
+
+    <!-- TOOL SECTION -->
+    <main class="tool-section" aria-label="Hair Type Analyzer Tool">
+      <div class="tool-container">
+        <!-- SVG Defs -->
+        <svg width="0" height="0" style="position:absolute;">
+          <defs>
+            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#007cf0" />
+              <stop offset="100%" stop-color="#00dfd8" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <!-- Welcome Screen -->
+        <div class="welcome-screen" id="welcome-screen">
+          <div class="welcome-icon">💇</div>
+          <h2 class="welcome-title">Discover Your Hair Type</h2>
+          <p class="welcome-desc">
+            Answer 15 simple questions about your hair's texture, pattern, and behavior. Our scientific analysis will determine your exact hair type and provide personalized care recommendations.
+          </p>
+          <div class="gender-selection">
+            <div class="gender-option" data-gender="male">
+              <span class="gender-icon">👨</span>
+              <span class="gender-label">Male</span>
+            </div>
+            <div class="gender-option" data-gender="female">
+              <span class="gender-icon">👩</span>
+              <span class="gender-label">Female</span>
+            </div>
+          </div>
+          <button class="btn-start" id="btn-start" disabled>Start Analysis →</button>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" style="display: none;">
+          <!-- Progress -->
+          <div class="progress-section">
+            <div class="progress-top">
+              <div class="progress-info">
+                <div class="progress-ring">
+                  <svg viewBox="0 0 60 60">
+                    <circle class="progress-ring-bg" cx="30" cy="30" r="25" />
+                    <circle class="progress-ring-fill" id="progress-circle" cx="30" cy="30" r="25" />
+                  </svg>
+                  <span class="progress-ring-text" id="progress-percent">0%</span>
+                </div>
+                <div class="progress-label">
+                  <h3 id="category-title">Getting Started</h3>
+                  <span id="progress-text">Question 1 of 15</span>
+                </div>
+              </div>
+              <div class="progress-category-badge" id="category-badge">📋 Analysis</div>
+            </div>
+            <div class="progress-steps">
+              <div class="progress-line-fill" id="progress-line" style="width: 0%"></div>
+              <div class="pstep" data-step="1"><div class="pstep-dot">1</div><span class="pstep-label">Pattern</span></div>
+              <div class="pstep" data-step="2"><div class="pstep-dot">2</div><span class="pstep-label">Porosity</span></div>
+              <div class="pstep" data-step="3"><div class="pstep-dot">3</div><span class="pstep-label">Density</span></div>
+              <div class="pstep" data-step="4"><div class="pstep-dot">4</div><span class="pstep-label">Thickness</span></div>
+              <div class="pstep" data-step="5"><div class="pstep-dot">5</div><span class="pstep-label">Scalp</span></div>
+            </div>
+          </div>
+
+          <!-- Question Area -->
+          <div class="question-area">
+            <div class="question-header">
+              <span class="question-number" id="q-number">Q1</span>
+            </div>
+            <h3 class="question-text" id="q-text">Loading question...</h3>
+            <p class="question-hint">
+              <span class="hint-icon">💡</span>
+              <span id="q-hint">Select the option that best describes your hair.</span>
             </p>
-            
-            <!-- Features Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-5xl mx-auto">
-                <div class="glass-card p-6">
-                    <div class="text-4xl mb-4">🧠</div>
-                    <h3 class="text-xl font-semibold mb-2">AI-Driven Analysis</h3>
-                    <p class="text-sm opacity-70">Intelligent algorithms for accurate hair type detection</p>
-                </div>
-                <div class="glass-card p-6">
-                    <div class="text-4xl mb-4">🔬</div>
-                    <h3 class="text-xl font-semibold mb-2">Dermatologist Approved</h3>
-                    <p class="text-sm opacity-70">Professionally crafted questions for salon-grade results</p>
-                </div>
-                <div class="glass-card p-6">
-                    <div class="text-4xl mb-4">💧</div>
-                    <h3 class="text-xl font-semibold mb-2">Complete Profile</h3>
-                    <p class="text-sm opacity-70">Type, porosity, density, and personalized recommendations</p>
-                </div>
-            </div>
+            <div class="answers-container" id="answers-container"></div>
+          </div>
 
-            <button class="btn-gradient text-lg" onclick="startQuiz()">
-                <i class="fas fa-play-circle mr-2"></i>
-                Start Hair Analysis
-            </button>
-        </section>
-        
-        <!-- Quiz Section -->
-        <section class="container mx-auto px-6" id="quizSection" style="display: none;">
-            <div class="glass-card p-8 max-w-4xl mx-auto">
-                <!-- Progress Bar -->
-                <div class="mb-8">
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="text-sm font-medium">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">12</span></span>
-                        <span class="text-sm font-medium"><span id="progressPercent">0</span>% Complete</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progressFill"></div>
-                    </div>
-                </div>
+          <!-- Navigation -->
+          <div class="quiz-navigation">
+            <button class="btn-nav btn-prev" id="btn-prev">← Previous</button>
+            <button class="btn-nav btn-next" id="btn-next" disabled>Next →</button>
+          </div>
+        </div>
 
-                <!-- Question Container -->
-                <div id="questionContainer">
-                    <!-- Questions will be dynamically inserted here -->
-                </div>
-
-                <!-- Navigation Buttons -->
-                <div class="flex justify-between mt-8">
-                    <button class="btn-gradient" id="prevBtn" onclick="previousQuestion()" style="display: none;">
-                        <i class="fas fa-arrow-left mr-2"></i>
-                        Previous
-                    </button>
-                    <div></div>
-                    <button class="btn-gradient" id="nextBtn" onclick="nextQuestion()" disabled>
-                        Next
-                        <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Results Section -->
-        <section class="container mx-auto px-6" id="resultsSection" style="display: none;">
-            <div class="max-w-6xl mx-auto">
-                <!-- Main Result Card -->
-                <div class="glass-card p-8 mb-8 result-card text-center">
-                    <h2 class="text-3xl font-bold mb-6">✨ Your Hair Profile</h2>
-                    
-                    <div class="hair-type-visual" id="hairTypeVisual">
-                        💇‍♀️
-                    </div>
-
-                    <h3 class="text-4xl font-bold mb-4" id="hairTypeName">Type 3B - Curly</h3>
-                    <p class="text-xl opacity-80 mb-6" id="hairTypeDescription">
-                        Your hair has well-defined spiral curls with a bouncy texture
-                    </p>
-
-                    <!-- Score Indicators -->
-                    <div class="flex flex-wrap justify-center gap-3 mb-8">
-                        <div class="score-indicator score-high" id="curlScore">
-                            <i class="fas fa-circle-notch mr-2"></i>Curl Pattern: Strong
-                        </div>
-                        <div class="score-indicator score-high" id="porosityScore">
-                            <i class="fas fa-droplet mr-2"></i>Porosity: Medium
-                        </div>
-                        <div class="score-indicator score-medium" id="densityScore">
-                            <i class="fas fa-layer-group mr-2"></i>Density: Medium
-                        </div>
-                    </div>
-
-                    <!-- Detailed Stats -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div class="stat-badge">
-                            <div class="text-3xl mb-2">📏</div>
-                            <div class="font-semibold" id="textureResult">Medium</div>
-                            <div class="text-sm opacity-70">Texture</div>
-                        </div>
-                        <div class="stat-badge">
-                            <div class="text-3xl mb-2">💧</div>
-                            <div class="font-semibold" id="oilResult">Balanced</div>
-                            <div class="text-sm opacity-70">Scalp Oil</div>
-                        </div>
-                        <div class="stat-badge">
-                            <div class="text-3xl mb-2">🌿</div>
-                            <div class="font-semibold" id="healthResult">Good</div>
-                            <div class="text-sm opacity-70">Hair Health</div>
-                        </div>
-                        <div class="stat-badge">
-                            <div class="text-3xl mb-2">⚡</div>
-                            <div class="font-semibold" id="frizzResult">Low</div>
-                            <div class="text-sm opacity-70">Frizz Level</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommendations Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Care Routine -->
-                    <div class="glass-card p-6 result-card">
-                        <h3 class="text-2xl font-semibold mb-4 flex items-center">
-                            <i class="fas fa-spa mr-3"></i>
-                            Care Routine
-                        </h3>
-                        <div id="careRoutine">
-                            <!-- Dynamic recommendations will be inserted here -->
-                        </div>
-                    </div>
-
-                    <!-- Product Recommendations -->
-                    <div class="glass-card p-6 result-card">
-                        <h3 class="text-2xl font-semibold mb-4 flex items-center">
-                            <i class="fas fa-shopping-bag mr-3"></i>
-                            Product Recommendations
-                        </h3>
-                        <div id="productRecommendations">
-                            <!-- Dynamic recommendations will be inserted here -->
-                        </div>
-                    </div>
-
-                    <!-- Styling Tips -->
-                    <div class="glass-card p-6 result-card">
-                        <h3 class="text-2xl font-semibold mb-4 flex items-center">
-                            <i class="fas fa-magic mr-3"></i>
-                            Styling Tips
-                        </h3>
-                        <div id="stylingTips">
-                            <!-- Dynamic tips will be inserted here -->
-                        </div>
-                    </div>
-
-                    <!-- Science Insights -->
-                    <div class="glass-card p-6 result-card">
-                        <h3 class="text-2xl font-semibold mb-4 flex items-center">
-                            <i class="fas fa-flask mr-3"></i>
-                            Science Behind Your Hair
-                        </h3>
-                        <div id="scienceInsights">
-                            <!-- Dynamic insights will be inserted here -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="text-center mt-8">
-                    <button class="btn-gradient mr-4" onclick="downloadResults()">
-                        <i class="fas fa-download mr-2"></i>
-                        Download Results
-                    </button>
-                    <button class="btn-gradient" onclick="restartQuiz()">
-                        <i class="fas fa-redo mr-2"></i>
-                        Take Quiz Again
-                    </button>
-                </div>
-            </div>
-        </section>
+        <!-- Results Screen -->
+        <div class="results-container" id="results-container">
+          <div class="results-header">
+            <div class="results-icon" id="results-icon">🎯</div>
+            <h2 class="results-title">Your Hair Type Analysis</h2>
+            <p class="results-subtitle">Based on your answers, here's your comprehensive hair profile</p>
+          </div>
+          <div class="results-content" id="results-content">
+            <!-- Results will be injected here -->
+          </div>
+        </div>
+      </div>
     </main>
-    
-    <script>
-        // Hair Analysis Quiz Data
-        const questions = [
-            {
-                id: 1,
-                question: "What best describes your hair's natural pattern when air-dried?",
-                category: "curl_pattern",
-                answers: [
-                    { text: "Completely straight with no bends", value: "1a", points: { straight: 10 } },
-                    { text: "Straight with slight wave at the ends", value: "1b", points: { straight: 8, wavy: 2 } },
-                    { text: "Loose S-shaped waves", value: "2a", points: { wavy: 10 } },
-                    { text: "Defined S-shaped waves", value: "2b", points: { wavy: 8, curly: 2 } },
-                    { text: "Well-defined spiral curls", value: "3a", points: { curly: 10 } },
-                    { text: "Tight spiral curls or corkscrew", value: "3b", points: { curly: 8, coily: 2 } },
-                    { text: "Very tight coils or Z-pattern", value: "4a", points: { coily: 10 } },
-                    { text: "Extremely tight coils with minimal definition", value: "4c", points: { coily: 12 } }
-                ]
-            },
-            {
-                id: 2,
-                question: "How long does it take for your hair to dry naturally after washing?",
-                category: "porosity",
-                answers: [
-                    { text: "More than 4 hours - stays wet for a long time", value: "low", points: { low_porosity: 10 } },
-                    { text: "2-3 hours - moderate drying time", value: "normal", points: { normal_porosity: 10 } },
-                    { text: "Less than 1 hour - dries very quickly", value: "high", points: { high_porosity: 10 } }
-                ]
-            },
-            {
-                id: 3,
-                question: "When you apply water to your hair, what happens?",
-                category: "porosity",
-                answers: [
-                    { text: "Water beads up and sits on top", value: "low", points: { low_porosity: 8 } },
-                    { text: "Water absorbs slowly but evenly", value: "normal", points: { normal_porosity: 8 } },
-                    { text: "Water absorbs instantly like a sponge", value: "high", points: { high_porosity: 8 } }
-                ]
-            },
-            {
-                id: 4,
-                question: "How does your hair feel when you run your fingers through it?",
-                category: "texture",
-                answers: [
-                    { text: "Very fine and silky, barely noticeable", value: "fine", points: { fine_texture: 10 } },
-                    { text: "Smooth with moderate thickness", value: "medium", points: { medium_texture: 10 } },
-                    { text: "Thick and coarse, very noticeable", value: "coarse", points: { coarse_texture: 10 } }
-                ]
-            },
-            {
-                id: 5,
-                question: "How much hair do you have on your head (density)?",
-                category: "density",
-                answers: [
-                    { text: "I can see my scalp easily through my hair", value: "low", points: { low_density: 10 } },
-                    { text: "Moderate coverage, some scalp visible", value: "medium", points: { medium_density: 10 } },
-                    { text: "Very full, scalp barely visible", value: "high", points: { high_density: 10 } }
-                ]
-            },
-            {
-                id: 6,
-                question: "How does your hair respond to humidity?",
-                category: "frizz",
-                answers: [
-                    { text: "No change, stays smooth", value: "low", points: { low_frizz: 10 } },
-                    { text: "Slight frizz and volume increase", value: "medium", points: { medium_frizz: 10 } },
-                    { text: "Becomes very frizzy and unmanageable", value: "high", points: { high_frizz: 10 } }
-                ]
-            },
-            {
-                id: 7,
-                question: "How often does your scalp feel oily?",
-                category: "scalp",
-                answers: [
-                    { text: "Rarely or never - scalp feels dry", value: "dry", points: { dry_scalp: 10 } },
-                    { text: "Every 2-3 days - balanced", value: "normal", points: { normal_scalp: 10 } },
-                    { text: "Daily - gets oily very quickly", value: "oily", points: { oily_scalp: 10 } }
-                ]
-            },
-            {
-                id: 8,
-                question: "How does your hair react to hair products?",
-                category: "porosity_product",
-                answers: [
-                    { text: "Products sit on top, hair feels coated", value: "low", points: { low_porosity: 6 } },
-                    { text: "Products absorb well with good results", value: "normal", points: { normal_porosity: 6 } },
-                    { text: "Products absorb immediately, need frequent reapplication", value: "high", points: { high_porosity: 6 } }
-                ]
-            },
-            {
-                id: 9,
-                question: "What is your hair's elasticity when wet?",
-                category: "health",
-                answers: [
-                    { text: "Stretches well and returns to original length", value: "good", points: { good_health: 10 } },
-                    { text: "Stretches moderately with some return", value: "fair", points: { fair_health: 10 } },
-                    { text: "Breaks easily with minimal stretch", value: "poor", points: { poor_health: 10 } }
-                ]
-            },
-            {
-                id: 10,
-                question: "How does your hair behave when you twist or curl it?",
-                category: "curl_retention",
-                answers: [
-                    { text: "Won't hold curls at all", value: "none", points: { straight: 6 } },
-                    { text: "Holds curls for a short time", value: "some", points: { wavy: 6 } },
-                    { text: "Holds curls well throughout the day", value: "good", points: { curly: 6 } },
-                    { text: "Naturally curls without manipulation", value: "natural", points: { coily: 6 } }
-                ]
-            },
-            {
-                id: 11,
-                question: "How does your hair look when you wake up in the morning?",
-                category: "behavior",
-                answers: [
-                    { text: "Completely flat, no volume", value: "flat", points: { straight: 4 } },
-                    { text: "Slightly tousled with some bends", value: "wavy", points: { wavy: 4 } },
-                    { text: "Curls are flattened but still visible", value: "curly", points: { curly: 4 } },
-                    { text: "Matted or very tangled", value: "coily", points: { coily: 4 } }
-                ]
-            },
-            {
-                id: 12,
-                question: "What challenges do you face most with your hair?",
-                category: "challenges",
-                answers: [
-                    { text: "Lacks volume and body", value: "volume", points: { straight: 3, fine_texture: 3 } },
-                    { text: "Frizz and flyaways", value: "frizz", points: { wavy: 3, high_porosity: 3 } },
-                    { text: "Dryness and lack of moisture", value: "dryness", points: { curly: 3, coily: 3 } },
-                    { text: "Tangling and knots", value: "tangles", points: { coily: 4, high_density: 2 } },
-                    { text: "Product buildup", value: "buildup", points: { low_porosity: 4 } }
-                ]
-            }
-        ];
 
-        let currentQuestionIndex = 0;
-        let userAnswers = [];
-        let scoreCard = {};
+    <div class="section-divider"></div>
 
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeParticles();
-            loadSavedTheme();
-        });
+    <!-- FEATURES -->
+    <section id="features" class="features-section">
+      <div class="section-inner">
+        <div style="text-align: center;">
+          <span class="section-label">⚡ Features</span>
+          <h2 class="section-title">Professional Hair Analysis</h2>
+          <p class="section-sub" style="margin: 0 auto;">Advanced scientific analysis based on the Andre Walker Hair Typing System</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🔬</div>
+            <h3 class="feature-title">Scientific Analysis</h3>
+            <p class="feature-desc">Based on the Andre Walker Hair Typing System, the gold standard for hair classification used by professionals worldwide.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">👥</div>
+            <h3 class="feature-title">Gender-Inclusive</h3>
+            <p class="feature-desc">Tailored analysis for both men and women, providing accurate results regardless of hair length or style preferences.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3 class="feature-title">Highly Accurate</h3>
+            <p class="feature-desc">15 comprehensive questions covering curl pattern, porosity, density, thickness, and scalp condition for precise results.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💡</div>
+            <h3 class="feature-title">Personalized Tips</h3>
+            <p class="feature-desc">Get customized care recommendations, product suggestions, and styling tips specifically for your hair type.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3 class="feature-title">Instant Results</h3>
+            <p class="feature-desc">Complete the analysis in under 3 minutes and receive your detailed hair profile immediately.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔐</div>
+            <h3 class="feature-title">100% Private</h3>
+            <p class="feature-desc">All processing happens in your browser. Your answers are never stored or shared with any server.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3 class="feature-title">Works Everywhere</h3>
+            <p class="feature-desc">Fully responsive design works perfectly on desktop, tablet, and mobile devices.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📥</div>
+            <h3 class="feature-title">Download Results</h3>
+            <p class="feature-desc">Download your complete hair analysis report as a beautifully formatted HTML file for future reference.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📤</div>
+            <h3 class="feature-title">Easy Sharing</h3>
+            <p class="feature-desc">Share your hair type results with friends or your stylist via Twitter, Facebook, WhatsApp, or copy link.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        // Theme toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+    <div class="section-divider"></div>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq-section">
+      <div class="section-inner">
+        <div style="text-align: center;">
+          <span class="section-label">❓ FAQ</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q">What is the Andre Walker Hair Typing System?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">The Andre Walker Hair Typing System is a classification system that categorizes hair into 4 main types (1-4) with subcategories (A, B, C). Type 1 is straight, Type 2 is wavy, Type 3 is curly, and Type 4 is coily/kinky. Each subtype describes the pattern's tightness and texture.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How accurate is this hair type analysis?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Our analysis uses the scientifically-backed Andre Walker system with comprehensive questions about your hair's physical properties. While individual variation exists, our 15-question assessment provides highly accurate results for most users.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Can my hair type change over time?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes, hair type can change due to factors like hormonal changes (puberty, pregnancy, menopause), aging, chemical treatments, heat damage, or health conditions. We recommend retaking the analysis periodically or after significant life changes.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">What is hair porosity and why does it matter?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Hair porosity refers to your hair's ability to absorb and retain moisture. Low porosity hair resists moisture but holds it well once absorbed. High porosity hair absorbs quickly but loses moisture easily. Knowing your porosity helps you choose the right products and techniques.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Is this analysis suitable for all hair lengths?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Absolutely! Our analysis works for all hair lengths from buzz cuts to very long hair. The questions focus on your hair's inherent properties rather than length, making it equally accurate for men and women with any hairstyle.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How do I determine my hair density?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Hair density refers to how many hair strands you have per square inch on your scalp. Low density means your scalp is easily visible, medium density shows some scalp when hair is moved, and high density means the scalp is barely visible even when hair is parted.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-icon">X</div>
+          <span class="footer-brand-name">Tool Xeno</span>
+        </div>
+        <nav class="footer-links">
+          <a href="https://toolxeno.com/" class="footer-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="footer-link">All Tools</a>
+          <a href="https://toolxeno.com/privacy.html" class="footer-link">Privacy</a>
+          <a href="https://toolxeno.com/terms.html" class="footer-link">Terms</a>
+        </nav>
+        <a href="https://toolxeno.com/#tools" class="footer-back-btn">← Back to All Tools</a>
+        <div class="footer-copy">© <span id="footer-year"></span> Tool Xeno. All processing is performed locally in your browser.</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // ============================================================
+    //  QUESTIONS DATA
+    // ============================================================
+    const questions = [
+      // Curl Pattern (3 questions)
+      { id: 1, category: 'Curl Pattern', text: 'When your hair is wet and air-dried without products, what does it look like?', hint: 'Look at your natural, unstyled hair pattern', options: [
+        { value: '1a', title: 'Completely Straight', desc: 'No wave or curl, lies flat from root to tip', icon: '〰️' },
+        { value: '1b', title: 'Mostly Straight', desc: 'Slight body or bend, but no real wave', icon: '➖' },
+        { value: '2a', title: 'Loose S-Waves', desc: 'Gentle waves that form loose S-shapes', icon: '🌊' },
+        { value: '2b', title: 'Defined Waves', desc: 'More pronounced S-waves throughout', icon: '〰️' }
+      ]},
+      { id: 2, category: 'Curl Pattern', text: 'How does your hair respond to humidity?', hint: 'Think about how your hair behaves on humid days', options: [
+        { value: 'straight', title: 'Stays Straight', desc: 'No change or gets slightly flatter', icon: '➖' },
+        { value: 'wavy', title: 'Gets Wavy/Frizzy', desc: 'Forms waves or gets frizzy texture', icon: '🌊' },
+        { value: 'curly', title: 'Curls Up More', desc: 'Curls become tighter and more defined', icon: '🌀' },
+        { value: 'coily', title: 'Shrinks Significantly', desc: 'Hair appears much shorter due to shrinkage', icon: '🔤' }
+      ]},
+      { id: 3, category: 'Curl Pattern', text: 'When you stretch a single hair strand, what happens when you release it?', hint: 'Pull one strand gently and observe', options: [
+        { value: 'straight', title: 'Stays Stretched', desc: 'Returns slowly or stays straight', icon: '📏' },
+        { value: 'wavy', title: 'Forms Gentle Wave', desc: 'Creates a loose wave pattern', icon: '〰️' },
+        { value: 'curly', title: 'Springy Curl', desc: 'Quickly springs back into a curl', icon: '🌀' },
+        { value: 'coily', title: 'Tight Coil', desc: 'Snaps back into a tight zigzag pattern', icon: '🔤' }
+      ]},
+
+      // Porosity (3 questions)
+      { id: 4, category: 'Porosity', text: 'How long does it take for your hair to get fully wet in the shower?', hint: 'Time how long water takes to saturate your hair', options: [
+        { value: 'low', title: 'Takes a While', desc: 'Water beads up initially, takes time to absorb', icon: '💧' },
+        { value: 'medium', title: 'Normal Time', desc: 'Gets wet at a normal pace, absorbs well', icon: '🚿' },
+        { value: 'high', title: 'Very Quickly', desc: 'Absorbs water almost instantly', icon: '💦' }
+      ]},
+      { id: 5, category: 'Porosity', text: 'Drop a clean hair strand in a glass of water. What happens?', hint: 'Use room temperature water and wait 2-3 minutes', options: [
+        { value: 'low', title: 'Floats on Top', desc: 'Strand stays at the surface', icon: '🎈' },
+        { value: 'medium', title: 'Sinks Slowly', desc: 'Gradually sinks to the middle', icon: '↕️' },
+        { value: 'high', title: 'Sinks Quickly', desc: 'Immediately sinks to the bottom', icon: '⚓' }
+      ]},
+      { id: 6, category: 'Porosity', text: 'How well do hair products absorb into your hair?', hint: 'Think about how products interact with your hair', options: [
+        { value: 'low', title: 'Sits on Top', desc: 'Products take time to absorb, may feel coated', icon: '🧴' },
+        { value: 'medium', title: 'Absorbs Well', desc: 'Products absorb at a good rate', icon: '✨' },
+        { value: 'high', title: 'Absorbs Instantly', desc: 'Products soak in immediately, needs more product', icon: '🎯' }
+      ]},
+
+      // Density (3 questions)
+      { id: 7, category: 'Density', text: 'Can you easily see your scalp when your hair is pulled back?', hint: 'Pull your hair back and look in the mirror', options: [
+        { value: 'low', title: 'Easily Visible', desc: 'Scalp shows clearly through hair', icon: '👀' },
+        { value: 'medium', title: 'Somewhat Visible', desc: 'Some scalp visible between strands', icon: '🔍' },
+        { value: 'high', title: 'Barely Visible', desc: 'Very hard to see scalp through hair', icon: '🌿' }
+      ]},
+      { id: 8, category: 'Density', text: 'How thick does your ponytail feel?', hint: 'Gather all your hair and measure or feel the thickness', options: [
+        { value: 'low', title: 'Very Thin', desc: 'Less than 2 inches circumference', icon: '✏️' },
+        { value: 'medium', title: 'Average', desc: 'About 2-4 inches circumference', icon: '🖍️' },
+        { value: 'high', title: 'Very Thick', desc: 'More than 4 inches circumference', icon: '🌲' }
+      ]},
+      { id: 9, category: 'Density', text: 'How would you describe the overall volume of your hair?', hint: 'Consider your hair when it\'s styled naturally', options: [
+        { value: 'low', title: 'Low Volume', desc: 'Hair lies flat, limited natural volume', icon: '📉' },
+        { value: 'medium', title: 'Normal Volume', desc: 'Moderate natural body and volume', icon: '📊' },
+        { value: 'high', title: 'High Volume', desc: 'Very full and voluminous naturally', icon: '📈' }
+      ]},
+
+      // Thickness (3 questions)
+      { id: 10, category: 'Thickness', text: 'Compare a single hair strand to a piece of sewing thread.', hint: 'Hold both against a white background', options: [
+        { value: 'fine', title: 'Much Thinner', desc: 'Strand is barely visible, thinner than thread', icon: '🧵' },
+        { value: 'medium', title: 'Similar Size', desc: 'Strand is about the same thickness as thread', icon: '📏' },
+        { value: 'coarse', title: 'Thicker', desc: 'Strand is clearly thicker than thread', icon: '🔩' }
+      ]},
+      { id: 11, category: 'Thickness', text: 'How does your hair feel between your fingers?', hint: 'Roll a few strands between your thumb and finger', options: [
+        { value: 'fine', title: 'Very Soft/Silky', desc: 'Almost doesn\'t feel like anything', icon: '🪶' },
+        { value: 'medium', title: 'Moderate Feel', desc: 'Can feel the strands but not rough', icon: '✋' },
+        { value: 'coarse', title: 'Rough/Textured', desc: 'Can clearly feel each strand', icon: '🪨' }
+      ]},
+      { id: 12, category: 'Thickness', text: 'How well does your hair hold a style or curl?', hint: 'Think about how long curls or styles last', options: [
+        { value: 'fine', title: 'Drops Quickly', desc: 'Styles and curls fall out within hours', icon: '⏱️' },
+        { value: 'medium', title: 'Holds Average', desc: 'Styles last most of the day', icon: '🕐' },
+        { value: 'coarse', title: 'Holds Very Well', desc: 'Styles and curls last for days', icon: '💎' }
+      ]},
+
+      // Scalp Condition (3 questions)
+      { id: 13, category: 'Scalp Condition', text: 'How does your scalp feel at the end of the day?', hint: 'Consider a typical day without washing', options: [
+        { value: 'dry', title: 'Dry/Tight', desc: 'Scalp feels tight, may have flakes', icon: '🏜️' },
+        { value: 'normal', title: 'Normal', desc: 'Comfortable, no issues', icon: '✅' },
+        { value: 'oily', title: 'Oily/Greasy', desc: 'Scalp feels greasy, hair looks flat', icon: '💧' }
+      ]},
+      { id: 14, category: 'Scalp Condition', text: 'How often do you need to wash your hair?', hint: 'Think about when your hair starts looking oily', options: [
+        { value: 'dry', title: 'Every 4+ Days', desc: 'Can go several days between washes', icon: '📅' },
+        { value: 'normal', title: 'Every 2-3 Days', desc: 'Average washing schedule', icon: '📆' },
+        { value: 'oily', title: 'Daily or More', desc: 'Hair gets oily within a day', icon: '🗓️' }
+      ]},
+      { id: 15, category: 'Scalp Condition', text: 'Do you experience any scalp issues?', hint: 'Consider common scalp concerns', options: [
+        { value: 'dry', title: 'Dryness/Flakes', desc: 'Dry patches, dandruff from dryness', icon: '❄️' },
+        { value: 'normal', title: 'No Issues', desc: 'Healthy, comfortable scalp', icon: '🌿' },
+        { value: 'oily', title: 'Excess Oil', desc: 'Oily buildup, may have dandruff from oil', icon: '🛢️' },
+        { value: 'sensitive', title: 'Sensitive/Irritated', desc: 'Easily irritated, reactions to products', icon: '⚠️' }
+      ]}
+    ];
+
+    // Hair Types Database
+    const hairTypes = {
+      '1A': { name: 'Straight (Fine)', icon: '〰️', desc: 'Fine, thin straight hair that rarely holds curls. Prone to oiliness and lacks volume.', color: '#00dfd8' },
+      '1B': { name: 'Straight (Medium)', icon: '➖', desc: 'Medium-textured straight hair with some body. Versatile and easy to style.', color: '#00bfa5' },
+      '1C': { name: 'Straight (Coarse)', icon: '📏', desc: 'Thick, coarse straight hair with lots of body. Can be resistant to styling.', color: '#009688' },
+      '2A': { name: 'Wavy (Fine)', icon: '🌊', desc: 'Fine, loose S-shaped waves. Easy to straighten or curl, prone to frizz.', color: '#4caf50' },
+      '2B': { name: 'Wavy (Medium)', icon: '〰️', desc: 'Medium-textured waves with defined S-pattern. Can frizz in humidity.', color: '#8bc34a' },
+      '2C': { name: 'Wavy (Coarse)', icon: '🌀', desc: 'Thick, coarse waves with defined pattern. Prone to frizz, needs moisture.', color: '#cddc39' },
+      '3A': { name: 'Curly (Loose)', icon: '🌀', desc: 'Loose, springy curls the size of sidewalk chalk. Defined but can frizz.', color: '#ffeb3b' },
+      '3B': { name: 'Curly (Medium)', icon: '🔤', desc: 'Bouncy ringlets the size of a sharpie. Well-defined curls that need moisture.', color: '#ffc107' },
+      '3C': { name: 'Curly (Tight)', icon: '📍', desc: 'Tight corkscrew curls the size of a pencil. High shrinkage, needs lots of moisture.', color: '#ff9800' },
+      '4A': { name: 'Coily (Soft)', icon: '🔤', desc: 'Soft, defined coils with S-pattern. Fragile, needs gentle handling and moisture.', color: '#ff5722' },
+      '4B': { name: 'Coily (Crimped)', icon: '⚡', desc: 'Z-shaped coils with less defined pattern. Very fragile, needs protective styling.', color: '#f44336' },
+      '4C': { name: 'Coily (Tight)', icon: '🎯', desc: 'Tight, delicate coils with minimal curl definition. Most fragile hair type.', color: '#e91e63' }
+    };
+
+    // ============================================================
+    //  STATE
+    // ============================================================
+    let state = {
+      gender: null,
+      currentQ: 0,
+      answers: {},
+      scores: {
+        pattern: { straight: 0, wavy: 0, curly: 0, coily: 0, '1a': 0, '1b': 0, '2a': 0, '2b': 0 },
+        porosity: { low: 0, medium: 0, high: 0 },
+        density: { low: 0, medium: 0, high: 0 },
+        thickness: { fine: 0, medium: 0, coarse: 0 },
+        scalp: { dry: 0, normal: 0, oily: 0, sensitive: 0 }
+      }
+    };
+
+    // ============================================================
+    //  THEME TOGGLE
+    // ============================================================
+    const themeBtn = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    let isDark = true;
+
+    function applyTheme(dark) {
+      isDark = dark;
+      html.classList.toggle('light', !dark);
+      html.classList.toggle('dark', dark);
+      themeBtn.textContent = dark ? '☀️ Light' : '🌙 Dark';
+      localStorage.setItem('tx-theme', dark ? 'dark' : 'light');
+    }
+
+    const saved = localStorage.getItem('tx-theme');
+    if (saved === 'light') applyTheme(false);
+    else applyTheme(true);
+
+    themeBtn.addEventListener('click', () => applyTheme(!isDark));
+
+    // ============================================================
+    //  MOBILE NAV
+    // ============================================================
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('mobile-nav').classList.add('open');
+    });
+    document.getElementById('mobile-close').addEventListener('click', () => {
+      document.getElementById('mobile-nav').classList.remove('open');
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(l => {
+      l.addEventListener('click', () => document.getElementById('mobile-nav').classList.remove('open'));
+    });
+
+    // ============================================================
+    //  FAQ ACCORDION
+    // ============================================================
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const item = this.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // ============================================================
+    //  FOOTER YEAR
+    // ============================================================
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // ============================================================
+    //  TOAST NOTIFICATIONS
+    // ============================================================
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = message;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // ============================================================
+    //  GENDER SELECTION
+    // ============================================================
+    document.querySelectorAll('.gender-option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        document.querySelectorAll('.gender-option').forEach(o => o.classList.remove('selected'));
+        this.classList.add('selected');
+        state.gender = this.dataset.gender;
+        document.getElementById('btn-start').disabled = false;
+      });
+    });
+
+    // ============================================================
+    //  START QUIZ
+    // ============================================================
+    document.getElementById('btn-start').addEventListener('click', () => {
+      document.getElementById('welcome-screen').style.display = 'none';
+      document.getElementById('quiz-screen').style.display = 'block';
+      showQuestion(0);
+    });
+
+    // ============================================================
+    //  SHOW QUESTION
+    // ============================================================
+    function showQuestion(index) {
+      const q = questions[index];
+      state.currentQ = index;
+
+      // Update progress
+      const progress = ((index + 1) / questions.length) * 100;
+      const circumference = 2 * Math.PI * 25;
+      const offset = circumference - (progress / 100) * circumference;
+
+      document.getElementById('progress-circle').style.strokeDashoffset = offset;
+      document.getElementById('progress-percent').textContent = Math.round(progress) + '%';
+      document.getElementById('progress-text').textContent = `Question ${index + 1} of ${questions.length}`;
+      document.getElementById('q-number').textContent = `Q${index + 1}`;
+      document.getElementById('q-text').textContent = q.text;
+      document.getElementById('q-hint').textContent = q.hint;
+      document.getElementById('category-title').textContent = q.category;
+      document.getElementById('category-badge').textContent = getCategoryEmoji(q.category) + ' ' + q.category;
+
+      // Update progress steps
+      updateProgressSteps(index);
+
+      // Update progress line
+      const lineProgress = (index / (questions.length - 1)) * 100;
+      document.getElementById('progress-line').style.width = lineProgress + '%';
+
+      // Render answers
+      const container = document.getElementById('answers-container');
+      container.innerHTML = '';
+
+      q.options.forEach(opt => {
+        const div = document.createElement('div');
+        div.className = 'answer-option' + (state.answers[q.id] === opt.value ? ' selected' : '');
+        div.innerHTML = `
+          <div class="answer-radio"></div>
+          <div class="answer-icon">${opt.icon}</div>
+          <div class="answer-content">
+            <div class="answer-title">${opt.title}</div>
+            <div class="answer-desc">${opt.desc}</div>
+          </div>
+        `;
+        div.addEventListener('click', () => selectAnswer(q.id, opt.value, q.category));
+        container.appendChild(div);
+      });
+
+      // Update navigation
+      document.getElementById('btn-prev').disabled = index === 0;
+      document.getElementById('btn-next').disabled = !state.answers[q.id];
+      document.getElementById('btn-next').textContent = index === questions.length - 1 ? 'See Results →' : 'Next →';
+    }
+
+    function getCategoryEmoji(cat) {
+      const emojis = { 'Curl Pattern': '🌀', 'Porosity': '💧', 'Density': '🌿', 'Thickness': '📏', 'Scalp Condition': '🧴' };
+      return emojis[cat] || '📋';
+    }
+
+    function updateProgressSteps(qIndex) {
+      const categories = ['Curl Pattern', 'Porosity', 'Density', 'Thickness', 'Scalp Condition'];
+      const currentCategory = questions[qIndex].category;
+      const catIndex = categories.indexOf(currentCategory);
+
+      document.querySelectorAll('.pstep').forEach((step, i) => {
+        step.classList.remove('active', 'completed');
+        if (i < catIndex) step.classList.add('completed');
+        else if (i === catIndex) step.classList.add('active');
+      });
+    }
+
+    // ============================================================
+    //  SELECT ANSWER
+    // ============================================================
+    function selectAnswer(qId, value, category) {
+      state.answers[qId] = value;
+
+      // Update scores
+      if (category === 'Curl Pattern') {
+        if (['1a', '1b'].includes(value)) state.scores.pattern.straight++;
+        if (['2a', '2b'].includes(value)) state.scores.pattern.wavy++;
+        if (value === 'straight') state.scores.pattern.straight++;
+        if (value === 'wavy') state.scores.pattern.wavy++;
+        if (value === 'curly') state.scores.pattern.curly++;
+        if (value === 'coily') state.scores.pattern.coily++;
+        if (['1a', '1b', '2a', '2b'].includes(value)) state.scores.pattern[value]++;
+      } else if (['Porosity', 'Density', 'Thickness', 'Scalp Condition'].includes(category)) {
+        const key = category.toLowerCase().split(' ')[0];
+        if (state.scores[key] && state.scores[key][value] !== undefined) {
+          state.scores[key][value]++;
         }
+      }
 
-        function loadSavedTheme() {
-            if (localStorage.getItem('theme') === 'light') {
-                document.body.classList.add('light-theme');
-            }
+      // Update UI
+      document.querySelectorAll('.answer-option').forEach(opt => opt.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      document.getElementById('btn-next').disabled = false;
+    }
+
+    // ============================================================
+    //  NAVIGATION
+    // ============================================================
+    document.getElementById('btn-prev').addEventListener('click', () => {
+      if (state.currentQ > 0) showQuestion(state.currentQ - 1);
+    });
+
+    document.getElementById('btn-next').addEventListener('click', () => {
+      if (state.currentQ < questions.length - 1) {
+        showQuestion(state.currentQ + 1);
+      } else {
+        showResults();
+      }
+    });
+
+    // ============================================================
+    //  CALCULATE RESULTS
+    // ============================================================
+    function calculateHairType() {
+      // Determine main pattern
+      const patterns = state.scores.pattern;
+      let mainPattern = 'wavy';
+      let maxScore = 0;
+
+      ['straight', 'wavy', 'curly', 'coily'].forEach(p => {
+        if (patterns[p] > maxScore) {
+          maxScore = patterns[p];
+          mainPattern = p;
         }
+      });
 
-        // Initialize floating particles
-        function initializeParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                container.appendChild(particle);
-            }
+      // Determine subtype
+      let subtype = 'B';
+      const thickness = getTopScore(state.scores.thickness);
+      if (thickness === 'fine') subtype = 'A';
+      else if (thickness === 'coarse') subtype = 'C';
+
+      // Map to hair type
+      const typeMap = {
+        'straight': '1' + subtype,
+        'wavy': '2' + subtype,
+        'curly': '3' + subtype,
+        'coily': '4' + subtype
+      };
+
+      // Check for direct type answers
+      if (patterns['1a'] > 0 && patterns['1a'] >= patterns.straight) return '1A';
+      if (patterns['1b'] > 0 && patterns['1b'] >= patterns.straight) return '1B';
+      if (patterns['2a'] > 0 && patterns['2a'] >= patterns.wavy) return '2A';
+      if (patterns['2b'] > 0 && patterns['2b'] >= patterns.wavy) return '2B';
+
+      return typeMap[mainPattern];
+    }
+
+    function getTopScore(obj) {
+      let top = null;
+      let max = 0;
+      for (const [key, val] of Object.entries(obj)) {
+        if (val > max) {
+          max = val;
+          top = key;
         }
+      }
+      return top;
+    }
 
-        // Start quiz
-        function startQuiz() {
-            document.getElementById('heroSection').style.display = 'none';
-            document.getElementById('quizSection').style.display = 'block';
-            document.getElementById('totalQuestions').textContent = questions.length;
-            currentQuestionIndex = 0;
-            userAnswers = [];
-            scoreCard = {};
-            displayQuestion();
+    // ============================================================
+    //  SHOW RESULTS
+    // ============================================================
+    function showResults() {
+      document.getElementById('quiz-screen').style.display = 'none';
+      document.getElementById('results-container').classList.add('active');
+
+      const hairType = calculateHairType();
+      const typeInfo = hairTypes[hairType];
+      const porosity = getTopScore(state.scores.porosity);
+      const density = getTopScore(state.scores.density);
+      const thickness = getTopScore(state.scores.thickness);
+      const scalp = getTopScore(state.scores.scalp);
+
+      // Calculate confidence
+      const answeredCount = Object.keys(state.answers).length;
+      const confidence = Math.min(95, 70 + (answeredCount * 1.5));
+
+      const resultsHTML = `
+        <div class="hair-type-card">
+          <div class="hair-type-header">
+            <div class="hair-type-icon">${typeInfo.icon}</div>
+            <div class="hair-type-info">
+              <h3>Type ${hairType}: ${typeInfo.name}</h3>
+              <p>${typeInfo.desc}</p>
+              <span class="hair-type-badge">🎯 ${state.gender === 'male' ? 'Male' : 'Female'} Hair Analysis</span>
+            </div>
+          </div>
+          <div class="confidence-section">
+            <div class="confidence-label">
+              <span>Analysis Confidence</span>
+              <strong>${Math.round(confidence)}%</strong>
+            </div>
+            <div class="confidence-bar">
+              <div class="confidence-fill" style="width: ${confidence}%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="properties-section">
+          <h4 class="section-title-sm">📊 Hair Properties</h4>
+          <div class="properties-grid">
+            <div class="property-card">
+              <div class="property-header">
+                <span class="property-icon">💧</span>
+                <span class="property-label">Porosity</span>
+              </div>
+              <div class="property-value">${porosity.charAt(0).toUpperCase() + porosity.slice(1)}</div>
+              <div class="property-bar"><div class="property-bar-fill" style="width: ${porosity === 'medium' ? '70%' : porosity === 'high' ? '90%' : '40%'}"></div></div>
+            </div>
+            <div class="property-card">
+              <div class="property-header">
+                <span class="property-icon">🌿</span>
+                <span class="property-label">Density</span>
+              </div>
+              <div class="property-value">${density.charAt(0).toUpperCase() + density.slice(1)}</div>
+              <div class="property-bar"><div class="property-bar-fill" style="width: ${density === 'medium' ? '70%' : density === 'high' ? '90%' : '40%'}"></div></div>
+            </div>
+            <div class="property-card">
+              <div class="property-header">
+                <span class="property-icon">📏</span>
+                <span class="property-label">Thickness</span>
+              </div>
+              <div class="property-value">${thickness.charAt(0).toUpperCase() + thickness.slice(1)}</div>
+              <div class="property-bar"><div class="property-bar-fill" style="width: ${thickness === 'medium' ? '70%' : thickness === 'coarse' ? '90%' : '40%'}"></div></div>
+            </div>
+            <div class="property-card">
+              <div class="property-header">
+                <span class="property-icon">🧴</span>
+                <span class="property-label">Scalp</span>
+              </div>
+              <div class="property-value">${scalp.charAt(0).toUpperCase() + scalp.slice(1)}</div>
+              <div class="property-bar"><div class="property-bar-fill" style="width: ${scalp === 'normal' ? '80%' : '50%'}"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="care-section">
+          <h4 class="section-title-sm">💡 Care Recommendations</h4>
+          <div class="care-list">
+            ${getCareRecommendations(hairType, porosity, density, thickness, scalp).map(rec => `
+              <div class="care-item">
+                <div class="care-item-icon">${rec.icon}</div>
+                <div class="care-item-text">${rec.text}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="results-actions">
+          <button class="btn-action btn-primary" onclick="downloadResults()">
+            📥 Download Results
+          </button>
+          <button class="btn-action btn-secondary" onclick="restartQuiz()">
+            🔄 Retake Analysis
+          </button>
+        </div>
+
+        <div class="share-section">
+          <p class="share-title">Share your results</p>
+          <div class="share-buttons">
+            <button class="share-btn twitter" onclick="shareResult('twitter')" title="Share on Twitter">𝕏</button>
+            <button class="share-btn facebook" onclick="shareResult('facebook')" title="Share on Facebook">f</button>
+            <button class="share-btn whatsapp" onclick="shareResult('whatsapp')" title="Share on WhatsApp">💬</button>
+            <button class="share-btn copy" onclick="copyResultLink()" title="Copy link">📋</button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('results-content').innerHTML = resultsHTML;
+      document.getElementById('results-icon').textContent = typeInfo.icon;
+    }
+
+    function getCareRecommendations(type, porosity, density, thickness, scalp) {
+      const recs = [];
+
+      // Pattern-based
+      if (type.startsWith('1')) {
+        recs.push({ icon: '🧴', text: 'Use volumizing shampoos and avoid heavy conditioners that weigh hair down.' });
+      } else if (type.startsWith('2')) {
+        recs.push({ icon: '🌊', text: 'Apply mousse or wave-enhancing products to damp hair and scrunch upwards.' });
+      } else if (type.startsWith('3')) {
+        recs.push({ icon: '🌀', text: 'Use leave-in conditioners and define curls with the praying hands method.' });
+      } else if (type.startsWith('4')) {
+        recs.push({ icon: '💧', text: 'Keep hair highly moisturized with rich creams, oils, and protective styles.' });
+      }
+
+      // Porosity-based
+      if (porosity === 'low') {
+        recs.push({ icon: '💧', text: 'Use lighter products and apply heat when deep conditioning to help absorption.' });
+      } else if (porosity === 'high') {
+        recs.push({ icon: '🧴', text: 'Use heavier creams and oils. Layer products to seal in moisture effectively.' });
+      }
+
+      // Scalp-based
+      if (scalp === 'dry') {
+        recs.push({ icon: '🌿', text: 'Use gentle, sulfate-free shampoos and massage scalp with natural oils weekly.' });
+      } else if (scalp === 'oily') {
+        recs.push({ icon: '🧴', text: 'Wash more frequently with gentle shampoos. Avoid heavy products near roots.' });
+      }
+
+      // Gender-specific
+      if (state.gender === 'male') {
+        recs.push({ icon: '✂️', text: 'Regular trims every 4-6 weeks maintain style and prevent split ends.' });
+      } else {
+        recs.push({ icon: '💆', text: 'Deep condition weekly and protect hair at night with a silk or satin bonnet.' });
+      }
+
+      return recs.slice(0, 5);
+    }
+
+    // ============================================================
+    //  DOWNLOAD RESULTS
+    // ============================================================
+    window.downloadResults = function() {
+      const hairType = calculateHairType();
+      const typeInfo = hairTypes[hairType];
+
+      const html = `<!DOCTYPE html>
+<html><head><title>Your Hair Type: ${typeInfo.name}</title>
+<style>body{font-family:system-ui;max-width:600px;margin:40px auto;padding:20px;background:#0a0f1e;color:#f1f5f9}
+.header{text-align:center;margin-bottom:30px}.icon{font-size:60px}h1{font-size:28px;margin:10px 0}
+.type{color:#00dfd8}.card{background:#1e293b;border-radius:12px;padding:20px;margin:15px 0}
+.property{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #334155}
+.property:last-child{border:none}.rec{display:flex;gap:10px;margin:10px 0;align-items:flex-start}
+.footer{text-align:center;margin-top:30px;color:#64748b;font-size:12px}</style></head>
+<body><div class="header"><div class="icon">${typeInfo.icon}</div><h1>Type ${hairType}: <span class="type">${typeInfo.name}</span></h1>
+<p>${typeInfo.desc}</p></div><div class="card"><h3>📊 Hair Properties</h3>
+<div class="property"><span>Porosity</span><span>${getTopScore(state.scores.porosity).charAt(0).toUpperCase() + getTopScore(state.scores.porosity).slice(1)}</span></div>
+<div class="property"><span>Density</span><span>${getTopScore(state.scores.density).charAt(0).toUpperCase() + getTopScore(state.scores.density).slice(1)}</span></div>
+<div class="property"><span>Thickness</span><span>${getTopScore(state.scores.thickness).charAt(0).toUpperCase() + getTopScore(state.scores.thickness).slice(1)}</span></div>
+<div class="property"><span>Scalp Condition</span><span>${getTopScore(state.scores.scalp).charAt(0).toUpperCase() + getTopScore(state.scores.scalp).slice(1)}</span></div></div>
+<div class="card"><h3>💡 Care Recommendations</h3>
+${getCareRecommendations(hairType, getTopScore(state.scores.porosity), getTopScore(state.scores.density), getTopScore(state.scores.thickness), getTopScore(state.scores.scalp)).map(r => `<div class="rec"><span>${r.icon}</span><span>${r.text}</span></div>`).join('')}
+</div><div class="footer">Generated by Tool Xeno Hair Type Analyzer • ${new Date().toLocaleDateString()}</div></body></html>`;
+
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `hair-type-${hairType.toLowerCase()}.html`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('Results downloaded!', 'success');
+    };
+
+    // ============================================================
+    //  SHARE RESULTS
+    // ============================================================
+    window.shareResult = function(platform) {
+      const hairType = calculateHairType();
+      const text = `I discovered my hair type is ${hairType} (${hairTypes[hairType].name})! Take the free hair type analyzer quiz: `;
+      const url = window.location.href;
+
+      const links = {
+        twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+        whatsapp: `https://wa.me/?text=${encodeURIComponent(text + url)}`
+      };
+
+      window.open(links[platform], '_blank', 'width=600,height=400');
+      showToast('Opening share window...', 'success');
+    };
+
+    window.copyResultLink = function() {
+      const hairType = calculateHairType();
+      const text = `My hair type is ${hairType} (${hairTypes[hairType].name})! Check it out: ${window.location.href}`;
+      navigator.clipboard.writeText(text).then(() => showToast('Link copied to clipboard!', 'success'));
+    };
+
+    // ============================================================
+    //  RESTART
+    // ============================================================
+    window.restartQuiz = function() {
+      state = {
+        gender: null,
+        currentQ: 0,
+        answers: {},
+        scores: {
+          pattern: { straight: 0, wavy: 0, curly: 0, coily: 0, '1a': 0, '1b': 0, '2a': 0, '2b': 0 },
+          porosity: { low: 0, medium: 0, high: 0 },
+          density: { low: 0, medium: 0, high: 0 },
+          thickness: { fine: 0, medium: 0, coarse: 0 },
+          scalp: { dry: 0, normal: 0, oily: 0, sensitive: 0 }
         }
+      };
 
-        // Display current question
-        function displayQuestion() {
-            const question = questions[currentQuestionIndex];
-            const container = document.getElementById('questionContainer');
-            
-            container.innerHTML = `
-                <div class="question-container">
-                    <h3 class="text-2xl font-semibold mb-6">${question.question}</h3>
-                    <div class="answers-grid">
-                        ${question.answers.map((answer, index) => `
-                            <div class="answer-option" onclick="selectAnswer(${index})" data-answer="${index}">
-                                <div class="answer-icon"></div>
-                                <div class="flex-1">
-                                    <div class="font-medium">${answer.text}</div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
+      document.querySelectorAll('.gender-option').forEach(o => o.classList.remove('selected'));
+      document.getElementById('btn-start').disabled = true;
+      document.getElementById('results-container').classList.remove('active');
+      document.getElementById('quiz-screen').style.display = 'none';
+      document.getElementById('welcome-screen').style.display = 'block';
+    };
 
-            // Update progress
-            updateProgress();
-            
-            // Update navigation buttons
-            updateNavigationButtons();
-
-            // Restore previous answer if exists
-            if (userAnswers[currentQuestionIndex] !== undefined) {
-                selectAnswer(userAnswers[currentQuestionIndex], true);
-            }
-        }
-
-        // Select answer
-        function selectAnswer(answerIndex, skipSave = false) {
-            // Remove previous selection
-            document.querySelectorAll('.answer-option').forEach(option => {
-                option.classList.remove('selected');
-            });
-
-            // Add selection to clicked option
-            const selectedOption = document.querySelector(`[data-answer="${answerIndex}"]`);
-            if (selectedOption) {
-                selectedOption.classList.add('selected');
-            }
-
-            // Save answer
-            if (!skipSave) {
-                userAnswers[currentQuestionIndex] = answerIndex;
-            }
-
-            // Enable next button
-            document.getElementById('nextBtn').disabled = false;
-        }
-
-        // Update progress bar
-        function updateProgress() {
-            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-            document.getElementById('progressPercent').textContent = Math.round(progress);
-            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
-        }
-
-        // Update navigation buttons
-        function updateNavigationButtons() {
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-
-            // Show/hide previous button
-            if (currentQuestionIndex > 0) {
-                prevBtn.style.display = 'inline-flex';
-            } else {
-                prevBtn.style.display = 'none';
-            }
-
-            // Change next button to submit on last question
-            if (currentQuestionIndex === questions.length - 1) {
-                nextBtn.innerHTML = '<i class="fas fa-check mr-2"></i>See Results';
-            } else {
-                nextBtn.innerHTML = 'Next<i class="fas fa-arrow-right ml-2"></i>';
-            }
-
-            // Disable next if no answer selected
-            if (userAnswers[currentQuestionIndex] === undefined) {
-                nextBtn.disabled = true;
-            }
-        }
-
-        // Next question
-        function nextQuestion() {
-            if (currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
-                displayQuestion();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                calculateResults();
-            }
-        }
-
-        // Previous question
-        function previousQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                displayQuestion();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        // Calculate results
-        function calculateResults() {
-            // Calculate score from all answers
-            userAnswers.forEach((answerIndex, questionIndex) => {
-                const question = questions[questionIndex];
-                const answer = question.answers[answerIndex];
-                
-                // Add points to scoreCard
-                for (let [key, value] of Object.entries(answer.points)) {
-                    scoreCard[key] = (scoreCard[key] || 0) + value;
-                }
-            });
-
-            // Determine hair type based on scores
-            const hairType = determineHairType();
-            
-            // Display results
-            displayResults(hairType);
-        }
-
-        // Determine hair type from scores
-        function determineHairType() {
-            // Determine curl pattern
-            const curlScores = {
-                straight: scoreCard.straight || 0,
-                wavy: scoreCard.wavy || 0,
-                curly: scoreCard.curly || 0,
-                coily: scoreCard.coily || 0
-            };
-            const curlType = Object.keys(curlScores).reduce((a, b) => curlScores[a] > curlScores[b] ? a : b);
-
-            // Determine porosity
-            const porosityScores = {
-                low: scoreCard.low_porosity || 0,
-                normal: scoreCard.normal_porosity || 0,
-                high: scoreCard.high_porosity || 0
-            };
-            const porosity = Object.keys(porosityScores).reduce((a, b) => porosityScores[a] > porosityScores[b] ? a : b);
-
-            // Determine density
-            const densityScores = {
-                low: scoreCard.low_density || 0,
-                medium: scoreCard.medium_density || 0,
-                high: scoreCard.high_density || 0
-            };
-            const density = Object.keys(densityScores).reduce((a, b) => densityScores[a] > densityScores[b] ? a : b);
-
-            // Determine texture
-            const textureScores = {
-                fine: scoreCard.fine_texture || 0,
-                medium: scoreCard.medium_texture || 0,
-                coarse: scoreCard.coarse_texture || 0
-            };
-            const texture = Object.keys(textureScores).reduce((a, b) => textureScores[a] > textureScores[b] ? a : b);
-
-            // Determine scalp type
-            const scalpScores = {
-                dry: scoreCard.dry_scalp || 0,
-                normal: scoreCard.normal_scalp || 0,
-                oily: scoreCard.oily_scalp || 0
-            };
-            const scalpType = Object.keys(scalpScores).reduce((a, b) => scalpScores[a] > scalpScores[b] ? a : b);
-
-            // Determine frizz level
-            const frizzScores = {
-                low: scoreCard.low_frizz || 0,
-                medium: scoreCard.medium_frizz || 0,
-                high: scoreCard.high_frizz || 0
-            };
-            const frizzLevel = Object.keys(frizzScores).reduce((a, b) => frizzScores[a] > frizzScores[b] ? a : b);
-
-            // Determine health
-            const healthScores = {
-                good: scoreCard.good_health || 0,
-                fair: scoreCard.fair_health || 0,
-                poor: scoreCard.poor_health || 0
-            };
-            const health = Object.keys(healthScores).reduce((a, b) => healthScores[a] > healthScores[b] ? a : b);
-
-            return {
-                curlType,
-                porosity,
-                density,
-                texture,
-                scalpType,
-                frizzLevel,
-                health,
-                scores: scoreCard
-            };
-        }
-
-        // Display results
-        function displayResults(hairType) {
-            document.getElementById('quizSection').style.display = 'none';
-            document.getElementById('resultsSection').style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // Hair type mapping
-            const hairTypeData = {
-                straight: {
-                    name: "Type 1 - Straight Hair",
-                    code: "1B",
-                    emoji: "➖",
-                    description: "Your hair is naturally straight with minimal to no curl pattern. It tends to be sleek and shiny.",
-                    science: "Straight hair has a round follicle shape, allowing sebum to travel easily down the hair shaft, creating natural shine."
-                },
-                wavy: {
-                    name: "Type 2 - Wavy Hair",
-                    code: "2B",
-                    emoji: "〰️",
-                    description: "Your hair has a defined S-shaped wave pattern with moderate volume and body.",
-                    science: "Wavy hair results from an oval follicle shape, creating natural bends and waves in the hair shaft."
-                },
-                curly: {
-                    name: "Type 3 - Curly Hair",
-                    code: "3B",
-                    emoji: "🌀",
-                    description: "Your hair forms well-defined spiral curls with a bouncy, voluminous texture.",
-                    science: "Curly hair has a flat follicle shape with asymmetric keratin distribution, creating natural spiral patterns."
-                },
-                coily: {
-                    name: "Type 4 - Coily Hair",
-                    code: "4B",
-                    emoji: "🔀",
-                    description: "Your hair has tight coils or Z-pattern curls with a dense, springy texture.",
-                    science: "Coily hair has the flattest follicle shape and produces highly compressed curls with maximum shrinkage potential."
-                }
-            };
-
-            const currentType = hairTypeData[hairType.curlType];
-
-            // Update visual elements
-            document.getElementById('hairTypeVisual').textContent = currentType.emoji;
-            document.getElementById('hairTypeName').textContent = `${currentType.name} (${currentType.code})`;
-            document.getElementById('hairTypeDescription').textContent = currentType.description;
-
-            // Update score indicators
-            document.getElementById('curlScore').innerHTML = `<i class="fas fa-circle-notch mr-2"></i>Curl Pattern: ${capitalizeFirst(hairType.curlType)}`;
-            document.getElementById('porosityScore').innerHTML = `<i class="fas fa-droplet mr-2"></i>Porosity: ${capitalizeFirst(hairType.porosity)}`;
-            document.getElementById('densityScore').innerHTML = `<i class="fas fa-layer-group mr-2"></i>Density: ${capitalizeFirst(hairType.density)}`;
-
-            // Update detailed stats
-            document.getElementById('textureResult').textContent = capitalizeFirst(hairType.texture);
-            document.getElementById('oilResult').textContent = capitalizeFirst(hairType.scalpType);
-            document.getElementById('healthResult').textContent = capitalizeFirst(hairType.health);
-            document.getElementById('frizzResult').textContent = capitalizeFirst(hairType.frizzLevel);
-
-            // Generate care routine
-            generateCareRoutine(hairType);
-            
-            // Generate product recommendations
-            generateProductRecommendations(hairType);
-            
-            // Generate styling tips
-            generateStylingTips(hairType);
-            
-            // Generate science insights
-            generateScienceInsights(hairType, currentType.science);
-        }
-
-        // Generate care routine
-        function generateCareRoutine(hairType) {
-            const routines = {
-                straight: {
-                    wash: "Wash 2-3 times per week with volumizing shampoo",
-                    condition: "Use lightweight conditioner on ends only",
-                    treatment: "Weekly clarifying treatment to remove buildup"
-                },
-                wavy: {
-                    wash: "Wash 2-3 times per week with sulfate-free shampoo",
-                    condition: "Apply conditioner mid-length to ends",
-                    treatment: "Bi-weekly deep conditioning mask"
-                },
-                curly: {
-                    wash: "Co-wash or low-poo method 1-2 times per week",
-                    condition: "Deep condition weekly with moisturizing mask",
-                    treatment: "Protein treatment every 4-6 weeks"
-                },
-                coily: {
-                    wash: "Gentle cleansing 1 time per week, co-wash mid-week",
-                    condition: "Deep condition every wash day",
-                    treatment: "Pre-poo oil treatment and protein balance"
-                }
-            };
-
-            const porosityRoutines = {
-                low: "Use heat when deep conditioning, avoid heavy products",
-                normal: "Balanced routine with regular moisture-protein balance",
-                high: "Seal with oils, use protein treatments, avoid heat"
-            };
-
-            const routine = routines[hairType.curlType];
-            const container = document.getElementById('careRoutine');
-            
-            container.innerHTML = `
-                <div class="recommendation-item">
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-shower text-2xl mr-3"></i>
-                        <strong>Washing</strong>
-                    </div>
-                    <p class="opacity-80">${routine.wash}</p>
-                </div>
-                <div class="recommendation-item">
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-pump-soap text-2xl mr-3"></i>
-                        <strong>Conditioning</strong>
-                    </div>
-                    <p class="opacity-80">${routine.condition}</p>
-                </div>
-                <div class="recommendation-item">
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-spa text-2xl mr-3"></i>
-                        <strong>Treatments</strong>
-                    </div>
-                    <p class="opacity-80">${routine.treatment}</p>
-                </div>
-                <div class="recommendation-item">
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-droplet text-2xl mr-3"></i>
-                        <strong>Porosity Care</strong>
-                    </div>
-                    <p class="opacity-80">${porosityRoutines[hairType.porosity]}</p>
-                </div>
-            `;
-        }
-
-        // Generate product recommendations
-        function generateProductRecommendations(hairType) {
-            const products = {
-                straight: {
-                    shampoo: "Volumizing or clarifying shampoo",
-                    conditioner: "Lightweight, protein-rich conditioner",
-                    styling: "Root lifting spray, light mousse",
-                    ingredients: "Biotin, collagen, rice protein"
-                },
-                wavy: {
-                    shampoo: "Sulfate-free moisturizing shampoo",
-                    conditioner: "Medium-weight curl enhancing conditioner",
-                    styling: "Sea salt spray, curl cream, gel",
-                    ingredients: "Aloe vera, glycerin, seaweed extract"
-                },
-                curly: {
-                    shampoo: "Low-poo or co-wash cleanser",
-                    conditioner: "Rich, moisturizing conditioner",
-                    styling: "Leave-in conditioner, curl defining cream, gel",
-                    ingredients: "Shea butter, argan oil, coconut oil"
-                },
-                coily: {
-                    shampoo: "Creamy, sulfate-free shampoo",
-                    conditioner: "Ultra-moisturizing deep conditioner",
-                    styling: "Butter-based styling cream, curl custard, oils",
-                    ingredients: "Mango butter, jojoba oil, castor oil"
-                }
-            };
-
-            const currentProducts = products[hairType.curlType];
-            const container = document.getElementById('productRecommendations');
-            
-            container.innerHTML = `
-                <div class="recommendation-item">
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-bottle-droplet text-2xl mr-3"></i>
-                        <strong>Shampoo</strong>
-                    </div>
-                    <p class="opacity-80">${currentProducts.shampoo}</p>
-                </div>
-                <div class="recommendation-item">
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-pump-soap text-2xl mr-3"></i>
-                        <strong>Conditioner</strong>
-                    </div>
-                    <p class="opacity-80">${currentProducts.conditioner}</p>
-                </div>
-                <div class="recommendation-item">
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-spray-can text-2xl mr-3"></i>
-                        <strong>Styling Products</strong>
-                    </div>
-                    <p class="opacity-80">${currentProducts.styling}</p>
-                </div>
-                <div class="recommendation-item">
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-leaf text-2xl mr-3"></i>
-                        <strong>Key Ingredients</strong>
-                    </div>
-                    <p class="opacity-80">${currentProducts.ingredients}</p>
-                </div>
-            `;
-        }
-
-        // Generate styling tips
-        function generateStylingTips(hairType) {
-            const tips = {
-                straight: [
-                    "Apply products to roots for maximum volume",
-                    "Blow dry upside down to add body",
-                    "Use dry shampoo between washes",
-                    "Avoid heavy oils that can weigh hair down"
-                ],
-                wavy: [
-                    "Scrunch products into damp hair",
-                    "Air dry or diffuse on low heat",
-                    "Sleep on a silk pillowcase to maintain waves",
-                    "Refresh with water spray and curl cream"
-                ],
-                curly: [
-                    "Apply products to soaking wet hair",
-                    "Use the 'squish to condish' method",
-                    "Plop with a microfiber towel",
-                    "Diffuse on low heat or air dry"
-                ],
-                coily: [
-                    "Section hair and apply products thoroughly",
-                    "Use the LOC or LCO method (Liquid, Oil, Cream)",
-                    "Protective styling to retain length",
-                    "Moisturize daily and refresh with water"
-                ]
-            };
-
-            const currentTips = tips[hairType.curlType];
-            const container = document.getElementById('stylingTips');
-            
-            container.innerHTML = currentTips.map((tip, index) => `
-                <div class="recommendation-item">
-                    <div class="flex items-start">
-                        <div class="text-2xl mr-3">${index + 1}.</div>
-                        <p class="opacity-80 flex-1">${tip}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Generate science insights
-        function generateScienceInsights(hairType, mainScience) {
-            const porosityScience = {
-                low: "Your hair cuticles lie flat, making it harder for moisture to penetrate but easier to retain once inside. This is why pre-treating with heat helps.",
-                normal: "Your hair has slightly raised cuticles that allow optimal moisture balance. This is the ideal porosity for most styling and treatments.",
-                high: "Your cuticles are raised or damaged, allowing easy moisture entry but also quick loss. Sealing with oils helps lock in hydration."
-            };
-
-            const densityScience = {
-                low: "Lower follicle density means less hair volume but easier manageability. Focus on volumizing techniques and avoiding heavy products.",
-                medium: "Balanced follicle density provides good volume without excessive weight. You have flexibility in product choices.",
-                high: "High follicle density creates fullness but may be prone to tangling. Layering products and sectioning helps distribution."
-            };
-
-            const container = document.getElementById('scienceInsights');
-            
-            container.innerHTML = `
-                <div class="recommendation-item">
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-microscope text-2xl mr-3"></i>
-                        <strong>Curl Pattern Science</strong>
-                    </div>
-                    <p class="opacity-80">${mainScience}</p>
-                </div>
-                <div class="recommendation-item">
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-droplet text-2xl mr-3"></i>
-                        <strong>Porosity Explained</strong>
-                    </div>
-                    <p class="opacity-80">${porosityScience[hairType.porosity]}</p>
-                </div>
-                <div class="recommendation-item">
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-layer-group text-2xl mr-3"></i>
-                        <strong>Density Impact</strong>
-                    </div>
-                    <p class="opacity-80">${densityScience[hairType.density]}</p>
-                </div>
-            `;
-        }
-
-        // Capitalize first letter
-        function capitalizeFirst(str) {
-            return str.charAt(0).toUpperCase() + str.slice(1);
-        }
-
-        // Download results
-        function downloadResults() {
-            const resultsSection = document.getElementById('resultsSection');
-            const hairTypeName = document.getElementById('hairTypeName').textContent;
-            
-            // Create a simplified text version
-            let resultsText = `
-═══════════════════════════════════════════
-    HAIR TYPE ANALYSIS RESULTS
-═══════════════════════════════════════════
-
-${hairTypeName}
-${document.getElementById('hairTypeDescription').textContent}
-
-─────────────────────────────────────────
-HAIR PROFILE
-─────────────────────────────────────────
-Texture: ${document.getElementById('textureResult').textContent}
-Scalp Oil: ${document.getElementById('oilResult').textContent}
-Hair Health: ${document.getElementById('healthResult').textContent}
-Frizz Level: ${document.getElementById('frizzResult').textContent}
-
-─────────────────────────────────────────
-CARE ROUTINE
-─────────────────────────────────────────
-${document.getElementById('careRoutine').innerText}
-
-─────────────────────────────────────────
-PRODUCT RECOMMENDATIONS
-─────────────────────────────────────────
-${document.getElementById('productRecommendations').innerText}
-
-─────────────────────────────────────────
-STYLING TIPS
-─────────────────────────────────────────
-${document.getElementById('stylingTips').innerText}
-
-─────────────────────────────────────────
-SCIENCE INSIGHTS
-─────────────────────────────────────────
-${document.getElementById('scienceInsights').innerText}
-
-═══════════════════════════════════════════
-Generated by Tool Xeno - Hair Type Analyzer
-Visit us for more professional beauty tools
-═══════════════════════════════════════════
-            `;
-
-            // Create download
-            const blob = new Blob([resultsText], { type: 'text/plain' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'hair-analysis-results.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-        }
-
-        // Restart quiz
-        function restartQuiz() {
-            document.getElementById('resultsSection').style.display = 'none';
-            document.getElementById('heroSection').style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
-<script src="/homebutton.js"></script>
+  })();
+  </script>
 </body>
 </html>

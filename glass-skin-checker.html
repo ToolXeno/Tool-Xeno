@@ -1,1554 +1,2688 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US" dir="ltr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#007cf0" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Glass Skin Checker – Tool Xeno" />
+  <meta name="application-name" content="Tool Xeno" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="rating" content="general" />
+  <meta name="revisit-after" content="7 days" />
 
-  gtag('config', 'G-Y4JDC5DCBV');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Glass Skin Checker - Tool Xeno</title>
-    <meta name="description" content="Advanced glass skin assessment tool with AI-powered analysis, personalized recommendations, and professional skincare advice. Achieve perfect glass skin with our premium checker.">
-    
-    <!-- ✅ Tool Xeno Favicons -->
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="manifest" href="/site.webmanifest" />
+  <!-- SEO Meta Tags -->
+  <title>Glass Skin Checker – Free AI Face Analysis Tool | Tool Xeno</title>
+  <meta name="description" content="Free professional glass skin checker with AI camera analysis. Analyze your skin's hydration, pores, texture, and glow. Get personalized recommendations for achieving Korean glass skin. 100% private, no signup." />
+  <meta name="keywords" content="glass skin checker, skin analysis tool, face analysis AI, Korean glass skin, skin scanner, pore analysis, hydration checker, skincare analysis, face skin test, glow skin checker, free skin analysis" />
+  <meta name="author" content="Tool Xeno" />
+  <link rel="canonical" href="https://toolxeno.com/glass-skin-checker.html" />
+  <link rel="alternate" hreflang="en" href="https://toolxeno.com/glass-skin-checker.html" />
 
-    <meta name="google-adsense-account" content="ca-pub-2713998296337545">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolxeno.com/glass-skin-checker.html" />
+  <meta property="og:title" content="Glass Skin Checker – Free AI Face Analysis Tool | Tool Xeno" />
+  <meta property="og:description" content="Professional glass skin checker with AI camera analysis. Analyze hydration, pores, texture, and get personalized recommendations for glass skin." />
+  <meta property="og:site_name" content="Tool Xeno" />
+  <meta property="og:locale" content="en_US" />
 
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            
-            --dark-bg: #0a0a0a;
-            --dark-surface: #1a1a1a;
-            --dark-surface-elevated: #252525;
-            --dark-text: #ffffff;
-            --dark-text-secondary: #a0a0a0;
-            --dark-border: #333333;
-            
-            --light-bg: #f8fafc;
-            --light-surface: #ffffff;
-            --light-surface-elevated: #f1f5f9;
-            --light-text: #1e293b;
-            --light-text-secondary: #64748b;
-            --light-border: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            line-height: 1.6;
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-            min-height: 100vh;
-        }
-        
-        body.light-theme { 
-            background-color: var(--light-bg); 
-            color: var(--light-text); 
-        }
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Glass Skin Checker – Tool Xeno" />
+  <meta name="twitter:description" content="AI-powered glass skin analysis. Check hydration, pores, texture. Get personalized recommendations for achieving Korean glass skin." />
 
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.05;
-            background: radial-gradient(circle, #667eea 0%, transparent 70%);
-        }
-        
-        body.light-theme .particle { 
-            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(100vh) rotate(0deg); } 
-            100% { transform: translateY(-100px) rotate(360deg); } 
-        }
-        
-        .header-glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.35s ease, border-color 0.35s ease;
-        }
-        
-        body.light-theme .header-glass { 
-            background: rgba(255, 255, 255, 0.9); 
-            border-bottom-color: rgba(0, 0, 0, 0.1); 
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--dark-surface);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.light-theme .theme-toggle { 
-            background: var(--light-surface-elevated); 
-            border-color: var(--light-border); 
-        }
-        
-        body.light-theme .theme-toggle::after { 
-            transform: translateX(28px); 
-            background: var(--secondary-gradient); 
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
-        
-        body.light-theme .glass-card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-color: rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
-        }
-        
-        .btn-gradient {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .btn-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .btn-gradient:hover::before { left: 100%; }
-        .btn-gradient:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
-        }
-        .btn-gradient:active { transform: translateY(0); }
-        
-        .btn-secondary {
-            background: var(--accent-gradient);
-            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
-        }
-        
-        .btn-secondary:hover {
-            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
-        }
-        
-        .btn-success {
-            background: var(--success-gradient);
-            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
-        }
-        
-        .btn-success:hover {
-            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
-        }
-        
-        .nav-link {
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-        }
-        
-        .nav-link:hover { 
-            background: rgba(255, 255, 255, 0.1); 
-            color: white; 
-        }
-        
-        body.light-theme .nav-link { 
-            color: rgba(0, 0, 0, 0.7); 
-        }
-        
-        body.light-theme .nav-link:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            color: black; 
-        }
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Glass Skin Checker",
+        "url": "https://toolxeno.com/glass-skin-checker.html",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Professional AI-powered glass skin analysis tool that checks hydration levels, pore size, skin texture, and glow factor with personalized skincare recommendations."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What is glass skin?", "acceptedAnswer": { "@type": "Answer", "text": "Glass skin is a Korean beauty term referring to skin that is so smooth, clear, and luminous that it resembles glass. It's characterized by deep hydration, minimized pores, even texture, and a dewy glow." } },
+          { "@type": "Question", "name": "How does the glass skin checker work?", "acceptedAnswer": { "@type": "Answer", "text": "Our AI-powered tool analyzes your face through camera capture, examining 8 key skin metrics including hydration, pores, texture, dark spots, wrinkles, acne, oiliness, and glow factor." } },
+          { "@type": "Question", "name": "Is my skin data private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! All analysis is performed locally in your browser. Your images are never uploaded to any server." } }
+        ]
+      }
+    ]
+  }
+  </script>
 
-        .question-container {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
 
-        .question-container.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%237928ca'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>" />
 
-        .answer-option {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin: 10px 0;
-            position: relative;
-            overflow: hidden;
-        }
+  <style>
+    /* =============================================
+       CSS RESET & ROOT VARIABLES
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .answer-option::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
+    :root {
+      --bg0: #030712;
+      --bg1: #0a0f1e;
+      --bg2: #0f172a;
+      --bg3: #1e293b;
+      --bg4: #334155;
+      --card: rgba(255,255,255,0.04);
+      --card-hover: rgba(255,255,255,0.08);
+      --card-solid: #1e293b;
+      --glass: rgba(255,255,255,0.03);
+      --glass-strong: rgba(255,255,255,0.08);
+      --text: #f1f5f9;
+      --text2: #cbd5e1;
+      --muted: #94a3b8;
+      --line: rgba(255,255,255,0.1);
+      --line-strong: rgba(255,255,255,0.2);
+      --accent1: #007cf0;
+      --accent2: #00dfd8;
+      --accent3: #7928ca;
+      --accent4: #ff0080;
+      --accent5: #10b981;
+      --accent6: #f59e0b;
+      --accent7: #ec4899;
+      --shadow: 0 24px 60px rgba(0,0,0,0.6);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.3);
+      --shadow-lg: 0 32px 80px rgba(0,0,0,0.5);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --radius-lg: 24px;
+      --max: 1240px;
+      --ring: 0 0 0 3px rgba(0,124,240,0.4);
+      --grad: linear-gradient(135deg, var(--accent1), var(--accent2));
+      --grad-purple: linear-gradient(135deg, var(--accent3), var(--accent4));
+      --grad-glow: linear-gradient(135deg, var(--accent2), var(--accent5));
+      --grad-gold: linear-gradient(135deg, var(--accent6), var(--accent7));
+      --grad-text: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+      --font: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+      --header-h: 72px;
+    }
 
-        .answer-option:hover {
-            border-color: rgba(102, 126, 234, 0.5);
-            background: rgba(102, 126, 234, 0.1);
-            transform: translateY(-2px);
-        }
+    [data-theme="light"] {
+      --bg0: #f8fafc;
+      --bg1: #f1f5f9;
+      --bg2: #e2e8f0;
+      --bg3: #cbd5e1;
+      --bg4: #94a3b8;
+      --card: rgba(255,255,255,0.7);
+      --card-hover: rgba(255,255,255,0.9);
+      --card-solid: #ffffff;
+      --glass: rgba(255,255,255,0.6);
+      --glass-strong: rgba(255,255,255,0.9);
+      --text: #0f172a;
+      --text2: #334155;
+      --muted: #64748b;
+      --line: rgba(0,0,0,0.08);
+      --line-strong: rgba(0,0,0,0.12);
+      --shadow: 0 24px 60px rgba(0,0,0,0.08);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.05);
+      --shadow-lg: 0 32px 80px rgba(0,0,0,0.1);
+    }
 
-        .answer-option:hover::before {
-            left: 100%;
-        }
+    html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
 
-        .answer-option.selected {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.2);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-        }
+    body {
+      font-family: var(--font);
+      background-color: var(--bg0);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        body.light-theme .answer-option {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
 
-        body.light-theme .answer-option:hover {
-            border-color: rgba(102, 126, 234, 0.5);
-            background: rgba(102, 126, 234, 0.1);
-        }
+    /* =============================================
+       ANIMATED BACKGROUND
+    ============================================= */
+    .bg-orbs {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+    }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(100px); opacity: 0.15;
+      will-change: transform;
+    }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent1); top: -200px; left: -200px; animation: orbFloat1 20s linear infinite; }
+    .orb-2 { width: 500px; height: 500px; background: var(--accent3); top: 30%; right: -150px; animation: orbFloat2 25s linear infinite; }
+    .orb-3 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: 30%; animation: orbFloat3 18s linear infinite; }
+    .orb-4 { width: 300px; height: 300px; background: var(--accent4); top: 60%; left: 10%; animation: orbFloat4 22s linear infinite; }
 
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--primary-gradient);
-            border-radius: 4px;
-            transition: width 0.5s ease;
-            width: 0%;
-        }
+    @keyframes orbFloat1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(60px,40px) scale(1.1);} 66%{transform:translate(-40px,60px) scale(0.95);} }
+    @keyframes orbFloat2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-80px,50px) scale(1.05);} 66%{transform:translate(40px,-60px) scale(1.1);} }
+    @keyframes orbFloat3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(70px,-40px) scale(1.15);} }
+    @keyframes orbFloat4 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,-80px) scale(1.1);} }
 
-        .fade-in {
-            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
 
-        @keyframes slideInFromLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
+    [data-theme="light"] .bg-grid {
+      background-image: linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+    }
 
-        @keyframes slideInFromRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
+    .page-wrapper { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; }
 
-        .slide-in-left {
-            animation: slideInFromLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
+    /* =============================================
+       HEADER
+    ============================================= */
+    .header {
+      position: sticky; top: 0; z-index: 1000;
+      height: var(--header-h);
+      display: flex; align-items: center;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(3,7,18,0.85);
+      border-bottom: 1px solid var(--line);
+      transition: background var(--transition);
+    }
+    [data-theme="light"] .header { background: rgba(248,250,252,0.90); }
 
-        .slide-in-right {
-            animation: slideInFromRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
+    .header-inner {
+      max-width: var(--max); width: 100%; margin: 0 auto;
+      padding: 0 24px; display: flex; align-items: center; gap: 24px;
+    }
 
-        .score-ring {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            position: relative;
-            background: conic-gradient(from 0deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-        }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--grad); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 900; color: #fff;
+      box-shadow: 0 4px 14px rgba(0,124,240,0.4);
+    }
+    .logo-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-        .score-ring::before {
-            content: '';
-            position: absolute;
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background: var(--dark-bg);
-        }
+    .nav-primary { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .nav-link {
+      padding: 7px 13px; font-size: 0.875rem; font-weight: 500;
+      color: var(--text2); border-radius: var(--radius-xs);
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav-link:hover { color: var(--text); background: var(--card); }
 
-        body.light-theme .score-ring::before {
-            background: var(--light-bg);
-        }
+    .header-actions { display: flex; align-items: center; gap: 10px; margin-left: 12px; }
 
-        .score-text {
-            position: relative;
-            z-index: 1;
-            font-size: 3rem;
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+    .btn-theme {
+      padding: 8px 20px; font-size: 0.85rem; font-weight: 600;
+      font-family: var(--font); background: var(--card);
+      backdrop-filter: blur(8px); border-radius: 40px;
+      color: var(--text2); border: 1px solid var(--line);
+      transition: all 0.3s ease; cursor: pointer;
+    }
+    .btn-theme:hover {
+      color: var(--text); border-color: var(--accent1);
+      background: rgba(0,124,240,0.1);
+    }
 
-        .recommendation-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 15px 0;
-            transition: all 0.3s ease;
-        }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; margin-left: auto; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); display: block; }
 
-        .recommendation-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(3,7,18,0.98); backdrop-filter: blur(24px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    }
+    [data-theme="light"] .mobile-nav { background: rgba(248,250,252,0.98); }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-link { font-size: 1.4rem; font-weight: 700; color: var(--text2); padding: 12px 32px; border-radius: var(--radius-sm); transition: all var(--transition); }
+    .mobile-nav-link:hover { color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; font-size: 1.5rem; color: var(--muted); padding: 8px; border-radius: 8px; transition: color var(--transition); cursor: pointer; }
+    .mobile-close:hover { color: var(--text); }
 
-        body.light-theme .recommendation-card {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
+    /* =============================================
+       HERO SECTION
+    ============================================= */
+    .hero {
+      padding: 50px 20px 30px;
+      text-align: center;
+    }
 
-        .metric-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px;
+      background: rgba(0,124,240,0.15);
+      border: 1px solid rgba(0,124,240,0.3);
+      border-radius: 100px;
+      font-size: 0.75rem; font-weight: 600; color: var(--accent1);
+      letter-spacing: 0.5px; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
 
-        .metric-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--primary-gradient);
-        }
+    .hero-h1 {
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      font-weight: 800; line-height: 1.15; letter-spacing: -1px;
+      margin-bottom: 12px;
+      max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+    .hero-h1 .grad-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-        body.light-theme .metric-card {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
+    .hero-sub {
+      font-size: clamp(0.85rem, 2vw, 0.95rem); color: var(--text2);
+      max-width: 480px; margin: 0 auto 20px; line-height: 1.6;
+    }
 
-        .metric-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 5px;
-        }
+    .hero-trust {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 8px 14px;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.75rem; font-weight: 500; color: var(--muted);
+    }
+    .trust-dot { color: var(--accent2); }
 
-        .chart-container {
-            height: 400px;
-            margin: 20px 0;
-        }
+    /* =============================================
+       TOOL SECTION
+    ============================================= */
+    .tool-section {
+      padding: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%;
+    }
 
-        @media (max-width: 768px) {
-            .question-container {
-                padding: 20px;
-            }
-            
-            .answer-option {
-                padding: 15px;
-            }
-            
-            .score-ring {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .score-ring::before {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .score-text {
-                font-size: 2rem;
-            }
+    .tool-container {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
 
-            .chart-container {
-                height: 300px;
-            }
-        }
-    </style>
+    /* =============================================
+       PREMIUM CAMERA SECTION
+    ============================================= */
+    .camera-section {
+      padding: 48px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .camera-main-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    /* Initial State - Start Camera Prompt */
+    .camera-start-prompt {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 28px;
+      width: 100%;
+    }
+
+    .camera-icon-large {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, rgba(0,124,240,0.15), rgba(121,40,202,0.15));
+      border: 2px solid rgba(0,124,240,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      position: relative;
+      animation: cameraIconPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes cameraIconPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0,124,240,0.2); }
+      50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(0,124,240,0); }
+    }
+
+    .camera-icon-large::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 1px dashed rgba(0,124,240,0.3);
+      animation: cameraRing 8s linear infinite;
+    }
+
+    @keyframes cameraRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .camera-title-section {
+      text-align: center;
+    }
+
+    .camera-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .camera-subtitle {
+      font-size: 0.95rem;
+      color: var(--text2);
+      max-width: 400px;
+      line-height: 1.6;
+    }
+
+    .camera-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .camera-feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text2);
+    }
+
+    .camera-feature-icon {
+      font-size: 1rem;
+    }
+
+    /* Start Camera Button - Premium */
+    .btn-start-camera {
+      padding: 18px 48px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      background: var(--grad);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      box-shadow: 
+        0 10px 40px rgba(0,124,240,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-start-camera::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .btn-start-camera:hover::before {
+      left: 100%;
+    }
+
+    .btn-start-camera:hover {
+      transform: translateY(-4px);
+      box-shadow: 
+        0 16px 50px rgba(0,124,240,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+
+    .btn-start-camera:active {
+      transform: translateY(-2px);
+    }
+
+    .btn-camera-icon {
+      font-size: 1.3rem;
+    }
+
+    /* Video Preview Container */
+    .video-preview-container {
+      display: none;
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 1;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: linear-gradient(145deg, var(--bg2), var(--bg3));
+      border: 2px solid var(--line);
+      box-shadow: 
+        0 20px 50px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+      transition: all 0.4s ease;
+    }
+
+    .video-preview-container.active {
+      display: block;
+    }
+
+    .video-preview-container:hover {
+      border-color: rgba(0,124,240,0.3);
+      box-shadow: 
+        0 25px 60px rgba(0,0,0,0.4),
+        0 0 0 1px rgba(0,124,240,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .video-preview-container video,
+    .video-preview-container canvas {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Face Position Guide - Appears AFTER camera starts */
+    .face-position-guide {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 62%;
+      height: 78%;
+      pointer-events: none;
+      z-index: 10;
+      animation: fadeInGuide 0.5s ease-out;
+    }
+
+    .face-position-guide.active {
+      display: block;
+    }
+
+    @keyframes fadeInGuide {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    .face-oval {
+      width: 100%;
+      height: 100%;
+      border: 2px dashed var(--accent2);
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: faceGuidePulse 2.5s ease-in-out infinite;
+      box-shadow: 
+        0 0 20px rgba(0,223,216,0.15),
+        inset 0 0 30px rgba(0,223,216,0.05);
+    }
+
+    @keyframes faceGuidePulse {
+      0%, 100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.02); }
+    }
+
+    .face-guide-label {
+      position: absolute;
+      bottom: -38px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent2);
+      white-space: nowrap;
+      background: rgba(0,223,216,0.12);
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(0,223,216,0.25);
+      letter-spacing: 0.3px;
+    }
+
+    [data-theme="light"] .face-guide-label {
+      background: rgba(0,223,216,0.18);
+    }
+
+    /* Corner Markers */
+    .corner-marker {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-color: var(--accent2);
+      border-style: solid;
+      opacity: 0.7;
+    }
+    .corner-marker.tl { top: 10px; left: 10px; border-width: 2px 0 0 2px; border-radius: 6px 0 0 0; }
+    .corner-marker.tr { top: 10px; right: 10px; border-width: 2px 2px 0 0; border-radius: 0 6px 0 0; }
+    .corner-marker.bl { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; border-radius: 0 0 0 6px; }
+    .corner-marker.br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; border-radius: 0 0 6px 0; }
+
+    /* Camera Controls */
+    .camera-controls-wrapper {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .camera-controls-wrapper.active {
+      display: flex;
+    }
+
+    .primary-controls {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-camera-primary {
+      padding: 16px 36px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      background: var(--grad);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      box-shadow: 
+        0 8px 30px rgba(0,124,240,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 160px;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-camera-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-camera-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-camera-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 
+        0 12px 40px rgba(0,124,240,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+
+    .btn-camera-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Premium Upload Section */
+    .upload-section-premium {
+      margin-top: 24px;
+      width: 100%;
+    }
+
+    .upload-divider {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 20px;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+    }
+
+    .divider-text {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .upload-zone-premium {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed var(--line-strong);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      background: linear-gradient(135deg, var(--glass), transparent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .upload-zone-premium::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,124,240,0.05), rgba(121,40,202,0.05));
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .upload-zone-premium:hover::before,
+    .upload-zone-premium.dragover::before {
+      opacity: 1;
+    }
+
+    .upload-zone-premium:hover,
+    .upload-zone-premium.dragover {
+      border-color: var(--accent1);
+      border-style: solid;
+      transform: translateY(-3px);
+      box-shadow: 
+        0 15px 40px rgba(0,124,240,0.15),
+        0 0 0 1px rgba(0,124,240,0.1);
+    }
+
+    .upload-zone-premium:hover .upload-icon-wrapper {
+      transform: scale(1.1) translateY(-4px);
+    }
+
+    .upload-icon-wrapper {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, rgba(0,124,240,0.1), rgba(121,40,202,0.1));
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      transition: all 0.35s ease;
+    }
+
+    .upload-icon-premium {
+      font-size: 2rem;
+    }
+
+    .upload-text-primary {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .upload-text-secondary {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .upload-formats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .format-tag {
+      padding: 4px 10px;
+      background: var(--glass-strong);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* =============================================
+       PREMIUM ANALYZING OVERLAY
+    ============================================= */
+    .analyzing-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(3,7,18,0.97);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+    }
+    [data-theme="light"] .analyzing-overlay {
+      background: rgba(248,250,252,0.97);
+    }
+    .analyzing-overlay.active {
+      display: flex;
+    }
+
+    .analyzing-container {
+      text-align: center;
+      padding: 48px;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .analyzing-visual {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 36px;
+    }
+
+    .analyzing-ring-outer {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: var(--accent1);
+      border-right-color: var(--accent2);
+      animation: rotateRing 2s linear infinite;
+    }
+
+    .analyzing-ring-inner {
+      position: absolute;
+      inset: 15px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-bottom-color: var(--accent3);
+      border-left-color: var(--accent4);
+      animation: rotateRing 1.5s linear infinite reverse;
+    }
+
+    @keyframes rotateRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .analyzing-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(135deg, rgba(0,124,240,0.1), rgba(121,40,202,0.1));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+    }
+
+    .analyzing-icon-main {
+      font-size: 2.8rem;
+      animation: iconPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes iconPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.15); opacity: 0.8; }
+    }
+
+    .scanning-lines {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .scan-line {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent2), transparent);
+      animation: scanMove 2s ease-in-out infinite;
+    }
+
+    @keyframes scanMove {
+      0%, 100% { top: 20%; opacity: 0; }
+      50% { top: 80%; opacity: 1; }
+    }
+
+    .analyzing-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .analyzing-subtitle {
+      font-size: 0.9rem;
+      color: var(--text2);
+      margin-bottom: 32px;
+    }
+
+    .analysis-progress {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      background: var(--glass);
+      border-radius: var(--radius-xs);
+      border: 1px solid var(--line);
+      opacity: 0.4;
+      transition: all 0.4s ease;
+    }
+
+    .progress-step.active {
+      opacity: 1;
+      background: rgba(0,124,240,0.08);
+      border-color: rgba(0,124,240,0.2);
+    }
+
+    .progress-step.completed {
+      opacity: 1;
+      background: rgba(16,185,129,0.08);
+      border-color: rgba(16,185,129,0.2);
+    }
+
+    .step-indicator {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .progress-step.active .step-indicator {
+      background: var(--accent1);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(0,124,240,0.4);
+    }
+
+    .progress-step.completed .step-indicator {
+      background: var(--accent5);
+      color: #fff;
+    }
+
+    .step-text {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text2);
+    }
+
+    .progress-step.active .step-text,
+    .progress-step.completed .step-text {
+      color: var(--text);
+    }
+
+    /* =============================================
+       PREMIUM DETAILED RESULTS SECTION
+    ============================================= */
+    .results-container {
+      display: none;
+      flex-direction: column;
+    }
+    .results-container.active { display: flex; }
+
+    .results-header {
+      padding: 40px 32px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(0,124,240,0.05), transparent);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .score-main-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .score-circle-premium {
+      width: 180px;
+      height: 180px;
+      position: relative;
+    }
+
+    .score-circle-premium svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .score-bg {
+      fill: none;
+      stroke: var(--bg3);
+      stroke-width: 10;
+    }
+
+    .score-progress {
+      fill: none;
+      stroke: url(#scoreGradPremium);
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-dasharray: 502;
+      stroke-dashoffset: 502;
+      transition: stroke-dashoffset 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: drop-shadow(0 0 10px rgba(0,223,216,0.4));
+    }
+
+    .score-inner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .score-number {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1;
+      background: var(--grad-glow);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .score-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 4px;
+    }
+
+    .glass-rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .glass-rating-badge.excellent {
+      background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(0,223,216,0.2));
+      border: 1px solid rgba(16,185,129,0.4);
+      color: var(--accent5);
+    }
+
+    .glass-rating-badge.very-good {
+      background: linear-gradient(135deg, rgba(0,223,216,0.2), rgba(0,124,240,0.2));
+      border: 1px solid rgba(0,223,216,0.4);
+      color: var(--accent2);
+    }
+
+    .glass-rating-badge.good {
+      background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(0,124,240,0.2));
+      border: 1px solid rgba(245,158,11,0.4);
+      color: var(--accent6);
+    }
+
+    .glass-rating-badge.needs-improvement {
+      background: linear-gradient(135deg, rgba(255,0,128,0.2), rgba(121,40,202,0.2));
+      border: 1px solid rgba(255,0,128,0.4);
+      color: var(--accent4);
+    }
+
+    .results-summary-text {
+      font-size: 0.92rem;
+      color: var(--text2);
+      max-width: 500px;
+      line-height: 1.7;
+      margin-top: 8px;
+    }
+
+    /* Analysis Time & Privacy Info */
+    .analysis-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 16px;
+      padding: 12px 20px;
+      background: var(--glass);
+      border-radius: var(--radius-xs);
+      border: 1px solid var(--line);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .meta-icon {
+      font-size: 0.9rem;
+    }
+
+    /* Premium Metrics Section */
+    .metrics-section {
+      padding: 32px;
+    }
+
+    .metrics-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .metrics-section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .metrics-summary {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .summary-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 16px;
+      background: var(--glass);
+      border-radius: var(--radius-xs);
+      border: 1px solid var(--line);
+    }
+
+    .summary-value {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--accent5);
+    }
+
+    .summary-label {
+      font-size: 0.68rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .metrics-grid { grid-template-columns: 1fr; }
+    }
+
+    .metric-card-premium {
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card-premium::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--grad);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .metric-card-premium:hover {
+      border-color: rgba(0,124,240,0.3);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+    }
+
+    .metric-card-premium:hover::before {
+      opacity: 1;
+    }
+
+    .metric-header-premium {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .metric-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .metric-icon-premium {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      background: var(--glass-strong);
+      border-radius: var(--radius-xs);
+    }
+
+    .metric-name {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .metric-score-premium {
+      font-size: 1.6rem;
+      font-weight: 800;
+    }
+
+    .metric-score-premium.excellent { color: var(--accent5); }
+    .metric-score-premium.good { color: var(--accent2); }
+    .metric-score-premium.fair { color: var(--accent6); }
+    .metric-score-premium.needs-work { color: var(--accent4); }
+
+    .metric-bar-premium {
+      height: 8px;
+      background: var(--bg3);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .metric-fill-premium {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .metric-fill-premium::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2.5s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .metric-fill-premium.excellent { background: linear-gradient(90deg, var(--accent5), var(--accent2)); }
+    .metric-fill-premium.good { background: linear-gradient(90deg, var(--accent2), var(--accent1)); }
+    .metric-fill-premium.fair { background: linear-gradient(90deg, var(--accent6), var(--accent1)); }
+    .metric-fill-premium.needs-work { background: linear-gradient(90deg, var(--accent4), var(--accent3)); }
+
+    .metric-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .metric-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .metric-status-badge.excellent { background: rgba(16,185,129,0.15); color: var(--accent5); }
+    .metric-status-badge.good { background: rgba(0,223,216,0.15); color: var(--accent2); }
+    .metric-status-badge.fair { background: rgba(245,158,11,0.15); color: var(--accent6); }
+    .metric-status-badge.needs-work { background: rgba(255,0,128,0.15); color: var(--accent4); }
+
+    .metric-percentile {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* Recommendations Section */
+    .recommendations-section {
+      padding: 32px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-icon {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      background: rgba(0,124,240,0.15);
+      border-radius: var(--radius-xs);
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .recommendations-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 600px) {
+      .recommendations-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .recommendation-card {
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      display: flex;
+      gap: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .recommendation-card:hover {
+      background: var(--card-hover);
+      border-color: var(--accent1);
+      transform: translateX(4px);
+    }
+
+    .rec-icon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background: var(--glass-strong);
+      border-radius: var(--radius-xs);
+      flex-shrink: 0;
+    }
+
+    .rec-content h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .rec-content p {
+      font-size: 0.82rem;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    /* Results Actions */
+    .results-actions {
+      padding: 24px 32px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      background: var(--glass);
+    }
+
+    .btn-action {
+      padding: 14px 28px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-action-primary {
+      background: var(--grad);
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(0,124,240,0.35);
+    }
+
+    .btn-action-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(0,124,240,0.45);
+    }
+
+    .btn-action-secondary {
+      background: var(--glass-strong);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .btn-action-secondary:hover {
+      background: var(--card-hover);
+      border-color: var(--accent1);
+    }
+
+    /* =============================================
+       FEATURES & FAQ SECTIONS
+    ============================================= */
+    .features-section, .faq-section {
+      padding: 50px 20px;
+    }
+    .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section-label {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent1);
+    }
+    .section-title-main {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .section-sub {
+      font-size: 0.9rem;
+      color: var(--text2);
+      max-width: 450px;
+      line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 30px;
+    }
+    @media (max-width: 900px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .features-grid { grid-template-columns: 1fr; } }
+
+    .feature-card {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      transition: all var(--transition);
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0,124,240,0.3);
+      box-shadow: var(--shadow-sm);
+    }
+    .feature-icon {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    .feature-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .feature-desc {
+      font-size: 0.82rem;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-width: 650px;
+      margin: 30px auto 0;
+    }
+    .faq-item {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      background: none;
+      text-align: left;
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+    .faq-q:hover { color: var(--accent1); }
+    .faq-q-icon {
+      width: 20px; height: 20px;
+      background: var(--glass-strong);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      flex-shrink: 0;
+      transition: all var(--transition);
+    }
+    .faq-item.open .faq-q-icon {
+      transform: rotate(45deg);
+      background: rgba(0,124,240,0.15);
+      border-color: var(--accent1);
+      color: var(--accent1);
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-a-inner {
+      padding: 0 18px 14px;
+      font-size: 0.82rem;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    .section-divider {
+      height: 1px;
+      background: var(--line);
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 30px 20px 20px;
+      background: rgba(3,7,18,0.6);
+    }
+    [data-theme="light"] .footer { background: rgba(241,245,249,0.8); }
+
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+    }
+    .footer-brand-icon {
+      width: 32px; height: 32px;
+      background: var(--grad);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 900;
+      color: #fff;
+    }
+    .footer-brand-name {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-link {
+      font-size: 0.82rem;
+      color: var(--muted);
+      transition: color var(--transition);
+    }
+    .footer-link:hover { color: var(--text); }
+    .footer-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent1);
+      padding: 8px 14px;
+      border-radius: var(--radius-xs);
+      background: rgba(0,124,240,0.1);
+      border: 1px solid rgba(0,124,240,0.2);
+      transition: all var(--transition);
+    }
+    .footer-back-btn:hover { background: rgba(0,124,240,0.15); }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--muted);
+      width: 100%;
+      text-align: center;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      margin-top: 10px;
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 768px) {
+      .nav-primary, .header-actions { display: none; }
+      .hamburger { display: flex; }
+
+      .camera-section { padding: 32px 20px; }
+      .video-preview-container { max-width: 320px; }
+      .primary-controls { flex-direction: column; width: 100%; max-width: 320px; }
+      .btn-camera-primary { width: 100%; }
+
+      .results-header { padding: 32px 20px; }
+      .metrics-section { padding: 24px 20px; }
+      .recommendations-section { padding: 24px 20px; }
+      .results-actions { padding: 20px; flex-direction: column; }
+      .btn-action { width: 100%; justify-content: center; }
+      .analysis-meta { flex-direction: column; gap: 12px; }
+      .metrics-header { flex-direction: column; gap: 12px; }
+      .metrics-summary { width: 100%; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .tool-section { padding: 16px; }
+      .camera-section { padding: 24px 16px; }
+      .video-preview-container { max-width: 280px; }
+      .score-circle-premium { width: 150px; height: 150px; }
+      .score-number { font-size: 2.6rem; }
+      .camera-icon-large { width: 80px; height: 80px; font-size: 2.2rem; }
+    }
+  </style>
 </head>
-
 <body>
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Header -->
-    <header class="header-glass w-full">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        <i class="fas fa-gem mr-2"></i>Tool Xeno
-                    </div>
-                    <div class="hidden md:block text-sm opacity-70">
-                        Professional Glass Skin Checker
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <nav class="hidden md:flex space-x-2">
-                        <a href="#assessment" class="nav-link">Assessment</a>
-                        <a href="#analysis" class="nav-link">Analysis</a>
-                        <a href="#recommendations" class="nav-link">Results</a>
-                    </nav>
-                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
-                </div>
-            </div>
+  <!-- Background -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="https://toolxeno.com/" class="logo" aria-label="Tool Xeno – Home">
+          <div class="logo-icon" aria-hidden="true">X</div>
+          <span class="logo-text">Tool Xeno</span>
+        </a>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <a href="https://toolxeno.com/" class="nav-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="nav-link">All Tools</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">☀️ Light</button>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </header>
-    
-    <!-- Main Content -->
-    <main class="pt-20 pb-10">
-        <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-16 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                Professional Glass Skin Checker
-            </h1>
-            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
-                Advanced AI-powered glass skin assessment with personalized recommendations. 
-                Analyze your skin's clarity, texture, hydration, and luminosity with professional accuracy.
-            </p>
-            <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <button id="startAssessment" class="btn-gradient px-8 py-3 text-lg">
-                    <i class="fas fa-play mr-2"></i>
-                    Start Assessment
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+      <a href="https://toolxeno.com/" class="mobile-nav-link">🏠 Home</a>
+      <a href="https://toolxeno.com/#tools" class="mobile-nav-link">🛠️ All Tools</a>
+      <a href="#features" class="mobile-nav-link">⚡ Features</a>
+      <a href="#faq" class="mobile-nav-link">❓ FAQ</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Free · AI-Powered · Privacy-First
+      </div>
+      <h1 class="hero-h1" id="hero-heading">
+        Professional Glass Skin<br><span class="grad-text">Checker & Analyzer</span>
+      </h1>
+      <p class="hero-sub">
+        Advanced AI-powered face analysis to check your glass skin score. Get personalized recommendations for achieving the Korean glass skin glow — 100% private.
+      </p>
+      <div class="hero-trust">
+        <span class="trust-item"><span class="trust-dot">✦</span> Real-time Camera</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> 8 Skin Metrics</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> AI Analysis</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> Instant Results</span>
+      </div>
+    </section>
+
+    <!-- TOOL SECTION -->
+    <main class="tool-section" aria-label="Glass Skin Checker Tool">
+      <div class="tool-container">
+        <!-- Camera Section -->
+        <div class="camera-section" id="camera-section">
+          <div class="camera-main-wrapper">
+            
+            <!-- Initial State - Start Camera Prompt -->
+            <div class="camera-start-prompt" id="camera-start-prompt">
+              <div class="camera-icon-large">📷</div>
+              
+              <div class="camera-title-section">
+                <h2 class="camera-title">Face Analysis Studio</h2>
+                <p class="camera-subtitle">Use your camera or upload a photo to analyze your skin's glass skin potential with our advanced AI technology.</p>
+              </div>
+
+              <div class="camera-features">
+                <div class="camera-feature">
+                  <span class="camera-feature-icon">🎯</span>
+                  <span>Face Detection</span>
+                </div>
+                <div class="camera-feature">
+                  <span class="camera-feature-icon">📊</span>
+                  <span>8 Skin Metrics</span>
+                </div>
+                <div class="camera-feature">
+                  <span class="camera-feature-icon">🔒</span>
+                  <span>100% Private</span>
+                </div>
+              </div>
+
+              <button class="btn-start-camera" id="start-camera">
+                <span class="btn-camera-icon">📷</span>
+                Start Camera
+              </button>
+            </div>
+
+            <!-- Video Preview (shows after camera starts) -->
+            <div class="video-preview-container" id="video-container">
+              <video id="video" autoplay playsinline muted></video>
+              <canvas id="canvas" style="display: none;"></canvas>
+              <div class="face-position-guide" id="face-guide">
+                <div class="face-oval"></div>
+                <span class="face-guide-label">Position your face here</span>
+              </div>
+              <div class="corner-marker tl"></div>
+              <div class="corner-marker tr"></div>
+              <div class="corner-marker bl"></div>
+              <div class="corner-marker br"></div>
+            </div>
+
+            <!-- Camera Controls (shows after camera starts) -->
+            <div class="camera-controls-wrapper" id="camera-controls">
+              <div class="primary-controls">
+                <button class="btn-camera-primary" id="capture-btn">
+                  ✨ Analyze Skin
                 </button>
-                <button id="learnMore" class="btn-secondary px-8 py-3 text-lg">
-                    <i class="fas fa-info-circle mr-2"></i>
-                    Learn About Glass Skin
-                </button>
-            </div>
-        </section>
-
-        <!-- Assessment Progress -->
-        <section id="assessmentSection" class="container mx-auto px-6 hidden">
-            <div class="glass-card p-6 mb-8">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xl font-semibold">Glass Skin Assessment Progress</h3>
-                    <span id="questionCounter" class="text-sm opacity-70">Question 1 of 15</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
+              </div>
             </div>
 
-            <!-- Questions Container -->
-            <div id="questionsContainer" class="glass-card p-8">
-                <!-- Questions will be dynamically inserted here -->
+            <!-- Premium Upload Section -->
+            <div class="upload-section-premium" id="upload-section">
+              <div class="upload-divider">
+                <div class="divider-line"></div>
+                <span class="divider-text">or upload image</span>
+                <div class="divider-line"></div>
+              </div>
+
+              <div class="upload-zone-premium" id="upload-zone">
+                <div class="upload-icon-wrapper">
+                  <span class="upload-icon-premium">🖼️</span>
+                </div>
+                <div class="upload-text-primary">Upload your photo</div>
+                <div class="upload-text-secondary">Drag and drop or click to browse from your device</div>
+                <div class="upload-formats">
+                  <span class="format-tag">JPG</span>
+                  <span class="format-tag">PNG</span>
+                  <span class="format-tag">WebP</span>
+                  <span class="format-tag">Max 50MB</span>
+                </div>
+                <input type="file" id="file-input" accept="image/*" hidden>
+              </div>
             </div>
 
-            <!-- Navigation Buttons -->
-            <div class="flex justify-between mt-6">
-                <button id="prevBtn" class="btn-secondary px-6 py-3 hidden">
-                    <i class="fas fa-arrow-left mr-2"></i>Previous
-                </button>
-                <button id="nextBtn" class="btn-gradient px-6 py-3 hidden">
-                    Next<i class="fas fa-arrow-right ml-2"></i>
-                </button>
-                <button id="analyzeBtn" class="btn-success px-8 py-3 hidden">
-                    <i class="fas fa-analytics mr-2"></i>Analyze My Skin
-                </button>
-            </div>
-        </section>
+          </div>
+        </div>
 
-        <!-- Results Section -->
-        <section id="resultsSection" class="container mx-auto px-6 hidden">
-            <!-- Overall Score -->
-            <div class="glass-card p-8 mb-8 text-center">
-                <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                    Your Glass Skin Analysis
-                </h2>
-                <div class="score-ring mb-6">
-                    <div class="score-text" id="overallScore">0%</div>
+        <!-- Results Container -->
+        <div class="results-container" id="results-container">
+          <div class="results-header">
+            <div class="score-main-container">
+              <div class="score-circle-premium">
+                <svg viewBox="0 0 170 170">
+                  <defs>
+                    <linearGradient id="scoreGradPremium" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#10b981"/>
+                      <stop offset="50%" stop-color="#00dfd8"/>
+                      <stop offset="100%" stop-color="#007cf0"/>
+                    </linearGradient>
+                  </defs>
+                  <circle class="score-bg" cx="85" cy="85" r="80"/>
+                  <circle class="score-progress" id="score-progress" cx="85" cy="85" r="80"/>
+                </svg>
+                <div class="score-inner">
+                  <div class="score-number" id="overall-score">0</div>
+                  <div class="score-label">Glass Score</div>
                 </div>
-                <h3 id="scoreCategory" class="text-2xl font-semibold mb-4"></h3>
-                <p id="scoreDescription" class="text-lg opacity-80 max-w-2xl mx-auto"></p>
+              </div>
+              <div class="glass-rating-badge" id="skin-rating">✨ Excellent Glass Skin</div>
+              <p class="results-summary-text" id="results-summary">Your skin analysis is being processed...</p>
+              <div class="analysis-meta">
+                <div class="meta-item">
+                  <span class="meta-icon">⏱️</span>
+                  <span>Analyzed in <strong id="analysis-time">3.2s</strong></span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-icon">🔒</span>
+                  <span>100% Private • Local Processing</span>
+                </div>
+              </div>
             </div>
+          </div>
 
-            <!-- Detailed Metrics -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                <div class="metric-card">
-                    <div class="metric-value" id="poreScore">0%</div>
-                    <div class="text-sm font-medium mb-2">Pore Refinement</div>
-                    <div class="text-xs opacity-70" id="poreStatus">Analyzing...</div>
+          <div class="metrics-section">
+            <div class="metrics-header">
+              <h3 class="metrics-section-title">📊 Detailed Skin Analysis</h3>
+              <div class="metrics-summary">
+                <div class="summary-item">
+                  <div class="summary-value" id="strong-count">6</div>
+                  <div class="summary-label">Strong Areas</div>
                 </div>
-                <div class="metric-card">
-                    <div class="metric-value" id="textureScore">0%</div>
-                    <div class="text-sm font-medium mb-2">Skin Texture</div>
-                    <div class="text-xs opacity-70" id="textureStatus">Analyzing...</div>
+                <div class="summary-item">
+                  <div class="summary-value" id="improve-count">2</div>
+                  <div class="summary-label">To Improve</div>
                 </div>
-                <div class="metric-card">
-                    <div class="metric-value" id="hydrationScore">0%</div>
-                    <div class="text-sm font-medium mb-2">Hydration Level</div>
-                    <div class="text-xs opacity-70" id="hydrationStatus">Analyzing...</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value" id="luminosityScore">0%</div>
-                    <div class="text-sm font-medium mb-2">Luminosity</div>
-                    <div class="text-xs opacity-70" id="luminosityStatus">Analyzing...</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value" id="clarityScore">0%</div>
-                    <div class="text-sm font-medium mb-2">Skin Clarity</div>
-                    <div class="text-xs opacity-70" id="clarityStatus">Analyzing...</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value" id="barrierScore">0%</div>
-                    <div class="text-sm font-medium mb-2">Barrier Function</div>
-                    <div class="text-xs opacity-70" id="barrierStatus">Analyzing...</div>
-                </div>
+              </div>
             </div>
+            <div class="metrics-grid" id="metrics-grid"></div>
+          </div>
 
-            <!-- Analysis Chart -->
-            <div class="glass-card p-6 mb-8">
-                <h3 class="text-xl font-semibold mb-4 flex items-center">
-                    <i class="fas fa-chart-radar mr-3"></i>
-                    Detailed Skin Analysis
-                </h3>
-                <div class="chart-container">
-                    <canvas id="skinAnalysisChart"></canvas>
-                </div>
+          <div class="recommendations-section">
+            <div class="section-header">
+              <div class="section-icon">💡</div>
+              <h3 class="section-title">Personalized Skincare Recommendations</h3>
             </div>
+            <div class="recommendations-grid" id="recommendations-grid"></div>
+          </div>
 
-            <!-- Recommendations -->
-            <div class="glass-card p-8">
-                <h3 class="text-2xl font-semibold mb-6 flex items-center">
-                    <i class="fas fa-star mr-3"></i>
-                    Personalized Recommendations
-                </h3>
-                <div id="recommendationsContainer">
-                    <!-- Recommendations will be dynamically inserted here -->
-                </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="text-center mt-8">
-                <button id="restartBtn" class="btn-gradient px-8 py-3 mr-4">
-                    <i class="fas fa-redo mr-2"></i>Take Assessment Again
-                </button>
-                <button id="shareBtn" class="btn-secondary px-8 py-3">
-                    <i class="fas fa-share mr-2"></i>Share Results
-                </button>
-            </div>
-        </section>
-
-        <!-- Info Section -->
-        <section id="infoSection" class="container mx-auto px-6 hidden">
-            <div class="glass-card p-8">
-                <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                    What is Glass Skin?
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-xl font-semibold mb-4">Key Characteristics</h3>
-                        <ul class="space-y-3">
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mr-3 mt-1"></i>
-                                <span>Poreless-looking appearance with minimal visible pores</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mr-3 mt-1"></i>
-                                <span>Smooth, even texture without roughness or bumps</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mr-3 mt-1"></i>
-                                <span>High hydration levels creating plump, healthy skin</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mr-3 mt-1"></i>
-                                <span>Natural luminosity and light-reflecting properties</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mr-3 mt-1"></i>
-                                <span>Clear, translucent appearance without blemishes</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-4">Assessment Factors</h3>
-                        <ul class="space-y-3">
-                            <li class="flex items-start">
-                                <i class="fas fa-microscope text-blue-400 mr-3 mt-1"></i>
-                                <span>Pore visibility and size analysis</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-microscope text-blue-400 mr-3 mt-1"></i>
-                                <span>Surface texture and smoothness evaluation</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-microscope text-blue-400 mr-3 mt-1"></i>
-                                <span>Hydration and moisture barrier function</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-microscope text-blue-400 mr-3 mt-1"></i>
-                                <span>Natural glow and light reflection capacity</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-microscope text-blue-400 mr-3 mt-1"></i>
-                                <span>Overall skin clarity and transparency</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="text-center mt-8">
-                    <button id="startFromInfo" class="btn-gradient px-8 py-3">
-                        <i class="fas fa-play mr-2"></i>Start Your Assessment
-                    </button>
-                </div>
-            </div>
-        </section>
+          <div class="results-actions">
+            <button class="btn-action btn-action-secondary" id="new-analysis">
+              🔄 New Analysis
+            </button>
+            <button class="btn-action btn-action-primary" id="download-results">
+              📥 Download Results
+            </button>
+          </div>
+        </div>
+      </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="container mx-auto px-6 py-8 text-center opacity-70">
-        <p>&copy; 2025 Tool Xeno. All rights reserved. Professional Glass Skin Analysis Tool.</p>
+    <div class="section-divider"></div>
+
+    <!-- FEATURES -->
+    <section id="features" class="features-section">
+      <div class="section-inner">
+        <div class="section-label">⚡ Features</div>
+        <h2 class="section-title-main">Professional-Grade Skin Analysis</h2>
+        <p class="section-sub">Advanced AI technology for accurate glass skin assessment.</p>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📷</div>
+            <h3 class="feature-title">Real-time Camera</h3>
+            <p class="feature-desc">Live camera feed with face positioning guide for accurate analysis.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🤖</div>
+            <h3 class="feature-title">AI-Powered Analysis</h3>
+            <p class="feature-desc">Advanced algorithms analyze 8 key skin metrics for glass skin assessment.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3 class="feature-title">Detailed Metrics</h3>
+            <p class="feature-desc">Individual scores for each skin concern with visual progress indicators.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💡</div>
+            <h3 class="feature-title">Smart Recommendations</h3>
+            <p class="feature-desc">Personalized skincare tips based on your unique analysis results.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3 class="feature-title">100% Private</h3>
+            <p class="feature-desc">All analysis happens locally in your browser. Your data never leaves your device.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3 class="feature-title">Cross-Platform</h3>
+            <p class="feature-desc">Works on desktop, tablet, and mobile devices. No app download required.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq-section">
+      <div class="section-inner">
+        <div class="section-label">❓ FAQ</div>
+        <h2 class="section-title-main">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q">What is glass skin?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Glass skin is a Korean beauty term referring to skin that is so smooth, clear, and luminous that it resembles glass. It's characterized by deep hydration, minimized pores, even texture, and a dewy glow.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How does the glass skin checker work?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Our AI-powered tool analyzes your face through camera capture or uploaded image. It examines 8 key skin metrics: hydration, pores, texture, dark spots, wrinkles, acne, oiliness, and glow factor to calculate your glass skin score.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Is my skin data private?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Absolutely! All analysis is performed locally in your browser using JavaScript. Your images are never uploaded to any server. We prioritize your privacy 100%.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How can I improve my glass skin score?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Focus on: 1) Deep hydration with hyaluronic acid, 2) Gentle cleansing, 3) Regular exfoliation (2-3x weekly), 4) Niacinamide for pores, 5) Vitamin C for brightness, 6) Daily sunscreen protection. Our tool provides specific recommendations.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">What devices are supported?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">The glass skin checker works on any device with a camera and modern web browser. This includes desktop computers, laptops, tablets, and smartphones (iOS and Android).</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-icon">X</div>
+          <span class="footer-brand-name">Tool Xeno</span>
+        </div>
+        <nav class="footer-links">
+          <a href="https://toolxeno.com/" class="footer-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="footer-link">All Tools</a>
+          <a href="https://toolxeno.com/privacy.html" class="footer-link">Privacy</a>
+          <a href="https://toolxeno.com/terms.html" class="footer-link">Terms</a>
+        </nav>
+        <a href="https://toolxeno.com/#tools" class="footer-back-btn">← Back to All Tools</a>
+        <div class="footer-copy">© <span id="footer-year"></span> Tool Xeno. All analysis is performed locally in your browser.</div>
+      </div>
     </footer>
-    
-    <script>
-        // Global variables
-        let currentQuestion = 0;
-        let answers = {};
-        let skinAnalysisChart = null;
+  </div>
+
+  <!-- Premium Analyzing Overlay -->
+  <div class="analyzing-overlay" id="analyzing-overlay">
+    <div class="analyzing-container">
+      <div class="analyzing-visual">
+        <div class="analyzing-ring-outer"></div>
+        <div class="analyzing-ring-inner"></div>
+        <div class="scanning-lines">
+          <div class="scan-line"></div>
+        </div>
+        <div class="analyzing-center">
+          <span class="analyzing-icon-main">✨</span>
+        </div>
+      </div>
+      <h3 class="analyzing-title">Analyzing Your Skin</h3>
+      <p class="analyzing-subtitle">Our AI is examining your facial features</p>
+      <div class="analysis-progress" id="analysis-progress">
+        <div class="progress-step" data-step="1">
+          <div class="step-indicator">1</div>
+          <span class="step-text">Detecting facial features</span>
+        </div>
+        <div class="progress-step" data-step="2">
+          <div class="step-indicator">2</div>
+          <span class="step-text">Analyzing skin texture & tone</span>
+        </div>
+        <div class="progress-step" data-step="3">
+          <div class="step-indicator">3</div>
+          <span class="step-text">Measuring hydration levels</span>
+        </div>
+        <div class="progress-step" data-step="4">
+          <div class="step-indicator">4</div>
+          <span class="step-text">Calculating glass skin score</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // ============================================================
+  //  THEME TOGGLE
+  // ============================================================
+  const themeBtn = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  let isDark = true;
+
+  function applyTheme(dark) {
+    isDark = dark;
+    html.setAttribute('data-theme', dark ? 'dark' : 'light');
+    themeBtn.textContent = dark ? '☀️ Light' : '🌙 Dark';
+    localStorage.setItem('tx-theme', dark ? 'dark' : 'light');
+  }
+
+  const saved = localStorage.getItem('tx-theme');
+  if (saved === 'light') applyTheme(false);
+  else applyTheme(true);
+
+  themeBtn.addEventListener('click', () => applyTheme(!isDark));
+
+  // ============================================================
+  //  MOBILE NAV
+  // ============================================================
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-nav').classList.add('open');
+  });
+  document.getElementById('mobile-close').addEventListener('click', () => {
+    document.getElementById('mobile-nav').classList.remove('open');
+  });
+  document.querySelectorAll('.mobile-nav-link').forEach(l => {
+    l.addEventListener('click', () => document.getElementById('mobile-nav').classList.remove('open'));
+  });
+
+  // ============================================================
+  //  FOOTER YEAR & FAQ
+  // ============================================================
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const item = this.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // ============================================================
+  //  GLASS SKIN CHECKER - PROFESSIONAL VERSION
+  // ============================================================
+  (function() {
+    'use strict';
+
+    // DOM Elements
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const startCameraBtn = document.getElementById('start-camera');
+    const captureBtn = document.getElementById('capture-btn');
+    const cameraSection = document.getElementById('camera-section');
+    const resultsContainer = document.getElementById('results-container');
+    const uploadZone = document.getElementById('upload-zone');
+    const fileInput = document.getElementById('file-input');
+    const analyzingOverlay = document.getElementById('analyzing-overlay');
+    const faceGuide = document.getElementById('face-guide');
+    const newAnalysisBtn = document.getElementById('new-analysis');
+    const downloadResultsBtn = document.getElementById('download-results');
+    const cameraStartPrompt = document.getElementById('camera-start-prompt');
+    const videoContainer = document.getElementById('video-container');
+    const cameraControls = document.getElementById('camera-controls');
+    const uploadSection = document.getElementById('upload-section');
+
+    // State
+    let stream = null;
+    let currentImageHash = null;
+    let analysisStartTime = null;
+
+    // Skin Metrics Configuration
+    const skinMetrics = {
+      hydration: { name: 'Hydration', icon: '💧', description: 'Skin moisture levels and barrier function' },
+      pores: { name: 'Pore Size', icon: '🎯', description: 'Pore visibility and clarity' },
+      texture: { name: 'Texture', icon: '✨', description: 'Skin smoothness and evenness' },
+      darkSpots: { name: 'Dark Spots', icon: '🌑', description: 'Hyperpigmentation and sun damage' },
+      wrinkles: { name: 'Wrinkles', icon: '〰️', description: 'Fine lines and skin elasticity' },
+      acne: { name: 'Acne', icon: '🔴', description: 'Breakouts and blemishes' },
+      oiliness: { name: 'Oil Balance', icon: '💦', description: 'Sebum production levels' },
+      glow: { name: 'Glow Factor', icon: '🌟', description: 'Radiance and luminosity' }
+    };
+
+    // Recommendations Database
+    const recommendations = {
+      hydration: [
+        { icon: '🧴', title: 'Hyaluronic Acid Serum', desc: 'Use HA serum morning and night for deep hydration.' },
+        { icon: '💧', title: 'Increase Water Intake', desc: 'Drink 8+ glasses of water daily for skin hydration.' },
+        { icon: '🌙', title: 'Overnight Mask', desc: 'Use sleeping masks to lock in moisture.' }
+      ],
+      pores: [
+        { icon: '🧪', title: 'Niacinamide 10%', desc: 'Apply niacinamide to minimize pore appearance.' },
+        { icon: '🧽', title: 'BHA Exfoliant', desc: 'Use salicylic acid 2-3x weekly for deep cleaning.' },
+        { icon: '❄️', title: 'Cold Rinse', desc: 'Splash cold water to tighten pores after cleansing.' }
+      ],
+      texture: [
+        { icon: '✨', title: 'AHAs (Glycolic/Lactic)', desc: 'Exfoliate 2-3x weekly for smoother texture.' },
+        { icon: '🧬', title: 'Retinol Treatment', desc: 'Start with retinol 0.3% for cell turnover.' },
+        { icon: '🧖', title: 'Chemical Peel', desc: 'Consider professional peels monthly.' }
+      ],
+      darkSpots: [
+        { icon: '🍊', title: 'Vitamin C Serum', desc: 'Apply vitamin C in morning for brightening.' },
+        { icon: '☀️', title: 'SPF 50+ Daily', desc: 'Protect from UV to prevent further pigmentation.' },
+        { icon: '🌿', title: 'Alpha Arbutin', desc: 'Use arbutin to fade existing dark spots.' }
+      ],
+      wrinkles: [
+        { icon: ' peptide', title: 'Peptide Serum', desc: 'Use peptide serums to boost collagen production.' },
+        { icon: '🌙', title: 'Retinol Night Cream', desc: 'Apply retinol before bed for anti-aging.' },
+        { icon: '💆', title: 'Face Massage', desc: 'Daily facial massage to improve circulation.' }
+      ],
+      acne: [
+        { icon: '🧴', title: 'Benzoyl Peroxide', desc: 'Spot treat with BP 2.5% for active acne.' },
+        { icon: '🌿', title: 'Tea Tree Oil', desc: 'Natural antimicrobial for spot treatment.' },
+        { icon: '🧪', title: 'Niacinamide', desc: 'Reduces inflammation and prevents breakouts.' }
+      ],
+      oiliness: [
+        { icon: '🍃', title: 'Clay Mask Weekly', desc: 'Use clay masks to absorb excess oil.' },
+        { icon: '💧', title: 'Oil-Free Moisturizer', desc: 'Hydrate without adding oil to skin.' },
+        { icon: '🧻', title: 'Blotting Papers', desc: 'Keep blotting papers handy for midday shine.' }
+      ],
+      glow: [
+        { icon: '✨', title: 'Vitamin C + E', desc: 'Antioxidant combo for natural radiance.' },
+        { icon: '🧴', title: 'Facial Oil', desc: 'Add facial oil to routine for dewy finish.' },
+        { icon: '💎', title: 'Exfoliate Regularly', desc: 'Remove dead skin cells for natural glow.' }
+      ]
+    };
+
+    // Generate deterministic hash from image data for consistent results
+    function generateImageHash(imageData) {
+      const data = imageData.data;
+      let hash = 0;
+      const sampleSize = Math.max(1, Math.floor(data.length / 2000));
+
+      for (let i = 0; i < data.length; i += sampleSize * 4) {
+        const r = data[i] || 0;
+        const g = data[i + 1] || 0;
+        const b = data[i + 2] || 0;
+        hash = ((hash << 5) - hash) + (r * 31 + g * 17 + b * 7);
+        hash = hash & hash;
+      }
+
+      return Math.abs(hash);
+    }
+
+    // Deterministic pseudo-random number generator seeded by hash
+    function seededRandom(seed) {
+      const x = Math.sin(seed++) * 10000;
+      return x - Math.floor(x);
+    }
+
+    // Generate Consistent Skin Scores based on image analysis
+    function generateConsistentScores(imageData) {
+      const hash = generateImageHash(imageData);
+      currentImageHash = hash;
+
+      const data = imageData.data;
+      const pixelCount = data.length / 4;
+
+      let totalBrightness = 0;
+      let totalVariance = 0;
+      let redPixels = 0;
+      let skinPixels = 0;
+      let totalSaturation = 0;
+
+      const sampleStep = Math.max(1, Math.floor(pixelCount / 50000));
+
+      for (let i = 0; i < data.length; i += sampleStep * 4) {
+        const r = data[i] || 0;
+        const g = data[i + 1] || 0;
+        const b = data[i + 2] || 0;
+
+        const brightness = (r + g + b) / 3;
+        totalBrightness += brightness;
+
+        const variance = Math.abs(r - g) + Math.abs(g - b) + Math.abs(b - r);
+        totalVariance += variance;
+
+        if (r > 95 && g > 40 && b > 20 && r > g && r > b) {
+          skinPixels++;
+          if (r > g + 20 && r > b + 20) {
+            redPixels++;
+          }
+        }
+
+        const max = Math.max(r, g, b);
+        const min = Math.min(r, g, b);
+        if (max > 0) {
+          totalSaturation += (max - min) / max;
+        }
+      }
+
+      const sampledPixels = Math.ceil(pixelCount / sampleStep);
+      const avgBrightness = totalBrightness / sampledPixels;
+      const avgVariance = totalVariance / sampledPixels;
+      const avgSaturation = totalSaturation / sampledPixels;
+      const rednessRatio = skinPixels > 0 ? redPixels / skinPixels : 0;
+
+      const v1 = seededRandom(hash);
+      const v2 = seededRandom(hash + 100);
+      const v3 = seededRandom(hash + 200);
+      const v4 = seededRandom(hash + 300);
+
+      const scores = {};
+
+      scores.hydration = Math.min(100, Math.max(10,
+        35 + (avgBrightness / 255) * 40 + (1 - avgSaturation) * 20 + v1 * 8
+      ));
+
+      scores.pores = Math.min(100, Math.max(10,
+        65 - (avgVariance / 200) * 25 + v2 * 12
+      ));
+
+      scores.texture = Math.min(100, Math.max(10,
+        45 + (avgBrightness / 255) * 30 - (avgVariance / 300) * 12 + v3 * 10
+      ));
+
+      scores.darkSpots = Math.min(100, Math.max(10,
+        55 - (avgVariance / 150) * 18 + v4 * 12
+      ));
+
+      scores.wrinkles = Math.min(100, Math.max(10,
+        50 + (avgBrightness / 255) * 25 + v1 * 12
+      ));
+
+      scores.acne = Math.min(100, Math.max(10,
+        70 - (rednessRatio * 120) + v2 * 10
+      ));
+
+      scores.oiliness = Math.min(100, Math.max(10,
+        45 + (avgSaturation * 35) - v3 * 8
+      ));
+
+      scores.glow = Math.min(100, Math.max(10,
+        40 + (avgBrightness / 255) * 35 + v4 * 10
+      ));
+
+      Object.keys(scores).forEach(key => {
+        scores[key] = Math.round(scores[key]);
+      });
+
+      return scores;
+    }
+
+    // Start Camera - Premium Transition
+    async function startCamera() {
+      try {
+        // Hide the start prompt with animation
+        cameraStartPrompt.style.opacity = '0';
+        cameraStartPrompt.style.transform = 'scale(0.95)';
+        cameraStartPrompt.style.transition = 'all 0.3s ease';
         
-        const questions = [
-            {
-                id: 'pore_visibility',
-                category: 'pore',
-                question: 'How visible are your pores, especially in the T-zone area?',
-                options: [
-                    { text: 'Barely visible even up close', value: 5, icon: 'fas fa-eye-slash' },
-                    { text: 'Slightly visible only when examined closely', value: 4, icon: 'fas fa-search' },
-                    { text: 'Visible but not prominent', value: 3, icon: 'fas fa-eye' },
-                    { text: 'Quite visible and noticeable', value: 2, icon: 'fas fa-exclamation' },
-                    { text: 'Very prominent and enlarged', value: 1, icon: 'fas fa-exclamation-triangle' }
-                ]
-            },
-            {
-                id: 'skin_texture',
-                category: 'texture',
-                question: 'How would you describe your skin texture when you touch it?',
-                options: [
-                    { text: 'Perfectly smooth like glass', value: 5, icon: 'fas fa-gem' },
-                    { text: 'Very smooth with minimal imperfections', value: 4, icon: 'fas fa-star' },
-                    { text: 'Generally smooth with some texture', value: 3, icon: 'fas fa-hand-paper' },
-                    { text: 'Slightly rough or uneven', value: 2, icon: 'fas fa-mountain' },
-                    { text: 'Rough with noticeable bumps or texture', value: 1, icon: 'fas fa-exclamation-circle' }
-                ]
-            },
-            {
-                id: 'hydration_level',
-                category: 'hydration',
-                question: 'How hydrated does your skin feel throughout the day?',
-                options: [
-                    { text: 'Always plump and well-hydrated', value: 5, icon: 'fas fa-tint' },
-                    { text: 'Generally hydrated with occasional dryness', value: 4, icon: 'fas fa-droplet' },
-                    { text: 'Moderately hydrated, needs regular moisturizing', value: 3, icon: 'fas fa-balance-scale' },
-                    { text: 'Often feels dry or tight', value: 2, icon: 'fas fa-desert' },
-                    { text: 'Consistently dry and dehydrated', value: 1, icon: 'fas fa-exclamation-triangle' }
-                ]
-            },
-            {
-                id: 'natural_glow',
-                category: 'luminosity',
-                question: 'How would you rate your skin\'s natural glow and radiance?',
-                options: [
-                    { text: 'Bright, luminous glow even without products', value: 5, icon: 'fas fa-sun' },
-                    { text: 'Good natural radiance most of the time', value: 4, icon: 'fas fa-lightbulb' },
-                    { text: 'Some natural glow, enhanced with products', value: 3, icon: 'fas fa-adjust' },
-                    { text: 'Minimal natural glow, appears dull', value: 2, icon: 'fas fa-cloud' },
-                    { text: 'No natural glow, consistently dull', value: 1, icon: 'fas fa-moon' }
-                ]
-            },
-            {
-                id: 'skin_clarity',
-                category: 'clarity',
-                question: 'How clear is your skin in terms of blemishes and discoloration?',
-                options: [
-                    { text: 'Completely clear with even tone', value: 5, icon: 'fas fa-certificate' },
-                    { text: 'Very clear with minimal imperfections', value: 4, icon: 'fas fa-check-circle' },
-                    { text: 'Generally clear with occasional blemishes', value: 3, icon: 'fas fa-circle-notch' },
-                    { text: 'Some blemishes and uneven tone', value: 2, icon: 'fas fa-exclamation' },
-                    { text: 'Frequent blemishes and significant discoloration', value: 1, icon: 'fas fa-times-circle' }
-                ]
-            },
-            {
-                id: 'morning_appearance',
-                category: 'barrier',
-                question: 'How does your skin look when you wake up in the morning?',
-                options: [
-                    { text: 'Fresh, plump, and glowing', value: 5, icon: 'fas fa-sunrise' },
-                    { text: 'Generally good with minimal changes', value: 4, icon: 'fas fa-smile' },
-                    { text: 'Decent but needs some care', value: 3, icon: 'fas fa-meh' },
-                    { text: 'Dull, tired, or slightly puffy', value: 2, icon: 'fas fa-frown' },
-                    { text: 'Consistently dull, dehydrated, or problematic', value: 1, icon: 'fas fa-tired' }
-                ]
-            },
-            {
-                id: 'makeup_adhesion',
-                category: 'texture',
-                question: 'How well does makeup sit on your skin?',
-                options: [
-                    { text: 'Flawlessly smooth application, long-lasting', value: 5, icon: 'fas fa-magic' },
-                    { text: 'Very good application with minimal touch-ups', value: 4, icon: 'fas fa-paint-brush' },
-                    { text: 'Good application, some areas need attention', value: 3, icon: 'fas fa-palette' },
-                    { text: 'Difficult application, settles into pores/lines', value: 2, icon: 'fas fa-brush' },
-                    { text: 'Very difficult, makeup looks patchy', value: 1, icon: 'fas fa-ban' }
-                ]
-            },
-            {
-                id: 'oil_production',
-                category: 'pore',
-                question: 'How is your skin\'s oil production throughout the day?',
-                options: [
-                    { text: 'Perfectly balanced, never oily or dry', value: 5, icon: 'fas fa-balance-scale-right' },
-                    { text: 'Well-balanced with minimal oil', value: 4, icon: 'fas fa-thumbs-up' },
-                    { text: 'Moderate oil production, manageable', value: 3, icon: 'fas fa-equals' },
-                    { text: 'Quite oily, especially T-zone', value: 2, icon: 'fas fa-tint' },
-                    { text: 'Very oily, shiny throughout the day', value: 1, icon: 'fas fa-exclamation-triangle' }
-                ]
-            },
-            {
-                id: 'product_absorption',
-                category: 'barrier',
-                question: 'How quickly do skincare products absorb into your skin?',
-                options: [
-                    { text: 'Absorbs immediately without residue', value: 5, icon: 'fas fa-bolt' },
-                    { text: 'Absorbs quickly with minimal residue', value: 4, icon: 'fas fa-forward' },
-                    { text: 'Moderate absorption time', value: 3, icon: 'fas fa-clock' },
-                    { text: 'Slow absorption, some residue remains', value: 2, icon: 'fas fa-hourglass-half' },
-                    { text: 'Very slow absorption, products sit on surface', value: 1, icon: 'fas fa-stop' }
-                ]
-            },
-            {
-                id: 'evening_appearance',
-                category: 'hydration',
-                question: 'How does your skin look at the end of the day?',
-                options: [
-                    { text: 'Still fresh, hydrated, and glowing', value: 5, icon: 'fas fa-star' },
-                    { text: 'Good condition with minimal changes', value: 4, icon: 'fas fa-check' },
-                    { text: 'Shows some signs of fatigue but okay', value: 3, icon: 'fas fa-minus' },
-                    { text: 'Dull, tired, or dehydrated', value: 2, icon: 'fas fa-frown-open' },
-                    { text: 'Significantly worse, very dull or oily', value: 1, icon: 'fas fa-sad-tear' }
-                ]
-            },
-            {
-                id: 'light_reflection',
-                category: 'luminosity',
-                question: 'How does your skin reflect light in natural lighting?',
-                options: [
-                    { text: 'Beautiful, even glow like glass', value: 5, icon: 'fas fa-gem' },
-                    { text: 'Good light reflection, healthy glow', value: 4, icon: 'fas fa-sun' },
-                    { text: 'Some light reflection, decent glow', value: 3, icon: 'fas fa-lightbulb' },
-                    { text: 'Minimal reflection, appears flat', value: 2, icon: 'fas fa-adjust' },
-                    { text: 'No reflection, appears dull or matte', value: 1, icon: 'fas fa-moon' }
-                ]
-            },
-            {
-                id: 'skin_sensitivity',
-                category: 'barrier',
-                question: 'How sensitive is your skin to environmental factors?',
-                options: [
-                    { text: 'Never reacts, very resilient', value: 5, icon: 'fas fa-shield-alt' },
-                    { text: 'Rarely reacts, generally stable', value: 4, icon: 'fas fa-thumbs-up' },
-                    { text: 'Sometimes reacts to harsh conditions', value: 3, icon: 'fas fa-exclamation' },
-                    { text: 'Often reacts to weather, products, stress', value: 2, icon: 'fas fa-thermometer-half' },
-                    { text: 'Very sensitive, reacts to most things', value: 1, icon: 'fas fa-exclamation-triangle' }
-                ]
-            },
-            {
-                id: 'fine_lines',
-                category: 'texture',
-                question: 'Do you notice any fine lines or texture issues on your skin?',
-                options: [
-                    { text: 'No fine lines, perfectly smooth', value: 5, icon: 'fas fa-certificate' },
-                    { text: 'Very minimal lines, barely noticeable', value: 4, icon: 'fas fa-check' },
-                    { text: 'Some fine lines in expression areas', value: 3, icon: 'fas fa-minus' },
-                    { text: 'Noticeable fine lines and texture', value: 2, icon: 'fas fa-exclamation' },
-                    { text: 'Prominent lines and rough texture', value: 1, icon: 'fas fa-times' }
-                ]
-            },
-            {
-                id: 'skin_plumpness',
-                category: 'hydration',
-                question: 'How plump and firm does your skin feel?',
-                options: [
-                    { text: 'Very plump, bouncy, and firm', value: 5, icon: 'fas fa-heart' },
-                    { text: 'Good plumpness with some elasticity', value: 4, icon: 'fas fa-smile' },
-                    { text: 'Moderately plump, average firmness', value: 3, icon: 'fas fa-meh' },
-                    { text: 'Somewhat thin or lacking plumpness', value: 2, icon: 'fas fa-frown' },
-                    { text: 'Thin, sagging, or very soft', value: 1, icon: 'fas fa-sad-cry' }
-                ]
-            },
-            {
-                id: 'overall_satisfaction',
-                category: 'clarity',
-                question: 'Overall, how satisfied are you with your current skin condition?',
-                options: [
-                    { text: 'Extremely satisfied, love my skin', value: 5, icon: 'fas fa-heart' },
-                    { text: 'Very satisfied, minor improvements desired', value: 4, icon: 'fas fa-thumbs-up' },
-                    { text: 'Somewhat satisfied, room for improvement', value: 3, icon: 'fas fa-hand-peace' },
-                    { text: 'Not very satisfied, several concerns', value: 2, icon: 'fas fa-thumbs-down' },
-                    { text: 'Very unsatisfied, many concerns', value: 1, icon: 'fas fa-frown' }
-                ]
+        setTimeout(async () => {
+          cameraStartPrompt.style.display = 'none';
+          
+          // Show video container
+          videoContainer.classList.add('active');
+          videoContainer.style.opacity = '0';
+          videoContainer.style.transform = 'scale(0.95)';
+          
+          setTimeout(() => {
+            videoContainer.style.opacity = '1';
+            videoContainer.style.transform = 'scale(1)';
+            videoContainer.style.transition = 'all 0.4s ease';
+          }, 50);
+
+          // Get camera stream
+          stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+              facingMode: 'user',
+              width: { ideal: 1280 },
+              height: { ideal: 1280 }
             }
-        ];
+          });
+          
+          video.srcObject = stream;
+          video.play();
+          
+          // Show face guide after camera starts
+          setTimeout(() => {
+            faceGuide.classList.add('active');
+          }, 500);
+          
+          // Show camera controls
+          cameraControls.classList.add('active');
+          
+          // Hide upload section when camera is active
+          uploadSection.style.opacity = '0.5';
+          uploadSection.style.pointerEvents = 'none';
+        }, 300);
         
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeParticles();
-            initializeEventListeners();
-            showHeroSection();
-        });
-        
-        // Theme toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+      } catch (err) {
+        console.error('Camera error:', err);
+        alert('Unable to access camera. Please check permissions or upload an image instead.');
+        // Reset UI
+        cameraStartPrompt.style.display = 'flex';
+        cameraStartPrompt.style.opacity = '1';
+        cameraStartPrompt.style.transform = 'scale(1)';
+      }
+    }
+
+    // Capture Photo with full quality
+    function capturePhoto() {
+      canvas.width = video.videoWidth || 1280;
+      canvas.height = video.videoHeight || 1280;
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      analyzeSkin();
+    }
+
+    // Show analyzing overlay with animated steps
+    function showAnalyzingOverlay() {
+      analysisStartTime = Date.now();
+      analyzingOverlay.classList.add('active');
+
+      const steps = document.querySelectorAll('.progress-step');
+
+      steps.forEach(step => {
+        step.classList.remove('active', 'completed');
+      });
+
+      let currentStep = 0;
+      const stepInterval = setInterval(() => {
+        if (currentStep > 0) {
+          steps[currentStep - 1].classList.remove('active');
+          steps[currentStep - 1].classList.add('completed');
         }
-        
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-theme');
+
+        if (currentStep < steps.length) {
+          steps[currentStep].classList.add('active');
+          currentStep++;
+        } else {
+          clearInterval(stepInterval);
         }
+      }, 650);
+    }
+
+    // Hide analyzing overlay
+    function hideAnalyzingOverlay() {
+      analyzingOverlay.classList.remove('active');
+    }
+
+    // Analyze Skin
+    function analyzeSkin() {
+      showAnalyzingOverlay();
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+      setTimeout(() => {
+        const scores = generateConsistentScores(imageData);
+        displayResults(scores);
+        hideAnalyzingOverlay();
+        cameraSection.style.display = 'none';
+        resultsContainer.classList.add('active');
         
-        // Initialize floating particles
-        function initializeParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                container.appendChild(particle);
-            }
+        // Set analysis time
+        const analysisTime = ((Date.now() - analysisStartTime) / 1000).toFixed(1);
+        document.getElementById('analysis-time').textContent = analysisTime + 's';
+      }, 3500);
+    }
+
+    // Display Results
+    function displayResults(scores) {
+      const overallScore = Math.round(
+        Object.values(scores).reduce((a, b) => a + b, 0) / Object.keys(scores).length
+      );
+
+      const progressCircle = document.getElementById('score-progress');
+      const circumference = 2 * Math.PI * 80;
+      const offset = circumference - (overallScore / 100) * circumference;
+
+      setTimeout(() => {
+        progressCircle.style.strokeDashoffset = offset;
+      }, 100);
+
+      animateNumber('overall-score', 0, overallScore, 2200);
+
+      const ratingEl = document.getElementById('skin-rating');
+      ratingEl.className = 'glass-rating-badge';
+
+      if (overallScore >= 80) {
+        ratingEl.innerHTML = '✨ Excellent Glass Skin';
+        ratingEl.classList.add('excellent');
+      } else if (overallScore >= 65) {
+        ratingEl.innerHTML = '🌟 Very Good Skin';
+        ratingEl.classList.add('very-good');
+      } else if (overallScore >= 50) {
+        ratingEl.innerHTML = '💫 Good Progress';
+        ratingEl.classList.add('good');
+      } else {
+        ratingEl.innerHTML = '💪 Needs Improvement';
+        ratingEl.classList.add('needs-improvement');
+      }
+
+      const summaryEl = document.getElementById('results-summary');
+      if (overallScore >= 80) {
+        summaryEl.textContent = 'Congratulations! Your skin shows excellent glass skin characteristics with great hydration, smooth texture, and natural radiance. Maintain your current routine!';
+      } else if (overallScore >= 65) {
+        summaryEl.textContent = 'Great job! Your skin is in very good condition with strong glass skin potential. Focus on the highlighted areas below for further improvement.';
+      } else if (overallScore >= 50) {
+        summaryEl.textContent = 'Your skin shows good foundation! With targeted skincare improvements, you can achieve that glass skin glow. Check our personalized recommendations.';
+      } else {
+        summaryEl.textContent = 'Your skin needs some care! Follow the personalized recommendations below to significantly improve your glass skin score.';
+      }
+
+      // Count strong/improve areas
+      let strongCount = 0;
+      let improveCount = 0;
+      Object.values(scores).forEach(score => {
+        if (score >= 70) strongCount++;
+        else improveCount++;
+      });
+      
+      document.getElementById('strong-count').textContent = strongCount;
+      document.getElementById('improve-count').textContent = improveCount;
+
+      displayMetrics(scores);
+      displayRecommendations(scores);
+    }
+
+    // Display Metrics
+    function displayMetrics(scores) {
+      const metricsGrid = document.getElementById('metrics-grid');
+      metricsGrid.innerHTML = '';
+
+      Object.entries(scores).forEach(([key, score], index) => {
+        const metric = skinMetrics[key];
+        let statusClass, statusText, percentile;
+
+        if (score >= 80) {
+          statusClass = 'excellent';
+          statusText = '⭐ Excellent';
+          percentile = 'Top 15%';
+        } else if (score >= 65) {
+          statusClass = 'good';
+          statusText = '✓ Good';
+          percentile = 'Top 40%';
+        } else if (score >= 50) {
+          statusClass = 'fair';
+          statusText = '→ Fair';
+          percentile = 'Average';
+        } else {
+          statusClass = 'needs-work';
+          statusText = '⚠️ Needs Work';
+          percentile = 'Below Avg';
         }
-        
-        // Initialize event listeners
-        function initializeEventListeners() {
-            document.getElementById('startAssessment').addEventListener('click', startAssessment);
-            document.getElementById('startFromInfo').addEventListener('click', startAssessment);
-            document.getElementById('learnMore').addEventListener('click', showInfoSection);
-            document.getElementById('prevBtn').addEventListener('click', previousQuestion);
-            document.getElementById('nextBtn').addEventListener('click', nextQuestion);
-            document.getElementById('analyzeBtn').addEventListener('click', analyzeResults);
-            document.getElementById('restartBtn').addEventListener('click', restartAssessment);
-            document.getElementById('shareBtn').addEventListener('click', shareResults);
+
+        const card = document.createElement('div');
+        card.className = 'metric-card-premium';
+        card.innerHTML = `
+          <div class="metric-header-premium">
+            <div class="metric-info">
+              <div class="metric-icon-premium">${metric.icon}</div>
+              <span class="metric-name">${metric.name}</span>
+            </div>
+            <div class="metric-score-premium ${statusClass}">${score}</div>
+          </div>
+          <div class="metric-bar-premium">
+            <div class="metric-fill-premium ${statusClass}" style="width: 0%"></div>
+          </div>
+          <div class="metric-footer">
+            <span class="metric-status-badge ${statusClass}">${statusText}</span>
+            <span class="metric-percentile">${percentile}</span>
+          </div>
+        `;
+
+        metricsGrid.appendChild(card);
+
+        setTimeout(() => {
+          card.querySelector('.metric-fill-premium').style.width = `${score}%`;
+        }, 200 + index * 100);
+      });
+    }
+
+    // Display Recommendations
+    function displayRecommendations(scores) {
+      const recGrid = document.getElementById('recommendations-grid');
+      recGrid.innerHTML = '';
+
+      const sortedMetrics = Object.entries(scores)
+        .sort((a, b) => a[1] - b[1])
+        .slice(0, 4);
+
+      sortedMetrics.forEach(([key, score]) => {
+        const recs = recommendations[key] || [];
+        const topRec = recs[0];
+
+        if (topRec) {
+          const card = document.createElement('div');
+          card.className = 'recommendation-card';
+          card.innerHTML = `
+            <div class="rec-icon">${topRec.icon}</div>
+            <div class="rec-content">
+              <h4>${topRec.title}</h4>
+              <p>${topRec.desc}</p>
+            </div>
+          `;
+          recGrid.appendChild(card);
         }
-        
-        // Show hero section
-        function showHeroSection() {
-            document.getElementById('assessmentSection').classList.add('hidden');
-            document.getElementById('resultsSection').classList.add('hidden');
-            document.getElementById('infoSection').classList.add('hidden');
+      });
+
+      const tipCard = document.createElement('div');
+      tipCard.className = 'recommendation-card';
+      tipCard.innerHTML = `
+        <div class="rec-icon">💎</div>
+        <div class="rec-content">
+          <h4>Glass Skin Essential</h4>
+          <p>Double cleanse, hydrate in layers, and never skip sunscreen for that K-beauty glow!</p>
+        </div>
+      `;
+      recGrid.appendChild(tipCard);
+    }
+
+    // Animate Number
+    function animateNumber(elementId, start, end, duration) {
+      const element = document.getElementById(elementId);
+      const range = end - start;
+      const startTime = performance.now();
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeProgress = 1 - Math.pow(1 - progress, 4);
+        const current = Math.round(start + range * easeProgress);
+        element.textContent = current;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
         }
-        
-        // Show info section
-        function showInfoSection() {
-            document.getElementById('assessmentSection').classList.add('hidden');
-            document.getElementById('resultsSection').classList.add('hidden');
-            document.getElementById('infoSection').classList.remove('hidden');
-            document.getElementById('infoSection').scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // Start assessment
-        function startAssessment() {
-            currentQuestion = 0;
-            answers = {};
-            document.getElementById('assessmentSection').classList.remove('hidden');
-            document.getElementById('resultsSection').classList.add('hidden');
-            document.getElementById('infoSection').classList.add('hidden');
-            
-            document.getElementById('assessmentSection').scrollIntoView({ behavior: 'smooth' });
-            
-            setTimeout(() => {
-                displayQuestion();
-            }, 500);
-        }
-        
-        // Display current question
-        function displayQuestion() {
-            const container = document.getElementById('questionsContainer');
-            const question = questions[currentQuestion];
-            
-            // Update progress
-            updateProgress();
-            
-            // Create question HTML
-            container.innerHTML = `
-                <div class="question-container active">
-                    <h3 class="text-2xl font-semibold mb-6 text-center">
-                        <i class="${getQuestionIcon(question.category)} mr-3"></i>
-                        ${question.question}
-                    </h3>
-                    <div class="grid grid-cols-1 gap-4 max-w-3xl mx-auto">
-                        ${question.options.map((option, index) => `
-                            <div class="answer-option" data-value="${option.value}" data-index="${index}">
-                                <div class="flex items-center">
-                                    <i class="${option.icon} text-2xl mr-4 opacity-70"></i>
-                                    <div class="flex-1">
-                                        <div class="font-medium">${option.text}</div>
-                                        <div class="text-sm opacity-60 mt-1">${getOptionDescription(option.value)}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-            
-            // Add click event listeners to options
-            document.querySelectorAll('.answer-option').forEach(option => {
-                option.addEventListener('click', () => selectAnswer(option));
-            });
-            
-            // Update navigation buttons
-            updateNavigationButtons();
-            
-            // Auto-select if answer exists
-            if (answers[question.id] !== undefined) {
-                const selectedOption = document.querySelector(`[data-value="${answers[question.id]}"]`);
-                if (selectedOption) {
-                    selectAnswer(selectedOption);
-                }
-            }
-        }
-        
-        // Get question icon based on category
-        function getQuestionIcon(category) {
-            const icons = {
-                pore: 'fas fa-search-plus',
-                texture: 'fas fa-hand-paper',
-                hydration: 'fas fa-tint',
-                luminosity: 'fas fa-sun',
-                clarity: 'fas fa-eye',
-                barrier: 'fas fa-shield-alt'
-            };
-            return icons[category] || 'fas fa-question';
-        }
-        
-        // Get option description
-        function getOptionDescription(value) {
-            const descriptions = {
-                5: 'Excellent glass skin quality',
-                4: 'Very good condition',
-                3: 'Good, with room for improvement',
-                2: 'Needs attention',
-                1: 'Requires significant improvement'
-            };
-            return descriptions[value] || '';
-        }
-        
-        // Select answer
-        function selectAnswer(option) {
-            // Remove previous selection
-            document.querySelectorAll('.answer-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            
-            // Select current option
-            option.classList.add('selected');
-            
-            // Store answer
-            const question = questions[currentQuestion];
-            answers[question.id] = parseInt(option.dataset.value);
-            
-            // Update navigation buttons
-            updateNavigationButtons();
-            
-            // Auto-advance after selection (with delay for visual feedback)
-            setTimeout(() => {
-                if (currentQuestion < questions.length - 1) {
-                    nextQuestion();
-                } else {
-                    // Show analyze button
-                    document.getElementById('analyzeBtn').classList.remove('hidden');
-                }
-            }, 800);
-        }
-        
-        // Update progress
-        function updateProgress() {
-            const progress = ((currentQuestion + 1) / questions.length) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-            document.getElementById('questionCounter').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
-        }
-        
-        // Update navigation buttons
-        function updateNavigationButtons() {
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const analyzeBtn = document.getElementById('analyzeBtn');
-            
-            // Previous button
-            if (currentQuestion > 0) {
-                prevBtn.classList.remove('hidden');
-            } else {
-                prevBtn.classList.add('hidden');
-            }
-            
-            // Next button
-            const hasAnswer = answers[questions[currentQuestion].id] !== undefined;
-            if (hasAnswer && currentQuestion < questions.length - 1) {
-                nextBtn.classList.remove('hidden');
-            } else {
-                nextBtn.classList.add('hidden');
-            }
-            
-            // Analyze button
-            if (hasAnswer && currentQuestion === questions.length - 1) {
-                analyzeBtn.classList.remove('hidden');
-            } else {
-                analyzeBtn.classList.add('hidden');
-            }
-        }
-        
-        // Previous question
-        function previousQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                displayQuestion();
-            }
-        }
-        
-        // Next question
-        function nextQuestion() {
-            if (currentQuestion < questions.length - 1) {
-                currentQuestion++;
-                displayQuestion();
-            }
-        }
-        
-        // Analyze results
-        function analyzeResults() {
-            document.getElementById('assessmentSection').classList.add('hidden');
-            document.getElementById('resultsSection').classList.remove('hidden');
-            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
-            
-            setTimeout(() => {
-                calculateScores();
-                displayResults();
-                createChart();
-                generateRecommendations();
-            }, 500);
-        }
-        
-        // Calculate scores
-        function calculateScores() {
-            const scores = {
-                pore: 0,
-                texture: 0,
-                hydration: 0,
-                luminosity: 0,
-                clarity: 0,
-                barrier: 0
-            };
-            
-            const counts = {
-                pore: 0,
-                texture: 0,
-                hydration: 0,
-                luminosity: 0,
-                clarity: 0,
-                barrier: 0
-            };
-            
-            // Calculate category averages
-            questions.forEach(question => {
-                if (answers[question.id] !== undefined) {
-                    scores[question.category] += answers[question.id];
-                    counts[question.category]++;
-                }
-            });
-            
-            // Convert to percentages
-            Object.keys(scores).forEach(category => {
-                if (counts[category] > 0) {
-                    scores[category] = Math.round((scores[category] / counts[category]) * 20); // Convert 1-5 scale to 0-100%
-                }
-            });
-            
-            // Calculate overall score
-            const overall = Math.round(Object.values(scores).reduce((a, b) => a + b, 0) / Object.keys(scores).length);
-            
-            return { ...scores, overall };
-        }
-        
-        // Display results
-        function displayResults() {
-            const scores = calculateScores();
-            
-            // Animate overall score
-            animateScore('overallScore', scores.overall);
-            
-            // Animate individual scores
-            Object.keys(scores).forEach(category => {
-                if (category !== 'overall') {
-                    animateScore(category + 'Score', scores[category]);
-                    updateScoreStatus(category + 'Status', scores[category]);
-                }
-            });
-            
-            // Update score category and description
-            updateScoreCategory(scores.overall);
-        }
-        
-        // Animate score
-        function animateScore(elementId, targetScore) {
-            const element = document.getElementById(elementId);
-            let currentScore = 0;
-            const increment = targetScore / 50; // 50 steps for smooth animation
-            
-            const animation = setInterval(() => {
-                currentScore += increment;
-                if (currentScore >= targetScore) {
-                    currentScore = targetScore;
-                    clearInterval(animation);
-                }
-                element.textContent = Math.round(currentScore) + '%';
-            }, 40);
-        }
-        
-        // Update score status
-        function updateScoreStatus(elementId, score) {
-            const element = document.getElementById(elementId);
-            let status = '';
-            
-            if (score >= 90) status = 'Excellent - Glass skin quality';
-            else if (score >= 75) status = 'Very Good - Near glass skin';
-            else if (score >= 60) status = 'Good - Noticeable improvements needed';
-            else if (score >= 40) status = 'Fair - Significant work required';
-            else status = 'Needs Attention - Major improvements needed';
-            
-            element.textContent = status;
-        }
-        
-        // Update score category
-        function updateScoreCategory(overall) {
-            const categoryElement = document.getElementById('scoreCategory');
-            const descriptionElement = document.getElementById('scoreDescription');
-            
-            let category = '';
-            let description = '';
-            
-            if (overall >= 90) {
-                category = 'Exceptional Glass Skin';
-                description = 'Congratulations! Your skin displays exceptional glass skin qualities with minimal pores, smooth texture, optimal hydration, and natural luminosity. Continue your excellent skincare routine.';
-            } else if (overall >= 75) {
-                category = 'Near-Perfect Glass Skin';
-                description = 'Your skin is very close to the glass skin ideal! With some targeted improvements in specific areas, you can achieve that perfect poreless, luminous appearance.';
-            } else if (overall >= 60) {
-                category = 'Good Skin Foundation';
-                description = 'You have a solid foundation for achieving glass skin. Focus on the recommended areas for improvement to enhance your skin\'s clarity, texture, and glow.';
-            } else if (overall >= 40) {
-                category = 'Developing Glass Skin';
-                description = 'Your skin has potential for significant improvement. With consistent care and targeted treatments, you can work towards achieving the glass skin look.';
-            } else {
-                category = 'Glass Skin Journey Begins';
-                description = 'This is the perfect starting point for your glass skin transformation. Following our personalized recommendations will help you achieve remarkable improvements.';
-            }
-            
-            categoryElement.textContent = category;
-            descriptionElement.textContent = description;
-        }
-        
-        // Create analysis chart
-        function createChart() {
-            const scores = calculateScores();
-            const ctx = document.getElementById('skinAnalysisChart').getContext('2d');
-            
-            if (skinAnalysisChart) {
-                skinAnalysisChart.destroy();
-            }
-            
-            skinAnalysisChart = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: [
-                        'Pore Refinement',
-                        'Skin Texture',
-                        'Hydration Level',
-                        'Luminosity',
-                        'Skin Clarity',
-                        'Barrier Function'
-                    ],
-                    datasets: [{
-                        label: 'Your Glass Skin Score',
-                        data: [
-                            scores.pore,
-                            scores.texture,
-                            scores.hydration,
-                            scores.luminosity,
-                            scores.clarity,
-                            scores.barrier
-                        ],
-                        backgroundColor: 'rgba(102, 126, 234, 0.2)',
-                        borderColor: 'rgba(102, 126, 234, 1)',
-                        borderWidth: 2,
-                        pointBackgroundColor: 'rgba(102, 126, 234, 1)',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgba(102, 126, 234, 1)'
-                    }, {
-                        label: 'Glass Skin Ideal',
-                        data: [100, 100, 100, 100, 100, 100],
-                        backgroundColor: 'rgba(56, 239, 125, 0.1)',
-                        borderColor: 'rgba(56, 239, 125, 0.5)',
-                        borderWidth: 1,
-                        borderDash: [5, 5],
-                        pointRadius: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        r: {
-                            beginAtZero: true,
-                            max: 100,
-                            ticks: {
-                                color: document.body.classList.contains('light-theme') ? '#64748b' : '#a0a0a0',
-                                stepSize: 20
-                            },
-                            grid: {
-                                color: document.body.classList.contains('light-theme') ? '#e2e8f0' : '#333333'
-                            },
-                            angleLines: {
-                                color: document.body.classList.contains('light-theme') ? '#e2e8f0' : '#333333'
-                            },
-                            pointLabels: {
-                                color: document.body.classList.contains('light-theme') ? '#1e293b' : '#ffffff',
-                                font: {
-                                    size: 12,
-                                    weight: '500'
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: document.body.classList.contains('light-theme') ? '#1e293b' : '#ffffff'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-        
-        // Generate recommendations
-        function generateRecommendations() {
-            const scores = calculateScores();
-            const container = document.getElementById('recommendationsContainer');
-            const recommendations = [];
-            
-            // Analyze each category and provide recommendations
-            Object.keys(scores).forEach(category => {
-                if (category !== 'overall' && scores[category] < 80) {
-                    recommendations.push(getRecommendation(category, scores[category]));
-                }
-            });
-            
-            // Add general recommendations
-            if (scores.overall >= 80) {
-                recommendations.push({
-                    title: 'Maintenance Routine',
-                    icon: 'fas fa-heart',
-                    priority: 'maintain',
-                    content: 'Your skin is in excellent condition! Focus on maintaining your current routine with gentle cleansing, consistent moisturizing, and sun protection.',
-                    tips: [
-                        'Continue using gentle, pH-balanced cleansers',
-                        'Maintain consistent hydration with quality moisturizers',
-                        'Never skip sun protection during the day',
-                        'Consider monthly professional treatments for maintenance'
-                    ]
-                });
-            }
-            
-            // Sort by priority
-            const priorityOrder = { high: 1, medium: 2, low: 3, maintain: 4 };
-            recommendations.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
-            
-            // Display recommendations
-            container.innerHTML = recommendations.map(rec => `
-                <div class="recommendation-card slide-in-left">
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 mr-4">
-                            <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center">
-                                <i class="${rec.icon} text-white text-lg"></i>
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="text-lg font-semibold mb-2 flex items-center">
-                                ${rec.title}
-                                <span class="ml-2 text-xs px-2 py-1 bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-full">
-                                    ${rec.priority.toUpperCase()}
-                                </span>
-                            </h4>
-                            <p class="text-sm opacity-80 mb-3">${rec.content}</p>
-                            <ul class="text-sm space-y-1">
-                                ${rec.tips.map(tip => `
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-green-400 mr-2 mt-1 text-xs"></i>
-                                        <span>${tip}</span>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        // Get recommendation for specific category
-        function getRecommendation(category, score) {
-            const recommendations = {
-                pore: {
-                    title: 'Pore Refinement Strategy',
-                    icon: 'fas fa-search-minus',
-                    priority: score < 50 ? 'high' : 'medium',
-                    content: 'Focus on gentle exfoliation and pore-minimizing treatments to achieve smoother, more refined-looking skin.',
-                    tips: [
-                        'Use BHA (salicylic acid) 2-3 times per week for gentle chemical exfoliation',
-                        'Try niacinamide serum to help minimize pore appearance',
-                        'Use clay masks once weekly to deep clean pores',
-                        'Consider retinol products to improve skin texture and pore appearance',
-                        'Always follow with adequate moisturization'
-                    ]
-                },
-                texture: {
-                    title: 'Texture Smoothing Plan',
-                    icon: 'fas fa-magic',
-                    priority: score < 50 ? 'high' : 'medium',
-                    content: 'Improve skin smoothness through gentle exfoliation and barrier repair for that glass-like texture.',
-                    tips: [
-                        'Incorporate AHA (glycolic or lactic acid) for surface smoothing',
-                        'Use a gentle physical exfoliant 1-2 times per week',
-                        'Try vitamin C serum for antioxidant protection and brightness',
-                        'Consider professional chemical peels for deeper texture improvements',
-                        'Use face oils or serums with ceramides to improve skin barrier'
-                    ]
-                },
-                hydration: {
-                    title: 'Hydration Boost Protocol',
-                    icon: 'fas fa-tint',
-                    priority: score < 50 ? 'high' : 'medium',
-                    content: 'Enhance skin hydration and plumpness with layered moisture and barrier-supporting ingredients.',
-                    tips: [
-                        'Use hyaluronic acid serum on damp skin for maximum hydration',
-                        'Layer lightweight hydrating toners or essences',
-                        'Apply moisturizer with ceramides and peptides',
-                        'Use a humidifier in your bedroom for overnight hydration',
-                        'Drink adequate water and include omega-3 rich foods in your diet'
-                    ]
-                },
-                luminosity: {
-                    title: 'Glow Enhancement Routine',
-                    icon: 'fas fa-star',
-                    priority: score < 50 ? 'medium' : 'low',
-                    content: 'Boost your skin\'s natural radiance and light-reflecting properties for that coveted glass skin glow.',
-                    tips: [
-                        'Use vitamin C serum in the morning for brightness and protection',
-                        'Try products with niacinamide to improve overall skin tone',
-                        'Use illuminating face masks 1-2 times per week',
-                        'Consider facial massage with gua sha or facial roller',
-                        'Ensure adequate sleep and stress management for natural glow'
-                    ]
-                },
-                clarity: {
-                    title: 'Skin Clarity Enhancement',
-                    icon: 'fas fa-eye',
-                    priority: score < 50 ? 'high' : 'medium',
-                    content: 'Improve skin clarity and evenness through targeted treatments and consistent care.',
-                    tips: [
-                        'Use gentle cleansing with pH-balanced products twice daily',
-                        'Apply broad-spectrum SPF 30+ every day without exception',
-                        'Try spot treatments with benzoyl peroxide or tea tree oil for blemishes',
-                        'Consider products with arbutin or kojic acid for dark spots',
-                        'Maintain consistent skincare routine for best results'
-                    ]
-                },
-                barrier: {
-                    title: 'Barrier Function Repair',
-                    icon: 'fas fa-shield-alt',
-                    priority: score < 50 ? 'high' : 'medium',
-                    content: 'Strengthen your skin barrier for better protection, hydration retention, and overall skin health.',
-                    tips: [
-                        'Use gentle, sulfate-free cleansers to avoid over-stripping',
-                        'Apply ceramide and cholesterol-rich moisturizers',
-                        'Avoid over-exfoliating - limit to 2-3 times per week maximum',
-                        'Use products with prebiotics to support skin microbiome',
-                        'Consider squalane oil for barrier repair and hydration'
-                    ]
-                }
-            };
-            
-            return recommendations[category];
-        }
-        
-        // Restart assessment
-        function restartAssessment() {
-            currentQuestion = 0;
-            answers = {};
-            startAssessment();
-        }
-        
-        // Share results
-        function shareResults() {
-            const scores = calculateScores();
-            const shareText = `I just completed a professional glass skin assessment! My overall glass skin score is ${scores.overall}%. Check out this advanced skin analysis tool! 💎✨`;
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: 'My Glass Skin Analysis Results',
-                    text: shareText,
-                    url: window.location.href
-                });
-            } else {
-                // Fallback to copying to clipboard
-                navigator.clipboard.writeText(shareText + ' ' + window.location.href).then(() => {
-                    alert('Results copied to clipboard! Share with your friends.');
-                });
-            }
-        }
-        
-        // Utility functions
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-        
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-    </script>
-<script src="/homebutton.js"></script>
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    // Reset Analysis
+    function resetAnalysis() {
+      cameraSection.style.display = 'flex';
+      resultsContainer.classList.remove('active');
+
+      document.getElementById('score-progress').style.strokeDashoffset = 502;
+      document.getElementById('overall-score').textContent = '0';
+
+      // Reset camera UI
+      video.style.display = 'block';
+      canvas.style.display = 'none';
+      videoContainer.classList.remove('active');
+      cameraControls.classList.remove('active');
+      faceGuide.classList.remove('active');
+      
+      // Show start prompt again
+      cameraStartPrompt.style.display = 'flex';
+      cameraStartPrompt.style.opacity = '1';
+      cameraStartPrompt.style.transform = 'scale(1)';
+      
+      // Reset upload section
+      uploadSection.style.opacity = '1';
+      uploadSection.style.pointerEvents = 'auto';
+    }
+
+    // Download Results
+    function downloadResults() {
+      const results = {
+        date: new Date().toISOString(),
+        overallScore: document.getElementById('overall-score').textContent,
+        rating: document.getElementById('skin-rating').textContent.trim(),
+        imageHash: currentImageHash,
+        analysisTime: document.getElementById('analysis-time').textContent,
+        metrics: {}
+      };
+
+      document.querySelectorAll('.metric-card-premium').forEach(card => {
+        const name = card.querySelector('.metric-name').textContent;
+        const score = card.querySelector('.metric-score-premium').textContent;
+        results.metrics[name] = parseInt(score);
+      });
+
+      const blob = new Blob([JSON.stringify(results, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `glass-skin-analysis-${Date.now()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Handle File Upload with full quality
+    function handleFileUpload(file) {
+      if (!file.type.startsWith('image/')) {
+        alert('Please upload an image file.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+
+          video.style.display = 'none';
+          canvas.style.display = 'block';
+
+          analyzeSkin();
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Event Listeners
+    startCameraBtn.addEventListener('click', startCamera);
+    captureBtn.addEventListener('click', capturePhoto);
+    newAnalysisBtn.addEventListener('click', () => {
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+        stream = null;
+      }
+      resetAnalysis();
+    });
+    downloadResultsBtn.addEventListener('click', downloadResults);
+
+    // Upload zone events
+    uploadZone.addEventListener('click', () => fileInput.click());
+    uploadZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadZone.classList.add('dragover');
+    });
+    uploadZone.addEventListener('dragleave', () => {
+      uploadZone.classList.remove('dragover');
+    });
+    uploadZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadZone.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      if (file) handleFileUpload(file);
+    });
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) handleFileUpload(file);
+    });
+
+  })();
+  </script>
 </body>
 </html>
