@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Format Converter — Tool Xeno | Free Online Image Converter</title>
+  <meta name="description" content="Convert images between 20+ formats instantly. Resize, optimize, and batch-process — all in your browser with zero uploads. Supports PNG, JPEG, WebP, AVIF, BMP, GIF, ICO, TIFF." />
+  <meta name="keywords" content="image converter, format converter, PNG to JPEG, WebP converter, AVIF, batch image conversion, resize images" />
+  <meta property="og:title" content="Professional Image Format Converter — Tool Xeno" />
+  <meta property="og:description" content="Convert images between 20+ formats instantly. Resize, optimize, and batch-process — all in your browser." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%2300dfd8'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' text-anchor='middle' fill='white' font-size='18' font-weight='900' font-family='sans-serif'>X</text></svg>" />
+
+  <!-- ============================================================
+       CSS — TOOL XENO THEME
+       ============================================================ -->
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--tx-bg0);
+      color: var(--tx-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; border: none; background: none; cursor: pointer; }
+    img { display: block; max-width: 100%; }
+    input, select { font-family: inherit; }
+    ul { list-style: none; }
+
+    /* ===== DARK THEME (default) ===== */
+    :root {
+      --tx-bg0: #030712;
+      --tx-bg1: #0a0f1e;
+      --tx-bg2: #0f172a;
+      --tx-bg3: #1e293b;
+      --tx-card: rgba(255,255,255,0.04);
+      --tx-card-hover: rgba(255,255,255,0.08);
+      --tx-card-solid: #1e293b;
+      --tx-glass: rgba(255,255,255,0.03);
+      --tx-text: #f1f5f9;
+      --tx-text2: #cbd5e1;
+      --tx-muted: #94a3b8;
+      --tx-line: rgba(255,255,255,0.1);
+      --tx-line-strong: rgba(255,255,255,0.2);
+      --tx-accent1: #007cf0;
+      --tx-accent2: #00dfd8;
+      --tx-accent3: #7928ca;
+      --tx-accent4: #ff0080;
+      --tx-shadow: 0 24px 60px rgba(0,0,0,0.6);
+      --tx-shadow-sm: 0 8px 24px rgba(0,0,0,0.3);
+      --tx-radius: 20px;
+      --tx-radius-sm: 12px;
+      --tx-radius-xs: 8px;
+      --tx-grad: linear-gradient(135deg, var(--tx-accent1), var(--tx-accent2));
+      --tx-grad-text: linear-gradient(90deg, var(--tx-accent1), var(--tx-accent2), var(--tx-accent3));
+    }
+
+    /* ===== LIGHT THEME ===== */
+    .light {
+      --tx-bg0: #f8fafc;
+      --tx-bg1: #f1f5f9;
+      --tx-bg2: #e2e8f0;
+      --tx-bg3: #cbd5e1;
+      --tx-card: rgba(255,255,255,0.9);
+      --tx-card-hover: rgba(255,255,255,1);
+      --tx-card-solid: #ffffff;
+      --tx-glass: rgba(255,255,255,0.8);
+      --tx-text: #0f172a;
+      --tx-text2: #334155;
+      --tx-muted: #64748b;
+      --tx-line: rgba(0,0,0,0.1);
+      --tx-line-strong: rgba(0,0,0,0.15);
+      --tx-shadow: 0 24px 60px rgba(0,0,0,0.1);
+      --tx-shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    /* ===== ANIMATED BACKGROUND ORBS ===== */
+    .bg-orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; will-change: transform; }
+    .orb-1 { width: 600px; height: 600px; background: var(--tx-accent1); top: -200px; left: -200px; animation: orbFloat1 20s linear infinite; }
+    .orb-2 { width: 500px; height: 500px; background: var(--tx-accent3); top: 30%; right: -150px; animation: orbFloat2 25s linear infinite; }
+    .orb-3 { width: 400px; height: 400px; background: var(--tx-accent2); bottom: -100px; left: 30%; animation: orbFloat3 18s linear infinite; }
+    .orb-4 { width: 300px; height: 300px; background: var(--tx-accent4); top: 60%; left: 10%; animation: orbFloat4 22s linear infinite; }
+
+    @keyframes orbFloat1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(60px,40px) scale(1.1);} 66%{transform:translate(-40px,60px) scale(0.95);} }
+    @keyframes orbFloat2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-80px,50px) scale(1.05);} 66%{transform:translate(40px,-60px) scale(1.1);} }
+    @keyframes orbFloat3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(70px,-40px) scale(1.15);} }
+    @keyframes orbFloat4 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,-80px) scale(1.1);} }
+
+    /* ===== GRID OVERLAY ===== */
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+    .light .bg-grid {
+      background-image: linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+    }
+
+    .page-wrapper { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: sticky; top: 0; z-index: 50;
+      border-bottom: 1px solid var(--tx-line);
+      backdrop-filter: blur(20px);
+      background: rgba(3,7,18,0.85);
+    }
+    .light .header { background: rgba(248,250,252,0.90); }
+    .header-inner {
+      max-width: 1240px; margin: 0 auto; padding: 0 24px;
+      height: 72px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--tx-grad);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 900; font-size: 1rem;
+      box-shadow: 0 4px 14px rgba(0,124,240,0.4);
+    }
+    .logo-text {
+      background: var(--tx-grad-text);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Desktop Nav */
+    .desktop-nav { display: flex; align-items: center; gap: 4px; }
+    .nav-link {
+      font-size: 14px; font-weight: 500; padding: 6px 12px;
+      border-radius: var(--tx-radius-xs); color: var(--tx-text2);
+      transition: all 0.2s;
+    }
+    .nav-link:hover { color: var(--tx-text); background: var(--tx-card); }
+
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .theme-btn {
+      display: flex; align-items: center; gap: 8px;
+      border-radius: 9999px; padding: 8px 20px;
+      font-size: 14px; font-weight: 600; color: var(--tx-text2);
+      background: var(--tx-card); border: 1px solid var(--tx-line);
+      transition: all 0.2s;
+    }
+    .theme-btn:hover { border-color: var(--tx-accent1); background: rgba(0,124,240,0.1); }
+    .hamburger {
+      display: none; width: 36px; height: 36px;
+      align-items: center; justify-content: center;
+      border-radius: var(--tx-radius-xs); color: var(--tx-text2);
+      border: 1px solid var(--tx-line); transition: all 0.2s;
+    }
+
+    /* ===== MOBILE NAV OVERLAY ===== */
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; z-index: 60;
+      flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+      background: rgba(3,7,18,0.95); opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .mobile-nav.active { opacity: 1; pointer-events: auto; }
+    .mobile-nav-close {
+      position: absolute; top: 20px; right: 20px;
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--tx-text); border: 1px solid var(--tx-line);
+    }
+    .mobile-nav-link { font-size: 24px; font-weight: 700; color: var(--tx-text); transition: color 0.2s; }
+    .mobile-nav-link:hover { color: var(--tx-accent1); }
+
+    /* ===== HERO ===== */
+    .hero { padding: 64px 24px 40px; text-align: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border-radius: 9999px; padding: 6px 16px;
+      background: rgba(0,124,240,0.15); border: 1px solid rgba(0,124,240,0.3);
+      margin-bottom: 24px;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--tx-accent2); animation: pulse 2s infinite;
+    }
+    .hero-badge-text { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--tx-accent1); }
+    .hero h1 { font-weight: 800; letter-spacing: -0.02em; font-size: 2.5rem; margin-bottom: 20px; }
+    .hero-gradient {
+      background: linear-gradient(90deg, #007cf0, #00dfd8, #7928ca);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subtitle { max-width: 560px; margin: 0 auto 24px; font-size: 18px; line-height: 1.7; color: var(--tx-text2); }
+    .hero-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; font-size: 14px; color: var(--tx-muted); }
+    .hero-badge-item { display: flex; align-items: center; gap: 6px; }
+    .hero-badge-star { color: var(--tx-accent2); }
+
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+    /* ===== TOOL SECTION ===== */
+    .tool-section { padding: 0 24px 64px; }
+
+    /* Upload Zone */
+    .upload-container { max-width: 768px; margin: 0 auto; }
+    .upload-zone {
+      border: 2px dashed var(--tx-line-strong); border-radius: var(--tx-radius-sm);
+      padding: 64px 24px; text-align: center; cursor: pointer;
+      background: var(--tx-glass); transition: all 0.3s;
+    }
+    .upload-zone.drag-over { border-color: var(--tx-accent1); background: rgba(0,124,240,0.08); }
+    .upload-zone-icon { font-size: 60px; margin-bottom: 16px; opacity: 0.8; }
+    .upload-zone-title { font-weight: 700; font-size: 20px; color: var(--tx-text); margin-bottom: 8px; }
+    .upload-zone-sub { color: var(--tx-muted); margin-bottom: 24px; }
+    .upload-zone-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      border-radius: 12px; padding: 10px 24px;
+      font-size: 14px; font-weight: 600; color: #fff;
+      background: linear-gradient(135deg, #007cf0, #00dfd8);
+      box-shadow: 0 4px 20px rgba(0,124,240,0.35);
+      transition: all 0.3s;
+    }
+    .upload-zone-btn:hover { box-shadow: 0 8px 30px rgba(0,124,240,0.45); transform: translateY(-2px); }
+    .upload-zone-hint { margin-top: 16px; font-size: 12px; color: var(--tx-muted); }
+
+    /* Workspace */
+    .workspace { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 380px; gap: 24px; }
+    .workspace-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+    .workspace-toolbar h2 { font-weight: 700; font-size: 18px; color: var(--tx-text); }
+    .workspace-toolbar-actions { display: flex; align-items: center; gap: 8px; }
+    .toolbar-btn {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 14px; font-weight: 500; padding: 6px 12px;
+      border-radius: var(--tx-radius-xs); border: 1px solid var(--tx-line);
+      color: var(--tx-muted); background: transparent; transition: all 0.2s;
+    }
+    .toolbar-btn.add:hover { color: var(--tx-accent1); background: rgba(0,124,240,0.15); border-color: #007cf0; }
+    .toolbar-btn.clear:hover { color: #ef4444; border-color: #ef4444; }
+
+    /* File List */
+    .file-list { max-height: 70vh; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding-right: 4px; }
+    .file-card {
+      border: 1px solid var(--tx-line); border-radius: var(--tx-radius-sm);
+      padding: 16px; background: var(--tx-card-solid);
+      display: flex; align-items: flex-start; gap: 12px;
+      transition: all 0.2s; animation: fadeSlideIn 0.3s ease;
+    }
+    .file-card.error { border-color: #ef4444; }
+    @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    .file-thumb {
+      width: 64px; height: 64px; border-radius: 8px; overflow: hidden;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      background: var(--tx-bg2);
+    }
+    .file-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .file-thumb-placeholder { color: var(--tx-muted); font-size: 24px; }
+
+    .file-info { flex: 1; min-width: 0; }
+    .file-name { font-weight: 600; font-size: 14px; color: var(--tx-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .file-meta { display: flex; align-items: center; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
+    .file-format-badge {
+      font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 6px;
+    }
+    .file-meta-text { font-size: 12px; color: var(--tx-muted); }
+    .file-status { margin-top: 8px; }
+    .status-waiting { font-size: 12px; color: var(--tx-muted); }
+    .status-converting { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--tx-accent1); }
+    .spinner { width: 12px; height: 12px; border: 2px solid transparent; border-top-color: currentColor; border-radius: 50%; animation: spin 0.6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .status-done { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .status-done-size { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: #10b981; }
+    .compression-badge { font-size: 12px; font-weight: 600; padding: 2px 6px; border-radius: 6px; }
+    .compression-badge.good { background: rgba(16,185,129,0.15); color: #10b981; }
+    .compression-badge.bad { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .format-output-badge { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 6px; background: rgba(0,124,240,0.15); color: var(--tx-accent1); }
+    .status-duration { font-size: 12px; color: var(--tx-muted); }
+    .compression-bar { width: 100%; margin-top: 4px; height: 6px; border-radius: 9999px; overflow: hidden; background: var(--tx-bg2); }
+    .compression-bar-fill { height: 100%; border-radius: 9999px; transition: width 0.5s; }
+    .status-error { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: #ef4444; }
+
+    .file-actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+    .file-action-btn {
+      width: 32px; height: 32px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .file-action-btn.download { color: var(--tx-accent1); }
+    .file-action-btn.download:hover { background: rgba(0,124,240,0.15); }
+    .file-action-btn.remove { color: var(--tx-muted); }
+    .file-action-btn.remove:hover { color: #ef4444; background: rgba(239,68,68,0.15); }
+
+    /* Convert & Download bar */
+    .convert-bar { margin-top: 16px; display: flex; gap: 12px; }
+    .convert-btn {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+      border-radius: 12px; padding: 12px 24px;
+      font-size: 14px; font-weight: 600; color: #fff;
+      background: linear-gradient(135deg, #007cf0, #00dfd8);
+      box-shadow: 0 4px 20px rgba(0,124,240,0.35);
+      transition: all 0.3s;
+    }
+    .convert-btn:hover:not(:disabled) { box-shadow: 0 8px 30px rgba(0,124,240,0.45); transform: translateY(-2px); }
+    .convert-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .download-all-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      border-radius: 12px; padding: 12px 20px;
+      font-size: 14px; font-weight: 600;
+      border: 1px solid var(--tx-accent1); color: var(--tx-accent1);
+      background: rgba(0,124,240,0.1); transition: all 0.2s;
+    }
+    .download-all-btn:hover { background: rgba(0,124,240,0.2); }
+
+    /* Settings Panel */
+    .settings-panel { display: flex; flex-direction: column; gap: 16px; }
+    .settings-card {
+      border: 1px solid var(--tx-line); border-radius: var(--tx-radius-sm);
+      padding: 20px; background: var(--tx-card-solid);
+    }
+    .settings-card h3 { font-weight: 700; font-size: 14px; margin-bottom: 12px; color: var(--tx-text); display: flex; align-items: center; gap: 8px; }
+
+    /* Format Grid */
+    .format-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .format-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      padding: 10px 4px; border-radius: var(--tx-radius-xs);
+      border: 1px solid var(--tx-line); background: transparent; transition: all 0.2s;
+    }
+    .format-btn:hover { border-color: rgba(0,124,240,0.3); }
+    .format-btn.active { border-color: #007cf0; background: rgba(0,124,240,0.15); }
+    .format-btn-icon { font-size: 18px; }
+    .format-btn-name { font-size: 11px; font-weight: 600; color: var(--tx-text2); }
+    .format-btn.active .format-btn-name { color: var(--tx-accent1); }
+    .format-btn-ext { font-size: 10px; color: var(--tx-muted); }
+
+    /* Quality Slider */
+    .quality-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .quality-value { font-size: 14px; font-weight: 700; width: 40px; text-align: center; color: var(--tx-accent1); }
+    .quality-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .quality-preset-btn {
+      font-size: 12px; font-weight: 500; padding: 4px 10px;
+      border-radius: 9999px; border: 1px solid var(--tx-line);
+      color: var(--tx-text2); background: transparent; transition: all 0.2s;
+    }
+    .quality-preset-btn.active { border-color: #007cf0; background: rgba(0,124,240,0.15); color: var(--tx-accent1); }
+
+    /* Toggle Switch */
+    .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 6px 0; cursor: pointer; }
+    .toggle-label { font-size: 12px; font-weight: 500; color: var(--tx-text2); }
+    .toggle-switch { position: relative; width: 36px; height: 20px; border-radius: 9999px; background: var(--tx-bg3); transition: background 0.2s; }
+    .toggle-switch.on { background: #007cf0; }
+    .toggle-switch-knob {
+      position: absolute; top: 2px; left: 2px; width: 16px; height: 16px;
+      border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+    .toggle-switch.on .toggle-switch-knob { transform: translateX(16px); }
+
+    /* Resize */
+    .resize-select {
+      width: 100%; font-size: 14px; border-radius: var(--tx-radius-xs);
+      padding: 8px 12px; margin-bottom: 12px; border: 1px solid var(--tx-line);
+      background: var(--tx-bg2); color: var(--tx-text); outline: none; cursor: pointer;
+    }
+    .resize-select option { background: var(--tx-bg2); color: var(--tx-text); }
+    .custom-dims { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .dim-input {
+      flex: 1; min-width: 80px; font-size: 14px; border-radius: var(--tx-radius-xs);
+      padding: 8px 12px; border: 1px solid var(--tx-line);
+      background: var(--tx-bg2); color: var(--tx-text); outline: none;
+    }
+    .dim-input::placeholder { color: var(--tx-muted); }
+    .dim-input:focus { border-color: var(--tx-accent1); }
+    .lock-btn {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--tx-line); color: var(--tx-muted);
+      background: transparent; transition: all 0.2s; flex-shrink: 0;
+    }
+    .lock-btn.locked { border-color: var(--tx-accent1); color: var(--tx-accent1); background: rgba(0,124,240,0.15); }
+    .reset-btn {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--tx-line); color: var(--tx-muted);
+      background: transparent; transition: all 0.2s; flex-shrink: 0;
+    }
+    .reset-btn:hover { color: var(--tx-text); }
+
+    /* Advanced Options */
+    .advanced-label { font-size: 12px; font-weight: 500; margin-bottom: 6px; display: block; color: var(--tx-text2); }
+    .bg-color-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .bg-auto-btn {
+      font-size: 12px; font-weight: 500; padding: 4px 10px;
+      border-radius: 9999px; border: 1px solid var(--tx-line);
+      color: var(--tx-text2); background: transparent; transition: all 0.2s;
+    }
+    .bg-auto-btn.active { border-color: #007cf0; background: rgba(0,124,240,0.15); color: var(--tx-accent1); }
+    .bg-color-picker { width: 32px; height: 32px; border: none; padding: 0; cursor: pointer; background: transparent; border-radius: 6px; }
+    .bg-color-hex { font-size: 12px; font-family: monospace; color: var(--tx-muted); }
+    .pattern-input {
+      width: 100%; font-size: 14px; border-radius: var(--tx-radius-xs);
+      padding: 8px 12px; border: 1px solid var(--tx-line);
+      background: var(--tx-bg2); color: var(--tx-text); outline: none;
+    }
+    .pattern-input::placeholder { color: var(--tx-muted); }
+    .pattern-input:focus { border-color: var(--tx-accent1); }
+    .pattern-hint { font-size: 10px; margin-top: 4px; color: var(--tx-muted); }
+
+    /* ===== SECTION DIVIDER ===== */
+    .divider { height: 1px; max-width: 1240px; margin: 0 auto; background: var(--tx-line); }
+
+    /* ===== FEATURES ===== */
+    .features-section { padding: 64px 24px; }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--tx-accent1); }
+    .section-title { font-weight: 800; letter-spacing: -0.02em; font-size: 2rem; margin-top: 12px; color: var(--tx-text); }
+    .section-subtitle { max-width: 560px; margin: 16px auto 0; color: var(--tx-text2); }
+    .features-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .feature-card {
+      border: 1px solid var(--tx-line); border-radius: var(--tx-radius-sm);
+      padding: 24px; background: var(--tx-card-solid); transition: all 0.3s;
+    }
+    .feature-card:hover { border-color: rgba(0,124,240,0.3); box-shadow: var(--tx-shadow-sm); transform: translateY(-3px); }
+    .feature-icon { font-size: 30px; margin-bottom: 12px; display: block; }
+    .feature-title { font-weight: 700; font-size: 16px; color: var(--tx-text); margin-bottom: 8px; }
+    .feature-desc { font-size: 14px; line-height: 1.6; color: var(--tx-text2); }
+
+    /* ===== FAQ ===== */
+    .faq-section { padding: 64px 24px; }
+    .faq-container { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+    .faq-item { border: 1px solid var(--tx-line); border-radius: var(--tx-radius-xs); overflow: hidden; background: var(--tx-card-solid); }
+    .faq-question {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 16px; text-align: left; font-weight: 600; font-size: 14px;
+      color: var(--tx-text); transition: color 0.2s; cursor: pointer;
+    }
+    .faq-question.open { color: var(--tx-accent1); }
+    .faq-icon {
+      width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; border: 1px solid var(--tx-line);
+      background: var(--tx-glass); color: var(--tx-text2);
+      transition: all 0.3s;
+    }
+    .faq-question.open .faq-icon { background: rgba(0,124,240,0.2); border-color: var(--tx-accent1); color: var(--tx-accent1); transform: rotate(45deg); }
+    .faq-answer {
+      overflow: hidden; transition: max-height 0.3s ease-out;
+      max-height: 0;
+    }
+    .faq-answer.open { max-height: 300px; }
+    .faq-answer-text { padding: 0 20px 16px; font-size: 14px; line-height: 1.7; color: var(--tx-text2); }
+
+    /* ===== FOOTER ===== */
+    .footer { border-top: 1px solid var(--tx-line); margin-top: auto; background: rgba(3,7,18,0.6); }
+    .light .footer { background: rgba(241,245,249,0.8); }
+    .footer-inner { max-width: 1240px; margin: 0 auto; padding: 36px 24px 24px; }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-brand { display: flex; align-items: center; gap: 8px; }
+    .footer-logo {
+      width: 32px; height: 32px; border-radius: 10px;
+      background: linear-gradient(135deg, #007cf0, #00dfd8);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 900; font-size: 12px;
+      box-shadow: 0 4px 14px rgba(0,124,240,0.4);
+    }
+    .footer-links { display: flex; align-items: center; gap: 16px; }
+    .footer-link { font-size: 14px; color: var(--tx-muted); transition: color 0.2s; }
+    .footer-link:hover { color: var(--tx-text); }
+    .footer-back {
+      font-size: 14px; font-weight: 600; padding: 8px 16px;
+      border-radius: var(--tx-radius-xs); border: 1px solid rgba(0,124,240,0.2);
+      color: var(--tx-accent1); background: rgba(0,124,240,0.1); transition: all 0.2s;
+    }
+    .footer-back:hover { background: rgba(0,124,240,0.2); }
+    .footer-bottom { text-align: center; font-size: 12px; color: var(--tx-muted); padding-top: 20px; margin-top: 12px; border-top: 1px solid var(--tx-line); }
+
+    /* ===== RANGE SLIDER ===== */
+    input[type="range"] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; width: 100%; }
+    input[type="range"]::-webkit-slider-track { height: 4px; background: var(--tx-bg3); border-radius: 2px; }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 16px; height: 16px; background: var(--tx-grad);
+      border-radius: 50%; margin-top: -6px;
+      box-shadow: 0 2px 6px rgba(0,124,240,0.5); border: 2px solid #fff;
+    }
+    input[type="range"]::-moz-range-track { height: 4px; background: var(--tx-bg3); border-radius: 2px; }
+    input[type="range"]::-moz-range-thumb {
+      width: 16px; height: 16px; background: var(--tx-grad);
+      border-radius: 50%; border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,124,240,0.5);
+    }
+    input[type="range"]:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ===== TOAST NOTIFICATIONS ===== */
+    #toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+    .toast {
+      padding: 12px 20px; border-radius: var(--tx-radius-xs);
+      font-size: 13px; font-weight: 500; color: #fff;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      transform: translateX(120%); opacity: 0;
+      transition: all 0.3s ease; pointer-events: auto;
+    }
+    .toast.show { transform: translateX(0); opacity: 1; }
+    .toast-success { background: #059669; }
+    .toast-error { background: #dc2626; }
+    .toast-info { background: var(--tx-accent1); }
+    .toast-warning { background: #d97706; }
+
+    /* ===== CUSTOM SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
+    .light ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); }
+    .light ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .desktop-nav { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { display: flex; }
+      .hero h1 { font-size: 2rem; }
+      .hero-subtitle { font-size: 16px; }
+      .workspace { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; align-items: flex-start; }
+      .upload-zone { padding: 40px 16px; }
+      .custom-dims { flex-wrap: wrap; }
+      .dim-input { min-width: calc(50% - 28px); }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.6rem; }
+      .format-grid { grid-template-columns: repeat(4, 1fr); }
+      .hero-badge { font-size: 10px; padding: 4px 12px; }
+      .convert-bar { flex-direction: column; }
+      .download-all-btn span { display: inline; }
+      .section-title { font-size: 1.6rem; }
+      .custom-dims { gap: 6px; }
+      .dim-input { min-width: 0; flex: 1 1 calc(50% - 24px); padding: 8px 10px; font-size: 13px; }
+      .lock-btn, .reset-btn { width: 36px; height: 36px; }
+      .settings-card { padding: 16px; }
+    }
+    @media (max-width: 360px) {
+      .custom-dims { gap: 6px; }
+      .dim-input { flex: 1 1 100%; }
+      .lock-btn { order: -1; }
+    }
+
+    /* ===== UTILITIES ===== */
+    .hidden { display: none !important; }
+    .icon-svg { width: 1em; height: 1em; vertical-align: middle; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== BACKGROUND ===== -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+
+    <!-- ====================== HEADER ====================== -->
+    <header class="header">
+      <div class="header-inner">
+        <a href="#" class="logo">
+          <span class="logo-icon">X</span>
+          <span class="logo-text">Tool Xeno</span>
+        </a>
+        <nav class="desktop-nav">
+          <a href="#" class="nav-link">Home</a>
+          <a href="#" class="nav-link">All Tools</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-right">
+          <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+            <svg class="icon-svg" id="themeIconSun" style="display:none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="icon-svg" id="themeIconMoon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <span class="theme-btn-text" id="themeBtnText">Light</span>
+          </button>
+          <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+            <svg class="icon-svg" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== MOBILE NAV OVERLAY ===== -->
+    <div class="mobile-nav" id="mobileNav">
+      <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
+        <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <a href="#" class="mobile-nav-link" data-close-nav>Home</a>
+      <a href="#" class="mobile-nav-link" data-close-nav>All Tools</a>
+      <a href="#features" class="mobile-nav-link" data-close-nav>Features</a>
+      <a href="#faq" class="mobile-nav-link" data-close-nav>FAQ</a>
+    </div>
+
+    <!-- ====================== HERO ====================== -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        <span class="hero-badge-text">Free · No Signup · Privacy-First</span>
+      </div>
+      <h1>Professional Image <span class="hero-gradient">Format Converter</span></h1>
+      <p class="hero-subtitle">Convert images between 20+ formats instantly. Resize, optimize, and batch-process — all in your browser with zero uploads.</p>
+      <div class="hero-badges">
+        <span class="hero-badge-item"><span class="hero-badge-star">✦</span> No file size limit</span>
+        <span class="hero-badge-item"><span class="hero-badge-star">✦</span> Zero uploads</span>
+        <span class="hero-badge-item"><span class="hero-badge-star">✦</span> Lightning fast</span>
+        <span class="hero-badge-item"><span class="hero-badge-star">✦</span> 8 output formats</span>
+      </div>
+    </section>
+
+    <!-- ====================== TOOL SECTION ====================== -->
+    <section class="tool-section">
+
+      <!-- Upload State -->
+      <div class="upload-container" id="uploadState">
+        <div class="upload-zone" id="uploadZone">
+          <div class="upload-zone-icon">🖼️</div>
+          <p class="upload-zone-title">Drop your images here</p>
+          <p class="upload-zone-sub">or click to browse from your device</p>
+          <span class="upload-zone-btn">📁 Choose Files</span>
+          <p class="upload-zone-hint">Supports PNG, JPEG, WebP, AVIF, BMP, GIF, ICO, TIFF, SVG, HEIC — up to 100 MB each · You can also paste from clipboard</p>
+        </div>
+        <input type="file" id="fileInput" accept="image/*" multiple style="display:none" />
+      </div>
+
+      <!-- Workspace State -->
+      <div class="workspace hidden" id="workspaceState">
+        <!-- LEFT: File Queue -->
+        <div>
+          <div class="workspace-toolbar">
+            <h2 id="fileCountTitle">Your Files (0)</h2>
+            <div class="workspace-toolbar-actions">
+              <button class="toolbar-btn add" id="addMoreBtn">
+                <svg class="icon-svg" style="width:15px;height:15px" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add More
+              </button>
+              <button class="toolbar-btn clear" id="clearAllBtn">
+                <svg class="icon-svg" style="width:15px;height:15px" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                Clear All
+              </button>
+            </div>
+          </div>
+          <input type="file" id="fileInputWorkspace" accept="image/*" multiple style="display:none" />
+
+          <div class="file-list" id="fileList"></div>
+
+          <div class="convert-bar">
+            <button class="convert-btn" id="convertBtn">
+              <svg class="icon-svg" style="width:16px;height:16px" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Convert All Files
+            </button>
+            <button class="download-all-btn hidden" id="downloadAllBtn">
+              <svg class="icon-svg" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Download All</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- RIGHT: Settings Panel -->
+        <div class="settings-panel">
+          <!-- Output Format -->
+          <div class="settings-card">
+            <h3>📐 Output Format</h3>
+            <div class="format-grid" id="formatGrid"></div>
+          </div>
+
+          <!-- Quality -->
+          <div class="settings-card hidden" id="qualityPanel">
+            <h3>⚙️ Quality</h3>
+            <div class="quality-row">
+              <input type="range" min="1" max="100" value="92" id="qualitySlider" />
+              <span class="quality-value" id="qualityValue">92</span>
+            </div>
+            <div class="quality-presets" id="qualityPresets"></div>
+            <div class="hidden" id="losslessToggle">
+              <div class="toggle-row">
+                <span class="toggle-label">Lossless</span>
+                <div class="toggle-switch" id="losslessSwitch"><div class="toggle-switch-knob"></div></div>
+              </div>
+            </div>
+            <div class="hidden" id="progressiveToggle">
+              <div class="toggle-row">
+                <span class="toggle-label">Progressive JPEG</span>
+                <div class="toggle-switch" id="progressiveSwitch"><div class="toggle-switch-knob"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resize -->
+          <div class="settings-card">
+            <h3>📏 Resize</h3>
+            <select class="resize-select" id="resizeSelect"></select>
+            <div class="custom-dims">
+              <input type="number" class="dim-input" id="customWidth" placeholder="Width" min="1" />
+              <button class="lock-btn locked" id="lockBtn" title="Aspect ratio locked">
+                <svg class="icon-svg" style="width:14px;height:14px" id="lockIcon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <svg class="icon-svg" style="width:14px;height:14px;display:none" id="unlockIcon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+              </button>
+              <input type="number" class="dim-input" id="customHeight" placeholder="Height" min="1" />
+              <button class="reset-btn" id="resetDimsBtn" title="Reset dimensions">
+                <svg class="icon-svg" style="width:14px;height:14px" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Advanced Options -->
+          <div class="settings-card">
+            <h3>🎨 Advanced Options</h3>
+            <div style="margin-bottom:12px">
+              <label class="advanced-label">Background Color (for transparency)</label>
+              <div class="bg-color-row">
+                <button class="bg-auto-btn active" id="bgAutoBtn">Auto</button>
+                <input type="color" class="bg-color-picker" id="bgColorPicker" value="#ffffff" title="Pick background color" />
+                <span class="bg-color-hex hidden" id="bgColorHex">#ffffff</span>
+              </div>
+            </div>
+            <div class="toggle-row">
+              <span class="toggle-label">Remove metadata (EXIF)</span>
+              <div class="toggle-switch on" id="removeMetaSwitch"><div class="toggle-switch-knob" style="transform:translateX(16px)"></div></div>
+            </div>
+            <div style="margin-top:12px">
+              <label class="advanced-label" style="display:flex;align-items:center;gap:4px">
+                Output filename pattern
+                <svg class="icon-svg" style="width:12px;height:12px;color:var(--tx-muted)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              </label>
+              <input type="text" class="pattern-input" id="outputPattern" placeholder="Leave blank for default" />
+              <p class="pattern-hint">Use {'{name}'} for original name, {'{format}'} for format id</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== DIVIDER ====================== -->
+    <div class="divider"></div>
+
+    <!-- ====================== FEATURES ====================== -->
+    <section class="features-section" id="features">
+      <div class="section-header">
+        <span class="section-label">⚡ Features</span>
+        <h2 class="section-title">Professional-Grade Image Conversion</h2>
+        <p class="section-subtitle">Advanced tools for fast, high-quality format conversion.</p>
+      </div>
+      <div class="features-grid" id="featuresGrid"></div>
+    </section>
+
+    <!-- ====================== DIVIDER ====================== -->
+    <div class="divider"></div>
+
+    <!-- ====================== FAQ ====================== -->
+    <section class="faq-section" id="faq">
+      <div class="section-header">
+        <span class="section-label">❓ FAQ</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+      <div class="faq-container" id="faqContainer"></div>
+    </section>
+
+    <!-- ====================== FOOTER ====================== -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <span class="footer-logo">X</span>
+            <span class="logo-text" style="font-size:16px">Tool Xeno</span>
+          </div>
+          <div class="footer-links">
+            <a href="#" class="footer-link">Home</a>
+            <a href="#" class="footer-link">All Tools</a>
+            <a href="#" class="footer-link">Privacy</a>
+            <a href="#" class="footer-link">Terms</a>
+          </div>
+          <a href="#" class="footer-back">← Back to All Tools</a>
+        </div>
+        <div class="footer-bottom">
+          © <span id="footerYear"></span> Tool Xeno. All processing is performed locally in your browser.
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast container -->
+  <div id="toast-container"></div>
+
+  <!-- ============================================================
+       JAVASCRIPT — COMPLETE APPLICATION LOGIC
+       ============================================================ -->
+  <script>
+  (function() {
+    'use strict';
+
+    /* ============================================================
+       DATA — FORMAT DEFINITIONS
+       ============================================================ */
+    var OUTPUT_FORMATS = [
+      { id: 'png',  name: 'PNG',  ext: '.png',  mime: 'image/png',      icon: '🖼️', color: '#007cf0', supportsQuality: false, supportsLossless: true },
+      { id: 'jpg',  name: 'JPEG', ext: '.jpg',  mime: 'image/jpeg',     icon: '📷', color: '#ff6b35', supportsQuality: true,  supportsLossless: false },
+      { id: 'webp', name: 'WebP', ext: '.webp', mime: 'image/webp',     icon: '🌐', color: '#4285f4', supportsQuality: true,  supportsLossless: true },
+      { id: 'avif', name: 'AVIF', ext: '.avif', mime: 'image/avif',     icon: '🎬', color: '#7928ca', supportsQuality: true,  supportsLossless: true },
+      { id: 'bmp',  name: 'BMP',  ext: '.bmp',  mime: 'image/bmp',      icon: '🗄️', color: '#64748b', supportsQuality: false, supportsLossless: true },
+      { id: 'gif',  name: 'GIF',  ext: '.gif',  mime: 'image/gif',      icon: '🎭', color: '#10b981', supportsQuality: false, supportsLossless: false },
+      { id: 'ico',  name: 'ICO',  ext: '.ico',  mime: 'image/x-icon',   icon: '🔷', color: '#f59e0b', supportsQuality: false, supportsLossless: true },
+      { id: 'tiff', name: 'TIFF', ext: '.tiff', mime: 'image/tiff',     icon: '📄', color: '#8b5cf6', supportsQuality: false, supportsLossless: true }
+    ];
+
+    var RESIZE_PRESETS = [
+      { name: 'Original', width: 0, height: 0 },
+      { name: '4K (3840×2160)', width: 3840, height: 2160 },
+      { name: 'Full HD (1920×1080)', width: 1920, height: 1080 },
+      { name: 'HD (1280×720)', width: 1280, height: 720 },
+      { name: 'Square (1080×1080)', width: 1080, height: 1080 },
+      { name: 'Instagram Post', width: 1080, height: 1350 },
+      { name: 'Instagram Story', width: 1080, height: 1920 },
+      { name: 'Facebook Cover', width: 1640, height: 624 },
+      { name: 'Twitter Header', width: 1500, height: 500 },
+      { name: 'LinkedIn Banner', width: 1584, height: 396 },
+      { name: 'YouTube Thumb', width: 1280, height: 720 },
+      { name: 'Favicon (512×512)', width: 512, height: 512 },
+      { name: 'App Icon (1024×1024)', width: 1024, height: 1024 }
+    ];
+
+    var QUALITY_PRESETS = [
+      { name: 'Maximum', value: 100 },
+      { name: 'High', value: 92 },
+      { name: 'Balanced', value: 80 },
+      { name: 'Medium', value: 65 },
+      { name: 'Small', value: 45 },
+      { name: 'Minimal', value: 25 }
+    ];
+
+    var FEATURES = [
+      { icon: '🔄', title: 'Universal Formats', desc: 'Convert between 20+ image formats including PNG, JPEG, WebP, AVIF, BMP, GIF, ICO, TIFF, SVG, and more.' },
+      { icon: '✨', title: 'Zero Quality Loss', desc: 'Lossless conversion ensures your images maintain perfect quality. Every pixel preserved.' },
+      { icon: '📦', title: 'Batch Processing', desc: 'Convert hundreds of images at once. Drag, drop, and download. ZIP support for bulk downloads.' },
+      { icon: '📏', title: 'Smart Resize', desc: 'Resize during conversion with presets for social media, HD, 4K, and custom dimensions.' },
+      { icon: '🎯', title: 'Quality Control', desc: 'Fine-tune quality with a precision slider. Presets for quick optimization. Lossless mode available.' },
+      { icon: '🔒', title: '100% Private', desc: 'All processing happens locally in your browser. Your images never leave your device.' }
+    ];
+
+    var FAQ_ITEMS = [
+      { q: 'What image formats are supported for conversion?', a: 'We support PNG, JPEG, WebP, AVIF, BMP, GIF, ICO, TIFF as output formats. Input supports all these plus SVG, HEIC, TGA, and any format your browser can display. That\'s 20+ formats in total.' },
+      { q: 'Will converting my images reduce their quality?', a: 'Not necessarily! For PNG, BMP, and ICO, conversion is always lossless. For JPEG, WebP, and AVIF, you control the quality with our precision slider — set it to maximum (100) for near-lossless results. We also offer a dedicated lossless mode for WebP and AVIF formats.' },
+      { q: 'How does batch conversion work?', a: 'Simply drag and drop multiple images or select multiple files. All images are converted using the same format and quality settings. You can download them individually or use "Download All" to get everything at once. There\'s no limit on the number of files.' },
+      { q: 'Is my image data private and secure?', a: 'Absolutely. All image processing happens entirely in your browser using HTML5 Canvas API. Your images are never uploaded to any server. Once you close the page, all data is gone. Zero data collection, zero tracking.' },
+      { q: 'Can I resize images while converting?', a: 'Yes! Our tool includes a powerful resize feature with presets for popular sizes (4K, Full HD, HD, social media formats) and custom dimensions. You can lock the aspect ratio to prevent distortion. Resizing happens during conversion with zero additional quality loss.' },
+      { q: 'What is AVIF and why should I use it?', a: 'AVIF (AV1 Image File Format) is the next-generation image format developed by the Alliance for Open Media. It typically produces files 50% smaller than JPEG at equivalent quality, supports HDR, wide color gamut, and even animation. It\'s supported by Chrome, Firefox, and Edge. Use it for web optimization.' },
+      { q: 'What happens to transparent backgrounds when converting to JPEG?', a: 'JPEG doesn\'t support transparency. By default, our tool automatically replaces transparent areas with white. You can also choose a custom background color using the color picker in Advanced Options. For transparent output, use PNG or WebP format instead.' }
+    ];
+
+    /* ============================================================
+       STATE
+       ============================================================ */
+    var state = {
+      files: [],
+      isConverting: false,
+      targetFormat: 'webp',
+      quality: 92,
+      lossless: false,
+      progressive: false,
+      removeMetadata: true,
+      bgColor: 'auto',
+      maintainAspectRatio: true,
+      resizePreset: 'Original',
+      customWidth: '',
+      customHeight: '',
+      outputPattern: '',
+      openFaq: null,
+      isDark: true
+    };
+
+    /* ============================================================
+       DOM REFERENCES
+       ============================================================ */
+    var $ = function(id) { return document.getElementById(id); };
+    var uploadState = $('uploadState');
+    var workspaceState = $('workspaceState');
+    var uploadZone = $('uploadZone');
+    var fileInput = $('fileInput');
+    var fileInputWorkspace = $('fileInputWorkspace');
+    var fileList = $('fileList');
+    var fileCountTitle = $('fileCountTitle');
+    var convertBtn = $('convertBtn');
+    var downloadAllBtn = $('downloadAllBtn');
+    var formatGrid = $('formatGrid');
+    var qualityPanel = $('qualityPanel');
+    var qualitySlider = $('qualitySlider');
+    var qualityValue = $('qualityValue');
+    var qualityPresetsEl = $('qualityPresets');
+    var losslessToggle = $('losslessToggle');
+    var losslessSwitch = $('losslessSwitch');
+    var progressiveToggle = $('progressiveToggle');
+    var progressiveSwitch = $('progressiveSwitch');
+    var resizeSelect = $('resizeSelect');
+    var customWidthInput = $('customWidth');
+    var customHeightInput = $('customHeight');
+    var lockBtn = $('lockBtn');
+    var lockIcon = $('lockIcon');
+    var unlockIcon = $('unlockIcon');
+    var resetDimsBtn = $('resetDimsBtn');
+    var bgAutoBtn = $('bgAutoBtn');
+    var bgColorPicker = $('bgColorPicker');
+    var bgColorHex = $('bgColorHex');
+    var removeMetaSwitch = $('removeMetaSwitch');
+    var outputPatternInput = $('outputPattern');
+    var themeToggle = $('themeToggle');
+    var themeIconSun = $('themeIconSun');
+    var themeIconMoon = $('themeIconMoon');
+    var themeBtnText = $('themeBtnText');
+    var hamburgerBtn = $('hamburgerBtn');
+    var mobileNav = $('mobileNav');
+    var mobileNavClose = $('mobileNavClose');
+    var featuresGrid = $('featuresGrid');
+    var faqContainer = $('faqContainer');
+    var addMoreBtn = $('addMoreBtn');
+    var clearAllBtn = $('clearAllBtn');
+
+    /* ============================================================
+       UTILITY FUNCTIONS
+       ============================================================ */
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 B';
+      var k = 1024;
+      var sizes = ['B', 'KB', 'MB', 'GB'];
+      var i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function getCompressionRatio(original, converted) {
+      if (original === 0) return 0;
+      return Math.round(((original - converted) / original) * 100);
+    }
+
+    function detectFormatFromFileName(name) {
+      var ext = name.split('.').pop().toLowerCase() || '';
+      var map = { png:'png', jpg:'jpg', jpeg:'jpg', jfif:'jpg', webp:'webp', avif:'avif', bmp:'bmp', gif:'gif', ico:'ico', tiff:'tiff', tif:'tiff', svg:'svg', heic:'heic', heif:'heic', tga:'tga' };
+      return map[ext] || 'unknown';
+    }
+
+    function getFormatById(id) {
+      for (var i = 0; i < OUTPUT_FORMATS.length; i++) {
+        if (OUTPUT_FORMATS[i].id === id) return OUTPUT_FORMATS[i];
+      }
+      return null;
+    }
+
+    function getOutputExtension(formatId) {
+      var fmt = getFormatById(formatId);
+      return fmt ? fmt.ext : '.png';
+    }
+
+    function getMimeType(formatId) {
+      var fmt = getFormatById(formatId);
+      return fmt ? fmt.mime : 'image/png';
+    }
+
+    function showToast(message, type) {
+      type = type || 'success';
+      var container = $('toast-container');
+      var toast = document.createElement('div');
+      toast.className = 'toast toast-' + type;
+      toast.textContent = message;
+      container.appendChild(toast);
+      setTimeout(function() { toast.classList.add('show'); }, 10);
+      setTimeout(function() {
+        toast.classList.remove('show');
+        setTimeout(function() { toast.remove(); }, 300);
+      }, 3000);
+    }
+
+    function downloadBlob(blob, fileName) {
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function() { URL.revokeObjectURL(url); }, 100);
+    }
+
+    /* ============================================================
+       IMAGE UTILITIES
+       ============================================================ */
+    function loadImage(src) {
+      return new Promise(function(resolve, reject) {
+        var img = new Image();
+        img.onload = function() { resolve(img); };
+        img.onerror = function() { reject(new Error('Failed to load image')); };
+        img.crossOrigin = 'anonymous';
+        img.src = src;
+      });
+    }
+
+    function getImageDimensions(file) {
+      return new Promise(function(resolve, reject) {
+        var url = URL.createObjectURL(file);
+        var img = new Image();
+        img.onload = function() { URL.revokeObjectURL(url); resolve({ width: img.naturalWidth, height: img.naturalHeight }); };
+        img.onerror = function() { URL.revokeObjectURL(url); reject(new Error('Failed to load image')); };
+        img.src = url;
+      });
+    }
+
+    function createThumbnail(file, maxSize) {
+      maxSize = maxSize || 128;
+      return new Promise(function(resolve, reject) {
+        var url = URL.createObjectURL(file);
+        var img = new Image();
+        img.onload = function() {
+          URL.revokeObjectURL(url);
+          var canvas = document.createElement('canvas');
+          var w = img.naturalWidth, h = img.naturalHeight;
+          var ratio = Math.min(maxSize / w, maxSize / h, 1);
+          w = Math.round(w * ratio); h = Math.round(h * ratio);
+          canvas.width = w; canvas.height = h;
+          var ctx = canvas.getContext('2d');
+          ctx.imageSmoothingQuality = 'high';
+          ctx.drawImage(img, 0, 0, w, h);
+          resolve(canvas.toDataURL('image/jpeg', 0.7));
+        };
+        img.onerror = function() { URL.revokeObjectURL(url); reject(new Error('Failed to create thumbnail')); };
+        img.src = url;
+      });
+    }
+
+    function calculateDimensions(originalW, originalH, targetW, targetH, maintainRatio) {
+      if (!targetW && !targetH) return { width: originalW, height: originalH };
+      if (maintainRatio) {
+        if (targetW && !targetH) {
+          return { width: targetW, height: Math.round(targetW * (originalH / originalW)) };
+        }
+        if (!targetW && targetH) {
+          return { width: Math.round(targetH * (originalW / originalH)), height: targetH };
+        }
+        if (targetW && targetH) {
+          var ratioW = originalW / targetW;
+          var ratioH = originalH / targetH;
+          if (ratioW > ratioH) {
+            return { width: targetW, height: Math.round(targetW * (originalH / originalW)) };
+          } else {
+            return { width: Math.round(targetH * (originalW / originalH)), height: targetH };
+          }
+        }
+      }
+      return { width: targetW || originalW, height: targetH || originalH };
+    }
+
+    function canvasToBlob(canvas, mimeType, quality) {
+      return new Promise(function(resolve, reject) {
+        canvas.toBlob(function(blob) {
+          if (blob) resolve(blob);
+          else reject(new Error('Failed to export as ' + mimeType));
+        }, mimeType, mimeType === 'image/png' ? undefined : quality / 100);
+      });
+    }
+
+    /* ============================================================
+       CUSTOM ENCODERS
+       ============================================================ */
+    function encodeBMP(canvas) {
+      var ctx = canvas.getContext('2d');
+      var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      var width = imageData.width, height = imageData.height, data = imageData.data;
+      var rowSize = Math.ceil((width * 3) / 4) * 4;
+      var pixelArraySize = rowSize * height;
+      var fileSize = 54 + pixelArraySize;
+      var buffer = new ArrayBuffer(fileSize);
+      var view = new DataView(buffer);
+
+      // BMP Header
+      view.setUint8(0, 0x42); view.setUint8(1, 0x4d);
+      view.setUint32(2, fileSize, true);
+      view.setUint32(6, 0, true);
+      view.setUint32(10, 54, true);
+      // DIB Header
+      view.setUint32(14, 40, true);
+      view.setInt32(18, width, true);
+      view.setInt32(22, -height, true);
+      view.setUint16(26, 1, true);
+      view.setUint16(28, 24, true);
+      view.setUint32(30, 0, true);
+      view.setUint32(34, pixelArraySize, true);
+      view.setUint32(38, 2835, true);
+      view.setUint32(42, 2835, true);
+      view.setUint32(46, 0, true);
+      view.setUint32(50, 0, true);
+
+      // Pixel data (BGR)
+      var offset = 54;
+      for (var y = 0; y < height; y++) {
+        for (var x = 0; x < width; x++) {
+          var i = (y * width + x) * 4;
+          view.setUint8(offset++, data[i + 2]); // B
+          view.setUint8(offset++, data[i + 1]); // G
+          view.setUint8(offset++, data[i]);     // R
+        }
+        var expectedOffset = 54 + (y + 1) * rowSize;
+        while (offset < expectedOffset) { view.setUint8(offset++, 0); }
+      }
+
+      return new Blob([buffer], { type: 'image/bmp' });
+    }
+
+    function encodeICO(pngBlob) {
+      return new Promise(function(resolve) {
+        var reader = new FileReader();
+        reader.onload = function() {
+          var pngData = new Uint8Array(reader.result);
+          var pngSize = pngData.length;
+          var headerSize = 6, dirEntrySize = 16;
+          var fileSize = headerSize + dirEntrySize + pngSize;
+          var buffer = new ArrayBuffer(fileSize);
+          var view = new DataView(buffer);
+
+          view.setUint16(0, 0, true);
+          view.setUint16(2, 1, true);
+          view.setUint16(4, 1, true);
+          view.setUint8(6, pngSize > 0 ? 0 : 0);
+          view.setUint8(7, pngSize > 0 ? 0 : 0);
+          view.setUint8(8, 0);
+          view.setUint8(9, 0);
+          view.setUint16(10, 1, true);
+          view.setUint16(12, 32, true);
+          view.setUint32(14, pngSize, true);
+          view.setUint32(18, headerSize + dirEntrySize, true);
+
+          var icoView = new Uint8Array(buffer);
+          icoView.set(pngData, headerSize + dirEntrySize);
+          resolve(new Blob([buffer], { type: 'image/x-icon' }));
+        };
+        reader.readAsArrayBuffer(pngBlob);
+      });
+    }
+
+    function encodeTIFF(canvas) {
+      var ctx = canvas.getContext('2d');
+      var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      var width = imageData.width, height = imageData.height, data = imageData.data;
+      var isLE = true;
+      var numTags = 11;
+      var ifdOffset = 8;
+      var ifdSize = 2 + numTags * 12 + 4;
+      var imageDataOffset = ifdOffset + ifdSize;
+      var pixelDataSize = width * height * 3;
+      var fileSize = imageDataOffset + pixelDataSize;
+      var buffer = new ArrayBuffer(fileSize);
+      var view = new DataView(buffer);
+
+      view.setUint16(0, 0x4949, !isLE);
+      view.setUint16(2, 42, !isLE);
+      view.setUint32(4, ifdOffset, !isLE);
+
+      var pos = ifdOffset;
+      view.setUint16(pos, numTags, !isLE); pos += 2;
+
+      function writeTag(tag, type, count, valueOrOffset) {
+        view.setUint16(pos, tag, !isLE); pos += 2;
+        view.setUint16(pos, type, !isLE); pos += 2;
+        view.setUint32(pos, count, !isLE); pos += 4;
+        view.setUint32(pos, valueOrOffset, !isLE); pos += 4;
+      }
+
+      writeTag(256, 3, 1, width);
+      writeTag(257, 3, 1, height);
+      writeTag(258, 3, 1, 8);
+      writeTag(259, 3, 1, 1);
+      writeTag(262, 3, 1, 2);
+      writeTag(273, 3, 1, imageDataOffset);
+      writeTag(277, 3, 1, 3);
+      writeTag(278, 3, 1, height);
+      writeTag(279, 3, 1, pixelDataSize);
+      writeTag(282, 5, 1, 0);
+      writeTag(283, 5, 1, 0);
+      view.setUint32(pos, 0, !isLE);
+
+      var pixelPos = imageDataOffset;
+      for (var i = 0; i < data.length; i += 4) {
+        view.setUint8(pixelPos++, data[i]);
+        view.setUint8(pixelPos++, data[i + 1]);
+        view.setUint8(pixelPos++, data[i + 2]);
+      }
+
+      return new Blob([buffer], { type: 'image/tiff' });
+    }
+
+    /* ============================================================
+       CONVERSION ENGINE
+       ============================================================ */
+    function convertImage(file, options) {
+      var id = crypto.randomUUID();
+      var startTime = performance.now();
+      var originalFormat = file.type.split('/')[1] ? file.type.split('/')[1].split(';')[0] : 'unknown';
+
+      return loadImage(URL.createObjectURL(file)).then(function(img) {
+        URL.revokeObjectURL(img.src);
+
+        var dims = calculateDimensions(
+          img.naturalWidth, img.naturalHeight,
+          options.width, options.height,
+          options.maintainAspectRatio
+        );
+
+        var canvas = document.createElement('canvas');
+        canvas.width = dims.width;
+        canvas.height = dims.height;
+        var ctx = canvas.getContext('2d');
+
+        if (options.bgColor) {
+          ctx.fillStyle = options.bgColor;
+          ctx.fillRect(0, 0, dims.width, dims.height);
+        } else if ((options.outputFormat === 'jpg') && file.type === 'image/png') {
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, dims.width, dims.height);
+        }
+
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, 0, 0, dims.width, dims.height);
+
+        var mimeType = getMimeType(options.outputFormat);
+        var quality = options.lossless ? 100 : options.quality;
+
+        if (options.outputFormat === 'bmp') {
+          var blob = encodeBMP(canvas);
+          return {
+            id: id, originalFile: file, originalSize: file.size, originalFormat: originalFormat,
+            convertedBlob: blob, convertedSize: blob.size, convertedFormat: options.outputFormat,
+            convertedUrl: URL.createObjectURL(blob),
+            width: dims.width, height: dims.height,
+            originalWidth: img.naturalWidth, originalHeight: img.naturalHeight,
+            status: 'done', duration: performance.now() - startTime
+          };
+        }
+        if (options.outputFormat === 'ico') {
+          return canvasToBlob(canvas, 'image/png', 100).then(function(pngBlob) {
+            return encodeICO(pngBlob);
+          }).then(function(blob) {
+            return {
+              id: id, originalFile: file, originalSize: file.size, originalFormat: originalFormat,
+              convertedBlob: blob, convertedSize: blob.size, convertedFormat: options.outputFormat,
+              convertedUrl: URL.createObjectURL(blob),
+              width: dims.width, height: dims.height,
+              originalWidth: img.naturalWidth, originalHeight: img.naturalHeight,
+              status: 'done', duration: performance.now() - startTime
+            };
+          });
+        }
+        if (options.outputFormat === 'tiff') {
+          var tiffBlob = encodeTIFF(canvas);
+          return {
+            id: id, originalFile: file, originalSize: file.size, originalFormat: originalFormat,
+            convertedBlob: tiffBlob, convertedSize: tiffBlob.size, convertedFormat: options.outputFormat,
+            convertedUrl: URL.createObjectURL(tiffBlob),
+            width: dims.width, height: dims.height,
+            originalWidth: img.naturalWidth, originalHeight: img.naturalHeight,
+            status: 'done', duration: performance.now() - startTime
+          };
+        }
+
+        return canvasToBlob(canvas, mimeType, quality).then(function(blob) {
+          return {
+            id: id, originalFile: file, originalSize: file.size, originalFormat: originalFormat,
+            convertedBlob: blob, convertedSize: blob.size, convertedFormat: options.outputFormat,
+            convertedUrl: URL.createObjectURL(blob),
+            width: dims.width, height: dims.height,
+            originalWidth: img.naturalWidth, originalHeight: img.naturalHeight,
+            status: 'done', duration: performance.now() - startTime
+          };
+        });
+      }).catch(function(err) {
+        return {
+          id: id, originalFile: file, originalSize: file.size, originalFormat: originalFormat,
+          convertedBlob: null, convertedSize: 0, convertedFormat: options.outputFormat,
+          convertedUrl: null, width: 0, height: 0, originalWidth: 0, originalHeight: 0,
+          status: 'error', error: err.message || 'Unknown conversion error',
+          duration: performance.now() - startTime
+        };
+      });
+    }
+
+    /* ============================================================
+       BUILD OPTIONS
+       ============================================================ */
+    function buildOptions() {
+      var width, height;
+      if (state.resizePreset !== 'Original') {
+        var preset = null;
+        for (var i = 0; i < RESIZE_PRESETS.length; i++) {
+          if (RESIZE_PRESETS[i].name === state.resizePreset) { preset = RESIZE_PRESETS[i]; break; }
+        }
+        if (preset && preset.width) { width = preset.width; height = preset.height; }
+      } else {
+        if (state.customWidth) width = Number(state.customWidth);
+        if (state.customHeight) height = Number(state.customHeight);
+      }
+      return {
+        outputFormat: state.targetFormat,
+        quality: state.quality,
+        width: width,
+        height: height,
+        maintainAspectRatio: state.maintainAspectRatio,
+        removeMetadata: state.removeMetadata,
+        bgColor: state.bgColor === 'auto' ? null : state.bgColor,
+        progressive: state.progressive,
+        lossless: state.lossless
+      };
+    }
+
+    /* ============================================================
+       FILE MANAGEMENT
+       ============================================================ */
+    function processFileEntry(file) {
+      var id = crypto.randomUUID();
+      var originalFormat = detectFormatFromFileName(file.name);
+      return Promise.all([
+        createThumbnail(file, 128).catch(function() { return null; }),
+        getImageDimensions(file).catch(function() { return null; })
+      ]).then(function(results) {
+        return {
+          id: id, file: file, name: file.name,
+          thumbnail: results[0], dimensions: results[1],
+          originalSize: file.size, originalFormat: originalFormat,
+          result: null, status: 'pending', error: null
+        };
+      });
+    }
+
+    function handleFiles(incoming) {
+      var MAX_SIZE = 100 * 1024 * 1024;
+      var valid = [];
+      for (var i = 0; i < incoming.length; i++) {
+        var f = incoming[i];
+        if (!f.type.startsWith('image/')) { showToast('"' + f.name + '" is not an image file — skipped', 'error'); continue; }
+        if (f.size > MAX_SIZE) { showToast('"' + f.name + '" exceeds 100 MB — skipped', 'error'); continue; }
+        valid.push(f);
+      }
+      if (valid.length === 0) return;
+      var promises = valid.map(processFileEntry);
+      Promise.all(promises).then(function(items) {
+        state.files = state.files.concat(items);
+        renderFileList();
+        updateView();
+        showToast('Added ' + valid.length + ' image' + (valid.length > 1 ? 's' : ''));
+      });
+    }
+
+    function removeFile(id) {
+      for (var i = 0; i < state.files.length; i++) {
+        if (state.files[i].id === id) {
+          if (state.files[i].result && state.files[i].result.convertedUrl) URL.revokeObjectURL(state.files[i].result.convertedUrl);
+          state.files.splice(i, 1);
+          break;
+        }
+      }
+      renderFileList();
+      updateView();
+    }
+
+    function clearAllFiles() {
+      for (var i = 0; i < state.files.length; i++) {
+        if (state.files[i].result && state.files[i].result.convertedUrl) URL.revokeObjectURL(state.files[i].result.convertedUrl);
+      }
+      state.files = [];
+      renderFileList();
+      updateView();
+      showToast('All files cleared', 'info');
+    }
+
+    /* ============================================================
+       RENDERING
+       ============================================================ */
+    function updateView() {
+      var hasFiles = state.files.length > 0;
+      uploadState.classList.toggle('hidden', hasFiles);
+      workspaceState.classList.toggle('hidden', !hasFiles);
+      fileCountTitle.textContent = 'Your Files (' + state.files.length + ')';
+
+      var doneCount = 0;
+      for (var i = 0; i < state.files.length; i++) {
+        if (state.files[i].status === 'done') doneCount++;
+      }
+      downloadAllBtn.classList.toggle('hidden', doneCount === 0);
+    }
+
+    function renderFileList() {
+      fileList.innerHTML = '';
+      for (var i = 0; i < state.files.length; i++) {
+        fileList.appendChild(createFileCard(state.files[i]));
+      }
+      updateView();
+    }
+
+    function createFileCard(item) {
+      var card = document.createElement('div');
+      card.className = 'file-card' + (item.status === 'error' ? ' error' : '');
+      card.id = 'file-' + item.id;
+
+      var fmt = getFormatById(item.originalFormat);
+      var fmtColor = fmt ? fmt.color : 'var(--tx-accent1)';
+
+      var thumbHtml = item.thumbnail
+        ? '<img src="' + item.thumbnail + '" alt="" />'
+        : '<span class="file-thumb-placeholder">📄</span>';
+
+      var dimHtml = item.dimensions
+        ? '<span class="file-meta-text">' + item.dimensions.width + ' × ' + item.dimensions.height + '</span>'
+        : '';
+
+      var statusHtml = '';
+      if (item.status === 'pending') {
+        statusHtml = '<div class="file-status"><span class="status-waiting">Waiting...</span></div>';
+      } else if (item.status === 'converting') {
+        statusHtml = '<div class="file-status"><span class="status-converting"><span class="spinner"></span> Converting...</span></div>';
+      } else if (item.status === 'done' && item.result) {
+        var ratio = getCompressionRatio(item.result.originalSize, item.result.convertedSize);
+        var ratioClass = ratio > 0 ? 'good' : 'bad';
+        var ratioText = ratio > 0 ? '-' + ratio + '%' : '+' + Math.abs(ratio) + '%';
+        var barWidth = Math.min((item.result.convertedSize / item.result.originalSize) * 100, 100);
+        var barColor = item.result.convertedSize < item.result.originalSize ? '#10b981' : '#ef4444';
+
+        statusHtml = '<div class="file-status"><div class="status-done">' +
+          '<span class="status-done-size">✓ ' + formatFileSize(item.result.convertedSize) + '</span>' +
+          '<span class="compression-badge ' + ratioClass + '">' + ratioText + '</span>' +
+          '<span class="format-output-badge">' + state.targetFormat.toUpperCase() + '</span>' +
+          '<span class="status-duration">' + (item.result.duration / 1000).toFixed(1) + 's</span>' +
+          '<div class="compression-bar"><div class="compression-bar-fill" style="width:' + barWidth + '%;background:' + barColor + '"></div></div>' +
+          '</div></div>';
+      } else if (item.status === 'error') {
+        statusHtml = '<div class="file-status"><span class="status-error">⚠ ' + (item.error || 'Conversion failed') + '</span></div>';
+      }
+
+      var downloadBtnHtml = (item.status === 'done' && item.result && item.result.convertedBlob)
+        ? '<button class="file-action-btn download" data-download="' + item.id + '" title="Download"><svg class="icon-svg" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>'
+        : '';
+
+      card.innerHTML =
+        '<div class="file-thumb">' + thumbHtml + '</div>' +
+        '<div class="file-info">' +
+          '<p class="file-name">' + item.name + '</p>' +
+          '<div class="file-meta">' +
+            '<span class="file-format-badge" style="background:' + fmtColor + '20;color:' + fmtColor + '">' + (item.originalFormat || 'unknown').toUpperCase() + '</span>' +
+            dimHtml +
+            '<span class="file-meta-text">' + formatFileSize(item.originalSize) + '</span>' +
+          '</div>' +
+          statusHtml +
+        '</div>' +
+        '<div class="file-actions">' +
+          downloadBtnHtml +
+          '<button class="file-action-btn remove" data-remove="' + item.id + '" title="Remove"><svg class="icon-svg" style="width:16px;height:16px" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>' +
+        '</div>';
+
+      return card;
+    }
+
+    function updateFileCard(id) {
+      for (var i = 0; i < state.files.length; i++) {
+        if (state.files[i].id === id) {
+          var existing = $('file-' + id);
+          if (existing) {
+            var newCard = createFileCard(state.files[i]);
+            existing.replaceWith(newCard);
+          }
+          break;
+        }
+      }
+    }
+
+    /* ============================================================
+       CONVERSION HANDLERS
+       ============================================================ */
+    function handleConvertAll() {
+      if (state.files.length === 0 || state.isConverting) return;
+      state.isConverting = true;
+      convertBtn.disabled = true;
+      convertBtn.innerHTML = '<span class="spinner" style="width:16px;height:16px;border-width:2px"></span> Converting...';
+
+      var opts = buildOptions();
+      var successCount = 0, errorCount = 0;
+      var chain = Promise.resolve();
+
+      for (var i = 0; i < state.files.length; i++) {
+        (function(index) {
+          chain = chain.then(function() {
+            state.files[index].status = 'converting';
+            state.files[index].result = null;
+            state.files[index].error = null;
+            updateFileCard(state.files[index].id);
+            return convertImage(state.files[index].file, opts);
+          }).then(function(result) {
+            state.files[index].result = result;
+            state.files[index].status = result.status;
+            state.files[index].error = result.error;
+            if (result.status === 'done') successCount++; else errorCount++;
+            updateFileCard(state.files[index].id);
+          }).catch(function(err) {
+            state.files[index].status = 'error';
+            state.files[index].error = err.message || 'Conversion failed';
+            errorCount++;
+            updateFileCard(state.files[index].id);
+          });
+        })(i);
+      }
+
+      chain.then(function() {
+        state.isConverting = false;
+        convertBtn.disabled = false;
+        convertBtn.innerHTML = '<svg class="icon-svg" style="width:16px;height:16px" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Convert All Files';
+        updateView();
+        if (errorCount === 0) {
+          showToast('All ' + successCount + ' file' + (successCount > 1 ? 's' : '') + ' converted successfully');
+        } else {
+          showToast(successCount + ' succeeded, ' + errorCount + ' failed', 'warning');
+        }
+      });
+    }
+
+    function handleDownload(item) {
+      if (!item.result || !item.result.convertedBlob) return;
+      var ext = getOutputExtension(state.targetFormat);
+      var baseName = item.name.replace(/\.[^.]+$/, '');
+      var fileName = state.outputPattern
+        ? state.outputPattern.replace('{name}', baseName).replace('{format}', state.targetFormat)
+        : baseName + ext;
+      downloadBlob(item.result.convertedBlob, fileName);
+      showToast('Downloading ' + fileName);
+    }
+
+    function handleDownloadAll() {
+      var doneFiles = [];
+      for (var i = 0; i < state.files.length; i++) {
+        if (state.files[i].status === 'done' && state.files[i].result && state.files[i].result.convertedBlob) {
+          doneFiles.push(state.files[i]);
+        }
+      }
+      if (doneFiles.length === 0) return;
+      for (var j = 0; j < doneFiles.length; j++) {
+        (function(item, delay) {
+          setTimeout(function() { handleDownload(item); }, delay);
+        })(doneFiles[j], j * 200);
+      }
+      showToast('Downloading ' + doneFiles.length + ' file' + (doneFiles.length > 1 ? 's' : ''));
+    }
+
+    /* ============================================================
+       UI SETUP — FORMAT GRID
+       ============================================================ */
+    function renderFormatGrid() {
+      formatGrid.innerHTML = '';
+      for (var i = 0; i < OUTPUT_FORMATS.length; i++) {
+        (function(fmt) {
+          var btn = document.createElement('button');
+          btn.className = 'format-btn' + (state.targetFormat === fmt.id ? ' active' : '');
+          btn.innerHTML = '<span class="format-btn-icon">' + fmt.icon + '</span><span class="format-btn-name">' + fmt.name + '</span><span class="format-btn-ext">' + fmt.ext + '</span>';
+          btn.addEventListener('click', function() {
+            state.targetFormat = fmt.id;
+            renderFormatGrid();
+            updateQualityPanel();
+          });
+          formatGrid.appendChild(btn);
+        })(OUTPUT_FORMATS[i]);
+      }
+    }
+
+    function updateQualityPanel() {
+      var fmt = getFormatById(state.targetFormat);
+      var supportsQ = fmt && fmt.supportsQuality;
+      var supportsL = fmt && fmt.supportsLossless;
+      var isJpeg = state.targetFormat === 'jpg';
+
+      qualityPanel.classList.toggle('hidden', !supportsQ);
+      losslessToggle.classList.toggle('hidden', !supportsL);
+      progressiveToggle.classList.toggle('hidden', !isJpeg);
+    }
+
+    /* ============================================================
+       UI SETUP — QUALITY PRESETS
+       ============================================================ */
+    function renderQualityPresets() {
+      qualityPresetsEl.innerHTML = '';
+      for (var i = 0; i < QUALITY_PRESETS.length; i++) {
+        (function(preset) {
+          var btn = document.createElement('button');
+          btn.className = 'quality-preset-btn' + (!state.lossless && state.quality === preset.value ? ' active' : '');
+          btn.textContent = preset.name + ' (' + preset.value + ')';
+          btn.title = preset.description || '';
+          btn.addEventListener('click', function() {
+            state.lossless = false;
+            state.quality = preset.value;
+            qualitySlider.value = preset.value;
+            qualitySlider.disabled = false;
+            qualityValue.textContent = preset.value;
+            losslessSwitch.classList.remove('on');
+            losslessSwitch.querySelector('.toggle-switch-knob').style.transform = 'translateX(0)';
+            renderQualityPresets();
+          });
+          qualityPresetsEl.appendChild(btn);
+        })(QUALITY_PRESETS[i]);
+      }
+    }
+
+    /* ============================================================
+       UI SETUP — RESIZE SELECT
+       ============================================================ */
+    function renderResizeSelect() {
+      resizeSelect.innerHTML = '';
+      for (var i = 0; i < RESIZE_PRESETS.length; i++) {
+        var opt = document.createElement('option');
+        opt.value = RESIZE_PRESETS[i].name;
+        opt.textContent = RESIZE_PRESETS[i].name;
+        resizeSelect.appendChild(opt);
+      }
+    }
+
+    /* ============================================================
+       UI SETUP — FEATURES
+       ============================================================ */
+    function renderFeatures() {
+      featuresGrid.innerHTML = '';
+      for (var i = 0; i < FEATURES.length; i++) {
+        var f = FEATURES[i];
+        var card = document.createElement('div');
+        card.className = 'feature-card';
+        card.innerHTML = '<span class="feature-icon">' + f.icon + '</span><h3 class="feature-title">' + f.title + '</h3><p class="feature-desc">' + f.desc + '</p>';
+        featuresGrid.appendChild(card);
+      }
+    }
+
+    /* ============================================================
+       UI SETUP — FAQ
+       ============================================================ */
+    function renderFaq() {
+      faqContainer.innerHTML = '';
+      for (var i = 0; i < FAQ_ITEMS.length; i++) {
+        (function(item, index) {
+          var faqItem = document.createElement('div');
+          faqItem.className = 'faq-item';
+
+          var question = document.createElement('button');
+          question.className = 'faq-question';
+          question.innerHTML = '<span>' + item.q + '</span><span class="faq-icon">+</span>';
+
+          var answer = document.createElement('div');
+          answer.className = 'faq-answer';
+          answer.innerHTML = '<div class="faq-answer-text">' + item.a + '</div>';
+
+          question.addEventListener('click', function() {
+            var isOpen = state.openFaq === index;
+            // Close all
+            state.openFaq = isOpen ? null : index;
+            var allQuestions = faqContainer.querySelectorAll('.faq-question');
+            var allAnswers = faqContainer.querySelectorAll('.faq-answer');
+            for (var j = 0; j < allQuestions.length; j++) {
+              allQuestions[j].classList.remove('open');
+              allAnswers[j].classList.remove('open');
+            }
+            if (!isOpen) {
+              question.classList.add('open');
+              answer.classList.add('open');
+            }
+          });
+
+          faqItem.appendChild(question);
+          faqItem.appendChild(answer);
+          faqContainer.appendChild(faqItem);
+        })(FAQ_ITEMS[i], i);
+      }
+    }
+
+    /* ============================================================
+       EVENT LISTENERS
+       ============================================================ */
+
+    // File input
+    fileInput.addEventListener('change', function(e) {
+      if (e.target.files && e.target.files.length > 0) {
+        handleFiles(Array.from(e.target.files));
+        e.target.value = '';
+      }
+    });
+    fileInputWorkspace.addEventListener('change', function(e) {
+      if (e.target.files && e.target.files.length > 0) {
+        handleFiles(Array.from(e.target.files));
+        e.target.value = '';
+      }
+    });
+
+    // Upload zone click
+    uploadZone.addEventListener('click', function() { fileInput.click(); });
+
+    // Add more
+    addMoreBtn.addEventListener('click', function() { fileInputWorkspace.click(); });
+
+    // Clear all
+    clearAllBtn.addEventListener('click', clearAllFiles);
+
+    // Drag and drop on upload zone
+    uploadZone.addEventListener('dragover', function(e) { e.preventDefault(); e.stopPropagation(); uploadZone.classList.add('drag-over'); });
+    uploadZone.addEventListener('dragleave', function(e) { e.preventDefault(); e.stopPropagation(); uploadZone.classList.remove('drag-over'); });
+    uploadZone.addEventListener('drop', function(e) {
+      e.preventDefault(); e.stopPropagation(); uploadZone.classList.remove('drag-over');
+      if (e.dataTransfer.files.length > 0) handleFiles(Array.from(e.dataTransfer.files));
+    });
+
+    // Drag and drop on workspace (entire document)
+    document.addEventListener('dragover', function(e) { e.preventDefault(); });
+    document.addEventListener('drop', function(e) {
+      e.preventDefault();
+      if (state.files.length > 0 && e.dataTransfer.files.length > 0) {
+        handleFiles(Array.from(e.dataTransfer.files));
+      }
+    });
+
+    // Clipboard paste
+    document.addEventListener('paste', function(e) {
+      var items = e.clipboardData && e.clipboardData.items;
+      if (!items) return;
+      var imageFiles = [];
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].type.startsWith('image/')) {
+          var file = items[i].getAsFile();
+          if (file) imageFiles.push(file);
+        }
+      }
+      if (imageFiles.length > 0) {
+        e.preventDefault();
+        handleFiles(imageFiles);
+        showToast('Pasted ' + imageFiles.length + ' image' + (imageFiles.length > 1 ? 's' : '') + ' from clipboard');
+      }
+    });
+
+    // Convert button
+    convertBtn.addEventListener('click', handleConvertAll);
+    downloadAllBtn.addEventListener('click', handleDownloadAll);
+
+    // Quality slider
+    qualitySlider.addEventListener('input', function() {
+      state.quality = Number(qualitySlider.value);
+      state.lossless = false;
+      qualityValue.textContent = qualitySlider.value;
+      losslessSwitch.classList.remove('on');
+      losslessSwitch.querySelector('.toggle-switch-knob').style.transform = 'translateX(0)';
+      renderQualityPresets();
+    });
+
+    // Lossless toggle
+    losslessSwitch.addEventListener('click', function() {
+      state.lossless = !state.lossless;
+      losslessSwitch.classList.toggle('on', state.lossless);
+      losslessSwitch.querySelector('.toggle-switch-knob').style.transform = state.lossless ? 'translateX(16px)' : 'translateX(0)';
+      qualitySlider.disabled = state.lossless;
+      qualityValue.textContent = state.lossless ? '∞' : state.quality;
+      renderQualityPresets();
+    });
+
+    // Progressive toggle
+    progressiveSwitch.addEventListener('click', function() {
+      state.progressive = !state.progressive;
+      progressiveSwitch.classList.toggle('on', state.progressive);
+      progressiveSwitch.querySelector('.toggle-switch-knob').style.transform = state.progressive ? 'translateX(16px)' : 'translateX(0)';
+    });
+
+    // Resize select
+    resizeSelect.addEventListener('change', function() {
+      state.resizePreset = resizeSelect.value;
+      if (state.resizePreset !== 'Original') {
+        state.customWidth = '';
+        state.customHeight = '';
+        customWidthInput.value = '';
+        customHeightInput.value = '';
+      }
+    });
+
+    // Custom dimensions
+    customWidthInput.addEventListener('input', function() {
+      state.resizePreset = 'Original';
+      resizeSelect.value = 'Original';
+      state.customWidth = customWidthInput.value;
+    });
+    customHeightInput.addEventListener('input', function() {
+      state.resizePreset = 'Original';
+      resizeSelect.value = 'Original';
+      state.customHeight = customHeightInput.value;
+    });
+
+    // Aspect ratio lock
+    lockBtn.addEventListener('click', function() {
+      state.maintainAspectRatio = !state.maintainAspectRatio;
+      lockBtn.classList.toggle('locked', state.maintainAspectRatio);
+      lockIcon.style.display = state.maintainAspectRatio ? '' : 'none';
+      unlockIcon.style.display = state.maintainAspectRatio ? 'none' : '';
+      lockBtn.title = state.maintainAspectRatio ? 'Aspect ratio locked' : 'Aspect ratio unlocked';
+    });
+
+    // Reset dimensions
+    resetDimsBtn.addEventListener('click', function() {
+      state.customWidth = '';
+      state.customHeight = '';
+      state.resizePreset = 'Original';
+      customWidthInput.value = '';
+      customHeightInput.value = '';
+      resizeSelect.value = 'Original';
+    });
+
+    // Background color
+    bgAutoBtn.addEventListener('click', function() {
+      state.bgColor = 'auto';
+      bgAutoBtn.classList.add('active');
+      bgColorHex.classList.add('hidden');
+    });
+    bgColorPicker.addEventListener('input', function() {
+      state.bgColor = bgColorPicker.value;
+      bgAutoBtn.classList.remove('active');
+      bgColorHex.textContent = bgColorPicker.value;
+      bgColorHex.classList.remove('hidden');
+    });
+
+    // Remove metadata toggle
+    removeMetaSwitch.addEventListener('click', function() {
+      state.removeMetadata = !state.removeMetadata;
+      removeMetaSwitch.classList.toggle('on', state.removeMetadata);
+      removeMetaSwitch.querySelector('.toggle-switch-knob').style.transform = state.removeMetadata ? 'translateX(16px)' : 'translateX(0)';
+    });
+
+    // Output pattern
+    outputPatternInput.addEventListener('input', function() {
+      state.outputPattern = outputPatternInput.value;
+    });
+
+    // File list delegation for download/remove buttons
+    fileList.addEventListener('click', function(e) {
+      var downloadBtn = e.target.closest('[data-download]');
+      if (downloadBtn) {
+        var id = downloadBtn.getAttribute('data-download');
+        for (var i = 0; i < state.files.length; i++) {
+          if (state.files[i].id === id) { handleDownload(state.files[i]); break; }
+        }
+        return;
+      }
+      var removeBtn = e.target.closest('[data-remove]');
+      if (removeBtn) {
+        var rid = removeBtn.getAttribute('data-remove');
+        removeFile(rid);
+      }
+    });
+
+    /* ============================================================
+       THEME TOGGLE
+       ============================================================ */
+    function setTheme(dark) {
+      state.isDark = dark;
+      document.documentElement.classList.toggle('light', !dark);
+      themeIconSun.style.display = dark ? 'none' : '';
+      themeIconMoon.style.display = dark ? '' : 'none';
+      themeBtnText.textContent = dark ? 'Light' : 'Dark';
+      try { localStorage.setItem('tool-xeno-theme', dark ? 'dark' : 'light'); } catch(e) {}
+    }
+
+    themeToggle.addEventListener('click', function() { setTheme(!state.isDark); });
+
+    // Init theme from localStorage
+    try {
+      var savedTheme = localStorage.getItem('tool-xeno-theme');
+      if (savedTheme === 'light') setTheme(false); else setTheme(true);
+    } catch(e) { setTheme(true); }
+
+    /* ============================================================
+       MOBILE NAV
+       ============================================================ */
+    hamburgerBtn.addEventListener('click', function() { mobileNav.classList.add('active'); });
+    mobileNavClose.addEventListener('click', function() { mobileNav.classList.remove('active'); });
+    var closeNavLinks = document.querySelectorAll('[data-close-nav]');
+    for (var c = 0; c < closeNavLinks.length; c++) {
+      closeNavLinks[c].addEventListener('click', function() { mobileNav.classList.remove('active'); });
+    }
+
+    /* ============================================================
+       FOOTER YEAR
+       ============================================================ */
+    $('footerYear').textContent = new Date().getFullYear();
+
+    /* ============================================================
+       INIT
+       ============================================================ */
+    renderFormatGrid();
+    updateQualityPanel();
+    renderQualityPresets();
+    renderResizeSelect();
+    renderFeatures();
+    renderFaq();
+    updateView();
+
+  })();
+  </script>
+</body>
+</html>
