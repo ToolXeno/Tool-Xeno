@@ -1,1200 +1,945 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US" dir="ltr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#007cf0" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Text Sorter – Tool Xeno" />
+  <meta name="application-name" content="Tool Xeno" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="rating" content="general" />
+  <meta name="revisit-after" content="7 days" />
 
-  gtag('config', 'G-Y4JDC5DCBV');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Text Sorter - Tool Xeno</title>
-    <meta name="description" content="Professional text sorter with advanced features - sort alphabetically, numerically, by length, reverse order, remove duplicates, and more.">
+  <!-- SEO -->
+  <title>Text Sorter – Free Online Line & Word Sorter Tool | Tool Xeno</title>
+  <meta name="description" content="Free professional text sorter online. Sort lines alphabetically (A-Z, Z-A), numerically, by length, naturally, or randomly. Advanced options: remove duplicates, trim whitespace, remove blank lines, add line numbers, case-insensitive sort. 100% private, no signup." />
+  <meta name="keywords" content="text sorter, sort lines online, alphabetical sorter, word sorter, line sorter, sort text A-Z, sort text Z-A, numerical sort, natural sort, random sort, remove duplicates lines, text organizer, free text tool, sort list online" />
+  <meta name="author" content="Tool Xeno" />
+  <link rel="canonical" href="https://toolxeno.com/text-sorter.html" />
+  <link rel="alternate" hreflang="en" href="https://toolxeno.com/text-sorter.html" />
 
-    <!-- ✅ Tool Xeno Favicons -->
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="manifest" href="/site.webmanifest" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolxeno.com/text-sorter.html" />
+  <meta property="og:title" content="Text Sorter – Free Online Line & Word Sorter | Tool Xeno" />
+  <meta property="og:description" content="Sort text lines alphabetically, numerically, by length, naturally, or randomly. Remove duplicates, trim whitespace, add line numbers. Free, private, in-browser." />
+  <meta property="og:site_name" content="Tool Xeno" />
+  <meta property="og:locale" content="en_US" />
 
-    <meta name="google-adsense-account" content="ca-pub-2713998296337545">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Text Sorter – Tool Xeno" />
+  <meta name="twitter:description" content="Sort text lines alphabetically, numerically, by length, naturally, or randomly. Free, private, in-browser." />
 
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            
-            --dark-bg: #0a0a0a;
-            --dark-surface: #1a1a1a;
-            --dark-surface-elevated: #252525;
-            --dark-text: #ffffff;
-            --dark-text-secondary: #a0a0a0;
-            --dark-border: #333333;
-            
-            --light-bg: #f8fafc;
-            --light-surface: #ffffff;
-            --light-surface-elevated: #f1f5f9;
-            --light-text: #1e293b;
-            --light-text-secondary: #64748b;
-            --light-border: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            line-height: 1.6;
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-            min-height: 100vh;
-        }
-        
-        body.light-theme { 
-            background-color: var(--light-bg); 
-            color: var(--light-text); 
-        }
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Text Sorter",
+        "url": "https://toolxeno.com/text-sorter.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Professional online text sorter with alphabetical, numerical, natural, length-based, and random sorting. Supports removing duplicates, trimming whitespace, adding line numbers, and more.",
+        "featureList": ["Alphabetical sort A-Z and Z-A", "Numerical sort ascending and descending", "Natural sort for filenames and version numbers", "Sort by line length", "Sort by word count per line", "Fisher-Yates shuffle", "Remove duplicate lines", "Remove empty lines", "Trim whitespace", "Case-insensitive sorting", "Add line numbers", "Add custom prefix and suffix", "Download sorted output as text file"]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolxeno.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Text Tools", "item": "https://toolxeno.com/#tools" },
+          { "@type": "ListItem", "position": 3, "name": "Text Sorter", "item": "https://toolxeno.com/text-sorter.html" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I sort text alphabetically?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Paste or type your text into the input area, select 'A to Z' from the sort method dropdown, and click the 'Sort Text' button. Your lines will be sorted in ascending alphabetical order instantly." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is natural sorting?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Natural sorting orders text the way humans read it. For example, 'file9' comes before 'file10', and 'v1.2' comes before 'v1.10'. This is the same algorithm used by Windows Explorer and macOS Finder for filenames." }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I remove duplicate lines while sorting?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Check the 'Remove Duplicates' option in the preprocessing panel before clicking Sort. This removes any duplicate lines from your text, keeping only the first occurrence of each unique line." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my data safe when sorting text?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. All processing happens entirely in your browser using JavaScript. Your text is never sent to any server, stored, or shared. When you close or refresh the page, your data is gone permanently." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I sort numbers mixed with text?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use the 'Natural Sort' option for mixed text and numbers (e.g., 'Item 2' before 'Item 10'), or the 'Numeric Sort' option for lists that start with numbers. The tool intelligently handles both cases." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I add line numbers to the sorted output?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Check the 'Add Line Numbers' option in the post-processing panel before sorting. Each line in the output will be prefixed with its sequential number (e.g., '1. First line', '2. Second line')." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the Fisher-Yates shuffle?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The Fisher-Yates shuffle is a randomization algorithm that produces a truly random permutation of a list. Each click of the 'Shuffle' button produces a different, unbiased random order of your lines." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.05;
-            background: radial-gradient(circle, #667eea 0%, transparent 70%);
-        }
-        
-        body.light-theme .particle { 
-            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(100vh) rotate(0deg); } 
-            100% { transform: translateY(-100px) rotate(360deg); } 
-        }
-        
-        .header-glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.35s ease, border-color 0.35s ease;
-        }
-        
-        body.light-theme .header-glass { 
-            background: rgba(255, 255, 255, 0.9); 
-            border-bottom-color: rgba(0, 0, 0, 0.1); 
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--dark-surface);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.light-theme .theme-toggle { 
-            background: var(--light-surface-elevated); 
-            border-color: var(--light-border); 
-        }
-        
-        body.light-theme .theme-toggle::after { 
-            transform: translateX(28px); 
-            background: var(--secondary-gradient); 
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
-        
-        body.light-theme .glass-card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-color: rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
-        }
-        
-        .btn-gradient {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .btn-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .btn-gradient:hover::before { left: 100%; }
-        .btn-gradient:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
-        }
-        .btn-gradient:active { transform: translateY(0); }
-        
-        .btn-secondary {
-            background: var(--accent-gradient);
-            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
-        }
-        
-        .btn-secondary:hover {
-            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
-        }
-        
-        .btn-success {
-            background: var(--success-gradient);
-            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
-        }
-        
-        .btn-success:hover {
-            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
-        }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
 
-        .btn-danger {
-            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
-            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
-        }
-        
-        .btn-danger:hover {
-            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
-        }
-        
-        .nav-link {
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-        }
-        
-        .nav-link:hover { 
-            background: rgba(255, 255, 255, 0.1); 
-            color: white; 
-        }
-        
-        body.light-theme .nav-link { 
-            color: rgba(0, 0, 0, 0.7); 
-        }
-        
-        body.light-theme .nav-link:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            color: black; 
-        }
-        
-        .textarea-custom {
-            width: 100%;
-            min-height: 300px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            color: var(--dark-text);
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            line-height: 1.8;
-            resize: vertical;
-            transition: all 0.3s ease;
-        }
-        
-        .textarea-custom:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-        
-        body.light-theme .textarea-custom {
-            background: rgba(0, 0, 0, 0.02);
-            border-color: rgba(0, 0, 0, 0.1);
-            color: var(--light-text);
-        }
-        
-        body.light-theme .textarea-custom:focus {
-            border-color: #667eea;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
-        }
-        
-        body.light-theme .stat-card {
-            background: rgba(0, 0, 0, 0.03);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            font-size: 0.85rem;
-            opacity: 0.7;
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .toggle-switch {
-            position: relative;
-            width: 50px;
-            height: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .toggle-switch.active {
-            background: var(--primary-gradient);
-            border-color: transparent;
-        }
-        
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 19px;
-            height: 19px;
-            background: white;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .toggle-switch.active::after {
-            transform: translateX(25px);
-        }
-        
-        body.light-theme .toggle-switch {
-            background: rgba(0, 0, 0, 0.1);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .option-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .option-item:last-child {
-            border-bottom: none;
-        }
-        
-        body.light-theme .option-item {
-            border-bottom-color: rgba(0, 0, 0, 0.05);
-        }
-        
-        .sort-mode-selector {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .sort-mode-option {
-            padding: 15px 10px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .sort-mode-option::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-gradient);
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: -1;
-        }
-        
-        .sort-mode-option.active {
-            border-color: #667eea;
-            color: white;
-        }
-        
-        .sort-mode-option.active::before {
-            left: 0;
-            opacity: 1;
-        }
-        
-        .sort-mode-option:hover:not(.active) {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-        }
-        
-        body.light-theme .sort-mode-option {
-            border-color: rgba(0, 0, 0, 0.15);
-        }
-        
-        body.light-theme .sort-mode-option:hover:not(.active) {
-            border-color: #667eea;
-        }
-        
-        .sort-mode-icon {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            display: block;
-        }
-        
-        .sort-mode-label {
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .action-buttons button {
-            flex: 1;
-            min-width: 140px;
-        }
-        
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--primary-gradient);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1000;
-            pointer-events: none;
-        }
-        
-        .toast.show {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        
-        .toast.success {
-            background: var(--success-gradient);
-        }
-        
-        .toast.error {
-            background: var(--secondary-gradient);
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--primary-gradient);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .sort-mode-selector {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .action-buttons button {
-                width: 100%;
-            }
-            
-            .toast {
-                bottom: 20px;
-                right: 20px;
-                left: 20px;
-            }
-        }
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%237928ca'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>" />
 
-        @media (max-width: 480px) {
-            .logo-container {
-                gap: 8px;
-            }
-            
-            .logo-icon {
-                width: 35px;
-                height: 35px;
-                font-size: 1.1rem;
-            }
-            
-            .text-3xl {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg0: #030712; --bg1: #0a0f1e; --bg2: #0f172a; --bg3: #1e293b;
+      --card: rgba(255,255,255,0.04); --card-hover: rgba(255,255,255,0.08);
+      --card-solid: #1e293b; --glass: rgba(255,255,255,0.03);
+      --text: #f1f5f9; --text2: #cbd5e1; --muted: #94a3b8;
+      --line: rgba(255,255,255,0.1); --line-strong: rgba(255,255,255,0.2);
+      --accent1: #007cf0; --accent2: #00dfd8; --accent3: #7928ca; --accent4: #ff0080;
+      --shadow: 0 24px 60px rgba(0,0,0,0.6); --shadow-sm: 0 8px 24px rgba(0,0,0,0.3);
+      --radius: 20px; --radius-sm: 12px; --radius-xs: 8px;
+      --max: 1240px; --ring: 0 0 0 3px rgba(0,124,240,0.4);
+      --grad: linear-gradient(135deg, var(--accent1), var(--accent2));
+      --grad-purple: linear-gradient(135deg, var(--accent3), var(--accent4));
+      --grad-text: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+      --grad-bg: linear-gradient(135deg, rgba(0,124,240,0.08) 0%, rgba(121,40,202,0.08) 100%);
+      --font: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+      --header-h: 72px;
+    }
+
+    [data-theme="light"] {
+      --bg0: #f8fafc; --bg1: #f1f5f9; --bg2: #e2e8f0; --bg3: #cbd5e1;
+      --card: rgba(255,255,255,0.9); --card-hover: rgba(255,255,255,1);
+      --card-solid: #ffffff; --glass: rgba(255,255,255,0.8);
+      --text: #0f172a; --text2: #334155; --muted: #64748b;
+      --line: rgba(0,0,0,0.1); --line-strong: rgba(0,0,0,0.15);
+      --shadow: 0 24px 60px rgba(0,0,0,0.1); --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+    body { font-family: var(--font); background-color: var(--bg0); color: var(--text); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+
+    /* Animated Background */
+    .bg-orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; will-change: transform; }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent1); top: -200px; left: -200px; animation: orbFloat1 20s linear infinite; }
+    .orb-2 { width: 500px; height: 500px; background: var(--accent3); top: 30%; right: -150px; animation: orbFloat2 25s linear infinite; }
+    .orb-3 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: 30%; animation: orbFloat3 18s linear infinite; }
+    .orb-4 { width: 300px; height: 300px; background: var(--accent4); top: 60%; left: 10%; animation: orbFloat4 22s linear infinite; }
+    @keyframes orbFloat1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(60px,40px) scale(1.1);} 66%{transform:translate(-40px,60px) scale(0.95);} }
+    @keyframes orbFloat2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-80px,50px) scale(1.05);} 66%{transform:translate(40px,-60px) scale(1.1);} }
+    @keyframes orbFloat3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(70px,-40px) scale(1.15);} }
+    @keyframes orbFloat4 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,-80px) scale(1.1);} }
+    .bg-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%); }
+    .page-wrapper { position: relative; z-index: 1; }
+
+    /* Header */
+    .header { position: sticky; top: 0; z-index: 1000; height: var(--header-h); display: flex; align-items: center; backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); background: rgba(3,7,18,0.85); border-bottom: 1px solid var(--line); transition: background var(--transition); }
+    [data-theme="light"] .header { background: rgba(248,250,252,0.90); }
+    .header-inner { max-width: var(--max); width: 100%; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; flex-shrink: 0; }
+    .logo-icon { width: 36px; height: 36px; background: var(--grad); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 900; color: #fff; box-shadow: 0 4px 14px rgba(0,124,240,0.4); }
+    .logo-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-primary { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .nav-link { padding: 7px 13px; font-size: 0.875rem; font-weight: 500; color: var(--text2); border-radius: var(--radius-xs); transition: color var(--transition), background var(--transition); }
+    .nav-link:hover { color: var(--text); background: var(--card); }
+    .header-actions { display: flex; align-items: center; gap: 10px; margin-left: 12px; }
+    .btn-theme { padding: 8px 20px; font-size: 0.85rem; font-weight: 600; font-family: var(--font); background: var(--card); backdrop-filter: blur(8px); border-radius: 40px; color: var(--text2); border: 1px solid var(--line); transition: all 0.3s ease; cursor: pointer; }
+    .btn-theme:hover { color: var(--text); border-color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; margin-left: auto; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); display: block; }
+    .mobile-nav { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(3,7,18,0.98); backdrop-filter: blur(24px); flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-link { font-size: 1.4rem; font-weight: 700; color: var(--text2); padding: 12px 32px; border-radius: var(--radius-sm); transition: all var(--transition); }
+    .mobile-nav-link:hover { color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; font-size: 1.5rem; color: var(--muted); padding: 8px; border-radius: 8px; transition: color var(--transition); cursor: pointer; }
+    .mobile-close:hover { color: var(--text); }
+
+    /* Hero */
+    .hero { padding: 60px 24px 40px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(0,124,240,0.15); border: 1px solid rgba(0,124,240,0.3); border-radius: 100px; font-size: 0.78rem; font-weight: 600; color: var(--accent1); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 20px; }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
+    .hero-h1 { font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .hero-h1 .grad-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: clamp(0.9rem, 1.5vw, 1rem); color: var(--text2); max-width: 580px; margin: 0 auto 24px; line-height: 1.6; }
+    .hero-trust { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 16px; }
+    .trust-item { display: flex; align-items: center; gap: 5px; font-size: 0.8rem; font-weight: 500; color: var(--muted); }
+    .trust-dot { color: var(--accent2); }
+
+    /* Tool Section */
+    .tool-section { padding: 20px 24px 60px; max-width: 1400px; margin: 0 auto; }
+    .tool-container { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .tool-wrapper { padding: 24px; }
+
+    /* Sort Controls Bar */
+    .sort-controls { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
+    .controls-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .control-group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .control-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+
+    /* Custom Select */
+    .sort-select { padding: 9px 14px; font-size: 0.82rem; font-weight: 600; font-family: var(--font); background: var(--bg2); border: 1px solid var(--line); border-radius: var(--radius-xs); color: var(--text); cursor: pointer; outline: none; transition: all var(--transition); appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 32px; min-width: 160px; }
+    .sort-select:focus { border-color: var(--accent1); box-shadow: var(--ring); }
+    .sort-select option { background: var(--card-solid); color: var(--text); }
+
+    /* Toggle Switch */
+    .toggle-wrap { display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
+    .toggle-track { width: 36px; height: 20px; background: var(--bg3); border-radius: 10px; position: relative; transition: background 0.25s ease; border: 1px solid var(--line); flex-shrink: 0; }
+    .toggle-track.active { background: rgba(0,124,240,0.3); border-color: var(--accent1); }
+    .toggle-thumb { width: 14px; height: 14px; background: var(--muted); border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: all 0.25s ease; }
+    .toggle-track.active .toggle-thumb { left: 18px; background: var(--accent1); }
+    .toggle-text { font-size: 0.75rem; font-weight: 600; color: var(--text2); white-space: nowrap; }
+
+    /* Prefix/Suffix Input */
+    .ps-input { width: 70px; padding: 7px 10px; font-size: 0.78rem; font-weight: 500; font-family: var(--font); background: var(--bg2); border: 1px solid var(--line); border-radius: var(--radius-xs); color: var(--text); outline: none; transition: all var(--transition); text-align: center; }
+    .ps-input:focus { border-color: var(--accent1); box-shadow: var(--ring); }
+
+    /* Divider */
+    .controls-divider { width: 1px; height: 28px; background: var(--line); margin: 0 4px; flex-shrink: 0; }
+
+    /* Sort Button */
+    .btn-sort { padding: 10px 28px; font-size: 0.9rem; font-weight: 700; background: var(--grad); color: #fff; border-radius: var(--radius-xs); box-shadow: 0 4px 20px rgba(0,124,240,0.35); transition: all var(--transition); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .btn-sort:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,124,240,0.45); }
+    .btn-sort:active { transform: translateY(0); }
+
+    /* Textareas Layout */
+    .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+    .editor-panel { display: flex; flex-direction: column; gap: 10px; }
+    .panel-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+    .panel-title { font-size: 0.85rem; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px; }
+    .panel-title-count { font-size: 0.72rem; font-weight: 700; color: var(--accent1); background: rgba(0,124,240,0.15); padding: 2px 8px; border-radius: 20px; }
+    .panel-actions { display: flex; align-items: center; gap: 5px; }
+
+    .panel-btn { display: inline-flex; align-items: center; gap: 4px; padding: 5px 10px; font-size: 0.72rem; font-weight: 600; color: var(--text2); background: var(--glass); border: 1px solid var(--line); border-radius: 6px; transition: all var(--transition); }
+    .panel-btn:hover { color: var(--text); background: var(--card-hover); border-color: var(--accent1); }
+    .panel-btn.copied { color: var(--accent2); border-color: var(--accent2); background: rgba(0,223,216,0.1); }
+
+    #input-text { width: 100%; min-height: 340px; padding: 16px; font-size: 0.9rem; font-weight: 400; font-family: var(--font); line-height: 1.65; color: var(--text); background: var(--bg1); border: 1px solid var(--line); border-radius: var(--radius-sm); resize: vertical; outline: none; transition: border-color var(--transition), box-shadow var(--transition); }
+    #input-text::placeholder { color: var(--muted); opacity: 0.6; }
+    #input-text:focus { border-color: var(--accent1); box-shadow: var(--ring); }
+
+    #output-text { width: 100%; min-height: 340px; padding: 16px; font-size: 0.9rem; font-weight: 400; font-family: var(--font); line-height: 1.65; color: var(--accent2); background: var(--bg1); border: 1px solid var(--line); border-radius: var(--radius-sm); resize: vertical; outline: none; }
+    #output-text::placeholder { color: var(--muted); opacity: 0.6; }
+
+    /* Stats Bar */
+    .stats-bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 12px 16px; background: var(--glass); border: 1px solid var(--line); border-radius: var(--radius-xs); margin-top: 16px; }
+    .stat-chip { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; font-weight: 600; color: var(--muted); }
+    .stat-chip-val { color: var(--text); font-weight: 700; }
+
+    /* Features & FAQ */
+    .features-section, .faq-section { padding: 60px 24px; }
+    .section-inner { max-width: var(--max); margin: 0 auto; }
+    .section-label { display: inline-block; margin-bottom: 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent1); }
+    .section-title { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 12px; }
+    .section-sub { font-size: 0.95rem; color: var(--text2); max-width: 500px; line-height: 1.6; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
+    @media (max-width: 900px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .features-grid { grid-template-columns: 1fr; } }
+    .feature-card { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 24px; transition: all var(--transition); }
+    .feature-card:hover { transform: translateY(-3px); border-color: rgba(0,124,240,0.3); box-shadow: var(--shadow-sm); }
+    .feature-icon { font-size: 2rem; margin-bottom: 12px; }
+    .feature-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .feature-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+    .faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 700px; margin: 36px auto 0; }
+    .faq-item { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-xs); overflow: hidden; }
+    .faq-q { width: 100%; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 0.9rem; font-weight: 600; color: var(--text); background: none; text-align: left; cursor: pointer; transition: color var(--transition); }
+    .faq-q:hover { color: var(--accent1); }
+    .faq-q-icon { width: 22px; height: 22px; background: var(--glass); border: 1px solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0; transition: all var(--transition); }
+    .faq-item.open .faq-q-icon { transform: rotate(45deg); background: rgba(0,124,240,0.15); border-color: var(--accent1); color: var(--accent1); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-a-inner { padding: 0 20px 16px; font-size: 0.85rem; color: var(--text2); line-height: 1.7; }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .section-divider { height: 1px; background: var(--line); max-width: var(--max); margin: 0 auto; }
+
+    /* Footer */
+    .footer { border-top: 1px solid var(--line); padding: 36px 24px 24px; background: rgba(3,7,18,0.6); }
+    [data-theme="light"] .footer { background: rgba(241,245,249,0.8); }
+    .footer-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .footer-brand-icon { width: 32px; height: 32px; background: var(--grad); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 900; color: #fff; }
+    .footer-brand-name { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-link { font-size: 0.85rem; color: var(--muted); transition: color var(--transition); }
+    .footer-link:hover { color: var(--text); }
+    .footer-back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 600; color: var(--accent1); padding: 8px 16px; border-radius: var(--radius-xs); background: rgba(0,124,240,0.1); border: 1px solid rgba(0,124,240,0.2); transition: all var(--transition); }
+    .footer-back-btn:hover { background: rgba(0,124,240,0.15); }
+    .footer-copy { font-size: 0.78rem; color: var(--muted); width: 100%; text-align: center; padding-top: 20px; border-top: 1px solid var(--line); margin-top: 12px; }
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+      .editor-grid { grid-template-columns: 1fr; }
+      .controls-divider { display: none; }
+    }
+    @media (max-width: 768px) {
+      .nav-primary, .header-actions { display: none; }
+      .hamburger { display: flex; }
+      .tool-wrapper { padding: 16px; }
+      #input-text, #output-text { min-height: 220px; }
+      .controls-row { gap: 8px; }
+      .sort-select { min-width: 140px; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 40px 16px 30px; }
+      .btn-sort { width: 100%; justify-content: center; }
+      .stats-bar { gap: 10px; }
+    }
+  </style>
 </head>
-
 <body>
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span id="toastMessage">Success!</span>
-    </div>
-    
-    <!-- Header -->
-    <header class="header-glass fixed w-full top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <i class="fas fa-sort-alpha-down"></i>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                            Tool Xeno
-                        </div>
-                        <div class="hidden md:block text-sm opacity-70">
-                            Professional Text Sorter
-                        </div>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <nav class="hidden md:flex space-x-2">
-                        <a href="#sort" class="nav-link">Sort</a>
-                        <a href="#options" class="nav-link">Options</a>
-                        <a href="#stats" class="nav-link">Stats</a>
-                    </nav>
-                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
-                </div>
-            </div>
+  <div class="bg-orbs" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><div class="orb orb-4"></div></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="https://toolxeno.com/" class="logo" aria-label="Tool Xeno – Home">
+          <div class="logo-icon" aria-hidden="true">X</div>
+          <span class="logo-text">Tool Xeno</span>
+        </a>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <a href="https://toolxeno.com/" class="nav-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="nav-link">All Tools</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">&#9788;&#65039; Light</button>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
     </header>
-    
-    <!-- Main Content -->
-    <main class="pt-20 pb-10">
-        <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-16 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                Professional Text Sorter
-            </h1>
-            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
-                Advanced text sorting tool with alphabetical, numerical, length-based sorting, 
-                duplicate removal, case handling, and custom separator support.
-            </p>
-        </section>
-        
-        <!-- Main Sorter Interface -->
-        <section id="sort" class="container mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                <!-- Input Panel -->
-                <div class="glass-card p-6 fade-in">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-xl font-semibold flex items-center">
-                            <i class="fas fa-edit mr-3"></i>
-                            Input Text
-                        </h3>
-                        <div class="flex gap-2">
-                            <button onclick="pasteFromClipboard()" class="btn-gradient px-4 py-2 text-sm" title="Paste from clipboard">
-                                <i class="fas fa-clipboard"></i>
-                            </button>
-                            <button onclick="clearInput()" class="btn-danger px-4 py-2 text-sm" title="Clear input">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <textarea 
-                        id="inputText" 
-                        class="textarea-custom" 
-                        placeholder="Enter or paste your text here...&#10;Each line will be treated as a separate item.&#10;&#10;Example:&#10;Banana&#10;Apple&#10;Cherry&#10;10&#10;25&#10;3"
-                        oninput="updateStats()"></textarea>
-                    <div class="mt-3 text-sm opacity-70">
-                        <i class="fas fa-info-circle mr-2"></i>
-                        Enter each item on a new line
-                    </div>
-                </div>
-                
-                <!-- Output Panel -->
-                <div class="glass-card p-6 fade-in">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-xl font-semibold flex items-center">
-                            <i class="fas fa-check-circle mr-3"></i>
-                            Sorted Output
-                        </h3>
-                        <div class="flex gap-2">
-                            <button onclick="copyToClipboard()" class="btn-success px-4 py-2 text-sm" title="Copy to clipboard">
-                                <i class="fas fa-copy"></i>
-                            </button>
-                            <button onclick="downloadAsFile()" class="btn-secondary px-4 py-2 text-sm" title="Download as file">
-                                <i class="fas fa-download"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <textarea 
-                        id="outputText" 
-                        class="textarea-custom" 
-                        placeholder="Sorted text will appear here..."
-                        readonly></textarea>
-                    <div class="mt-3 text-sm opacity-70">
-                        <i class="fas fa-info-circle mr-2"></i>
-                        Results are updated in real-time
-                    </div>
-                </div>
+
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-close" id="mobile-close" aria-label="Close menu">&#10005;</button>
+      <a href="https://toolxeno.com/" class="mobile-nav-link">Home</a>
+      <a href="https://toolxeno.com/#tools" class="mobile-nav-link">All Tools</a>
+      <a href="#features" class="mobile-nav-link">Features</a>
+      <a href="#faq" class="mobile-nav-link">FAQ</a>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-badge"><span class="hero-badge-dot"></span>Free Online Tool</div>
+      <h1 class="hero-h1"><span class="grad-text">Text Sorter</span> &mdash; Organize Any List Instantly</h1>
+      <p class="hero-sub">Paste your text and sort lines alphabetically, numerically, by length, naturally, or randomly. Remove duplicates, trim whitespace, add line numbers, and more &mdash; all processed privately in your browser.</p>
+      <div class="hero-trust">
+        <span class="trust-item"><span class="trust-dot">&#8226;</span> 11 Sort Methods</span>
+        <span class="trust-item"><span class="trust-dot">&#8226;</span> Remove Duplicates</span>
+        <span class="trust-item"><span class="trust-dot">&#8226;</span> Natural Sort</span>
+        <span class="trust-item"><span class="trust-dot">&#8226;</span> 100% Private</span>
+      </div>
+    </section>
+
+    <section class="tool-section" aria-label="Text sorter tool">
+      <div class="tool-container">
+        <div class="tool-wrapper">
+          <!-- Sort Controls -->
+          <div class="sort-controls">
+            <div class="controls-row">
+              <span class="control-label">Sort Method</span>
+              <select class="sort-select" id="sort-method" aria-label="Sort method">
+                <option value="az">A &rarr; Z (Alphabetical)</option>
+                <option value="za">Z &rarr; A (Reverse Alpha)</option>
+                <option value="natural-asc">Natural &#8593; (file9 before file10)</option>
+                <option value="natural-desc">Natural &#8595; (file10 before file9)</option>
+                <option value="num-asc">0 &rarr; 9 (Numeric Asc)</option>
+                <option value="num-desc">9 &rarr; 0 (Numeric Desc)</option>
+                <option value="len-short">Short &rarr; Long (By Length)</option>
+                <option value="len-long">Long &rarr; Short (By Length)</option>
+                <option value="words-few">Fewest Words First</option>
+                <option value="words-most">Most Words First</option>
+                <option value="reverse">Reverse Current Order</option>
+                <option value="shuffle">Shuffle (Random)</option>
+              </select>
+
+              <div class="controls-divider"></div>
+
+              <span class="control-label">Options</span>
+              <div class="toggle-wrap" data-toggle="case-insensitive" role="switch" aria-checked="true" tabindex="0">
+                <div class="toggle-track active"><div class="toggle-thumb"></div></div>
+                <span class="toggle-text">Case Insensitive</span>
+              </div>
+              <div class="toggle-wrap" data-toggle="trim" role="switch" aria-checked="true" tabindex="0">
+                <div class="toggle-track active"><div class="toggle-thumb"></div></div>
+                <span class="toggle-text">Trim Spaces</span>
+              </div>
+              <div class="toggle-wrap" data-toggle="remove-blanks" role="switch" aria-checked="true" tabindex="0">
+                <div class="toggle-track active"><div class="toggle-thumb"></div></div>
+                <span class="toggle-text">Remove Blanks</span>
+              </div>
+              <div class="toggle-wrap" data-toggle="remove-dupes" role="switch" aria-checked="false" tabindex="0">
+                <div class="toggle-track"><div class="toggle-thumb"></div></div>
+                <span class="toggle-text">Remove Duplicates</span>
+              </div>
+              <div class="toggle-wrap" data-toggle="line-numbers" role="switch" aria-checked="false" tabindex="0">
+                <div class="toggle-track"><div class="toggle-thumb"></div></div>
+                <span class="toggle-text">Line Numbers</span>
+              </div>
             </div>
-            
-            <!-- Statistics -->
-            <div id="stats" class="glass-card p-6 mb-8 fade-in">
-                <h3 class="text-xl font-semibold mb-4 flex items-center">
-                    <i class="fas fa-chart-bar mr-3"></i>
-                    Statistics
-                </h3>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value" id="totalLines">0</div>
-                        <div class="stat-label">Total Lines</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="uniqueLines">0</div>
-                        <div class="stat-label">Unique Lines</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="duplicateLines">0</div>
-                        <div class="stat-label">Duplicates</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="totalChars">0</div>
-                        <div class="stat-label">Total Characters</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="emptyLines">0</div>
-                        <div class="stat-label">Empty Lines</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="avgLength">0</div>
-                        <div class="stat-label">Avg Length</div>
-                    </div>
-                </div>
+
+            <div class="controls-row">
+              <span class="control-label">Prefix</span>
+              <input type="text" class="ps-input" id="prefix-input" placeholder="e.g. - " maxlength="20" aria-label="Line prefix" />
+              <span class="control-label">Suffix</span>
+              <input type="text" class="ps-input" id="suffix-input" placeholder="e.g. ;" maxlength="20" aria-label="Line suffix" />
+
+              <div class="controls-divider"></div>
+
+              <button class="btn-sort" id="btn-sort" aria-label="Sort text">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h12M3 18h6"/></svg>
+                Sort Text
+              </button>
             </div>
-            
-            <!-- Sorting Options -->
-            <div id="options" class="glass-card p-6 mb-8 fade-in">
-                <h3 class="text-xl font-semibold mb-6 flex items-center">
-                    <i class="fas fa-sliders-h mr-3"></i>
-                    Sorting Options
-                </h3>
-                
-                <!-- Sort Mode Selection -->
-                <div class="mb-6">
-                    <label class="block text-sm font-medium mb-3">Sort Mode</label>
-                    <div class="sort-mode-selector" id="sortModeSelector">
-                        <div class="sort-mode-option active" data-mode="alphabetical" onclick="selectSortMode('alphabetical')">
-                            <i class="fas fa-sort-alpha-down sort-mode-icon"></i>
-                            <div class="sort-mode-label">Alphabetical</div>
-                        </div>
-                        <div class="sort-mode-option" data-mode="numerical" onclick="selectSortMode('numerical')">
-                            <i class="fas fa-sort-numeric-down sort-mode-icon"></i>
-                            <div class="sort-mode-label">Numerical</div>
-                        </div>
-                        <div class="sort-mode-option" data-mode="length" onclick="selectSortMode('length')">
-                            <i class="fas fa-ruler-horizontal sort-mode-icon"></i>
-                            <div class="sort-mode-label">By Length</div>
-                        </div>
-                        <div class="sort-mode-option" data-mode="reverse" onclick="selectSortMode('reverse')">
-                            <i class="fas fa-exchange-alt sort-mode-icon"></i>
-                            <div class="sort-mode-label">Reverse</div>
-                        </div>
-                        <div class="sort-mode-option" data-mode="random" onclick="selectSortMode('random')">
-                            <i class="fas fa-random sort-mode-icon"></i>
-                            <div class="sort-mode-label">Random</div>
-                        </div>
-                        <div class="sort-mode-option" data-mode="natural" onclick="selectSortMode('natural')">
-                            <i class="fas fa-sort-amount-down sort-mode-icon"></i>
-                            <div class="sort-mode-label">Natural</div>
-                        </div>
-                    </div>
+          </div>
+
+          <!-- Editor Grid -->
+          <div class="editor-grid">
+            <!-- Input -->
+            <div class="editor-panel">
+              <div class="panel-header">
+                <div class="panel-title">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Input
+                  <span class="panel-title-count" id="input-count">0 lines</span>
                 </div>
-                
-                <!-- Advanced Options -->
-                <div class="space-y-4">
-                    <div class="option-item">
-                        <div>
-                            <label class="text-sm font-medium">Ascending Order</label>
-                            <p class="text-xs opacity-70">Sort from A to Z or lowest to highest</p>
-                        </div>
-                        <div class="toggle-switch active" id="ascendingToggle" onclick="toggleOption('ascending')"></div>
-                    </div>
-                    
-                    <div class="option-item">
-                        <div>
-                            <label class="text-sm font-medium">Case Sensitive</label>
-                            <p class="text-xs opacity-70">Treat uppercase and lowercase as different</p>
-                        </div>
-                        <div class="toggle-switch" id="caseSensitiveToggle" onclick="toggleOption('caseSensitive')"></div>
-                    </div>
-                    
-                    <div class="option-item">
-                        <div>
-                            <label class="text-sm font-medium">Remove Duplicates</label>
-                            <p class="text-xs opacity-70">Keep only unique lines</p>
-                        </div>
-                        <div class="toggle-switch" id="removeDuplicatesToggle" onclick="toggleOption('removeDuplicates')"></div>
-                    </div>
-                    
-                    <div class="option-item">
-                        <div>
-                            <label class="text-sm font-medium">Ignore Empty Lines</label>
-                            <p class="text-xs opacity-70">Remove blank lines from output</p>
-                        </div>
-                        <div class="toggle-switch active" id="ignoreEmptyToggle" onclick="toggleOption('ignoreEmpty')"></div>
-                    </div>
-                    
-                    <div class="option-item">
-                        <div>
-                            <label class="text-sm font-medium">Trim Whitespace</label>
-                            <p class="text-xs opacity-70">Remove leading and trailing spaces</p>
-                        </div>
-                        <div class="toggle-switch active" id="trimToggle" onclick="toggleOption('trim')"></div>
-                    </div>
-                    
-                    <div class="option-item">
-                        <div>
-                            <label class="text-sm font-medium">Add Line Numbers</label>
-                            <p class="text-xs opacity-70">Prefix each line with its number</p>
-                        </div>
-                        <div class="toggle-switch" id="addNumbersToggle" onclick="toggleOption('addNumbers')"></div>
-                    </div>
+                <div class="panel-actions">
+                  <button class="panel-btn" id="paste-input" aria-label="Paste from clipboard">&#128203; Paste</button>
+                  <button class="panel-btn" id="sample-input" aria-label="Load sample text">&#128221; Sample</button>
+                  <button class="panel-btn" id="clear-input" aria-label="Clear input">&#128465; Clear</button>
                 </div>
-                
-                <!-- Action Buttons -->
-                <div class="action-buttons mt-8">
-                    <button onclick="sortText()" class="btn-gradient">
-                        <i class="fas fa-sort mr-2"></i>
-                        Sort Now
-                    </button>
-                    <button onclick="undoSort()" class="btn-secondary">
-                        <i class="fas fa-undo mr-2"></i>
-                        Undo
-                    </button>
-                    <button onclick="swapInputOutput()" class="btn-success">
-                        <i class="fas fa-exchange-alt mr-2"></i>
-                        Swap I/O
-                    </button>
-                    <button onclick="resetAll()" class="btn-danger">
-                        <i class="fas fa-sync mr-2"></i>
-                        Reset All
-                    </button>
-                </div>
+              </div>
+              <textarea id="input-text" placeholder="Paste or type your text here, one item per line...&#10;&#10;Example:&#10;banana&#10;Apple&#10;cherry&#10;date&#10;elderberry&#10;fig&#10;grape" spellcheck="false"></textarea>
             </div>
-        </section>
-    </main>
-    
-    <script>
-        // Global state
-        let sortOptions = {
-            mode: 'alphabetical',
-            ascending: true,
-            caseSensitive: false,
-            removeDuplicates: false,
-            ignoreEmpty: true,
-            trim: true,
-            addNumbers: false
-        };
-        
-        let historyStack = [];
-        
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeParticles();
-            loadSavedTheme();
-            updateStats();
-            
-            // Auto-sort on input change
-            document.getElementById('inputText').addEventListener('input', function() {
-                debounce(sortText, 500)();
-            });
+
+            <!-- Output -->
+            <div class="editor-panel">
+              <div class="panel-header">
+                <div class="panel-title">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                  Output
+                  <span class="panel-title-count" id="output-count">0 lines</span>
+                </div>
+                <div class="panel-actions">
+                  <button class="panel-btn" id="copy-output" aria-label="Copy output">&#128196; Copy</button>
+                  <button class="panel-btn" id="download-output" aria-label="Download output">&#128229; Download</button>
+                </div>
+              </div>
+              <textarea id="output-text" readonly placeholder="Sorted output will appear here..."></textarea>
+            </div>
+          </div>
+
+          <!-- Stats Bar -->
+          <div class="stats-bar" id="stats-bar" aria-label="Sorting statistics">
+            <div class="stat-chip">Input: <span class="stat-chip-val" id="stat-input-lines">0</span> lines</div>
+            <div class="stat-chip">Output: <span class="stat-chip-val" id="stat-output-lines">0</span> lines</div>
+            <div class="stat-chip">Duplicates removed: <span class="stat-chip-val" id="stat-dupes">0</span></div>
+            <div class="stat-chip">Blanks removed: <span class="stat-chip-val" id="stat-blanks">0</span></div>
+            <div class="stat-chip">Sort method: <span class="stat-chip-val" id="stat-method">A &rarr; Z</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <div class="section-divider"></div>
+    <section class="features-section" id="features" aria-label="Features">
+      <div class="section-inner">
+        <span class="section-label">Why This Tool</span>
+        <h2 class="section-title">Professional Sorting, Simplified</h2>
+        <p class="section-sub">A feature-rich text sorter built for developers, writers, data analysts, and anyone who works with lists.</p>
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">&#128640;</div>
+            <h3 class="feature-title">11 Sort Methods</h3>
+            <p class="feature-desc">Sort alphabetically (A-Z, Z-A), numerically (0-9, 9-0), naturally (file9 before file10), by line length, by word count, reverse the current order, or shuffle randomly using the Fisher-Yates algorithm for true unbiased randomization.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">&#129504;</div>
+            <h3 class="feature-title">Natural Sort</h3>
+            <p class="feature-desc">Natural sorting orders items the way humans read them. File9 comes before file10, version v1.2 comes before v1.10, and Item 2 comes before Item 20. This uses the same algorithm as Windows Explorer and macOS Finder.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">&#128295;</div>
+            <h3 class="feature-title">Smart Cleanup</h3>
+            <p class="feature-desc">Automatically trim whitespace from each line, remove empty blank lines, and eliminate duplicate entries. These preprocessing options ensure your output is always clean, deduplicated, and properly formatted.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">#</div>
+            <h3 class="feature-title">Line Numbers & Prefix</h3>
+            <p class="feature-desc">Add sequential line numbers (1. 2. 3.) to sorted output, or append custom prefix and suffix text to every line. Perfect for creating numbered lists, bulleted lists, code arrays, or formatted data exports.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">&#128274;</div>
+            <h3 class="feature-title">100% Private</h3>
+            <p class="feature-desc">All text processing happens entirely in your browser using JavaScript. Your data is never sent to any server, never stored, never shared, and never logged. Close the tab and your text is permanently gone.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">&#128241;</div>
+            <h3 class="feature-title">Works Everywhere</h3>
+            <p class="feature-desc">Fully responsive design works on desktop, tablet, and mobile. The side-by-side editor layout adapts to stacked view on smaller screens. Copy, download, or paste with one-tap action buttons.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <div class="section-divider"></div>
+    <section class="faq-section" id="faq" aria-label="Frequently asked questions">
+      <div class="section-inner">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q">How do I sort text alphabetically?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Paste or type your text into the input area, select "A to Z" from the sort method dropdown, and click the "Sort Text" button. Your lines will be sorted in ascending alphabetical order instantly. Toggle "Case Insensitive" on if you want Apple and apple treated as equivalent.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">What is natural sorting and when should I use it?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Natural sorting orders text the way humans naturally read it. For example, "file9" comes before "file10", "v1.2" comes before "v1.10", and "Chapter 2" comes before "Chapter 20". Use it for sorting filenames, version numbers, numbered items, or any list with mixed text and numbers. It uses the same algorithm as Windows Explorer and macOS Finder.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How do I remove duplicate lines while sorting?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Check the "Remove Duplicates" toggle option before clicking Sort. The tool will remove any lines that appear more than once, keeping only the first occurrence of each unique line. The statistics bar at the bottom shows exactly how many duplicates were removed.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Is my data safe when using this text sorter?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes, completely safe. All processing happens entirely in your browser using client-side JavaScript. Your text is never transmitted to any server, never stored in any database, and never shared with any third party. When you close or refresh the page, all your data is permanently gone.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Can I sort numbers mixed with text?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes. Use "Natural Sort" for lists with mixed text and numbers (e.g., "Item 2" before "Item 10"), or "Numeric Sort" for lists where items start with numbers (e.g., "2 apples" before "10 apples"). Both methods handle mixed content intelligently and fall back gracefully for non-numeric items.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">What is the Fisher-Yates shuffle algorithm?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">The Fisher-Yates shuffle is a mathematically proven algorithm that produces a truly unbiased random permutation. Every click of the Shuffle button produces a different random ordering of your lines, with each possible arrangement having an equal probability. It is the gold standard for randomization.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How do I add line numbers or prefixes to the output?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Toggle "Line Numbers" to add sequential numbers (1. 2. 3.) before each line. You can also type custom text into the "Prefix" and "Suffix" input fields to prepend or append any characters to every line in the sorted output, such as bullets, dashes, semicolons, or code formatting.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-icon">X</div>
+          <span class="footer-brand-name">Tool Xeno</span>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://toolxeno.com/" class="footer-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="footer-link">All Tools</a>
+          <a href="https://toolxeno.com/privacy.html" class="footer-link">Privacy</a>
+          <a href="https://toolxeno.com/terms.html" class="footer-link">Terms</a>
+        </nav>
+        <a href="https://toolxeno.com/#tools" class="footer-back-btn">&larr; Back to All Tools</a>
+        <div class="footer-copy">&copy; <span id="footer-year"></span> Tool Xeno. All processing is performed locally in your browser.</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+  /* ============================================================
+     THEME TOGGLE
+  ============================================================ */
+  (function() {
+    var btn = document.getElementById('theme-toggle');
+    var html = document.documentElement;
+    var isDark = true;
+    function apply(dark) {
+      isDark = dark;
+      html.setAttribute('data-theme', dark ? 'dark' : 'light');
+      btn.textContent = dark ? '\u2600\uFE0F Light' : '\uD83C\uDF19 Dark';
+      try { localStorage.setItem('tx-theme', dark ? 'dark' : 'light'); } catch(e) {}
+    }
+    try { var s = localStorage.getItem('tx-theme'); if (s === 'light') apply(false); else apply(true); } catch(e) { apply(true); }
+    btn.addEventListener('click', function() { apply(!isDark); });
+  })();
+
+  /* ============================================================
+     MOBILE NAV
+  ============================================================ */
+  (function() {
+    var mob = document.getElementById('mobile-nav');
+    document.getElementById('hamburger').addEventListener('click', function() { mob.classList.add('open'); });
+    document.getElementById('mobile-close').addEventListener('click', function() { mob.classList.remove('open'); });
+    var links = mob.querySelectorAll('.mobile-nav-link');
+    for (var i = 0; i < links.length; i++) links[i].addEventListener('click', function() { mob.classList.remove('open'); });
+  })();
+
+  /* ============================================================
+     FOOTER YEAR
+  ============================================================ */
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  /* ============================================================
+     TOGGLE SWITCHES
+  ============================================================ */
+  (function() {
+    var toggles = document.querySelectorAll('.toggle-wrap');
+    for (var i = 0; i < toggles.length; i++) {
+      (function(el) {
+        var track = el.querySelector('.toggle-track');
+        el.addEventListener('click', function() {
+          var on = track.classList.toggle('active');
+          el.setAttribute('aria-checked', on ? 'true' : 'false');
         });
-        
-        // Theme toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        el.addEventListener('keydown', function(e) {
+          if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); el.click(); }
+        });
+      })(toggles[i]);
+    }
+  })();
+
+  /* ============================================================
+     TEXT SORTER ENGINE
+  ============================================================ */
+  (function() {
+    var inputEl = document.getElementById('input-text');
+    var outputEl = document.getElementById('output-text');
+    var sortBtn = document.getElementById('btn-sort');
+    var copyBtn = document.getElementById('copy-output');
+    var downloadBtn = document.getElementById('download-output');
+    var pasteBtn = document.getElementById('paste-input');
+    var sampleBtn = document.getElementById('sample-input');
+    var clearBtn = document.getElementById('clear-input');
+    var inputCount = document.getElementById('input-count');
+    var outputCount = document.getElementById('output-count');
+    var statInputLines = document.getElementById('stat-input-lines');
+    var statOutputLines = document.getElementById('stat-output-lines');
+    var statDupes = document.getElementById('stat-dupes');
+    var statBlanks = document.getElementById('stat-blanks');
+    var statMethod = document.getElementById('stat-method');
+
+    function getOption(name) {
+      var el = document.querySelector('[data-toggle="' + name + '"] .toggle-track');
+      return el ? el.classList.contains('active') : false;
+    }
+
+    function getInputLines() {
+      return inputEl.value.split(/\r?\n/);
+    }
+
+    function updateInputCount() {
+      var lines = getInputLines();
+      inputCount.textContent = lines.length + ' line' + (lines.length !== 1 ? 's' : '');
+    }
+
+    inputEl.addEventListener('input', updateInputCount);
+
+    /* --- Natural sort comparator --- */
+    function naturalCompare(a, b) {
+      var ax = [], bx = [];
+      a.replace(/(\d+)|(\D+)/g, function(_, $1, $2) { ax.push([$1 || Infinity, $2 || '']); });
+      b.replace(/(\d+)|(\D+)/g, function(_, $1, $2) { bx.push([$1 || Infinity, $2 || '']); });
+      while (ax.length && bx.length) {
+        var an = ax.shift(), bn = bx.shift();
+        var nn = (an[0] - bn[0]) || an[1].localeCompare(bn[1]);
+        if (nn) return nn;
+      }
+      return ax.length - bx.length;
+    }
+
+    /* --- Sort methods --- */
+    var methodLabels = {
+      'az': 'A \u2192 Z', 'za': 'Z \u2192 A',
+      'natural-asc': 'Natural \u2191', 'natural-desc': 'Natural \u2193',
+      'num-asc': '0 \u2192 9', 'num-desc': '9 \u2192 0',
+      'len-short': 'Short \u2192 Long', 'len-long': 'Long \u2192 Short',
+      'words-few': 'Fewest Words', 'words-most': 'Most Words',
+      'reverse': 'Reverse', 'shuffle': 'Shuffle'
+    };
+
+    function sortLines(lines, method, caseInsensitive) {
+      var arr = lines.slice();
+
+      switch (method) {
+        case 'az':
+          arr.sort(function(a, b) {
+            var x = caseInsensitive ? a.toLowerCase() : a;
+            var y = caseInsensitive ? b.toLowerCase() : b;
+            return x.localeCompare(y);
+          });
+          break;
+        case 'za':
+          arr.sort(function(a, b) {
+            var x = caseInsensitive ? a.toLowerCase() : a;
+            var y = caseInsensitive ? b.toLowerCase() : b;
+            return y.localeCompare(x);
+          });
+          break;
+        case 'natural-asc':
+          arr.sort(function(a, b) {
+            return naturalCompare(caseInsensitive ? a.toLowerCase() : a, caseInsensitive ? b.toLowerCase() : b);
+          });
+          break;
+        case 'natural-desc':
+          arr.sort(function(a, b) {
+            return naturalCompare(caseInsensitive ? b.toLowerCase() : b, caseInsensitive ? a.toLowerCase() : a);
+          });
+          break;
+        case 'num-asc':
+          arr.sort(function(a, b) {
+            var na = parseFloat(a.match(/-?\d+\.?\d*/)) || 0;
+            var nb = parseFloat(b.match(/-?\d+\.?\d*/)) || 0;
+            return na - nb;
+          });
+          break;
+        case 'num-desc':
+          arr.sort(function(a, b) {
+            var na = parseFloat(a.match(/-?\d+\.?\d*/)) || 0;
+            var nb = parseFloat(b.match(/-?\d+\.?\d*/)) || 0;
+            return nb - na;
+          });
+          break;
+        case 'len-short':
+          arr.sort(function(a, b) { return a.length - b.length; });
+          break;
+        case 'len-long':
+          arr.sort(function(a, b) { return b.length - a.length; });
+          break;
+        case 'words-few':
+          arr.sort(function(a, b) {
+            var wa = a.trim() ? a.trim().split(/\s+/).length : 0;
+            var wb = b.trim() ? b.trim().split(/\s+/).length : 0;
+            return wa - wb;
+          });
+          break;
+        case 'words-most':
+          arr.sort(function(a, b) {
+            var wa = a.trim() ? a.trim().split(/\s+/).length : 0;
+            var wb = b.trim() ? b.trim().split(/\s+/).length : 0;
+            return wb - wa;
+          });
+          break;
+        case 'reverse':
+          arr.reverse();
+          break;
+        case 'shuffle':
+          for (var i = arr.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+          }
+          break;
+      }
+      return arr;
+    }
+
+    /* --- Main sort function --- */
+    function doSort() {
+      var raw = inputEl.value;
+      if (!raw.trim()) {
+        outputEl.value = '';
+        updateOutputCount(0);
+        resetStats();
+        return;
+      }
+
+      var lines = getInputLines();
+      var totalInput = lines.length;
+      var method = document.getElementById('sort-method').value;
+      var caseInsensitive = getOption('case-insensitive');
+      var trim = getOption('trim');
+      var removeBlanks = getOption('remove-blanks');
+      var removeDupes = getOption('remove-dupes');
+      var addLineNums = getOption('line-numbers');
+      var prefix = document.getElementById('prefix-input').value;
+      var suffix = document.getElementById('suffix-input').value;
+
+      var blanksRemoved = 0;
+      var dupesRemoved = 0;
+
+      /* Trim */
+      if (trim) {
+        for (var i = 0; i < lines.length; i++) {
+          lines[i] = lines[i].trim();
         }
-        
-        // Load saved theme
-        function loadSavedTheme() {
-            if (localStorage.getItem('theme') === 'light') {
-                document.body.classList.add('light-theme');
-            }
-        }
-        
-        // Initialize floating particles
-        function initializeParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                container.appendChild(particle);
-            }
-        }
-        
-        // Select sort mode
-        function selectSortMode(mode) {
-            sortOptions.mode = mode;
-            
-            // Update UI
-            document.querySelectorAll('.sort-mode-option').forEach(option => {
-                option.classList.remove('active');
-            });
-            document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
-            
-            sortText();
-        }
-        
-        // Toggle option
-        function toggleOption(option) {
-            const toggle = document.getElementById(option + 'Toggle');
-            toggle.classList.toggle('active');
-            sortOptions[option] = toggle.classList.contains('active');
-            
-            sortText();
-        }
-        
-        // Main sort function
-        function sortText() {
-            const input = document.getElementById('inputText').value;
-            
-            if (!input.trim()) {
-                document.getElementById('outputText').value = '';
-                updateStats();
-                return;
-            }
-            
-            // Save to history
-            const currentOutput = document.getElementById('outputText').value;
-            if (currentOutput && historyStack[historyStack.length - 1] !== currentOutput) {
-                historyStack.push(currentOutput);
-                if (historyStack.length > 10) historyStack.shift();
-            }
-            
-            // Split into lines
-            let lines = input.split('\n');
-            
-            // Apply preprocessing
-            if (sortOptions.trim) {
-                lines = lines.map(line => line.trim());
-            }
-            
-            if (sortOptions.ignoreEmpty) {
-                lines = lines.filter(line => line !== '');
-            }
-            
-            if (sortOptions.removeDuplicates) {
-                lines = [...new Set(lines)];
-            }
-            
-            // Apply sorting
-            let sortedLines = [...lines];
-            
-            switch (sortOptions.mode) {
-                case 'alphabetical':
-                    sortedLines = sortAlphabetically(sortedLines);
-                    break;
-                case 'numerical':
-                    sortedLines = sortNumerically(sortedLines);
-                    break;
-                case 'length':
-                    sortedLines = sortByLength(sortedLines);
-                    break;
-                case 'reverse':
-                    sortedLines = lines.reverse();
-                    break;
-                case 'random':
-                    sortedLines = shuffleArray(sortedLines);
-                    break;
-                case 'natural':
-                    sortedLines = sortNaturally(sortedLines);
-                    break;
-            }
-            
-            // Apply ascending/descending
-            if (!sortOptions.ascending && sortOptions.mode !== 'reverse' && sortOptions.mode !== 'random') {
-                sortedLines = sortedLines.reverse();
-            }
-            
-            // Add line numbers if enabled
-            if (sortOptions.addNumbers) {
-                sortedLines = sortedLines.map((line, index) => `${index + 1}. ${line}`);
-            }
-            
-            // Update output
-            document.getElementById('outputText').value = sortedLines.join('\n');
-            updateStats();
-        }
-        
-        // Alphabetical sorting
-        function sortAlphabetically(lines) {
-            return lines.sort((a, b) => {
-                if (!sortOptions.caseSensitive) {
-                    return a.toLowerCase().localeCompare(b.toLowerCase());
-                }
-                return a.localeCompare(b);
-            });
-        }
-        
-        // Numerical sorting
-        function sortNumerically(lines) {
-            return lines.sort((a, b) => {
-                const numA = parseFloat(a);
-                const numB = parseFloat(b);
-                
-                // Handle non-numeric values
-                if (isNaN(numA) && isNaN(numB)) return 0;
-                if (isNaN(numA)) return 1;
-                if (isNaN(numB)) return -1;
-                
-                return numA - numB;
-            });
-        }
-        
-        // Length-based sorting
-        function sortByLength(lines) {
-            return lines.sort((a, b) => a.length - b.length);
-        }
-        
-        // Natural sorting (handles numbers within text)
-        function sortNaturally(lines) {
-            return lines.sort((a, b) => {
-                return a.localeCompare(b, undefined, {
-                    numeric: true,
-                    sensitivity: sortOptions.caseSensitive ? 'case' : 'base'
-                });
-            });
-        }
-        
-        // Shuffle array (Fisher-Yates algorithm)
-        function shuffleArray(array) {
-            const arr = [...array];
-            for (let i = arr.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [arr[i], arr[j]] = [arr[j], arr[i]];
-            }
-            return arr;
-        }
-        
-        // Update statistics
-        function updateStats() {
-            const input = document.getElementById('inputText').value;
-            const lines = input.split('\n');
-            
-            const totalLines = lines.length;
-            const nonEmptyLines = lines.filter(line => line.trim() !== '');
-            const uniqueLines = new Set(nonEmptyLines.map(line => 
-                sortOptions.caseSensitive ? line.trim() : line.trim().toLowerCase()
-            )).size;
-            const duplicateLines = nonEmptyLines.length - uniqueLines;
-            const emptyLines = totalLines - nonEmptyLines.length;
-            const totalChars = input.length;
-            const avgLength = nonEmptyLines.length > 0 
-                ? Math.round(nonEmptyLines.reduce((sum, line) => sum + line.trim().length, 0) / nonEmptyLines.length) 
-                : 0;
-            
-            document.getElementById('totalLines').textContent = totalLines;
-            document.getElementById('uniqueLines').textContent = uniqueLines;
-            document.getElementById('duplicateLines').textContent = duplicateLines;
-            document.getElementById('totalChars').textContent = totalChars;
-            document.getElementById('emptyLines').textContent = emptyLines;
-            document.getElementById('avgLength').textContent = avgLength;
-        }
-        
-        // Paste from clipboard
-        async function pasteFromClipboard() {
-            try {
-                const text = await navigator.clipboard.readText();
-                document.getElementById('inputText').value = text;
-                updateStats();
-                sortText();
-                showToast('Text pasted from clipboard!', 'success');
-            } catch (err) {
-                showToast('Failed to paste from clipboard', 'error');
-            }
-        }
-        
-        // Copy to clipboard
-        async function copyToClipboard() {
-            const output = document.getElementById('outputText').value;
-            
-            if (!output) {
-                showToast('Nothing to copy!', 'error');
-                return;
-            }
-            
-            try {
-                await navigator.clipboard.writeText(output);
-                showToast('Copied to clipboard!', 'success');
-            } catch (err) {
-                showToast('Failed to copy to clipboard', 'error');
-            }
-        }
-        
-        // Download as file
-        function downloadAsFile() {
-            const output = document.getElementById('outputText').value;
-            
-            if (!output) {
-                showToast('Nothing to download!', 'error');
-                return;
-            }
-            
-            const blob = new Blob([output], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `sorted-text-${Date.now()}.txt`;
-            link.click();
-            URL.revokeObjectURL(url);
-            
-            showToast('File downloaded successfully!', 'success');
-        }
-        
-        // Clear input
-        function clearInput() {
-            if (confirm('Are you sure you want to clear all input?')) {
-                document.getElementById('inputText').value = '';
-                document.getElementById('outputText').value = '';
-                updateStats();
-                showToast('Input cleared!', 'success');
-            }
-        }
-        
-        // Undo last sort
-        function undoSort() {
-            if (historyStack.length === 0) {
-                showToast('Nothing to undo!', 'error');
-                return;
-            }
-            
-            const lastOutput = historyStack.pop();
-            document.getElementById('outputText').value = lastOutput;
-            showToast('Undo successful!', 'success');
-        }
-        
-        // Swap input and output
-        function swapInputOutput() {
-            const input = document.getElementById('inputText').value;
-            const output = document.getElementById('outputText').value;
-            
-            document.getElementById('inputText').value = output;
-            document.getElementById('outputText').value = input;
-            
-            updateStats();
-            showToast('Input and output swapped!', 'success');
-        }
-        
-        // Reset all
-        function resetAll() {
-            if (confirm('Are you sure you want to reset everything?')) {
-                document.getElementById('inputText').value = '';
-                document.getElementById('outputText').value = '';
-                historyStack = [];
-                
-                // Reset options to default
-                sortOptions = {
-                    mode: 'alphabetical',
-                    ascending: true,
-                    caseSensitive: false,
-                    removeDuplicates: false,
-                    ignoreEmpty: true,
-                    trim: true,
-                    addNumbers: false
-                };
-                
-                // Update UI
-                document.querySelectorAll('.sort-mode-option').forEach(option => {
-                    option.classList.remove('active');
-                });
-                document.querySelector('[data-mode="alphabetical"]').classList.add('active');
-                
-                document.getElementById('ascendingToggle').classList.add('active');
-                document.getElementById('caseSensitiveToggle').classList.remove('active');
-                document.getElementById('removeDuplicatesToggle').classList.remove('active');
-                document.getElementById('ignoreEmptyToggle').classList.add('active');
-                document.getElementById('trimToggle').classList.add('active');
-                document.getElementById('addNumbersToggle').classList.remove('active');
-                
-                updateStats();
-                showToast('Everything has been reset!', 'success');
-            }
-        }
-        
-        // Show toast notification
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-            
-            toastMessage.textContent = message;
-            toast.className = `toast ${type}`;
-            
-            setTimeout(() => {
-                toast.classList.add('show');
-            }, 100);
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-        
-        // Debounce function
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-    </script>
-<script src="/homebutton.js"></script>
+      }
+
+      /* Remove blanks */
+      if (removeBlanks) {
+        var before = lines.length;
+        lines = lines.filter(function(l) { return l.length > 0; });
+        blanksRemoved = before - lines.length;
+      }
+
+      /* Remove duplicates (case-insensitive if option on) */
+      if (removeDupes) {
+        var seen = {};
+        var beforeD = lines.length;
+        lines = lines.filter(function(l) {
+          var key = caseInsensitive ? l.toLowerCase() : l;
+          if (seen[key]) return false;
+          seen[key] = true;
+          return true;
+        });
+        dupesRemoved = beforeD - lines.length;
+      }
+
+      /* Sort */
+      var sorted = sortLines(lines, method, caseInsensitive);
+
+      /* Post-process: line numbers, prefix, suffix */
+      for (var j = 0; j < sorted.length; j++) {
+        var parts = [];
+        if (addLineNums) parts.push((j + 1) + '.');
+        if (prefix) parts.push(prefix);
+        parts.push(sorted[j]);
+        if (suffix) parts.push(suffix);
+        sorted[j] = parts.join(' ');
+      }
+
+      var result = sorted.join('\n');
+      outputEl.value = result;
+
+      /* Update stats */
+      updateOutputCount(sorted.length);
+      statInputLines.textContent = totalInput;
+      statOutputLines.textContent = sorted.length;
+      statDupes.textContent = dupesRemoved;
+      statBlanks.textContent = blanksRemoved;
+      statMethod.textContent = methodLabels[method] || method;
+    }
+
+    function updateOutputCount(count) {
+      outputCount.textContent = count + ' line' + (count !== 1 ? 's' : '');
+    }
+
+    function resetStats() {
+      statInputLines.textContent = '0';
+      statOutputLines.textContent = '0';
+      statDupes.textContent = '0';
+      statBlanks.textContent = '0';
+    }
+
+    /* Event: Sort */
+    sortBtn.addEventListener('click', doSort);
+
+    /* Keyboard shortcut: Ctrl/Cmd + Enter to sort */
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        doSort();
+      }
+    });
+
+    /* Copy output */
+    copyBtn.addEventListener('click', function() {
+      var text = outputEl.value;
+      if (!text) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(showCopied).catch(fallbackCopy);
+      } else { fallbackCopy(); }
+      function fallbackCopy() { outputEl.select(); try { document.execCommand('copy'); showCopied(); } catch(e) {} }
+      function showCopied() {
+        copyBtn.textContent = '\u2705 Copied!';
+        copyBtn.classList.add('copied');
+        setTimeout(function() { copyBtn.innerHTML = '&#128196; Copy'; copyBtn.classList.remove('copied'); }, 1500);
+      }
+    });
+
+    /* Download output */
+    downloadBtn.addEventListener('click', function() {
+      var text = outputEl.value;
+      if (!text) return;
+      var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'sorted-text.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    /* Paste */
+    pasteBtn.addEventListener('click', function() {
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        navigator.clipboard.readText().then(function(text) {
+          inputEl.value = text;
+          inputEl.focus();
+          updateInputCount();
+        }).catch(function() { inputEl.focus(); });
+      } else { inputEl.focus(); }
+    });
+
+    /* Sample data */
+    sampleBtn.addEventListener('click', function() {
+      inputEl.value =
+        'file10.txt\nfile9.txt\nfile1.txt\nfile20.txt\nfile3.txt\n\n' +
+        'Banana\napple\nCherry\ndate\nElderberry\napple\n\n' +
+        'v1.10\nv1.2\nv1.9\nv2.0\nv1.1\n\n' +
+        'Item 20\nItem 2\nItem 100\nItem 1\nItem 10\n\n' +
+        'zebra\nYak\nWhale\nFox\nElephant\nDog\nCat\nantelope\n\n' +
+        'the quick brown fox\na lazy dog\nan extremely long sentence that goes on and on without stopping\nhi\nhello world';
+      updateInputCount();
+      inputEl.focus();
+    });
+
+    /* Clear */
+    clearBtn.addEventListener('click', function() {
+      if (!inputEl.value) return;
+      inputEl.value = '';
+      outputEl.value = '';
+      updateInputCount();
+      updateOutputCount(0);
+      resetStats();
+      inputEl.focus();
+    });
+
+    /* Initialize */
+    updateInputCount();
+  })();
+
+  /* ============================================================
+     FAQ ACCORDION
+  ============================================================ */
+  (function() {
+    var items = document.querySelectorAll('.faq-item');
+    for (var i = 0; i < items.length; i++) {
+      (function(item) {
+        item.querySelector('.faq-q').addEventListener('click', function() {
+          var open = item.classList.contains('open');
+          for (var j = 0; j < items.length; j++) items[j].classList.remove('open');
+          if (!open) item.classList.add('open');
+        });
+      })(items[i]);
+    }
+  })();
+  </script>
 </body>
 </html>
