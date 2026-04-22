@@ -1,1586 +1,2923 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US" dir="ltr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#007cf0" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Regex Tester – Tool Xeno" />
+  <meta name="application-name" content="Tool Xeno" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="rating" content="general" />
+  <meta name="revisit-after" content="7 days" />
 
-  gtag('config', 'G-Y4JDC5DCBV');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Regex Tester - Tool Xeno</title>
-    <meta name="description" content="Professional regex tester with advanced features - real-time matching, group analysis, pattern explanations, and common patterns library with premium UI.">
+  <!-- SEO -->
+  <title>Regex Tester – Free Online Regular Expression Tester & Debugger | Tool Xeno</title>
+  <meta name="description" content="Free professional regex tester online. Test regular expressions in real-time with match highlighting, capture groups, replace preview, pattern library, code generator, and error detection. Supports JavaScript, Python, PHP, Java, C#, Go, Rust. 100% client-side, no signup." />
+  <meta name="keywords" content="regex tester, regular expression tester, regex debugger, regex online, pattern tester, regex match, regex replace, regex generator, javascript regex, python regex, php regex, regex cheat sheet, regular expression debugger" />
+  <meta name="author" content="Tool Xeno" />
+  <link rel="canonical" href="https://toolxeno.com/regex-tester.html" />
+  <link rel="alternate" hreflang="en" href="https://toolxeno.com/regex-tester.html" />
 
-    <!-- ✅ Tool Xeno Favicons -->
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="manifest" href="/site.webmanifest" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolxeno.com/regex-tester.html" />
+  <meta property="og:title" content="Regex Tester – Free Online Regular Expression Tool | Tool Xeno" />
+  <meta property="og:description" content="Test regex patterns in real-time with match highlighting, capture groups, replace preview, code generator, and error detection. Free, private, in-browser." />
+  <meta property="og:site_name" content="Tool Xeno" />
+  <meta property="og:locale" content="en_US" />
 
-    <meta name="google-adsense-account" content="ca-pub-2713998296337545">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Regex Tester – Tool Xeno" />
+  <meta name="twitter:description" content="Test regex patterns in real-time. Match highlighting, capture groups, replace preview, code generator. Free, private, in-browser." />
 
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            --warning-gradient: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
-            --error-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
-            
-            --dark-bg: #0a0a0a;
-            --dark-surface: #1a1a1a;
-            --dark-surface-elevated: #252525;
-            --dark-text: #ffffff;
-            --dark-text-secondary: #a0a0a0;
-            --dark-border: #333333;
-            
-            --light-bg: #f8fafc;
-            --light-surface: #ffffff;
-            --light-surface-elevated: #f1f5f9;
-            --light-text: #1e293b;
-            --light-text-secondary: #64748b;
-            --light-border: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            line-height: 1.6;
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-            min-height: 100vh;
-        }
-        
-        body.light-theme { 
-            background-color: var(--light-bg); 
-            color: var(--light-text); 
-        }
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Regex Tester",
+        "url": "https://toolxeno.com/regex-tester.html",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Free professional regex tester with real-time matching, capture groups, replace preview, pattern library, code generator, and error detection."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolxeno.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Developer Tools", "item": "https://toolxeno.com/#tools" },
+          { "@type": "ListItem", "position": 3, "name": "Regex Tester", "item": "https://toolxeno.com/regex-tester.html" }
+        ]
+      },
+      {
+        "@type": "HowTo",
+        "name": "How to Test a Regular Expression",
+        "description": "Step-by-step guide to testing regex patterns using Tool Xeno's Regex Tester.",
+        "step": [
+          { "@type": "HowToStep", "position": 1, "name": "Enter Pattern", "text": "Type or paste your regex pattern in the pattern field." },
+          { "@type": "HowToStep", "position": 2, "name": "Add Test String", "text": "Enter the text you want to test against in the test string area." },
+          { "@type": "HowToStep", "position": 3, "name": "Set Flags", "text": "Toggle regex flags like global (g), case-insensitive (i), multiline (m) as needed." },
+          { "@type": "HowToStep", "position": 4, "name": "View Results", "text": "See matches highlighted in real-time. View capture groups, use replace, or generate code." }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What is a regular expression?", "acceptedAnswer": { "@type": "Answer", "text": "A regular expression (regex) is a sequence of characters that defines a search pattern. It is used for string matching, validation, search-and-replace, and text parsing in programming." } },
+          { "@type": "Question", "name": "What regex engine does this tool use?", "acceptedAnswer": { "@type": "Answer", "text": "This tool uses the browser's built-in JavaScript regex engine (ECMAScript). The code generator provides equivalent patterns for Python, PHP, Java, C#, Go, and Rust." } },
+          { "@type": "Question", "name": "What do the regex flags mean?", "acceptedAnswer": { "@type": "Answer", "text": "g (global) finds all matches, i (case-insensitive) ignores letter case, m (multiline) makes ^ and $ match line boundaries, s (dotall) makes . match newlines, u (unicode) enables full Unicode support." } },
+          { "@type": "Question", "name": "Is my data safe?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. All regex testing happens entirely in your browser. No data is ever sent to any server. Your test strings and patterns remain completely private." } },
+          { "@type": "Question", "name": "Can I save my regex patterns?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use the Save button to store patterns in your browser's localStorage. You can also export sessions as JSON and import them later." } },
+          { "@type": "Question", "name": "How does the code generator work?", "acceptedAnswer": { "@type": "Answer", "text": "The code generator takes your current pattern and flags, then produces ready-to-use code snippets in JavaScript, Python, PHP, Java, C#, Go, and Rust with the appropriate syntax for each language." } }
+        ]
+      }
+    ]
+  }
+  </script>
 
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.05;
-            background: radial-gradient(circle, #667eea 0%, transparent 70%);
-        }
-        
-        body.light-theme .particle { 
-            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(100vh) rotate(0deg); } 
-            100% { transform: translateY(-100px) rotate(360deg); } 
-        }
-        
-        .header-glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.35s ease, border-color 0.35s ease;
-        }
-        
-        body.light-theme .header-glass { 
-            background: rgba(255, 255, 255, 0.9); 
-            border-bottom-color: rgba(0, 0, 0, 0.1); 
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--dark-surface);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.light-theme .theme-toggle { 
-            background: var(--light-surface-elevated); 
-            border-color: var(--light-border); 
-        }
-        
-        body.light-theme .theme-toggle::after { 
-            transform: translateX(28px); 
-            background: var(--secondary-gradient); 
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
-        
-        body.light-theme .glass-card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-color: rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
-        }
-        
-        .btn-gradient {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .btn-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .btn-gradient:hover::before { left: 100%; }
-        .btn-gradient:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
-        }
-        .btn-gradient:active { transform: translateY(0); }
-        
-        .btn-secondary {
-            background: var(--accent-gradient);
-            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
-        }
-        
-        .btn-secondary:hover {
-            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
-        }
-        
-        .btn-success {
-            background: var(--success-gradient);
-            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
-        }
-        
-        .btn-success:hover {
-            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
-        }
-        
-        .btn-warning {
-            background: var(--warning-gradient);
-            box-shadow: 0 4px 15px rgba(247, 151, 30, 0.3);
-        }
-        
-        .btn-warning:hover {
-            box-shadow: 0 8px 25px rgba(247, 151, 30, 0.4);
-        }
-        
-        .nav-link {
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-        }
-        
-        .nav-link:hover { 
-            background: rgba(255, 255, 255, 0.1); 
-            color: white; 
-        }
-        
-        body.light-theme .nav-link { 
-            color: rgba(0, 0, 0, 0.7); 
-        }
-        
-        body.light-theme .nav-link:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            color: black; 
-        }
-        
-        .code-input {
-            font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 16px;
-            color: var(--dark-text);
-            resize: vertical;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        
-        .code-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-        }
-        
-        body.light-theme .code-input {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.1);
-            color: var(--light-text);
-        }
-        
-        .regex-input {
-            font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 16px 20px;
-            color: var(--dark-text);
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .regex-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-        }
-        
-        .regex-input.error {
-            border-color: #ff416c;
-            box-shadow: 0 0 20px rgba(255, 65, 108, 0.3);
-        }
-        
-        body.light-theme .regex-input {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.1);
-            color: var(--light-text);
-        }
-        
-        .flag-selector {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        
-        .flag-option {
-            padding: 8px 16px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            font-family: 'Fira Code', monospace;
-            font-size: 14px;
-            user-select: none;
-        }
-        
-        .flag-option.active {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.2);
-            color: #667eea;
-        }
-        
-        body.light-theme .flag-option {
-            border-color: rgba(0, 0, 0, 0.2);
-        }
-        
-        body.light-theme .flag-option.active {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-        }
-        
-        .match-highlight {
-            background: rgba(102, 126, 234, 0.3);
-            border-radius: 4px;
-            padding: 2px 4px;
-            margin: 0 1px;
-            position: relative;
-            animation: matchPulse 0.3s ease;
-        }
-        
-        .match-highlight.group-0 { background: rgba(102, 126, 234, 0.4); }
-        .match-highlight.group-1 { background: rgba(240, 147, 251, 0.4); }
-        .match-highlight.group-2 { background: rgba(79, 172, 254, 0.4); }
-        .match-highlight.group-3 { background: rgba(17, 153, 142, 0.4); }
-        .match-highlight.group-4 { background: rgba(247, 151, 30, 0.4); }
-        
-        @keyframes matchPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 16px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        body.light-theme .stat-card {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 5px;
-        }
-        
-        .pattern-library {
-            max-height: 300px;
-            overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(102, 126, 234, 0.5) rgba(255, 255, 255, 0.1);
-        }
-        
-        .pattern-library::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        .pattern-library::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-        
-        .pattern-library::-webkit-scrollbar-thumb {
-            background: rgba(102, 126, 234, 0.5);
-            border-radius: 10px;
-        }
-        
-        .pattern-item {
-            padding: 12px 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .pattern-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        
-        .pattern-item:last-child {
-            border-bottom: none;
-        }
-        
-        body.light-theme .pattern-item {
-            border-bottom-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        body.light-theme .pattern-item:hover {
-            background: rgba(0, 0, 0, 0.05);
-        }
-        
-        .pattern-regex {
-            font-family: 'Fira Code', monospace;
-            font-size: 13px;
-            color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-            padding: 4px 8px;
-            border-radius: 6px;
-            margin-left: 8px;
-        }
-        
-        .group-analysis {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 16px;
-        }
-        
-        body.light-theme .group-analysis {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .group-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .group-item:last-child {
-            border-bottom: none;
-        }
-        
-        body.light-theme .group-item {
-            border-bottom-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .group-badge {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 600;
-            color: white;
-        }
-        
-        .group-badge.group-0 { background: var(--primary-gradient); }
-        .group-badge.group-1 { background: var(--secondary-gradient); }
-        .group-badge.group-2 { background: var(--accent-gradient); }
-        .group-badge.group-3 { background: var(--success-gradient); }
-        .group-badge.group-4 { background: var(--warning-gradient); }
-        
-        .group-value {
-            font-family: 'Fira Code', monospace;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 13px;
-        }
-        
-        body.light-theme .group-value {
-            background: rgba(0, 0, 0, 0.1);
-        }
-        
-        .explanation-card {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 16px;
-        }
-        
-        .explanation-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        
-        .explanation-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .explanation-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--primary-gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 12px;
-            flex-shrink: 0;
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .flag-selector {
-                justify-content: center;
-            }
-            
-            .pattern-library {
-                max-height: 200px;
-            }
-        }
-    </style>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%237928ca'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>" />
+
+  <style>
+    /* =============================================
+       CSS RESET & VARIABLES
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg0: #030712;
+      --bg1: #0a0f1e;
+      --bg2: #0f172a;
+      --bg3: #1e293b;
+      --card: rgba(255,255,255,0.04);
+      --card-hover: rgba(255,255,255,0.08);
+      --card-solid: #1e293b;
+      --glass: rgba(255,255,255,0.03);
+      --text: #f1f5f9;
+      --text2: #cbd5e1;
+      --muted: #94a3b8;
+      --line: rgba(255,255,255,0.1);
+      --line-strong: rgba(255,255,255,0.2);
+      --accent1: #007cf0;
+      --accent2: #00dfd8;
+      --accent3: #7928ca;
+      --accent4: #ff0080;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --match1: rgba(0,124,240,0.3);
+      --match2: rgba(0,223,216,0.3);
+      --match3: rgba(121,40,202,0.3);
+      --match4: rgba(255,0,128,0.3);
+      --match5: rgba(245,158,11,0.3);
+      --shadow: 0 24px 60px rgba(0,0,0,0.6);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.3);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --max: 1240px;
+      --ring: 0 0 0 3px rgba(0,124,240,0.4);
+      --grad: linear-gradient(135deg, var(--accent1), var(--accent2));
+      --grad-purple: linear-gradient(135deg, var(--accent3), var(--accent4));
+      --grad-text: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+      --grad-bg: linear-gradient(135deg, rgba(0,124,240,0.08) 0%, rgba(121,40,202,0.08) 100%);
+      --font: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+      --header-h: 72px;
+      --editor-font: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', 'Menlo', monospace;
+    }
+
+    [data-theme="light"] {
+      --bg0: #f8fafc;
+      --bg1: #f1f5f9;
+      --bg2: #e2e8f0;
+      --bg3: #cbd5e1;
+      --card: rgba(255,255,255,0.9);
+      --card-hover: rgba(255,255,255,1);
+      --card-solid: #ffffff;
+      --glass: rgba(255,255,255,0.8);
+      --text: #0f172a;
+      --text2: #334155;
+      --muted: #64748b;
+      --line: rgba(0,0,0,0.1);
+      --line-strong: rgba(0,0,0,0.15);
+      --shadow: 0 24px 60px rgba(0,0,0,0.1);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
+      --match1: rgba(0,124,240,0.25);
+      --match2: rgba(0,180,170,0.25);
+      --match3: rgba(100,20,160,0.25);
+      --match4: rgba(200,0,100,0.25);
+      --match5: rgba(200,130,0,0.25);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg0);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+    select { font-family: var(--font); }
+    textarea { font-family: var(--editor-font); }
+    input[type="text"] { font-family: var(--editor-font); }
+
+    /* =============================================
+       ANIMATED BACKGROUND
+    ============================================= */
+    .bg-orbs {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+      contain: strict;
+    }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(100px); opacity: 0.15;
+      will-change: transform;
+    }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent1); top: -200px; left: -200px; animation: orbFloat1 20s linear infinite; }
+    .orb-2 { width: 500px; height: 500px; background: var(--accent3); top: 30%; right: -150px; animation: orbFloat2 25s linear infinite; }
+    .orb-3 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: 30%; animation: orbFloat3 18s linear infinite; }
+    .orb-4 { width: 300px; height: 300px; background: var(--accent4); top: 60%; left: 10%; animation: orbFloat4 22s linear infinite; }
+
+    @keyframes orbFloat1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(60px,40px) scale(1.1);} 66%{transform:translate(-40px,60px) scale(0.95);} }
+    @keyframes orbFloat2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-80px,50px) scale(1.05);} 66%{transform:translate(40px,-60px) scale(1.1);} }
+    @keyframes orbFloat3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(70px,-40px) scale(1.15);} }
+    @keyframes orbFloat4 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,-80px) scale(1.1);} }
+
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+      contain: strict;
+    }
+
+    .page-wrapper { position: relative; z-index: 1; }
+
+    /* =============================================
+       HEADER
+    ============================================= */
+    .header {
+      position: sticky; top: 0; z-index: 1000;
+      height: var(--header-h);
+      display: flex; align-items: center;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(3,7,18,0.85);
+      border-bottom: 1px solid var(--line);
+      transition: background var(--transition);
+    }
+    [data-theme="light"] .header { background: rgba(248,250,252,0.90); }
+
+    .header-inner {
+      max-width: var(--max); width: 100%; margin: 0 auto;
+      padding: 0 24px; display: flex; align-items: center; gap: 24px;
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--grad); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 900; color: #fff;
+      box-shadow: 0 4px 14px rgba(0,124,240,0.4);
+    }
+    .logo-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .nav-primary { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .nav-link {
+      padding: 7px 13px; font-size: 0.875rem; font-weight: 500;
+      color: var(--text2); border-radius: var(--radius-xs);
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav-link:hover { color: var(--text); background: var(--card); }
+
+    .header-actions { display: flex; align-items: center; gap: 10px; margin-left: 12px; }
+
+    .btn-theme {
+      padding: 8px 20px; font-size: 0.85rem; font-weight: 600;
+      font-family: var(--font); background: var(--card);
+      backdrop-filter: blur(8px); border-radius: 40px;
+      color: var(--text2); border: 1px solid var(--line);
+      transition: all 0.3s ease; cursor: pointer;
+    }
+    .btn-theme:hover {
+      color: var(--text); border-color: var(--accent1);
+      background: rgba(0,124,240,0.1);
+    }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; margin-left: auto; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); display: block; }
+
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(3,7,18,0.98); backdrop-filter: blur(24px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-link { font-size: 1.4rem; font-weight: 700; color: var(--text2); padding: 12px 32px; border-radius: var(--radius-sm); transition: all var(--transition); }
+    .mobile-nav-link:hover { color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; font-size: 1.5rem; color: var(--muted); padding: 8px; border-radius: 8px; transition: color var(--transition); cursor: pointer; }
+    .mobile-close:hover { color: var(--text); }
+
+    /* =============================================
+       HERO SECTION
+    ============================================= */
+    .hero {
+      padding: 48px 24px 32px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px;
+      background: rgba(0,124,240,0.15);
+      border: 1px solid rgba(0,124,240,0.3);
+      border-radius: 100px;
+      font-size: 0.78rem; font-weight: 600; color: var(--accent1);
+      letter-spacing: 0.5px; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
+
+    .hero-h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 800; line-height: 1.1; letter-spacing: -1.5px;
+      margin-bottom: 14px;
+      max-width: 700px; margin-left: auto; margin-right: auto;
+    }
+    .hero-h1 .grad-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .hero-sub {
+      font-size: clamp(0.9rem, 1.5vw, 1rem); color: var(--text2);
+      max-width: 580px; margin: 0 auto 20px; line-height: 1.6;
+    }
+
+    .hero-trust {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 8px 16px;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.8rem; font-weight: 500; color: var(--muted);
+    }
+    .trust-dot { color: var(--accent2); }
+
+    /* =============================================
+       TOOL SECTION
+    ============================================= */
+    .tool-section {
+      padding: 12px 24px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .tool-container {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    /* =============================================
+       TOOLBAR
+    ============================================= */
+    .tool-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding: 10px 16px;
+      background: var(--card-solid);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .toolbar-spacer { flex: 1; }
+
+    .toolbar-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 7px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text2);
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      transition: all var(--transition);
+    }
+    .toolbar-btn:hover {
+      color: var(--text);
+      background: var(--card-hover);
+      border-color: var(--accent1);
+    }
+    .toolbar-btn:active { transform: scale(0.97); }
+    .toolbar-btn.primary {
+      background: var(--grad);
+      color: #fff;
+      border: none;
+      box-shadow: 0 2px 10px rgba(0,124,240,0.3);
+    }
+    .toolbar-btn.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0,124,240,0.4);
+    }
+
+    /* Mobile panel tabs */
+    .mobile-panel-tabs {
+      display: none;
+      gap: 2px;
+      padding: 8px 16px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--line);
+    }
+    .mobile-panel-tab {
+      flex: 1;
+      padding: 8px 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text2);
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      text-align: center;
+      transition: all var(--transition);
+    }
+    .mobile-panel-tab.active {
+      color: #fff;
+      background: var(--grad);
+      border-color: transparent;
+    }
+
+    /* =============================================
+       EDITOR LAYOUT (3-column)
+    ============================================= */
+    .editor-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      min-height: 450px;
+    }
+    .editor-pane {
+      display: flex;
+      flex-direction: column;
+    }
+    .editor-pane + .editor-pane { border-left: 1px solid var(--line); }
+
+    .pane-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 14px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+    .pane-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pane-badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--accent1);
+      background: rgba(0,124,240,0.15);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .pane-actions { display: flex; gap: 4px; }
+    .pane-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text2);
+      border-radius: 4px;
+      transition: all var(--transition);
+    }
+    .pane-btn:hover { color: var(--accent1); background: rgba(0,124,240,0.1); }
+
+    /* Code Editor */
+    .code-editor {
+      flex: 1;
+      display: flex;
+      background: var(--bg1);
+      position: relative;
+      overflow: hidden;
+    }
+    .code-editor textarea {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      padding: 14px;
+      font-family: var(--editor-font);
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text);
+      background: transparent;
+      border: none;
+      resize: none;
+      outline: none;
+      tab-size: 2;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow: auto;
+    }
+    .code-editor textarea::placeholder {
+      color: var(--muted);
+      opacity: 0.6;
+    }
+    .code-editor textarea::-webkit-scrollbar { width: 8px; height: 8px; }
+    .code-editor textarea::-webkit-scrollbar-track { background: transparent; }
+    .code-editor textarea::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 4px; }
+    .code-editor textarea::-webkit-scrollbar-thumb:hover { background: var(--line-strong); }
+
+    /* Pattern Input */
+    .pattern-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 0;
+      background: var(--bg1);
+      border-bottom: 1px solid var(--line);
+    }
+    .pattern-slash {
+      font-family: var(--editor-font);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent1);
+      padding: 10px 4px 10px 14px;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    .pattern-input {
+      flex: 1;
+      padding: 10px 8px;
+      font-family: var(--editor-font);
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text);
+      background: transparent;
+      border: none;
+      outline: none;
+    }
+    .pattern-input::placeholder { color: var(--muted); opacity: 0.5; }
+    .pattern-input:focus { background: rgba(0,124,240,0.04); }
+    .flags-display {
+      font-family: var(--editor-font);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent3);
+      padding: 10px 14px 10px 4px;
+      user-select: none;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    /* Flags bar */
+    .flags-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+    .flag-btn {
+      padding: 4px 10px;
+      font-family: var(--editor-font);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+    .flag-btn:hover { color: var(--text2); background: var(--card-hover); }
+    .flag-btn.active {
+      color: #fff;
+      background: var(--accent1);
+      border-color: var(--accent1);
+      box-shadow: 0 2px 8px rgba(0,124,240,0.3);
+    }
+    .flag-btn .flag-desc {
+      font-family: var(--font);
+      font-size: 0.62rem;
+      font-weight: 500;
+      opacity: 0.7;
+      margin-left: 3px;
+    }
+
+    /* Test string highlight layer */
+    .test-highlight-wrap {
+      flex: 1;
+      position: relative;
+      overflow: auto;
+      background: var(--bg1);
+    }
+    .test-highlight-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      padding: 14px;
+      font-family: var(--editor-font);
+      font-size: 13px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: transparent;
+      overflow: hidden;
+    }
+    .test-highlight-layer mark {
+      color: transparent;
+      border-radius: 3px;
+      position: relative;
+    }
+    .test-textarea {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      padding: 14px;
+      font-family: var(--editor-font);
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text);
+      background: transparent;
+      border: none;
+      resize: none;
+      outline: none;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow: auto;
+    }
+    .test-textarea::placeholder { color: var(--muted); opacity: 0.6; }
+    .test-textarea::-webkit-scrollbar { width: 8px; height: 8px; }
+    .test-textarea::-webkit-scrollbar-track { background: transparent; }
+    .test-textarea::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 4px; }
+
+    /* Error bar */
+    .error-bar {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: rgba(239,68,68,0.1);
+      border-top: 1px solid rgba(239,68,68,0.3);
+      color: var(--error);
+    }
+    .error-bar.active { display: flex; }
+    .error-fix-btn {
+      margin-left: auto;
+      padding: 3px 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--error);
+      border-radius: 4px;
+      transition: opacity var(--transition);
+    }
+    .error-fix-btn:hover { opacity: 0.85; }
+
+    /* =============================================
+       RESULTS PANE
+    ============================================= */
+    .results-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      background: var(--bg1);
+    }
+    .results-content::-webkit-scrollbar { width: 6px; }
+    .results-content::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
+
+    .result-item {
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .result-item:hover {
+      border-color: var(--accent1);
+      background: var(--card-hover);
+    }
+    .result-item.highlighted {
+      border-color: var(--accent2);
+      background: rgba(0,223,216,0.1);
+    }
+    .result-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .result-index {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--accent1);
+      padding: 2px 7px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .result-text {
+      font-family: var(--editor-font);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      word-break: break-all;
+    }
+    .result-pos {
+      font-size: 0.68rem;
+      color: var(--muted);
+      font-family: var(--editor-font);
+    }
+    .result-groups {
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid var(--line);
+    }
+    .result-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 0;
+      font-size: 0.75rem;
+    }
+    .group-color {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .group-name {
+      color: var(--muted);
+      font-weight: 600;
+      min-width: 60px;
+    }
+    .group-value {
+      color: var(--text2);
+      font-family: var(--editor-font);
+      word-break: break-all;
+    }
+
+    .no-results {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 10px;
+      color: var(--muted);
+      text-align: center;
+      padding: 20px;
+    }
+    .no-results-icon { font-size: 2.5rem; opacity: 0.5; }
+    .no-results-text { font-size: 0.85rem; font-weight: 500; }
+
+    .match-actions-bar {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      padding: 8px 12px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--line);
+    }
+    .match-action-btn {
+      padding: 4px 8px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text2);
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      transition: all var(--transition);
+    }
+    .match-action-btn:hover { color: var(--accent1); background: rgba(0,124,240,0.1); border-color: var(--accent1); }
+
+    /* =============================================
+       STATS PANEL
+    ============================================= */
+    .stats-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border-top: 1px solid var(--line);
+      background: var(--bg2);
+    }
+    .stat-item {
+      flex: 1;
+      min-width: 100px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-right: 1px solid var(--line);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .stat-value {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .stat-value.success { color: var(--success); }
+    .stat-value.error { color: var(--error); }
+    .stat-unit {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-left: 2px;
+    }
+
+    /* =============================================
+       COLLAPSIBLE PANELS
+    ============================================= */
+    .collapsible-panel {
+      border-top: 1px solid var(--line);
+      background: var(--card-solid);
+    }
+    .collapsible-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+    .collapsible-toggle:hover { color: var(--accent1); }
+    .collapsible-icon {
+      width: 22px; height: 22px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      transition: all var(--transition);
+    }
+    .collapsible-panel.open .collapsible-icon {
+      transform: rotate(180deg);
+      background: rgba(0,124,240,0.15);
+      border-color: var(--accent1);
+      color: var(--accent1);
+    }
+    .collapsible-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .collapsible-panel.open .collapsible-body { max-height: 800px; }
+
+    .collapsible-inner {
+      padding: 0 16px 16px;
+    }
+
+    /* Replace Panel */
+    .replace-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .replace-input-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .replace-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .replace-input {
+      width: 100%;
+      padding: 10px 12px;
+      font-family: var(--editor-font);
+      font-size: 13px;
+      color: var(--text);
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .replace-input:focus { border-color: var(--accent1); box-shadow: var(--ring); }
+    .replace-input::placeholder { color: var(--muted); opacity: 0.5; }
+    .replace-result {
+      width: 100%;
+      padding: 10px 12px;
+      font-family: var(--editor-font);
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      min-height: 60px;
+      max-height: 160px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .replace-count {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .replace-count strong { color: var(--accent2); }
+
+    /* Pattern Library */
+    .pattern-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .pattern-tab {
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text2);
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .pattern-tab:hover { color: var(--text); }
+    .pattern-tab.active {
+      color: #fff;
+      background: var(--accent1);
+      border-color: var(--accent1);
+    }
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px;
+    }
+    .pattern-card {
+      padding: 10px 12px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .pattern-card:hover {
+      border-color: var(--accent1);
+      background: rgba(0,124,240,0.08);
+    }
+    .pattern-card-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .pattern-card-regex {
+      font-size: 0.7rem;
+      font-family: var(--editor-font);
+      color: var(--muted);
+      word-break: break-all;
+      line-height: 1.4;
+    }
+
+    /* Saved Cases */
+    .saved-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .saved-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      transition: all var(--transition);
+    }
+    .saved-item:hover { border-color: var(--accent1); }
+    .saved-info { flex: 1; min-width: 0; }
+    .saved-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .saved-meta {
+      font-size: 0.68rem;
+      color: var(--muted);
+      font-family: var(--editor-font);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .saved-actions { display: flex; gap: 4px; flex-shrink: 0; }
+    .saved-btn {
+      padding: 4px 8px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text2);
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      transition: all var(--transition);
+    }
+    .saved-btn:hover { color: var(--accent1); border-color: var(--accent1); }
+    .saved-btn.delete:hover { color: var(--error); border-color: var(--error); }
+    .no-saved {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    .save-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .save-input {
+      flex: 1;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      color: var(--text);
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      outline: none;
+      font-family: var(--font);
+    }
+    .save-input:focus { border-color: var(--accent1); }
+    .save-input::placeholder { color: var(--muted); opacity: 0.5; }
+    .save-btn {
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--grad);
+      border-radius: var(--radius-xs);
+      transition: all var(--transition);
+    }
+    .save-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,124,240,0.3); }
+
+    /* Code Generator */
+    .code-lang-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .code-lang-tab {
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text2);
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: var(--editor-font);
+    }
+    .code-lang-tab:hover { color: var(--text); }
+    .code-lang-tab.active {
+      color: #fff;
+      background: var(--accent1);
+      border-color: var(--accent1);
+    }
+    .code-output {
+      position: relative;
+    }
+    .code-block {
+      padding: 14px;
+      font-family: var(--editor-font);
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: var(--text2);
+      background: var(--bg1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 300px;
+      overflow: auto;
+    }
+    .code-block::-webkit-scrollbar { width: 6px; }
+    .code-block::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
+    .code-copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+    }
+
+    /* Explanation */
+    .explanation-content {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--text2);
+    }
+    .explanation-token {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin: 3px;
+      padding: 4px 10px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-family: var(--editor-font);
+      font-size: 0.82rem;
+    }
+    .explanation-token-char {
+      font-weight: 700;
+      color: var(--accent1);
+    }
+    .explanation-token-desc {
+      font-family: var(--font);
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* =============================================
+       IMPORT/EXPORT SECTION IN TOOLBAR
+    ============================================= */
+    .import-export-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    /* =============================================
+       TOAST NOTIFICATION
+    ============================================= */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      box-shadow: var(--shadow);
+      z-index: 5000;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      pointer-events: none;
+    }
+    .toast.active {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    .toast-icon { font-size: 1.1rem; }
+
+    /* =============================================
+       HOW IT WORKS, FEATURES & FAQ
+    ============================================= */
+    .howto-section, .features-section, .faq-section {
+      padding: 60px 24px;
+    }
+    .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent1);
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--text2);
+      max-width: 560px;
+      line-height: 1.6;
+    }
+
+    .howto-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 36px;
+    }
+    .step-card { text-align: center; }
+    .step-number {
+      width: 48px; height: 48px;
+      margin: 0 auto 14px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--grad); color: #fff;
+      font-size: 1.1rem; font-weight: 800;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0,124,240,0.3);
+    }
+    .step-title {
+      font-size: 0.95rem; font-weight: 700;
+      margin-bottom: 6px; color: var(--text);
+    }
+    .step-desc {
+      font-size: 0.8rem; color: var(--text2); line-height: 1.5;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 36px;
+    }
+    .feature-card {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      transition: all var(--transition);
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0,124,240,0.3);
+      box-shadow: var(--shadow-sm);
+    }
+    .feature-icon { font-size: 2rem; margin-bottom: 12px; }
+    .feature-title {
+      font-size: 1rem; font-weight: 700;
+      margin-bottom: 8px; color: var(--text);
+    }
+    .feature-desc {
+      font-size: 0.85rem; color: var(--text2); line-height: 1.6;
+    }
+
+    .faq-list {
+      display: flex; flex-direction: column;
+      gap: 10px; max-width: 700px;
+      margin: 36px auto 0;
+    }
+    .faq-item {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      padding: 16px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px;
+      font-size: 0.9rem; font-weight: 600;
+      color: var(--text); background: none;
+      text-align: left; cursor: pointer;
+      transition: color var(--transition);
+    }
+    .faq-q:hover { color: var(--accent1); }
+    .faq-q-icon {
+      width: 22px; height: 22px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; flex-shrink: 0;
+      transition: all var(--transition);
+    }
+    .faq-item.open .faq-q-icon {
+      transform: rotate(45deg);
+      background: rgba(0,124,240,0.15);
+      border-color: var(--accent1);
+      color: var(--accent1);
+    }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-a-inner {
+      padding: 0 20px 16px;
+      font-size: 0.85rem; color: var(--text2); line-height: 1.7;
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    .section-divider {
+      height: 1px; background: var(--line);
+      max-width: var(--max); margin: 0 auto;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 36px 24px 24px;
+      background: rgba(3,7,18,0.6);
+    }
+    [data-theme="light"] .footer { background: rgba(241,245,249,0.8); }
+
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-brand {
+      display: flex; align-items: center; gap: 10px; font-weight: 700;
+    }
+    .footer-brand-icon {
+      width: 32px; height: 32px;
+      background: var(--grad); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; font-weight: 900; color: #fff;
+    }
+    .footer-brand-name {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-link {
+      font-size: 0.85rem; color: var(--muted);
+      transition: color var(--transition);
+    }
+    .footer-link:hover { color: var(--text); }
+    .footer-back-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--accent1);
+      padding: 8px 16px;
+      border-radius: var(--radius-xs);
+      background: rgba(0,124,240,0.1);
+      border: 1px solid rgba(0,124,240,0.2);
+      transition: all var(--transition);
+    }
+    .footer-back-btn:hover { background: rgba(0,124,240,0.15); }
+    .footer-copy {
+      font-size: 0.78rem; color: var(--muted);
+      width: 100%; text-align: center;
+      padding-top: 20px; border-top: 1px solid var(--line);
+      margin-top: 12px;
+    }
+
+    /* =============================================
+       HIDDEN FILE INPUT
+    ============================================= */
+    .hidden-input { display: none; }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 900px) {
+      .editor-main { grid-template-columns: 1fr; }
+      .editor-pane + .editor-pane { border-left: none; border-top: 1px solid var(--line); }
+      .howto-steps { grid-template-columns: 1fr 1fr; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-primary, .header-actions { display: none; }
+      .hamburger { display: flex; }
+      .mobile-panel-tabs { display: flex; }
+
+      .tool-toolbar { padding: 8px 10px; gap: 4px; }
+      .toolbar-btn { padding: 5px 8px; font-size: 0.72rem; }
+      .toolbar-btn .btn-label { display: none; }
+
+      .editor-pane[data-panel] { display: none; }
+      .editor-pane[data-panel].mobile-active { display: flex; }
+
+      .stats-panel { flex-wrap: wrap; }
+      .stat-item { min-width: 80px; padding: 8px 10px; }
+      .stat-value { font-size: 0.8rem; }
+
+      .pattern-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .howto-steps { grid-template-columns: 1fr; }
+      .pattern-grid { grid-template-columns: 1fr; }
+      .replace-row { flex-direction: column; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 36px 16px 20px; }
+      .tool-section { padding: 8px 8px 40px; }
+      .tool-toolbar { gap: 3px; }
+      .collapsible-inner { padding: 0 10px 10px; }
+    }
+  </style>
 </head>
-
 <body>
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Header -->
-    <header class="header-glass fixed w-full top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                         Tool Xeno
-                    </div>
-                    <div class="hidden md:block text-sm opacity-70">
-                        Professional Regex Tester
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <nav class="hidden md:flex space-x-2">
-                        <a href="#tester" class="nav-link">Tester</a>
-                        <a href="#patterns" class="nav-link">Patterns</a>
-                        <a href="#help" class="nav-link">Help</a>
-                    </nav>
-                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
-                </div>
-            </div>
+  <!-- Background -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="https://toolxeno.com/" class="logo" aria-label="Tool Xeno – Home">
+          <div class="logo-icon" aria-hidden="true">X</div>
+          <span class="logo-text">Tool Xeno</span>
+        </a>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <a href="https://toolxeno.com/" class="nav-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="nav-link">All Tools</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">☀️ Light</button>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </header>
-    
-    <!-- Main Content -->
-    <main class="pt-20 pb-10">
-        <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-16 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                Professional Regex Tester
-            </h1>
-            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
-                Advanced regular expression testing with real-time matching, group analysis, pattern explanations, 
-                and comprehensive visualization tools for developers and data analysts.
-            </p>
-        </section>
-        
-        <!-- Main Tester Interface -->
-        <section id="tester" class="container mx-auto px-6">
-            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
-                <!-- Input Panel -->
-                <div class="xl:col-span-2 space-y-6">
-                    <!-- Regex Input -->
-                    <div class="glass-card p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-semibold flex items-center">
-                                <i class="fas fa-code mr-3"></i>
-                                Regular Expression
-                            </h3>
-                            <div class="flex gap-2">
-                                <button id="clearRegex" class="btn-secondary px-3 py-2 text-sm">
-                                    <i class="fas fa-eraser mr-1"></i>Clear
-                                </button>
-                                <button id="testRegex" class="btn-gradient px-4 py-2 text-sm">
-                                    <i class="fas fa-play mr-2"></i>Test
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="relative mb-4">
-                            <input type="text" id="regexInput" class="regex-input w-full" 
-                                   placeholder="Enter your regular expression (e.g., \d+|\w+@\w+\.\w+)" 
-                                   value="/\b\w+@\w+\.\w+\b/g">
-                            <div id="regexError" class="text-red-400 text-sm mt-2 hidden"></div>
-                        </div>
-                        
-                        <!-- Flags -->
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium mb-3">Flags</label>
-                            <div class="flag-selector">
-                                <div class="flag-option active" data-flag="g" title="Global">g</div>
-                                <div class="flag-option" data-flag="i" title="Case Insensitive">i</div>
-                                <div class="flag-option" data-flag="m" title="Multiline">m</div>
-                                <div class="flag-option" data-flag="s" title="Dotall">s</div>
-                                <div class="flag-option" data-flag="u" title="Unicode">u</div>
-                                <div class="flag-option" data-flag="y" title="Sticky">y</div>
-                            </div>
-                        </div>
-                        
-                        <!-- Quick Actions -->
-                        <div class="flex flex-wrap gap-2">
-                            <button class="btn-secondary px-3 py-1 text-sm" onclick="insertPattern('\\d+')">
-                                <i class="fas fa-plus mr-1"></i>Numbers
-                            </button>
-                            <button class="btn-secondary px-3 py-1 text-sm" onclick="insertPattern('\\w+')">
-                                <i class="fas fa-plus mr-1"></i>Words
-                            </button>
-                            <button class="btn-secondary px-3 py-1 text-sm" onclick="insertPattern('[a-zA-Z]+')">
-                                <i class="fas fa-plus mr-1"></i>Letters
-                            </button>
-                            <button class="btn-secondary px-3 py-1 text-sm" onclick="insertPattern('\\s+')">
-                                <i class="fas fa-plus mr-1"></i>Whitespace
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Test String Input -->
-                    <div class="glass-card p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-semibold flex items-center">
-                                <i class="fas fa-file-text mr-3"></i>
-                                Test String
-                            </h3>
-                            <div class="flex gap-2">
-                                <button id="clearTest" class="btn-secondary px-3 py-2 text-sm">
-                                    <i class="fas fa-eraser mr-1"></i>Clear
-                                </button>
-                                <button id="loadSample" class="btn-warning px-3 py-2 text-sm">
-                                    <i class="fas fa-file-import mr-1"></i>Sample
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <textarea id="testString" class="code-input w-full h-32 resize-y" 
-                                  placeholder="Enter your test string here...">Contact us at support@example.com or sales@company.org
-Visit our website: https://www.example.com
-Phone numbers: +1-555-0123, (555) 123-4567
-Dates: 2025-01-15, 12/31/2024, Jan 1st 2025</textarea>
-                        
-                        <!-- Replace Mode -->
-                        <div class="mt-4 p-4 bg-black bg-opacity-20 rounded-lg">
-                            <div class="flex items-center justify-between mb-3">
-                                <label class="text-sm font-medium flex items-center">
-                                    <input type="checkbox" id="replaceMode" class="mr-2">
-                                    Replace Mode
-                                </label>
-                                <button id="doReplace" class="btn-success px-3 py-1 text-sm hidden">
-                                    <i class="fas fa-exchange-alt mr-1"></i>Replace
-                                </button>
-                            </div>
-                            <input type="text" id="replaceWith" class="code-input w-full hidden" 
-                                   placeholder="Replacement string (use $1, $2 for groups)">
-                        </div>
-                    </div>
-                    
-                    <!-- Results Display -->
-                    <div class="glass-card p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-semibold flex items-center">
-                                <i class="fas fa-search mr-3"></i>
-                                Results & Visualization
-                            </h3>
-                            <div class="flex gap-2">
-                                <button id="copyMatches" class="btn-success px-3 py-2 text-sm">
-                                    <i class="fas fa-copy mr-1"></i>Copy Matches
-                                </button>
-                                <button id="exportResults" class="btn-secondary px-3 py-2 text-sm">
-                                    <i class="fas fa-download mr-1"></i>Export
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div id="highlightedText" class="code-input w-full h-32 overflow-y-auto" style="white-space: pre-wrap; font-family: 'Fira Code', monospace;">
-                            <!-- Highlighted matches will appear here -->
-                        </div>
-                        
-                        <!-- Statistics -->
-                        <div class="stats-grid mt-6">
-                            <div class="stat-card">
-                                <div class="stat-value" id="totalMatches">0</div>
-                                <div class="text-sm opacity-70">Total Matches</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-value" id="totalGroups">0</div>
-                                <div class="text-sm opacity-70">Capture Groups</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-value" id="executionTime">0ms</div>
-                                <div class="text-sm opacity-70">Execution Time</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-value" id="regexLength">0</div>
-                                <div class="text-sm opacity-70">Pattern Length</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Sidebar Panel -->
-                <div class="space-y-6">
-                    <!-- Group Analysis -->
-                    <div class="glass-card p-6">
-                        <h3 class="text-lg font-semibold mb-4 flex items-center">
-                            <i class="fas fa-layer-group mr-3"></i>
-                            Group Analysis
-                        </h3>
-                        <div id="groupAnalysis">
-                            <div class="text-center opacity-50 py-8">
-                                <i class="fas fa-info-circle text-2xl mb-2"></i>
-                                <div>Test a regex to see group analysis</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Pattern Explanation -->
-                    <div class="glass-card p-6">
-                        <h3 class="text-lg font-semibold mb-4 flex items-center">
-                            <i class="fas fa-lightbulb mr-3"></i>
-                            Pattern Explanation
-                        </h3>
-                        <div id="patternExplanation">
-                            <div class="text-center opacity-50 py-8">
-                                <i class="fas fa-question-circle text-2xl mb-2"></i>
-                                <div>Enter a regex to see explanation</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Common Patterns Library -->
-                    <div class="glass-card p-6">
-                        <h3 class="text-lg font-semibold mb-4 flex items-center">
-                            <i class="fas fa-book mr-3"></i>
-                            Pattern Library
-                        </h3>
-                        <div class="pattern-library" id="patternLibrary">
-                            <!-- Patterns will be loaded here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <!-- Footer -->
-    <footer class="text-center py-8 opacity-50">
-        <div class="container mx-auto px-6">
-            <p>&copy; 2025 Tool Xeno. All rights reserved. Professional Regex Tester.</p>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+      <a href="https://toolxeno.com/" class="mobile-nav-link">🏠 Home</a>
+      <a href="https://toolxeno.com/#tools" class="mobile-nav-link">🛠️ All Tools</a>
+      <a href="#features" class="mobile-nav-link">⚡ Features</a>
+      <a href="#faq" class="mobile-nav-link">❓ FAQ</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Free · No Signup · Privacy-First
+      </div>
+      <h1 class="hero-h1" id="hero-heading">
+        Regex <span class="grad-text">Tester</span>
+      </h1>
+      <p class="hero-sub">
+        Test regular expressions in real-time with live match highlighting, capture groups, replace preview, code generation, and pattern library — all securely in your browser.
+      </p>
+      <div class="hero-trust">
+        <span class="trust-item"><span class="trust-dot">✦</span> Real-Time Matching</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> Capture Groups</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> Code Generator</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> Error Detection</span>
+      </div>
+    </section>
+
+    <!-- TOOL SECTION -->
+    <section class="tool-section" aria-label="Regex Tester Tool">
+      <article class="tool-container">
+        <!-- Toolbar -->
+        <div class="tool-toolbar">
+          <div class="import-export-row">
+            <button class="toolbar-btn" id="btn-export" title="Export session as JSON">📤 <span class="btn-label">Export</span></button>
+            <button class="toolbar-btn" id="btn-import" title="Import JSON session">📥 <span class="btn-label">Import</span></button>
+            <button class="toolbar-btn" id="btn-share" title="Share via URL">🔗 <span class="btn-label">Share</span></button>
+          </div>
+          <div class="toolbar-spacer"></div>
+          <button class="toolbar-btn" id="btn-explain" title="Explain regex">💡 <span class="btn-label">Explain</span></button>
+          <button class="toolbar-btn primary" id="btn-save" title="Save current test case">💾 <span class="btn-label">Save</span></button>
+          <button class="toolbar-btn" id="btn-clear-all" title="Clear All">🗑️ <span class="btn-label">Clear</span></button>
+          <input type="file" id="file-import" class="hidden-input" accept=".json" />
         </div>
+
+        <!-- Mobile Panel Tabs -->
+        <div class="mobile-panel-tabs" id="mobile-panel-tabs">
+          <button class="mobile-panel-tab active" data-panel="pattern">📝 Pattern</button>
+          <button class="mobile-panel-tab" data-panel="test">📋 Test String</button>
+          <button class="mobile-panel-tab" data-panel="results">🔍 Results</button>
+        </div>
+
+        <!-- Editor 3-Column -->
+        <div class="editor-main" id="editor-main">
+          <!-- Pattern & Flags Pane -->
+          <div class="editor-pane" data-panel="pattern">
+            <div class="pane-header">
+              <div class="pane-title">
+                📝 Pattern
+              </div>
+            </div>
+            <div class="pattern-input-wrap">
+              <span class="pattern-slash">/</span>
+              <input type="text" class="pattern-input" id="pattern-input" placeholder="Enter regex pattern..." spellcheck="false" aria-label="Regex pattern" />
+              <span class="flags-display" id="flags-display" title="Click to toggle flags panel">g</span>
+            </div>
+            <div class="flags-bar" id="flags-bar">
+              <button class="flag-btn active" data-flag="g" title="Global">g <span class="flag-desc">global</span></button>
+              <button class="flag-btn" data-flag="i" title="Case-insensitive">i <span class="flag-desc">ignoreCase</span></button>
+              <button class="flag-btn" data-flag="m" title="Multiline">m <span class="flag-desc">multiline</span></button>
+              <button class="flag-btn" data-flag="s" title="Dotall">s <span class="flag-desc">dotAll</span></button>
+              <button class="flag-btn" data-flag="u" title="Unicode">u <span class="flag-desc">unicode</span></button>
+            </div>
+            <!-- Error bar -->
+            <div class="error-bar" id="error-bar">
+              <span>⚠️</span>
+              <span id="error-text"></span>
+              <button class="error-fix-btn" id="error-fix-btn" style="display:none;"></button>
+            </div>
+            <!-- Explanation inline -->
+            <div class="explanation-content" id="explanation-inline" style="padding:12px 14px;display:none;border-top:1px solid var(--line);"></div>
+          </div>
+
+          <!-- Test String Pane -->
+          <div class="editor-pane" data-panel="test">
+            <div class="pane-header">
+              <div class="pane-title">
+                📋 Test String
+                <span class="pane-badge" id="test-length-badge">0 chars</span>
+              </div>
+              <div class="pane-actions">
+                <button class="pane-btn" id="btn-paste-test" title="Paste from clipboard">📋 Paste</button>
+                <button class="pane-btn" id="btn-clear-test" title="Clear test string">🗑️</button>
+              </div>
+            </div>
+            <div class="test-highlight-wrap">
+              <div class="test-highlight-layer" id="test-highlight-layer"></div>
+              <textarea class="test-textarea" id="test-textarea" placeholder="Enter test string here...&#10;&#10;Matches will be highlighted in real-time." spellcheck="false" aria-label="Test string"></textarea>
+            </div>
+          </div>
+
+          <!-- Results Pane -->
+          <div class="editor-pane" data-panel="results">
+            <div class="pane-header">
+              <div class="pane-title">
+                🔍 Results
+                <span class="pane-badge" id="match-count-badge">0 matches</span>
+              </div>
+            </div>
+            <div class="match-actions-bar" id="match-actions-bar">
+              <button class="match-action-btn" id="btn-sort-az" title="Sort A-Z">↑ A-Z</button>
+              <button class="match-action-btn" id="btn-sort-za" title="Sort Z-A">↓ Z-A</button>
+              <button class="match-action-btn" id="btn-sort-len" title="Sort by length">↕ Length</button>
+              <button class="match-action-btn" id="btn-unique" title="Remove duplicates">✦ Unique</button>
+              <button class="match-action-btn" id="btn-copy-matches" title="Copy matches (one per line)">📋 Lines</button>
+              <button class="match-action-btn" id="btn-copy-js-array" title="Copy as JS array">📋 JS</button>
+              <button class="match-action-btn" id="btn-copy-json-array" title="Copy as JSON array">📋 JSON</button>
+            </div>
+            <div class="results-content" id="results-content">
+              <div class="no-results" id="no-results">
+                <div class="no-results-icon">🔍</div>
+                <div class="no-results-text">Enter a pattern and test string to see matches</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Panel -->
+        <div class="stats-panel">
+          <div class="stat-item">
+            <span class="stat-label">Matches</span>
+            <span class="stat-value" id="stat-matches">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Groups</span>
+            <span class="stat-value" id="stat-groups">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Time</span>
+            <span class="stat-value" id="stat-time">0<span class="stat-unit">ms</span></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Test Length</span>
+            <span class="stat-value" id="stat-test-len">0<span class="stat-unit">chars</span></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Pattern Length</span>
+            <span class="stat-value" id="stat-pattern-len">0<span class="stat-unit">chars</span></span>
+          </div>
+        </div>
+
+        <!-- Replace Panel -->
+        <div class="collapsible-panel" id="replace-panel">
+          <button class="collapsible-toggle" id="replace-toggle">
+            🔄 Replace — Find & Replace with Capture Groups
+            <span class="collapsible-icon">▼</span>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-inner">
+              <div class="replace-row">
+                <div class="replace-input-wrap">
+                  <label class="replace-label" for="replace-input">Replace With</label>
+                  <input type="text" class="replace-input" id="replace-input" placeholder="e.g. $1-$2 or ${group}" />
+                </div>
+              </div>
+              <div class="replace-input-wrap" style="margin-bottom:8px;">
+                <label class="replace-label">Preview</label>
+                <div class="replace-result" id="replace-result">Replaced text will appear here...</div>
+              </div>
+              <div class="replace-count" id="replace-count"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Patterns Library Panel -->
+        <div class="collapsible-panel" id="patterns-panel">
+          <button class="collapsible-toggle" id="patterns-toggle">
+            📚 Common Patterns — Quick-Load Regex Templates
+            <span class="collapsible-icon">▼</span>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-inner">
+              <div class="pattern-tabs" id="pattern-tabs">
+                <button class="pattern-tab active" data-cat="all">All</button>
+                <button class="pattern-tab" data-cat="web">Web</button>
+                <button class="pattern-tab" data-cat="data">Data</button>
+                <button class="pattern-tab" data-cat="validation">Validation</button>
+              </div>
+              <div class="pattern-grid" id="pattern-grid"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Saved Cases Panel -->
+        <div class="collapsible-panel" id="saved-panel">
+          <button class="collapsible-toggle" id="saved-toggle">
+            💾 Saved Cases — Your Regex Library
+            <span class="collapsible-icon">▼</span>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-inner">
+              <div class="save-row">
+                <input type="text" class="save-input" id="save-name-input" placeholder="Name this test case..." />
+                <button class="save-btn" id="btn-save-case">💾 Save</button>
+              </div>
+              <div class="saved-list" id="saved-list"></div>
+              <div style="margin-top:10px;display:flex;gap:6px;">
+                <button class="toolbar-btn" id="btn-export-saved" style="font-size:0.72rem;">📤 Export All Saved</button>
+                <button class="toolbar-btn" id="btn-clear-saved" style="font-size:0.72rem;">🗑️ Clear All</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code Generator Panel -->
+        <div class="collapsible-panel" id="codegen-panel">
+          <button class="collapsible-toggle" id="codegen-toggle">
+            💻 Code Generator — Multi-Language Regex Code
+            <span class="collapsible-icon">▼</span>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-inner">
+              <div class="code-lang-tabs" id="code-lang-tabs">
+                <button class="code-lang-tab active" data-lang="javascript">JavaScript</button>
+                <button class="code-lang-tab" data-lang="python">Python</button>
+                <button class="code-lang-tab" data-lang="php">PHP</button>
+                <button class="code-lang-tab" data-lang="java">Java</button>
+                <button class="code-lang-tab" data-lang="csharp">C#</button>
+                <button class="code-lang-tab" data-lang="go">Go</button>
+                <button class="code-lang-tab" data-lang="rust">Rust</button>
+              </div>
+              <div class="code-output">
+                <pre class="code-block" id="code-block"></pre>
+                <button class="pane-btn code-copy-btn" id="btn-copy-code" title="Copy code">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </article>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="howto-section" aria-labelledby="howto-heading">
+      <div class="section-inner">
+        <span class="section-label">How It Works</span>
+        <h2 class="section-title" id="howto-heading">Test Regex in <span class="grad-text">4 Simple Steps</span></h2>
+        <p class="section-sub">No signup, no server. Just type your regex and see results instantly.</p>
+        <div class="howto-steps">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-title">Enter Pattern</div>
+            <div class="step-desc">Type or paste your regex pattern in the pattern input field.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-title">Add Test String</div>
+            <div class="step-desc">Enter the text you want to match against.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-title">Set Flags</div>
+            <div class="step-desc">Toggle regex flags: global, case-insensitive, multiline, dotall, unicode.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <div class="step-title">View Results</div>
+            <div class="step-desc">See highlighted matches, capture groups, use replace, or generate code.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- FEATURES -->
+    <section class="features-section" id="features" aria-labelledby="features-heading">
+      <div class="section-inner">
+        <span class="section-label">Features</span>
+        <h2 class="section-title" id="features-heading">Everything You Need for <span class="grad-text">Regex Testing</span></h2>
+        <p class="section-sub">Professional-grade regex testing with powerful features for developers.</p>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-title">Real-Time Matching</div>
+            <div class="feature-desc">See matches highlighted instantly as you type. No need to click a button — results update in real-time with debounced processing.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <div class="feature-title">Capture Groups</div>
+            <div class="feature-desc">View all captured groups with color coding. Named groups are displayed with their names for easy reference.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔄</div>
+            <div class="feature-title">Find & Replace</div>
+            <div class="feature-desc">Test replacements with capture group references ($1, $2, ${name}). See a live preview of the replaced text.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💡</div>
+            <div class="feature-title">Regex Explanation</div>
+            <div class="feature-desc">Get a human-readable breakdown of your regex pattern. Understand every token, quantifier, and anchor.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💻</div>
+            <div class="feature-title">Code Generator</div>
+            <div class="feature-desc">Generate ready-to-use regex code in JavaScript, Python, PHP, Java, C#, Go, and Rust.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📚</div>
+            <div class="feature-title">Pattern Library</div>
+            <div class="feature-desc">Quick-load common regex patterns for emails, URLs, phone numbers, IP addresses, and more.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💾</div>
+            <div class="feature-title">Save & Export</div>
+            <div class="feature-desc">Save test cases to localStorage, export as JSON, import sessions, and share via URL.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚠️</div>
+            <div class="feature-title">Error Detection</div>
+            <div class="feature-desc">Instantly see regex errors with position pinpointing and suggested fixes for common mistakes.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-title">100% Private</div>
+            <div class="feature-desc">All processing happens in your browser. No data is ever sent to any server.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- FAQ -->
+    <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+      <div class="section-inner">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title" id="faq-heading">Frequently Asked <span class="grad-text">Questions</span></h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q">What is a regular expression?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">A regular expression (regex) is a sequence of characters that defines a search pattern. It is used for string matching, validation, search-and-replace, and text parsing. Regex is supported in virtually every programming language.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">What regex engine does this tool use?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">This tool uses the browser's built-in JavaScript regex engine (ECMAScript standard). The code generator provides equivalent patterns and usage examples for Python, PHP, Java, C#, Go, and Rust. Note that some advanced features may differ between engines.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">What do the regex flags mean?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner"><strong>g (global)</strong> — Find all matches instead of stopping at the first.<br><strong>i (case-insensitive)</strong> — Match both upper and lower case letters.<br><strong>m (multiline)</strong> — Make ^ and $ match the start/end of each line.<br><strong>s (dotall)</strong> — Make . match newline characters too.<br><strong>u (unicode)</strong> — Enable full Unicode matching support.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How do capture groups work?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Capture groups are parts of your pattern enclosed in parentheses. Each group captures the text matched by that part of the pattern. Use (?&lt;name&gt;...) for named groups. In replace, reference them with $1, $2, etc., or ${name} for named groups.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Can I save my regex patterns?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes! Use the Save button to store test cases in your browser's localStorage. Each saved case includes the pattern, flags, and test string. You can also export all saved cases as JSON, import them later, or share a regex via URL using the hash parameter.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How does the share via URL feature work?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Click the Share button to encode your current pattern and flags into the URL hash. Anyone opening that URL will see your regex pre-loaded. This works for sharing patterns without needing to save or export files.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Is my data safe?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Absolutely. All regex testing happens entirely in your browser. No data is ever sent to any server. Your test strings and patterns remain completely private. Saved data is stored only in your browser's localStorage.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How do I use the code generator?<span class="faq-q-icon">+</span></button>
+            <div class="faq-a"><div class="faq-a-inner">Enter your regex pattern and flags, then open the Code Generator panel. Select a programming language to see ready-to-use code snippets that implement your regex with proper syntax for that language, including match and replace examples.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-icon">X</div>
+          <span class="footer-brand-name">Tool Xeno</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://toolxeno.com/" class="footer-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="footer-link">All Tools</a>
+          <a href="https://toolxeno.com/privacy.html" class="footer-link">Privacy</a>
+          <a href="https://toolxeno.com/terms.html" class="footer-link">Terms</a>
+        </div>
+        <a href="https://toolxeno.com/#tools" class="footer-back-btn">← Back to All Tools</a>
+        <div class="footer-copy">© 2025 Tool Xeno. All rights reserved. Built with ❤️ for developers.</div>
+      </div>
     </footer>
-    
-    <script>
-        // Global variables
-        let currentRegex = null;
-        let currentFlags = 'g';
-        let matches = [];
-        let executionStartTime = 0;
-        
-        // Common patterns library
-        const patternLibrary = [
-            {
-                name: "Email Address",
-                pattern: "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b",
-                description: "Matches valid email addresses",
-                category: "Common"
-            },
-            {
-                name: "URL/Website",
-                pattern: "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)",
-                description: "Matches HTTP and HTTPS URLs",
-                category: "Web"
-            },
-            {
-                name: "Phone Number (US)",
-                pattern: "(\\+1[-\\s]?)?(\\([0-9]{3}\\)|[0-9]{3})[-\\s]?[0-9]{3}[-\\s]?[0-9]{4}",
-                description: "Matches US phone numbers in various formats",
-                category: "Common"
-            },
-            {
-                name: "Date (YYYY-MM-DD)",
-                pattern: "\\d{4}-\\d{2}-\\d{2}",
-                description: "Matches dates in ISO format",
-                category: "Date/Time"
-            },
-            {
-                name: "Date (MM/DD/YYYY)",
-                pattern: "\\d{1,2}\\/\\d{1,2}\\/\\d{4}",
-                description: "Matches US date format",
-                category: "Date/Time"
-            },
-            {
-                name: "IPv4 Address",
-                pattern: "\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b",
-                description: "Matches valid IPv4 addresses",
-                category: "Network"
-            },
-            {
-                name: "Credit Card",
-                pattern: "\\b(?:\\d{4}[-\\s]?){3}\\d{4}\\b",
-                description: "Matches credit card numbers",
-                category: "Financial"
-            },
-            {
-                name: "Hex Color Code",
-                pattern: "#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})",
-                description: "Matches hex color codes",
-                category: "Web"
-            },
-            {
-                name: "HTML Tag",
-                pattern: "<\\/?[a-zA-Z][^>]*>",
-                description: "Matches HTML tags",
-                category: "Web"
-            },
-            {
-                name: "Password (Strong)",
-                pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-                description: "Strong password with 8+ chars, upper, lower, digit, special",
-                category: "Validation"
-            },
-            {
-                name: "Integer Numbers",
-                pattern: "-?\\d+",
-                description: "Matches positive and negative integers",
-                category: "Numbers"
-            },
-            {
-                name: "Decimal Numbers",
-                pattern: "-?\\d+(?:\\.\\d+)?",
-                description: "Matches decimal numbers",
-                category: "Numbers"
-            },
-            {
-                name: "Whitespace",
-                pattern: "\\s+",
-                description: "Matches whitespace characters",
-                category: "Text"
-            },
-            {
-                name: "Word Characters",
-                pattern: "\\w+",
-                description: "Matches word characters (letters, digits, underscore)",
-                category: "Text"
-            },
-            {
-                name: "Non-Word Characters",
-                pattern: "\\W+",
-                description: "Matches non-word characters",
-                category: "Text"
-            }
-        ];
-        
-        // Sample test strings
-        const sampleStrings = [
-            `Contact Information:
-Email: john.doe@example.com, support@company.org, info@website.net
-Phone: +1-555-0123, (555) 123-4567, 555.987.6543
-Website: https://www.example.com, http://company.org
+  </div>
 
-Dates and Times:
-ISO Format: 2025-01-15, 2024-12-31, 2025-06-30
-US Format: 01/15/2025, 12/31/2024, 06/30/2025
-European: 15/01/2025, 31/12/2024, 30/06/2025
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <span class="toast-icon" id="toast-icon">✅</span>
+    <span id="toast-text"></span>
+  </div>
 
-Numbers and Codes:
-Credit Cards: 4111-1111-1111-1111, 5555 5555 5555 4444
-IPv4: 192.168.1.1, 10.0.0.1, 127.0.0.1
-Hex Colors: #FF0000, #00FF00, #0000FF, #FFF
+  <script>
+    /* =============================================
+       STATE
+    ============================================= */
+    const state = {
+      pattern: '',
+      flags: { g: true, i: false, m: false, s: false, u: false },
+      testString: '',
+      replaceString: '',
+      matches: [],
+      error: null,
+      highlightedMatch: -1,
+      codeLang: 'javascript',
+      patternCat: 'all'
+    };
 
-Text Patterns:
-Passwords: MyP@ssw0rd!, SecurePass123#
-HTML: <div class="container"><p>Hello World!</p></div>
-Special: @username, #hashtag, $price, %discount`,
+    const MATCH_COLORS = [
+      'var(--match1)', 'var(--match2)', 'var(--match3)', 'var(--match4)', 'var(--match5)',
+      'rgba(16,185,129,0.3)', 'rgba(139,92,246,0.3)'
+    ];
+    const MATCH_COLOR_HEX = [
+      '#007cf0', '#00dfd8', '#7928ca', '#ff0080', '#f59e0b', '#10b981', '#8b5cf6'
+    ];
 
-            `Log File Sample:
-2025-01-15 14:30:15 [INFO] User login successful: user@domain.com
-2025-01-15 14:30:22 [ERROR] Database connection failed: timeout after 30s
-2025-01-15 14:30:45 [WARN] High memory usage detected: 85%
-2025-01-15 14:31:02 [DEBUG] Processing request ID: req_abc123def456
+    /* =============================================
+       DOM REFS
+    ============================================= */
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => document.querySelectorAll(sel);
 
-Network Traffic:
-192.168.1.100 -> 203.0.113.50:443 (HTTPS)
-10.0.0.15 -> 8.8.8.8:53 (DNS)
-172.16.0.1 -> 172.16.0.255:80 (HTTP)
+    const patternInput = $('#pattern-input');
+    const flagsDisplay = $('#flags-display');
+    const flagsBar = $('#flags-bar');
+    const testTextarea = $('#test-textarea');
+    const testHighlightLayer = $('#test-highlight-layer');
+    const resultsContent = $('#results-content');
+    const noResults = $('#no-results');
+    const errorBar = $('#error-bar');
+    const errorText = $('#error-text');
+    const errorFixBtn = $('#error-fix-btn');
+    const explanationInline = $('#explanation-inline');
+    const replaceInput = $('#replace-input');
+    const replaceResult = $('#replace-result');
+    const replaceCount = $('#replace-count');
+    const codeBlock = $('#code-block');
+    const saveNameInput = $('#save-name-input');
+    const savedList = $('#saved-list');
+    const patternGrid = $('#pattern-grid');
+    const toast = $('#toast');
+    const toastIcon = $('#toast-icon');
+    const toastText = $('#toast-text');
 
-API Responses:
-{"status": 200, "message": "success", "data": {"id": 12345}}
-{"error": "invalid_token", "code": 401, "timestamp": "2025-01-15T14:30:15Z"}`,
+    /* =============================================
+       DEBOUNCE
+    ============================================= */
+    let debounceTimer = null;
+    function debounce(fn, ms = 300) {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(fn, ms);
+    }
 
-            `E-commerce Data:
-Product: iPhone 15 Pro - $999.99 (SKU: IPH15PRO128)
-Product: MacBook Air M3 - $1,199.00 (SKU: MBA13M3256)
-Order #ORD-2025-001234 - Total: $2,198.99
+    /* =============================================
+       TOAST
+    ============================================= */
+    let toastTimer = null;
+    function showToast(msg, icon = '✅') {
+      toastIcon.textContent = icon;
+      toastText.textContent = msg;
+      toast.classList.add('active');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('active'), 2500);
+    }
 
-Customer Reviews:
-★★★★★ "Excellent product! 5/5 stars" - customer@email.com
-★★★☆☆ "Good but expensive, 3.5/5" - buyer@domain.org
-★★★★☆ "Fast shipping, 4/5" - user123@service.net
+    /* =============================================
+       FLAGS
+    ============================================= */
+    function getFlagsString() {
+      return Object.entries(state.flags).filter(([,v]) => v).map(([k]) => k).join('');
+    }
 
-Social Media:
-@techreview: Check out our latest #iPhone15Pro review! 📱✨
-@dealfinder: 50% OFF selected items! Use code SAVE50 💰
-#trending #technology #deals #shopping`
-        ];
-        
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeParticles();
-            initializeControls();
-            loadPatternLibrary();
-            testRegex(); // Initial test with sample
+    function updateFlagsDisplay() {
+      const f = getFlagsString() || 'none';
+      flagsDisplay.textContent = f;
+    }
+
+    flagsBar.addEventListener('click', (e) => {
+      const btn = e.target.closest('.flag-btn');
+      if (!btn) return;
+      const flag = btn.dataset.flag;
+      state.flags[flag] = !state.flags[flag];
+      btn.classList.toggle('active', state.flags[flag]);
+      updateFlagsDisplay();
+      runMatch();
+    });
+
+    flagsDisplay.addEventListener('click', () => {
+      // toggle flags bar visibility if needed - it's always visible in this layout
+    });
+
+    /* =============================================
+       CORE REGEX MATCHING
+    ============================================= */
+    function runMatch() {
+      const pattern = patternInput.value;
+      const testStr = testTextarea.value;
+      state.pattern = pattern;
+      state.testString = testStr;
+
+      // Stats
+      $('#stat-pattern-len').innerHTML = pattern.length + '<span class="stat-unit">chars</span>';
+      $('#stat-test-len').innerHTML = testStr.length.toLocaleString() + '<span class="stat-unit">chars</span>';
+      $('#test-length-badge').textContent = testStr.length.toLocaleString() + ' chars';
+
+      // Clear error
+      errorBar.classList.remove('active');
+      errorFixBtn.style.display = 'none';
+      explanationInline.style.display = 'none';
+
+      if (!pattern) {
+        state.matches = [];
+        state.error = null;
+        updateUI();
+        return;
+      }
+
+      let regex;
+      const t0 = performance.now();
+      try {
+        regex = new RegExp(pattern, getFlagsString());
+      } catch (e) {
+        state.matches = [];
+        state.error = e;
+        showError(e, pattern);
+        updateUI();
+        return;
+      }
+
+      state.error = null;
+
+      try {
+        const matches = [];
+        if (state.flags.g) {
+          let m;
+          const safeRegex = new RegExp(pattern, getFlagsString());
+          // Protect against catastrophic backtracking
+          let count = 0;
+          const maxMatches = 10000;
+          while ((m = safeRegex.exec(testStr)) !== null) {
+            matches.push(m);
+            count++;
+            if (count >= maxMatches) break;
+            if (m[0].length === 0) safeRegex.lastIndex++;
+          }
+        } else {
+          const m = regex.exec(testStr);
+          if (m) matches.push(m);
+        }
+        state.matches = matches;
+      } catch (e) {
+        state.matches = [];
+        state.error = e;
+        showError(e, pattern);
+        updateUI();
+        return;
+      }
+
+      const elapsed = (performance.now() - t0).toFixed(2);
+      $('#stat-time').innerHTML = elapsed + '<span class="stat-unit">ms</span>';
+
+      updateUI();
+      updateHighlighting();
+      updateReplace();
+      updateCodegen();
+    }
+
+    function showError(e, pattern) {
+      const msg = e.message || String(e);
+      errorBar.classList.add('active');
+      errorText.textContent = msg;
+
+      // Try to suggest fix
+      const fixes = suggestFix(msg, pattern);
+      if (fixes.length > 0) {
+        errorFixBtn.style.display = 'inline-block';
+        errorFixBtn.textContent = 'Fix: ' + fixes[0].label;
+        errorFixBtn.onclick = () => {
+          patternInput.value = fixes[0].value;
+          runMatch();
+        };
+      } else {
+        errorFixBtn.style.display = 'none';
+      }
+
+      $('#stat-time').innerHTML = '—<span class="stat-unit">ms</span>';
+      updateHighlighting();
+    }
+
+    function suggestFix(msg, pattern) {
+      const fixes = [];
+      if (msg.includes('unterminated group') || msg.includes('Unterminated group')) {
+        const open = (pattern.match(/\(/g) || []).length;
+        const close = (pattern.match(/\)/g) || []).length;
+        if (open > close) {
+          fixes.push({ label: 'Add missing )', value: pattern + ')' });
+        }
+      }
+      if (msg.includes('unterminated character class') || msg.includes('Unterminated character class')) {
+        const open = (pattern.match(/\[/g) || []).length;
+        const close = (pattern.match(/\]/g) || []).length;
+        if (open > close) {
+          fixes.push({ label: 'Add missing ]', value: pattern + ']' });
+        }
+      }
+      if (msg.includes('nothing to repeat')) {
+        // Common: *?+ at start
+        fixes.push({ label: 'Escape quantifier', value: pattern.replace(/^[*?+]/, '\\$&') });
+      }
+      if (msg.includes('Invalid escape')) {
+        const match = msg.match(/Invalid escape sequence: (\\[^sSdDwWbBnrt0])/);
+        if (match) {
+          fixes.push({ label: 'Escape backslash', value: pattern.replace(match[1], '\\\\' + match[1].slice(1)) });
+        }
+      }
+      return fixes;
+    }
+
+    /* =============================================
+       UPDATE UI
+    ============================================= */
+    function updateUI() {
+      const matches = state.matches;
+      const matchCount = matches.length;
+
+      // Stats
+      $('#stat-matches').textContent = matchCount;
+      $('#stat-matches').className = 'stat-value' + (matchCount > 0 ? ' success' : '');
+      const groupCount = matches.length > 0 ? Math.max(...matches.map(m => m.length)) - 1 : 0;
+      $('#stat-groups').textContent = groupCount;
+      $('#match-count-badge').textContent = matchCount + ' match' + (matchCount !== 1 ? 'es' : '');
+
+      // Results list
+      renderResults(matches);
+    }
+
+    function renderResults(matches) {
+      if (matches.length === 0 && !state.error) {
+        noResults.style.display = 'flex';
+        // Remove all result items
+        resultsContent.querySelectorAll('.result-item').forEach(el => el.remove());
+        return;
+      }
+      noResults.style.display = 'none';
+
+      // Remove existing items
+      resultsContent.querySelectorAll('.result-item').forEach(el => el.remove());
+
+      matches.forEach((m, idx) => {
+        const item = document.createElement('div');
+        item.className = 'result-item';
+        if (state.highlightedMatch === idx) item.classList.add('highlighted');
+        item.dataset.index = idx;
+
+        let groupsHtml = '';
+        if (m.length > 1) {
+          groupsHtml = '<div class="result-groups">';
+          for (let g = 1; g < m.length; g++) {
+            const colorHex = MATCH_COLOR_HEX[(g - 1) % MATCH_COLOR_HEX.length];
+            const groupName = m.groups ? Object.keys(m.groups).find(k => m.groups[k] === m[g]) : null;
+            groupsHtml += '<div class="result-group">';
+            groupsHtml += '<span class="group-color" style="background:' + colorHex + '"></span>';
+            groupsHtml += '<span class="group-name">$' + g + (groupName ? ' (' + groupName + ')' : '') + '</span>';
+            groupsHtml += '<span class="group-value">' + escapeHtml(m[g] !== undefined ? m[g] : '') + '</span>';
+            groupsHtml += '</div>';
+          }
+          groupsHtml += '</div>';
+        }
+
+        const matchColorHex = MATCH_COLOR_HEX[idx % MATCH_COLOR_HEX.length];
+        item.innerHTML = '<div class="result-header">'
+          + '<span class="result-index" style="background:' + matchColorHex + '">Match ' + (idx + 1) + '</span>'
+          + '<span class="result-text">' + escapeHtml(m[0]) + '</span>'
+          + '</div>'
+          + '<div class="result-pos">Index: ' + m.index + ' — Length: ' + m[0].length + '</div>'
+          + groupsHtml;
+
+        item.addEventListener('click', () => {
+          state.highlightedMatch = state.highlightedMatch === idx ? -1 : idx;
+          renderResults(matches);
+          highlightMatchInTest(idx);
         });
-        
-        // Theme toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
-        }
-        
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-theme');
-        }
-        
-        // Initialize floating particles
-        function initializeParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                container.appendChild(particle);
+
+        resultsContent.appendChild(item);
+      });
+    }
+
+    function highlightMatchInTest(idx) {
+      const m = state.matches[idx];
+      if (!m) return;
+      testTextarea.focus();
+      testTextarea.setSelectionRange(m.index, m.index + m[0].length);
+      testTextarea.blur();
+    }
+
+    /* =============================================
+       MATCH HIGHLIGHTING IN TEST STRING
+    ============================================= */
+    function updateHighlighting() {
+      if (state.error || state.matches.length === 0) {
+        testHighlightLayer.innerHTML = '';
+        return;
+      }
+
+      const text = state.testString;
+      if (!text) { testHighlightLayer.innerHTML = ''; return; }
+
+      const matches = state.matches;
+      const matchColors = MATCH_COLORS;
+
+      // Build highlighted HTML
+      let html = '';
+      let lastIndex = 0;
+
+      matches.forEach((m, idx) => {
+        if (m.index < lastIndex) return; // skip overlapping
+
+        // Before match
+        html += escapeHtml(text.slice(lastIndex, m.index));
+
+        // Match with group colors
+        if (m.length > 1) {
+          // Get group offsets
+          let fullText = m[0];
+          let fullStart = m.index;
+          let segments = [];
+
+          // Build group segments with positions
+          for (let g = 1; g < m.length; g++) {
+            const gVal = m[g] !== undefined ? m[g] : '';
+            const gIdx = fullText.indexOf(gVal, segments.length > 0 ? (segments[segments.length-1].end - fullStart) : 0);
+            if (gIdx !== -1) {
+              segments.push({ start: fullStart + gIdx, end: fullStart + gIdx + gVal.length, group: g });
             }
-        }
-        
-        // Initialize controls
-        function initializeControls() {
-            const regexInput = document.getElementById('regexInput');
-            const testString = document.getElementById('testString');
-            const replaceMode = document.getElementById('replaceMode');
-            const replaceWith = document.getElementById('replaceWith');
-            
-            // Real-time testing
-            regexInput.addEventListener('input', debounce(testRegex, 500));
-            testString.addEventListener('input', debounce(testRegex, 300));
-            
-            // Flag toggles
-            document.querySelectorAll('.flag-option').forEach(flag => {
-                flag.addEventListener('click', () => {
-                    flag.classList.toggle('active');
-                    updateFlags();
-                    testRegex();
-                });
-            });
-            
-            // Replace mode toggle
-            replaceMode.addEventListener('change', () => {
-                const isChecked = replaceMode.checked;
-                replaceWith.classList.toggle('hidden', !isChecked);
-                document.getElementById('doReplace').classList.toggle('hidden', !isChecked);
-            });
-            
-            // Button events
-            document.getElementById('testRegex').addEventListener('click', testRegex);
-            document.getElementById('clearRegex').addEventListener('click', () => {
-                regexInput.value = '';
-                testRegex();
-            });
-            document.getElementById('clearTest').addEventListener('click', () => {
-                testString.value = '';
-                testRegex();
-            });
-            document.getElementById('loadSample').addEventListener('click', loadSample);
-            document.getElementById('copyMatches').addEventListener('click', copyMatches);
-            document.getElementById('exportResults').addEventListener('click', exportResults);
-            document.getElementById('doReplace').addEventListener('click', doReplace);
-        }
-        
-        // Update flags
-        function updateFlags() {
-            const activeFlags = Array.from(document.querySelectorAll('.flag-option.active'))
-                .map(flag => flag.dataset.flag)
-                .join('');
-            currentFlags = activeFlags;
-        }
-        
-        // Test regex
-        function testRegex() {
-            const regexInput = document.getElementById('regexInput');
-            const testString = document.getElementById('testString').value;
-            const regexError = document.getElementById('regexError');
-            
-            executionStartTime = performance.now();
-            
-            let regexPattern = regexInput.value.trim();
-            
-            // Clean regex input if wrapped in slashes
-            if (regexPattern.startsWith('/') && regexPattern.includes('/', 1)) {
-                const lastSlash = regexPattern.lastIndexOf('/');
-                const flags = regexPattern.substring(lastSlash + 1);
-                regexPattern = regexPattern.substring(1, lastSlash);
-                
-                // Update flags display
-                document.querySelectorAll('.flag-option').forEach(flag => {
-                    flag.classList.toggle('active', flags.includes(flag.dataset.flag));
-                });
-                updateFlags();
+          }
+
+          // Sort by start
+          segments.sort((a, b) => a.start - b.start);
+
+          // Build colored segments
+          let pos = m.index;
+          segments.forEach((seg, si) => {
+            if (seg.start > pos) {
+              const matchBg = matchColors[idx % matchColors.length];
+              html += '<mark style="background:' + matchBg + '">' + escapeHtml(text.slice(pos, seg.start)) + '</mark>';
             }
-            
-            if (!regexPattern) {
-                clearResults();
-                return;
-            }
-            
-            try {
-                currentRegex = new RegExp(regexPattern, currentFlags);
-                regexInput.classList.remove('error');
-                regexError.classList.add('hidden');
-                
-                // Find all matches
-                matches = [];
-                let match;
-                const regex = new RegExp(regexPattern, currentFlags);
-                
-                while ((match = regex.exec(testString)) !== null) {
-                    matches.push({
-                        match: match[0],
-                        index: match.index,
-                        groups: match.slice(1),
-                        fullMatch: match
-                    });
-                    
-                    // Prevent infinite loop on global flag
-                    if (!currentFlags.includes('g')) break;
-                    if (match.index === regex.lastIndex) regex.lastIndex++;
+            const groupBg = matchColors[(idx + si + 1) % matchColors.length];
+            html += '<mark style="background:' + groupBg + '">' + escapeHtml(text.slice(seg.start, seg.end)) + '</mark>';
+            pos = seg.end;
+          });
+          if (pos < m.index + fullText.length) {
+            const matchBg = matchColors[idx % matchColors.length];
+            html += '<mark style="background:' + matchBg + '">' + escapeHtml(text.slice(pos, m.index + fullText.length)) + '</mark>';
+          }
+        } else {
+          const bg = matchColors[idx % matchColors.length];
+          html += '<mark style="background:' + bg + '">' + escapeHtml(m[0]) + '</mark>';
+        }
+
+        lastIndex = m.index + m[0].length;
+      });
+
+      // Remaining text
+      html += escapeHtml(text.slice(lastIndex));
+
+      testHighlightLayer.innerHTML = html;
+    }
+
+    /* =============================================
+       REPLACE
+    ============================================= */
+    function updateReplace() {
+      if (state.error || !state.pattern) {
+        replaceResult.textContent = 'Replaced text will appear here...';
+        replaceCount.innerHTML = '';
+        return;
+      }
+
+      const testStr = state.testString;
+      const replaceVal = replaceInput.value;
+
+      if (!testStr) {
+        replaceResult.textContent = 'Replaced text will appear here...';
+        replaceCount.innerHTML = '';
+        return;
+      }
+
+      try {
+        const flags = getFlagsString();
+        const regex = new RegExp(state.pattern, flags);
+        const result = testStr.replace(regex, replaceVal);
+
+        // Count replacements
+        let count = 0;
+        if (flags.includes('g')) {
+          const tempRegex = new RegExp(state.pattern, flags);
+          while (tempRegex.test(testStr)) { count++; }
+        } else {
+          count = regex.test(testStr) ? 1 : 0;
+        }
+
+        replaceResult.textContent = result;
+        replaceCount.innerHTML = count > 0
+          ? '<strong>' + count + '</strong> replacement' + (count !== 1 ? 's' : '') + ' made'
+          : 'No matches found to replace';
+      } catch (e) {
+        replaceResult.textContent = 'Error in replacement: ' + e.message;
+        replaceCount.innerHTML = '';
+      }
+    }
+
+    replaceInput.addEventListener('input', () => {
+      state.replaceString = replaceInput.value;
+      updateReplace();
+    });
+
+    /* =============================================
+       REGEX EXPLANATION
+    ============================================= */
+    function explainRegex(pattern) {
+      if (!pattern) return '';
+
+      const tokens = [];
+      let i = 0;
+
+      while (i < pattern.length) {
+        const ch = pattern[i];
+
+        if (ch === '\\' && i + 1 < pattern.length) {
+          const next = pattern[i + 1];
+          const esc = ch + next;
+          let desc = '';
+          const escMap = {
+            'd': 'Digit [0-9]', 'D': 'Non-digit [^0-9]', 'w': 'Word char [a-zA-Z0-9_]', 'W': 'Non-word char',
+            's': 'Whitespace', 'S': 'Non-whitespace', 'b': 'Word boundary', 'B': 'Non-word boundary',
+            'n': 'Newline', 'r': 'Carriage return', 't': 'Tab', '0': 'Null character'
+          };
+          if (escMap[next]) {
+            desc = escMap[next];
+          } else {
+            desc = 'Literal "' + next + '"';
+          }
+          tokens.push({ char: esc, desc });
+          i += 2;
+          continue;
+        }
+
+        if (ch === '^') { tokens.push({ char: '^', desc: 'Start of string/line' }); i++; continue; }
+        if (ch === '$') { tokens.push({ char: '$', desc: 'End of string/line' }); i++; continue; }
+        if (ch === '.') { tokens.push({ char: '.', desc: 'Any character (except newline)' }); i++; continue; }
+        if (ch === '|') { tokens.push({ char: '|', desc: 'OR — alternation' }); i++; continue; }
+
+        // Quantifiers
+        if (ch === '*' && (i === 0 || !'+?{'.includes(pattern[i-1]))) {
+          const desc = i + 1 < pattern.length && pattern[i+1] === '?' ? '0 or more (lazy)' : '0 or more (greedy)';
+          tokens.push({ char: pattern[i+1] === '?' ? '*?' : '*', desc }); i += (pattern[i+1] === '?' ? 2 : 1); continue;
+        }
+        if (ch === '+' && (i === 0 || !'+?{'.includes(pattern[i-1]))) {
+          const desc = i + 1 < pattern.length && pattern[i+1] === '?' ? '1 or more (lazy)' : '1 or more (greedy)';
+          tokens.push({ char: pattern[i+1] === '?' ? '+?' : '+', desc }); i += (pattern[i+1] === '?' ? 2 : 1); continue;
+        }
+        if (ch === '?' && (i === 0 || !'+?{'.includes(pattern[i-1]))) {
+          const desc = i + 1 < pattern.length && pattern[i+1] === '?' ? '0 or 1 (lazy)' : '0 or 1 (optional)';
+          tokens.push({ char: pattern[i+1] === '?' ? '??' : '?', desc }); i += (pattern[i+1] === '?' ? 2 : 1); continue;
+        }
+
+        // Character class
+        if (ch === '[') {
+          let j = i + 1;
+          if (j < pattern.length && pattern[j] === '^') j++;
+          if (j < pattern.length && pattern[j] === ']') j++;
+          while (j < pattern.length && pattern[j] !== ']') { if (pattern[j] === '\\') j++; j++; }
+          if (j < pattern.length && pattern[j] === ']') j++;
+          const cls = pattern.slice(i, j);
+          let desc = 'Character class';
+          if (cls[1] === '^') desc = 'Negated character class';
+          tokens.push({ char: cls, desc });
+          i = j;
+          continue;
+        }
+
+        // Group
+        if (ch === '(') {
+          let j = i + 1;
+          if (j < pattern.length && pattern[j] === '?') {
+            if (j + 1 < pattern.length) {
+              if (pattern[j+1] === ':') {
+                let endJ = pattern.indexOf(')', j);
+                if (endJ === -1) endJ = pattern.length;
+                tokens.push({ char: '(...)', desc: 'Non-capturing group' });
+                i = endJ + 1;
+                continue;
+              }
+              if (pattern[j+1] === '=' ) {
+                tokens.push({ char: '(?=...)', desc: 'Positive lookahead' });
+                i += 3; // skip past the (?>
+                continue;
+              }
+              if (pattern[j+1] === '!') {
+                tokens.push({ char: '(?!...)', desc: 'Negative lookahead' });
+                i += 3;
+                continue;
+              }
+              if (pattern[j+1] === '<' && j + 2 < pattern.length && pattern[j+2] !== '=' && pattern[j+2] !== '!') {
+                let nameEnd = pattern.indexOf('>', j + 2);
+                if (nameEnd !== -1) {
+                  const name = pattern.slice(j + 2, nameEnd);
+                  tokens.push({ char: '(?<' + name + '>...)', desc: 'Named group "' + name + '"' });
+                  i = nameEnd + 1;
+                  continue;
                 }
-                
-                displayResults();
-                updateStatistics();
-                analyzeGroups();
-                explainPattern(regexPattern);
-                
-            } catch (error) {
-                regexInput.classList.add('error');
-                regexError.textContent = 'Invalid regular expression: ' + error.message;
-                regexError.classList.remove('hidden');
-                clearResults();
+              }
             }
+          }
+          tokens.push({ char: '(...)', desc: 'Capturing group' });
+          i++;
+          continue;
         }
-        
-        // Display results with highlighting
-        function displayResults() {
-            const testString = document.getElementById('testString').value;
-            const highlightedText = document.getElementById('highlightedText');
-            
-            if (matches.length === 0) {
-                highlightedText.textContent = testString || 'No matches found';
-                return;
-            }
-            
-            let result = '';
-            let lastIndex = 0;
-            
-            matches.forEach((match, matchIndex) => {
-                // Add text before match
-                result += escapeHtml(testString.substring(lastIndex, match.index));
-                
-                // Add highlighted match
-                const matchText = escapeHtml(match.match);
-                result += `<span class="match-highlight group-0" title="Match ${matchIndex + 1}: ${matchText}">${matchText}</span>`;
-                
-                lastIndex = match.index + match.match.length;
-            });
-            
-            // Add remaining text
-            result += escapeHtml(testString.substring(lastIndex));
-            
-            highlightedText.innerHTML = result;
+
+        // Quantifier {n,m}
+        if (ch === '{') {
+          let j = pattern.indexOf('}', i);
+          if (j !== -1) {
+            const quant = pattern.slice(i, j + 1);
+            tokens.push({ char: quant, desc: 'Quantifier ' + quant });
+            i = j + 1;
+            continue;
+          }
         }
-        
-        // Update statistics
-        function updateStatistics() {
-            const executionTime = (performance.now() - executionStartTime).toFixed(2);
-            const regexLength = document.getElementById('regexInput').value.length;
-            
-            document.getElementById('totalMatches').textContent = matches.length;
-            document.getElementById('totalGroups').textContent = matches.length > 0 ? matches[0].groups.length : 0;
-            document.getElementById('executionTime').textContent = executionTime + 'ms';
-            document.getElementById('regexLength').textContent = regexLength;
+
+        // Default literal
+        tokens.push({ char: ch, desc: 'Literal "' + ch + '"' });
+        i++;
+      }
+
+      if (tokens.length === 0) return '<span style="color:var(--muted)">Enter a pattern to see its explanation.</span>';
+
+      return tokens.map(t =>
+        '<span class="explanation-token">'
+        + '<span class="explanation-token-char">' + escapeHtml(t.char) + '</span>'
+        + '<span class="explanation-token-desc">' + escapeHtml(t.desc) + '</span>'
+        + '</span>'
+      ).join('');
+    }
+
+    /* =============================================
+       CODE GENERATOR
+    ============================================= */
+    function generateCode(pattern, flags, lang) {
+      const flagStr = flags || '';
+      const testStr = state.testString ? state.testString.split('\n')[0].slice(0, 50) : 'your string here';
+
+      const codes = {
+        javascript: `// JavaScript\nconst regex = /${pattern}/${flagStr};\nconst text = "${escapeForCode(testStr)}";\n\n// Test match\nconst match = regex.exec(text);\nif (match) {\n  console.log("Match:", match[0]);\n  console.log("Index:", match.index);\n  // Access groups: match[1], match[2], ...\n}\n\n// Find all matches (with g flag)\nconst allMatches = [...text.matchAll(new RegExp(pattern, "${flagStr}"))];\nconsole.log(allMatches);\n\n// Replace\nconst replaced = text.replace(regex, "replacement");\nconsole.log(replaced);\n\n// Test\nconst isMatch = regex.test(text);\nconsole.log("Is match:", isMatch);`,
+
+        python: `# Python\nimport re\n\npattern = r"${pattern}"\ntext = """${escapeForCode(testStr)}"""\n\n# Compile regex\nregex = re.compile(pattern${flagStr.includes('i') ? ', re.IGNORECASE' : ''}${flagStr.includes('m') ? ' | re.MULTILINE' : ''}${flagStr.includes('s') ? ' | re.DOTALL' : ''})\n\n# Find all matches\nmatches = regex.findall(text)\nprint("All matches:", matches)\n\n# Search (first match)\nmatch = regex.search(text)\nif match:\n    print("Match:", match.group())\n    print("Start:", match.start())\n    print("End:", match.end())\n\n# Finditer (all with positions)\nfor m in regex.finditer(text):\n    print(f"Match: {m.group()} at {m.start()}-{m.end()}")\n\n# Replace\nreplaced = regex.sub("replacement", text)\nprint("Replaced:", replaced)`,
+
+        php: `<?php\n// PHP\n$pattern = '/${pattern}/${flagStr}';\n$text = '${escapeForCode(testStr)}';\n\n// Test match\nif (preg_match($pattern, $text, $matches)) {\n    echo "Match: " . $matches[0] . "\\n";\n    echo "Full matches: ";\\n    print_r($matches);\n}\n\n// Find all matches\nif (preg_match_all($pattern, $text, $matches, PREG_SET_ORDER)) {\n    foreach ($matches as $match) {\n        echo "Match: " . $match[0] . "\\n";\n    }\n}\n\n// Replace\n$replaced = preg_replace($pattern, 'replacement', $text);\necho "Replaced: " . $replaced;\n?>`,
+
+        java: `// Java\nimport java.util.regex.*;\n\npublic class RegexExample {\n    public static void main(String[] args) {\n        String pattern = "${pattern}";\n        String text = "${escapeForCode(testStr)}";\n        ${flagStr.includes('i') ? 'int flags = Pattern.CASE_INSENSITIVE;\n' : flagStr.includes('m') ? 'int flags = Pattern.MULTILINE;\n' : ''}\n        // Compile regex\n        Pattern p = Pattern.compile(pattern${flagStr.includes('i') || flagStr.includes('m') ? ', flags' : ''});\n        Matcher m = p.matcher(text);\n\n        // Find all matches\n        while (m.find()) {\n            System.out.println("Match: " + m.group());\n            System.out.println("Start: " + m.start());\n            System.out.println("End: " + m.end());\n            // Groups: m.group(1), m.group(2), ...\n        }\n\n        // Replace\n        String replaced = m.replaceAll("replacement");\n        System.out.println("Replaced: " + replaced);\n\n        // Test\n        boolean isMatch = p.matcher(text).find();\n        System.out.println("Is match: " + isMatch);\n    }\n}`,
+
+        csharp: `// C#\nusing System;\nusing System.Text.RegularExpressions;\n\nclass Program\n{\n    static void Main()\n    {\n        string pattern = @"${pattern}";\n        string text = "${escapeForCode(testStr)}";\n        ${flagStr.includes('i') ? 'var options = RegexOptions.IgnoreCase;\n' : flagStr.includes('m') ? 'var options = RegexOptions.Multiline;\n' : 'var options = RegexOptions.None;\n'}\n        // Create regex\n        Regex regex = new Regex(pattern, options);\n\n        // Find all matches\n        MatchCollection matches = regex.Matches(text);\n        foreach (Match match in matches)\n        {\n            Console.WriteLine($"Match: {match.Value}");\n            Console.WriteLine($"Index: {match.Index}");\n            // Groups: match.Groups[1].Value, ...\n        }\n\n        // Replace\n        string replaced = regex.Replace(text, "replacement");\n        Console.WriteLine($"Replaced: {replaced}");\n\n        // Test\n        bool isMatch = regex.IsMatch(text);\n        Console.WriteLine($"Is match: {isMatch}");\n    }\n}`,
+
+        go: `// Go\npackage main\n\nimport (\n    "fmt"\n    "regexp"\n)\n\nfunc main() {\n    pattern := \`${pattern}\`\n    text := "${escapeForCode(testStr)}"\n\n    // Compile regex\n${flagStr.includes('i') ? '    re, err := regexp.Compile("(?i)" + pattern)\n' : '    re, err := regexp.Compile(pattern)\n'}    if err != nil {\n        fmt.Println("Regex error:", err)\n        return\n    }\n\n    // Find all matches\n    matches := re.FindAllString(text, -1)\n    fmt.Println("Matches:", matches)\n\n    // Find with positions\n    for _, match := range re.FindAllStringIndex(text, -1) {\n        fmt.Printf("Match: %q at %d-%d\\n", text[match[0]:match[1]], match[0], match[1])\n    }\n\n    // Replace\n    replaced := re.ReplaceAllString(text, "replacement")\n    fmt.Println("Replaced:", replaced)\n\n    // Test\n    isMatch := re.MatchString(text)\n    fmt.Println("Is match:", isMatch)\n}`,
+
+        rust: `// Rust\nuse regex::Regex;\n\nfn main() {\n    let pattern = r"${pattern}";\n    let text = "${escapeForCode(testStr)}";\n\n    // Compile regex\n    let re = Regex::new(pattern).unwrap();\n\n    // Find first match\n    if let Some(caps) = re.captures(text) {\n        println!("Match: {}", &caps[0]);\n        // Access groups: &caps[1], &caps["name"], etc.\n    }\n\n    // Find all matches\n    for caps in re.captures_iter(text) {\n        println!("Match: {} at {:?}", &caps[0], caps.get(0).unwrap().range());\n    }\n\n    // Replace\n    let replaced = re.replace_all(text, "replacement");\n    println!("Replaced: {}", replaced);\n\n    // Test\n    let is_match = re.is_match(text);\n    println!("Is match: {}", is_match);\n}\n\n// Cargo.toml dependency:\n// [dependencies]\n// regex = "1"`
+      };
+
+      return codes[lang] || '// Unsupported language';
+    }
+
+    function escapeForCode(str) {
+      return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '');
+    }
+
+    function updateCodegen() {
+      codeBlock.textContent = generateCode(state.pattern, getFlagsString(), state.codeLang);
+    }
+
+    /* =============================================
+       PATTERN LIBRARY
+    ============================================= */
+    const PATTERNS = [
+      { name: 'Email', regex: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}', test: 'Contact us at hello@toolxeno.com or support@example.org', cat: 'web' },
+      { name: 'URL', regex: 'https?://[\\w\\-]+(\\.[\\w\\-]+)+[\\w\\-.,@?^=%&:/~+#]*', test: 'Visit https://toolxeno.com/regex-tester or http://example.org/path?q=test', cat: 'web' },
+      { name: 'Phone (US)', regex: '\\(?(\\d{3})\\)?[-.\\s]?(\\d{3})[-.\\s]?(\\d{4})', test: 'Call (555) 123-4567 or 555.987.6543 or 555 123 4567', cat: 'data' },
+      { name: 'Phone (Intl)', regex: '\\+\\d{1,3}[-.\\s]?\\(?\\d{1,4}\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}', test: '+1 555-123-4567 or +44 20 7946 0958', cat: 'data' },
+      { name: 'IP Address (v4)', regex: '\\b(?:(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\b', test: 'Server IPs: 192.168.1.1, 10.0.0.255, 172.16.0.1', cat: 'data' },
+      { name: 'IP Address (v6)', regex: '(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}', test: 'IPv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334', cat: 'data' },
+      { name: 'Date (YYYY-MM-DD)', regex: '\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])', test: 'Dates: 2025-01-15, 2024-12-31, 2023-06-01', cat: 'data' },
+      { name: 'Date (MM/DD/YYYY)', regex: '(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01])/\\d{4}', test: 'Dates: 01/15/2025, 12/31/2024, 06/01/2023', cat: 'data' },
+      { name: 'Time (HH:MM)', regex: '([01]\\d|2[0-3]):[0-5]\\d', test: 'Times: 09:30, 14:45, 23:59', cat: 'data' },
+      { name: 'HTML Tags', regex: '<(\\w+)[^>]*>[^<]*</\\1>', test: '<div>Hello</div> <span>World</span> <p>Test</p>', cat: 'web' },
+      { name: 'HTML Self-Closing', regex: '<(\\w+)([^>]*)\\s*/\\s*>', test: '<br /> <img src="x.jpg" /> <hr />', cat: 'web' },
+      { name: 'Credit Card', regex: '\\b(?:\\d[ -]*?){13,19}\\b', test: 'Cards: 4111 1111 1111 1111, 5500-0000-0000-0004', cat: 'validation' },
+      { name: 'Hex Color', regex: '#(?:[0-9a-fA-F]{3}){1,2}\\b', test: 'Colors: #ff0000, #00ff00, #0000ff, #abc, #123456', cat: 'web' },
+      { name: 'SSN', regex: '\\d{3}-\\d{2}-\\d{4}', test: 'SSN: 123-45-6789, 987-65-4321', cat: 'data' },
+      { name: 'Postal Code (US)', regex: '\\b\\d{5}(-\\d{4})?\\b', test: 'ZIP: 10001, 90210, 12345-6789', cat: 'data' },
+      { name: 'Username', regex: '^[a-zA-Z0-9_-]{3,16}$', test: 'john_doe\nuser123\ninvalid user name!', cat: 'validation' },
+      { name: 'Password (Strong)', regex: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$', test: 'Weak: password\nStrong: MyP@ss1word!', cat: 'validation' },
+      { name: 'Number', regex: '-?\\d+(\\.\\d+)?', test: 'Numbers: 42, -3.14, 0.5, 1000', cat: 'data' },
+      { name: 'Whitespace', regex: '\\s+', test: 'Hello   World\tTabbed\nNewline', cat: 'web' },
+    ];
+
+    function renderPatternGrid(cat) {
+      const filtered = cat === 'all' ? PATTERNS : PATTERNS.filter(p => p.cat === cat);
+      patternGrid.innerHTML = filtered.map(p =>
+        '<div class="pattern-card" data-pattern="' + escapeAttr(p.regex) + '" data-test="' + escapeAttr(p.test) + '">'
+        + '<div class="pattern-card-name">' + escapeHtml(p.name) + '</div>'
+        + '<div class="pattern-card-regex">/' + escapeHtml(p.regex) + '/</div>'
+        + '</div>'
+      ).join('');
+    }
+
+    patternGrid.addEventListener('click', (e) => {
+      const card = e.target.closest('.pattern-card');
+      if (!card) return;
+      patternInput.value = card.dataset.pattern;
+      testTextarea.value = card.dataset.test;
+      runMatch();
+      showToast('Pattern loaded: ' + card.querySelector('.pattern-card-name').textContent, '📚');
+    });
+
+    /* Pattern category tabs */
+    $('#pattern-tabs').addEventListener('click', (e) => {
+      const tab = e.target.closest('.pattern-tab');
+      if (!tab) return;
+      $$('#pattern-tabs .pattern-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      state.patternCat = tab.dataset.cat;
+      renderPatternGrid(state.patternCat);
+    });
+
+    /* =============================================
+       SAVED CASES
+    ============================================= */
+    function getSavedCases() {
+      try {
+        return JSON.parse(localStorage.getItem('regex-tester-saved') || '[]');
+      } catch { return []; }
+    }
+
+    function saveCasesToStorage(cases) {
+      localStorage.setItem('regex-tester-saved', JSON.stringify(cases));
+    }
+
+    function renderSavedCases() {
+      const cases = getSavedCases();
+      if (cases.length === 0) {
+        savedList.innerHTML = '<div class="no-saved">No saved test cases yet.</div>';
+        return;
+      }
+      savedList.innerHTML = cases.map((c, idx) =>
+        '<div class="saved-item" data-idx="' + idx + '">'
+        + '<div class="saved-info">'
+        + '<div class="saved-name">' + escapeHtml(c.name) + '</div>'
+        + '<div class="saved-meta">/' + escapeHtml(c.pattern) + '/' + escapeHtml(c.flags) + ' — ' + escapeHtml(c.date) + '</div>'
+        + '</div>'
+        + '<div class="saved-actions">'
+        + '<button class="saved-btn load-btn" data-idx="' + idx + '">📂 Load</button>'
+        + '<button class="saved-btn delete delete-btn" data-idx="' + idx + '">🗑️</button>'
+        + '</div>'
+        + '</div>'
+      ).join('');
+    }
+
+    savedList.addEventListener('click', (e) => {
+      const loadBtn = e.target.closest('.load-btn');
+      const deleteBtn = e.target.closest('.delete-btn');
+      const cases = getSavedCases();
+      const idx = parseInt(e.target.closest('[data-idx]')?.dataset.idx);
+
+      if (loadBtn && !isNaN(idx) && cases[idx]) {
+        const c = cases[idx];
+        patternInput.value = c.pattern;
+        testTextarea.value = c.testString;
+        // Set flags
+        Object.keys(state.flags).forEach(f => state.flags[f] = false);
+        if (c.flags) {
+          [...c.flags].forEach(f => { if (f in state.flags) state.flags[f] = true; });
         }
-        
-        // Analyze groups
-        function analyzeGroups() {
-            const groupAnalysis = document.getElementById('groupAnalysis');
-            
-            if (matches.length === 0) {
-                groupAnalysis.innerHTML = `
-                    <div class="text-center opacity-50 py-8">
-                        <i class="fas fa-info-circle text-2xl mb-2"></i>
-                        <div>No matches found</div>
-                    </div>
-                `;
-                return;
-            }
-            
-            const firstMatch = matches[0];
-            const hasGroups = firstMatch.groups.length > 0;
-            
-            if (!hasGroups) {
-                groupAnalysis.innerHTML = `
-                    <div class="text-center opacity-50 py-8">
-                        <i class="fas fa-layer-group text-2xl mb-2"></i>
-                        <div>No capture groups in pattern</div>
-                    </div>
-                `;
-                return;
-            }
-            
-            let html = '';
-            
-            // Show groups for first match
-            html += '<div class="mb-4"><div class="text-sm font-medium mb-2">First Match Groups:</div>';
-            
-            firstMatch.groups.forEach((group, index) => {
-                html += `
-                    <div class="group-item">
-                        <div class="group-badge group-${(index + 1) % 5}">${index + 1}</div>
-                        <div class="flex-1">
-                            <div class="text-sm font-medium">Group ${index + 1}</div>
-                            <div class="group-value">${escapeHtml(group || 'null')}</div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            html += '</div>';
-            
-            // Show all matches summary if multiple
-            if (matches.length > 1) {
-                html += `<div class="text-sm opacity-70">Total matches: ${matches.length}</div>`;
-            }
-            
-            groupAnalysis.innerHTML = html;
+        $$('.flag-btn').forEach(btn => btn.classList.toggle('active', state.flags[btn.dataset.flag]));
+        updateFlagsDisplay();
+        runMatch();
+        showToast('Loaded: ' + c.name, '📂');
+      }
+
+      if (deleteBtn && !isNaN(idx)) {
+        cases.splice(idx, 1);
+        saveCasesToStorage(cases);
+        renderSavedCases();
+        showToast('Test case deleted', '🗑️');
+      }
+    });
+
+    function saveCurrentCase(name) {
+      if (!name || !state.pattern) {
+        showToast('Enter a name and pattern first', '⚠️');
+        return;
+      }
+      const cases = getSavedCases();
+      cases.unshift({
+        name,
+        pattern: state.pattern,
+        flags: getFlagsString(),
+        testString: state.testString,
+        date: new Date().toLocaleDateString()
+      });
+      saveCasesToStorage(cases);
+      renderSavedCases();
+      saveNameInput.value = '';
+      showToast('Saved: ' + name, '💾');
+    }
+
+    /* =============================================
+       MATCH TEXT OPERATIONS
+    ============================================= */
+    function getMatchTexts() {
+      return state.matches.map(m => m[0]);
+    }
+
+    $('#btn-sort-az').addEventListener('click', () => {
+      const texts = getMatchTexts().sort((a, b) => a.localeCompare(b));
+      copyToClipboard(texts.join('\n'));
+      showToast('Sorted A-Z and copied', '📋');
+    });
+
+    $('#btn-sort-za').addEventListener('click', () => {
+      const texts = getMatchTexts().sort((a, b) => b.localeCompare(a));
+      copyToClipboard(texts.join('\n'));
+      showToast('Sorted Z-A and copied', '📋');
+    });
+
+    $('#btn-sort-len').addEventListener('click', () => {
+      const texts = getMatchTexts().sort((a, b) => a.length - b.length);
+      copyToClipboard(texts.join('\n'));
+      showToast('Sorted by length and copied', '📋');
+    });
+
+    $('#btn-unique').addEventListener('click', () => {
+      const texts = [...new Set(getMatchTexts())];
+      copyToClipboard(texts.join('\n'));
+      showToast('Unique matches copied (' + texts.length + ')', '✦');
+    });
+
+    $('#btn-copy-matches').addEventListener('click', () => {
+      const texts = getMatchTexts();
+      copyToClipboard(texts.join('\n'));
+      showToast(texts.length + ' matches copied (one per line)', '📋');
+    });
+
+    $('#btn-copy-js-array').addEventListener('click', () => {
+      const texts = getMatchTexts().map(t => JSON.stringify(t));
+      copyToClipboard('[' + texts.join(', ') + ']');
+      showToast('Copied as JavaScript array', '📋');
+    });
+
+    $('#btn-copy-json-array').addEventListener('click', () => {
+      const texts = getMatchTexts();
+      copyToClipboard(JSON.stringify(texts, null, 2));
+      showToast('Copied as JSON array', '📋');
+    });
+
+    /* =============================================
+       EXPORT / IMPORT / SHARE
+    ============================================= */
+    $('#btn-export').addEventListener('click', () => {
+      const session = {
+        pattern: state.pattern,
+        flags: getFlagsString(),
+        testString: state.testString,
+        replaceString: state.replaceString,
+        exportedAt: new Date().toISOString()
+      };
+      const blob = new Blob([JSON.stringify(session, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'regex-session-' + Date.now() + '.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('Session exported as JSON', '📤');
+    });
+
+    $('#btn-import').addEventListener('click', () => {
+      $('#file-import').click();
+    });
+
+    $('#file-import').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        try {
+          const session = JSON.parse(ev.target.result);
+          if (session.pattern !== undefined) patternInput.value = session.pattern;
+          if (session.testString !== undefined) testTextarea.value = session.testString;
+          if (session.replaceString !== undefined) replaceInput.value = session.replaceString;
+          if (session.flags) {
+            Object.keys(state.flags).forEach(f => state.flags[f] = false);
+            [...session.flags].forEach(f => { if (f in state.flags) state.flags[f] = true; });
+            $$('.flag-btn').forEach(btn => btn.classList.toggle('active', state.flags[btn.dataset.flag]));
+            updateFlagsDisplay();
+          }
+          runMatch();
+          showToast('Session imported successfully', '📥');
+        } catch {
+          showToast('Invalid JSON file', '⚠️');
         }
-        
-        // Explain pattern
-        function explainPattern(pattern) {
-            const explanation = document.getElementById('patternExplanation');
-            const parts = analyzeRegexPattern(pattern);
-            
-            if (parts.length === 0) {
-                explanation.innerHTML = `
-                    <div class="text-center opacity-50 py-8">
-                        <i class="fas fa-question-circle text-2xl mb-2"></i>
-                        <div>Enter a regex to see explanation</div>
-                    </div>
-                `;
-                return;
-            }
-            
-            let html = '';
-            parts.forEach((part, index) => {
-                html += `
-                    <div class="explanation-item">
-                        <div class="explanation-icon">${index + 1}</div>
-                        <div>
-                            <div class="font-medium">${part.title}</div>
-                            <div class="text-sm opacity-70">${part.description}</div>
-                            ${part.pattern ? `<code class="text-xs bg-black bg-opacity-20 px-2 py-1 rounded mt-1 inline-block">${escapeHtml(part.pattern)}</code>` : ''}
-                        </div>
-                    </div>
-                `;
-            });
-            
-            explanation.innerHTML = html;
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    });
+
+    $('#btn-share').addEventListener('click', () => {
+      if (!state.pattern) { showToast('Enter a pattern first', '⚠️'); return; }
+      const data = { p: state.pattern, f: getFlagsString(), t: state.testString.slice(0, 500) };
+      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+      const url = location.origin + location.pathname + '#' + encoded;
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('Share URL copied to clipboard!', '🔗');
+        });
+      } else {
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = url;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('Share URL copied to clipboard!', '🔗');
+      }
+    });
+
+    /* =============================================
+       UTILITY
+    ============================================= */
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function escapeAttr(str) {
+      return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;');
+    }
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+    }
+
+    /* =============================================
+       EVENT LISTENERS
+    ============================================= */
+    patternInput.addEventListener('input', () => debounce(runMatch));
+    testTextarea.addEventListener('input', () => debounce(runMatch));
+
+    // Paste test string
+    $('#btn-paste-test').addEventListener('click', async () => {
+      try {
+        const text = await navigator.clipboard.readText();
+        testTextarea.value = text;
+        runMatch();
+        showToast('Text pasted from clipboard', '📋');
+      } catch {
+        showToast('Cannot access clipboard', '⚠️');
+      }
+    });
+
+    // Clear test
+    $('#btn-clear-test').addEventListener('click', () => {
+      testTextarea.value = '';
+      runMatch();
+    });
+
+    // Clear all
+    $('#btn-clear-all').addEventListener('click', () => {
+      patternInput.value = '';
+      testTextarea.value = '';
+      replaceInput.value = '';
+      state.highlightedMatch = -1;
+      runMatch();
+      showToast('All cleared', '🗑️');
+    });
+
+    // Save button in toolbar
+    $('#btn-save').addEventListener('click', () => {
+      saveNameInput.value = '';
+      saveNameInput.focus();
+      // Open saved panel
+      $('#saved-panel').classList.add('open');
+    });
+
+    // Save case button
+    $('#btn-save-case').addEventListener('click', () => {
+      saveCurrentCase(saveNameInput.value.trim());
+    });
+
+    saveNameInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') saveCurrentCase(saveNameInput.value.trim());
+    });
+
+    // Explain button
+    $('#btn-explain').addEventListener('click', () => {
+      if (!state.pattern) { showToast('Enter a pattern first', '⚠️'); return; }
+      const isVis = explanationInline.style.display !== 'none';
+      if (isVis) {
+        explanationInline.style.display = 'none';
+      } else {
+        explanationInline.innerHTML = explainRegex(state.pattern);
+        explanationInline.style.display = 'block';
+      }
+    });
+
+    // Export saved
+    $('#btn-export-saved').addEventListener('click', () => {
+      const cases = getSavedCases();
+      if (cases.length === 0) { showToast('No saved cases to export', '⚠️'); return; }
+      const blob = new Blob([JSON.stringify(cases, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'regex-saved-cases-' + Date.now() + '.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('Saved cases exported', '📤');
+    });
+
+    // Clear saved
+    $('#btn-clear-saved').addEventListener('click', () => {
+      saveCasesToStorage([]);
+      renderSavedCases();
+      showToast('All saved cases cleared', '🗑️');
+    });
+
+    // Copy code
+    $('#btn-copy-code').addEventListener('click', () => {
+      copyToClipboard(codeBlock.textContent);
+      showToast('Code copied to clipboard', '📋');
+    });
+
+    // Code language tabs
+    $('#code-lang-tabs').addEventListener('click', (e) => {
+      const tab = e.target.closest('.code-lang-tab');
+      if (!tab) return;
+      $$('#code-lang-tabs .code-lang-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      state.codeLang = tab.dataset.lang;
+      updateCodegen();
+    });
+
+    /* =============================================
+       COLLAPSIBLE PANELS
+    ============================================= */
+    $$('.collapsible-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const panel = btn.closest('.collapsible-panel');
+        panel.classList.toggle('open');
+      });
+    });
+
+    /* =============================================
+       MOBILE PANEL TABS
+    ============================================= */
+    $$('.mobile-panel-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        $$('.mobile-panel-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        $$('.editor-pane').forEach(p => p.classList.remove('mobile-active'));
+        const target = document.querySelector('.editor-pane[data-panel="' + tab.dataset.panel + '"]');
+        if (target) target.classList.add('mobile-active');
+      });
+    });
+    // Set initial mobile active
+    document.querySelector('.editor-pane[data-panel="pattern"]').classList.add('mobile-active');
+
+    /* =============================================
+       FAQ
+    ============================================= */
+    $$('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        // Close all
+        $$('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    /* =============================================
+       THEME TOGGLE
+    ============================================= */
+    const themeToggle = $('#theme-toggle');
+    function setTheme(dark) {
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      themeToggle.textContent = dark ? '☀️ Light' : '🌙 Dark';
+      localStorage.setItem('regex-tester-theme', dark ? 'dark' : 'light');
+    }
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+      setTheme(!isDark);
+    });
+    // Init theme
+    const savedTheme = localStorage.getItem('regex-tester-theme');
+    if (savedTheme === 'light') setTheme(false);
+
+    /* =============================================
+       MOBILE NAV
+    ============================================= */
+    $('#hamburger').addEventListener('click', () => $('#mobile-nav').classList.add('open'));
+    $('#mobile-close').addEventListener('click', () => $('#mobile-nav').classList.remove('open'));
+    $$('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => $('#mobile-nav').classList.remove('open'));
+    });
+
+    /* =============================================
+       URL HASH (Share)
+    ============================================= */
+    function loadFromHash() {
+      const hash = location.hash.slice(1);
+      if (!hash) return;
+      try {
+        const data = JSON.parse(decodeURIComponent(escape(atob(hash))));
+        if (data.p) patternInput.value = data.p;
+        if (data.t) testTextarea.value = data.t;
+        if (data.f) {
+          Object.keys(state.flags).forEach(f => state.flags[f] = false);
+          [...data.f].forEach(f => { if (f in state.flags) state.flags[f] = true; });
+          $$('.flag-btn').forEach(btn => btn.classList.toggle('active', state.flags[btn.dataset.flag]));
+          updateFlagsDisplay();
         }
-        
-        // Analyze regex pattern (simplified)
-        function analyzeRegexPattern(pattern) {
-            const parts = [];
-            
-            // Common patterns detection
-            if (pattern.includes('\\d')) {
-                parts.push({
-                    title: 'Digit Matching',
-                    description: '\\d matches any digit (0-9)',
-                    pattern: '\\d'
-                });
-            }
-            
-            if (pattern.includes('\\w')) {
-                parts.push({
-                    title: 'Word Characters',
-                    description: '\\w matches letters, digits, and underscores',
-                    pattern: '\\w'
-                });
-            }
-            
-            if (pattern.includes('\\s')) {
-                parts.push({
-                    title: 'Whitespace',
-                    description: '\\s matches whitespace characters (space, tab, newline)',
-                    pattern: '\\s'
-                });
-            }
-            
-            if (pattern.includes('+')) {
-                parts.push({
-                    title: 'One or More',
-                    description: '+ matches one or more of the preceding element',
-                    pattern: '+'
-                });
-            }
-            
-            if (pattern.includes('*')) {
-                parts.push({
-                    title: 'Zero or More',
-                    description: '* matches zero or more of the preceding element',
-                    pattern: '*'
-                });
-            }
-            
-            if (pattern.includes('?')) {
-                parts.push({
-                    title: 'Optional',
-                    description: '? makes the preceding element optional (zero or one)',
-                    pattern: '?'
-                });
-            }
-            
-            if (pattern.includes('(') && pattern.includes(')')) {
-                parts.push({
-                    title: 'Capture Groups',
-                    description: 'Parentheses () create capture groups to extract parts of matches',
-                    pattern: '(...)'
-                });
-            }
-            
-            if (pattern.includes('[') && pattern.includes(']')) {
-                parts.push({
-                    title: 'Character Class',
-                    description: 'Square brackets [] define a set of characters to match',
-                    pattern: '[...]'
-                });
-            }
-            
-            if (pattern.includes('^')) {
-                parts.push({
-                    title: 'Start Anchor',
-                    description: '^ matches the start of a line or string',
-                    pattern: '^'
-                });
-            }
-            
-            if (pattern.includes('$')) {
-                parts.push({
-                    title: 'End Anchor',
-                    description: '$ matches the end of a line or string',
-                    pattern: '$'
-                });
-            }
-            
-            if (pattern.includes('\\b')) {
-                parts.push({
-                    title: 'Word Boundary',
-                    description: '\\b matches word boundaries (between word and non-word characters)',
-                    pattern: '\\b'
-                });
-            }
-            
-            if (pattern.includes('.')) {
-                parts.push({
-                    title: 'Any Character',
-                    description: '. matches any character except newline',
-                    pattern: '.'
-                });
-            }
-            
-            if (pattern.includes('|')) {
-                parts.push({
-                    title: 'Alternation',
-                    description: '| acts like OR - matches either the expression before or after it',
-                    pattern: 'a|b'
-                });
-            }
-            
-            return parts;
-        }
-        
-        // Load pattern library
-        function loadPatternLibrary() {
-            const library = document.getElementById('patternLibrary');
-            let html = '';
-            
-            const categories = [...new Set(patternLibrary.map(p => p.category))];
-            
-            categories.forEach(category => {
-                const patterns = patternLibrary.filter(p => p.category === category);
-                
-                html += `<div class="mb-4">`;
-                html += `<div class="text-sm font-semibold mb-2 opacity-70">${category}</div>`;
-                
-                patterns.forEach(pattern => {
-                    html += `
-                        <div class="pattern-item" onclick="usePattern('${pattern.pattern}', '${pattern.name}')">
-                            <div>
-                                <div class="font-medium text-sm">${pattern.name}</div>
-                                <div class="text-xs opacity-70">${pattern.description}</div>
-                            </div>
-                            <div class="pattern-regex">${pattern.pattern.substring(0, 20)}${pattern.pattern.length > 20 ? '...' : ''}</div>
-                        </div>
-                    `;
-                });
-                
-                html += `</div>`;
-            });
-            
-            library.innerHTML = html;
-        }
-        
-        // Use pattern from library
-        function usePattern(pattern, name) {
-            document.getElementById('regexInput').value = pattern;
-            testRegex();
-            
-            // Show notification
-            showNotification(`Loaded pattern: ${name}`, 'success');
-        }
-        
-        // Insert pattern at cursor
-        function insertPattern(pattern) {
-            const regexInput = document.getElementById('regexInput');
-            const start = regexInput.selectionStart;
-            const end = regexInput.selectionEnd;
-            const value = regexInput.value;
-            
-            regexInput.value = value.substring(0, start) + pattern + value.substring(end);
-            regexInput.setSelectionRange(start + pattern.length, start + pattern.length);
-            regexInput.focus();
-            
-            testRegex();
-        }
-        
-        // Load sample data
-        function loadSample() {
-            const randomSample = sampleStrings[Math.floor(Math.random() * sampleStrings.length)];
-            document.getElementById('testString').value = randomSample;
-            testRegex();
-            
-            showNotification('Sample data loaded', 'info');
-        }
-        
-        // Copy matches
-        function copyMatches() {
-            if (matches.length === 0) {
-                showNotification('No matches to copy', 'warning');
-                return;
-            }
-            
-            const matchText = matches.map(m => m.match).join('\n');
-            navigator.clipboard.writeText(matchText).then(() => {
-                showNotification(`Copied ${matches.length} matches`, 'success');
-            });
-        }
-        
-        // Export results
-        function exportResults() {
-            if (matches.length === 0) {
-                showNotification('No results to export', 'warning');
-                return;
-            }
-            
-            const data = {
-                pattern: document.getElementById('regexInput').value,
-                flags: currentFlags,
-                testString: document.getElementById('testString').value,
-                matches: matches.map(m => ({
-                    match: m.match,
-                    index: m.index,
-                    groups: m.groups
-                })),
-                timestamp: new Date().toISOString()
-            };
-            
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'regex-results.json';
-            a.click();
-            URL.revokeObjectURL(url);
-            
-            showNotification('Results exported', 'success');
-        }
-        
-        // Do replace
-        function doReplace() {
-            const testString = document.getElementById('testString').value;
-            const replaceWith = document.getElementById('replaceWith').value;
-            
-            if (!currentRegex) {
-                showNotification('Invalid regex pattern', 'error');
-                return;
-            }
-            
-            try {
-                const result = testString.replace(currentRegex, replaceWith);
-                document.getElementById('testString').value = result;
-                testRegex();
-                
-                showNotification('Replace completed', 'success');
-            } catch (error) {
-                showNotification('Replace failed: ' + error.message, 'error');
-            }
-        }
-        
-        // Clear results
-        function clearResults() {
-            document.getElementById('highlightedText').textContent = '';
-            document.getElementById('totalMatches').textContent = '0';
-            document.getElementById('totalGroups').textContent = '0';
-            document.getElementById('executionTime').textContent = '0ms';
-            document.getElementById('regexLength').textContent = '0';
-            
-            document.getElementById('groupAnalysis').innerHTML = `
-                <div class="text-center opacity-50 py-8">
-                    <i class="fas fa-info-circle text-2xl mb-2"></i>
-                    <div>Test a regex to see group analysis</div>
-                </div>
-            `;
-            
-            document.getElementById('patternExplanation').innerHTML = `
-                <div class="text-center opacity-50 py-8">
-                    <i class="fas fa-question-circle text-2xl mb-2"></i>
-                    <div>Enter a regex to see explanation</div>
-                </div>
-            `;
-        }
-        
-        // Show notification
-        function showNotification(message, type = 'info') {
-            const colors = {
-                success: 'var(--success-gradient)',
-                error: 'var(--error-gradient)',
-                warning: 'var(--warning-gradient)',
-                info: 'var(--accent-gradient)'
-            };
-            
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 100px;
-                right: 20px;
-                background: ${colors[type]};
-                color: white;
-                padding: 12px 20px;
-                border-radius: 8px;
-                font-weight: 500;
-                z-index: 1000;
-                animation: slideIn 0.3s ease;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            `;
-            notification.textContent = message;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'slideOut 0.3s ease forwards';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-        }
-        
-        // Utility functions
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-        
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-        
-        // Add CSS animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            
-            @keyframes slideOut {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        // Initialize with sample data
-        document.getElementById('testString').value = sampleStrings[0];
-    </script>
-<script src="/homebutton.js"></script>
+        runMatch();
+      } catch {}
+    }
+
+    /* =============================================
+       INIT
+    ============================================= */
+    function init() {
+      renderPatternGrid('all');
+      renderSavedCases();
+      updateFlagsDisplay();
+      updateCodegen();
+      loadFromHash();
+    }
+
+    init();
+  </script>
 </body>
 </html>

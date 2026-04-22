@@ -1,1066 +1,2377 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US" dir="ltr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#007cf0" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Code Minifier – Tool Xeno" />
+  <meta name="application-name" content="Tool Xeno" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="rating" content="general" />
+  <meta name="revisit-after" content="7 days" />
 
-  gtag('config', 'G-Y4JDC5DCBV');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional HTML Minifier - Tool Xeno</title>
-    <meta name="description" content="Advanced HTML minifier with syntax highlighting, compression analytics, and professional optimization features - minify HTML code with real-time preview and statistics.">
+  <!-- SEO -->
+  <title>Code Minifier – Free HTML, CSS, JS Minifier Online | Tool Xeno</title>
+  <meta name="description" content="Free online code minifier for HTML, CSS, and JavaScript. Compress code in real-time, reduce file size, estimate GZIP savings. Safe & aggressive modes, batch processing. 100% client-side, no signup." />
+  <meta name="keywords" content="code minifier, html minifier, css minifier, javascript minifier, minify css, minify js, minify html, code compressor, online minifier, reduce file size, uglify js, clean css" />
+  <meta name="author" content="Tool Xeno" />
+  <link rel="canonical" href="https://toolxeno.com/code-minifier.html" />
+  <link rel="alternate" hreflang="en" href="https://toolxeno.com/code-minifier.html" />
 
-    <!-- ✅ Tool Xeno Favicons -->
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="manifest" href="/site.webmanifest" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolxeno.com/code-minifier.html" />
+  <meta property="og:title" content="Code Minifier – Free HTML, CSS, JS Minifier Online | Tool Xeno" />
+  <meta property="og:description" content="Minify HTML, CSS, and JavaScript in real-time. Reduce file sizes with safe and aggressive modes. Free, private, in-browser." />
+  <meta property="og:site_name" content="Tool Xeno" />
+  <meta property="og:locale" content="en_US" />
 
-    <meta name="google-adsense-account" content="ca-pub-2713998296337545">
-    
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-    
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            
-            --dark-bg: #0a0a0a;
-            --dark-surface: #1a1a1a;
-            --dark-surface-elevated: #252525;
-            --dark-text: #ffffff;
-            --dark-text-secondary: #a0a0a0;
-            --dark-border: #333333;
-            
-            --light-bg: #f8fafc;
-            --light-surface: #ffffff;
-            --light-surface-elevated: #f1f5f9;
-            --light-text: #1e293b;
-            --light-text-secondary: #64748b;
-            --light-border: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            line-height: 1.6;
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-            min-height: 100vh;
-        }
-        
-        body.light-theme { 
-            background-color: var(--light-bg); 
-            color: var(--light-text); 
-        }
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Code Minifier – Tool Xeno" />
+  <meta name="twitter:description" content="Minify HTML, CSS, JavaScript in real-time. Reduce file sizes. Free, private, in-browser." />
 
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.05;
-            background: radial-gradient(circle, #667eea 0%, transparent 70%);
-        }
-        
-        body.light-theme .particle { 
-            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(100vh) rotate(0deg); } 
-            100% { transform: translateY(-100px) rotate(360deg); } 
-        }
-        
-        .header-glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.35s ease, border-color 0.35s ease;
-        }
-        
-        body.light-theme .header-glass { 
-            background: rgba(255, 255, 255, 0.9); 
-            border-bottom-color: rgba(0, 0, 0, 0.1); 
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--dark-surface);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.light-theme .theme-toggle { 
-            background: var(--light-surface-elevated); 
-            border-color: var(--light-border); 
-        }
-        
-        body.light-theme .theme-toggle::after { 
-            transform: translateX(28px); 
-            background: var(--secondary-gradient); 
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
-        
-        body.light-theme .glass-card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-color: rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
-        }
-        
-        .btn-gradient {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .btn-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .btn-gradient:hover::before { left: 100%; }
-        .btn-gradient:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
-        }
-        .btn-gradient:active { transform: translateY(0); }
-        
-        .btn-secondary {
-            background: var(--accent-gradient);
-            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
-        }
-        
-        .btn-secondary:hover {
-            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
-        }
-        
-        .btn-success {
-            background: var(--success-gradient);
-            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
-        }
-        
-        .btn-success:hover {
-            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
-        }
-        
-        .nav-link {
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-        }
-        
-        .nav-link:hover { 
-            background: rgba(255, 255, 255, 0.1); 
-            color: white; 
-        }
-        
-        body.light-theme .nav-link { 
-            color: rgba(0, 0, 0, 0.7); 
-        }
-        
-        body.light-theme .nav-link:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            color: black; 
-        }
-        
-        .code-editor {
-            width: 100%;
-            min-height: 300px;
-            resize: vertical;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            color: var(--dark-text);
-            padding: 20px;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            font-size: 14px;
-            line-height: 1.6;
-            transition: border-color 0.3s ease, background-color 0.35s ease;
-            outline: none;
-        }
-        
-        .code-editor:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
-        }
-        
-        body.light-theme .code-editor {
-            background: var(--light-surface);
-            color: var(--light-text);
-            border-color: var(--light-border);
-        }
-        
-        .toggle-switch {
-            position: relative;
-            width: 50px;
-            height: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .toggle-switch.active {
-            background: var(--primary-gradient);
-        }
-        
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 21px;
-            height: 21px;
-            background: white;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .toggle-switch.active::after {
-            transform: translateX(25px);
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        body.light-theme .stat-card {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 5px;
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .comparison-view {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .comparison-view {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--success-gradient);
-            border-radius: 3px;
-            transition: width 0.3s ease;
-            width: 0%;
-        }
-        
-        .tooltip {
-            position: relative;
-            cursor: help;
-        }
-        
-        .tooltip::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 1000;
-        }
-        
-        .tooltip:hover::after {
-            opacity: 1;
-        }
-        
-        pre[class*="language-"] {
-            margin: 0;
-            background: transparent !important;
-            border-radius: 15px;
-            font-size: 14px;
-        }
-        
-        code[class*="language-"] {
-            background: transparent !important;
-            color: var(--dark-text-secondary) !important;
-        }
-        
-        body.light-theme code[class*="language-"] {
-            color: var(--light-text) !important;
-        }
-    </style>
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Code Minifier",
+        "url": "https://toolxeno.com/code-minifier.html",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Free online code minifier for HTML, CSS, and JavaScript. Compress code in real-time with safe and aggressive modes."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolxeno.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Developer Tools", "item": "https://toolxeno.com/#tools" },
+          { "@type": "ListItem", "position": 3, "name": "Code Minifier", "item": "https://toolxeno.com/code-minifier.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%237928ca'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>" />
+
+  <style>
+    /* =============================================
+       CSS RESET & VARIABLES
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg0: #030712;
+      --bg1: #0a0f1e;
+      --bg2: #0f172a;
+      --bg3: #1e293b;
+      --card: rgba(255,255,255,0.04);
+      --card-hover: rgba(255,255,255,0.08);
+      --card-solid: #1e293b;
+      --glass: rgba(255,255,255,0.03);
+      --text: #f1f5f9;
+      --text2: #cbd5e1;
+      --muted: #94a3b8;
+      --line: rgba(255,255,255,0.1);
+      --line-strong: rgba(255,255,255,0.2);
+      --accent1: #007cf0;
+      --accent2: #00dfd8;
+      --accent3: #7928ca;
+      --accent4: #ff0080;
+      --shadow: 0 24px 60px rgba(0,0,0,0.6);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.3);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --max: 1240px;
+      --ring: 0 0 0 3px rgba(0,124,240,0.4);
+      --grad: linear-gradient(135deg, var(--accent1), var(--accent2));
+      --grad-purple: linear-gradient(135deg, var(--accent3), var(--accent4));
+      --grad-text: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+      --grad-bg: linear-gradient(135deg, rgba(0,124,240,0.08) 0%, rgba(121,40,202,0.08) 100%);
+      --font: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+      --header-h: 72px;
+      --editor-font: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', 'Menlo', monospace;
+    }
+
+    [data-theme="light"] {
+      --bg0: #f8fafc;
+      --bg1: #f1f5f9;
+      --bg2: #e2e8f0;
+      --bg3: #cbd5e1;
+      --card: rgba(255,255,255,0.9);
+      --card-hover: rgba(255,255,255,1);
+      --card-solid: #ffffff;
+      --glass: rgba(255,255,255,0.8);
+      --text: #0f172a;
+      --text2: #334155;
+      --muted: #64748b;
+      --line: rgba(0,0,0,0.1);
+      --line-strong: rgba(0,0,0,0.15);
+      --shadow: 0 24px 60px rgba(0,0,0,0.1);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg0);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+    select { font-family: var(--font); }
+
+    /* =============================================
+       ANIMATED BACKGROUND
+    ============================================= */
+    .bg-orbs {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+    }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(100px); opacity: 0.15;
+      will-change: transform;
+    }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent1); top: -200px; left: -200px; animation: orbFloat1 20s linear infinite; }
+    .orb-2 { width: 500px; height: 500px; background: var(--accent3); top: 30%; right: -150px; animation: orbFloat2 25s linear infinite; }
+    .orb-3 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: 30%; animation: orbFloat3 18s linear infinite; }
+    .orb-4 { width: 300px; height: 300px; background: var(--accent4); top: 60%; left: 10%; animation: orbFloat4 22s linear infinite; }
+
+    @keyframes orbFloat1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(60px,40px) scale(1.1);} 66%{transform:translate(-40px,60px) scale(0.95);} }
+    @keyframes orbFloat2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-80px,50px) scale(1.05);} 66%{transform:translate(40px,-60px) scale(1.1);} }
+    @keyframes orbFloat3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(70px,-40px) scale(1.15);} }
+    @keyframes orbFloat4 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,-80px) scale(1.1);} }
+
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+
+    .page-wrapper { position: relative; z-index: 1; }
+
+    /* =============================================
+       HEADER
+    ============================================= */
+    .header {
+      position: sticky; top: 0; z-index: 1000;
+      height: var(--header-h);
+      display: flex; align-items: center;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(3,7,18,0.85);
+      border-bottom: 1px solid var(--line);
+      transition: background var(--transition);
+    }
+    [data-theme="light"] .header { background: rgba(248,250,252,0.90); }
+
+    .header-inner {
+      max-width: var(--max); width: 100%; margin: 0 auto;
+      padding: 0 24px; display: flex; align-items: center; gap: 24px;
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--grad); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 900; color: #fff;
+      box-shadow: 0 4px 14px rgba(0,124,240,0.4);
+    }
+    .logo-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .nav-primary { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .nav-link {
+      padding: 7px 13px; font-size: 0.875rem; font-weight: 500;
+      color: var(--text2); border-radius: var(--radius-xs);
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav-link:hover { color: var(--text); background: var(--card); }
+
+    .header-actions { display: flex; align-items: center; gap: 10px; margin-left: 12px; }
+
+    .btn-theme {
+      padding: 8px 20px; font-size: 0.85rem; font-weight: 600;
+      font-family: var(--font); background: var(--card);
+      backdrop-filter: blur(8px); border-radius: 40px;
+      color: var(--text2); border: 1px solid var(--line);
+      transition: all 0.3s ease; cursor: pointer;
+    }
+    .btn-theme:hover {
+      color: var(--text); border-color: var(--accent1);
+      background: rgba(0,124,240,0.1);
+    }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; margin-left: auto; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); display: block; }
+
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(3,7,18,0.98); backdrop-filter: blur(24px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-link { font-size: 1.4rem; font-weight: 700; color: var(--text2); padding: 12px 32px; border-radius: var(--radius-sm); transition: all var(--transition); }
+    .mobile-nav-link:hover { color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; font-size: 1.5rem; color: var(--muted); padding: 8px; border-radius: 8px; transition: color var(--transition); cursor: pointer; }
+    .mobile-close:hover { color: var(--text); }
+
+    /* =============================================
+       HERO SECTION
+    ============================================= */
+    .hero {
+      padding: 48px 24px 32px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px;
+      background: rgba(0,124,240,0.15);
+      border: 1px solid rgba(0,124,240,0.3);
+      border-radius: 100px;
+      font-size: 0.78rem; font-weight: 600; color: var(--accent1);
+      letter-spacing: 0.5px; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
+
+    .hero-h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 800; line-height: 1.1; letter-spacing: -1.5px;
+      margin-bottom: 14px;
+      max-width: 700px; margin-left: auto; margin-right: auto;
+    }
+    .hero-h1 .grad-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .hero-sub {
+      font-size: clamp(0.9rem, 1.5vw, 1rem); color: var(--text2);
+      max-width: 560px; margin: 0 auto 20px; line-height: 1.6;
+    }
+
+    .hero-trust {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 8px 16px;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.8rem; font-weight: 500; color: var(--muted);
+    }
+    .trust-dot { color: var(--accent2); }
+
+    /* =============================================
+       TOOL SECTION
+    ============================================= */
+    .tool-section {
+      padding: 12px 24px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .tool-container {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    /* =============================================
+       TOOLBAR
+    ============================================= */
+    .tool-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding: 12px 16px;
+      background: var(--card-solid);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mode-tabs {
+      display: flex;
+      gap: 3px;
+      background: var(--bg2);
+      padding: 3px;
+      border-radius: var(--radius-xs);
+      border: 1px solid var(--line);
+    }
+    .mode-tab {
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text2);
+      border-radius: 6px;
+      transition: all var(--transition);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .mode-tab:hover { color: var(--text); }
+    .mode-tab.active {
+      color: #fff;
+      background: var(--grad);
+      box-shadow: 0 2px 8px rgba(0,124,240,0.3);
+    }
+
+    .toolbar-spacer { flex: 1; }
+
+    .toolbar-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 7px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text2);
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      transition: all var(--transition);
+    }
+    .toolbar-btn:hover {
+      color: var(--text);
+      background: var(--card-hover);
+      border-color: var(--accent1);
+    }
+    .toolbar-btn:active {
+      transform: scale(0.97);
+    }
+    .toolbar-btn.primary {
+      background: var(--grad);
+      color: #fff;
+      border: none;
+      box-shadow: 0 2px 10px rgba(0,124,240,0.3);
+    }
+    .toolbar-btn.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0,124,240,0.4);
+    }
+    .toolbar-btn.primary:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* =============================================
+       EDITOR LAYOUT (Split Pane)
+    ============================================= */
+    .editor-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .editor-pane {
+      display: flex;
+      flex-direction: column;
+    }
+    .editor-pane.input-pane {
+      min-height: 450px;
+    }
+    .editor-pane.output-pane {
+      min-height: 450px;
+    }
+    .editor-pane + .editor-pane {
+      border-left: 1px solid var(--line);
+    }
+
+    .pane-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 14px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+    .pane-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pane-badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--accent1);
+      background: rgba(0,124,240,0.15);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .pane-actions {
+      display: flex;
+      gap: 4px;
+    }
+    .pane-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text2);
+      border-radius: 4px;
+      transition: all var(--transition);
+    }
+    .pane-btn:hover { color: var(--accent1); background: rgba(0,124,240,0.1); }
+
+    /* Code Editor */
+    .code-editor {
+      flex: 1;
+      display: flex;
+      background: var(--bg1);
+      position: relative;
+      overflow: hidden;
+    }
+    .code-editor textarea {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      padding: 16px;
+      font-family: var(--editor-font);
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text);
+      background: transparent;
+      border: none;
+      resize: none;
+      outline: none;
+      tab-size: 2;
+      white-space: pre;
+      overflow: auto;
+    }
+    .code-editor textarea::placeholder {
+      color: var(--muted);
+      opacity: 0.6;
+    }
+    .code-editor textarea::-webkit-scrollbar { width: 8px; height: 8px; }
+    .code-editor textarea::-webkit-scrollbar-track { background: transparent; }
+    .code-editor textarea::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 4px; }
+    .code-editor textarea::-webkit-scrollbar-thumb:hover { background: var(--line-strong); }
+    .code-editor textarea[readonly] {
+      cursor: default;
+    }
+
+    /* Drop zone overlay */
+    .drop-overlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: rgba(0,124,240,0.15);
+      border: 3px dashed var(--accent1);
+      border-radius: 0;
+      z-index: 10;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent1);
+      backdrop-filter: blur(4px);
+    }
+    .drop-overlay.active { display: flex; }
+
+    /* =============================================
+       STATS PANEL
+    ============================================= */
+    .stats-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border-top: 1px solid var(--line);
+      background: var(--bg2);
+    }
+    .stat-item {
+      flex: 1;
+      min-width: 120px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-right: 1px solid var(--line);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .stat-value {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .stat-value.success { color: var(--accent2); }
+    .stat-value .stat-unit {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-left: 2px;
+    }
+
+    /* =============================================
+       OPTIONS PANEL
+    ============================================= */
+    .options-panel {
+      border-top: 1px solid var(--line);
+      background: var(--card-solid);
+    }
+    .options-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+    .options-toggle:hover { color: var(--accent1); }
+    .options-toggle-icon {
+      width: 22px; height: 22px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      transition: all var(--transition);
+    }
+    .options-panel.open .options-toggle-icon {
+      transform: rotate(180deg);
+      background: rgba(0,124,240,0.15);
+      border-color: var(--accent1);
+      color: var(--accent1);
+    }
+    .options-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .options-panel.open .options-body { max-height: 600px; }
+    .options-inner {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+      padding: 0 16px 16px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 12px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+    }
+    .option-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text2);
+    }
+
+    /* Toggle Switch */
+    .toggle {
+      position: relative;
+      width: 38px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+    .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: var(--bg3);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all var(--transition);
+      border: 1px solid var(--line);
+    }
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      left: 2px;
+      top: 2px;
+      background: var(--text2);
+      border-radius: 50%;
+      transition: all var(--transition);
+    }
+    .toggle input:checked + .toggle-slider {
+      background: var(--accent1);
+      border-color: var(--accent1);
+    }
+    .toggle input:checked + .toggle-slider::before {
+      transform: translateX(18px);
+      background: #fff;
+    }
+
+    /* Mode select */
+    .mode-select {
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .mode-select:focus { outline: none; border-color: var(--accent1); }
+    .mode-select option { background: var(--card-solid); color: var(--text); }
+
+    /* =============================================
+       ERROR BAR
+    ============================================= */
+    .error-bar {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: rgba(255,0,80,0.1);
+      border-top: 1px solid rgba(255,0,80,0.3);
+      color: var(--accent4);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .error-bar.active { display: flex; }
+    .error-bar-icon { font-size: 1rem; flex-shrink: 0; }
+    .error-bar-text { flex: 1; }
+
+    /* =============================================
+       BATCH TABS
+    ============================================= */
+    .batch-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--bg2);
+      border-top: 1px solid var(--line);
+      overflow-x: auto;
+    }
+    .batch-bar::-webkit-scrollbar { height: 4px; }
+    .batch-bar::-webkit-scrollbar-track { background: transparent; }
+    .batch-bar::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 2px; }
+
+    .batch-tab {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text2);
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all var(--transition);
+      flex-shrink: 0;
+    }
+    .batch-tab:hover { color: var(--text); background: var(--card-hover); }
+    .batch-tab.active {
+      color: var(--accent1);
+      background: rgba(0,124,240,0.15);
+      border-color: var(--accent1);
+    }
+    .batch-tab-close {
+      font-size: 0.65rem;
+      opacity: 0.6;
+      transition: opacity var(--transition);
+      padding: 0 2px;
+    }
+    .batch-tab-close:hover { opacity: 1; color: var(--accent4); }
+    .batch-add-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      font-size: 1rem;
+      color: var(--text2);
+      background: var(--glass);
+      border: 1px dashed var(--line);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all var(--transition);
+      flex-shrink: 0;
+    }
+    .batch-add-btn:hover {
+      color: var(--accent1);
+      border-color: var(--accent1);
+      background: rgba(0,124,240,0.1);
+    }
+
+    /* =============================================
+       TOAST NOTIFICATION
+    ============================================= */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      box-shadow: var(--shadow);
+      z-index: 5000;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      pointer-events: none;
+    }
+    .toast.active {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    .toast-icon { font-size: 1.1rem; }
+
+    /* =============================================
+       HOW IT WORKS, FEATURES & FAQ
+    ============================================= */
+    .howto-section, .features-section, .faq-section {
+      padding: 60px 24px;
+    }
+    .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent1);
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--text2);
+      max-width: 500px;
+      line-height: 1.6;
+    }
+
+    /* How It Works */
+    .howto-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 36px;
+    }
+    .step-card { text-align: center; }
+    .step-number {
+      width: 48px; height: 48px;
+      margin: 0 auto 14px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--grad); color: #fff;
+      font-size: 1.1rem; font-weight: 800;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0,124,240,0.3);
+    }
+    .step-title {
+      font-size: 0.95rem; font-weight: 700;
+      margin-bottom: 6px; color: var(--text);
+    }
+    .step-desc {
+      font-size: 0.8rem; color: var(--text2); line-height: 1.5;
+    }
+
+    /* Features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .feature-card {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      transition: all var(--transition);
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0,124,240,0.3);
+      box-shadow: var(--shadow-sm);
+    }
+    .feature-icon { font-size: 2rem; margin-bottom: 12px; }
+    .feature-title {
+      font-size: 1rem; font-weight: 700;
+      margin-bottom: 8px; color: var(--text);
+    }
+    .feature-desc {
+      font-size: 0.85rem; color: var(--text2); line-height: 1.6;
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex; flex-direction: column;
+      gap: 10px; max-width: 700px;
+      margin: 36px auto 0;
+    }
+    .faq-item {
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xs);
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      padding: 16px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px;
+      font-size: 0.9rem; font-weight: 600;
+      color: var(--text); background: none;
+      text-align: left; cursor: pointer;
+      transition: color var(--transition);
+    }
+    .faq-q:hover { color: var(--accent1); }
+    .faq-q-icon {
+      width: 22px; height: 22px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; flex-shrink: 0;
+      transition: all var(--transition);
+    }
+    .faq-item.open .faq-q-icon {
+      transform: rotate(45deg);
+      background: rgba(0,124,240,0.15);
+      border-color: var(--accent1);
+      color: var(--accent1);
+    }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-a-inner {
+      padding: 0 20px 16px;
+      font-size: 0.85rem; color: var(--text2); line-height: 1.7;
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    .section-divider {
+      height: 1px; background: var(--line);
+      max-width: var(--max); margin: 0 auto;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 36px 24px 24px;
+      background: rgba(3,7,18,0.6);
+    }
+    [data-theme="light"] .footer { background: rgba(241,245,249,0.8); }
+
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-brand {
+      display: flex; align-items: center; gap: 10px; font-weight: 700;
+    }
+    .footer-brand-icon {
+      width: 32px; height: 32px;
+      background: var(--grad); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; font-weight: 900; color: #fff;
+    }
+    .footer-brand-name {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-link {
+      font-size: 0.85rem; color: var(--muted);
+      transition: color var(--transition);
+    }
+    .footer-link:hover { color: var(--text); }
+    .footer-back-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--accent1);
+      padding: 8px 16px;
+      border-radius: var(--radius-xs);
+      background: rgba(0,124,240,0.1);
+      border: 1px solid rgba(0,124,240,0.2);
+      transition: all var(--transition);
+    }
+    .footer-back-btn:hover { background: rgba(0,124,240,0.15); }
+    .footer-copy {
+      font-size: 0.78rem; color: var(--muted);
+      width: 100%; text-align: center;
+      padding-top: 20px; border-top: 1px solid var(--line);
+      margin-top: 12px;
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 900px) {
+      .editor-main { grid-template-columns: 1fr; }
+      .editor-pane + .editor-pane { border-left: none; border-top: 1px solid var(--line); }
+      .editor-pane.input-pane, .editor-pane.output-pane { min-height: 300px; }
+      .howto-steps { grid-template-columns: 1fr 1fr; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-primary, .header-actions { display: none; }
+      .hamburger { display: flex; }
+
+      .tool-toolbar { padding: 8px 10px; gap: 4px; }
+      .mode-tab { padding: 5px 10px; font-size: 0.72rem; }
+      .toolbar-btn { padding: 5px 8px; font-size: 0.72rem; }
+      .toolbar-btn .btn-label { display: none; }
+
+      .pane-header { padding: 6px 10px; }
+      .pane-title { font-size: 0.72rem; }
+
+      .stats-panel { flex-wrap: wrap; }
+      .stat-item { min-width: 100px; padding: 8px 10px; }
+      .stat-value { font-size: 0.8rem; }
+
+      .options-inner { grid-template-columns: 1fr 1fr; }
+      .howto-steps { gap: 14px; }
+    }
+
+    @media (max-width: 560px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .howto-steps { grid-template-columns: 1fr; }
+      .batch-bar { overflow-x: auto; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 36px 16px 20px; }
+      .tool-section { padding: 8px 8px 40px; }
+      .tool-toolbar { gap: 3px; }
+      .mode-tabs { gap: 2px; padding: 2px; }
+      .mode-tab { padding: 4px 8px; font-size: 0.68rem; }
+      .options-inner { grid-template-columns: 1fr; }
+      .batch-bar { padding: 6px 10px; }
+    }
+  </style>
 </head>
-
 <body>
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Header -->
-    <header class="header-glass fixed w-full top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        🛠️ Tool Xeno
-                    </div>
-                    <div class="hidden md:block text-sm opacity-70">
-                        Professional HTML Minifier
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <nav class="hidden md:flex space-x-2">
-                        <a href="#minify" class="nav-link">Minify</a>
-                        <a href="#options" class="nav-link">Options</a>
-                        <a href="#stats" class="nav-link">Statistics</a>
-                    </nav>
-                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
-                </div>
-            </div>
+  <!-- Background -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="https://toolxeno.com/" class="logo" aria-label="Tool Xeno – Home">
+          <div class="logo-icon" aria-hidden="true">X</div>
+          <span class="logo-text">Tool Xeno</span>
+        </a>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <a href="https://toolxeno.com/" class="nav-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="nav-link">All Tools</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">☀️ Light</button>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </header>
-    
-    <!-- Main Content -->
-    <main class="pt-20 pb-10">
-        <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-16 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                Professional HTML Minifier
-            </h1>
-            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
-                Advanced HTML minification with syntax highlighting, real-time preview, and comprehensive compression analytics. 
-                Optimize your HTML code for faster loading times and better performance.
-            </p>
-        </section>
-        
-        <!-- Main Minifier Interface -->
-        <section id="minify" class="container mx-auto px-6">
-            <!-- Options Panel -->
-            <div class="glass-card p-6 mb-8">
-                <h3 class="text-xl font-semibold mb-6 flex items-center">
-                    <i class="fas fa-cogs mr-3"></i>
-                    Minification Options
-                </h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <label class="text-sm font-medium tooltip" data-tooltip="Remove all HTML comments">Remove Comments</label>
-                            <p class="text-xs opacity-70">Strip <!-- --> tags</p>
-                        </div>
-                        <div class="toggle-switch active" data-option="removeComments"></div>
-                    </div>
-                    
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <label class="text-sm font-medium tooltip" data-tooltip="Collapse whitespace between tags">Collapse Whitespace</label>
-                            <p class="text-xs opacity-70">Minimize spaces</p>
-                        </div>
-                        <div class="toggle-switch active" data-option="collapseWhitespace"></div>
-                    </div>
-                    
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <label class="text-sm font-medium tooltip" data-tooltip="Remove empty attributes like class=''">Remove Empty Attrs</label>
-                            <p class="text-xs opacity-70">Clean empty values</p>
-                        </div>
-                        <div class="toggle-switch active" data-option="removeEmptyAttributes"></div>
-                    </div>
-                    
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <label class="text-sm font-medium tooltip" data-tooltip="Minify inline CSS and JavaScript">Minify Inline</label>
-                            <p class="text-xs opacity-70">CSS & JS optimization</p>
-                        </div>
-                        <div class="toggle-switch active" data-option="minifyCSS"></div>
-                    </div>
-                </div>
-                
-                <div class="mt-6 flex flex-wrap gap-3">
-                    <button id="minifyBtn" class="btn-gradient">
-                        <i class="fas fa-compress mr-2"></i>
-                        Minify HTML
-                    </button>
-                    <button id="clearBtn" class="btn-secondary">
-                        <i class="fas fa-eraser mr-2"></i>
-                        Clear All
-                    </button>
-                    <button id="sampleBtn" class="btn-gradient">
-                        <i class="fas fa-file-code mr-2"></i>
-                        Load Sample
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Code Editor Section -->
-            <div class="comparison-view mb-8">
-                <!-- Original HTML -->
-                <div class="glass-card p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold flex items-center">
-                            <i class="fas fa-code mr-3"></i>
-                            Original HTML
-                        </h3>
-                        <span id="originalLines" class="text-sm opacity-70">0 lines</span>
-                    </div>
-                    <textarea 
-                        id="originalHtml" 
-                        class="code-editor"
-                        placeholder="Paste your HTML code here..."
-                        spellcheck="false"
-                    ></textarea>
-                </div>
-                
-                <!-- Minified HTML -->
-                <div class="glass-card p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold flex items-center">
-                            <i class="fas fa-compress-arrows-alt mr-3"></i>
-                            Minified HTML
-                        </h3>
-                        <div class="flex gap-2">
-                            <span id="minifiedLines" class="text-sm opacity-70">0 lines</span>
-                            <button id="copyBtn" class="btn-success px-3 py-1 text-sm" title="Copy to clipboard">
-                                <i class="fas fa-copy"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <pre id="minifiedHtml" class="code-editor min-h-[300px] overflow-auto"><code class="language-html">// Minified HTML will appear here...</code></pre>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Statistics Dashboard -->
-            <div id="statsSection" class="glass-card p-6 mb-8">
-                <h3 class="text-xl font-semibold mb-6 flex items-center">
-                    <i class="fas fa-chart-bar mr-3"></i>
-                    Compression Statistics
-                </h3>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value" id="originalSize">0 B</div>
-                        <div class="text-sm opacity-70">Original Size</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="minifiedSize">0 B</div>
-                        <div class="text-sm opacity-70">Minified Size</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="compressionRatio">0%</div>
-                        <div class="text-sm opacity-70">Size Reduction</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="bytesSaved">0 B</div>
-                        <div class="text-sm opacity-70">Bytes Saved</div>
-                    </div>
-                </div>
-                
-                <div class="mt-6">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-sm font-medium">Compression Progress</span>
-                        <span id="compressionPercent" class="text-sm font-bold text-green-400">0%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progressBar"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Advanced Analytics -->
-            <div class="glass-card p-6">
-                <h3 class="text-xl font-semibold mb-6 flex items-center">
-                    <i class="fas fa-analytics mr-3"></i>
-                    Detailed Analysis
-                </h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-4">
-                        <div class="flex justify-between">
-                            <span class="text-sm opacity-70">Total Characters:</span>
-                            <span id="totalChars" class="font-medium">0</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-sm opacity-70">HTML Tags:</span>
-                            <span id="htmlTags" class="font-medium">0</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-sm opacity-70">Attributes:</span>
-                            <span id="attributes" class="font-medium">0</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-sm opacity-70">Comments Removed:</span>
-                            <span id="commentsRemoved" class="font-medium">0</span>
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <div class="flex justify-between">
-                            <span class="text-sm opacity-70">Whitespace Removed:</span>
-                            <span id="whitespaceRemoved" class="font-medium">0</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-sm opacity-70">Empty Attrs Removed:</span>
-                            <span id="emptyAttrsRemoved" class="font-medium">0</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-sm opacity-70">Processing Time:</span>
-                            <span id="processingTime" class="font-medium">0ms</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-sm opacity-70">Optimization Level:</span>
-                            <span id="optimizationLevel" class="font-medium">High</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <!-- Footer -->
-    <footer class="container mx-auto px-6 py-8 text-center opacity-70">
-        <div class="border-t border-opacity-20 pt-6">
-            <p>&copy; 2025 Tool Xeno. Professional HTML Minifier - Advanced web development tools.</p>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+      <a href="https://toolxeno.com/" class="mobile-nav-link">🏠 Home</a>
+      <a href="https://toolxeno.com/#tools" class="mobile-nav-link">🛠️ All Tools</a>
+      <a href="#features" class="mobile-nav-link">⚡ Features</a>
+      <a href="#faq" class="mobile-nav-link">❓ FAQ</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Free · No Signup · Privacy-First
+      </div>
+      <h1 class="hero-h1" id="hero-heading">
+        HTML, CSS & JS<br><span class="grad-text">Code Minifier</span>
+      </h1>
+      <p class="hero-sub">
+        Minify your code instantly with real-time processing. Reduce file sizes, estimate GZIP savings, and beautify code — all in your browser.
+      </p>
+      <div class="hero-trust">
+        <span class="trust-item"><span class="trust-dot">✦</span> Real-Time Processing</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> GZIP Estimate</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> Auto-Detection</span>
+        <span class="trust-item"><span class="trust-dot">✦</span> Batch Processing</span>
+      </div>
+    </section>
+
+    <!-- TOOL SECTION -->
+    <section class="tool-section" aria-label="Code Minifier Tool">
+      <div class="tool-container">
+        <!-- Toolbar -->
+        <div class="tool-toolbar">
+          <div class="mode-tabs" id="mode-tabs" role="tablist">
+            <button class="mode-tab active" data-mode="auto" role="tab" aria-selected="true">Auto</button>
+            <button class="mode-tab" data-mode="html" role="tab" aria-selected="false">HTML</button>
+            <button class="mode-tab" data-mode="css" role="tab" aria-selected="false">CSS</button>
+            <button class="mode-tab" data-mode="js" role="tab" aria-selected="false">JS</button>
+          </div>
+          <div class="toolbar-spacer"></div>
+          <button class="toolbar-btn primary" id="btn-minify" title="Minify Code">⚡ Minify</button>
+          <button class="toolbar-btn" id="btn-beautify" title="Beautify Code">✨ <span class="btn-label">Beautify</span></button>
+          <button class="toolbar-btn" id="btn-clear" title="Clear All">🗑️ <span class="btn-label">Clear</span></button>
+          <button class="toolbar-btn" id="btn-upload" title="Upload File">📂 <span class="btn-label">Upload</span></button>
+          <button class="toolbar-btn" id="btn-download" title="Download Output">💾 <span class="btn-label">Download</span></button>
         </div>
+
+        <!-- Hidden file input -->
+        <input type="file" id="file-input" accept=".html,.htm,.css,.js,.mjs,.ts,.tsx,.jsx,.svg,.json" style="display:none" />
+
+        <!-- Editor Split Panes -->
+        <div class="editor-main">
+          <!-- Input Pane -->
+          <div class="editor-pane input-pane">
+            <div class="pane-header">
+              <div class="pane-title">
+                📝 Input
+                <span class="pane-badge" id="input-lines-badge">0 lines</span>
+              </div>
+              <div class="pane-actions">
+                <button class="pane-btn" id="btn-paste" title="Paste from clipboard">📋 Paste</button>
+                <button class="pane-btn" id="btn-clear-input" title="Clear input">🗑️ Clear</button>
+              </div>
+            </div>
+            <div class="code-editor" id="input-code-editor">
+              <textarea id="input-editor" placeholder="Paste or type your code here...&#10;&#10;Or drag & drop a file onto this area." spellcheck="false"></textarea>
+              <div class="drop-overlay" id="drop-overlay">📁 Drop file here</div>
+            </div>
+          </div>
+
+          <!-- Output Pane -->
+          <div class="editor-pane output-pane">
+            <div class="pane-header">
+              <div class="pane-title">
+                📦 Output
+                <span class="pane-badge" id="output-lines-badge">0 lines</span>
+              </div>
+              <div class="pane-actions">
+                <button class="pane-btn" id="btn-copy" title="Copy to clipboard">📋 Copy</button>
+                <button class="pane-btn" id="btn-clear-output" title="Clear output">🗑️ Clear</button>
+              </div>
+            </div>
+            <div class="code-editor">
+              <textarea id="output-editor" readonly placeholder="Minified output will appear here..." spellcheck="false"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-panel" id="stats-panel">
+          <div class="stat-item">
+            <span class="stat-label">Original Size</span>
+            <span class="stat-value" id="stat-original">0<span class="stat-unit">B</span></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Minified Size</span>
+            <span class="stat-value" id="stat-minified">0<span class="stat-unit">B</span></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Savings</span>
+            <span class="stat-value" id="stat-savings">0<span class="stat-unit">%</span></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">GZIP Estimate</span>
+            <span class="stat-value" id="stat-gzip">0<span class="stat-unit">B</span></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Time</span>
+            <span class="stat-value" id="stat-time">0<span class="stat-unit">ms</span></span>
+          </div>
+        </div>
+
+        <!-- Error Bar -->
+        <div class="error-bar" id="error-bar">
+          <span class="error-bar-icon">⚠️</span>
+          <span class="error-bar-text" id="error-text"></span>
+        </div>
+
+        <!-- Advanced Options -->
+        <div class="options-panel" id="options-panel">
+          <button class="options-toggle" id="options-toggle">
+            <span>⚙️ Advanced Options</span>
+            <span class="options-toggle-icon">▼</span>
+          </button>
+          <div class="options-body">
+            <div class="options-inner">
+              <div class="option-item">
+                <span class="option-label">Mode</span>
+                <select class="mode-select" id="opt-mode">
+                  <option value="safe">Safe</option>
+                  <option value="aggressive">Aggressive</option>
+                </select>
+              </div>
+              <div class="option-item">
+                <span class="option-label">Preserve Comments</span>
+                <label class="toggle">
+                  <input type="checkbox" id="opt-preserve-comments" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="option-item">
+                <span class="option-label">Remove Console</span>
+                <label class="toggle">
+                  <input type="checkbox" id="opt-remove-console" checked />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="option-item">
+                <span class="option-label">Real-time Minify</span>
+                <label class="toggle">
+                  <input type="checkbox" id="opt-realtime" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Batch Tabs -->
+        <div class="batch-bar" id="batch-bar">
+          <button class="batch-add-btn" id="batch-add" title="Add new snippet">+</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="howto-section" id="howto" aria-labelledby="howto-heading">
+      <div class="section-inner">
+        <span class="section-label">How It Works</span>
+        <h2 class="section-title" id="howto-heading">Minify in 4 Simple Steps</h2>
+        <p class="section-sub">From pasting code to downloading the minified result — everything happens in seconds.</p>
+        <div class="howto-steps">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-title">Paste or Upload</div>
+            <div class="step-desc">Paste your HTML, CSS, or JavaScript code, or drag and drop a file directly into the editor.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-title">Auto-Detect Mode</div>
+            <div class="step-desc">The tool automatically detects your language, or manually select HTML, CSS, or JS from the mode tabs.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-title">Minify Instantly</div>
+            <div class="step-desc">Click Minify or enable real-time mode for instant compression with safe or aggressive settings.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <div class="step-title">Copy or Download</div>
+            <div class="step-desc">Copy the result to your clipboard or download it as a .html, .css, or .js file instantly.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- FEATURES -->
+    <section class="features-section" id="features" aria-labelledby="features-heading">
+      <div class="section-inner">
+        <span class="section-label">Features</span>
+        <h2 class="section-title" id="features-heading">Everything You Need</h2>
+        <p class="section-sub">A comprehensive, privacy-first code minification tool built for modern developers.</p>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-title">Real-Time Minification</div>
+            <div class="feature-desc">Enable real-time mode to see your minified code update as you type, with a 300ms debounce for performance.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🧠</div>
+            <div class="feature-title">Smart Auto-Detection</div>
+            <div class="feature-desc">Automatically detects HTML, CSS, or JavaScript based on code patterns — no manual mode switching needed.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <div class="feature-title">Safe & Aggressive Modes</div>
+            <div class="feature-desc">Safe mode preserves structure; aggressive mode applies maximum compression with zero-unit removal and color shortening.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <div class="feature-title">GZIP Size Estimation</div>
+            <div class="feature-desc">See estimated GZIP compressed sizes using the CompressionStream API, so you know the real-world savings.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📦</div>
+            <div class="feature-title">Batch Processing</div>
+            <div class="feature-desc">Work with multiple snippets simultaneously using tabs. Each tab stores its own input, output, and mode independently.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-title">100% Client-Side</div>
+            <div class="feature-desc">Your code never leaves your browser. Zero server processing, zero data collection — complete privacy guaranteed.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- FAQ -->
+    <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+      <div class="section-inner">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title" id="faq-heading">Frequently Asked Questions</h2>
+        <p class="section-sub">Common questions about our code minification tool.</p>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              <span>Is my code sent to a server?</span>
+              <span class="faq-q-icon">+</span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">No. All minification happens entirely in your browser using JavaScript. Your code never leaves your device, making it completely private and secure. There are no server-side API calls involved.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              <span>What's the difference between Safe and Aggressive modes?</span>
+              <span class="faq-q-icon">+</span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Safe mode performs basic minification: removes comments, collapses whitespace, and trims unnecessary characters while preserving code safety. Aggressive mode goes further by removing units on zero values (0px → 0), shortening hex colors (#aabbcc → #abc), removing leading zeros, and more.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              <span>Does the minifier support ES6+ JavaScript?</span>
+              <span class="faq-q-icon">+</span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Yes. Our JavaScript minifier handles modern syntax including arrow functions, template literals (backticks), const/let, import/export statements, and async/await. It carefully preserves string content while minifying the surrounding code structure.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              <span>How accurate is the GZIP estimate?</span>
+              <span class="faq-q-icon">+</span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">If your browser supports the CompressionStream API (Chrome, Edge, Firefox 113+), we perform actual GZIP compression to calculate the exact compressed size. In older browsers, we provide an estimate of approximately 30% of the minified size.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              <span>Can I minify multiple files at once?</span>
+              <span class="faq-q-icon">+</span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Yes! Use the batch tabs at the bottom of the tool. Click the + button to add new snippet tabs. Each tab maintains its own input code, output, detected mode, and stats independently, so you can work on multiple files simultaneously.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-icon" aria-hidden="true">X</div>
+          <span class="footer-brand-name">Tool Xeno</span>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://toolxeno.com/" class="footer-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="footer-link">All Tools</a>
+          <a href="https://toolxeno.com/privacy.html" class="footer-link">Privacy</a>
+          <a href="https://toolxeno.com/terms.html" class="footer-link">Terms</a>
+        </nav>
+        <a href="https://toolxeno.com/#tools" class="footer-back-btn">← Back to All Tools</a>
+        <div class="footer-copy">© <span id="footer-year"></span> Tool Xeno. All processing is performed locally in your browser.</div>
+      </div>
     </footer>
-    
-    <script>
-        // Global variables
-        let minifierOptions = {
-            removeComments: true,
-            collapseWhitespace: true,
-            removeEmptyAttributes: true,
-            minifyCSS: true
-        };
-        
-        let analytics = {
-            totalChars: 0,
-            htmlTags: 0,
-            attributes: 0,
-            commentsRemoved: 0,
-            whitespaceRemoved: 0,
-            emptyAttrsRemoved: 0,
-            processingTime: 0
-        };
-        
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeParticles();
-            initializeControls();
-            loadSampleHTML();
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast-icon" id="toast-icon">✅</span>
+    <span id="toast-text"></span>
+  </div>
+
+  <script>
+  /* =============================================
+     CODE MINIFIER - COMPLETE APPLICATION
+     Rewritten from scratch with guaranteed functionality
+  ============================================= */
+  document.addEventListener('DOMContentLoaded', function() {
+
+    /* ---- DOM REFERENCES (cached) ---- */
+    var themeToggle = document.getElementById('theme-toggle');
+    var hamburger = document.getElementById('hamburger');
+    var mobileNav = document.getElementById('mobile-nav');
+    var mobileClose = document.getElementById('mobile-close');
+    var modeTabs = document.getElementById('mode-tabs');
+    var btnMinify = document.getElementById('btn-minify');
+    var btnBeautify = document.getElementById('btn-beautify');
+    var btnClear = document.getElementById('btn-clear');
+    var btnUpload = document.getElementById('btn-upload');
+    var btnDownload = document.getElementById('btn-download');
+    var fileInput = document.getElementById('file-input');
+    var inputEditor = document.getElementById('input-editor');
+    var outputEditor = document.getElementById('output-editor');
+    var inputLinesBadge = document.getElementById('input-lines-badge');
+    var outputLinesBadge = document.getElementById('output-lines-badge');
+    var btnPaste = document.getElementById('btn-paste');
+    var btnClearInput = document.getElementById('btn-clear-input');
+    var btnCopy = document.getElementById('btn-copy');
+    var btnClearOutput = document.getElementById('btn-clear-output');
+    var statOriginal = document.getElementById('stat-original');
+    var statMinified = document.getElementById('stat-minified');
+    var statSavings = document.getElementById('stat-savings');
+    var statGzip = document.getElementById('stat-gzip');
+    var statTime = document.getElementById('stat-time');
+    var errorBar = document.getElementById('error-bar');
+    var errorText = document.getElementById('error-text');
+    var optionsPanel = document.getElementById('options-panel');
+    var optionsToggle = document.getElementById('options-toggle');
+    var optMode = document.getElementById('opt-mode');
+    var optPreserveComments = document.getElementById('opt-preserve-comments');
+    var optRemoveConsole = document.getElementById('opt-remove-console');
+    var optRealtime = document.getElementById('opt-realtime');
+    var batchBar = document.getElementById('batch-bar');
+    var batchAdd = document.getElementById('batch-add');
+    var dropOverlay = document.getElementById('drop-overlay');
+    var inputCodeEditor = document.getElementById('input-code-editor');
+    var toastEl = document.getElementById('toast');
+    var toastIcon = document.getElementById('toast-icon');
+    var toastText = document.getElementById('toast-text');
+    var footerYear = document.getElementById('footer-year');
+
+    /* ---- STATE ---- */
+    var activeMode = 'auto';
+    var detectedMode = 'html';
+    var tabs = [{ input: '', output: '', mode: 'auto', detectedMode: 'html', stats: null }];
+    var activeTab = 0;
+    var debounceTimer = null;
+    var toastTimer = null;
+
+    /* =============================================
+       UTILITY FUNCTIONS
+    ============================================= */
+
+    function showToast(message, icon) {
+      if (!toastEl) return;
+      toastIcon.textContent = icon || '✅';
+      toastText.textContent = message;
+      toastEl.classList.add('active');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(function() {
+        toastEl.classList.remove('active');
+      }, 2500);
+    }
+
+    function showError(msg) {
+      if (!errorBar || !errorText) return;
+      errorText.textContent = msg;
+      errorBar.classList.add('active');
+    }
+
+    function clearError() {
+      if (!errorBar) return;
+      errorBar.classList.remove('active');
+    }
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0<span class="stat-unit">B</span>';
+      if (bytes < 1024) return bytes + '<span class="stat-unit">B</span>';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + '<span class="stat-unit">KB</span>';
+      return (bytes / (1024 * 1024)).toFixed(2) + '<span class="stat-unit">MB</span>';
+    }
+
+    function getByteSize(str) {
+      try { return new Blob([str]).size; } catch(e) { return str.length; }
+    }
+
+    function getLineCount(str) {
+      if (!str) return 0;
+      return str.split('\n').length;
+    }
+
+    function updateLineCounts() {
+      if (!inputLinesBadge || !outputLinesBadge) return;
+      var inputLines = getLineCount(inputEditor ? inputEditor.value : '');
+      var outputLines = getLineCount(outputEditor ? outputEditor.value : '');
+      inputLinesBadge.textContent = inputLines + ' line' + (inputLines !== 1 ? 's' : '');
+      outputLinesBadge.textContent = outputLines + ' line' + (outputLines !== 1 ? 's' : '');
+    }
+
+    function resetStats() {
+      if (!statOriginal) return;
+      statOriginal.innerHTML = '0<span class="stat-unit">B</span>';
+      statMinified.innerHTML = '0<span class="stat-unit">B</span>';
+      statSavings.innerHTML = '0<span class="stat-unit">%</span>';
+      statSavings.className = 'stat-value';
+      statGzip.innerHTML = '0<span class="stat-unit">B</span>';
+      statTime.innerHTML = '0<span class="stat-unit">ms</span>';
+    }
+
+    /* ---- GZIP ESTIMATE ---- */
+    function getGzipSize(str) {
+      if (typeof CompressionStream !== 'undefined') {
+        var blob = new Blob([str]);
+        var stream = blob.stream().pipeThrough(new CompressionStream('gzip'));
+        return new Response(stream).arrayBuffer().then(function(buf) {
+          return buf.byteLength;
+        }).catch(function() {
+          return Math.round(getByteSize(str) * 0.3);
         });
-        
-        // Theme toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+      }
+      return Promise.resolve(Math.round(getByteSize(str) * 0.3));
+    }
+
+    function updateStats(original, minified, timeMs) {
+      if (!statOriginal) return;
+      var origSize = getByteSize(original);
+      var minSize = getByteSize(minified);
+      var savings = origSize > 0 ? ((origSize - minSize) / origSize * 100) : 0;
+
+      statOriginal.innerHTML = formatBytes(origSize);
+      statMinified.innerHTML = formatBytes(minSize);
+      statSavings.innerHTML = savings.toFixed(1) + '<span class="stat-unit">%</span>';
+      statSavings.className = 'stat-value' + (savings > 0 ? ' success' : '');
+      statTime.innerHTML = timeMs.toFixed(2) + '<span class="stat-unit">ms</span>';
+
+      if (tabs[activeTab]) {
+        tabs[activeTab].stats = { origSize: origSize, minSize: minSize, savings: savings, timeMs: timeMs };
+      }
+
+      getGzipSize(minified).then(function(gzipSize) {
+        if (statGzip) statGzip.innerHTML = formatBytes(gzipSize);
+        if (tabs[activeTab] && tabs[activeTab].stats) {
+          tabs[activeTab].stats.gzipSize = gzipSize;
         }
-        
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-theme');
+      });
+    }
+
+    /* =============================================
+       AUTO DETECT LANGUAGE
+    ============================================= */
+    function detectLanguage(code) {
+      var trimmed = code.trim();
+      if (!trimmed) return 'html';
+
+      // HTML detection
+      if (/<html|<!doctype|<head|<body|<div|<span|<meta/i.test(trimmed)) return 'html';
+      if ((trimmed.match(/</g) || []).length > 3 && (trimmed.match(/>/g) || []).length > 3) return 'html';
+
+      // CSS detection - has braces and colons/semicolons, but no JS keywords
+      if (/\{[^}]*\}/.test(trimmed) && /[;:]/.test(trimmed)) {
+        if (!/\b(function|const|let|var|=>|import|export|return|if\s*\(|for\s*\()\b/.test(trimmed)) {
+          if (/^\s*[a-zA-Z0-9_\-.*#\[\]:>,\s]+\s*\{/m.test(trimmed)) return 'css';
+          if (/[\#\.][a-zA-Z]/.test(trimmed) && /\{/.test(trimmed)) return 'css';
         }
-        
-        // Initialize floating particles
-        function initializeParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                container.appendChild(particle);
-            }
+      }
+
+      // JS detection
+      if (/\b(function|const|let|var|=>|import|export|class |async |await |module\.exports)\b/.test(trimmed)) return 'js';
+      if (/console\.(log|warn|error)/.test(trimmed)) return 'js';
+
+      // Fallback
+      if (/[;:{}]/.test(trimmed) && !/[<>]/.test(trimmed)) return 'css';
+      return 'js';
+    }
+
+    /* =============================================
+       HTML MINIFIER
+    ============================================= */
+    function minifyHTML(code, opts) {
+      var aggressive = opts.mode === 'aggressive';
+      var preserveComments = opts.preserveComments;
+      var result = code;
+
+      // Remove comments (but preserve conditional IE comments <!--[if ...]>)
+      if (!preserveComments) {
+        result = result.replace(/<!--(?!\[if)[\s\S]*?-->/g, '');
+      }
+
+      // Remove type="text/javascript" and type="text/css"
+      result = result.replace(/\s+type\s*=\s*["']text\/javascript["']/gi, '');
+      result = result.replace(/\s+type\s*=\s*["']text\/css["']/gi, '');
+
+      // Collapse whitespace between tags
+      result = result.replace(/>\s+</g, '><');
+
+      if (aggressive) {
+        // Remove optional quotes on simple attributes
+        result = result.replace(/=\s*"([a-zA-Z][a-zA-Z0-9\-_]*)"/g, '=$1');
+
+        // Collapse boolean attributes
+        result = result.replace(/\b(disabled|checked|selected|readonly|multiple|autoplay|controls|loop|muted|default|defer|async|reversed|open|hidden|required|autofocus)\s*=\s*["']?\1["']?/gi, '$1');
+
+        // Remove unnecessary whitespace in general areas
+        result = result.replace(/\s{2,}/g, ' ');
+      }
+
+      // Remove empty lines
+      result = result.replace(/^\s*\n/gm, '');
+
+      return result.trim();
+    }
+
+    /* =============================================
+       CSS MINIFIER
+    ============================================= */
+    function minifyCSS(code, opts) {
+      var aggressive = opts.mode === 'aggressive';
+      var preserveComments = opts.preserveComments;
+      var result = code;
+
+      // Remove comments
+      if (!preserveComments) {
+        result = result.replace(/\/\*[\s\S]*?\*\//g, '');
+      }
+
+      // Remove newlines and extra whitespace
+      result = result.replace(/\n/g, ' ');
+      result = result.replace(/\s{2,}/g, ' ');
+
+      // Remove semicolons before closing brace
+      result = result.replace(/;}/g, '}');
+
+      // Remove spaces around { : ; ,
+      result = result.replace(/\s*\{\s*/g, '{');
+      result = result.replace(/\s*\}\s*/g, '}');
+      result = result.replace(/\s*:\s*/g, ':');
+      result = result.replace(/\s*;\s*/g, ';');
+      result = result.replace(/\s*,\s*/g, ',');
+
+      if (aggressive) {
+        // Remove units on zero values
+        result = result.replace(/\b0(px|em|rem|vh|vw|%|pt|pc|in|cm|mm|ex|ch|vmin|vmax|s|ms)\b/g, '0');
+
+        // Shorten hex colors (#aabbcc → #abc)
+        result = result.replace(/#([0-9a-fA-F])\1([0-9a-fA-F])\2([0-9a-fA-F])\3/g, '#$1$2$3');
+
+        // Remove leading zeros (0.5 → .5)
+        result = result.replace(/\b0+(\.\d+)/g, '$1');
+
+        // Remove empty rules
+        result = result.replace(/[^{}]+\{\s*\}/g, '');
+      }
+
+      return result.trim();
+    }
+
+    /* =============================================
+       JS MINIFIER
+    ============================================= */
+    function minifyJS(code, opts) {
+      var aggressive = opts.mode === 'aggressive';
+      var preserveComments = opts.preserveComments;
+      var removeConsole = opts.removeConsole;
+      var result = code;
+
+      // Step 1: Protect strings by extracting them to placeholders
+      var strings = [];
+      var strIdx = 0;
+
+      function preserveString(match) {
+        var placeholder = '\x00S' + strIdx + 'E\x00';
+        strings[strIdx] = match;
+        strIdx++;
+        return placeholder;
+      }
+
+      // Protect template literals (backtick strings)
+      result = result.replace(/`(?:[^`\\]|\\.)*`/g, preserveString);
+      // Protect double-quoted strings
+      result = result.replace(/"(?:[^"\\]|\\.)*"/g, preserveString);
+      // Protect single-quoted strings
+      result = result.replace(/'(?:[^'\\]|\\.)*'/g, preserveString);
+
+      // Step 2: Remove comments
+      if (!preserveComments) {
+        // Remove multi-line comments
+        result = result.replace(/\/\*[\s\S]*?\*\//g, '');
+        // Remove single-line comments (but not URLs like http://)
+        result = result.replace(/(?<![a-zA-Z0-9:])\/\/.*$/gm, '');
+      }
+
+      // Step 3: Remove console.log/warn/error if option enabled
+      if (removeConsole) {
+        result = result.replace(/\bconsole\.(log|warn|error|info|debug|trace)\s*\([^)]*\)\s*;?/g, '');
+      }
+
+      if (aggressive) {
+        // true → !0, false → !1
+        result = result.replace(/\btrue\b/g, '!0');
+        result = result.replace(/\bfalse\b/g, '!1');
+
+        // Collapse whitespace
+        result = result.replace(/[ \t]+/g, ' ');
+
+        // Remove spaces around operators
+        result = result.replace(/\s*([+\-*/%=<>!&|^~?:])\s*/g, '$1');
+
+        // Restore space after keywords that need it
+        var keywords = ['var','let','const','return','typeof','instanceof','in','of','new','delete','throw','case','void','yield','await','export','import','from','as','class','extends','super','function','if','else','for','while','do','switch','try','catch','finally','with','break','continue','default','debugger'];
+        for (var ki = 0; ki < keywords.length; ki++) {
+          var kw = keywords[ki];
+          // Add space between keyword and following identifier/placeholder
+          var re = new RegExp('\\b' + kw + '(?=[^\\x00\\s;\\)\\]\\},])', 'g');
+          result = result.replace(re, kw + ' ');
         }
-        
-        // Initialize controls
-        function initializeControls() {
-            // Toggle switches
-            document.querySelectorAll('.toggle-switch').forEach(toggle => {
-                toggle.addEventListener('click', () => {
-                    toggle.classList.toggle('active');
-                    const option = toggle.dataset.option;
-                    minifierOptions[option] = toggle.classList.contains('active');
-                    
-                    if (document.getElementById('originalHtml').value.trim()) {
-                        debounce(minifyHTML, 300)();
-                    }
-                });
+
+        // Ensure space after } before keywords
+        result = result.replace(/\}([a-zA-Z])/g, '} $1');
+        result = result.replace(/\)([a-zA-Z])/g, ') $1');
+        result = result.replace(/;([a-zA-Z])/g, '; $1');
+
+        // Remove unnecessary semicolons before }
+        result = result.replace(/;}/g, '}');
+      } else {
+        // Safe mode: just collapse whitespace
+        result = result.replace(/[ \t]+/g, ' ');
+        result = result.replace(/\n\s*\n/g, '\n');
+      }
+
+      // Step 4: Restore strings
+      for (var i = strings.length - 1; i >= 0; i--) {
+        while (result.indexOf('\x00S' + i + 'E\x00') !== -1) {
+          result = result.replace('\x00S' + i + 'E\x00', strings[i]);
+        }
+      }
+
+      return result.trim();
+    }
+
+    /* =============================================
+       BEAUTIFIERS
+    ============================================= */
+    function beautifyHTML(code) {
+      var result = '';
+      var indent = 0;
+      var tab = '  ';
+      var lines = code.replace(/>\s*</g, '>\n<').split('\n');
+      var voidElements = ['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'];
+
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i].trim();
+        if (!line) continue;
+
+        // Closing tags decrease indent
+        if (/^<\//.test(line)) {
+          indent = Math.max(0, indent - 1);
+        }
+
+        result += tab.repeat(indent) + line + '\n';
+
+        // Opening tags increase indent (not self-closing, not void, not closing tag on same line)
+        var isVoid = false;
+        var tagName = line.match(/^<([a-zA-Z][a-zA-Z0-9]*)/);
+        if (tagName) {
+          for (var v = 0; v < voidElements.length; v++) {
+            if (voidElements[v] === tagName[1].toLowerCase()) { isVoid = true; break; }
+          }
+        }
+        if (/^<[a-zA-Z]/.test(line) && !/\/>\s*$/.test(line) && !isVoid && !/<\//.test(line)) {
+          indent++;
+        }
+      }
+
+      return result.trim();
+    }
+
+    function beautifyCSS(code) {
+      var result = '';
+      var indent = 0;
+      var tab = '  ';
+
+      var cleaned = code.replace(/\{/g, ' {\n');
+      cleaned = cleaned.replace(/\}/g, '\n}\n');
+      cleaned = cleaned.replace(/;/g, ';\n');
+
+      var lines = cleaned.split('\n');
+
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i].trim();
+        if (!line) continue;
+
+        if (line === '}') {
+          indent = Math.max(0, indent - 1);
+          result += tab.repeat(indent) + line + '\n';
+        } else {
+          result += tab.repeat(indent) + line + '\n';
+          if (line.endsWith('{')) {
+            indent++;
+          }
+        }
+      }
+
+      return result.trim();
+    }
+
+    function beautifyJS(code) {
+      var result = '';
+      var indent = 0;
+      var tab = '  ';
+      var lines = code.split('\n');
+
+      for (var i = 0; i < lines.length; i++) {
+        var trimmed = lines[i].trimEnd();
+        if (!trimmed.trim()) { result += '\n'; continue; }
+
+        // Decrease indent for lines starting with }
+        if (/^\s*\}/.test(trimmed)) {
+          indent = Math.max(0, indent - 1);
+        }
+
+        result += tab.repeat(indent) + trimmed.trim() + '\n';
+
+        // Count { and }
+        var opens = (trimmed.match(/\{/g) || []).length;
+        var closes = (trimmed.match(/\}/g) || []).length;
+        indent += opens - closes;
+        indent = Math.max(0, indent);
+      }
+
+      return result.trim();
+    }
+
+    /* =============================================
+       MAIN MINIFY FUNCTION
+    ============================================= */
+    function runMinify() {
+      clearError();
+      if (!inputEditor) return;
+      var input = inputEditor.value;
+      if (!input.trim()) {
+        showError('Please enter some code to minify.');
+        return;
+      }
+
+      var mode = activeMode === 'auto' ? detectLanguage(input) : activeMode;
+      detectedMode = mode;
+      if (tabs[activeTab]) tabs[activeTab].detectedMode = mode;
+
+      var opts = {
+        mode: optMode ? optMode.value : 'safe',
+        preserveComments: optPreserveComments ? optPreserveComments.checked : false,
+        removeConsole: optRemoveConsole ? optRemoveConsole.checked : true
+      };
+
+      var output = '';
+      var start = performance.now();
+
+      try {
+        switch (mode) {
+          case 'html': output = minifyHTML(input, opts); break;
+          case 'css': output = minifyCSS(input, opts); break;
+          case 'js': output = minifyJS(input, opts); break;
+          default: output = minifyHTML(input, opts);
+        }
+      } catch(e) {
+        showError('Minification error: ' + e.message);
+        return;
+      }
+
+      var elapsed = performance.now() - start;
+
+      if (outputEditor) outputEditor.value = output;
+      if (tabs[activeTab]) tabs[activeTab].output = output;
+
+      updateLineCounts();
+      updateStats(input, output, elapsed);
+      updateBatchTabLabels();
+      showToast('Code minified!', '⚡');
+    }
+
+    /* =============================================
+       MAIN BEAUTIFY FUNCTION
+    ============================================= */
+    function runBeautify() {
+      clearError();
+      if (!inputEditor) return;
+      var input = inputEditor.value;
+      if (!input.trim()) {
+        showError('Please enter some code to beautify.');
+        return;
+      }
+
+      var mode = activeMode === 'auto' ? detectLanguage(input) : activeMode;
+      var output = '';
+
+      try {
+        switch (mode) {
+          case 'html': output = beautifyHTML(input); break;
+          case 'css': output = beautifyCSS(input); break;
+          case 'js': output = beautifyJS(input); break;
+          default: output = beautifyHTML(input);
+        }
+      } catch(e) {
+        showError('Beautify error: ' + e.message);
+        return;
+      }
+
+      if (inputEditor) inputEditor.value = output;
+      if (tabs[activeTab]) tabs[activeTab].input = output;
+      updateLineCounts();
+      showToast('Code beautified!', '✨');
+    }
+
+    /* =============================================
+       MODE TAB SWITCHING
+    ============================================= */
+    function setModeTab(mode) {
+      var tabs2 = document.querySelectorAll('.mode-tab');
+      for (var i = 0; i < tabs2.length; i++) {
+        if (tabs2[i].getAttribute('data-mode') === mode) {
+          tabs2[i].classList.add('active');
+          tabs2[i].setAttribute('aria-selected', 'true');
+        } else {
+          tabs2[i].classList.remove('active');
+          tabs2[i].setAttribute('aria-selected', 'false');
+        }
+      }
+      activeMode = mode;
+      if (tabs[activeTab]) tabs[activeTab].mode = mode;
+    }
+
+    /* =============================================
+       BATCH TAB SYSTEM
+    ============================================= */
+    function saveCurrentTabState() {
+      if (tabs[activeTab]) {
+        tabs[activeTab].input = inputEditor ? inputEditor.value : '';
+        tabs[activeTab].output = outputEditor ? outputEditor.value : '';
+        tabs[activeTab].mode = activeMode;
+        tabs[activeTab].detectedMode = detectedMode;
+      }
+    }
+
+    function loadTabState(idx) {
+      if (!tabs[idx]) return;
+      var t = tabs[idx];
+      if (inputEditor) inputEditor.value = t.input || '';
+      if (outputEditor) outputEditor.value = t.output || '';
+      setModeTab(t.mode || 'auto');
+      detectedMode = t.detectedMode || 'html';
+      updateLineCounts();
+
+      if (t.stats && statOriginal) {
+        var s = t.stats;
+        statOriginal.innerHTML = formatBytes(s.origSize);
+        statMinified.innerHTML = formatBytes(s.minSize);
+        statSavings.innerHTML = s.savings.toFixed(1) + '<span class="stat-unit">%</span>';
+        statSavings.className = 'stat-value' + (s.savings > 0 ? ' success' : '');
+        if (s.gzipSize) {
+          statGzip.innerHTML = formatBytes(s.gzipSize);
+        }
+        statTime.innerHTML = s.timeMs.toFixed(2) + '<span class="stat-unit">ms</span>';
+      } else {
+        resetStats();
+      }
+    }
+
+    function updateBatchTabLabels() {
+      var tabEls = document.querySelectorAll('.batch-tab');
+      for (var i = 0; i < tabEls.length; i++) {
+        if (i < tabs.length && tabs[i]) {
+          var t = tabs[i];
+          var modeLabel = t.detectedMode ? t.detectedMode.toUpperCase() : '...';
+          // Only update text content (first child node), not the close button
+          if (tabEls[i].firstChild) {
+            tabEls[i].firstChild.textContent = 'Snippet ' + (i + 1) + ' (' + modeLabel + ')';
+          }
+        }
+      }
+    }
+
+    function renderBatchTabs() {
+      // Remove existing batch tabs
+      var existing = document.querySelectorAll('.batch-tab');
+      for (var i = 0; i < existing.length; i++) {
+        existing[i].remove();
+      }
+
+      for (var idx = 0; idx < tabs.length; idx++) {
+        (function(tabIdx) {
+          var tabEl = document.createElement('button');
+          tabEl.className = 'batch-tab' + (tabIdx === activeTab ? ' active' : '');
+          tabEl.setAttribute('data-tab', tabIdx);
+
+          var modeLabel = tabs[tabIdx].detectedMode ? tabs[tabIdx].detectedMode.toUpperCase() : '...';
+          var textNode = document.createTextNode('Snippet ' + (tabIdx + 1) + ' (' + modeLabel + ')');
+          tabEl.appendChild(textNode);
+
+          // Add close button if more than 1 tab
+          if (tabs.length > 1) {
+            var closeSpan = document.createElement('span');
+            closeSpan.className = 'batch-tab-close';
+            closeSpan.textContent = '✕';
+            closeSpan.addEventListener('click', function(e) {
+              e.stopPropagation();
+              if (tabs.length <= 1) return;
+              saveCurrentTabState();
+              tabs.splice(tabIdx, 1);
+              if (activeTab >= tabs.length) activeTab = tabs.length - 1;
+              renderBatchTabs();
+              loadTabState(activeTab);
             });
-            
-            // Buttons
-            document.getElementById('minifyBtn').addEventListener('click', minifyHTML);
-            document.getElementById('clearBtn').addEventListener('click', clearAll);
-            document.getElementById('sampleBtn').addEventListener('click', loadSampleHTML);
-            document.getElementById('copyBtn').addEventListener('click', copyToClipboard);
-            
-            // Real-time processing
-            document.getElementById('originalHtml').addEventListener('input', () => {
-                debounce(minifyHTML, 500)();
-                updateLineCount();
-            });
-        }
-        
-        // Load sample HTML
-        function loadSampleHTML() {
-            const sampleHTML = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample HTML Document</title>
-    <!-- This is a comment that will be removed -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-    </style>
-</head>
-<body>
-    <!-- Main content section -->
-    <div class="container">
-        <header>
-            <h1>Welcome to HTML Minifier</h1>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact" title="">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
-        
-        <main>
-            <section id="content">
-                <h2>Advanced HTML Minification</h2>
-                <p>
-                    This tool provides professional HTML minification with advanced
-                    features including comment removal, whitespace optimization, 
-                    and comprehensive analytics.
-                </p>
-                
-                <div class="features">
-                    <h3>Key Features:</h3>
-                    <ul>
-                        <li>Real-time minification</li>
-                        <li>Syntax highlighting</li>
-                        <li>Compression statistics</li>
-                        <li>Advanced optimization options</li>
-                    </ul>
-                </div>
-            </section>
-        </main>
-        
-        <footer class="">
-            <p>&copy; 2025 Tool Xeno. All rights reserved.</p>
-        </footer>
-    </div>
-    
-    <script>
-        console.log('Sample HTML loaded successfully!');
-        
-        // Sample JavaScript that can be minified
-        function initializeApp() {
-            const elements = document.querySelectorAll('.feature');
-            elements.forEach(element => {
-                element.addEventListener('click', function() {
-                    this.classList.toggle('active');
-                });
-            });
-        }
-        
-        document.addEventListener('DOMContentLoaded', initializeApp);
-    </script>
-</body></html>`;
-            
-            document.getElementById('originalHtml').value = sampleHTML;
-            minifyHTML();
-            updateLineCount();
-        }
-        
-        // Minify HTML function
-        function minifyHTML() {
-            const startTime = performance.now();
-            const originalHTML = document.getElementById('originalHtml').value;
-            
-            if (!originalHTML.trim()) {
-                clearResults();
-                return;
+            tabEl.appendChild(closeSpan);
+          }
+
+          // Click to switch tabs
+          tabEl.addEventListener('click', function() {
+            saveCurrentTabState();
+            activeTab = tabIdx;
+            var allTabs = document.querySelectorAll('.batch-tab');
+            for (var j = 0; j < allTabs.length; j++) {
+              allTabs[j].classList.remove('active');
             }
-            
-            let minified = originalHTML;
-            
-            // Reset analytics
-            analytics = {
-                totalChars: originalHTML.length,
-                htmlTags: 0,
-                attributes: 0,
-                commentsRemoved: 0,
-                whitespaceRemoved: 0,
-                emptyAttrsRemoved: 0,
-                processingTime: 0
-            };
-            
-            // Count HTML tags and attributes
-            analytics.htmlTags = (originalHTML.match(/<[^>]+>/g) || []).length;
-            analytics.attributes = (originalHTML.match(/\w+\s*=\s*["'][^"']*["']/g) || []).length;
-            
-            // Remove comments
-            if (minifierOptions.removeComments) {
-                const commentsBefore = (minified.match(/<!--[\s\S]*?-->/g) || []).length;
-                minified = minified.replace(/<!--[\s\S]*?-->/g, '');
-                analytics.commentsRemoved = commentsBefore;
-            }
-            
-            // Remove empty attributes
-            if (minifierOptions.removeEmptyAttributes) {
-                const emptyAttrsBefore = (minified.match(/\s+\w+\s*=\s*["'][\s]*["']/g) || []).length;
-                minified = minified.replace(/\s+\w+\s*=\s*["'][\s]*["']/g, '');
-                analytics.emptyAttrsRemoved = emptyAttrsBefore;
-            }
-            
-            // Collapse whitespace
-            if (minifierOptions.collapseWhitespace) {
-                const whitespaceBefore = minified.length;
-                minified = minified
-                    .replace(/>\s+</g, '><') // Remove whitespace between tags
-                    .replace(/\s+/g, ' ') // Collapse multiple spaces
-                    .replace(/^\s+|\s+$/g, '') // Trim leading/trailing whitespace
-                    .replace(/\s+>/g, '>') // Remove space before closing tag
-                    .replace(/<\s+/g, '<'); // Remove space after opening tag
-                analytics.whitespaceRemoved = whitespaceBefore - minified.length;
-            }
-            
-            // Minify inline CSS and JS
-            if (minifierOptions.minifyCSS) {
-                minified = minified
-                    .replace(/<style[^>]*>([\s\S]*?)<\/style>/gi, (match, css) => {
-                        const minifiedCSS = css
-                            .replace(/\/\*[\s\S]*?\*\//g, '') // Remove CSS comments
-                            .replace(/\s*{\s*/g, '{')
-                            .replace(/\s*}\s*/g, '}')
-                            .replace(/\s*;\s*/g, ';')
-                            .replace(/\s*:\s*/g, ':')
-                            .replace(/\s+/g, ' ')
-                            .trim();
-                        return match.replace(css, minifiedCSS);
-                    })
-                    .replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, (match, js) => {
-                        const minifiedJS = js
-                            .replace(/\/\*[\s\S]*?\*\//g, '') // Remove JS comments
-                            .replace(/\/\/.*$/gm, '') // Remove single-line comments
-                            .replace(/\s*{\s*/g, '{')
-                            .replace(/\s*}\s*/g, '}')
-                            .replace(/\s*;\s*/g, ';')
-                            .replace(/\s+/g, ' ')
-                            .trim();
-                        return match.replace(js, minifiedJS);
-                    });
-            }
-            
-            analytics.processingTime = Math.round(performance.now() - startTime);
-            
-            // Display results
-            displayMinifiedHTML(minified);
-            updateStatistics(originalHTML, minified);
-            updateAnalytics();
+            tabEl.classList.add('active');
+            loadTabState(tabIdx);
+          });
+
+          // Insert before the add button
+          if (batchAdd && batchBar) {
+            batchBar.insertBefore(tabEl, batchAdd);
+          }
+        })(idx);
+      }
+    }
+
+    /* =============================================
+       EVENT LISTENERS - ALL BUTTONS
+    ============================================= */
+
+    // Theme toggle
+    if (themeToggle) {
+      // Init theme
+      var savedTheme = null;
+      try { savedTheme = localStorage.getItem('toolxeno-theme'); } catch(e) {}
+      if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeToggle.textContent = '🌙 Dark';
+      }
+
+      themeToggle.addEventListener('click', function() {
+        var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        if (isLight) {
+          document.documentElement.removeAttribute('data-theme');
+          themeToggle.textContent = '☀️ Light';
+          try { localStorage.setItem('toolxeno-theme', 'dark'); } catch(e) {}
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+          themeToggle.textContent = '🌙 Dark';
+          try { localStorage.setItem('toolxeno-theme', 'light'); } catch(e) {}
         }
-        
-        // Display minified HTML with syntax highlighting
-        function displayMinifiedHTML(minified) {
-            const codeElement = document.querySelector('#minifiedHtml code');
-            codeElement.textContent = minified;
-            
-            // Trigger Prism.js highlighting
-            if (typeof Prism !== 'undefined') {
-                Prism.highlightElement(codeElement);
-            }
-            
-            updateMinifiedLineCount(minified);
+      });
+    }
+
+    // Mobile nav
+    if (hamburger) {
+      hamburger.addEventListener('click', function() {
+        if (mobileNav) mobileNav.classList.add('open');
+      });
+    }
+    if (mobileClose) {
+      mobileClose.addEventListener('click', function() {
+        if (mobileNav) mobileNav.classList.remove('open');
+      });
+    }
+    var mobileLinks = document.querySelectorAll('.mobile-nav-link');
+    for (var ml = 0; ml < mobileLinks.length; ml++) {
+      mobileLinks[ml].addEventListener('click', function() {
+        if (mobileNav) mobileNav.classList.remove('open');
+      });
+    }
+
+    // Mode tabs
+    if (modeTabs) {
+      modeTabs.addEventListener('click', function(e) {
+        var tab = e.target.closest('.mode-tab');
+        if (!tab) return;
+        var mode = tab.getAttribute('data-mode');
+        if (!mode) return;
+        setModeTab(mode);
+        // Re-minify if real-time enabled
+        if (optRealtime && optRealtime.checked && inputEditor && inputEditor.value.trim()) {
+          runMinify();
         }
-        
-        // Update statistics
-        function updateStatistics(original, minified) {
-            const originalSize = new Blob([original]).size;
-            const minifiedSize = new Blob([minified]).size;
-            const savings = originalSize - minifiedSize;
-            const compressionRatio = originalSize > 0 ? (savings / originalSize * 100) : 0;
-            
-            document.getElementById('originalSize').textContent = formatFileSize(originalSize);
-            document.getElementById('minifiedSize').textContent = formatFileSize(minifiedSize);
-            document.getElementById('compressionRatio').textContent = compressionRatio.toFixed(1) + '%';
-            document.getElementById('bytesSaved').textContent = formatFileSize(savings);
-            document.getElementById('compressionPercent').textContent = compressionRatio.toFixed(1) + '%';
-            
-            // Update progress bar
-            const progressBar = document.getElementById('progressBar');
-            progressBar.style.width = Math.min(compressionRatio, 100) + '%';
+      });
+    }
+
+    // Minify button
+    if (btnMinify) {
+      btnMinify.addEventListener('click', function() {
+        runMinify();
+      });
+    }
+
+    // Beautify button
+    if (btnBeautify) {
+      btnBeautify.addEventListener('click', function() {
+        runBeautify();
+      });
+    }
+
+    // Clear button
+    if (btnClear) {
+      btnClear.addEventListener('click', function() {
+        if (inputEditor) inputEditor.value = '';
+        if (outputEditor) outputEditor.value = '';
+        if (tabs[activeTab]) {
+          tabs[activeTab].input = '';
+          tabs[activeTab].output = '';
+          tabs[activeTab].stats = null;
         }
-        
-        // Update detailed analytics
-        function updateAnalytics() {
-            document.getElementById('totalChars').textContent = analytics.totalChars.toLocaleString();
-            document.getElementById('htmlTags').textContent = analytics.htmlTags;
-            document.getElementById('attributes').textContent = analytics.attributes;
-            document.getElementById('commentsRemoved').textContent = analytics.commentsRemoved;
-            document.getElementById('whitespaceRemoved').textContent = analytics.whitespaceRemoved;
-            document.getElementById('emptyAttrsRemoved').textContent = analytics.emptyAttrsRemoved;
-            document.getElementById('processingTime').textContent = analytics.processingTime + 'ms';
-            
-            // Determine optimization level
-            let level = 'Low';
-            if (analytics.processingTime < 50 && analytics.whitespaceRemoved > 100) level = 'High';
-            else if (analytics.processingTime < 100) level = 'Medium';
-            
-            document.getElementById('optimizationLevel').textContent = level;
+        resetStats();
+        clearError();
+        updateLineCounts();
+        showToast('Cleared!', '🗑️');
+      });
+    }
+
+    // Upload button
+    if (btnUpload && fileInput) {
+      btnUpload.addEventListener('click', function() {
+        fileInput.click();
+      });
+    }
+
+    // File input change
+    if (fileInput) {
+      fileInput.addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+          if (inputEditor) inputEditor.value = ev.target.result;
+          if (tabs[activeTab]) tabs[activeTab].input = ev.target.result;
+          updateLineCounts();
+          showToast('File loaded: ' + file.name, '📂');
+
+          // Auto-detect from file extension
+          var ext = file.name.split('.').pop().toLowerCase();
+          if (ext === 'html' || ext === 'htm' || ext === 'svg') {
+            setModeTab('html');
+          } else if (ext === 'css') {
+            setModeTab('css');
+          } else if (ext === 'js' || ext === 'mjs' || ext === 'ts' || ext === 'tsx' || ext === 'jsx') {
+            setModeTab('js');
+          }
+
+          if (optRealtime && optRealtime.checked) runMinify();
+        };
+        reader.readAsText(file);
+        fileInput.value = '';
+      });
+    }
+
+    // Download button
+    if (btnDownload) {
+      btnDownload.addEventListener('click', function() {
+        if (!outputEditor) return;
+        var output = outputEditor.value;
+        if (!output.trim()) {
+          showError('No output to download. Minify your code first.');
+          return;
         }
-        
-        // Update line counts
-        function updateLineCount() {
-            const original = document.getElementById('originalHtml').value;
-            const lines = original ? original.split('\n').length : 0;
-            document.getElementById('originalLines').textContent = lines + ' lines';
+        var ext = detectedMode === 'html' ? '.html' : detectedMode === 'css' ? '.css' : '.js';
+        var mime = detectedMode === 'html' ? 'text/html' : detectedMode === 'css' ? 'text/css' : 'application/javascript';
+        var blob = new Blob([output], { type: mime });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'minified' + ext;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('File downloaded!', '💾');
+      });
+    }
+
+    // Paste button
+    if (btnPaste) {
+      btnPaste.addEventListener('click', function() {
+        if (navigator.clipboard && navigator.clipboard.readText) {
+          navigator.clipboard.readText().then(function(text) {
+            if (inputEditor) inputEditor.value = text;
+            if (tabs[activeTab]) tabs[activeTab].input = text;
+            updateLineCounts();
+            showToast('Pasted from clipboard!', '📋');
+            if (optRealtime && optRealtime.checked) runMinify();
+          }).catch(function() {
+            showError('Unable to read clipboard. Please paste manually with Ctrl+V.');
+          });
+        } else {
+          showError('Clipboard API not available in this browser.');
         }
-        
-        function updateMinifiedLineCount(minified) {
-            const lines = minified ? minified.split('\n').length : 0;
-            document.getElementById('minifiedLines').textContent = lines + ' lines';
+      });
+    }
+
+    // Clear input button
+    if (btnClearInput) {
+      btnClearInput.addEventListener('click', function() {
+        if (inputEditor) inputEditor.value = '';
+        if (tabs[activeTab]) tabs[activeTab].input = '';
+        updateLineCounts();
+      });
+    }
+
+    // Copy button
+    if (btnCopy) {
+      btnCopy.addEventListener('click', function() {
+        if (!outputEditor) return;
+        var output = outputEditor.value;
+        if (!output.trim()) {
+          showError('No output to copy.');
+          return;
         }
-        
-        // Clear all
-        function clearAll() {
-            document.getElementById('originalHtml').value = '';
-            document.querySelector('#minifiedHtml code').textContent = '// Minified HTML will appear here...';
-            clearResults();
-            updateLineCount();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(output).then(function() {
+            showToast('Copied to clipboard!', '📋');
+          }).catch(function() {
+            // Fallback
+            outputEditor.select();
+            document.execCommand('copy');
+            showToast('Copied to clipboard!', '📋');
+          });
+        } else {
+          outputEditor.select();
+          document.execCommand('copy');
+          showToast('Copied to clipboard!', '📋');
         }
-        
-        // Clear results
-        function clearResults() {
-            document.getElementById('originalSize').textContent = '0 B';
-            document.getElementById('minifiedSize').textContent = '0 B';
-            document.getElementById('compressionRatio').textContent = '0%';
-            document.getElementById('bytesSaved').textContent = '0 B';
-            document.getElementById('progressBar').style.width = '0%';
-            document.getElementById('compressionPercent').textContent = '0%';
-            document.getElementById('minifiedLines').textContent = '0 lines';
-            
-            // Clear analytics
-            Object.keys(analytics).forEach(key => {
-                const element = document.getElementById(key);
-                if (element) element.textContent = key === 'processingTime' ? '0ms' : '0';
-            });
-            document.getElementById('optimizationLevel').textContent = 'None';
+      });
+    }
+
+    // Clear output button
+    if (btnClearOutput) {
+      btnClearOutput.addEventListener('click', function() {
+        if (outputEditor) outputEditor.value = '';
+        if (tabs[activeTab]) tabs[activeTab].output = '';
+        resetStats();
+        updateLineCounts();
+      });
+    }
+
+    // Options panel toggle
+    if (optionsToggle && optionsPanel) {
+      optionsToggle.addEventListener('click', function() {
+        optionsPanel.classList.toggle('open');
+      });
+    }
+
+    // Real-time minify on input
+    if (inputEditor) {
+      inputEditor.addEventListener('input', function() {
+        if (tabs[activeTab]) tabs[activeTab].input = inputEditor.value;
+        updateLineCounts();
+        if (optRealtime && optRealtime.checked) {
+          if (debounceTimer) clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(runMinify, 300);
         }
-        
-        // Copy to clipboard
-        function copyToClipboard() {
-            const minifiedCode = document.querySelector('#minifiedHtml code').textContent;
-            
-            if (!minifiedCode || minifiedCode === '// Minified HTML will appear here...') {
-                alert('No minified code to copy!');
-                return;
-            }
-            
-            navigator.clipboard.writeText(minifiedCode).then(() => {
-                const btn = document.getElementById('copyBtn');
-                const originalHTML = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-check"></i>';
-                btn.classList.add('bg-green-500');
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalHTML;
-                    btn.classList.remove('bg-green-500');
-                }, 2000);
-            }).catch(() => {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = minifiedCode;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                alert('Code copied to clipboard!');
-            });
+      });
+    }
+
+    // Batch add button
+    if (batchAdd) {
+      batchAdd.addEventListener('click', function() {
+        saveCurrentTabState();
+        tabs.push({ input: '', output: '', mode: 'auto', detectedMode: 'html', stats: null });
+        activeTab = tabs.length - 1;
+        renderBatchTabs();
+        loadTabState(activeTab);
+        if (inputEditor) inputEditor.focus();
+      });
+    }
+
+    /* ---- DRAG & DROP ---- */
+    if (inputCodeEditor && dropOverlay) {
+      var dragCounter = 0;
+
+      inputCodeEditor.addEventListener('dragenter', function(e) {
+        e.preventDefault();
+        dragCounter++;
+        dropOverlay.classList.add('active');
+      });
+
+      inputCodeEditor.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        dragCounter--;
+        if (dragCounter <= 0) {
+          dragCounter = 0;
+          dropOverlay.classList.remove('active');
         }
-        
-        // Format file size
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 B';
-            const k = 1024;
-            const sizes = ['B', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+      });
+
+      inputCodeEditor.addEventListener('dragover', function(e) {
+        e.preventDefault();
+      });
+
+      inputCodeEditor.addEventListener('drop', function(e) {
+        e.preventDefault();
+        dragCounter = 0;
+        dropOverlay.classList.remove('active');
+        var file = e.dataTransfer.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+          if (inputEditor) inputEditor.value = ev.target.result;
+          if (tabs[activeTab]) tabs[activeTab].input = ev.target.result;
+          updateLineCounts();
+          showToast('File loaded: ' + file.name, '📂');
+
+          var ext = file.name.split('.').pop().toLowerCase();
+          if (ext === 'html' || ext === 'htm' || ext === 'svg') setModeTab('html');
+          else if (ext === 'css') setModeTab('css');
+          else if (ext === 'js' || ext === 'mjs' || ext === 'ts') setModeTab('js');
+
+          if (optRealtime && optRealtime.checked) runMinify();
+        };
+        reader.readAsText(file);
+      });
+    }
+
+    /* ---- FAQ ACCORDION ---- */
+    var faqButtons = document.querySelectorAll('.faq-q');
+    for (var fi = 0; fi < faqButtons.length; fi++) {
+      faqButtons[fi].addEventListener('click', function() {
+        var item = this.closest('.faq-item');
+        if (!item) return;
+        var isOpen = item.classList.contains('open');
+
+        // Close all
+        var allItems = document.querySelectorAll('.faq-item');
+        for (var fj = 0; fj < allItems.length; fj++) {
+          allItems[fj].classList.remove('open');
+          var q = allItems[fj].querySelector('.faq-q');
+          if (q) q.setAttribute('aria-expanded', 'false');
         }
-        
-        // Debounce function
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
+
+        // Toggle current
+        if (!isOpen) {
+          item.classList.add('open');
+          this.setAttribute('aria-expanded', 'true');
         }
-    </script>
-<script src="/homebutton.js"></script>
+      });
+    }
+
+    /* ---- KEYBOARD SHORTCUTS ---- */
+    document.addEventListener('keydown', function(e) {
+      // Ctrl/Cmd + Enter to minify
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        runMinify();
+      }
+      // Ctrl/Cmd + Shift + B to beautify
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'B' || e.key === 'b')) {
+        e.preventDefault();
+        runBeautify();
+      }
+      // Tab key in textarea inserts spaces
+      if (e.key === 'Tab' && document.activeElement === inputEditor) {
+        e.preventDefault();
+        var start = inputEditor.selectionStart;
+        var end = inputEditor.selectionEnd;
+        inputEditor.value = inputEditor.value.substring(0, start) + '  ' + inputEditor.value.substring(end);
+        inputEditor.selectionStart = inputEditor.selectionEnd = start + 2;
+        if (tabs[activeTab]) tabs[activeTab].input = inputEditor.value;
+      }
+    });
+
+    /* ---- FOOTER YEAR ---- */
+    if (footerYear) {
+      footerYear.textContent = new Date().getFullYear();
+    }
+
+    /* ---- INIT ---- */
+    updateLineCounts();
+    renderBatchTabs();
+
+  }); // end DOMContentLoaded
+  </script>
 </body>
 </html>

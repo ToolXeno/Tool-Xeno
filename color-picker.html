@@ -1,1520 +1,1068 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US" dir="ltr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Y4JDC5DCBV');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Picker & Converter - Tool Xeno</title>
-    <meta name="description" content="Professional color picker and converter with multi-format support, palette generation, color harmony analysis, and accessibility features - HEX, RGB, HSL, HSV, CMYK converter.">
-
-    <!-- ✅ Tool Xeno Favicons -->
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="manifest" href="/site.webmanifest" />
-
-    <meta name="google-adsense-account" content="ca-pub-2713998296337545">
-
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            
-            --dark-bg: #0a0a0a;
-            --dark-surface: #1a1a1a;
-            --dark-surface-elevated: #252525;
-            --dark-text: #ffffff;
-            --dark-text-secondary: #a0a0a0;
-            --dark-border: #333333;
-            
-            --light-bg: #f8fafc;
-            --light-surface: #ffffff;
-            --light-surface-elevated: #f1f5f9;
-            --light-text: #1e293b;
-            --light-text-secondary: #64748b;
-            --light-border: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            line-height: 1.6;
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-            min-height: 100vh;
-        }
-        
-        body.light-theme { 
-            background-color: var(--light-bg); 
-            color: var(--light-text); 
-        }
-
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.05;
-            background: radial-gradient(circle, #667eea 0%, transparent 70%);
-        }
-        
-        body.light-theme .particle { 
-            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(100vh) rotate(0deg); } 
-            100% { transform: translateY(-100px) rotate(360deg); } 
-        }
-        
-        .header-glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.35s ease, border-color 0.35s ease;
-        }
-        
-        body.light-theme .header-glass { 
-            background: rgba(255, 255, 255, 0.9); 
-            border-bottom-color: rgba(0, 0, 0, 0.1); 
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--dark-surface);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.light-theme .theme-toggle { 
-            background: var(--light-surface-elevated); 
-            border-color: var(--light-border); 
-        }
-        
-        body.light-theme .theme-toggle::after { 
-            transform: translateX(28px); 
-            background: var(--secondary-gradient); 
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
-        
-        body.light-theme .glass-card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-color: rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
-        }
-        
-        .btn-gradient {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .btn-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .btn-gradient:hover::before { left: 100%; }
-        .btn-gradient:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
-        }
-        .btn-gradient:active { transform: translateY(0); }
-        
-        .btn-secondary {
-            background: var(--accent-gradient);
-            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
-        }
-        
-        .btn-secondary:hover {
-            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
-        }
-        
-        .btn-success {
-            background: var(--success-gradient);
-            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
-        }
-        
-        .btn-success:hover {
-            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
-        }
-        
-        .nav-link {
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-        }
-        
-        .nav-link:hover { 
-            background: rgba(255, 255, 255, 0.1); 
-            color: white; 
-        }
-        
-        body.light-theme .nav-link { 
-            color: rgba(0, 0, 0, 0.7); 
-        }
-        
-        body.light-theme .nav-link:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            color: black; 
-        }
-
-        .color-wheel {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            position: relative;
-            cursor: crosshair;
-            margin: 0 auto;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-        
-        .color-wheel-pointer {
-            width: 16px;
-            height: 16px;
-            border: 3px solid white;
-            border-radius: 50%;
-            position: absolute;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-            pointer-events: none;
-            transition: transform 0.1s ease;
-        }
-        
-        .color-slider {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 12px;
-            border-radius: 6px;
-            outline: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .color-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: white;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            border: 2px solid #ddd;
-        }
-        
-        .color-slider::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: white;
-            cursor: pointer;
-            border: 2px solid #ddd;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .color-input {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 8px 12px;
-            color: var(--dark-text);
-            font-family: 'Inter', monospace;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        
-        body.light-theme .color-input {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.2);
-            color: var(--light-text);
-        }
-        
-        .color-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .color-preview {
-            width: 100%;
-            height: 120px;
-            border-radius: 15px;
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .color-preview:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .palette-color {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .palette-color:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .harmony-color {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .harmony-color:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .gradient-preview {
-            width: 100%;
-            height: 80px;
-            border-radius: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .gradient-preview:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .format-tab {
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
-            font-weight: 500;
-        }
-        
-        .format-tab.active {
-            background: var(--primary-gradient);
-            border-color: transparent;
-            color: white;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-        
-        body.light-theme .format-tab {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-
-        .copy-button {
-            background: var(--accent-gradient);
-            border: none;
-            border-radius: 6px;
-            padding: 6px 12px;
-            color: white;
-            font-size: 12px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            opacity: 0;
-        }
-        
-        .copy-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.4);
-        }
-        
-        .color-format-group:hover .copy-button {
-            opacity: 1;
-        }
-
-        .accessibility-score {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        .score-aaa { background: #10b981; color: white; }
-        .score-aa { background: #f59e0b; color: white; }
-        .score-fail { background: #ef4444; color: white; }
-
-        .fade-in {
-            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .tooltip {
-            position: absolute;
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            pointer-events: none;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .tooltip.show {
-            opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-            .color-wheel {
-                width: 250px;
-                height: 250px;
-            }
-            
-            .palette-color {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .harmony-color {
-                width: 35px;
-                height: 35px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#007cf0" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Color Picker – Tool Xeno" />
+  <meta name="application-name" content="Tool Xeno" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="rating" content="general" />
+  <meta name="revisit-after" content="7 days" />
+  <title>Color Picker – Free Online HEX RGB HSL CMYK Converter | Tool Xeno</title>
+  <meta name="description" content="Free professional color picker and converter online. Pick colors with HSV canvas, convert between HEX, RGB, RGBA, HSL, HSLA, CMYK instantly. Generate gradients, check WCAG contrast, create palettes. 100% free, private, no signup." />
+  <meta name="keywords" content="color picker, color converter, hex to rgb, rgb to hsl, cmyk converter, gradient generator, wcag contrast checker, color palette, color harmony, eyedropper tool, free color tool, online color picker" />
+  <meta name="author" content="Tool Xeno" />
+  <link rel="canonical" href="https://toolxeno.com/color-picker.html" />
+  <link rel="alternate" hreflang="en" href="https://toolxeno.com/color-picker.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolxeno.com/color-picker.html" />
+  <meta property="og:title" content="Color Picker – Free Online Color Converter & Gradient Tool | Tool Xeno" />
+  <meta property="og:description" content="Professional color picker with HSV canvas, multi-format conversion (HEX, RGB, HSL, CMYK), gradient generator, contrast checker, palette manager. Free & private." />
+  <meta property="og:site_name" content="Tool Xeno" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Color Picker & Converter – Tool Xeno" />
+  <meta name="twitter:description" content="Pick, convert, and manage colors. Gradient generator, contrast checker, palette creator. Free, private, in-browser." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Color Picker and Converter",
+        "url": "https://toolxeno.com/color-picker.html",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Professional online color picker with HSV canvas, multi-format conversion, gradient generator, WCAG contrast checker, and palette manager."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolxeno.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Design Tools", "item": "https://toolxeno.com/#tools" },
+          { "@type": "ListItem", "position": 3, "name": "Color Picker", "item": "https://toolxeno.com/color-picker.html" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "What color formats does the Tool Xeno Color Picker support?", "acceptedAnswer": {"@type": "Answer", "text": "It supports HEX, RGB, RGBA, HSL, HSLA, and CMYK with real-time bidirectional conversion between all formats."}},
+          {"@type": "Question", "name": "Is the Color Picker tool free to use?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, the Tool Xeno Color Picker is 100% free with no signup required. All processing happens locally in your browser."}},
+          {"@type": "Question", "name": "What is WCAG contrast ratio?", "acceptedAnswer": {"@type": "Answer", "text": "WCAG contrast ratio measures the difference in luminance between foreground and background colors. AA requires 4.5:1 for normal text, AAA requires 7:1."}},
+          {"@type": "Question", "name": "Can I export my color palettes?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, you can export palettes as JSON, CSS custom properties, or SCSS variables. Palettes are also saved to your browser's local storage."}}
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%237928ca'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg0:#030712;--bg1:#0a0f1e;--bg2:#0f172a;--bg3:#1e293b;--card:rgba(255,255,255,0.04);--card-hover:rgba(255,255,255,0.08);--card-solid:#1e293b;--glass:rgba(255,255,255,0.03);--text:#f1f5f9;--text2:#cbd5e1;--muted:#94a3b8;--line:rgba(255,255,255,0.1);--line-strong:rgba(255,255,255,0.2);--accent1:#007cf0;--accent2:#00dfd8;--accent3:#7928ca;--accent4:#ff0080;--shadow:0 24px 60px rgba(0,0,0,0.6);--shadow-sm:0 8px 24px rgba(0,0,0,0.3);--radius:20px;--radius-sm:12px;--radius-xs:8px;--max:1240px;--ring:0 0 0 3px rgba(0,124,240,0.4);--grad:linear-gradient(135deg,var(--accent1),var(--accent2));--grad-purple:linear-gradient(135deg,var(--accent3),var(--accent4));--grad-text:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));--grad-bg:linear-gradient(135deg,rgba(0,124,240,0.08) 0%,rgba(121,40,202,0.08) 100%);--font:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;--transition:0.25s cubic-bezier(0.4,0,0.2,1);--header-h:72px}
+    [data-theme="light"]{--bg0:#f8fafc;--bg1:#f1f5f9;--bg2:#e2e8f0;--bg3:#cbd5e1;--card:rgba(255,255,255,0.9);--card-hover:rgba(255,255,255,1);--card-solid:#ffffff;--glass:rgba(255,255,255,0.8);--text:#0f172a;--text2:#334155;--muted:#64748b;--line:rgba(0,0,0,0.1);--line-strong:rgba(0,0,0,0.15);--shadow:0 24px 60px rgba(0,0,0,0.1);--shadow-sm:0 8px 24px rgba(0,0,0,0.06)}
+    html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
+    body{font-family:var(--font);background-color:var(--bg0);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{font-family:var(--font);cursor:pointer;border:none;background:none}ul{list-style:none}
+    input[type="range"]{-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;width:100%}
+    input[type="range"]::-webkit-slider-track{height:4px;background:var(--bg3);border-radius:2px}
+    input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;background:var(--grad);border-radius:50%;margin-top:-6px;box-shadow:0 2px 6px rgba(0,124,240,0.5);border:2px solid #fff}
+    input[type="range"]::-moz-range-track{height:4px;background:var(--bg3);border-radius:2px}
+    input[type="range"]::-moz-range-thumb{width:16px;height:16px;background:var(--grad);border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,124,240,0.5)}
+    .bg-orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:0.15;will-change:transform}
+    .orb-1{width:600px;height:600px;background:var(--accent1);top:-200px;left:-200px;animation:orbFloat1 20s linear infinite}
+    .orb-2{width:500px;height:500px;background:var(--accent3);top:30%;right:-150px;animation:orbFloat2 25s linear infinite}
+    .orb-3{width:400px;height:400px;background:var(--accent2);bottom:-100px;left:30%;animation:orbFloat3 18s linear infinite}
+    .orb-4{width:300px;height:300px;background:var(--accent4);top:60%;left:10%;animation:orbFloat4 22s linear infinite}
+    @keyframes orbFloat1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,40px) scale(1.1)}66%{transform:translate(-40px,60px) scale(0.95)}}
+    @keyframes orbFloat2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-80px,50px) scale(1.05)}66%{transform:translate(40px,-60px) scale(1.1)}}
+    @keyframes orbFloat3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(70px,-40px) scale(1.15)}}
+    @keyframes orbFloat4{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-80px) scale(1.1)}}
+    .bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%)}
+    .page-wrapper{position:relative;z-index:1}
+    .header{position:sticky;top:0;z-index:1000;height:var(--header-h);display:flex;align-items:center;backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);background:rgba(3,7,18,0.85);border-bottom:1px solid var(--line);transition:background var(--transition)}
+    [data-theme="light"] .header{background:rgba(248,250,252,0.90)}
+    .header-inner{max-width:var(--max);width:100%;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:24px}
+    .logo{display:flex;align-items:center;gap:10px;font-size:1.2rem;font-weight:800;letter-spacing:-0.5px;flex-shrink:0}
+    .logo-icon{width:36px;height:36px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:900;color:#fff;box-shadow:0 4px 14px rgba(0,124,240,0.4)}
+    .logo-text{background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .nav-primary{display:flex;align-items:center;gap:4px;margin-left:auto}
+    .nav-link{padding:7px 13px;font-size:0.875rem;font-weight:500;color:var(--text2);border-radius:var(--radius-xs);transition:color var(--transition),background var(--transition)}
+    .nav-link:hover{color:var(--text);background:var(--card)}
+    .header-actions{display:flex;align-items:center;gap:10px;margin-left:12px}
+    .btn-theme{padding:8px 20px;font-size:0.85rem;font-weight:600;font-family:var(--font);background:var(--card);backdrop-filter:blur(8px);border-radius:40px;color:var(--text2);border:1px solid var(--line);transition:all 0.3s ease;cursor:pointer}
+    .btn-theme:hover{color:var(--text);border-color:var(--accent1);background:rgba(0,124,240,0.1)}
+    .hamburger{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer;margin-left:auto}
+    .hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all var(--transition);display:block}
+    .mobile-nav{display:none;position:fixed;inset:0;z-index:2000;background:rgba(3,7,18,0.98);backdrop-filter:blur(24px);flex-direction:column;align-items:center;justify-content:center;gap:8px}
+    .mobile-nav.open{display:flex}
+    .mobile-nav-link{font-size:1.4rem;font-weight:700;color:var(--text2);padding:12px 32px;border-radius:var(--radius-sm);transition:all var(--transition)}
+    .mobile-nav-link:hover{color:var(--accent1);background:rgba(0,124,240,0.1)}
+    .mobile-close{position:absolute;top:24px;right:24px;font-size:1.5rem;color:var(--muted);padding:8px;border-radius:8px;transition:color var(--transition);cursor:pointer}
+    .mobile-close:hover{color:var(--text)}
+    .hero{padding:60px 24px 40px;text-align:center}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(0,124,240,0.15);border:1px solid rgba(0,124,240,0.3);border-radius:100px;font-size:0.78rem;font-weight:600;color:var(--accent1);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:20px}
+    .hero-badge-dot{width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+    .hero-h1{font-size:clamp(1.8rem,5vw,3.5rem);font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:16px;max-width:700px;margin-left:auto;margin-right:auto}
+    .hero-h1 .grad-text{background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:clamp(0.9rem,1.5vw,1rem);color:var(--text2);max-width:580px;margin:0 auto 24px;line-height:1.6}
+    .hero-trust{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 16px}
+    .trust-item{display:flex;align-items:center;gap:5px;font-size:0.8rem;font-weight:500;color:var(--muted)}
+    .trust-dot{color:var(--accent2)}
+    .tool-section{padding:20px 24px 60px;max-width:1400px;margin:0 auto}
+    .tool-container{background:var(--card-solid);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    /* PICKER LAYOUT */
+    .picker-layout{display:grid;grid-template-columns:1fr 400px;min-height:0}
+    @media(max-width:1000px){.picker-layout{grid-template-columns:1fr}}
+    .picker-canvas-area{padding:20px;display:flex;flex-direction:column;gap:14px;background:var(--bg1)}
+    .sv-canvas-wrap{position:relative;width:100%;aspect-ratio:1/1;max-width:380px;margin:0 auto;border-radius:var(--radius-xs);overflow:hidden;cursor:crosshair;touch-action:none}
+    .sv-canvas-wrap canvas{width:100%;height:100%;display:block}
+    .sv-indicator{position:absolute;width:18px;height:18px;border:2.5px solid #fff;border-radius:50%;box-shadow:0 0 0 1.5px rgba(0,0,0,0.3),inset 0 0 0 1.5px rgba(0,0,0,0.3);pointer-events:none;transform:translate(-50%,-50%);z-index:2}
+    .slider-row{display:flex;gap:12px;align-items:center;max-width:380px;margin:0 auto;width:100%}
+    .slider-row label{font-size:0.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;min-width:42px;flex-shrink:0}
+    .hue-slider-wrap{flex:1;height:20px;position:relative;border-radius:10px;overflow:hidden;cursor:pointer;touch-action:none}
+    .hue-slider-wrap canvas{width:100%;height:100%;display:block;border-radius:10px}
+    .alpha-slider-wrap{flex:1;height:20px;position:relative;border-radius:10px;overflow:hidden;cursor:pointer;touch-action:none;background:repeating-conic-gradient(var(--bg3) 0% 25%,var(--bg2) 0% 50%) 50%/12px 12px}
+    .alpha-slider-wrap canvas{width:100%;height:100%;display:block;border-radius:10px;position:relative;z-index:1}
+    .slider-indicator{position:absolute;top:50%;width:8px;height:24px;background:#fff;border-radius:4px;box-shadow:0 0 4px rgba(0,0,0,0.4);transform:translate(-50%,-50%);pointer-events:none;z-index:3}
+    /* CONTROLS PANEL */
+    .picker-controls{border-left:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:16px;overflow-y:auto;max-height:calc(100vh - 180px)}
+    @media(max-width:1000px){.picker-controls{border-left:none;border-top:1px solid var(--line);max-height:none}}
+    .preview-section{display:flex;gap:12px;align-items:stretch}
+    .color-preview-box{flex:1;border-radius:var(--radius-sm);border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column}
+    .preview-swatch{flex:1;min-height:80px;transition:background 0.15s}
+    .preview-label{padding:6px 10px;font-size:0.7rem;font-weight:600;color:var(--muted);text-align:center;background:var(--glass);border-top:1px solid var(--line)}
+    .color-name-tag{text-align:center;font-size:0.78rem;font-weight:600;color:var(--accent2);padding:2px 0}
+    .format-group{background:var(--glass);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px}
+    .format-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .format-title{font-size:0.82rem;font-weight:700;color:var(--text)}
+    .format-copy-btn{font-size:0.7rem;font-weight:600;color:var(--accent1);padding:3px 10px;border-radius:20px;background:rgba(0,124,240,0.1);border:1px solid rgba(0,124,240,0.2);transition:all var(--transition);display:flex;align-items:center;gap:4px}
+    .format-copy-btn:hover{background:rgba(0,124,240,0.2)}
+    .format-inputs{display:flex;gap:6px;flex-wrap:wrap}
+    .format-input-wrap{flex:1;min-width:50px;display:flex;flex-direction:column;gap:3px}
+    .format-input-label{font-size:0.65rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.3px}
+    .format-input{width:100%;padding:7px 8px;font-size:0.8rem;font-weight:500;background:var(--bg2);border:1px solid var(--line);border-radius:6px;color:var(--text);font-family:'Courier New',monospace;text-align:center;transition:border-color var(--transition)}
+    .format-input:focus{outline:none;border-color:var(--accent1);box-shadow:var(--ring)}
+    .hex-input{font-size:1rem;font-weight:700;letter-spacing:0.5px}
+    .action-row{display:flex;gap:6px;flex-wrap:wrap}
+    .action-btn{flex:1;min-width:calc(50% - 3px);padding:9px 10px;font-size:0.78rem;font-weight:600;color:var(--text2);background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius-xs);transition:all var(--transition);display:flex;align-items:center;justify-content:center;gap:5px}
+    .action-btn:hover{color:var(--text);background:var(--card-hover);border-color:var(--accent1)}
+    .action-btn.primary{color:#fff;background:var(--grad);border:none;box-shadow:0 4px 14px rgba(0,124,240,0.3)}
+    .action-btn.primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,124,240,0.4)}
+    /* ADVANCED TABS */
+    .adv-tabs-section{border-top:1px solid var(--line);padding:16px 20px 20px}
+    .adv-tabs{display:flex;gap:4px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+    .adv-tabs::-webkit-scrollbar{height:0}
+    .adv-tab{flex-shrink:0;padding:8px 16px;font-size:0.78rem;font-weight:600;color:var(--text2);background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius-xs);transition:all var(--transition);cursor:pointer;white-space:nowrap}
+    .adv-tab:hover{color:var(--text)}
+    .adv-tab.active{color:var(--accent1);background:rgba(0,124,240,0.15);border-color:var(--accent1)}
+    .adv-panel{display:none}
+    .adv-panel.active{display:block}
+    /* HARMONY */
+    .harmony-types{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:14px}
+    .harmony-type-btn{padding:6px 12px;font-size:0.72rem;font-weight:600;color:var(--text2);background:var(--bg2);border:1px solid var(--line);border-radius:20px;transition:all var(--transition);cursor:pointer}
+    .harmony-type-btn:hover{color:var(--text)}
+    .harmony-type-btn.active{color:var(--accent1);background:rgba(0,124,240,0.15);border-color:var(--accent1)}
+    .harmony-swatches{display:flex;gap:10px;flex-wrap:wrap}
+    .harmony-swatch{width:72px;text-align:center;cursor:pointer;transition:transform var(--transition)}
+    .harmony-swatch:hover{transform:translateY(-3px)}
+    .harmony-swatch-color{width:72px;height:72px;border-radius:var(--radius-xs);border:2px solid var(--line);margin-bottom:6px}
+    .harmony-swatch-label{font-size:0.68rem;font-weight:600;color:var(--muted);font-family:'Courier New',monospace}
+    /* GRADIENT */
+    .gradient-controls{display:flex;flex-direction:column;gap:12px}
+    .gradient-type-row{display:flex;gap:6px;align-items:center}
+    .gradient-type-btn{padding:7px 14px;font-size:0.75rem;font-weight:600;color:var(--text2);background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius-xs);transition:all var(--transition);cursor:pointer}
+    .gradient-type-btn.active{color:var(--accent1);background:rgba(0,124,240,0.15);border-color:var(--accent1)}
+    .gradient-angle-wrap{display:flex;align-items:center;gap:8px}
+    .gradient-angle-input{width:60px;padding:6px;font-size:0.8rem;font-weight:500;background:var(--bg2);border:1px solid var(--line);border-radius:6px;color:var(--text);text-align:center;font-family:var(--font)}
+    .gradient-angle-input:focus{outline:none;border-color:var(--accent1)}
+    .gradient-stops{display:flex;flex-direction:column;gap:8px}
+    .gradient-stop{display:flex;gap:8px;align-items:center;padding:8px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius-xs)}
+    .gradient-stop-color{width:32px;height:32px;border-radius:6px;border:1px solid var(--line);cursor:pointer;flex-shrink:0;overflow:hidden}
+    .gradient-stop-color input[type="color"]{width:40px;height:40px;border:none;padding:0;cursor:pointer;margin:-4px}
+    .gradient-stop-pos{flex:1}
+    .gradient-stop-pos input[type="range"]{width:100%}
+    .gradient-stop-label{font-size:0.68rem;color:var(--muted);font-weight:600}
+    .gradient-stop-remove{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--muted);border-radius:4px;transition:all var(--transition)}
+    .gradient-stop-remove:hover{color:#f87171;background:rgba(248,113,113,0.1)}
+    .gradient-preview{height:80px;border-radius:var(--radius-xs);border:1px solid var(--line);margin-top:8px}
+    .gradient-css-output{width:100%;min-height:60px;padding:10px;font-size:0.75rem;font-family:'Courier New',monospace;background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius-xs);color:var(--text);resize:vertical}
+    .gradient-css-output:focus{outline:none;border-color:var(--accent1)}
+    /* CONTRAST */
+    .contrast-inputs{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:end;margin-bottom:16px}
+    .contrast-color-box{display:flex;flex-direction:column;gap:6px}
+    .contrast-swatch{height:48px;border-radius:var(--radius-xs);border:1px solid var(--line)}
+    .contrast-label{font-size:0.72rem;font-weight:600;color:var(--muted);text-transform:uppercase}
+    .contrast-swap-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--text2);background:var(--bg2);border:1px solid var(--line);border-radius:50%;transition:all var(--transition);margin-bottom:4px}
+    .contrast-swap-btn:hover{color:var(--accent1);border-color:var(--accent1)}
+    .contrast-result{text-align:center;padding:16px;background:var(--bg2);border-radius:var(--radius-xs);margin-bottom:12px}
+    .contrast-ratio-value{font-size:2rem;font-weight:800;color:var(--text)}
+    .contrast-ratio-label{font-size:0.75rem;color:var(--muted);font-weight:500}
+    .wcag-results{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .wcag-badge{padding:10px;border-radius:var(--radius-xs);border:1px solid var(--line);text-align:center;background:var(--glass)}
+    .wcag-badge.pass{border-color:rgba(0,214,78,0.4);background:rgba(0,214,78,0.08)}
+    .wcag-badge.fail{border-color:rgba(248,113,113,0.4);background:rgba(248,113,113,0.08)}
+    .wcag-badge-label{font-size:0.68rem;font-weight:600;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+    .wcag-badge-value{font-size:0.9rem;font-weight:700}
+    .wcag-badge.pass .wcag-badge-value{color:#00d64e}
+    .wcag-badge.fail .wcag-badge-value{color:#f87171}
+    .contrast-preview{padding:20px;border-radius:var(--radius-xs);margin-top:12px;text-align:center}
+    .contrast-preview-normal{font-size:1rem;font-weight:400;margin-bottom:8px}
+    .contrast-preview-large{font-size:1.5rem;font-weight:700}
+    /* PALETTE */
+    .palette-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+    .palette-name-input{padding:6px 12px;font-size:0.82rem;font-weight:600;background:var(--bg2);border:1px solid var(--line);border-radius:6px;color:var(--text);font-family:var(--font)}
+    .palette-name-input:focus{outline:none;border-color:var(--accent1)}
+    .palette-actions{display:flex;gap:6px}
+    .palette-colors{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;min-height:52px}
+    .palette-color{width:44px;height:44px;border-radius:var(--radius-xs);border:2px solid var(--line);cursor:pointer;transition:all var(--transition);position:relative}
+    .palette-color:hover{transform:scale(1.1);border-color:var(--accent1)}
+    .palette-color-remove{position:absolute;top:-6px;right:-6px;width:18px;height:18px;background:#f87171;color:#fff;border-radius:50%;font-size:0.65rem;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity var(--transition)}
+    .palette-color:hover .palette-color-remove{opacity:1}
+    .palette-saved{display:flex;flex-direction:column;gap:10px}
+    .palette-saved-item{display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius-xs)}
+    .palette-saved-colors{display:flex;gap:4px}
+    .palette-saved-swatch{width:28px;height:28px;border-radius:4px;border:1px solid var(--line)}
+    .palette-saved-name{flex:1;font-size:0.8rem;font-weight:600;color:var(--text)}
+    .palette-saved-load{padding:4px 10px;font-size:0.7rem;font-weight:600;color:var(--accent1);background:rgba(0,124,240,0.1);border:1px solid rgba(0,124,240,0.2);border-radius:4px;transition:all var(--transition)}
+    .palette-saved-load:hover{background:rgba(0,124,240,0.2)}
+    .palette-saved-delete{padding:4px 8px;font-size:0.7rem;font-weight:600;color:#f87171;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);border-radius:4px;transition:all var(--transition)}
+    .palette-saved-delete:hover{background:rgba(248,113,113,0.15)}
+    /* HISTORY */
+    .history-grid{display:flex;gap:8px;flex-wrap:wrap}
+    .history-swatch{width:44px;height:44px;border-radius:var(--radius-xs);border:2px solid var(--line);cursor:pointer;transition:all var(--transition);position:relative}
+    .history-swatch:hover{transform:scale(1.1);border-color:var(--accent1)}
+    .history-clear{font-size:0.75rem;font-weight:600;color:#f87171;padding:6px 12px;border-radius:6px;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);transition:all var(--transition);margin-top:12px}
+    .history-clear:hover{background:rgba(248,113,113,0.15)}
+    /* TINTS & SHADES */
+    .tints-shades-row{display:flex;gap:4px;flex-wrap:wrap}
+    .ts-swatch{flex:1;min-width:32px;height:40px;border-radius:6px;border:1px solid var(--line);cursor:pointer;transition:transform var(--transition);position:relative}
+    .ts-swatch:hover{transform:scaleY(1.15)}
+    .ts-label{font-size:0.6rem;color:var(--muted);text-align:center;margin-top:3px;font-family:'Courier New',monospace}
+    .ts-col{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:36px}
+    /* FEATURES & FAQ */
+    .features-section,.faq-section{padding:60px 24px}
+    .section-inner{max-width:var(--max);margin:0 auto}
+    .section-label{display:inline-block;margin-bottom:10px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent1)}
+    .section-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-1px;line-height:1.15;margin-bottom:12px}
+    .section-sub{font-size:0.95rem;color:var(--text2);max-width:500px;line-height:1.6}
+    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+    @media(max-width:900px){.features-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.features-grid{grid-template-columns:1fr}}
+    .feature-card{background:var(--card-solid);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;transition:all var(--transition)}
+    .feature-card:hover{transform:translateY(-3px);border-color:rgba(0,124,240,0.3);box-shadow:var(--shadow-sm)}
+    .feature-icon{font-size:2rem;margin-bottom:12px}
+    .feature-title{font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--text)}
+    .feature-desc{font-size:0.85rem;color:var(--text2);line-height:1.6}
+    .faq-list{display:flex;flex-direction:column;gap:10px;max-width:700px;margin:36px auto 0}
+    .faq-item{background:var(--card-solid);border:1px solid var(--line);border-radius:var(--radius-xs);overflow:hidden}
+    .faq-q{width:100%;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:0.9rem;font-weight:600;color:var(--text);background:none;text-align:left;cursor:pointer;transition:color var(--transition)}
+    .faq-q:hover{color:var(--accent1)}
+    .faq-q-icon{width:22px;height:22px;background:var(--glass);border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0;transition:all var(--transition)}
+    .faq-item.open .faq-q-icon{transform:rotate(45deg);background:rgba(0,124,240,0.15);border-color:var(--accent1);color:var(--accent1)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease}
+    .faq-a-inner{padding:0 20px 16px;font-size:0.85rem;color:var(--text2);line-height:1.7}
+    .faq-item.open .faq-a{max-height:300px}
+    .section-divider{height:1px;background:var(--line);max-width:var(--max);margin:0 auto}
+    /* FOOTER */
+    .footer{border-top:1px solid var(--line);padding:36px 24px 24px;background:rgba(3,7,18,0.6)}
+    [data-theme="light"] .footer{background:rgba(241,245,249,0.8)}
+    .footer-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+    .footer-brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .footer-brand-icon{width:32px;height:32px;background:var(--grad);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:900;color:#fff}
+    .footer-brand-name{background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .footer-links{display:flex;gap:20px;flex-wrap:wrap}
+    .footer-link{font-size:0.85rem;color:var(--muted);transition:color var(--transition)}
+    .footer-link:hover{color:var(--text)}
+    .footer-back-btn{display:inline-flex;align-items:center;gap:6px;font-size:0.85rem;font-weight:600;color:var(--accent1);padding:8px 16px;border-radius:var(--radius-xs);background:rgba(0,124,240,0.1);border:1px solid rgba(0,124,240,0.2);transition:all var(--transition)}
+    .footer-back-btn:hover{background:rgba(0,124,240,0.15)}
+    .footer-copy{font-size:0.78rem;color:var(--muted);width:100%;text-align:center;padding-top:20px;border-top:1px solid var(--line);margin-top:12px}
+    /* TOAST */
+    .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--accent1);color:#fff;padding:10px 24px;border-radius:8px;font-size:0.85rem;font-weight:600;opacity:0;transition:all 0.3s ease;z-index:9999;pointer-events:none}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    /* RESPONSIVE */
+    @media(max-width:768px){.nav-primary,.header-actions{display:none}.hamburger{display:flex}.sv-canvas-wrap{max-width:100%}.slider-row{max-width:100%}.contrast-inputs{grid-template-columns:1fr;gap:8px}.contrast-swap-btn{margin:0 auto}.wcag-results{grid-template-columns:1fr}}
+    @media(max-width:480px){.harmony-swatch{width:56px}.harmony-swatch-color{width:56px;height:56px}}
+  </style>
 </head>
-
 <body>
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Header -->
-    <header class="header-glass fixed w-full top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        <i class="fas fa-palette mr-2"></i>Tool Xeno
-                    </div>
-                    <div class="hidden md:block text-sm opacity-70">
-                        Professional Color Picker & Converter
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <nav class="hidden md:flex space-x-2">
-                        <a href="#picker" class="nav-link">Picker</a>
-                        <a href="#converter" class="nav-link">Converter</a>
-                        <a href="#palettes" class="nav-link">Palettes</a>
-                        <a href="#harmony" class="nav-link">Harmony</a>
-                    </nav>
-                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
-                </div>
-            </div>
-        </div>
+  <div class="bg-orbs" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><div class="orb orb-4"></div></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="page-wrapper">
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="https://toolxeno.com/" class="logo" aria-label="Tool Xeno – Home"><div class="logo-icon" aria-hidden="true">X</div><span class="logo-text">Tool Xeno</span></a>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <a href="https://toolxeno.com/" class="nav-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="nav-link">All Tools</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions"><button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">☀️ Light</button></div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
     </header>
-    
-    <!-- Main Content -->
-    <main class="pt-20 pb-10">
-        <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-16 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                Professional Color Tools
-            </h1>
-            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto">
-                Advanced color picker and converter with multi-format support, palette generation, 
-                color harmony analysis, and accessibility features. Perfect for designers and developers.
-            </p>
-        </section>
-        
-        <!-- Main Interface -->
-        <section class="container mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-                
-                <!-- Color Picker Panel -->
-                <div class="lg:col-span-2 space-y-6">
-                    <!-- Color Wheel -->
-                    <div class="glass-card p-6">
-                        <h3 class="text-xl font-semibold mb-6 flex items-center">
-                            <i class="fas fa-circle-notch mr-3"></i>
-                            Color Wheel
-                        </h3>
-                        
-                        <div class="text-center mb-6">
-                            <div class="color-wheel" id="colorWheel">
-                                <canvas id="wheelCanvas" width="300" height="300"></canvas>
-                                <div class="color-wheel-pointer" id="wheelPointer"></div>
-                            </div>
-                        </div>
-                        
-                        <!-- Brightness Slider -->
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Brightness</label>
-                            <input type="range" id="brightnessSlider" class="color-slider" min="0" max="100" value="100">
-                        </div>
-                        
-                        <!-- Saturation Slider -->
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Saturation</label>
-                            <input type="range" id="saturationSlider" class="color-slider" min="0" max="100" value="100">
-                        </div>
-                        
-                        <!-- Alpha Slider -->
-                        <div class="mb-6">
-                            <label class="block text-sm font-medium mb-2">Opacity</label>
-                            <input type="range" id="alphaSlider" class="color-slider" min="0" max="100" value="100">
-                        </div>
-                        
-                        <!-- Eyedropper Tool -->
-                        <div class="flex gap-3">
-                            <button id="eyedropperBtn" class="btn-secondary flex-1">
-                                <i class="fas fa-eye-dropper mr-2"></i>
-                                Eyedropper Tool
-                            </button>
-                            <button id="randomColorBtn" class="btn-gradient">
-                                <i class="fas fa-random mr-2"></i>
-                                Random
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Format Converter -->
-                    <div class="glass-card p-6" id="converter">
-                        <h3 class="text-xl font-semibold mb-6 flex items-center">
-                            <i class="fas fa-exchange-alt mr-3"></i>
-                            Format Converter
-                        </h3>
-                        
-                        <!-- Format Tabs -->
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <div class="format-tab active" data-format="hex">HEX</div>
-                            <div class="format-tab" data-format="rgb">RGB</div>
-                            <div class="format-tab" data-format="hsl">HSL</div>
-                            <div class="format-tab" data-format="hsv">HSV</div>
-                            <div class="format-tab" data-format="cmyk">CMYK</div>
-                        </div>
-                        
-                        <!-- Color Format Inputs -->
-                        <div class="space-y-4">
-                            <div class="color-format-group relative">
-                                <label class="block text-sm font-medium mb-2">HEX</label>
-                                <input type="text" id="hexInput" class="color-input" placeholder="#000000">
-                                <button class="copy-button" onclick="copyToClipboard('hexInput')">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="color-format-group relative">
-                                <label class="block text-sm font-medium mb-2">RGB</label>
-                                <input type="text" id="rgbInput" class="color-input" placeholder="rgb(0, 0, 0)" readonly>
-                                <button class="copy-button" onclick="copyToClipboard('rgbInput')">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="color-format-group relative">
-                                <label class="block text-sm font-medium mb-2">HSL</label>
-                                <input type="text" id="hslInput" class="color-input" placeholder="hsl(0, 0%, 0%)" readonly>
-                                <button class="copy-button" onclick="copyToClipboard('hslInput')">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="color-format-group relative">
-                                <label class="block text-sm font-medium mb-2">HSV</label>
-                                <input type="text" id="hsvInput" class="color-input" placeholder="hsv(0, 0%, 0%)" readonly>
-                                <button class="copy-button" onclick="copyToClipboard('hsvInput')">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="color-format-group relative">
-                                <label class="block text-sm font-medium mb-2">CMYK</label>
-                                <input type="text" id="cmykInput" class="color-input" placeholder="cmyk(0%, 0%, 0%, 100%)" readonly>
-                                <button class="copy-button" onclick="copyToClipboard('cmykInput')">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Preview and Tools Panel -->
-                <div class="space-y-6">
-                    <!-- Color Preview -->
-                    <div class="glass-card p-6">
-                        <h3 class="text-xl font-semibold mb-4 flex items-center">
-                            <i class="fas fa-eye mr-3"></i>
-                            Color Preview
-                        </h3>
-                        
-                        <div class="color-preview mb-4" id="colorPreview" onclick="copyCurrentColor()">
-                            <div class="absolute inset-0 flex items-center justify-center text-white font-semibold text-sm opacity-0 hover:opacity-100 transition-opacity bg-black bg-opacity-50">
-                                Click to Copy
-                            </div>
-                        </div>
-                        
-                        <!-- Color Details -->
-                        <div class="text-center space-y-2">
-                            <div id="colorName" class="text-lg font-semibold">Black</div>
-                            <div id="colorDescription" class="text-sm opacity-70">Pure Black</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Accessibility Checker -->
-                    <div class="glass-card p-6">
-                        <h3 class="text-xl font-semibold mb-4 flex items-center">
-                            <i class="fas fa-universal-access mr-3"></i>
-                            Accessibility
-                        </h3>
-                        
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Background Color</label>
-                                <input type="color" id="bgColorInput" class="w-full h-10 rounded-lg cursor-pointer" value="#ffffff">
-                            </div>
-                            
-                            <div id="contrastResults" class="space-y-2">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-sm">Normal Text</span>
-                                    <span class="accessibility-score score-aaa" id="normalScore">AAA</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-sm">Large Text</span>
-                                    <span class="accessibility-score score-aaa" id="largeScore">AAA</span>
-                                </div>
-                                <div class="text-xs opacity-70" id="contrastRatio">Contrast Ratio: 21:1</div>
-                            </div>
-                            
-                            <!-- Sample Text Preview -->
-                            <div class="mt-4 p-4 rounded-lg border-2 border-dashed border-gray-300">
-                                <div id="sampleText" class="font-medium">Sample Text Preview</div>
-                                <div id="sampleTextLarge" class="text-xl font-bold mt-2">Large Text Sample</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Color History -->
-                    <div class="glass-card p-6">
-                        <h3 class="text-xl font-semibold mb-4 flex items-center">
-                            <i class="fas fa-history mr-3"></i>
-                            Color History
-                            <button onclick="clearHistory()" class="ml-auto text-xs px-3 py-1 bg-red-500 text-white rounded-lg">
-                                Clear
-                            </button>
-                        </h3>
-                        
-                        <div id="colorHistory" class="grid grid-cols-4 gap-2">
-                            <!-- History colors will be inserted here -->
-                        </div>
-                    </div>
-                </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+      <a href="https://toolxeno.com/" class="mobile-nav-link">🏠 Home</a>
+      <a href="https://toolxeno.com/#tools" class="mobile-nav-link">🧰 All Tools</a>
+      <a href="#features" class="mobile-nav-link">✨ Features</a>
+      <a href="#faq" class="mobile-nav-link">❓ FAQ</a>
+    </nav>
+    <section class="hero">
+      <div class="hero-badge"><div class="hero-badge-dot"></div> Professional Color Tool</div>
+      <h1 class="hero-h1">Color Picker <span class="grad-text">& Converter</span></h1>
+      <p class="hero-sub">Pick colors with precision, convert between HEX, RGB, HSL, CMYK instantly. Generate gradients, check accessibility, create palettes — all free in your browser.</p>
+      <div class="hero-trust">
+        <span class="trust-item"><span class="trust-dot">●</span> 6 Format Support</span>
+        <span class="trust-item"><span class="trust-dot">●</span> WCAG Checker</span>
+        <span class="trust-item"><span class="trust-dot">●</span> Gradient Generator</span>
+        <span class="trust-item"><span class="trust-dot">●</span> 100% Private</span>
+        <span class="trust-item"><span class="trust-dot">●</span> No Signup</span>
+      </div>
+    </section>
+    <section class="tool-section">
+      <div class="tool-container">
+        <div class="picker-layout">
+          <div class="picker-canvas-area">
+            <div class="sv-canvas-wrap" id="sv-wrap"><canvas id="sv-canvas"></canvas><div class="sv-indicator" id="sv-indicator"></div></div>
+            <div class="slider-row"><label>Hue</label><div class="hue-slider-wrap" id="hue-wrap"><canvas id="hue-canvas"></canvas><div class="slider-indicator" id="hue-indicator"></div></div></div>
+            <div class="slider-row"><label>Alpha</label><div class="alpha-slider-wrap" id="alpha-wrap"><canvas id="alpha-canvas"></canvas><div class="slider-indicator" id="alpha-indicator"></div></div></div>
+          </div>
+          <div class="picker-controls">
+            <div class="preview-section">
+              <div class="color-preview-box"><div class="preview-swatch" id="preview-dark" style="background:#030712"></div><div class="preview-label">Dark BG</div></div>
+              <div class="color-preview-box"><div class="preview-swatch" id="preview-light" style="background:#ffffff"></div><div class="preview-label">Light BG</div></div>
             </div>
-            
-            <!-- Color Harmony -->
-            <div class="glass-card p-6 mb-8" id="harmony">
-                <h3 class="text-xl font-semibold mb-6 flex items-center">
-                    <i class="fas fa-magic mr-3"></i>
-                    Color Harmony
-                </h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div>
-                        <h4 class="font-medium mb-3">Complementary</h4>
-                        <div class="flex gap-2" id="complementaryColors"></div>
-                    </div>
-                    <div>
-                        <h4 class="font-medium mb-3">Triadic</h4>
-                        <div class="flex gap-2" id="triadicColors"></div>
-                    </div>
-                    <div>
-                        <h4 class="font-medium mb-3">Analogous</h4>
-                        <div class="flex gap-2" id="analogousColors"></div>
-                    </div>
-                    <div>
-                        <h4 class="font-medium mb-3">Split Complementary</h4>
-                        <div class="flex gap-2" id="splitComplementaryColors"></div>
-                    </div>
-                </div>
+            <div class="color-name-tag" id="color-name">No named color</div>
+            <div class="format-group">
+              <div class="format-header"><span class="format-title">HEX</span><button class="format-copy-btn" data-format="hex">📋 Copy</button></div>
+              <div class="format-inputs"><div class="format-input-wrap" style="flex:1;max-width:160px"><input type="text" class="format-input hex-input" id="hex-input" value="#007CF0" maxlength="9" spellcheck="false" /></div></div>
             </div>
-            
-            <!-- Palette Generator -->
-            <div class="glass-card p-6 mb-8" id="palettes">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-xl font-semibold flex items-center">
-                        <i class="fas fa-swatchbook mr-3"></i>
-                        Palette Generator
-                    </h3>
-                    <div class="flex gap-2">
-                        <button onclick="generateRandomPalette()" class="btn-secondary">
-                            <i class="fas fa-random mr-2"></i>
-                            Random Palette
-                        </button>
-                        <button onclick="savePalette()" class="btn-gradient">
-                            <i class="fas fa-save mr-2"></i>
-                            Save Palette
-                        </button>
-                    </div>
-                </div>
-                
-                <div id="generatedPalette" class="flex flex-wrap gap-4 justify-center mb-6">
-                    <!-- Generated palette colors will be inserted here -->
-                </div>
-                
-                <!-- Gradient Generator -->
-                <div class="mt-8">
-                    <h4 class="font-medium mb-4 flex items-center">
-                        <i class="fas fa-gradient mr-2"></i>
-                        Gradient Generator
-                    </h4>
-                    <div class="space-y-4">
-                        <div class="gradient-preview" id="gradientPreview"></div>
-                        <div class="flex gap-2">
-                            <select id="gradientType" class="color-input">
-                                <option value="linear">Linear</option>
-                                <option value="radial">Radial</option>
-                            </select>
-                            <input type="range" id="gradientAngle" class="color-slider flex-1" min="0" max="360" value="90">
-                            <button onclick="copyGradientCSS()" class="btn-gradient">
-                                <i class="fas fa-copy mr-2"></i>
-                                Copy CSS
-                            </button>
-                        </div>
-                        <input type="text" id="gradientCSS" class="color-input" readonly placeholder="Generated CSS will appear here">
-                    </div>
-                </div>
+            <div class="format-group">
+              <div class="format-header"><span class="format-title">RGB / RGBA</span><button class="format-copy-btn" data-format="rgb">📋 Copy</button></div>
+              <div class="format-inputs">
+                <div class="format-input-wrap"><span class="format-input-label">R</span><input type="number" class="format-input" id="r-input" min="0" max="255" value="0" /></div>
+                <div class="format-input-wrap"><span class="format-input-label">G</span><input type="number" class="format-input" id="g-input" min="0" max="255" value="124" /></div>
+                <div class="format-input-wrap"><span class="format-input-label">B</span><input type="number" class="format-input" id="b-input" min="0" max="255" value="240" /></div>
+                <div class="format-input-wrap"><span class="format-input-label">A</span><input type="number" class="format-input" id="a-input" min="0" max="100" value="100" step="1" /></div>
+              </div>
             </div>
-        </section>
-    </main>
-    
-    <!-- Footer -->
-    <footer class="container mx-auto px-6 py-8 text-center opacity-70">
-        <p>&copy; 2025 Tool Xeno. Professional Color Tools for Designers and Developers.</p>
+            <div class="format-group">
+              <div class="format-header"><span class="format-title">HSL / HSLA</span><button class="format-copy-btn" data-format="hsl">📋 Copy</button></div>
+              <div class="format-inputs">
+                <div class="format-input-wrap"><span class="format-input-label">H</span><input type="number" class="format-input" id="hsl-h-input" min="0" max="360" value="206" /></div>
+                <div class="format-input-wrap"><span class="format-input-label">S</span><input type="number" class="format-input" id="hsl-s-input" min="0" max="100" value="100" /></div>
+                <div class="format-input-wrap"><span class="format-input-label">L</span><input type="number" class="format-input" id="hsl-l-input" min="0" max="100" value="47" /></div>
+                <div class="format-input-wrap"><span class="format-input-label">A</span><input type="number" class="format-input" id="hsl-a-input" min="0" max="100" value="100" step="1" /></div>
+              </div>
+            </div>
+            <div class="format-group">
+              <div class="format-header"><span class="format-title">CMYK</span><button class="format-copy-btn" data-format="cmyk">📋 Copy</button></div>
+              <div class="format-inputs">
+                <div class="format-input-wrap"><span class="format-input-label">C</span><input type="number" class="format-input" id="cmyk-c-input" min="0" max="100" value="100" /></div>
+                <div class="format-input-wrap"><span class="format-input-label">M</span><input type="number" class="format-input" id="cmyk-m-input" min="0" max="100" value="48" /></div>
+                <div class="format-input-wrap"><span class="format-input-label">Y</span><input type="number" class="format-input" id="cmyk-y-input" min="0" max="100" value="0" /></div>
+                <div class="format-input-wrap"><span class="format-input-label">K</span><input type="number" class="format-input" id="cmyk-k-input" min="0" max="100" value="6" /></div>
+              </div>
+            </div>
+            <div class="action-row">
+              <button class="action-btn" id="btn-eyedropper">🎯 Eyedropper</button>
+              <button class="action-btn" id="btn-random">🎲 Random</button>
+              <button class="action-btn primary" id="btn-add-palette">➕ Add to Palette</button>
+            </div>
+          </div>
+        </div>
+        <div class="adv-tabs-section">
+          <div class="adv-tabs" id="adv-tabs">
+            <button class="adv-tab active" data-tab="harmony">🎨 Harmony</button>
+            <button class="adv-tab" data-tab="tints">🌓 Tints & Shades</button>
+            <button class="adv-tab" data-tab="gradient">🌈 Gradient</button>
+            <button class="adv-tab" data-tab="contrast">♿ Contrast</button>
+            <button class="adv-tab" data-tab="palette">📋 Palette</button>
+            <button class="adv-tab" data-tab="history">🕐 History</button>
+          </div>
+          <div class="adv-panel active" id="panel-harmony">
+            <div class="harmony-types" id="harmony-types">
+              <button class="harmony-type-btn active" data-type="complementary">Complementary</button>
+              <button class="harmony-type-btn" data-type="analogous">Analogous</button>
+              <button class="harmony-type-btn" data-type="triadic">Triadic</button>
+              <button class="harmony-type-btn" data-type="tetradic">Tetradic</button>
+              <button class="harmony-type-btn" data-type="split">Split-Comp.</button>
+              <button class="harmony-type-btn" data-type="mono">Monochromatic</button>
+            </div>
+            <div class="harmony-swatches" id="harmony-swatches"></div>
+          </div>
+          <div class="adv-panel" id="panel-tints"><div class="tints-shades-row" id="tints-row"></div><div style="height:8px"></div><div class="tints-shades-row" id="shades-row"></div></div>
+          <div class="adv-panel" id="panel-gradient">
+            <div class="gradient-controls">
+              <div class="gradient-type-row">
+                <button class="gradient-type-btn active" data-gtype="linear">Linear</button>
+                <button class="gradient-type-btn" data-gtype="radial">Radial</button>
+                <button class="gradient-type-btn" data-gtype="conic">Conic</button>
+                <div class="gradient-angle-wrap" id="angle-wrap"><label style="font-size:0.72rem;font-weight:600;color:var(--muted)">Angle</label><input type="number" class="gradient-angle-input" id="grad-angle" value="90" min="0" max="360" />°</div>
+              </div>
+              <div class="gradient-stops" id="gradient-stops"></div>
+              <button class="action-btn" id="btn-add-stop" style="width:fit-content">+ Add Color Stop</button>
+              <div class="gradient-preview" id="gradient-preview"></div>
+              <textarea class="gradient-css-output" id="gradient-css" readonly></textarea>
+              <button class="action-btn primary" id="btn-copy-gradient" style="width:fit-content">📋 Copy CSS</button>
+            </div>
+          </div>
+          <div class="adv-panel" id="panel-contrast">
+            <div class="contrast-inputs">
+              <div class="contrast-color-box"><div class="contrast-label">Foreground</div><div class="contrast-swatch" id="contrast-fg-swatch"></div><input type="text" class="format-input" id="contrast-fg" value="#FFFFFF" style="margin-top:4px" /></div>
+              <button class="contrast-swap-btn" id="contrast-swap" title="Swap colors">⇄</button>
+              <div class="contrast-color-box"><div class="contrast-label">Background</div><div class="contrast-swatch" id="contrast-bg-swatch"></div><input type="text" class="format-input" id="contrast-bg" value="#007CF0" style="margin-top:4px" /></div>
+            </div>
+            <div class="contrast-result"><div class="contrast-ratio-label">Contrast Ratio</div><div class="contrast-ratio-value" id="contrast-ratio">4.50 : 1</div></div>
+            <div class="wcag-results" id="wcag-results"></div>
+            <div class="contrast-preview" id="contrast-preview"></div>
+          </div>
+          <div class="adv-panel" id="panel-palette">
+            <div class="palette-header">
+              <input type="text" class="palette-name-input" id="palette-name" value="My Palette" placeholder="Palette name" />
+              <div class="palette-actions">
+                <button class="action-btn" id="btn-save-palette">💾 Save</button>
+                <button class="action-btn" id="btn-export-palette">📤 Export</button>
+                <button class="action-btn" id="btn-clear-palette">🗑️ Clear</button>
+              </div>
+            </div>
+            <div class="palette-colors" id="palette-colors"></div>
+            <div class="palette-saved" id="palette-saved"></div>
+          </div>
+          <div class="adv-panel" id="panel-history">
+            <div class="history-grid" id="history-grid"></div>
+            <button class="history-clear" id="btn-clear-history">🗑️ Clear History</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="features-section" id="features">
+      <div class="section-inner">
+        <span class="section-label">Why This Tool</span>
+        <h2 class="section-title">Everything You Need for Color Work</h2>
+        <p class="section-sub">Built for designers, developers, and digital creators who demand precision and speed when working with colors.</p>
+        <div class="features-grid">
+          <div class="feature-card"><div class="feature-icon">🎯</div><div class="feature-title">Precision HSV Picker</div><div class="feature-desc">Canvas-based saturation-value picker with smooth hue and alpha sliders. Pick any color with pixel-perfect accuracy using mouse or touch.</div></div>
+          <div class="feature-card"><div class="feature-icon">🔄</div><div class="feature-title">6-Format Conversion</div><div class="feature-desc">Instantly convert between HEX, RGB, RGBA, HSL, HSLA, and CMYK. All formats update in real-time as you pick or type values.</div></div>
+          <div class="feature-card"><div class="feature-icon">🎨</div><div class="feature-title">Color Harmony</div><div class="feature-desc">Generate complementary, analogous, triadic, tetradic, split-complementary, and monochromatic palettes from any base color instantly.</div></div>
+          <div class="feature-card"><div class="feature-icon">🌈</div><div class="feature-title">Gradient Generator</div><div class="feature-desc">Create linear, radial, and conic gradients with up to 5 color stops. Live preview and one-click CSS code copying.</div></div>
+          <div class="feature-card"><div class="feature-icon">♿</div><div class="feature-title">WCAG Contrast Checker</div><div class="feature-desc">Check accessibility compliance with real-time contrast ratio calculation. Pass/fail indicators for WCAG AA and AAA standards.</div></div>
+          <div class="feature-card"><div class="feature-icon">📋</div><div class="feature-title">Palette Manager</div><div class="feature-desc">Save color palettes, organize your favorites, and export as JSON, CSS custom properties, or SCSS variables. All stored locally.</div></div>
+          <div class="feature-card"><div class="feature-icon">🎯</div><div class="feature-title">Eyedropper Tool</div><div class="feature-desc">Pick colors from anywhere on your screen using the native EyeDropper API. Available in Chrome 95+ and Edge 95+ browsers.</div></div>
+          <div class="feature-card"><div class="feature-icon">🌓</div><div class="feature-title">Tints & Shades</div><div class="feature-desc">Generate a full scale of tints (lighter) and shades (darker) from any base color. Perfect for building design system color scales.</div></div>
+          <div class="feature-card"><div class="feature-icon">🕐</div><div class="feature-title">Color History</div><div class="feature-desc">Automatically tracks your recently used colors. Click any history swatch to instantly recall it. Persisted across sessions.</div></div>
+        </div>
+      </div>
+    </section>
+    <div class="section-divider"></div>
+    <section class="faq-section" id="faq">
+      <div class="section-inner">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item"><button class="faq-q">What color formats are supported?<span class="faq-q-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">The tool supports six color formats with real-time bidirectional conversion: HEX (#RRGGBB and #RRGGBBAA), RGB (rgb(r, g, b)), RGBA (rgba(r, g, b, a)), HSL (hsl(h, s%, l%)), HSLA (hsla(h, s%, l%, a)), and CMYK (cmyk(c%, m%, y%, k%)). Changing any value instantly updates all other formats.</div></div></div>
+          <div class="faq-item"><button class="faq-q">How does the color harmony work?<span class="faq-q-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Color harmony generates palettes based on color theory. Complementary uses colors opposite on the color wheel (180° apart). Analogous uses adjacent colors (±30°). Triadic uses three equidistant colors (120° apart). Tetradic uses four colors (90° apart). Split-complementary uses the base plus two colors adjacent to its complement. Monochromatic generates variations of the same hue with different saturation and lightness levels.</div></div></div>
+          <div class="faq-item"><button class="faq-q">What is WCAG contrast ratio?<span class="faq-q-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">WCAG (Web Content Accessibility Guidelines) contrast ratio measures the luminance difference between foreground and background colors. A ratio of 1:1 means no contrast (same colors), while 21:1 is maximum contrast (black vs white). AA standard requires 4.5:1 for normal text and 3:1 for large text. AAA requires 7:1 for normal text and 4.5:1 for large text. Meeting these standards ensures your designs are readable for people with visual impairments.</div></div></div>
+          <div class="faq-item"><button class="faq-q">Can I export my color palettes?<span class="faq-q-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes! You can export palettes in multiple formats: JSON (for programmatic use), CSS custom properties (for web development), and SCSS variables (for preprocessing workflows). Palettes are also automatically saved to your browser's localStorage, so they persist between sessions without requiring an account or cloud storage.</div></div></div>
+          <div class="faq-item"><button class="faq-q">Is my data saved locally?<span class="faq-q-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Absolutely. All color data, palettes, and history are stored exclusively in your browser's localStorage. No data is ever sent to any server. Your color choices, palettes, and usage history remain completely private on your device. You can clear all stored data at any time from the respective sections.</div></div></div>
+          <div class="faq-item"><button class="faq-q">What is CMYK used for?<span class="faq-q-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">CMYK (Cyan, Magenta, Yellow, Key/Black) is a subtractive color model used primarily in print production. While screens use RGB (additive), printers use CMYK inks. The K (black) component reduces ink usage and improves shadow detail. Our converter lets designers work with screen colors (RGB/HEX) while seeing the equivalent print values, bridging the gap between digital and print workflows.</div></div></div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand"><div class="footer-brand-icon">X</div><span class="footer-brand-name">Tool Xeno</span></div>
+        <nav class="footer-links"><a href="https://toolxeno.com/" class="footer-link">Home</a><a href="https://toolxeno.com/#tools" class="footer-link">All Tools</a><a href="https://toolxeno.com/privacy.html" class="footer-link">Privacy</a><a href="https://toolxeno.com/terms.html" class="footer-link">Terms</a></nav>
+        <a href="https://toolxeno.com/#tools" class="footer-back-btn">← Back to All Tools</a>
+        <div class="footer-copy">© <span id="footer-year"></span> Tool Xeno. All processing is performed locally in your browser.</div>
+      </div>
     </footer>
-    
-    <!-- Tooltip -->
-    <div id="tooltip" class="tooltip"></div>
-    
-    <script>
-        // Global variables
-        let currentColor = { h: 0, s: 100, v: 100, a: 100 };
-        let colorHistory = [];
-        let isUpdating = false;
-        
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeParticles();
-            initializeColorWheel();
-            initializeEventListeners();
-            updateColorDisplay();
-            loadColorHistory();
+  </div>
+  <script>
+  /* ============================================================
+     COLOR PICKER & CONVERTER – FULL APPLICATION LOGIC
+     ============================================================ */
+  (function() {
+    'use strict';
+    // ─── STATE ──────────────────────────────────────────────
+    const state = { h:206, s:100, v:94, a:1 };
+    let currentPalette = [];
+    let savedPalettes = JSON.parse(localStorage.getItem('tx-palettes') || '[]');
+    let history = JSON.parse(localStorage.getItem('tx-color-history') || '[]');
+    let harmonyType = 'complementary';
+    let gradType = 'linear';
+    let gradStops = [
+      { color:'#007cf0', pos:0 },
+      { color:'#00dfd8', pos:100 }
+    ];
+    let contrastFg = '#ffffff';
+    let contrastBg = '#007cf0';
+    // ─── DOM CACHE ─────────────────────────────────────────
+    const $ = id => document.getElementById(id);
+    const svCanvas = $('sv-canvas'), svWrap = $('sv-wrap'), svInd = $('sv-indicator');
+    const hueCanvas = $('hue-canvas'), hueWrap = $('hue-wrap'), hueInd = $('hue-indicator');
+    const alphaCanvas = $('alpha-canvas'), alphaWrap = $('alpha-wrap'), alphaInd = $('alpha-indicator');
+    const hexIn = $('hex-input'), rIn = $('r-input'), gIn = $('g-input'), bIn = $('b-input'), aIn = $('a-input');
+    const hslH = $('hsl-h-input'), hslS = $('hsl-s-input'), hslL = $('hsl-l-input'), hslA = $('hsl-a-input');
+    const cmykC = $('cmyk-c-input'), cmykM = $('cmyk-m-input'), cmykY = $('cmyk-y-input'), cmykK = $('cmyk-k-input');
+    // ─── COLOR CONVERSION ──────────────────────────────────
+    function hsvToRgb(h, s, v) {
+      s /= 100; v /= 100;
+      const c = v * s, x = c * (1 - Math.abs((h / 60) % 2 - 1)), m = v - c;
+      let r, g, b;
+      if (h < 60) { r=c;g=x;b=0; } else if (h < 120) { r=x;g=c;b=0; }
+      else if (h < 180) { r=0;g=c;b=x; } else if (h < 240) { r=0;g=x;b=c; }
+      else if (h < 300) { r=x;g=0;b=c; } else { r=c;g=0;b=x; }
+      return { r:Math.round((r+m)*255), g:Math.round((g+m)*255), b:Math.round((b+m)*255) };
+    }
+    function rgbToHsv(r, g, b) {
+      r/=255;g/=255;b/=255;
+      const mx=Math.max(r,g,b), mn=Math.min(r,g,b), d=mx-mn;
+      let h=0, s=mx===0?0:d/mx, v=mx;
+      if(d!==0){switch(mx){case r:h=((g-b)/d+(g<b?6:0));break;case g:h=((b-r)/d+2);break;case b:h=((r-g)/d+4);break;}h*=60;}
+      return {h:Math.round(h)%360, s:Math.round(s*100), v:Math.round(v*100)};
+    }
+    function rgbToHsl(r, g, b) {
+      r/=255;g/=255;b/=255;
+      const mx=Math.max(r,g,b), mn=Math.min(r,g,b);
+      let h=0, s=0, l=(mx+mn)/2;
+      if(mx!==mn){const d=mx-mn;s=l>0.5?d/(2-mx-mn):d/(mx+mn);
+      switch(mx){case r:h=((g-b)/d+(g<b?6:0));break;case g:h=((b-r)/d+2);break;case b:h=((r-g)/d+4);break;}h*=60;}
+      return {h:Math.round(h)%360, s:Math.round(s*100), l:Math.round(l*100)};
+    }
+    function hslToRgb(h, s, l) {
+      s/=100;l/=100;
+      const c=(1-Math.abs(2*l-1))*s, x=c*(1-Math.abs((h/60)%2-1)), m=l-c/2;
+      let r,g,b;
+      if(h<60){r=c;g=x;b=0;}else if(h<120){r=x;g=c;b=0;}else if(h<180){r=0;g=c;b=x;}
+      else if(h<240){r=0;g=x;b=c;}else if(h<300){r=x;g=0;b=c;}else{r=c;g=0;b=x;}
+      return {r:Math.round((r+m)*255),g:Math.round((g+m)*255),b:Math.round((b+m)*255)};
+    }
+    function rgbToHex(r, g, b) { return '#' + [r,g,b].map(c => c.toString(16).padStart(2,'0')).join(''); }
+    function hexToRgb(hex) {
+      hex = hex.replace('#','');
+      if(hex.length===3) hex=hex.split('').map(c=>c+c).join('');
+      if(hex.length===8) return { r:parseInt(hex.slice(0,2),16), g:parseInt(hex.slice(2,4),16), b:parseInt(hex.slice(4,6),16), a:parseInt(hex.slice(6,8),16)/255 };
+      if(hex.length===6) return { r:parseInt(hex.slice(0,2),16), g:parseInt(hex.slice(2,4),16), b:parseInt(hex.slice(4,6),16), a:1 };
+      return null;
+    }
+    function rgbToCmyk(r, g, b) {
+      if(r===0&&g===0&&b===0) return {c:0,m:0,y:0,k:100};
+      const c1=1-r/255, m1=1-g/255, y1=1-b/255, k=Math.min(c1,m1,y1);
+      return { c:Math.round((c1-k)/(1-k)*100), m:Math.round((m1-k)/(1-k)*100), y:Math.round((y1-k)/(1-k)*100), k:Math.round(k*100) };
+    }
+    function cmykToRgb(c,m,y,k) {
+      c/=100;m/=100;y/=100;k/=100;
+      return { r:Math.round(255*(1-c)*(1-k)), g:Math.round(255*(1-m)*(1-k)), b:Math.round(255*(1-y)*(1-k)) };
+    }
+    function clamp(v,min,max){return Math.min(max,Math.max(min,v));}
+    // ─── COLOR NAMES ───────────────────────────────────────
+    const COLOR_NAMES = {
+      '#000000':'Black','#ffffff':'White','#ff0000':'Red','#00ff00':'Lime','#0000ff':'Blue',
+      '#ffff00':'Yellow','#00ffff':'Cyan','#ff00ff':'Magenta','#808080':'Gray','#c0c0c0':'Silver',
+      '#800000':'Maroon','#808000':'Olive','#008000':'Green','#800080':'Purple','#008080':'Teal',
+      '#000080':'Navy','#ff6347':'Tomato','#ffa500':'Orange','#ffd700':'Gold','#adff2f':'GreenYellow',
+      '#7fffd4':'Aquamarine','#ff69b4':'HotPink','#cd5c5c':'IndianRed','#4b0082':'Indigo','#f0e68c':'Khaki',
+      '#e6e6fa':'Lavender','#fa8072':'Salmon','#2e8b57':'SeaGreen','#40e0d0':'Turquoise','#ee82ee':'Violet',
+      '#f5f5dc':'Beige','#87ceeb':'SkyBlue','#007cf0':'DodgerBlue','#006400':'DarkGreen','#8b4513':'SaddleBrown',
+      '#dc143c':'Crimson','#ff1493':'DeepPink','#4169e1':'RoyalBlue','#228b22':'ForestGreen','#daa520':'GoldenRod'
+    };
+    function getColorName(hex) {
+      const h = hex.toLowerCase();
+      if(COLOR_NAMES[h]) return COLOR_NAMES[h];
+      let minDist = Infinity, name = '';
+      for(const [key, val] of Object.entries(COLOR_NAMES)) {
+        const rgb1 = hexToRgb(h), rgb2 = hexToRgb(key);
+        const dist = Math.sqrt((rgb1.r-rgb2.r)**2 + (rgb1.g-rgb2.g)**2 + (rgb1.b-rgb2.b)**2);
+        if(dist < minDist) { minDist = dist; name = val; }
+      }
+      return minDist < 50 ? `≈ ${name}` : 'No named color';
+    }
+    // ─── CANVAS SETUP ──────────────────────────────────────
+    const DPR = window.devicePixelRatio || 1;
+    function setupCanvas(canvas, w, h) {
+      canvas.width = w * DPR; canvas.height = h * DPR;
+      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+      const ctx = canvas.getContext('2d'); ctx.scale(DPR, DPR); return ctx;
+    }
+    function getCanvasSize(wrap) { return Math.floor(wrap.getBoundingClientRect().width); }
+    let svCtx, hueCtx, alphaCtx, svSize, hueW, hueH, alphaW, alphaH;
+    function initCanvases() {
+      svSize = getCanvasSize(svWrap);
+      svCtx = setupCanvas(svCanvas, svSize, svSize);
+      hueW = getCanvasSize(hueWrap); hueH = 20;
+      hueCtx = setupCanvas(hueCanvas, hueW, hueH);
+      alphaW = getCanvasSize(alphaWrap); alphaH = 20;
+      alphaCtx = setupCanvas(alphaCanvas, alphaW, alphaH);
+    }
+    // ─── DRAW SV PICKER ────────────────────────────────────
+    function drawSV() {
+      const w = svSize, h = svSize;
+      svCtx.fillStyle = `hsl(${state.h}, 100%, 50%)`;
+      svCtx.fillRect(0, 0, w, h);
+      const wG = svCtx.createLinearGradient(0,0,w,0);
+      wG.addColorStop(0, 'rgba(255,255,255,1)'); wG.addColorStop(1, 'rgba(255,255,255,0)');
+      svCtx.fillStyle = wG; svCtx.fillRect(0,0,w,h);
+      const bG = svCtx.createLinearGradient(0,0,0,h);
+      bG.addColorStop(0, 'rgba(0,0,0,0)'); bG.addColorStop(1, 'rgba(0,0,0,1)');
+      svCtx.fillStyle = bG; svCtx.fillRect(0,0,w,h);
+      const ix = (state.s/100)*w, iy = (1-state.v/100)*h;
+      svInd.style.left = ix + 'px'; svInd.style.top = iy + 'px';
+    }
+    // ─── DRAW HUE BAR ──────────────────────────────────────
+    function drawHue() {
+      const g = hueCtx.createLinearGradient(0,0,hueW,0);
+      [0,60,120,180,240,300,360].forEach(d => g.addColorStop(d/360, `hsl(${d},100%,50%)`));
+      hueCtx.fillStyle = g; hueCtx.fillRect(0,0,hueW,hueH);
+      hueInd.style.left = (state.h/360)*hueW + 'px';
+    }
+    // ─── DRAW ALPHA BAR ────────────────────────────────────
+    function drawAlpha() {
+      alphaCtx.clearRect(0,0,alphaW,alphaH);
+      const {r,g,b} = hsvToRgb(state.h, state.s, state.v);
+      const g2 = alphaCtx.createLinearGradient(0,0,alphaW,0);
+      g2.addColorStop(0, `rgba(${r},${g},${b},0)`);
+      g2.addColorStop(1, `rgba(${r},${g},${b},1)`);
+      alphaCtx.fillStyle = g2; alphaCtx.fillRect(0,0,alphaW,alphaH);
+      alphaInd.style.left = state.a * alphaW + 'px';
+    }
+    // ─── FULL UPDATE ───────────────────────────────────────
+    function updateAll(source) {
+      const {r,g,b} = hsvToRgb(state.h, state.s, state.v);
+      const hex = rgbToHex(r,g,b);
+      const hsl = rgbToHsl(r,g,b);
+      const cmyk = rgbToCmyk(r,g,b);
+      const rgbaStr = state.a < 1 ? `rgba(${r}, ${g}, ${b}, ${state.a.toFixed(2)})` : `rgb(${r}, ${g}, ${b})`;
+      const hslaStr = state.a < 1 ? `hsla(${hsl.h}, ${hsl.s}%, ${hsl.l}%, ${state.a.toFixed(2)})` : `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+      const hexAlpha = state.a < 1 ? hex + Math.round(state.a*255).toString(16).padStart(2,'0') : hex;
+      // Update inputs (skip source to avoid cursor jump)
+      if(source!=='hex') hexIn.value = hexAlpha.toUpperCase();
+      if(source!=='rgb'){rIn.value=r;gIn.value=g;bIn.value=b;aIn.value=Math.round(state.a*100);}
+      if(source!=='hsl'){hslH.value=hsl.h;hslS.value=hsl.s;hslL.value=hsl.l;hslA.value=Math.round(state.a*100);}
+      if(source!=='cmyk'){cmykC.value=cmyk.c;cmykM.value=cmyk.m;cmykY.value=cmyk.y;cmykK.value=cmyk.k;}
+      // Previews
+      const fullColor = `rgba(${r},${g},${b},${state.a})`;
+      $('preview-dark').style.background = fullColor;
+      $('preview-light').style.background = fullColor;
+      $('color-name').textContent = getColorName(hex);
+      // Contrast fg swatch
+      $('contrast-fg-swatch').style.background = contrastFg;
+      $('contrast-bg-swatch').style.background = contrastBg;
+      // Draw canvases
+      drawSV(); drawHue(); drawAlpha();
+      // Harmony, tints, gradient
+      updateHarmony(); updateTintsShades(); updateGradient();
+    }
+    // ─── SV PICKER INTERACTION ─────────────────────────────
+    let svDragging = false;
+    function handleSV(e) {
+      const rect = svCanvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      let x = (clientX - rect.left) / rect.width;
+      let y = (clientY - rect.top) / rect.height;
+      x = clamp(x, 0, 1); y = clamp(y, 0, 1);
+      state.s = Math.round(x * 100);
+      state.v = Math.round((1 - y) * 100);
+      updateAll('sv');
+    }
+    svWrap.addEventListener('mousedown', e => { svDragging = true; handleSV(e); addToHistory(); });
+    document.addEventListener('mousemove', e => { if(svDragging){ handleSV(e); } });
+    document.addEventListener('mouseup', () => { if(svDragging){ svDragging=false; addToHistory(); } });
+    svWrap.addEventListener('touchstart', e => { e.preventDefault(); svDragging=true; handleSV(e); addToHistory(); }, {passive:false});
+    document.addEventListener('touchmove', e => { if(svDragging) handleSV(e); }, {passive:true});
+    document.addEventListener('touchend', () => { if(svDragging){ svDragging=false; addToHistory(); } });
+    // ─── HUE SLIDER INTERACTION ────────────────────────────
+    let hueDragging = false;
+    function handleHue(e) {
+      const rect = hueWrap.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      let x = (clientX - rect.left) / rect.width;
+      x = clamp(x, 0, 1);
+      state.h = Math.round(x * 360) % 360;
+      updateAll('hue');
+    }
+    hueWrap.addEventListener('mousedown', e => { hueDragging=true; handleHue(e); addToHistory(); });
+    document.addEventListener('mousemove', e => { if(hueDragging) handleHue(e); });
+    document.addEventListener('mouseup', () => { if(hueDragging){ hueDragging=false; addToHistory(); } });
+    hueWrap.addEventListener('touchstart', e => { e.preventDefault(); hueDragging=true; handleHue(e); addToHistory(); }, {passive:false});
+    document.addEventListener('touchmove', e => { if(hueDragging) handleHue(e); }, {passive:true});
+    document.addEventListener('touchend', () => { if(hueDragging){ hueDragging=false; addToHistory(); } });
+    // ─── ALPHA SLIDER INTERACTION ──────────────────────────
+    let alphaDragging = false;
+    function handleAlpha(e) {
+      const rect = alphaWrap.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      let x = (clientX - rect.left) / rect.width;
+      state.a = parseFloat(clamp(x, 0, 1).toFixed(2));
+      updateAll('alpha');
+    }
+    alphaWrap.addEventListener('mousedown', e => { alphaDragging=true; handleAlpha(e); });
+    document.addEventListener('mousemove', e => { if(alphaDragging) handleAlpha(e); });
+    document.addEventListener('mouseup', () => { if(alphaDragging){ alphaDragging=false; } });
+    alphaWrap.addEventListener('touchstart', e => { e.preventDefault(); alphaDragging=true; handleAlpha(e); }, {passive:false});
+    document.addEventListener('touchmove', e => { if(alphaDragging) handleAlpha(e); }, {passive:true});
+    document.addEventListener('touchend', () => { alphaDragging=false; });
+    // ─── FORMAT INPUT HANDLERS ─────────────────────────────
+    hexIn.addEventListener('input', () => {
+      let val = hexIn.value.trim();
+      if(!val.startsWith('#')) val = '#' + val;
+      const rgb = hexToRgb(val);
+      if(!rgb) return;
+      if(rgb.a !== undefined) state.a = Math.round(rgb.a*100)/100;
+      const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
+      state.h = hsv.h; state.s = hsv.s; state.v = hsv.v;
+      updateAll('hex'); addToHistory();
+    });
+    function onRgbInput() {
+      const r=clamp(parseInt(rIn.value)||0,0,255), g=clamp(parseInt(gIn.value)||0,0,255), b=clamp(parseInt(bIn.value)||0,0,255);
+      state.a = clamp((parseInt(aIn.value)||100)/100, 0, 1);
+      const hsv = rgbToHsv(r,g,b);
+      state.h=hsv.h; state.s=hsv.s; state.v=hsv.v;
+      updateAll('rgb'); addToHistory();
+    }
+    rIn.addEventListener('input', onRgbInput); gIn.addEventListener('input', onRgbInput);
+    bIn.addEventListener('input', onRgbInput); aIn.addEventListener('input', onRgbInput);
+    function onHslInput() {
+      const h=clamp(parseInt(hslH.value)||0,0,360), s=clamp(parseInt(hslS.value)||0,0,100), l=clamp(parseInt(hslL.value)||0,0,100);
+      state.a = clamp((parseInt(hslA.value)||100)/100, 0, 1);
+      const rgb = hslToRgb(h,s,l);
+      const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
+      state.h=hsv.h; state.s=hsv.s; state.v=hsv.v;
+      updateAll('hsl'); addToHistory();
+    }
+    hslH.addEventListener('input', onHslInput); hslS.addEventListener('input', onHslInput);
+    hslL.addEventListener('input', onHslInput); hslA.addEventListener('input', onHslInput);
+    function onCmykInput() {
+      const c=clamp(parseInt(cmykC.value)||0,0,100), m=clamp(parseInt(cmykM.value)||0,0,100);
+      const y=clamp(parseInt(cmykY.value)||0,0,100), k=clamp(parseInt(cmykK.value)||0,0,100);
+      const rgb = cmykToRgb(c,m,y,k);
+      const hsv = rgbToHsv(rgb.r,rgb.g,rgb.b);
+      state.h=hsv.h; state.s=hsv.s; state.v=hsv.v;
+      updateAll('cmyk'); addToHistory();
+    }
+    cmykC.addEventListener('input', onCmykInput); cmykM.addEventListener('input', onCmykInput);
+    cmykY.addEventListener('input', onCmykInput); cmykK.addEventListener('input', onCmykInput);
+    // ─── COPY BUTTONS ──────────────────────────────────────
+    document.querySelectorAll('.format-copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const fmt = btn.dataset.format;
+        const {r,g,b} = hsvToRgb(state.h, state.s, state.v);
+        const hex = rgbToHex(r,g,b);
+        const hsl = rgbToHsl(r,g,b);
+        const cmyk = rgbToCmyk(r,g,b);
+        let text = '';
+        switch(fmt) {
+          case 'hex': text = state.a<1 ? hex + Math.round(state.a*255).toString(16).padStart(2,'0').toUpperCase() : hex.toUpperCase(); break;
+          case 'rgb': text = state.a<1 ? `rgba(${r}, ${g}, ${b}, ${state.a.toFixed(2)})` : `rgb(${r}, ${g}, ${b})`; break;
+          case 'hsl': text = state.a<1 ? `hsla(${hsl.h}, ${hsl.s}%, ${hsl.l}%, ${state.a.toFixed(2)})` : `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`; break;
+          case 'cmyk': text = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`; break;
+        }
+        navigator.clipboard.writeText(text).then(() => showToast('Copied: ' + text));
+      });
+    });
+    // ─── TOAST ─────────────────────────────────────────────
+    function showToast(msg) {
+      const t = document.createElement('div');
+      t.className = 'toast'; t.textContent = msg; document.body.appendChild(t);
+      requestAnimationFrame(() => t.classList.add('show'));
+      setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 2000);
+    }
+    // ─── ACTIONS ───────────────────────────────────────────
+    $('btn-random').addEventListener('click', () => {
+      state.h = Math.floor(Math.random()*360);
+      state.s = Math.floor(Math.random()*40)+60;
+      state.v = Math.floor(Math.random()*40)+60;
+      updateAll('random'); addToHistory();
+    });
+    $('btn-eyedropper').addEventListener('click', async () => {
+      if(!window.EyeDropper) { showToast('Eyedropper requires Chrome 95+ or Edge 95+'); return; }
+      try {
+        const dropper = new EyeDropper();
+        const result = await dropper.open();
+        const rgb = hexToRgb(result.sRGBHex);
+        if(rgb){ const hsv = rgbToHsv(rgb.r,rgb.g,rgb.b); state.h=hsv.h; state.s=hsv.s; state.v=hsv.v; state.a=1; updateAll('eyedropper'); addToHistory(); }
+      } catch(e) {}
+    });
+    // ─── COLOR HARMONY ─────────────────────────────────────
+    function getHarmonyColors(h, type) {
+      const colors = [];
+      const makeHue = hue => ((hue % 360) + 360) % 360;
+      switch(type) {
+        case 'complementary': colors.push({h,s:state.s,v:state.v},{h:makeHue(h+180),s:state.s,v:state.v}); break;
+        case 'analogous': [-30,-15,0,15,30].forEach(off => colors.push({h:makeHue(h+off),s:state.s,v:state.v})); break;
+        case 'triadic': [0,120,240].forEach(off => colors.push({h:makeHue(h+off),s:state.s,v:state.v})); break;
+        case 'tetradic': [0,90,180,270].forEach(off => colors.push({h:makeHue(h+off),s:state.s,v:state.v})); break;
+        case 'split': colors.push({h,s:state.s,v:state.v},{h:makeHue(h+150),s:state.s,v:state.v},{h:makeHue(h+210),s:state.s,v:state.v}); break;
+        case 'mono':
+          [{s:100,v:95},{s:80,v:85},{s:60,v:70},{s:40,v:55},{s:25,v:40},{s:15,v:30},{s:8,v:20}].forEach(c => colors.push({h,s:c.s,v:c.v}));
+          break;
+      }
+      return colors;
+    }
+    function updateHarmony() {
+      const container = $('harmony-swatches');
+      const colors = getHarmonyColors(state.h, harmonyType);
+      container.innerHTML = colors.map(c => {
+        const rgb = hsvToRgb(c.h, c.s, c.v);
+        const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+        return `<div class="harmony-swatch" data-hex="${hex}" title="${hex}"><div class="harmony-swatch-color" style="background:${hex}"></div><div class="harmony-swatch-label">${hex.toUpperCase()}</div></div>`;
+      }).join('');
+      container.querySelectorAll('.harmony-swatch').forEach(sw => {
+        sw.addEventListener('click', () => {
+          const rgb = hexToRgb(sw.dataset.hex);
+          if(rgb){ const hsv = rgbToHsv(rgb.r,rgb.g,rgb.b); state.h=hsv.h; state.s=hsv.s; state.v=hsv.v; updateAll('harmony'); addToHistory(); }
         });
-        
-        // Theme toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
-        }
-        
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-theme');
-        }
-        
-        // Initialize floating particles
-        function initializeParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                container.appendChild(particle);
-            }
-        }
-        
-        // Initialize color wheel
-        function initializeColorWheel() {
-            const canvas = document.getElementById('wheelCanvas');
-            const ctx = canvas.getContext('2d');
-            const radius = 150;
-            const centerX = 150;
-            const centerY = 150;
-            
-            // Draw color wheel
-            for (let angle = 0; angle < 360; angle++) {
-                const startAngle = (angle - 1) * Math.PI / 180;
-                const endAngle = angle * Math.PI / 180;
-                
-                ctx.beginPath();
-                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
-                ctx.lineWidth = radius;
-                ctx.strokeStyle = `hsl(${angle}, 100%, 50%)`;
-                ctx.stroke();
-            }
-            
-            // Add saturation/brightness gradient
-            const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
-            gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-            gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-            
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-            ctx.fillStyle = gradient;
-            ctx.fill();
-            
-            const gradient2 = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
-            gradient2.addColorStop(0, 'rgba(0, 0, 0, 0)');
-            gradient2.addColorStop(1, 'rgba(0, 0, 0, 1)');
-            
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-            ctx.fillStyle = gradient2;
-            ctx.fill();
-        }
-        
-        // Initialize event listeners
-        function initializeEventListeners() {
-            // Color wheel interaction
-            const colorWheel = document.getElementById('colorWheel');
-            let isDragging = false;
-            
-            colorWheel.addEventListener('mousedown', startColorSelection);
-            colorWheel.addEventListener('mousemove', updateColorSelection);
-            document.addEventListener('mouseup', () => isDragging = false);
-            
-            // Touch events
-            colorWheel.addEventListener('touchstart', startColorSelection);
-            colorWheel.addEventListener('touchmove', updateColorSelection);
-            
-            function startColorSelection(e) {
-                isDragging = true;
-                updateColorSelection(e);
-            }
-            
-            function updateColorSelection(e) {
-                if (!isDragging) return;
-                e.preventDefault();
-                
-                const rect = colorWheel.getBoundingClientRect();
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                let clientX = e.clientX || e.touches[0].clientX;
-                let clientY = e.clientY || e.touches[0].clientY;
-                
-                const x = clientX - rect.left - centerX;
-                const y = clientY - rect.top - centerY;
-                
-                const distance = Math.sqrt(x * x + y * y);
-                const maxDistance = 150;
-                
-                if (distance <= maxDistance) {
-                    const angle = Math.atan2(y, x) * 180 / Math.PI + 90;
-                    const hue = (angle + 360) % 360;
-                    const saturation = Math.min(distance / maxDistance * 100, 100);
-                    
-                    currentColor.h = hue;
-                    currentColor.s = saturation;
-                    
-                    updateColorDisplay();
-                }
-            }
-            
-            // Sliders
-            document.getElementById('brightnessSlider').addEventListener('input', function() {
-                currentColor.v = parseInt(this.value);
-                updateColorDisplay();
-            });
-            
-            document.getElementById('saturationSlider').addEventListener('input', function() {
-                currentColor.s = parseInt(this.value);
-                updateColorDisplay();
-            });
-            
-            document.getElementById('alphaSlider').addEventListener('input', function() {
-                currentColor.a = parseInt(this.value);
-                updateColorDisplay();
-            });
-            
-            // HEX input
-            document.getElementById('hexInput').addEventListener('input', function() {
-                if (isUpdating) return;
-                const hex = this.value;
-                if (isValidHex(hex)) {
-                    const rgb = hexToRgb(hex);
-                    const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
-                    currentColor = { ...hsv, a: currentColor.a };
-                    updateColorDisplay();
-                }
-            });
-            
-            // Format tabs
-            document.querySelectorAll('.format-tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    document.querySelectorAll('.format-tab').forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-            
-            // Random color button
-            document.getElementById('randomColorBtn').addEventListener('click', generateRandomColor);
-            
-            // Eyedropper button
-            document.getElementById('eyedropperBtn').addEventListener('click', async function() {
-                if ('EyeDropper' in window) {
-                    try {
-                        const eyeDropper = new EyeDropper();
-                        const result = await eyeDropper.open();
-                        const hex = result.sRGBHex;
-                        const rgb = hexToRgb(hex);
-                        const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
-                        currentColor = { ...hsv, a: currentColor.a };
-                        updateColorDisplay();
-                        addToHistory(hex);
-                    } catch (e) {
-                        alert('Eyedropper cancelled or not supported');
-                    }
-                } else {
-                    alert('EyeDropper API not supported in this browser');
-                }
-            });
-            
-            // Background color input for accessibility
-            document.getElementById('bgColorInput').addEventListener('input', updateAccessibility);
-        }
-        
-        // Update color display
-        function updateColorDisplay() {
-            if (isUpdating) return;
-            isUpdating = true;
-            
-            const { h, s, v, a } = currentColor;
-            
-            // Update sliders
-            document.getElementById('brightnessSlider').value = v;
-            document.getElementById('saturationSlider').value = s;
-            document.getElementById('alphaSlider').value = a;
-            
-            // Convert to RGB
-            const rgb = hsvToRgb(h, s, v);
-            const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
-            const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
-            const hsv = { h, s, v };
-            const cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
-            
-            // Update format inputs
-            document.getElementById('hexInput').value = hex;
-            document.getElementById('rgbInput').value = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
-            document.getElementById('hslInput').value = `hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`;
-            document.getElementById('hsvInput').value = `hsv(${Math.round(hsv.h)}, ${Math.round(hsv.s)}%, ${Math.round(hsv.v)}%)`;
-            document.getElementById('cmykInput').value = `cmyk(${Math.round(cmyk.c)}%, ${Math.round(cmyk.m)}%, ${Math.round(cmyk.y)}%, ${Math.round(cmyk.k)}%)`;
-            
-            // Update color preview
-            const colorPreview = document.getElementById('colorPreview');
-            colorPreview.style.backgroundColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${a/100})`;
-            
-            // Update wheel pointer
-            updateWheelPointer();
-            
-            // Update color name
-            updateColorName(hex);
-            
-            // Update accessibility
-            updateAccessibility();
-            
-            // Update harmony colors
-            updateHarmonyColors();
-            
-            // Update gradient
-            updateGradient();
-            
-            isUpdating = false;
-        }
-        
-        // Update wheel pointer position
-        function updateWheelPointer() {
-            const pointer = document.getElementById('wheelPointer');
-            const { h, s } = currentColor;
-            
-            const angle = (h - 90) * Math.PI / 180;
-            const distance = (s / 100) * 150;
-            
-            const x = Math.cos(angle) * distance + 150;
-            const y = Math.sin(angle) * distance + 150;
-            
-            pointer.style.left = x + 'px';
-            pointer.style.top = y + 'px';
-        }
-        
-        // Color conversion functions
-        function hsvToRgb(h, s, v) {
-            h /= 360;
-            s /= 100;
-            v /= 100;
-            
-            const c = v * s;
-            const x = c * (1 - Math.abs((h * 6) % 2 - 1));
-            const m = v - c;
-            
-            let r, g, b;
-            
-            if (h < 1/6) {
-                [r, g, b] = [c, x, 0];
-            } else if (h < 2/6) {
-                [r, g, b] = [x, c, 0];
-            } else if (h < 3/6) {
-                [r, g, b] = [0, c, x];
-            } else if (h < 4/6) {
-                [r, g, b] = [0, x, c];
-            } else if (h < 5/6) {
-                [r, g, b] = [x, 0, c];
-            } else {
-                [r, g, b] = [c, 0, x];
-            }
-            
-            return {
-                r: Math.round((r + m) * 255),
-                g: Math.round((g + m) * 255),
-                b: Math.round((b + m) * 255)
-            };
-        }
-        
-        function rgbToHsv(r, g, b) {
-            r /= 255;
-            g /= 255;
-            b /= 255;
-            
-            const max = Math.max(r, g, b);
-            const min = Math.min(r, g, b);
-            const diff = max - min;
-            
-            let h = 0;
-            if (diff !== 0) {
-                if (max === r) {
-                    h = ((g - b) / diff) % 6;
-                } else if (max === g) {
-                    h = (b - r) / diff + 2;
-                } else {
-                    h = (r - g) / diff + 4;
-                }
-            }
-            
-            h = Math.round(h * 60);
-            if (h < 0) h += 360;
-            
-            const s = max === 0 ? 0 : Math.round((diff / max) * 100);
-            const v = Math.round(max * 100);
-            
-            return { h, s, v };
-        }
-        
-        function rgbToHsl(r, g, b) {
-            r /= 255;
-            g /= 255;
-            b /= 255;
-            
-            const max = Math.max(r, g, b);
-            const min = Math.min(r, g, b);
-            const diff = max - min;
-            const sum = max + min;
-            
-            let h = 0;
-            if (diff !== 0) {
-                if (max === r) {
-                    h = ((g - b) / diff) % 6;
-                } else if (max === g) {
-                    h = (b - r) / diff + 2;
-                } else {
-                    h = (r - g) / diff + 4;
-                }
-            }
-            
-            h = Math.round(h * 60);
-            if (h < 0) h += 360;
-            
-            const l = sum / 2;
-            const s = diff === 0 ? 0 : diff / (1 - Math.abs(2 * l - 1));
-            
-            return {
-                h,
-                s: Math.round(s * 100),
-                l: Math.round(l * 100)
-            };
-        }
-        
-        function rgbToCmyk(r, g, b) {
-            r /= 255;
-            g /= 255;
-            b /= 255;
-            
-            const k = 1 - Math.max(r, Math.max(g, b));
-            const c = (1 - r - k) / (1 - k) || 0;
-            const m = (1 - g - k) / (1 - k) || 0;
-            const y = (1 - b - k) / (1 - k) || 0;
-            
-            return {
-                c: Math.round(c * 100),
-                m: Math.round(m * 100),
-                y: Math.round(y * 100),
-                k: Math.round(k * 100)
-            };
-        }
-        
-        function rgbToHex(r, g, b) {
-            return "#" + [r, g, b].map(x => {
-                const hex = x.toString(16);
-                return hex.length === 1 ? "0" + hex : hex;
-            }).join("");
-        }
-        
-        function hexToRgb(hex) {
-            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-            return result ? {
-                r: parseInt(result[1], 16),
-                g: parseInt(result[2], 16),
-                b: parseInt(result[3], 16)
-            } : null;
-        }
-        
-        function isValidHex(hex) {
-            return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex);
-        }
-        
-        // Generate random color
-        function generateRandomColor() {
-            currentColor = {
-                h: Math.random() * 360,
-                s: Math.random() * 100,
-                v: Math.random() * 100,
-                a: 100
-            };
-            updateColorDisplay();
-            addToHistory();
-        }
-        
-        // Update color name
-        function updateColorName(hex) {
-            const colorNames = {
-                '#000000': 'Black',
-                '#ffffff': 'White',
-                '#ff0000': 'Red',
-                '#00ff00': 'Lime',
-                '#0000ff': 'Blue',
-                '#ffff00': 'Yellow',
-                '#ff00ff': 'Magenta',
-                '#00ffff': 'Cyan',
-                '#808080': 'Gray',
-                '#800000': 'Maroon',
-                '#008000': 'Green',
-                '#000080': 'Navy'
-            };
-            
-            document.getElementById('colorName').textContent = colorNames[hex.toLowerCase()] || hex.toUpperCase();
-            document.getElementById('colorDescription').textContent = getColorDescription(currentColor.h);
-        }
-        
-        function getColorDescription(hue) {
-            if (hue < 30) return 'Red Tones';
-            if (hue < 60) return 'Orange Tones';
-            if (hue < 90) return 'Yellow Tones';
-            if (hue < 150) return 'Green Tones';
-            if (hue < 210) return 'Cyan Tones';
-            if (hue < 270) return 'Blue Tones';
-            if (hue < 330) return 'Purple Tones';
-            return 'Red Tones';
-        }
-        
-        // Update accessibility checking
-        function updateAccessibility() {
-            const bgColor = document.getElementById('bgColorInput').value;
-            const fgRgb = hsvToRgb(currentColor.h, currentColor.s, currentColor.v);
-            const bgRgb = hexToRgb(bgColor);
-            
-            if (!bgRgb) return;
-            
-            const contrast = calculateContrast(fgRgb, bgRgb);
-            
-            document.getElementById('contrastRatio').textContent = `Contrast Ratio: ${contrast.toFixed(2)}:1`;
-            
-            // Update scores
-            const normalScore = document.getElementById('normalScore');
-            const largeScore = document.getElementById('largeScore');
-            
-            // Normal text (AA: 4.5, AAA: 7)
-            if (contrast >= 7) {
-                normalScore.textContent = 'AAA';
-                normalScore.className = 'accessibility-score score-aaa';
-            } else if (contrast >= 4.5) {
-                normalScore.textContent = 'AA';
-                normalScore.className = 'accessibility-score score-aa';
-            } else {
-                normalScore.textContent = 'FAIL';
-                normalScore.className = 'accessibility-score score-fail';
-            }
-            
-            // Large text (AA: 3, AAA: 4.5)
-            if (contrast >= 4.5) {
-                largeScore.textContent = 'AAA';
-                largeScore.className = 'accessibility-score score-aaa';
-            } else if (contrast >= 3) {
-                largeScore.textContent = 'AA';
-                largeScore.className = 'accessibility-score score-aa';
-            } else {
-                largeScore.textContent = 'FAIL';
-                largeScore.className = 'accessibility-score score-fail';
-            }
-            
-            // Update sample text
-            const sampleText = document.getElementById('sampleText');
-            const sampleTextLarge = document.getElementById('sampleTextLarge');
-            
-            sampleText.style.color = rgbToHex(fgRgb.r, fgRgb.g, fgRgb.b);
-            sampleText.style.backgroundColor = bgColor;
-            sampleTextLarge.style.color = rgbToHex(fgRgb.r, fgRgb.g, fgRgb.b);
-            sampleTextLarge.style.backgroundColor = bgColor;
-        }
-        
-        function calculateContrast(color1, color2) {
-            const l1 = getRelativeLuminance(color1);
-            const l2 = getRelativeLuminance(color2);
-            
-            const lighter = Math.max(l1, l2);
-            const darker = Math.min(l1, l2);
-            
-            return (lighter + 0.05) / (darker + 0.05);
-        }
-        
-        function getRelativeLuminance(rgb) {
-            const { r, g, b } = rgb;
-            const [rs, gs, bs] = [r, g, b].map(c => {
-                c = c / 255;
-                return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
-            });
-            
-            return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
-        }
-        
-        // Update harmony colors
-        function updateHarmonyColors() {
-            const { h } = currentColor;
-            
-            // Complementary
-            const complementary = [(h + 180) % 360];
-            renderHarmonyColors('complementaryColors', [h, ...complementary]);
-            
-            // Triadic
-            const triadic = [(h + 120) % 360, (h + 240) % 360];
-            renderHarmonyColors('triadicColors', [h, ...triadic]);
-            
-            // Analogous
-            const analogous = [(h + 30) % 360, (h - 30 + 360) % 360];
-            renderHarmonyColors('analogousColors', [h, ...analogous]);
-            
-            // Split Complementary
-            const splitComp = [(h + 150) % 360, (h + 210) % 360];
-            renderHarmonyColors('splitComplementaryColors', [h, ...splitComp]);
-        }
-        
-        function renderHarmonyColors(containerId, hues) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-            
-            hues.forEach(hue => {
-                const rgb = hsvToRgb(hue, currentColor.s, currentColor.v);
-                const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
-                
-                const colorDiv = document.createElement('div');
-                colorDiv.className = 'harmony-color';
-                colorDiv.style.backgroundColor = hex;
-                colorDiv.title = hex;
-                colorDiv.onclick = () => {
-                    currentColor.h = hue;
-                    updateColorDisplay();
-                    addToHistory();
-                };
-                
-                container.appendChild(colorDiv);
-            });
-        }
-        
-        // Generate random palette
-        function generateRandomPalette() {
-            const container = document.getElementById('generatedPalette');
-            container.innerHTML = '';
-            
-            const baseHue = Math.random() * 360;
-            const colors = [];
-            
-            for (let i = 0; i < 5; i++) {
-                const hue = (baseHue + i * 72) % 360;
-                const sat = 60 + Math.random() * 40;
-                const val = 70 + Math.random() * 30;
-                const rgb = hsvToRgb(hue, sat, val);
-                const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
-                colors.push({ hex, hue, sat, val });
-            }
-            
-            colors.forEach(color => {
-                const colorDiv = document.createElement('div');
-                colorDiv.className = 'palette-color fade-in';
-                colorDiv.style.backgroundColor = color.hex;
-                colorDiv.title = color.hex;
-                colorDiv.onclick = () => {
-                    currentColor = { h: color.hue, s: color.sat, v: color.val, a: 100 };
-                    updateColorDisplay();
-                    addToHistory();
-                };
-                
-                container.appendChild(colorDiv);
-            });
-        }
-        
-        // Save palette (simplified - shows alert)
-        function savePalette() {
-            alert('Palette saved! (This is a demo - in a real app, this would save to your account)');
-        }
-        
-        // Update gradient
-        function updateGradient() {
-            const gradientPreview = document.getElementById('gradientPreview');
-            const gradientType = document.getElementById('gradientType').value;
-            const angle = document.getElementById('gradientAngle').value;
-            
-            const rgb = hsvToRgb(currentColor.h, currentColor.s, currentColor.v);
-            const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
-            
-            // Generate complementary color for gradient
-            const compRgb = hsvToRgb((currentColor.h + 180) % 360, currentColor.s, currentColor.v);
-            const compHex = rgbToHex(compRgb.r, compRgb.g, compRgb.b);
-            
-            let gradient;
-            if (gradientType === 'linear') {
-                gradient = `linear-gradient(${angle}deg, ${hex}, ${compHex})`;
-            } else {
-                gradient = `radial-gradient(circle, ${hex}, ${compHex})`;
-            }
-            
-            gradientPreview.style.background = gradient;
-            document.getElementById('gradientCSS').value = `background: ${gradient};`;
-        }
-        
-        // Copy gradient CSS
-        function copyGradientCSS() {
-            const cssInput = document.getElementById('gradientCSS');
-            cssInput.select();
-            document.execCommand('copy');
-            showTooltip('Gradient CSS copied to clipboard!');
-        }
-        
-        // Gradient controls
-        document.getElementById('gradientType').addEventListener('change', updateGradient);
-        document.getElementById('gradientAngle').addEventListener('input', updateGradient);
-        
-        // Add to color history
-        function addToHistory(hex = null) {
-            if (!hex) {
-                const rgb = hsvToRgb(currentColor.h, currentColor.s, currentColor.v);
-                hex = rgbToHex(rgb.r, rgb.g, rgb.b);
-            }
-            
-            if (!colorHistory.includes(hex)) {
-                colorHistory.unshift(hex);
-                if (colorHistory.length > 16) {
-                    colorHistory.pop();
-                }
-                saveColorHistory();
-                renderColorHistory();
-            }
-        }
-        
-        // Render color history
-        function renderColorHistory() {
-            const container = document.getElementById('colorHistory');
-            container.innerHTML = '';
-            
-            colorHistory.forEach(hex => {
-                const colorDiv = document.createElement('div');
-                colorDiv.className = 'palette-color fade-in';
-                colorDiv.style.backgroundColor = hex;
-                colorDiv.title = hex;
-                colorDiv.onclick = () => {
-                    const rgb = hexToRgb(hex);
-                    const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
-                    currentColor = { ...hsv, a: currentColor.a };
-                    updateColorDisplay();
-                };
-                
-                container.appendChild(colorDiv);
-            });
-        }
-        
-        // Save color history to localStorage
-        function saveColorHistory() {
-            localStorage.setItem('colorHistory', JSON.stringify(colorHistory));
-        }
-        
-        // Load color history from localStorage
-        function loadColorHistory() {
-            const saved = localStorage.getItem('colorHistory');
-            if (saved) {
-                colorHistory = JSON.parse(saved);
-                renderColorHistory();
-            }
-        }
-        
-        // Clear color history
-        function clearHistory() {
-            colorHistory = [];
-            saveColorHistory();
-            renderColorHistory();
-        }
-        
-        // Copy to clipboard
-        function copyToClipboard(inputId) {
-            const input = document.getElementById(inputId);
-            input.select();
-            document.execCommand('copy');
-            showTooltip('Copied to clipboard!');
-        }
-        
-        // Copy current color
-        function copyCurrentColor() {
-            const hex = document.getElementById('hexInput').value;
-            navigator.clipboard.writeText(hex).then(() => {
-                showTooltip('Color copied to clipboard!');
-                addToHistory();
-            });
-        }
-        
-        // Show tooltip
-        function showTooltip(text, duration = 2000) {
-            const tooltip = document.getElementById('tooltip');
-            tooltip.textContent = text;
-            tooltip.classList.add('show');
-            tooltip.style.left = '50%';
-            tooltip.style.top = '20px';
-            tooltip.style.transform = 'translateX(-50%)';
-            
-            setTimeout(() => {
-                tooltip.classList.remove('show');
-            }, duration);
-        }
-        
-        // Initialize with random color
-        generateRandomColor();
-    </script>
-<script src="/homebutton.js"></script>
+      });
+    }
+    document.querySelectorAll('.harmony-type-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.harmony-type-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active'); harmonyType = btn.dataset.type; updateHarmony();
+      });
+    });
+    // ─── TINTS & SHADES ────────────────────────────────────
+    function updateTintsShades() {
+      const {r,g,b} = hsvToRgb(state.h, state.s, state.v);
+      const tintsRow = $('tints-row'), shadesRow = $('shades-row');
+      let tintsHTML = '', shadesHTML = '';
+      for(let i=1; i<=9; i++) {
+        const tR = Math.round(r + (255-r) * (i/10));
+        const tG = Math.round(g + (255-g) * (i/10));
+        const tB = Math.round(b + (255-b) * (i/10));
+        const hex = rgbToHex(tR,tG,tB).toUpperCase();
+        tintsHTML += `<div class="ts-col"><div class="ts-swatch" style="background:${hex}" data-hex="${hex}" title="${hex}"></div><div class="ts-label">${i*10}%</div></div>`;
+        const sR = Math.round(r * (1 - i/10));
+        const sG = Math.round(g * (1 - i/10));
+        const sB = Math.round(b * (1 - i/10));
+        const shex = rgbToHex(sR,sG,sB).toUpperCase();
+        shadesHTML += `<div class="ts-col"><div class="ts-swatch" style="background:${shex}" data-hex="${shex}" title="${shex}"></div><div class="ts-label">${i*10}%</div></div>`;
+      }
+      tintsRow.innerHTML = tintsHTML;
+      shadesRow.innerHTML = shadesHTML;
+      tintsRow.querySelectorAll('.ts-swatch').forEach(s => s.addEventListener('click', () => applyHexFromEl(s)));
+      shadesRow.querySelectorAll('.ts-swatch').forEach(s => s.addEventListener('click', () => applyHexFromEl(s)));
+    }
+    function applyHexFromEl(el) {
+      const rgb = hexToRgb(el.dataset.hex);
+      if(rgb){ const hsv = rgbToHsv(rgb.r,rgb.g,rgb.b); state.h=hsv.h; state.s=hsv.s; state.v=hsv.v; updateAll('ts'); addToHistory(); }
+    }
+    // ─── GRADIENT GENERATOR ────────────────────────────────
+    function updateGradient() {
+      const container = $('gradient-stops');
+      container.innerHTML = gradStops.map((stop, i) => `
+        <div class="gradient-stop" data-idx="${i}">
+          <div class="gradient-stop-color"><input type="color" value="${stop.color}" data-idx="${i}" data-field="color" /></div>
+          <div class="gradient-stop-pos"><div class="gradient-stop-label">${stop.pos}%</div><input type="range" min="0" max="100" value="${stop.pos}" data-idx="${i}" data-field="pos" /></div>
+          ${gradStops.length > 2 ? `<button class="gradient-stop-remove" data-idx="${i}">✕</button>` : ''}
+        </div>`).join('');
+      // Event listeners
+      container.querySelectorAll('input[type="color"]').forEach(inp => {
+        inp.addEventListener('input', () => { gradStops[parseInt(inp.dataset.idx)].color = inp.value; updateGradient(); });
+      });
+      container.querySelectorAll('input[type="range"]').forEach(inp => {
+        inp.addEventListener('input', () => { gradStops[parseInt(inp.dataset.idx)].pos = parseInt(inp.value); updateGradient(); });
+      });
+      container.querySelectorAll('.gradient-stop-remove').forEach(btn => {
+        btn.addEventListener('click', () => { gradStops.splice(parseInt(btn.dataset.idx), 1); updateGradient(); });
+      });
+      // Preview
+      const sortedStops = [...gradStops].sort((a,b) => a.pos - b.pos);
+      const stopsStr = sortedStops.map(s => `${s.color} ${s.pos}%`).join(', ');
+      let css = '';
+      const angle = $('grad-angle').value || 90;
+      if(gradType === 'linear') css = `linear-gradient(${angle}deg, ${stopsStr})`;
+      else if(gradType === 'radial') css = `radial-gradient(circle, ${stopsStr})`;
+      else css = `conic-gradient(from ${angle}deg, ${stopsStr})`;
+      $('gradient-preview').style.background = css;
+      $('gradient-css').value = `background: ${css};`;
+    }
+    $('btn-add-stop').addEventListener('click', () => {
+      if(gradStops.length >= 5) { showToast('Maximum 5 stops allowed'); return; }
+      gradStops.push({ color:'#ffffff', pos: 50 });
+      updateGradient();
+    });
+    document.querySelectorAll('.gradient-type-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.gradient-type-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active'); gradType = btn.dataset.gtype;
+        $('angle-wrap').style.display = gradType === 'radial' ? 'none' : 'flex';
+        updateGradient();
+      });
+    });
+    $('grad-angle').addEventListener('input', updateGradient);
+    $('btn-copy-gradient').addEventListener('click', () => {
+      navigator.clipboard.writeText($('gradient-css').value).then(() => showToast('Gradient CSS copied!'));
+    });
+    // ─── CONTRAST CHECKER ──────────────────────────────────
+    function relativeLuminance(r,g,b) {
+      const [rs,gs,bs] = [r,g,b].map(c => { c/=255; return c<=0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4); });
+      return 0.2126*rs + 0.7152*gs + 0.0722*bs;
+    }
+    function contrastRatio(hex1, hex2) {
+      const rgb1 = hexToRgb(hex1), rgb2 = hexToRgb(hex2);
+      if(!rgb1||!rgb2) return 1;
+      const l1 = relativeLuminance(rgb1.r,rgb1.g,rgb1.b);
+      const l2 = relativeLuminance(rgb2.r,rgb2.g,rgb2.b);
+      const lighter = Math.max(l1,l2), darker = Math.min(l1,l2);
+      return (lighter + 0.05) / (darker + 0.05);
+    }
+    function updateContrast() {
+      const ratio = contrastRatio(contrastFg, contrastBg);
+      $('contrast-ratio').textContent = ratio.toFixed(2) + ' : 1';
+      $('contrast-fg-swatch').style.background = contrastFg;
+      $('contrast-bg-swatch').style.background = contrastBg;
+      $('contrast-fg').value = contrastFg;
+      $('contrast-bg').value = contrastBg;
+      const tests = [
+        {label:'AA Normal', threshold:4.5}, {label:'AA Large', threshold:3},
+        {label:'AAA Normal', threshold:7}, {label:'AAA Large', threshold:4.5}
+      ];
+      $('wcag-results').innerHTML = tests.map(t => {
+        const pass = ratio >= t.threshold;
+        return `<div class="wcag-badge ${pass?'pass':'fail'}"><div class="wcag-badge-label">${t.label}</div><div class="wcag-badge-value">${pass?'✓ Pass':'✗ Fail'}</div></div>`;
+      }).join('');
+      $('contrast-preview').style.background = contrastBg;
+      $('contrast-preview').style.color = contrastFg;
+      $('contrast-preview').innerHTML = `<div class="contrast-preview-normal">The quick brown fox jumps over the lazy dog.</div><div class="contrast-preview-large">Large Text Preview</div>`;
+    }
+    $('contrast-fg').addEventListener('input', () => { contrastFg = $('contrast-fg').value.trim(); updateContrast(); });
+    $('contrast-bg').addEventListener('input', () => { contrastBg = $('contrast-bg').value.trim(); updateContrast(); });
+    $('contrast-swap').addEventListener('click', () => { [contrastFg, contrastBg] = [contrastBg, contrastFg]; updateContrast(); });
+    // ─── PALETTE MANAGER ───────────────────────────────────
+    function renderPalette() {
+      $('palette-colors').innerHTML = currentPalette.map((hex, i) => `
+        <div class="palette-color" style="background:${hex}" data-idx="${i}" data-hex="${hex}" title="${hex.toUpperCase()}">
+          <div class="palette-color-remove" data-idx="${i}">✕</div>
+        </div>`).join('');
+      $('palette-colors').querySelectorAll('.palette-color').forEach(el => {
+        el.addEventListener('click', e => {
+          if(e.target.classList.contains('palette-color-remove')) {
+            currentPalette.splice(parseInt(e.target.dataset.idx), 1); renderPalette(); return;
+          }
+          applyHexFromEl(el);
+        });
+      });
+      renderSavedPalettes();
+    }
+    function renderSavedPalettes() {
+      $('palette-saved').innerHTML = savedPalettes.map((p, i) => `
+        <div class="palette-saved-item">
+          <div class="palette-saved-colors">${p.colors.slice(0,8).map(c => `<div class="palette-saved-swatch" style="background:${c}"></div>`).join('')}${p.colors.length>8?`<div class="palette-saved-swatch" style="background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:0.6rem;color:var(--muted)">+${p.colors.length-8}</div>`:''}</div>
+          <span class="palette-saved-name">${p.name} (${p.colors.length})</span>
+          <button class="palette-saved-load" data-idx="${i}">Load</button>
+          <button class="palette-saved-delete" data-idx="${i}">Delete</button>
+        </div>`).join('');
+      $('palette-saved').querySelectorAll('.palette-saved-load').forEach(btn => {
+        btn.addEventListener('click', () => { currentPalette = [...savedPalettes[parseInt(btn.dataset.idx)].colors]; renderPalette(); showToast('Palette loaded!'); });
+      });
+      $('palette-saved').querySelectorAll('.palette-saved-delete').forEach(btn => {
+        btn.addEventListener('click', () => { savedPalettes.splice(parseInt(btn.dataset.idx), 1); localStorage.setItem('tx-palettes', JSON.stringify(savedPalettes)); renderPalette(); });
+      });
+    }
+    $('btn-add-palette').addEventListener('click', () => {
+      const {r,g,b} = hsvToRgb(state.h, state.s, state.v);
+      const hex = rgbToHex(r,g,b).toUpperCase();
+      if(!currentPalette.includes(hex)) { currentPalette.push(hex); renderPalette(); showToast('Color added to palette'); }
+    });
+    $('btn-save-palette').addEventListener('click', () => {
+      if(currentPalette.length === 0) { showToast('Add colors first'); return; }
+      const name = $('palette-name').value.trim() || 'Untitled';
+      savedPalettes.push({ name, colors: [...currentPalette] });
+      localStorage.setItem('tx-palettes', JSON.stringify(savedPalettes));
+      renderPalette(); showToast('Palette saved!');
+    });
+    $('btn-clear-palette').addEventListener('click', () => { currentPalette = []; renderPalette(); });
+    $('btn-export-palette').addEventListener('click', () => {
+      if(currentPalette.length === 0) { showToast('No colors to export'); return; }
+      const name = $('palette-name').value.trim() || 'palette';
+      const css = `:root {\n${currentPalette.map((c,i) => `  --${name.replace(/\s+/g,'-').toLowerCase()}-${i+1}: ${c};`).join('\n')}\n}`;
+      const json = JSON.stringify({ name, colors: currentPalette }, null, 2);
+      const output = `/* CSS Custom Properties */\n${css}\n\n/* JSON */\n${json}`;
+      navigator.clipboard.writeText(output).then(() => showToast('Palette exported (CSS + JSON)!'));
+    });
+    // ─── HISTORY ───────────────────────────────────────────
+    function addToHistory() {
+      const {r,g,b} = hsvToRgb(state.h, state.s, state.v);
+      const hex = rgbToHex(r,g,b).toUpperCase();
+      history = history.filter(h => h !== hex);
+      history.unshift(hex);
+      if(history.length > 30) history = history.slice(0, 30);
+      localStorage.setItem('tx-color-history', JSON.stringify(history));
+      renderHistory();
+    }
+    function renderHistory() {
+      $('history-grid').innerHTML = history.map(hex => `<div class="history-swatch" style="background:${hex}" data-hex="${hex}" title="${hex}"></div>`).join('');
+      $('history-grid').querySelectorAll('.history-swatch').forEach(s => s.addEventListener('click', () => applyHexFromEl(s)));
+    }
+    $('btn-clear-history').addEventListener('click', () => { history = []; localStorage.setItem('tx-color-history', '[]'); renderHistory(); showToast('History cleared'); });
+    // ─── TABS ──────────────────────────────────────────────
+    $('adv-tabs').addEventListener('click', e => {
+      if(!e.target.classList.contains('adv-tab')) return;
+      document.querySelectorAll('.adv-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.adv-panel').forEach(p => p.classList.remove('active'));
+      e.target.classList.add('active');
+      $('panel-' + e.target.dataset.tab).classList.add('active');
+    });
+    // ─── FAQ ───────────────────────────────────────────────
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+    });
+    // ─── THEME TOGGLE ──────────────────────────────────────
+    const themeBtn = $('theme-toggle'), htmlEl = document.documentElement;
+    let isDark = localStorage.getItem('tx-theme') !== 'light';
+    function applyTheme(dark) {
+      isDark = dark;
+      htmlEl.setAttribute('data-theme', dark ? 'dark' : 'light');
+      themeBtn.textContent = dark ? '☀️ Light' : '🌙 Dark';
+      localStorage.setItem('tx-theme', dark ? 'dark' : 'light');
+    }
+    applyTheme(isDark);
+    themeBtn.addEventListener('click', () => applyTheme(!isDark));
+    // ─── MOBILE NAV ────────────────────────────────────────
+    $('hamburger').addEventListener('click', () => $('mobile-nav').classList.add('open'));
+    $('mobile-close').addEventListener('click', () => $('mobile-nav').classList.remove('open'));
+    $('mobile-nav').querySelectorAll('.mobile-nav-link').forEach(l => l.addEventListener('click', () => $('mobile-nav').classList.remove('open')));
+    // ─── FOOTER YEAR ───────────────────────────────────────
+    $('footer-year').textContent = new Date().getFullYear();
+    // ─── KEYBOARD SHORTCUT ────────────────────────────────
+    document.addEventListener('keydown', e => {
+      if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if(e.code === 'Space') { e.preventDefault(); $('btn-random').click(); }
+    });
+    // ─── RESIZE HANDLER ────────────────────────────────────
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => { initCanvases(); updateAll('resize'); }, 200);
+    });
+    // ─── INIT ──────────────────────────────────────────────
+    function init() {
+      initCanvases();
+      // Set gradient stop 1 to current color
+      gradStops[0].color = '#007cf0';
+      renderPalette();
+      renderHistory();
+      updateAll('init');
+      updateContrast();
+    }
+    if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+  </script>
 </body>
 </html>
