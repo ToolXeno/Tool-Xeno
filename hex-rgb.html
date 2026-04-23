@@ -1,0 +1,1063 @@
+<!doctype html>
+<html lang="en-US" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="theme-color" content="#007cf0"/>
+  <meta name="color-scheme" content="dark light"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="HEX to RGB Converter – Tool Xeno"/>
+  <meta name="application-name" content="Tool Xeno"/>
+  <meta name="format-detection" content="telephone=no"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1"/>
+  <meta name="rating" content="general"/>
+  <title>HEX to RGB Converter – Free Online Color Code Converter | Tool Xeno</title>
+  <meta name="description" content="Free instant HEX to RGB converter with real-time bidirectional conversion to RGB, RGBA, HSL, HSLA, CMYK, and HSV. Features alpha slider, live color preview, WCAG contrast checker, color history, presets, and one-click copy. No signup, 100% private."/>
+  <meta name="keywords" content="hex to rgb, rgb to hex, hex converter, rgb converter, color converter, hex to rgba, hsl converter, cmyk converter, hsv converter, color code converter, hex color picker, css color converter, online color tool, wcag contrast checker"/>
+  <meta name="author" content="Tool Xeno"/>
+  <link rel="canonical" href="https://toolxeno.com/hex-to-rgb.html"/>
+  <link rel="alternate" hreflang="en" href="https://toolxeno.com/hex-to-rgb.html"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://toolxeno.com/hex-to-rgb.html"/>
+  <meta property="og:title" content="HEX to RGB Converter – Free Online Color Code Converter | Tool Xeno"/>
+  <meta property="og:description" content="Instantly convert HEX to RGB, RGBA, HSL, HSLA, CMYK, and HSV. Supports 3/6-digit HEX with alpha, real-time preview, copy-to-clipboard, color history. Free and private."/>
+  <meta property="og:site_name" content="Tool Xeno"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="HEX to RGB Converter – Free Online Color Code Converter | Tool Xeno"/>
+  <meta name="twitter:description" content="Convert HEX to RGB instantly. Bidirectional, real-time, with alpha, HSL, CMYK, HSV support. Free, private, in-browser."/>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {"@type":"WebApplication","name":"HEX to RGB Converter","url":"https://toolxeno.com/hex-to-rgb.html","applicationCategory":"DesignApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Professional HEX to RGB color converter with real-time bidirectional conversion, multi-format output, alpha support, WCAG contrast checking, and color history."},
+      {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://toolxeno.com/"},{"@type":"ListItem","position":2,"name":"Design Tools","item":"https://toolxeno.com/#tools"},{"@type":"ListItem","position":3,"name":"HEX to RGB Converter","item":"https://toolxeno.com/hex-to-rgb.html"}]},
+      {"@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"How do I convert HEX to RGB?","acceptedAnswer":{"@type":"Answer","text":"Enter your HEX color code (e.g., #FF5733) into the input field. The tool instantly converts it to RGB values: rgb(255, 87, 51). No button press needed — conversion happens in real-time as you type."}},
+        {"@type":"Question","name":"What HEX formats are supported?","acceptedAnswer":{"@type":"Answer","text":"The converter supports 3-digit shorthand (#F00 expands to #FF0000), 6-digit standard (#FF5733), and 8-digit with alpha (#FF573380 for ~50% opacity). The # symbol is optional."}},
+        {"@type":"Question","name":"Can I convert RGB back to HEX?","acceptedAnswer":{"@type":"Answer","text":"Yes! The tool is fully bidirectional. Enter values in any RGB, HSL, or CMYK field and all other formats update instantly, including HEX."}},
+        {"@type":"Question","name":"What is the difference between RGB and RGBA?","acceptedAnswer":{"@type":"Answer","text":"RGB defines red, green, and blue channels (0-255). RGBA adds a fourth alpha channel (0-1) controlling transparency. 0 = fully transparent, 1 = fully opaque."}},
+        {"@type":"Question","name":"Is my color data stored or sent anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. All conversions happen entirely in your browser. Color history is saved only to your browser's localStorage. No data is sent to any server."}}
+      ]}
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%237928ca'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>"/>
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       TOOL XENO THEME SYSTEM — Dual Theme (Dark / Light)
+       ═══════════════════════════════════════════════════════════ */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg0:#030712;--bg1:#0a0f1e;--bg2:#0f172a;--bg3:#1e293b;
+      --card:rgba(255,255,255,0.04);--card-hover:rgba(255,255,255,0.08);
+      --card-solid:#1e293b;--glass:rgba(255,255,255,0.03);
+      --text:#f1f5f9;--text2:#cbd5e1;--muted:#94a3b8;
+      --line:rgba(255,255,255,0.1);--line-strong:rgba(255,255,255,0.2);
+      --accent1:#007cf0;--accent2:#00dfd8;--accent3:#7928ca;--accent4:#ff0080;
+      --shadow:0 24px 60px rgba(0,0,0,0.6);--shadow-sm:0 8px 24px rgba(0,0,0,0.3);
+      --radius:20px;--radius-sm:12px;--radius-xs:8px;
+      --max:1240px;--ring:0 0 0 3px rgba(0,124,240,0.4);
+      --grad:linear-gradient(135deg,var(--accent1),var(--accent2));
+      --grad-purple:linear-gradient(135deg,var(--accent3),var(--accent4));
+      --grad-text:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));
+      --grad-bg:linear-gradient(135deg,rgba(0,124,240,0.08) 0%,rgba(121,40,202,0.08) 100%);
+      --font:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      --mono:'JetBrains Mono','Courier New',Consolas,monospace;
+      --transition:0.25s cubic-bezier(0.4,0,0.2,1);--header-h:72px;
+      --checker:repeating-conic-gradient(var(--bg3) 0% 25%,var(--bg2) 0% 50%) 50%/14px 14px;
+    }
+    [data-theme="light"]{
+      --bg0:#f8fafc;--bg1:#f1f5f9;--bg2:#e2e8f0;--bg3:#cbd5e1;
+      --card:rgba(255,255,255,0.9);--card-hover:rgba(255,255,255,1);
+      --card-solid:#ffffff;--glass:rgba(255,255,255,0.8);
+      --text:#0f172a;--text2:#334155;--muted:#64748b;
+      --line:rgba(0,0,0,0.1);--line-strong:rgba(0,0,0,0.15);
+      --shadow:0 24px 60px rgba(0,0,0,0.1);--shadow-sm:0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
+    body{font-family:var(--font);background-color:var(--bg0);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button{font-family:var(--font);cursor:pointer;border:none;background:none}
+    input,textarea{font-family:inherit}
+    ul{list-style:none}
+
+    /* ─── ANIMATED BACKGROUND ────────────────────────── */
+    .bg-orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:0.15;will-change:transform}
+    .orb-1{width:600px;height:600px;background:var(--accent1);top:-200px;left:-200px;animation:orbFloat1 20s linear infinite}
+    .orb-2{width:500px;height:500px;background:var(--accent3);top:30%;right:-150px;animation:orbFloat2 25s linear infinite}
+    .orb-3{width:400px;height:400px;background:var(--accent2);bottom:-100px;left:30%;animation:orbFloat3 18s linear infinite}
+    .orb-4{width:300px;height:300px;background:var(--accent4);top:60%;left:10%;animation:orbFloat4 22s linear infinite}
+    @keyframes orbFloat1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,40px) scale(1.1)}66%{transform:translate(-40px,60px) scale(0.95)}}
+    @keyframes orbFloat2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-80px,50px) scale(1.05)}66%{transform:translate(40px,-60px) scale(1.1)}}
+    @keyframes orbFloat3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(70px,-40px) scale(1.15)}}
+    @keyframes orbFloat4{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-80px) scale(1.1)}}
+    .bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+      background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
+      background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%)}
+    .page-wrapper{position:relative;z-index:1}
+
+    /* ─── HEADER ─────────────────────────────────────── */
+    .header{position:sticky;top:0;z-index:1000;height:var(--header-h);display:flex;align-items:center;
+      backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);
+      background:rgba(3,7,18,0.85);border-bottom:1px solid var(--line);transition:background var(--transition)}
+    [data-theme="light"] .header{background:rgba(248,250,252,0.90)}
+    .header-inner{max-width:var(--max);width:100%;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:24px}
+    .logo{display:flex;align-items:center;gap:10px;font-size:1.2rem;font-weight:800;letter-spacing:-0.5px;flex-shrink:0}
+    .logo-icon{width:36px;height:36px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:900;color:#fff;box-shadow:0 4px 14px rgba(0,124,240,0.4)}
+    .logo-text{background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .nav-primary{display:flex;align-items:center;gap:4px;margin-left:auto}
+    .nav-link{padding:7px 13px;font-size:0.875rem;font-weight:500;color:var(--text2);border-radius:var(--radius-xs);transition:color var(--transition),background var(--transition)}
+    .nav-link:hover{color:var(--text);background:var(--card)}
+    .header-actions{display:flex;align-items:center;gap:10px;margin-left:12px}
+    .btn-theme{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;font-size:0.82rem;font-weight:600;
+      background:var(--card);backdrop-filter:blur(8px);border-radius:40px;color:var(--text2);
+      border:1px solid var(--line);transition:all 0.3s ease}
+    .btn-theme:hover{color:var(--text);border-color:var(--accent1);background:rgba(0,124,240,0.1)}
+    .btn-theme svg{width:16px;height:16px;flex-shrink:0}
+    .hamburger{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer;margin-left:auto}
+    .hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all var(--transition);display:block}
+    .mobile-nav{display:none;position:fixed;inset:0;z-index:2000;background:rgba(3,7,18,0.98);
+      backdrop-filter:blur(24px);flex-direction:column;align-items:center;justify-content:center;gap:8px}
+    .mobile-nav.open{display:flex}
+    .mobile-nav-link{font-size:1.4rem;font-weight:700;color:var(--text2);padding:12px 32px;border-radius:var(--radius-sm);transition:all var(--transition)}
+    .mobile-nav-link:hover{color:var(--accent1);background:rgba(0,124,240,0.1)}
+    .mobile-close{position:absolute;top:24px;right:24px;font-size:1.5rem;color:var(--muted);padding:8px;border-radius:8px;transition:color var(--transition)}
+    .mobile-close:hover{color:var(--text)}
+
+    /* ─── HERO ───────────────────────────────────────── */
+    .hero{padding:56px 24px 36px;text-align:center}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;
+      background:rgba(0,124,240,0.15);border:1px solid rgba(0,124,240,0.3);
+      border-radius:100px;font-size:0.78rem;font-weight:600;color:var(--accent1);
+      letter-spacing:0.5px;text-transform:uppercase;margin-bottom:20px}
+    .hero-badge-dot{width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+    .hero-h1{font-size:clamp(1.8rem,5vw,3.2rem);font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:14px;max-width:700px;margin-left:auto;margin-right:auto}
+    .hero-h1 .gt{background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:clamp(0.88rem,1.5vw,0.98rem);color:var(--text2);max-width:600px;margin:0 auto 22px;line-height:1.6}
+    .hero-trust{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 18px}
+    .trust-item{display:flex;align-items:center;gap:5px;font-size:0.8rem;font-weight:500;color:var(--muted)}
+    .trust-dot{color:var(--accent2)}
+
+    /* ─── TOOL CONTAINER ─────────────────────────────── */
+    .tool-section{padding:16px 24px 60px;max-width:1240px;margin:0 auto}
+    .tool-container{background:var(--card-solid);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .converter-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+    @media(max-width:860px){.converter-grid{grid-template-columns:1fr}}
+    .converter-left{padding:28px;display:flex;flex-direction:column;gap:18px;border-right:1px solid var(--line)}
+    @media(max-width:860px){.converter-left{border-right:none;border-bottom:1px solid var(--line)}}
+    .converter-right{padding:28px;display:flex;flex-direction:column;gap:14px}
+
+    /* ─── SECTION LABELS ─────────────────────────────── */
+    .sec-label{display:flex;align-items:center;gap:8px;font-size:0.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px}
+    .sec-label .sec-icon{width:16px;height:16px;display:flex;align-items:center;justify-content:center}
+
+    /* ─── HEX INPUT ──────────────────────────────────── */
+    .hex-input-wrap{display:flex;gap:8px;align-items:stretch}
+    .hex-input{flex:1;padding:14px 18px;font-size:1.5rem;font-weight:700;font-family:var(--mono);
+      letter-spacing:2px;background:var(--bg2);border:2px solid var(--line);border-radius:var(--radius-sm);
+      color:var(--text);transition:border-color var(--transition),box-shadow var(--transition);text-transform:uppercase}
+    .hex-input:focus{outline:none;border-color:var(--accent1);box-shadow:var(--ring)}
+    .hex-input.is-error{border-color:#f87171;box-shadow:0 0 0 3px rgba(248,113,113,0.25)}
+    .hex-input.is-valid{border-color:#22c55e}
+    .action-btns{display:flex;flex-direction:column;gap:6px}
+    .act-btn{width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+      background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius-xs);
+      color:var(--text2);transition:all var(--transition);flex-shrink:0}
+    .act-btn:hover{color:var(--text);background:var(--card-hover);border-color:var(--accent1)}
+    .act-btn svg{width:18px;height:18px}
+    .act-btn.primary{background:rgba(0,124,240,0.12);border-color:rgba(0,124,240,0.25);color:var(--accent1)}
+    .act-btn.primary:hover{background:rgba(0,124,240,0.22)}
+    .input-hint{font-size:0.73rem;font-weight:500;min-height:18px;margin-top:-2px;transition:color var(--transition)}
+    .input-hint.error{color:#f87171}
+    .input-hint.success{color:#22c55e}
+
+    /* ─── COLOR PREVIEW ──────────────────────────────── */
+    .preview-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .preview-card{border-radius:var(--radius-sm);border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column}
+    .preview-swatch-area{height:100px;position:relative;background:var(--checker);transition:height var(--transition)}
+    .preview-color-fill{position:absolute;inset:0;transition:background 0.15s ease}
+    .preview-info{padding:8px 12px;display:flex;align-items:center;justify-content:space-between;
+      background:var(--glass);border-top:1px solid var(--line)}
+    .preview-info-label{font-size:0.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px}
+    .preview-info-hex{font-size:0.72rem;font-weight:600;font-family:var(--mono);color:var(--text2)}
+
+    /* ─── COLOR NAME & GRADIENT BAR ──────────────────── */
+    .color-name-row{text-align:center;padding:2px 0}
+    .color-name{font-size:0.85rem;font-weight:700;color:var(--accent2);display:inline-flex;align-items:center;gap:6px}
+    .color-name .name-dot{width:10px;height:10px;border-radius:50%;border:1px solid var(--line);display:inline-block}
+    .gradient-strip{height:28px;border-radius:var(--radius-xs);border:1px solid var(--line);overflow:hidden;position:relative;background:var(--checker)}
+    .gradient-strip-fill{position:absolute;inset:0}
+
+    /* ─── ALPHA SLIDER ───────────────────────────────── */
+    .alpha-row{display:flex;align-items:center;gap:10px}
+    .alpha-label{font-size:0.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;min-width:44px}
+    .alpha-track{flex:1;position:relative;height:20px;border-radius:10px;overflow:hidden;cursor:pointer;background:var(--checker)}
+    .alpha-track-fill{position:absolute;inset:0;border-radius:10px}
+    .alpha-thumb{position:absolute;top:50%;width:10px;height:26px;background:#fff;border-radius:5px;
+      box-shadow:0 0 0 1px rgba(0,0,0,0.15),0 2px 6px rgba(0,0,0,0.3);
+      transform:translate(-50%,-50%);pointer-events:none;z-index:2;transition:box-shadow 0.15s}
+    .alpha-val-display{font-size:0.78rem;font-weight:600;color:var(--text);font-family:var(--mono);min-width:40px;text-align:right}
+
+    /* ─── RGB INPUTS (REVERSE) ───────────────────────── */
+    .rgb-inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .rgb-cell{display:flex;flex-direction:column;gap:4px}
+    .rgb-cell label{font-size:0.62rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.3px;display:flex;align-items:center;gap:4px}
+    .rgb-cell label .ch-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+    .rgb-cell input{width:100%;padding:9px 8px;font-size:0.88rem;font-weight:600;font-family:var(--mono);
+      background:var(--bg2);border:1px solid var(--line);border-radius:6px;color:var(--text);
+      text-align:center;transition:border-color var(--transition)}
+    .rgb-cell input:focus{outline:none;border-color:var(--accent1);box-shadow:var(--ring)}
+
+    /* ─── OUTPUT CARDS ───────────────────────────────── */
+    .out-card{background:var(--glass);border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;transition:border-color var(--transition)}
+    .out-card:hover{border-color:rgba(0,124,240,0.2)}
+    .out-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 6px}
+    .out-title{font-size:0.78rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px}
+    .out-badge{font-size:0.58rem;font-weight:700;padding:2px 6px;border-radius:4px;
+      background:rgba(0,124,240,0.12);color:var(--accent1);text-transform:uppercase;letter-spacing:0.3px}
+    .copy-btn{display:inline-flex;align-items:center;gap:4px;font-size:0.66rem;font-weight:600;
+      color:var(--accent1);padding:4px 10px;border-radius:20px;
+      background:rgba(0,124,240,0.08);border:1px solid rgba(0,124,240,0.18);transition:all var(--transition);white-space:nowrap}
+    .copy-btn:hover{background:rgba(0,124,240,0.18)}
+    .copy-btn svg{width:12px;height:12px}
+    .copy-btn.copied{color:#22c55e;background:rgba(34,197,94,0.1);border-color:rgba(34,197,94,0.3)}
+    .out-body{padding:4px 14px 12px}
+    .out-field{display:flex;align-items:center;gap:8px;padding:9px 12px;
+      background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius-xs);
+      cursor:pointer;transition:all var(--transition)}
+    .out-field:hover{border-color:rgba(0,124,240,0.3);background:var(--card-hover)}
+    .out-field-val{flex:1;font-family:var(--mono);font-size:0.88rem;font-weight:600;color:var(--text);
+      letter-spacing:0.3px;user-select:all;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .out-field-clip{font-size:0.78rem;color:var(--muted);flex-shrink:0;display:flex;align-items:center}
+    .out-field-clip svg{width:14px;height:14px}
+
+    /* ─── BOTTOM SECTIONS ────────────────────────────── */
+    .bottom-section{border-top:1px solid var(--line);padding:22px 28px}
+    .section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .section-head-left{display:flex;align-items:center;gap:8px}
+    .clear-btn{font-size:0.68rem;font-weight:600;color:#f87171;padding:4px 12px;border-radius:4px;
+      background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);transition:all var(--transition)}
+    .clear-btn:hover{background:rgba(248,113,113,0.16)}
+
+    /* PRESETS */
+    .presets-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+    .preset-chip{width:36px;height:36px;border-radius:8px;border:2px solid var(--line);
+      cursor:pointer;transition:all var(--transition);position:relative;flex-shrink:0}
+    .preset-chip:hover{transform:scale(1.18);border-color:var(--accent1);z-index:2;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+    .preset-chip-name{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:0.55rem;
+      font-weight:600;color:var(--muted);white-space:nowrap;opacity:0;transition:opacity var(--transition);pointer-events:none}
+    .preset-chip:hover .preset-chip-name{opacity:1}
+
+    /* HISTORY */
+    .history-wrap{display:flex;gap:8px;flex-wrap:wrap}
+    .history-chip{width:36px;height:36px;border-radius:8px;border:2px solid var(--line);
+      cursor:pointer;transition:all var(--transition)}
+    .history-chip:hover{transform:scale(1.18);border-color:var(--accent1);box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+    .history-empty{font-size:0.8rem;color:var(--muted);font-style:italic}
+
+    /* CONTRAST CHECKER */
+    .contrast-row{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:end;margin-bottom:14px}
+    @media(max-width:600px){.contrast-row{grid-template-columns:1fr;gap:10px}}
+    .contrast-box{display:flex;flex-direction:column;gap:5px}
+    .contrast-box-label{font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.3px}
+    .contrast-swatch{height:44px;border-radius:6px;border:1px solid var(--line);transition:background 0.15s}
+    .contrast-input{padding:7px 8px;font-size:0.78rem;font-family:var(--mono);font-weight:600;
+      background:var(--bg2);border:1px solid var(--line);border-radius:6px;color:var(--text);text-align:center}
+    .contrast-input:focus{outline:none;border-color:var(--accent1)}
+    .swap-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+      color:var(--text2);background:var(--bg2);border:1px solid var(--line);border-radius:50%;
+      transition:all var(--transition);margin-bottom:6px;align-self:center}
+    .swap-btn:hover{color:var(--accent1);border-color:var(--accent1);background:rgba(0,124,240,0.1)}
+    .swap-btn svg{width:16px;height:16px}
+    .contrast-result{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap}
+    .ratio-display{text-align:center}
+    .ratio-value{font-size:1.7rem;font-weight:800;color:var(--text);letter-spacing:-0.5px}
+    .ratio-label{font-size:0.68rem;color:var(--muted);font-weight:500}
+    .wcag-badges{display:flex;gap:6px;flex-wrap:wrap}
+    .wcag-badge{padding:5px 11px;border-radius:6px;font-size:0.65rem;font-weight:700;border:1px solid var(--line)}
+    .wcag-badge.pass{background:rgba(34,197,94,0.1);border-color:rgba(34,197,94,0.35);color:#22c55e}
+    .wcag-badge.fail{background:rgba(248,113,113,0.08);border-color:rgba(248,113,113,0.3);color:#f87171}
+    .contrast-preview{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+    .contrast-pv-card{padding:16px;border-radius:var(--radius-xs);text-align:center;border:1px solid var(--line)}
+    .contrast-pv-card .cpv-sm{font-size:0.88rem;font-weight:400;margin-bottom:3px}
+    .contrast-pv-card .cpv-lg{font-size:1.3rem;font-weight:700}
+    .contrast-pv-card .cpv-tag{font-size:0.58rem;color:inherit;opacity:0.45;margin-top:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+
+    /* SIMILAR */
+    .similar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+    .similar-card{display:flex;align-items:center;gap:10px;padding:8px 10px;
+      background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius-xs);
+      cursor:pointer;transition:all var(--transition)}
+    .similar-card:hover{border-color:var(--accent1);background:var(--card-hover);transform:translateY(-1px)}
+    .similar-swatch{width:32px;height:32px;border-radius:6px;border:1px solid var(--line);flex-shrink:0}
+    .similar-info{display:flex;flex-direction:column;gap:1px;overflow:hidden}
+    .similar-name{font-size:0.72rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .similar-hex{font-size:0.64rem;font-weight:500;color:var(--muted);font-family:var(--mono)}
+
+    /* CSS OUTPUT */
+    .css-area{width:100%;min-height:90px;padding:12px;font-size:0.76rem;font-family:var(--mono);
+      line-height:1.7;background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius-xs);
+      color:var(--accent2);resize:vertical;transition:border-color var(--transition)}
+    .css-area:focus{outline:none;border-color:var(--accent1)}
+    .css-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+
+    /* ─── FEATURES & FAQ ─────────────────────────────── */
+    .features-section,.faq-section{padding:56px 24px}
+    .section-inner{max-width:var(--max);margin:0 auto}
+    .section-label{display:inline-block;margin-bottom:10px;font-size:0.75rem;font-weight:700;
+      text-transform:uppercase;letter-spacing:1px;color:var(--accent1)}
+    .section-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-1px;line-height:1.15;margin-bottom:12px}
+    .section-sub{font-size:0.95rem;color:var(--text2);max-width:520px;line-height:1.6}
+    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+    @media(max-width:900px){.features-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.features-grid{grid-template-columns:1fr}}
+    .feature-card{background:var(--card-solid);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;transition:all var(--transition)}
+    .feature-card:hover{transform:translateY(-3px);border-color:rgba(0,124,240,0.3);box-shadow:var(--shadow-sm)}
+    .feature-icon{font-size:2rem;margin-bottom:12px}
+    .feature-title{font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--text)}
+    .feature-desc{font-size:0.85rem;color:var(--text2);line-height:1.6}
+    .faq-list{display:flex;flex-direction:column;gap:10px;max-width:700px;margin:36px auto 0}
+    .faq-item{background:var(--card-solid);border:1px solid var(--line);border-radius:var(--radius-xs);overflow:hidden}
+    .faq-q{width:100%;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+      font-size:0.9rem;font-weight:600;color:var(--text);background:none;text-align:left;transition:color var(--transition)}
+    .faq-q:hover{color:var(--accent1)}
+    .faq-q-icon{width:22px;height:22px;background:var(--glass);border:1px solid var(--line);
+      border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;
+      flex-shrink:0;transition:all var(--transition)}
+    .faq-item.open .faq-q-icon{transform:rotate(45deg);background:rgba(0,124,240,0.15);border-color:var(--accent1);color:var(--accent1)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease}
+    .faq-a-inner{padding:0 20px 16px;font-size:0.85rem;color:var(--text2);line-height:1.7}
+    .faq-item.open .faq-a{max-height:300px}
+    .section-divider{height:1px;background:var(--line);max-width:var(--max);margin:0 auto}
+
+    /* ─── FOOTER ─────────────────────────────────────── */
+    .footer{border-top:1px solid var(--line);padding:36px 24px 24px;background:rgba(3,7,18,0.6)}
+    [data-theme="light"] .footer{background:rgba(241,245,249,0.8)}
+    .footer-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+    .footer-brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .footer-brand-icon{width:32px;height:32px;background:var(--grad);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:900;color:#fff}
+    .footer-brand-name{background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .footer-links{display:flex;gap:20px;flex-wrap:wrap}
+    .footer-link{font-size:0.85rem;color:var(--muted);transition:color var(--transition)}
+    .footer-link:hover{color:var(--text)}
+    .footer-back{display:inline-flex;align-items:center;gap:6px;font-size:0.85rem;font-weight:600;
+      color:var(--accent1);padding:8px 16px;border-radius:var(--radius-xs);
+      background:rgba(0,124,240,0.1);border:1px solid rgba(0,124,240,0.2);transition:all var(--transition)}
+    .footer-back:hover{background:rgba(0,124,240,0.15)}
+    .footer-copy{font-size:0.78rem;color:var(--muted);width:100%;text-align:center;padding-top:20px;border-top:1px solid var(--line);margin-top:12px}
+
+    /* ─── TOAST ──────────────────────────────────────── */
+    .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+      background:var(--accent1);color:#fff;padding:10px 24px;border-radius:8px;
+      font-size:0.85rem;font-weight:600;opacity:0;transition:all 0.3s ease;z-index:9999;pointer-events:none;white-space:nowrap;
+      box-shadow:0 8px 30px rgba(0,124,240,0.4)}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    /* ─── RESPONSIVE ─────────────────────────────────── */
+    @media(max-width:768px){
+      .nav-primary,.header-actions{display:none}
+      .hamburger{display:flex}
+      .rgb-inputs{grid-template-columns:1fr 1fr 1fr}
+      .hex-input{font-size:1.2rem;padding:12px 14px}
+      .preview-row{grid-template-columns:1fr}
+      .contrast-preview{grid-template-columns:1fr}
+      .similar-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:480px){
+      .rgb-inputs{grid-template-columns:1fr}
+      .similar-grid{grid-template-columns:1fr}
+      .presets-wrap{gap:6px}
+      .preset-chip{width:32px;height:32px}
+      .history-chip{width:32px;height:32px}
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><div class="orb orb-4"></div>
+  </div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- ═══ HEADER ═══ -->
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="https://toolxeno.com/" class="logo" aria-label="Tool Xeno – Home">
+          <div class="logo-icon" aria-hidden="true">X</div>
+          <span class="logo-text">Tool Xeno</span>
+        </a>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <a href="https://toolxeno.com/" class="nav-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="nav-link">All Tools</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <span class="theme-label">Light</span>
+          </button>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ═══ MOBILE NAV ═══ -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-close" id="mobile-close" aria-label="Close menu">&#10005;</button>
+      <a href="https://toolxeno.com/" class="mobile-nav-link">Home</a>
+      <a href="https://toolxeno.com/#tools" class="mobile-nav-link">All Tools</a>
+      <a href="#features" class="mobile-nav-link">Features</a>
+      <a href="#faq" class="mobile-nav-link">FAQ</a>
+    </nav>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+      <div class="hero-badge"><div class="hero-badge-dot"></div> Instant Color Conversion</div>
+      <h1 class="hero-h1">HEX to RGB <span class="gt">Converter</span></h1>
+      <p class="hero-sub">Lightning-fast bidirectional conversion between HEX, RGB, RGBA, HSL, HSLA, CMYK, and HSV. Supports 3-digit shorthand, alpha channel, live preview, and one-click copy.</p>
+      <div class="hero-trust">
+        <span class="trust-item"><span class="trust-dot">&#9679;</span> Real-Time</span>
+        <span class="trust-item"><span class="trust-dot">&#9679;</span> Bidirectional</span>
+        <span class="trust-item"><span class="trust-dot">&#9679;</span> 7 Formats</span>
+        <span class="trust-item"><span class="trust-dot">&#9679;</span> Alpha Support</span>
+        <span class="trust-item"><span class="trust-dot">&#9679;</span> No Signup</span>
+      </div>
+    </section>
+
+    <!-- ═══ TOOL ═══ -->
+    <section class="tool-section">
+      <div class="tool-container">
+        <div class="converter-grid">
+          <!-- LEFT PANEL -->
+          <div class="converter-left">
+            <!-- HEX INPUT -->
+            <div>
+              <label class="sec-label" for="hex-input">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                HEX Color Code
+              </label>
+              <div class="hex-input-wrap">
+                <input type="text" id="hex-input" class="hex-input" value="#007CF0" placeholder="#007CF0" maxlength="9" autocomplete="off" spellcheck="false" aria-label="HEX color input"/>
+                <div class="action-btns">
+                  <button class="act-btn" id="btn-paste" title="Paste from clipboard">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+                  </button>
+                  <button class="act-btn primary" id="btn-random" title="Random color (Space)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+                  </button>
+                  <button class="act-btn" id="btn-clear" title="Clear input">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="input-hint" id="input-hint"></div>
+            </div>
+
+            <!-- PREVIEW -->
+            <div>
+              <label class="sec-label" style="margin-bottom:8px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M17 2h4v4"/><path d="M15 2l6 6"/><circle cx="6" cy="12" r="3"/><path d="M2 17l4 4"/></svg>
+                Color Preview
+              </label>
+              <div class="preview-row">
+                <div class="preview-card">
+                  <div class="preview-swatch-area"><div class="preview-color-fill" id="pv-dark"></div></div>
+                  <div class="preview-info"><span class="preview-info-label">On Dark</span><span class="preview-info-hex" id="pv-dark-hex">#030712</span></div>
+                </div>
+                <div class="preview-card">
+                  <div class="preview-swatch-area" style="background:var(--card-solid)"><div class="preview-color-fill" id="pv-light"></div></div>
+                  <div class="preview-info"><span class="preview-info-label">On Light</span><span class="preview-info-hex" id="pv-light-hex">#FFFFFF</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLOR NAME -->
+            <div class="color-name-row">
+              <span class="color-name"><span class="name-dot" id="name-dot"></span> <span id="color-name">DodgerBlue</span></span>
+            </div>
+
+            <!-- GRADIENT STRIP -->
+            <div class="gradient-strip"><div class="gradient-strip-fill" id="gradient-bar"></div></div>
+
+            <!-- ALPHA SLIDER -->
+            <div class="alpha-row">
+              <span class="alpha-label">Alpha</span>
+              <div class="alpha-track" id="alpha-track"><div class="alpha-track-fill" id="alpha-fill"></div><div class="alpha-thumb" id="alpha-thumb"></div></div>
+              <span class="alpha-val-display" id="alpha-display">100%</span>
+            </div>
+
+            <!-- RGB INPUTS -->
+            <div>
+              <label class="sec-label" style="margin-bottom:8px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                RGB Input <span style="color:var(--accent1);font-weight:400;text-transform:none;letter-spacing:0">(reverse)</span>
+              </label>
+              <div class="rgb-inputs">
+                <div class="rgb-cell"><label><span class="ch-dot" style="background:#ef4444"></span> Red</label><input type="number" id="r-in" min="0" max="255" value="0"/></div>
+                <div class="rgb-cell"><label><span class="ch-dot" style="background:#22c55e"></span> Green</label><input type="number" id="g-in" min="0" max="255" value="124"/></div>
+                <div class="rgb-cell"><label><span class="ch-dot" style="background:#3b82f6"></span> Blue</label><input type="number" id="b-in" min="0" max="255" value="240"/></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT PANEL -->
+          <div class="converter-right">
+            <!-- HEX OUTPUT -->
+            <div class="out-card">
+              <div class="out-header">
+                <span class="out-title">HEX <span class="out-badge">6-digit</span></span>
+                <button class="copy-btn" data-fmt="hex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button>
+              </div>
+              <div class="out-body"><div class="out-field" data-fmt="hex"><span class="out-field-val" id="out-hex">#007CF0</span><span class="out-field-clip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span></div></div>
+            </div>
+            <!-- RGB -->
+            <div class="out-card">
+              <div class="out-header"><span class="out-title">RGB</span><button class="copy-btn" data-fmt="rgb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button></div>
+              <div class="out-body"><div class="out-field" data-fmt="rgb"><span class="out-field-val" id="out-rgb">rgb(0, 124, 240)</span><span class="out-field-clip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span></div></div>
+            </div>
+            <!-- RGBA -->
+            <div class="out-card">
+              <div class="out-header"><span class="out-title">RGBA</span><button class="copy-btn" data-fmt="rgba"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button></div>
+              <div class="out-body"><div class="out-field" data-fmt="rgba"><span class="out-field-val" id="out-rgba">rgba(0, 124, 240, 1)</span><span class="out-field-clip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span></div></div>
+            </div>
+            <!-- RGB % -->
+            <div class="out-card">
+              <div class="out-header"><span class="out-title">RGB <span class="out-badge">%</span></span><button class="copy-btn" data-fmt="rgbp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button></div>
+              <div class="out-body"><div class="out-field" data-fmt="rgbp"><span class="out-field-val" id="out-rgbp">rgb(0%, 48.6%, 94.1%)</span><span class="out-field-clip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span></div></div>
+            </div>
+            <!-- HSL / HSLA -->
+            <div class="out-card">
+              <div class="out-header"><span class="out-title">HSL / HSLA</span><button class="copy-btn" data-fmt="hsl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button></div>
+              <div class="out-body"><div class="out-field" data-fmt="hsl"><span class="out-field-val" id="out-hsl">hsl(206, 100%, 47.1%)</span><span class="out-field-clip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span></div></div>
+            </div>
+            <!-- HSV -->
+            <div class="out-card">
+              <div class="out-header"><span class="out-title">HSV / HSB</span><button class="copy-btn" data-fmt="hsv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button></div>
+              <div class="out-body"><div class="out-field" data-fmt="hsv"><span class="out-field-val" id="out-hsv">hsv(206, 100%, 94.1%)</span><span class="out-field-clip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span></div></div>
+            </div>
+            <!-- CMYK -->
+            <div class="out-card">
+              <div class="out-header"><span class="out-title">CMYK</span><button class="copy-btn" data-fmt="cmyk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy</button></div>
+              <div class="out-body"><div class="out-field" data-fmt="cmyk"><span class="out-field-val" id="out-cmyk">cmyk(100%, 48%, 0%, 6%)</span><span class="out-field-clip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRESETS -->
+        <div class="bottom-section">
+          <div class="section-head">
+            <div class="section-head-left"><span class="sec-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              Quick Presets
+            </span></div>
+          </div>
+          <div class="presets-wrap" id="presets-grid"></div>
+        </div>
+
+        <!-- HISTORY -->
+        <div class="bottom-section">
+          <div class="section-head">
+            <div class="section-head-left"><span class="sec-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Recent Colors
+            </span></div>
+            <button class="clear-btn" id="btn-clear-history">Clear All</button>
+          </div>
+          <div class="history-wrap" id="history-grid"></div>
+        </div>
+
+        <!-- CONTRAST -->
+        <div class="bottom-section">
+          <div class="section-head">
+            <div class="section-head-left"><span class="sec-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              WCAG Contrast Checker
+            </span></div>
+          </div>
+          <div class="contrast-row">
+            <div class="contrast-box">
+              <div class="contrast-box-label">Text Color</div>
+              <div class="contrast-swatch" id="ct-fg-sw"></div>
+              <input class="contrast-input" id="ct-fg" value="#FFFFFF"/>
+            </div>
+            <button class="swap-btn" id="ct-swap" title="Swap colors">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+            </button>
+            <div class="contrast-box">
+              <div class="contrast-box-label">Background Color</div>
+              <div class="contrast-swatch" id="ct-bg-sw"></div>
+              <input class="contrast-input" id="ct-bg" value="#007CF0"/>
+            </div>
+          </div>
+          <div class="contrast-result">
+            <div class="ratio-display">
+              <div class="ratio-label">Contrast Ratio</div>
+              <div class="ratio-value" id="ct-ratio">4.50 : 1</div>
+            </div>
+            <div class="wcag-badges" id="ct-pills"></div>
+          </div>
+          <div class="contrast-preview">
+            <div class="contrast-pv-card" id="ct-pv-white"><div class="cpv-sm">The quick brown fox jumps</div><div class="cpv-lg">Large Text</div><div class="cpv-tag">On White</div></div>
+            <div class="contrast-pv-card" id="ct-pv-black"><div class="cpv-sm">The quick brown fox jumps</div><div class="cpv-lg">Large Text</div><div class="cpv-tag">On Black</div></div>
+          </div>
+        </div>
+
+        <!-- SIMILAR COLORS -->
+        <div class="bottom-section">
+          <div class="section-head">
+            <div class="section-head-left"><span class="sec-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              Similar Named Colors
+            </span></div>
+          </div>
+          <div class="similar-grid" id="similar-grid"></div>
+        </div>
+
+        <!-- CSS OUTPUT -->
+        <div class="bottom-section">
+          <div class="section-head">
+            <div class="section-head-left"><span class="sec-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              CSS Code Export
+            </span></div>
+          </div>
+          <textarea class="css-area" id="css-output" readonly></textarea>
+          <div class="css-actions">
+            <button class="copy-btn" id="btn-copy-css" style="padding:8px 16px;font-size:0.76rem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CSS Variables
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FEATURES ═══ -->
+    <section class="features-section" id="features">
+      <div class="section-inner">
+        <span class="section-label">Why This Converter</span>
+        <h2 class="section-title">Designed for Speed and Precision</h2>
+        <p class="section-sub">Every keystroke triggers instant conversion across all formats. No buttons, no waiting — just fast, accurate results for designers and developers.</p>
+        <div class="features-grid">
+          <div class="feature-card"><div class="feature-icon">&#9889;</div><div class="feature-title">Real-Time Conversion</div><div class="feature-desc">Results update instantly as you type — zero delay, zero button presses. Supports HEX, RGB, RGBA, HSL, HSLA, CMYK, HSV, and percentage formats simultaneously with perfect accuracy.</div></div>
+          <div class="feature-card"><div class="feature-icon">&#128260;</div><div class="feature-title">Bidirectional</div><div class="feature-desc">Convert HEX to RGB or RGB to HEX — editing any field updates all others. The RGB inputs let you reverse-convert seamlessly without switching modes or reloading the page.</div></div>
+          <div class="feature-card"><div class="feature-icon">&#128296;</div><div class="feature-title">Smart Auto-Format</div><div class="feature-desc">Auto-adds # prefix, expands 3-digit shorthand (#F00 becomes #FF0000), strips invalid characters, and uppercases hex letters. Intelligent validation with inline error feedback.</div></div>
+          <div class="feature-card"><div class="feature-icon">&#127912;</div><div class="feature-title">Alpha / Opacity</div><div class="feature-desc">Full alpha channel support with an interactive slider. Outputs both RGB and RGBA, HSL and HSLA. Visual transparency preview with checkerboard pattern behind the color swatches.</div></div>
+          <div class="feature-card"><div class="feature-icon">&#128203;</div><div class="feature-title">One-Click Copy</div><div class="feature-desc">Every output format has a dedicated copy button. Click the output field or the copy button to instantly copy to clipboard with animated confirmation toast feedback.</div></div>
+          <div class="feature-card"><div class="feature-icon">&#9855;</div><div class="feature-title">WCAG Contrast</div><div class="feature-desc">Built-in contrast checker shows WCAG AA and AAA compliance for normal and large text. Visual preview cards show how your color looks on white and black backgrounds.</div></div>
+          <div class="feature-card"><div class="feature-icon">&#127912;</div><div class="feature-title">30+ Presets</div><div class="feature-desc">Quick-access preset colors from a curated palette. Hover to see the color name, click to load instantly. Perfect for rapid prototyping, quick reference, and design exploration.</div></div>
+          <div class="feature-card"><div class="feature-icon">&#128339;</div><div class="feature-title">Color History</div><div class="feature-desc">Automatically saves your last 24 conversions to browser storage. Click any history swatch to reload the color. Persists across browser sessions using localStorage.</div></div>
+          <div class="feature-card"><div class="feature-icon">&#128274;</div><div class="feature-title">100% Private</div><div class="feature-desc">All processing runs entirely in your browser. No data is ever sent to any server. No cookies, no tracking, no accounts required — your colors stay completely private.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ═══ FAQ ═══ -->
+    <section class="faq-section" id="faq">
+      <div class="section-inner">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item"><button class="faq-q">How do I convert HEX to RGB?<span class="faq-q-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Simply type your HEX color code (e.g., #FF5733) into the input field. The tool instantly converts it to RGB values: rgb(255, 87, 51). No button press is needed — conversion happens in real-time as you type. You can also use the RGB input fields to convert in the reverse direction (RGB to HEX).</div></div></div>
+          <div class="faq-item"><button class="faq-q">What HEX formats are supported?<span class="faq-q-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">The converter supports three formats: 3-digit shorthand (#F00 auto-expands to #FF0000), 6-digit standard (#FF5733 for full color), and 8-digit with alpha (#FF573380 for approximately 50% opacity). The # symbol prefix is optional — if you type FF5733, the tool automatically adds it. All letters are auto-uppercased for consistency.</div></div></div>
+          <div class="faq-item"><button class="faq-q">What is the difference between RGB and RGBA?<span class="faq-q-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">RGB defines three color channels — Red, Green, and Blue — each ranging from 0 to 255. RGBA adds a fourth Alpha channel that controls transparency, ranging from 0 (fully transparent) to 1 (fully opaque). For example, rgba(255, 0, 0, 0.5) creates a semi-transparent red. The alpha slider in this tool lets you adjust opacity visually in real-time.</div></div></div>
+          <div class="faq-item"><button class="faq-q">How do I convert RGB back to HEX?<span class="faq-q-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Use the RGB input fields on the left panel. Enter values for Red (0-255), Green (0-255), and Blue (0-255). All output formats — including HEX — will update instantly as you type. This makes the tool fully bidirectional without needing to switch pages or modes.</div></div></div>
+          <div class="faq-item"><button class="faq-q">What is WCAG contrast ratio and why does it matter?<span class="faq-q-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">WCAG (Web Content Accessibility Guidelines) contrast ratio measures how well text stands out against its background. It ranges from 1:1 (no contrast) to 21:1 (maximum). AA standard requires 4.5:1 for normal text and 3:1 for large text. AAA requires 7:1 for normal text and 4.5:1 for large text. Meeting these ensures readability for users with visual impairments.</div></div></div>
+          <div class="faq-item"><button class="faq-q">Is my color data stored or sent anywhere?<span class="faq-q-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">No. All conversions happen entirely in your browser using JavaScript. Your color history is saved only to your browser's localStorage — it never leaves your device. No data is sent to any server, no cookies are set for tracking, and no account is required. You can clear the history at any time using the Clear All button.</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand"><div class="footer-brand-icon">X</div><span class="footer-brand-name">Tool Xeno</span></div>
+        <nav class="footer-links">
+          <a href="https://toolxeno.com/" class="footer-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="footer-link">All Tools</a>
+          <a href="https://toolxeno.com/privacy.html" class="footer-link">Privacy</a>
+          <a href="https://toolxeno.com/terms.html" class="footer-link">Terms</a>
+        </nav>
+        <a href="https://toolxeno.com/#tools" class="footer-back">&#8592; Back to All Tools</a>
+        <div class="footer-copy">&copy; <span id="footer-year"></span> Tool Xeno. All processing is performed locally in your browser.</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+  (function(){
+    'use strict';
+
+    /* ═══ COLOR CONVERSION ENGINE ═══════════════════════ */
+    function clamp(v,lo,hi){return Math.min(hi,Math.max(lo,v))}
+    function hexToRgb(hex){
+      hex=hex.replace('#','');
+      if(hex.length===3) hex=hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+      if(hex.length===8) return{r:parseInt(hex.slice(0,2),16),g:parseInt(hex.slice(2,4),16),b:parseInt(hex.slice(4,6),16),a:Math.round(parseInt(hex.slice(6,8),16)/255*100)/100};
+      if(hex.length===6) return{r:parseInt(hex.slice(0,2),16),g:parseInt(hex.slice(2,4),16),b:parseInt(hex.slice(4,6),16),a:1};
+      return null;
+    }
+    function rgbToHex(r,g,b){return '#'+[r,g,b].map(c=>Math.round(clamp(c,0,255)).toString(16).padStart(2,'0')).join('')}
+    function rgbToHsl(r,g,b){
+      r/=255;g/=255;b/=255;
+      var mx=Math.max(r,g,b),mn=Math.min(r,g,b),h=0,s=0,l=(mx+mn)/2;
+      if(mx!==mn){var d=mx-mn;s=l>0.5?d/(2-mx-mn):d/(mx+mn);
+        if(mx===r)h=((g-b)/d+(g<b?6:0));else if(mx===g)h=((b-r)/d+2);else h=((r-g)/d+4);h*=60;}
+      return{h:Math.round(h)%360,s:Math.round(s*100),l:Math.round(l*100)};
+    }
+    function hslToRgb(h,s,l){
+      s/=100;l/=100;var c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs((h/60)%2-1)),m=l-c/2,r,g,b;
+      if(h<60){r=c;g=x;b=0}else if(h<120){r=x;g=c;b=0}else if(h<180){r=0;g=c;b=x}else if(h<240){r=0;g=x;b=c}else if(h<300){r=x;g=0;b=c}else{r=c;g=0;b=x}
+      return{r:Math.round((r+m)*255),g:Math.round((g+m)*255),b:Math.round((b+m)*255)};
+    }
+    function rgbToCmyk(r,g,b){
+      if(r===0&&g===0&&b===0)return{c:0,m:0,y:0,k:100};
+      var c1=1-r/255,m1=1-g/255,y1=1-b/255,k=Math.min(c1,m1,y1);
+      return{c:Math.round((c1-k)/(1-k)*100),m:Math.round((m1-k)/(1-k)*100),y:Math.round((y1-k)/(1-k)*100),k:Math.round(k*100)};
+    }
+    function rgbToHsv(r,g,b){
+      r/=255;g/=255;b/=255;
+      var mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn,h=0,s=mx===0?0:d/mx,v=mx;
+      if(mx!==mn){if(mx===r)h=(g-b)/d+(g<b?6:0);else if(mx===g)h=(b-r)/d+2;else h=(r-g)/d+4;h*=60;}
+      return{h:Math.round(h)%360,s:Math.round(s*100),v:Math.round(v*100)};
+    }
+    function relLum(r,g,b){
+      return [r,g,b].map(function(c){c/=255;return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4)}).reduce(function(a,c,i){return a+c*[0.2126,0.7152,0.0722][i]},0);
+    }
+    function contrastRatio(h1,h2){
+      var a=hexToRgb(h1),b=hexToRgb(h2);if(!a||!b)return 1;
+      var l1=relLum(a.r,a.g,a.b),l2=relLum(b.r,b.g,b.b);
+      return(Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05);
+    }
+
+    /* ═══ COLOR NAMES DATABASE ═════════════════════════ */
+    var NAMES={aliceblue:'#F0F8FF',antiquewhite:'#FAEBD7',aqua:'#00FFFF',aquamarine:'#7FFFD4',azure:'#F0FFFF',beige:'#F5F5DC',bisque:'#FFE4C4',black:'#000000',blanchedalmond:'#FFEBCD',blue:'#0000FF',blueviolet:'#8A2BE2',brown:'#A52A2A',burlywood:'#DEB887',cadetblue:'#5F9EA0',chartreuse:'#7FFF00',chocolate:'#D2691E',coral:'#FF7F50',cornflowerblue:'#6495ED',cornsilk:'#FFF8DC',crimson:'#DC143C',cyan:'#00FFFF',darkblue:'#00008B',darkcyan:'#008B8B',darkgoldenrod:'#B8860B',darkgray:'#A9A9A9',darkgreen:'#006400',darkgrey:'#A9A9A9',darkkhaki:'#BDB76B',darkmagenta:'#8B008B',darkolivegreen:'#556B2F',darkorange:'#FF8C00',darkorchid:'#9932CC',darkred:'#8B0000',darksalmon:'#E9967A',darkseagreen:'#8FBC8F',darkslateblue:'#483D8B',darkslategray:'#2F4F4F',darkturquoise:'#00CED1',darkviolet:'#9400D3',deeppink:'#FF1493',deepskyblue:'#00BFFF',dimgray:'#696969',dodgerblue:'#1E90FF',firebrick:'#B22222',floralwhite:'#FFFAF0',forestgreen:'#228B22',fuchsia:'#FF00FF',gainsboro:'#DCDCDC',ghostwhite:'#F8F8FF',gold:'#FFD700',goldenrod:'#DAA520',gray:'#808080',green:'#008000',greenyellow:'#ADFF2F',honeydew:'#F0FFF0',hotpink:'#FF69B4',indianred:'#CD5C5C',indigo:'#4B0082',ivory:'#FFFFF0',khaki:'#F0E68C',lavender:'#E6E6FA',lavenderblush:'#FFF0F5',lawngreen:'#7CFC00',lemonchiffon:'#FFFACD',lightblue:'#ADD8E6',lightcoral:'#F08080',lightcyan:'#E0FFFF',lightgoldenrodyellow:'#FAFAD2',lightgray:'#D3D3D3',lightgreen:'#90EE90',lightpink:'#FFB6C1',lightsalmon:'#FFA07A',lightseagreen:'#20B2AA',lightskyblue:'#87CEEB',lightslategray:'#778899',lightsteelblue:'#B0C4DE',lightyellow:'#FFFFE0',lime:'#00FF00',limegreen:'#32CD32',linen:'#FAF0E6',magenta:'#FF00FF',maroon:'#800000',mediumaquamarine:'#66CDAA',mediumblue:'#0000CD',mediumorchid:'#BA55D3',mediumpurple:'#9370DB',mediumseagreen:'#3CB371',mediumslateblue:'#7B68EE',mediumspringgreen:'#00FA9A',mediumturquoise:'#48D1CC',mediumvioletred:'#C71585',midnightblue:'#191970',mintcream:'#F5FFFA',mistyrose:'#FFE4E1',moccasin:'#FFE4B5',navajowhite:'#FFDEAD',navy:'#000080',oldlace:'#FDF5E6',olive:'#808000',olivedrab:'#6B8E23',orange:'#FFA500',orangered:'#FF4500',orchid:'#DA70D6',palegoldenrod:'#EEE8AA',palegreen:'#98FB98',paleturquoise:'#AFEEEE',palevioletred:'#DB7093',papayawhip:'#FFEFD5',peachpuff:'#FFDAB9',peru:'#CD853F',pink:'#FFC0CB',plum:'#DDA0DD',powderblue:'#B0E0E6',purple:'#800080',rebeccapurple:'#663399',red:'#FF0000',rosybrown:'#BC8F8F',royalblue:'#4169E1',saddlebrown:'#8B4513',salmon:'#FA8072',sandybrown:'#F4A460',seagreen:'#2E8B57',seashell:'#FFF5EE',sienna:'#A0522D',silver:'#C0C0C0',skyblue:'#87CEEB',slateblue:'#6A5ACD',slategray:'#708090',snow:'#FFFAFA',springgreen:'#00FF7F',steelblue:'#4682B4',tan:'#D2B48C',teal:'#008080',thistle:'#D8BFD8',tomato:'#FF6347',turquoise:'#40E0D0',violet:'#EE82EE',wheat:'#F5DEB3',white:'#FFFFFF',whitesmoke:'#F5F5F5',yellow:'#FFFF00',yellowgreen:'#9ACD32'};
+    var NAMES_ARR=Object.entries(NAMES);
+    function getColorName(hex){
+      var h=hex.toLowerCase();
+      for(var i=0;i<NAMES_ARR.length;i++){if(NAMES_ARR[i][1].toLowerCase()===h)return NAMES_ARR[i][0]}
+      var min=Infinity,name='Unknown',rgb=hexToRgb(hex);
+      if(!rgb)return name;
+      for(var i=0;i<NAMES_ARR.length;i++){
+        var c=hexToRgb(NAMES_ARR[i][1]);if(!c)continue;
+        var d=Math.sqrt((rgb.r-c.r)*(rgb.r-c.r)+(rgb.g-c.g)*(rgb.g-c.g)+(rgb.b-c.b)*(rgb.b-c.b));
+        if(d<min){min=d;name=NAMES_ARR[i][0]}
+      }
+      return min<60?name:'Unknown';
+    }
+    function getSimilar(hex,topN){
+      var rgb=hexToRgb(hex);if(!rgb)return[];
+      return NAMES_ARR.map(function(e){
+        var c=hexToRgb(e[1]);if(!c)return{name:e[0],hex:e[1],dist:9999};
+        return{name:e[0],hex:e[1],dist:Math.sqrt((rgb.r-c.r)*(rgb.r-c.r)+(rgb.g-c.g)*(rgb.g-c.g)+(rgb.b-c.b)*(rgb.b-c.b))};
+      }).sort(function(a,b){return a.dist-b.dist}).slice(1,topN+1).filter(function(c){return c.dist<200});
+    }
+
+    /* ═══ DOM REFS ═════════════════════════════════════ */
+    function $(id){return document.getElementById(id)}
+    var hexIn=$('hex-input'), hintEl=$('input-hint');
+    var rIn=$('r-in'), gIn=$('g-in'), bIn=$('b-in');
+    var alpha=1, alphaDrag=false;
+    var ctFg='#FFFFFF', ctBg='#007CF0';
+    var history=JSON.parse(localStorage.getItem('tx-hex-history')||'[]');
+
+    /* ═══ VALIDATE & SANITIZE ═════════════════════════ */
+    function sanitizeHex(v){var s=v.replace(/[^0-9a-fA-F#]/g,'');if(s&&!s.startsWith('#'))s='#'+s;return s.toUpperCase()}
+    function validateHex(hex){var h=hex.replace('#','');return h.length===3||h.length===6||h.length===8}
+
+    /* ═══ MASTER UPDATE ═══════════════════════════════ */
+    function updateAll(source){
+      var raw=sanitizeHex(hexIn.value);
+      hexIn.value=raw;
+      var valid=validateHex(raw);
+      hexIn.classList.toggle('is-error',!valid&&raw.length>1);
+      hexIn.classList.toggle('is-valid',valid);
+      if(!valid){
+        hintEl.textContent=raw.length>1?'Invalid HEX — use 3, 6, or 8 digits (e.g. #F00, #FF5733)':'';
+        hintEl.className='input-hint error';
+        return;
+      }
+      hintEl.textContent='Valid HEX code';
+      hintEl.className='input-hint success';
+      var rgb=hexToRgb(raw);
+      if(!rgb)return;
+      if(source!=='rgb'){rIn.value=rgb.r;gIn.value=rgb.g;bIn.value=rgb.b;}
+      var hsl=rgbToHsl(rgb.r,rgb.g,rgb.b);
+      var cmyk=rgbToCmyk(rgb.r,rgb.g,rgb.b);
+      var hsv=rgbToHsv(rgb.r,rgb.g,rgb.b);
+      var a=rgb.a!==undefined?rgb.a:alpha;
+      var hex6=rgbToHex(rgb.r,rgb.g,rgb.b).toUpperCase();
+      var hexA=a<1?(hex6+Math.round(a*255).toString(16).padStart(2,'0')).toUpperCase():hex6;
+
+      // Update outputs
+      $('out-hex').textContent=a<1?hexA:hex6;
+      $('out-rgb').textContent='rgb('+rgb.r+', '+rgb.g+', '+rgb.b+')';
+      $('out-rgba').textContent=a<1?'rgba('+rgb.r+', '+rgb.g+', '+rgb.b+', '+a.toFixed(2)+')':'rgba('+rgb.r+', '+rgb.g+', '+rgb.b+', 1)';
+      $('out-rgbp').textContent='rgb('+(rgb.r/255*100).toFixed(1)+'%, '+(rgb.g/255*100).toFixed(1)+'%, '+(rgb.b/255*100).toFixed(1)+'%)';
+      $('out-hsl').textContent=a<1?'hsla('+hsl.h+', '+hsl.s+'%, '+hsl.l+'%, '+a.toFixed(2)+')':'hsl('+hsl.h+', '+hsl.s+'%, '+hsl.l+'%)';
+      $('out-hsv').textContent='hsv('+hsv.h+', '+hsv.s+'%, '+hsv.v+'%)';
+      $('out-cmyk').textContent='cmyk('+cmyk.c+'%, '+cmyk.m+'%, '+cmyk.y+'%, '+cmyk.k+'%)';
+
+      // Update previews
+      var full='rgba('+rgb.r+','+rgb.g+','+rgb.b+','+a+')';
+      $('pv-dark').style.background=full;
+      $('pv-light').style.background=full;
+      $('gradient-bar').style.background='linear-gradient(90deg, rgba(0,0,0,0.85), '+full+' 30%, '+full+' 70%, rgba(255,255,255,0.95))';
+
+      // Color name
+      $('color-name').textContent=getColorName(hex6);
+      $('name-dot').style.background=hex6;
+
+      // Store copy values on fields
+      document.querySelectorAll('.out-field').forEach(function(f){
+        f.dataset.copy=f.querySelector('.out-field-val').textContent;
+      });
+
+      updateAlphaBar(rgb);
+      updateContrast(hex6);
+      updateSimilar(hex6);
+      updateCSS(hex6,rgb,hsl,a);
+    }
+
+    function updateFromRgb(source){
+      var r=clamp(parseInt(rIn.value)||0,0,255);
+      var g=clamp(parseInt(gIn.value)||0,0,255);
+      var b=clamp(parseInt(bIn.value)||0,0,255);
+      var hex=rgbToHex(r,g,b).toUpperCase();
+      if(source!=='hex') hexIn.value=hex;
+      updateAll('rgb');
+    }
+
+    /* ═══ ALPHA SLIDER ════════════════════════════════ */
+    function updateAlphaBar(rgb){
+      if(!rgb)return;
+      var h=rgbToHex(rgb.r,rgb.g,rgb.b);
+      $('alpha-fill').style.background='linear-gradient(90deg, transparent, '+h+')';
+      $('alpha-thumb').style.left=(alpha*100)+'%';
+      $('alpha-display').textContent=Math.round(alpha*100)+'%';
+    }
+    function handleAlpha(e){
+      var rect=$('alpha-track').getBoundingClientRect();
+      var cx=e.touches?e.touches[0].clientX:e.clientX;
+      alpha=parseFloat(clamp((cx-rect.left)/rect.width,0,1).toFixed(2));
+      updateAll('alpha');
+    }
+    $('alpha-track').addEventListener('mousedown',function(e){alphaDrag=true;handleAlpha(e)});
+    document.addEventListener('mousemove',function(e){if(alphaDrag)handleAlpha(e)});
+    document.addEventListener('mouseup',function(){alphaDrag=false});
+    $('alpha-track').addEventListener('touchstart',function(e){e.preventDefault();alphaDrag=true;handleAlpha(e)},{passive:false});
+    document.addEventListener('touchmove',function(e){if(alphaDrag)handleAlpha(e)},{passive:true});
+    document.addEventListener('touchend',function(){alphaDrag=false});
+
+    /* ═══ INPUT EVENTS ════════════════════════════════ */
+    hexIn.addEventListener('input',function(){updateAll('hex')});
+    hexIn.addEventListener('blur',function(){
+      if(!validateHex(sanitizeHex(hexIn.value))&&hexIn.value){
+        hintEl.textContent='Invalid HEX code';hintEl.className='input-hint error';
+      }
+    });
+    rIn.addEventListener('input',function(){updateFromRgb('r')});
+    gIn.addEventListener('input',function(){updateFromRgb('g')});
+    bIn.addEventListener('input',function(){updateFromRgb('b')});
+
+    /* ═══ TOAST ═══════════════════════════════════════ */
+    function showToast(msg){
+      var t=document.createElement('div');t.className='toast';t.textContent=msg;
+      document.body.appendChild(t);
+      requestAnimationFrame(function(){t.classList.add('show')});
+      setTimeout(function(){t.classList.remove('show');setTimeout(function(){t.remove()},300)},2000);
+    }
+
+    /* ═══ COPY FUNCTIONALITY ══════════════════════════ */
+    document.querySelectorAll('.out-field').forEach(function(f){
+      f.addEventListener('click',function(){
+        var v=f.dataset.copy;if(v)navigator.clipboard.writeText(v).then(function(){showToast('Copied: '+v)});
+      });
+    });
+    document.querySelectorAll('.copy-btn[data-fmt]').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var el=btn.closest('.out-card').querySelector('.out-field-val');
+        if(!el)return;
+        navigator.clipboard.writeText(el.textContent).then(function(){
+          btn.classList.add('copied');
+          var origHTML=btn.innerHTML;
+          btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+          showToast('Copied: '+el.textContent);
+          setTimeout(function(){btn.classList.remove('copied');btn.innerHTML=origHTML},2000);
+        });
+      });
+    });
+
+    /* ═══ ACTION BUTTONS ══════════════════════════════ */
+    function randomColor(){
+      var h=Math.floor(Math.random()*360),s=Math.floor(Math.random()*40)+60,l=Math.floor(Math.random()*40)+35;
+      var rgb=hslToRgb(h,s,l);
+      hexIn.value=rgbToHex(rgb.r,rgb.g,rgb.b).toUpperCase();
+      alpha=1;updateAll('random');addHistory();
+    }
+    $('btn-random').addEventListener('click',randomColor);
+    $('btn-clear').addEventListener('click',function(){
+      hexIn.value='';hintEl.textContent='';hintEl.className='input-hint';
+      hexIn.classList.remove('is-error','is-valid');
+    });
+    $('btn-paste').addEventListener('click',function(){
+      navigator.clipboard.readText().then(function(t){
+        var cleaned=sanitizeHex(t);hexIn.value=cleaned;updateAll('paste');addHistory();showToast('Pasted: '+cleaned);
+      }).catch(function(){showToast('Clipboard access denied')});
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+      if(e.code==='Space'){e.preventDefault();randomColor();}
+    });
+
+    /* ═══ PRESETS ═════════════════════════════════════ */
+    var PRESETS=[
+      ['#FF6B6B','Coral'],['#4ECDC4','Teal'],['#45B7D1','Sky'],['#96CEB4','Sage'],
+      ['#FFEAA7','Cream'],['#DDA0DD','Plum'],['#FF8C42','Mango'],['#98D8C8','Mint'],
+      ['#F7DC6F','Sun'],['#BB8FCE','Lilac'],['#85C1E9','Ice'],['#F0B27A','Peach'],
+      ['#82E0AA','Clover'],['#F1948A','Salmon'],['#AED6F1','Powder'],['#D7BDE2','Orchid'],
+      ['#A3E4D7','Seafoam'],['#FAD7A0','Sand'],['#F5B7B1','Blush'],['#D5F5E3','Pistachio'],
+      ['#FF6348','Tomato'],['#1E90FF','Dodger'],['#FFA502','Orange'],['#2ED573','Emerald'],
+      ['#3742FA','Indigo'],['#FF4757','Cherry'],['#ECCC68','Gold'],['#A4B0BE','Silver'],
+      ['#2F3542','Charcoal'],['#FFFFFF','White'],['#000000','Black']
+    ];
+    var pg=$('presets-grid');
+    pg.innerHTML=PRESETS.map(function(p){
+      return '<div class="preset-chip" style="background:'+p[0]+'" data-hex="'+p[0]+'" title="'+p[1]+'"><span class="preset-chip-name">'+p[1]+'</span></div>';
+    }).join('');
+    pg.querySelectorAll('.preset-chip').forEach(function(s){
+      s.addEventListener('click',function(){hexIn.value=s.dataset.hex;alpha=1;updateAll('preset');addHistory()});
+    });
+
+    /* ═══ HISTORY ══════════════════════════════════════ */
+    function addHistory(){
+      var hex=sanitizeHex(hexIn.value);if(!validateHex(hex))return;
+      history=history.filter(function(h){return h!==hex});
+      history.unshift(hex);
+      if(history.length>24) history=history.slice(0,24);
+      localStorage.setItem('tx-hex-history',JSON.stringify(history));
+      renderHistory();
+    }
+    function renderHistory(){
+      var g=$('history-grid');
+      if(!history.length){g.innerHTML='<span class="history-empty">No colors yet — start converting!</span>';return;}
+      g.innerHTML=history.map(function(h){
+        return '<div class="history-chip" style="background:'+h+'" data-hex="'+h+'" title="'+h+'"></div>';
+      }).join('');
+      g.querySelectorAll('.history-chip').forEach(function(s){
+        s.addEventListener('click',function(){hexIn.value=s.dataset.hex;alpha=1;updateAll('history')});
+      });
+    }
+    $('btn-clear-history').addEventListener('click',function(){
+      history=[];localStorage.removeItem('tx-hex-history');renderHistory();showToast('History cleared');
+    });
+
+    /* ═══ CONTRAST CHECKER ════════════════════════════ */
+    function updateContrast(hex6){
+      var r=contrastRatio(ctFg,ctBg);
+      $('ct-ratio').textContent=r.toFixed(2)+' : 1';
+      $('ct-fg-sw').style.background=ctFg;
+      $('ct-bg-sw').style.background=ctBg;
+      $('ct-fg').value=ctFg;
+      $('ct-bg').value=ctBg;
+      var tests=[{l:'AA Normal',t:4.5},{l:'AA Large',t:3},{l:'AAA Normal',t:7},{l:'AAA Large',t:4.5}];
+      $('ct-pills').innerHTML=tests.map(function(t){
+        var p=r>=t.t;return '<span class="wcag-badge '+(p?'pass':'fail')+'">'+t.l+': '+(p?'&#10003;':'&#10007;')+'</span>';
+      }).join('');
+      if(hex6){
+        $('ct-pv-white').style.background='#ffffff';$('ct-pv-white').style.color=hex6;
+        $('ct-pv-black').style.background='#000000';$('ct-pv-black').style.color=hex6;
+      }
+    }
+    $('ct-fg').addEventListener('input',function(){ctFg=$('ct-fg').value.trim();updateContrast(sanitizeHex(hexIn.value))});
+    $('ct-bg').addEventListener('input',function(){ctBg=$('ct-bg').value.trim();updateContrast(sanitizeHex(hexIn.value))});
+    $('ct-swap').addEventListener('click',function(){var tmp=ctFg;ctFg=ctBg;ctBg=tmp;updateContrast(sanitizeHex(hexIn.value))});
+
+    /* ═══ SIMILAR COLORS ══════════════════════════════ */
+    function updateSimilar(hex){
+      var list=getSimilar(hex,6);
+      $('similar-grid').innerHTML=list.map(function(c){
+        return '<div class="similar-card" data-hex="'+c.hex+'"><div class="similar-swatch" style="background:'+c.hex+'"></div><div class="similar-info"><span class="similar-name">'+c.name+'</span><span class="similar-hex">'+c.hex+'</span></div></div>';
+      }).join('');
+      $('similar-grid').querySelectorAll('.similar-card').forEach(function(c){
+        c.addEventListener('click',function(){hexIn.value=c.dataset.hex;alpha=1;updateAll('similar');addHistory()});
+      });
+    }
+
+    /* ═══ CSS OUTPUT ══════════════════════════════════ */
+    function updateCSS(hex,rgb,hsl,a){
+      $('css-output').value=':root {\n  --color: '+hex+';\n  --color-rgb: '+rgb.r+', '+rgb.g+', '+rgb.b+';\n  --color-hsl: '+hsl.h+', '+hsl.s+'%, '+hsl.l+'%;\n}\n\n.color { color: '+hex+'; }\n.color-rgb { color: rgb('+rgb.r+', '+rgb.g+', '+rgb.b+'); }\n.color-hsl { color: hsl('+hsl.h+', '+hsl.s+'%, '+hsl.l+'%); }'+(a<1?'\n\n.color-alpha { color: rgba('+rgb.r+', '+rgb.g+', '+rgb.b+', '+a.toFixed(2)+'); }':'');
+    }
+    $('btn-copy-css').addEventListener('click',function(){
+      navigator.clipboard.writeText($('css-output').value).then(function(){showToast('CSS copied!')});
+    });
+
+    /* ═══ FAQ ACCORDION ═══════════════════════════════ */
+    document.querySelectorAll('.faq-q').forEach(function(q){
+      q.addEventListener('click',function(){q.parentElement.classList.toggle('open')});
+    });
+
+    /* ═══ THEME TOGGLE ════════════════════════════════ */
+    var tBtn=$('theme-toggle'), hEl=document.documentElement;
+    var isDark=localStorage.getItem('tx-theme')!=='light';
+    function applyTheme(dark){
+      isDark=dark;
+      if(dark){
+        hEl.removeAttribute('data-theme');
+      } else {
+        hEl.setAttribute('data-theme','light');
+      }
+      tBtn.querySelector('.theme-label').textContent=dark?'Light':'Dark';
+      tBtn.querySelector('.sun-icon').style.display=dark?'block':'none';
+      localStorage.setItem('tx-theme',dark?'dark':'light');
+    }
+    // Create moon icon (hidden initially)
+    var moonSvg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    moonSvg.setAttribute('viewBox','0 0 24 24');moonSvg.setAttribute('fill','none');
+    moonSvg.setAttribute('stroke','currentColor');moonSvg.setAttribute('stroke-width','2');
+    moonSvg.setAttribute('stroke-linecap','round');moonSvg.setAttribute('stroke-linejoin','round');
+    moonSvg.setAttribute('width','16');moonSvg.setAttribute('height','16');
+    moonSvg.style.display='none';moonSvg.classList.add('moon-icon');
+    moonSvg.innerHTML='<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
+    tBtn.insertBefore(moonSvg,tBtn.querySelector('.theme-label'));
+
+    applyTheme(isDark);
+    tBtn.addEventListener('click',function(){applyTheme(!isDark)});
+
+    /* ═══ MOBILE NAV ═════════════════════════════════ */
+    $('hamburger').addEventListener('click',function(){$('mobile-nav').classList.add('open')});
+    $('mobile-close').addEventListener('click',function(){$('mobile-nav').classList.remove('open')});
+    $('mobile-nav').querySelectorAll('.mobile-nav-link').forEach(function(l){
+      l.addEventListener('click',function(){$('mobile-nav').classList.remove('open')});
+    });
+
+    /* ═══ FOOTER YEAR ═════════════════════════════════ */
+    $('footer-year').textContent=new Date().getFullYear();
+
+    /* ═══ URL PARAMS ══════════════════════════════════ */
+    var params=new URLSearchParams(location.search);
+    var pHex=params.get('hex');
+    if(pHex){hexIn.value=sanitizeHex(pHex);alpha=1;updateAll('url');addHistory();}
+
+    /* ═══ INIT ════════════════════════════════════════ */
+    renderHistory();
+    updateAll('init');
+  })();
+  </script>
+</body>
+</html>
