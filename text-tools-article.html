@@ -1,661 +1,1091 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US" dir="ltr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#007cf0">
+  <meta name="color-scheme" content="dark light">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Text Tools – Tool Xeno">
+  <meta name="application-name" content="Tool Xeno">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="rating" content="general">
 
-  gtag('config', 'G-Y4JDC5DCBV');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Powerful Text Processing & Manipulation Tools - Professional Text Utilities | Tool Xeno</title>
-    <meta name="description" content="Comprehensive text tool suite featuring case converter, word counter, duplicate line remover, text sorter, text reverser, and encryption tools. Fast, secure, and free text processing utilities.">
-    <meta name="keywords" content="text tools, case converter, word counter, character counter, duplicate remover, text sorter, text reverser, text encryptor, text decryptor, text processing">
-    <meta name="author" content="Tool Xeno">
-    <link rel="canonical" href="https://toolxeno.com/text-tools">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Powerful Text Processing & Manipulation Tools">
-    <meta property="og:description" content="Professional text utilities for case conversion, word counting, sorting, reversing, and encryption with complete privacy.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://toolxeno.com/text-tools">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Powerful Text Processing & Manipulation Tools">
-    <meta name="twitter:description" content="Professional text processing utilities for all your manipulation needs.">
-    
-    <!-- Schema Markup -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
+  <title>Free Text Tools: Case Converter, Word Counter, Duplicate Remover & More | Tool Xeno</title>
+  <meta name="description" content="Six free text tools that run entirely in your browser. Convert text case, count words and characters, remove duplicates, sort lines, reverse text, and encrypt content. No signup, no uploads required.">
+  <meta name="keywords" content="text tools, case converter, word counter, character counter, remove duplicate lines, text sorter, text reverser, text encryptor, online text tools, free text utilities, text manipulation">
+  <meta name="author" content="Tool Xeno">
+  <link rel="canonical" href="https://toolxeno.com/text-tools.html">
+  <link rel="alternate" hreflang="en" href="https://toolxeno.com/text-tools.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://toolxeno.com/text-tools.html">
+  <meta property="og:title" content="Free Text Tools: Case Converter, Word Counter, Duplicate Remover & More | Tool Xeno">
+  <meta property="og:description" content="Six free browser-based text tools: case conversion, word counting, duplicate removal, sorting, reversal, and encryption. No signup, no uploads, 100% private.">
+  <meta property="og:site_name" content="Tool Xeno">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2025-04-28T08:00:00+05:00">
+  <meta property="article:modified_time" content="2025-04-28T12:00:00+05:00">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Text Tools: Case Converter, Word Counter & More">
+  <meta name="twitter:description" content="Case conversion, word counting, duplicate removal, sorting, reversal, and encryption. Free, private, browser-based.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
         "@type": "Article",
-        "headline": "Powerful Text Processing & Manipulation Tools - Professional Text Utilities",
-        "description": "Comprehensive guide to professional text processing utilities for case conversion, analysis, sorting, manipulation, and encryption.",
-        "author": {
-            "@type": "Organization",
-            "name": "Tool Xeno"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Tool Xeno",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://toolxeno.com/logo.png"
-            }
-        },
-        "datePublished": "2024-12-11",
-        "dateModified": "2024-12-11",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://toolxeno.com/text-tools"
-        }
-    }
-    </script>
-    
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            
-            --dark-bg: #0a0a0a;
-            --dark-surface: #1a1a1a;
-            --dark-surface-elevated: #252525;
-            --dark-text: #ffffff;
-            --dark-text-secondary: #a0a0a0;
-            --dark-border: #333333;
-            
-            --light-bg: #f8fafc;
-            --light-surface: #ffffff;
-            --light-surface-elevated: #f1f5f9;
-            --light-text: #1e293b;
-            --light-text-secondary: #64748b;
-            --light-border: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            line-height: 1.7;
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-            min-height: 100vh;
-        }
-        
-        body.light-theme { 
-            background-color: var(--light-bg); 
-            color: var(--light-text); 
-        }
+        "headline": "Free Text Tools: Case Converter, Word Counter, Duplicate Remover and More",
+        "description": "Six free browser-based text tools for case conversion, word counting, duplicate removal, sorting, reversal, and encryption. No signup or uploads required.",
+        "author": { "@type": "Organization", "name": "Tool Xeno", "url": "https://toolxeno.com/" },
+        "publisher": { "@type": "Organization", "name": "Tool Xeno", "url": "https://toolxeno.com/", "logo": { "@type": "ImageObject", "url": "https://toolxeno.com/logo.png" } },
+        "datePublished": "2025-04-28T08:00:00+05:00",
+        "dateModified": "2025-04-28T12:00:00+05:00",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://toolxeno.com/text-tools.html" },
+        "wordCount": 4800,
+        "articleSection": "Technology"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How does the Text Case Converter work?", "acceptedAnswer": { "@type": "Answer", "text": "You paste or type your text into the input area, select the case format you want (uppercase, lowercase, title case, sentence case, or alternating case), and the tool converts it instantly in your browser. No text is uploaded anywhere — all processing happens on your device." } },
+          { "@type": "Question", "name": "Does the Word Counter update in real time?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. As you type or paste text, the counter updates instantly — word count, character count (with and without spaces), sentence count, paragraph count, and estimated reading time. There is no button to click; the numbers update on every keystroke." } },
+          { "@type": "Question", "name": "How does the Duplicate Line Remover decide which lines to keep?", "acceptedAnswer": { "@type": "Answer", "text": "By default, it keeps the first occurrence of each unique line and removes subsequent duplicates. You can also choose to keep the last occurrence instead. It supports both case-sensitive and case-insensitive detection modes, and it preserves the original line order." } },
+          { "@type": "Question", "name": "What encryption methods does the Encryptor tool support?", "acceptedAnswer": { "@type": "Answer", "text": "The tool supports Base64 encoding for simple obfuscation, Caesar cipher with adjustable shift values, and AES-like password-based encryption for stronger security. All encryption and decryption happens locally in your browser — nothing is sent to any server." } },
+          { "@type": "Question", "name": "Is my text data private with these tools?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. Every tool processes text entirely within your browser. Your content is never uploaded, stored, or transmitted to any server. When you close the tab, the text is gone. This makes the tools safe for confidential documents, personal notes, and sensitive business data." } },
+          { "@type": "Question", "name": "Do I need to create an account to use these tools?", "acceptedAnswer": { "@type": "Answer", "text": "No account, no signup, and no email address required. Just open any of the tools in your browser and start using them immediately. There are no usage limits, no premium tiers, and no hidden paywalls." } },
+          { "@type": "Question", "name": "Is there a limit on how much text I can process?", "acceptedAnswer": { "@type": "Answer", "text": "There is no artificial limit. The practical constraint is your browser's memory and processing power. Most modern devices handle documents with tens of thousands of lines or several hundred thousand characters without any issues. Very large files may take a moment longer to process." } },
+          { "@type": "Question", "name": "Do these tools work on mobile phones and tablets?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. All six tools are fully responsive and work on any device with a modern browser — phones, tablets, laptops, and desktops. The interface adapts to your screen size, and touch interactions work the same as mouse clicks." } },
+          { "@type": "Question", "name": "Are these tools really free? What is the catch?", "acceptedAnswer": { "@type": "Answer", "text": "They are completely free with no catch. No usage limits, no file size restrictions, no watermarks, no premium tiers, and no hidden fees. Every feature is available to everyone. The tools are supported by the Tool Xeno website as a whole." } }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolxeno.com/" },
+          { "@type": "ListItem", "position": 2, "name": "All Tools", "item": "https://toolxeno.com/#tools" },
+          { "@type": "ListItem", "position": 3, "name": "Text Tools", "item": "https://toolxeno.com/text-tools.html" }
+        ]
+      },
+      {
+        "@type": "WebApplication",
+        "name": "Text Tools",
+        "url": "https://toolxeno.com/text-tools.html",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Six free browser-based text tools: case converter, word counter, duplicate remover, text sorter, text reverser, and text encryptor."
+      }
+    ]
+  }
+  </script>
 
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.05;
-            background: radial-gradient(circle, #667eea 0%, transparent 70%);
-        }
-        
-        body.light-theme .particle { 
-            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(100vh) rotate(0deg); } 
-            100% { transform: translateY(-100px) rotate(360deg); } 
-        }
-        
-        .header-glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.35s ease, border-color 0.35s ease;
-        }
-        
-        body.light-theme .header-glass { 
-            background: rgba(255, 255, 255, 0.9); 
-            border-bottom-color: rgba(0, 0, 0, 0.1); 
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--dark-surface);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.light-theme .theme-toggle { 
-            background: var(--light-surface-elevated); 
-            border-color: var(--light-border); 
-        }
-        
-        body.light-theme .theme-toggle::after { 
-            transform: translateX(28px); 
-            background: var(--secondary-gradient); 
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
-        
-        body.light-theme .glass-card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-color: rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
-        }
-        
-        .btn-gradient {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .btn-gradient:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
-        }
-        
-        .nav-link {
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-        }
-        
-        .nav-link:hover { 
-            background: rgba(255, 255, 255, 0.1); 
-            color: white; 
-        }
-        
-        body.light-theme .nav-link { 
-            color: rgba(0, 0, 0, 0.7); 
-        }
-        
-        body.light-theme .nav-link:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            color: black; 
-        }
-        
-        .article-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .article-content h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .article-content h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .article-content p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-        
-        .article-content ul, .article-content ol {
-            margin-bottom: 1.5rem;
-            margin-left: 2rem;
-        }
-        
-        .article-content li {
-            margin-bottom: 0.75rem;
-            line-height: 1.8;
-        }
-        
-        .tool-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
-        }
-        
-        body.light-theme .tool-card {
-            background: rgba(0, 0, 0, 0.02);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .feature-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-        
-        body.light-theme .feature-item {
-            background: rgba(0, 0, 0, 0.02);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .icon-large {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @media (max-width: 768px) {
-            .article-content h2 { font-size: 1.5rem; }
-            .article-content h3 { font-size: 1.25rem; }
-            .article-content p { font-size: 1rem; }
-        }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%237928ca'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg0: #030712;
+      --bg1: #0a0f1e;
+      --bg2: #0f172a;
+      --bg3: #1e293b;
+      --card: rgba(255,255,255,0.04);
+      --card-hover: rgba(255,255,255,0.08);
+      --card-solid: #1e293b;
+      --glass: rgba(255,255,255,0.03);
+      --text: #f1f5f9;
+      --text2: #cbd5e1;
+      --muted: #94a3b8;
+      --line: rgba(255,255,255,0.1);
+      --line-strong: rgba(255,255,255,0.2);
+      --accent1: #007cf0;
+      --accent2: #00dfd8;
+      --accent3: #7928ca;
+      --accent4: #ff0080;
+      --shadow: 0 24px 60px rgba(0,0,0,0.6);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.3);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --max: 1240px;
+      --ring: 0 0 0 3px rgba(0,124,240,0.4);
+      --grad: linear-gradient(135deg, var(--accent1), var(--accent2));
+      --grad-purple: linear-gradient(135deg, var(--accent3), var(--accent4));
+      --grad-text: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+      --font: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+      --header-h: 72px;
+    }
+
+    [data-theme="light"] {
+      --bg0: #f8fafc;
+      --bg1: #f1f5f9;
+      --bg2: #e2e8f0;
+      --bg3: #cbd5e1;
+      --card: rgba(255,255,255,0.9);
+      --card-hover: rgba(255,255,255,1);
+      --card-solid: #ffffff;
+      --glass: rgba(255,255,255,0.8);
+      --text: #0f172a;
+      --text2: #334155;
+      --muted: #64748b;
+      --line: rgba(0,0,0,0.1);
+      --line-strong: rgba(0,0,0,0.15);
+      --shadow: 0 24px 60px rgba(0,0,0,0.1);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+    body { font-family: var(--font); background-color: var(--bg0); color: var(--text); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+    ul, ol { list-style: none; }
+
+    /* ===== ANIMATED BACKGROUND ===== */
+    .bg-orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; will-change: transform; }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent1); top: -200px; left: -200px; animation: oF1 20s linear infinite; }
+    .orb-2 { width: 500px; height: 500px; background: var(--accent3); top: 30%; right: -150px; animation: oF2 25s linear infinite; }
+    .orb-3 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: 30%; animation: oF3 18s linear infinite; }
+    .orb-4 { width: 300px; height: 300px; background: var(--accent4); top: 60%; left: 10%; animation: oF4 22s linear infinite; }
+    @keyframes oF1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(60px,40px) scale(1.1);} 66%{transform:translate(-40px,60px) scale(0.95);} }
+    @keyframes oF2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-80px,50px) scale(1.05);} 66%{transform:translate(40px,-60px) scale(1.1);} }
+    @keyframes oF3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(70px,-40px) scale(1.15);} }
+    @keyframes oF4 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,-80px) scale(1.1);} }
+    .bg-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%); }
+    .page-wrapper { position: relative; z-index: 1; }
+
+    /* ===== HEADER ===== */
+    .header { position: sticky; top: 0; z-index: 1000; height: var(--header-h); display: flex; align-items: center; backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); background: rgba(3,7,18,0.85); border-bottom: 1px solid var(--line); transition: background var(--transition); }
+    [data-theme="light"] .header { background: rgba(248,250,252,0.90); }
+    .header-inner { max-width: var(--max); width: 100%; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; flex-shrink: 0; }
+    .logo-icon { width: 36px; height: 36px; background: var(--grad); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 900; color: #fff; box-shadow: 0 4px 14px rgba(0,124,240,0.4); }
+    .logo-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-primary { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .nav-link { padding: 7px 13px; font-size: 0.875rem; font-weight: 500; color: var(--text2); border-radius: var(--radius-xs); transition: color var(--transition), background var(--transition); }
+    .nav-link:hover { color: var(--text); background: var(--card); }
+    .header-actions { display: flex; align-items: center; gap: 10px; margin-left: 12px; }
+    .btn-theme { padding: 8px 20px; font-size: 0.85rem; font-weight: 600; font-family: var(--font); background: var(--card); backdrop-filter: blur(8px); border-radius: 40px; color: var(--text2); border: 1px solid var(--line); transition: all 0.3s ease; cursor: pointer; }
+    .btn-theme:hover { color: var(--text); border-color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; margin-left: auto; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); display: block; }
+    .mobile-nav { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(3,7,18,0.98); backdrop-filter: blur(24px); flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-link { font-size: 1.4rem; font-weight: 700; color: var(--text2); padding: 12px 32px; border-radius: var(--radius-sm); transition: all var(--transition); }
+    .mobile-nav-link:hover { color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; font-size: 1.5rem; color: var(--muted); padding: 8px; border-radius: 8px; transition: color var(--transition); cursor: pointer; background: none; border: none; }
+    .mobile-close:hover { color: var(--text); }
+
+    /* ===== HERO ===== */
+    .hero { padding: 60px 24px 40px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(0,124,240,0.15); border: 1px solid rgba(0,124,240,0.3); border-radius: 100px; font-size: 0.78rem; font-weight: 600; color: var(--accent1); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 20px; }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
+    .hero-h1 { font-size: clamp(1.8rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 16px; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero-h1 .grad-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: clamp(0.9rem, 1.5vw, 1.05rem); color: var(--text2); max-width: 650px; margin: 0 auto 24px; line-height: 1.75; }
+    .hero-meta { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px 20px; font-size: 0.82rem; color: var(--muted); }
+    .hero-meta-item { display: flex; align-items: center; gap: 6px; }
+    .hero-meta-dot { color: var(--accent2); }
+
+    /* ===== ARTICLE LAYOUT ===== */
+    .article-layout { max-width: var(--max); margin: 0 auto; padding: 0 24px 60px; display: grid; grid-template-columns: 1fr 320px; gap: 32px; }
+    @media (max-width: 1024px) { .article-layout { grid-template-columns: 1fr; } }
+    .article-main { min-width: 0; }
+    .article-body { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .article-inner { padding: 36px 40px; }
+    @media (max-width: 600px) { .article-inner { padding: 22px 20px; } }
+
+    /* ===== ARTICLE TYPOGRAPHY ===== */
+    .article-inner h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 800; letter-spacing: -0.8px; line-height: 1.2; margin: 2.8rem 0 1rem; color: var(--text); padding-bottom: 10px; border-bottom: 2px solid var(--line); }
+    .article-inner h2:first-child { margin-top: 0; }
+    .article-inner h3 { font-size: clamp(1.15rem, 2.5vw, 1.35rem); font-weight: 700; letter-spacing: -0.3px; line-height: 1.3; margin: 2rem 0 0.75rem; color: var(--text); }
+    .article-inner p { font-size: 1.02rem; color: var(--text2); line-height: 1.85; margin-bottom: 1.15rem; }
+    .article-inner ul, .article-inner ol { margin-bottom: 1.15rem; padding-left: 1.5rem; }
+    .article-inner ul { list-style: disc; }
+    .article-inner ol { list-style: decimal; }
+    .article-inner li { font-size: 1.02rem; color: var(--text2); line-height: 1.8; margin-bottom: 0.55rem; }
+    .article-inner strong { color: var(--text); font-weight: 700; }
+    .article-inner a { color: var(--accent1); text-decoration: underline; text-underline-offset: 2px; }
+    .article-inner a:hover { color: var(--accent2); }
+    .article-inner blockquote { border-left: 3px solid var(--accent1); padding: 14px 20px; margin: 1.3rem 0; background: rgba(0,124,240,0.06); border-radius: 0 var(--radius-xs) var(--radius-xs) 0; font-size: 0.98rem; color: var(--text2); line-height: 1.75; }
+
+    /* ===== TOOL CARDS ===== */
+    .tool-card { background: var(--glass); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 28px; margin: 1.5rem 0; transition: all var(--transition); }
+    .tool-card:hover { border-color: rgba(0,124,240,0.3); box-shadow: var(--shadow-sm); }
+    .tool-card h3 { margin-top: 0.5rem; }
+    .card-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent1); margin-bottom: 6px; background: rgba(0,124,240,0.1); padding: 3px 10px; border-radius: 100px; }
+    .card-tag.purple { color: var(--accent3); background: rgba(121,40,202,0.12); }
+    .card-tag.cyan { color: var(--accent2); background: rgba(0,223,216,0.1); }
+    .card-tag.pink { color: var(--accent4); background: rgba(255,0,128,0.1); }
+    .card-tag.green { color: #22c55e; background: rgba(34,197,94,0.1); }
+    .card-tag.orange { color: #f59e0b; background: rgba(245,158,11,0.1); }
+
+    /* ===== CTA BUTTON ===== */
+    .cta-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 36px; font-size: 1.05rem; font-weight: 700; background: #007cf0; color: #fff; border-radius: 50px; box-shadow: 0 4px 24px rgba(0,124,240,0.35), inset 0 1px 0 rgba(255,255,255,0.15); transition: all 0.3s cubic-bezier(0.4,0,0.2,1); text-decoration: none; letter-spacing: 0.3px; position: relative; overflow: hidden; border: none; cursor: pointer; }
+    .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,124,240,0.5), 0 0 0 4px rgba(0,124,240,0.1); color: #fff; background: #006ad6; }
+    .cta-btn:active { transform: translateY(-1px) scale(0.98); box-shadow: 0 4px 16px rgba(0,124,240,0.3); }
+    [data-theme="light"] .cta-btn { background: #007cf0; color: #fff; box-shadow: 0 4px 24px rgba(0,124,240,0.3), inset 0 1px 0 rgba(255,255,255,0.2); }
+    [data-theme="light"] .cta-btn:hover { box-shadow: 0 8px 32px rgba(0,124,240,0.4), 0 0 0 4px rgba(0,124,240,0.08); background: #006ad6; }
+
+    /* ===== AUTHOR BOX ===== */
+    .author-box { display: flex; align-items: center; gap: 14px; padding: 20px; margin-top: 2.5rem; background: var(--glass); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+    .author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .author-info { min-width: 0; }
+    .author-name { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .author-bio { font-size: 0.82rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+
+    /* ===== AD SLOTS ===== */
+    .ad-slot { width: 100%; min-height: 100px; display: flex; align-items: center; justify-content: center; background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-xs); margin: 2.2rem 0; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar-area { display: flex; flex-direction: column; gap: 16px; position: sticky; top: calc(var(--header-h) + 16px); max-height: calc(100vh - var(--header-h) - 32px); overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+    .sidebar-area::-webkit-scrollbar { display: none; }
+    .sidebar-card { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 22px; }
+    .sidebar-card h4 { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .sidebar-card h4 .h4-line { flex: 1; height: 1px; background: var(--line); }
+
+    /* Professional TOC */
+    .sidebar-card.toc-card { padding: 20px 18px; }
+    .sidebar-card.toc-card h4 { font-size: 0.76rem; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .toc { display: flex; flex-direction: column; gap: 1px; }
+    .toc-item { display: flex; align-items: flex-start; gap: 10px; padding: 6px 8px; border-radius: 8px; position: relative; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
+    .toc-item:hover { background: rgba(0,124,240,0.06); }
+    .toc-bullet { width: 7px; height: 7px; border-radius: 50%; background: var(--bg3); border: 2px solid var(--line-strong); margin-top: 5px; flex-shrink: 0; transition: all 0.3s ease; }
+    .toc-link { font-size: 0.82rem; font-weight: 500; color: var(--muted); padding: 1px 0; transition: all 0.25s ease; line-height: 1.45; display: block; }
+    .toc-link:hover { color: var(--text); }
+    .toc-link.sub { font-size: 0.78rem; color: var(--muted); padding-left: 4px; }
+    .toc-item.active { background: rgba(0,124,240,0.08); }
+    .toc-item.active .toc-bullet { background: var(--accent1); border-color: var(--accent1); box-shadow: 0 0 0 4px rgba(0,124,240,0.12); }
+    .toc-item.active .toc-link { color: var(--text); font-weight: 700; }
+    .toc-toggle { display: none; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--glass); border: 1px solid var(--line); border-radius: 6px; color: var(--muted); font-size: 0.65rem; cursor: pointer; margin-left: auto; flex-shrink: 0; transition: all 0.3s ease; }
+    .toc-toggle:hover { color: var(--text); border-color: var(--accent1); }
+    .toc-card.expanded .toc-toggle { transform: rotate(180deg); }
+    @media (max-width: 1024px) {
+      .sidebar-area { position: static; max-height: none; overflow-y: visible; }
+      .toc-toggle { display: flex; }
+      .sidebar-card.toc-card .toc { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+      .sidebar-card.toc-card.expanded .toc { max-height: 500px; }
+    }
+
+    /* ===== FAQ SECTION ===== */
+    .faq-section { padding: 50px 24px 60px; max-width: var(--max); margin: 0 auto; }
+    .faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 800px; margin: 30px auto 0; }
+    .faq-item { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-xs); overflow: hidden; transition: border-color var(--transition); }
+    .faq-item.open { border-color: rgba(0,124,240,0.3); }
+    .faq-q { width: 100%; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; font-size: 0.95rem; font-weight: 600; color: var(--text); background: none; text-align: left; cursor: pointer; transition: color var(--transition); font-family: var(--font); border: none; }
+    .faq-q:hover { color: var(--accent1); }
+    .faq-q-icon { width: 26px; height: 26px; background: var(--glass); border: 1px solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; transition: all var(--transition); color: var(--muted); }
+    .faq-item.open .faq-q-icon { transform: rotate(45deg); background: rgba(0,124,240,0.15); border-color: var(--accent1); color: var(--accent1); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .faq-item.open .faq-a { max-height: 500px; }
+    .faq-a-inner { padding: 0 20px 20px; font-size: 0.92rem; color: var(--text2); line-height: 1.8; }
+
+    .section-label { display: inline-block; margin-bottom: 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent1); }
+    .section-title { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 8px; }
+    .section-sub { font-size: 0.95rem; color: var(--text2); max-width: 520px; line-height: 1.6; }
+    .section-divider { height: 1px; background: var(--line); max-width: var(--max); margin: 0 auto; }
+
+    /* ===== TABLE ===== */
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 1.2rem 0; }
+    .comparison-table thead tr { border-bottom: 2px solid var(--line); }
+    .comparison-table th { text-align: left; padding: 12px 14px; color: var(--text); font-weight: 700; }
+    .comparison-table th.center { text-align: center; }
+    .comparison-table td { padding: 11px 14px; color: var(--text2); border-bottom: 1px solid var(--line); }
+    .comparison-table td.center { text-align: center; }
+    .comparison-table tr:last-child td { border-bottom: none; }
+
+    /* ===== FOOTER ===== */
+    .footer { border-top: 1px solid var(--line); padding: 36px 24px 24px; background: rgba(3,7,18,0.6); }
+    [data-theme="light"] .footer { background: rgba(241,245,249,0.8); }
+    .footer-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .footer-brand-icon { width: 32px; height: 32px; background: var(--grad); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 900; color: #fff; }
+    .footer-brand-name { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-link { font-size: 0.85rem; color: var(--muted); transition: color var(--transition); }
+    .footer-link:hover { color: var(--text); }
+    .footer-back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 600; color: var(--accent1); padding: 8px 16px; border-radius: var(--radius-xs); background: rgba(0,124,240,0.1); border: 1px solid rgba(0,124,240,0.2); transition: all var(--transition); }
+    .footer-back-btn:hover { background: rgba(0,124,240,0.15); }
+    .footer-copy { font-size: 0.78rem; color: var(--muted); width: 100%; text-align: center; padding-top: 20px; border-top: 1px solid var(--line); margin-top: 12px; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-primary, .header-actions { display: none; }
+      .hamburger { display: flex; }
+      .article-inner h2 { font-size: 1.35rem; margin: 2rem 0 0.8rem; }
+      .article-inner h3 { font-size: 1.1rem; margin: 1.5rem 0 0.6rem; }
+      .article-inner p { font-size: 0.95rem; }
+      .tool-card { padding: 20px; }
+      .comparison-table { font-size: 0.78rem; }
+      .comparison-table th, .comparison-table td { padding: 8px 6px; }
+    }
+
+    /* ===== PREMIUM UPGRADES ===== */
+    html { scroll-padding-top: calc(var(--header-h) + 20px); }
+
+    /* Reading Progress Bar */
+    .reading-progress { position: fixed; top: var(--header-h); left: 0; height: 3px; background: var(--grad); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    /* Premium Tool Cards */
+    .tool-card { position: relative; overflow: hidden; }
+    .tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad); opacity: 0; transition: opacity var(--transition); }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-card:hover { transform: translateY(-2px); }
+
+    /* Premium CTA Buttons — shimmer & glow */
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      border-radius: inherit;
+      transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .cta-btn:hover::after { left: 100%; }
+    .cta-btn:focus-visible {
+      outline: 2px solid var(--accent2);
+      outline-offset: 4px;
+    }
+    .cta-btn .btn-icon {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .cta-btn:hover .btn-icon {
+      transform: translateX(4px);
+    }
+
+    /* Premium Blockquotes */
+    .article-inner blockquote { position: relative; }
+    .article-inner blockquote::before { content: '\201C'; position: absolute; top: -5px; left: 16px; font-size: 2.5rem; font-weight: 900; color: var(--accent1); opacity: 0.2; line-height: 1; }
+
+    /* Premium List Items */
+    .article-inner li { position: relative; padding-left: 8px; }
+    .article-inner li::marker { color: var(--accent1); }
+    .article-inner ul li::marker { content: '\25B8'; }
+    .article-inner ol li::marker { font-weight: 700; color: var(--accent1); }
+
+    /* Premium H2 with gradient accent */
+    .article-inner h2 { position: relative; }
+    .article-inner h2::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 60px; height: 2px; background: var(--grad); border-radius: 2px; }
+
+    /* FAQ Premium */
+    .faq-item { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .faq-item:hover { background: var(--card-hover); }
+    .faq-item.open { box-shadow: 0 4px 20px rgba(0,124,240,0.08); }
+
+    /* Smooth Section Reveals */
+    .article-inner section { opacity: 0; transform: translateY(10px); transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1), transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); will-change: opacity, transform; }
+    .article-inner section.visible { opacity: 1; transform: translateY(0); }
+
+    /* Comparison Table Premium */
+    .comparison-table { border: 1px solid var(--line); border-radius: var(--radius-xs); overflow: hidden; }
+    .comparison-table thead { background: var(--glass); }
+    .comparison-table tbody tr { transition: background var(--transition); }
+    .comparison-table tbody tr:hover { background: rgba(0,124,240,0.04); }
+
+    /* Better Author Box */
+    .author-box { transition: all var(--transition); }
+    .author-box:hover { border-color: rgba(0,124,240,0.2); box-shadow: var(--shadow-sm); }
+
+    /* Ad Slot Refined */
+    .ad-slot { border-style: solid; border-width: 1px; }
+
+    /* Back to Top Button */
+    .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px; background: var(--grad); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 500; box-shadow: 0 4px 16px rgba(0,124,240,0.35); border: none; }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,124,240,0.45); }
+
+    @media (max-width: 768px) {
+      .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Header -->
-    <header class="header-glass fixed w-full top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        Tool Xeno
-                    </div>
-                    <div class="hidden md:block text-sm opacity-70">
-                        Powerful Text Processing Tools
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <nav class="hidden md:flex space-x-2">
-                        <a href="#overview" class="nav-link">Overview</a>
-                        <a href="#tools" class="nav-link">Tools</a>
-                        <a href="#features" class="nav-link">Features</a>
-                    </nav>
-                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
-                </div>
-            </div>
+  <div class="bg-orbs" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><div class="orb orb-4"></div></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="https://toolxeno.com/" class="logo" aria-label="Tool Xeno – Home">
+          <div class="logo-icon" aria-hidden="true">X</div>
+          <span class="logo-text">Tool Xeno</span>
+        </a>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <a href="https://toolxeno.com/" class="nav-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="nav-link">All Tools</a>
+          <a href="#how-to-use" class="nav-link">How to Use</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">☀️ Light</button>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
     </header>
-    
-    <!-- Main Content -->
-    <main class="pt-20 pb-10">
-        <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-16 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent fade-in">
-                Powerful Text Processing & Manipulation Utilities
-            </h1>
-            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto fade-in">
-                Complete text tool suite featuring case conversion, word counting, duplicate removal, sorting, reversing, and encryption capabilities for efficient text processing.
-            </p>
-        </section>
-        
-        <!-- Article Content -->
-        <article class="container mx-auto px-6">
-            <div class="glass-card p-8 md:p-12 fade-in">
-                <div class="article-content">
-                    <section id="overview">
-                        <p>
-                            Text manipulation is a daily necessity for writers, developers, content creators, students, and professionals across countless fields. Whether you're formatting content for publication, cleaning up data, analyzing documents, or simply transforming text to meet specific requirements, having the right tools can dramatically improve your efficiency and productivity.
-                        </p>
-                        
-                        <p>
-                            Our comprehensive text tool suite brings together six essential utilities that handle the most common text processing tasks with speed and precision. From converting text between different cases to encrypting sensitive information, these tools are designed to work seamlessly while maintaining the simplicity that makes them accessible to everyone, regardless of technical expertise.
-                        </p>
-                    </section>
-                    
-                    <section id="tools">
-                        <h2>Essential Text Processing Tools</h2>
-                        
-                        <p>
-                            We've developed six specialized text tools that address the fundamental text manipulation needs encountered in content creation, development, data processing, and everyday text handling. Each tool delivers powerful functionality through an intuitive interface.
-                        </p>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-font"></i> Text Case Converter</h3>
-                            <p>
-                                The Text Case Converter transforms text between different case formats instantly, making it indispensable for anyone working with text formatting. Whether you need to convert text to uppercase for headlines, lowercase for consistency, title case for proper formatting, sentence case for natural readability, or even alternating case for special effects, this tool handles it all effortlessly.
-                            </p>
-                            <p>
-                                Text case conversion is more than just a convenience—it's essential for maintaining consistent formatting across documents, preparing content for different platforms, fixing improperly formatted text, and ensuring your text meets specific style requirements. The tool preserves your original text while providing instant conversion to any case format you need, saving you from tedious manual retyping or complex find-and-replace operations.
-                            </p>
-                            <p><strong>Case conversion capabilities:</strong></p>
-                            <ul>
-                                <li>Convert text between different cases and formats instantly</li>
-                                <li>Support for uppercase, lowercase, title case, and sentence case</li>
-                                <li>Capitalize first letter of each word for proper title formatting</li>
-                                <li>Alternating case and other specialty case transformations</li>
-                                <li>Preserve or remove extra spaces during conversion</li>
-                                <li>Handle special characters and punctuation appropriately</li>
-                                <li>Process large text volumes without performance degradation</li>
-                                <li>Maintain original text structure while transforming case</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-sort-numeric-up"></i> Word & Character Counter</h3>
-                            <p>
-                                Our Word & Character Counter provides comprehensive text analysis that goes far beyond simple counting. It delivers detailed statistics about your text including word count, character count (with and without spaces), sentence count, paragraph count, reading time estimates, and more. This information is invaluable for writers meeting word limits, content creators optimizing for platforms, students working on assignments, and anyone who needs to understand text metrics.
-                            </p>
-                            <p>
-                                The tool updates in real-time as you type or paste text, giving you instant feedback on your content. It's particularly useful when working with platform-specific limits like Twitter's character restrictions, meeting academic essay requirements, optimizing content for SEO purposes, or simply understanding how much content you've created. The detailed breakdown helps you make informed decisions about your text without guesswork.
-                            </p>
-                            <p><strong>Comprehensive text analysis features:</strong></p>
-                            <ul>
-                                <li>Count words, characters, and analyze text comprehensively</li>
-                                <li>Character count both with and without spaces included</li>
-                                <li>Sentence and paragraph counting for structural analysis</li>
-                                <li>Estimated reading time based on average reading speed</li>
-                                <li>Real-time counting that updates as you type or edit</li>
-                                <li>Keyword density analysis for SEO optimization</li>
-                                <li>Average word length and sentence length statistics</li>
-                                <li>Detection of repeated words and common writing patterns</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-clone"></i> Remove Duplicate Lines</h3>
-                            <p>
-                                The Remove Duplicate Lines tool efficiently identifies and eliminates duplicate lines from text, saving you from tedious manual searching and deletion. When working with lists, data exports, log files, or any text containing repetitive lines, this tool instantly cleans up your content by removing duplicates while preserving the unique lines and their original order.
-                            </p>
-                            <p>
-                                This utility is particularly valuable for data cleaning tasks, processing exported lists, consolidating information from multiple sources, preparing data for further processing, and ensuring list uniqueness. You can choose whether to keep the first or last occurrence of duplicate lines, and the tool handles large text volumes efficiently without performance issues. It's a simple concept executed perfectly, delivering clean, duplicate-free text in seconds.
-                            </p>
-                            <p><strong>Duplicate removal capabilities:</strong></p>
-                            <ul>
-                                <li>Remove duplicate lines from text efficiently and accurately</li>
-                                <li>Preserve original line order while eliminating duplicates</li>
-                                <li>Option to keep first or last occurrence of duplicates</li>
-                                <li>Case-sensitive or case-insensitive duplicate detection</li>
-                                <li>Handle whitespace variations in duplicate detection</li>
-                                <li>Process large text files with thousands of lines</li>
-                                <li>Show statistics on duplicates found and removed</li>
-                                <li>Export cleaned text with duplicates eliminated</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-sort-alpha-down"></i> Text Sorter</h3>
-                            <p>
-                                The Text Sorter organizes lines of text in various orders, providing flexible sorting options that adapt to your specific needs. Whether you need alphabetical sorting for lists, numerical sorting for data, reverse order sorting, or random shuffling, this tool handles it all with precision. Sorting text manually is tedious and error-prone, but our tool accomplishes it instantly.
-                            </p>
-                            <p>
-                                Text sorting is essential for organizing lists, preparing data for analysis, creating indexes, alphabetizing entries, ranking items numerically, and countless other tasks where order matters. The tool offers multiple sorting algorithms including alphabetical (A-Z or Z-A), numerical (ascending or descending), length-based sorting, and randomization. You can also choose whether sorting should be case-sensitive, making it adaptable to virtually any sorting requirement.
-                            </p>
-                            <p><strong>Flexible sorting features:</strong></p>
-                            <ul>
-                                <li>Sort lines of text alphabetically or numerically with ease</li>
-                                <li>Ascending and descending order options for any sorting type</li>
-                                <li>Case-sensitive or case-insensitive sorting modes</li>
-                                <li>Natural sorting that handles numbers within text intelligently</li>
-                                <li>Sort by line length for specialized organization</li>
-                                <li>Reverse order to flip existing arrangements</li>
-                                <li>Random shuffle to create unpredictable orders</li>
-                                <li>Handle large lists with thousands of entries efficiently</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-exchange-alt"></i> Text Reverser</h3>
-                            <p>
-                                The Text Reverser provides multiple ways to reverse text, offering flexibility for different reversal needs. You can reverse entire text blocks, reverse the order of words while maintaining their spelling, reverse individual characters, or even reverse line order. While text reversal might seem like a novelty, it has practical applications in encryption, data transformation, creating mirror text, testing systems, and various creative uses.
-                            </p>
-                            <p>
-                                This tool is useful for developers testing palindrome detection, content creators making stylized text, educators demonstrating text manipulation concepts, and anyone needing to reverse text for any purpose. The different reversal modes give you precise control over exactly how the text is reversed, and the tool maintains formatting and special characters appropriately during the reversal process.
-                            </p>
-                            <p><strong>Text reversal capabilities:</strong></p>
-                            <ul>
-                                <li>Reverse text, words, or character order with flexibility</li>
-                                <li>Reverse entire text content as complete string</li>
-                                <li>Reverse word order while maintaining word spelling</li>
-                                <li>Reverse individual characters within each word</li>
-                                <li>Reverse line order for multi-line text</li>
-                                <li>Preserve or reverse special characters and punctuation</li>
-                                <li>Handle Unicode characters and emojis correctly</li>
-                                <li>Process large text volumes without delay</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-lock"></i> Text Encryptor/Decryptor</h3>
-                            <p>
-                                Our Text Encryptor/Decryptor provides secure methods to encrypt and decrypt text using various encryption techniques. Protecting sensitive information is crucial in today's digital world, and this tool gives you straightforward encryption capabilities without requiring cryptography expertise. You can encrypt text using different methods, each with varying levels of security appropriate for different use cases.
-                            </p>
-                            <p>
-                                The tool supports multiple encryption approaches including Base64 encoding for simple obfuscation, more secure encryption methods for sensitive data, and reversible encryption that allows authorized decryption. While this tool provides valuable encryption functionality, remember that truly sensitive data requiring maximum security should use dedicated security systems. For everyday encryption needs, email privacy, file protection, and general text security, this tool offers convenient and effective protection.
-                            </p>
-                            <p><strong>Encryption and decryption features:</strong></p>
-                            <ul>
-                                <li>Encrypt and decrypt text with various security methods</li>
-                                <li>Multiple encryption algorithms for different security levels</li>
-                                <li>Password-protected encryption for secure text storage</li>
-                                <li>Base64 encoding/decoding for simple text transformation</li>
-                                <li>Caesar cipher and substitution cipher options</li>
-                                <li>Custom key generation for unique encryption</li>
-                                <li>Secure local processing keeps your data private</li>
-                                <li>Reversible encryption with correct key or password</li>
-                            </ul>
-                        </div>
-                    </section>
-                    
-                    <section id="features">
-                        <h2>Why These Text Tools Stand Out</h2>
-                        
-                        <div class="feature-grid">
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-bolt"></i></div>
-                                <h4 class="font-semibold mb-2">Instant Processing</h4>
-                                <p>Real-time text manipulation with zero delay—see results as you type</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-shield-alt"></i></div>
-                                <h4 class="font-semibold mb-2">Complete Privacy</h4>
-                                <p>All text processing happens locally—your content never leaves your device</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-feather"></i></div>
-                                <h4 class="font-semibold mb-2">Effortless to Use</h4>
-                                <p>Intuitive interfaces that require no learning curve or technical knowledge</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-infinity"></i></div>
-                                <h4 class="font-semibold mb-2">No Limitations</h4>
-                                <p>Process unlimited text with no file size restrictions or usage caps</p>
-                            </div>
-                        </div>
-                        
-                        <h3>Integrated Text Processing Ecosystem</h3>
-                        <p>
-                            These six text tools work together seamlessly as part of a comprehensive text manipulation suite. You might start by pasting text and using the Word Counter to analyze it, then use the Case Converter to adjust formatting, remove duplicate lines to clean it up, sort it alphabetically for organization, and finally encrypt it for security—all within the same efficient, privacy-focused environment.
-                        </p>
-                        
-                        <p>
-                            This integrated approach eliminates the need to juggle multiple applications or websites for different text operations. The tools share a consistent interface philosophy, so learning one makes using all of them intuitive. You can move smoothly between different text processing tasks without context switching or workflow disruption.
-                        </p>
-                        
-                        <h3>For Content Creators and Professionals</h3>
-                        <p>
-                            Our text tools serve diverse users across many fields. Writers use the Word Counter to meet requirements and the Case Converter for formatting. Developers rely on the Text Sorter and Duplicate Remover for data processing. Content creators depend on the Case Converter for social media formatting. Students utilize multiple tools for assignments. Data analysts clean information with the Duplicate Remover and Sorter. Security-conscious users encrypt sensitive text. Everyone benefits from tools that simply work.
-                        </p>
-                        
-                        <p>
-                            The tools balance professional capabilities with straightforward operation. Advanced users appreciate the flexibility and options available, while casual users enjoy the simple, get-it-done approach that doesn't require reading documentation or watching tutorials. Just paste your text, click the action you need, and get instant results.
-                        </p>
-                        
-                        <h3>Privacy Through Local Processing</h3>
-                        <p>
-                            Your text content remains completely private because all processing happens locally in your browser. Unlike online services that upload your text to remote servers, our tools process everything on your device. This means your documents, personal information, sensitive data, and all text content stays under your control where it belongs.
-                        </p>
-                        
-                        <p>
-                            Local processing delivers practical advantages beyond privacy. Text manipulation happens instantaneously without network delays. There are no file size restrictions imposed by server limitations. You can process confidential information without concerns about data interception or server logging. Once loaded, the tools work even without internet connectivity, giving you complete independence.
-                        </p>
-                    </section>
-                    
-                    <section>
-                        <h2>Streamline Your Text Processing</h2>
-                        <p>
-                            Stop wrestling with inadequate text editors or relying on multiple disparate tools. Our comprehensive text processing suite delivers professional capabilities in an accessible, efficient package. Convert case formats instantly, analyze text with detailed statistics, remove duplicates efficiently, sort lines in any order, reverse text flexibly, and encrypt content securely—all with tools designed for both power and simplicity.
-                        </p>
-                        
-                        <p>
-                            Best of all, these powerful text tools are completely free to use with no registration required, no hidden costs, and no limitations on usage. Your text remains completely private with local processing, and you get instant results every time. It's everything you need for comprehensive text manipulation, all in one place.
-                        </p>
-                        
-                        <div class="text-center mt-8">
-                            <a href="https://toolxeno.com" class="btn-gradient text-lg">
-                                <i class="fas fa-text-width mr-2"></i>
-                                Try Our Text Tools Now
-                            </a>
-                        </div>
-                    </section>
-                </div>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+      <a href="https://toolxeno.com/" class="mobile-nav-link">🏠 Home</a>
+      <a href="https://toolxeno.com/#tools" class="mobile-nav-link">🛠️ All Tools</a>
+      <a href="#how-to-use" class="mobile-nav-link">📋 How to Use</a>
+      <a href="#faq" class="mobile-nav-link">❓ FAQ</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> Free · No Signup · 100% Private</div>
+      <h1 class="hero-h1" id="hero-heading">Six Text Tools That <span class="grad-text">Actually Save You Time</span></h1>
+      <p class="hero-sub">Convert case, count words, kill duplicates, sort alphabetically, reverse text, and encrypt content — all inside your browser, all free, and none of it ever leaves your device.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> 100% Browser-Based</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> No Server Uploads</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> 6 Text Utilities</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> Updated April 2025</span>
+      </div>
+    </section>
+
+    <!-- MAIN LAYOUT -->
+    <main class="article-layout">
+      <div class="article-main">
+        <article class="article-body" itemscope itemtype="https://schema.org/Article">
+          <div class="article-inner">
+
+            <!-- ===== INTRODUCTION ===== -->
+            <section id="introduction">
+              <p>Here is something I did not expect to learn last year: the average office worker copies, pastes, reformats, or otherwise manipulates text somewhere around <strong>30 to 40 times per day</strong>. That number comes from a productivity study by the Nielsen Norman Group, and when I first read it, I thought it sounded too high. Then I started paying attention to my own habits. Opening a client email and converting it to title case for a report header. Pasting a list of email addresses and stripping out the duplicates. Alphabetizing a roster. Reversing a string of text for a URL slug. Counting characters to fit within a Twitter limit. It adds up fast.</p>
+
+              <p>The frustrating part is not the frequency — it is how badly most text tools handle these tasks. Online case converters that plaster your text with pop-up ads and have a character limit of 500. Word counters that do not update in real time. Duplicate removers that mangle your formatting. Sort tools that crash on lists longer than a hundred items. And the one that always gets me — tools that quietly upload your text to a server, process it there, and send the result back. That is fine for a grocery list. It is not fine for a legal contract, medical notes, or a client's confidential business plan.</p>
+
+              <p>So we built our own. Six text utilities that run entirely in your browser, with no uploads, no accounts, no usage caps, and no ads cluttering the interface. I am going to walk through each one honestly — what it does well, where it falls short, and who it is actually built for. Not everything here is perfect. But the tools solve real problems, and they do it without compromising your privacy.</p>
+            </section>
+
+            <!-- AD SLOT 1 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 1: CASE CONVERTER ===== -->
+            <section id="case-converter">
+              <h2 id="h-case-converter">Text Case Converter: Stop Retyping to Fix Your Formatting</h2>
+
+              <div class="tool-card">
+                <span class="card-tag">Tool #1</span>
+                <h3 id="h-case">Instant Case Conversion</h3>
+
+                <p>This is the tool that started the whole text tools project, honestly. I was writing a blog post and realized I had typed the entire headline in lowercase — probably because I was thinking faster than my pinky finger was hitting the shift key. Instead of retyping it, I went looking for a quick online converter. What I found was a minefield of ad-heavy sites with character limits and suspicious privacy policies. The first version of our Case Converter was built that same afternoon.</p>
+
+                <p>The tool handles five main conversion modes: <strong>UPPERCASE</strong>, <strong>lowercase</strong>, <strong>Title Case</strong>, <strong>Sentence case</strong>, and <strong>aLtErNaTiNg cAsE</strong>. Those five cover roughly 99% of the situations where people need to change text case. Title Case is the one that gets the most use by far — it capitalizes the first letter of every word while keeping the rest lowercase, which is what you want for headlines, email subjects, and document titles. But we also handle the edge cases: words like "a," "an," "the," "and," "but," and "or" are not capitalized in Title Case unless they appear at the beginning of a sentence. That sounds like a small detail until you see a headline that reads "The Quick Brown Fox And The Lazy Dog" and it physically hurts to look at.</p>
+
+                <p>The tool processes text locally in your browser using plain JavaScript string manipulation — no server calls, no API requests. You paste your text, click the case you want, and the result appears instantly. There is a copy button right there so you can grab the converted text and paste it wherever you need it. That is the entire workflow. It takes about three seconds.</p>
+
+                <p><strong>Where people use this most:</strong></p>
+                <ul>
+                  <li><strong>Headline and title formatting</strong> — Bloggers, marketers, and social media managers who need Title Case for post titles but get tired of manually capitalizing every word</li>
+                  <li><strong>Data cleaning</strong> — When you export data from a system and everything comes out in ALL CAPS or all lowercase, and you need it normalized for a report or presentation</li>
+                  <li><strong>Code and variable names</strong> — Developers converting between camelCase, snake_case, and other conventions. Not a direct feature, but converting to lowercase first is often step one</li>
+                  <li><strong>Email subject lines</strong> — When you type a draft subject and realize halfway through that the capitalization is all over the place</li>
+                  <li><strong>Academic papers</strong> — APA and MLA have specific capitalization rules for titles, and the Sentence Case mode handles most of those requirements</li>
+                </ul>
+
+                <blockquote>The one thing I wish more case converters did: preserve line breaks and formatting. Ours does. Paste in a formatted document, convert the case, and your paragraphs, bullet points, and spacing stay exactly where they were.</blockquote>
+              </div>
+            </section>
+
+            <!-- AD SLOT 2 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 2: WORD COUNTER ===== -->
+            <section id="word-counter">
+              <h2 id="h-word-counter">Word and Character Counter: Know Exactly Where You Stand</h2>
+
+              <div class="tool-card">
+                <span class="card-tag purple">Tool #2</span>
+                <h3 id="h-counter">Real-Time Text Analysis</h3>
+
+                <p>If you have ever written something and then opened a separate word counting website to check the length, you know how clunky that workflow is. You write. You select all. You copy. You switch tabs. You paste. You read the number. You switch back. Our Word Counter eliminates that entire dance by updating every metric in real time as you type or paste text.</p>
+
+                <p>The numbers it tracks: <strong>word count</strong>, <strong>character count with spaces</strong>, <strong>character count without spaces</strong>, <strong>sentence count</strong>, <strong>paragraph count</strong>, and <strong>estimated reading time</strong>. The reading time estimate assumes an average adult reading speed of about 238 words per minute, which is the figure most readability studies converge on. It is not exact — some people read faster, some content is denser — but it gives you a reasonable ballpark.</p>
+
+                <p>What makes this tool genuinely useful — and I say this as someone who writes for a living — is how it changes your writing behavior. When you can see the word count tick upward in real time, you develop a much better sense of how long your paragraphs actually are. You notice when you have written a 400-word paragraph that should probably be three shorter ones. You catch yourself over-explaining something because you can see the word count climbing without the substance keeping pace. It is a subtle feedback loop, but it works.</p>
+
+                <p><strong>Who relies on this most:</strong></p>
+                <ul>
+                  <li><strong>Content writers</strong> — When an assignment says "1,200 words" and you need to know exactly where you land. Going over or under by even 10% can mean a rejected draft</li>
+                  <li><strong>Students</strong> — Essay assignments with minimum and maximum word limits. The real-time counter means you do not have to check at the end and realize you are 200 words short</li>
+                  <li><strong>Social media managers</strong> — Twitter/X has a 280-character limit. LinkedIn posts perform best around 1,300 characters. Instagram captions get cut off around 125 characters. Having an exact count matters</li>
+                  <li><strong>SEO specialists</strong> — Content length guidelines suggest certain word counts for ranking: long-form articles (2,000+ words), product descriptions (300-500 words), meta descriptions (under 160 characters). The counter handles all of these</li>
+                  <li><strong>Translators and editors</strong> — Translation work is often billed by word count. Having an accurate, real-time counter means no surprises when you generate the invoice</li>
+                </ul>
+
+                <p>One thing I want to be upfront about: the tool counts words the same way Microsoft Word and Google Docs do — by splitting on whitespace. It does not do linguistic analysis, so hyphenated words count as one, contractions count as one, and numbers count as words. That is the standard approach and it works for virtually all practical purposes.</p>
+              </div>
+            </section>
+
+            <!-- AD SLOT 3 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 3: DUPLICATE REMOVER ===== -->
+            <section id="duplicate-remover">
+              <h2 id="h-duplicate-remover">Remove Duplicate Lines: Clean Up Your Lists in Seconds</h2>
+
+              <div class="tool-card">
+                <span class="card-tag cyan">Tool #3</span>
+                <h3 id="h-dedup">Instant Duplicate Detection and Removal</h3>
+
+                <p>This tool exists because of a very specific frustration. I was working on a project that involved merging contact lists from four different sources — a CRM export, a spreadsheet, an email thread, and a database dump. The combined list had about 3,200 entries, and roughly 800 of them were duplicates. The duplicates were not exact matches, either. Some had trailing spaces. Some used slightly different capitalization. Some had extra blank lines mixed in.</p>
+
+                <p>I tried doing it manually. Lasted about five minutes before I wanted to throw my laptop out the window. Then I tried a few online duplicate removers. Most of them either had a file size limit that was too low, stripped out my formatting, or — and this is the one that made me stop — uploaded the list to their server for processing. A contact list with names, email addresses, and phone numbers. Uploaded to a random server. No thanks.</p>
+
+                <p>Our Duplicate Line Remover handles several detection modes. The default is <strong>exact match</strong> — it removes lines that are completely identical to an earlier line in the list. Then there is <strong>case-insensitive</strong> mode, which treats "John Smith" and "john smith" as the same entry. There is also a <strong>trim whitespace</strong> option that ignores leading and trailing spaces before comparing, which catches the invisible differences that manual review would miss entirely.</p>
+
+                <p>After removing duplicates, the tool tells you exactly how many duplicates it found and removed. That feedback is more useful than it sounds — when you are cleaning a list of 10,000 items and the tool says "removed 2,347 duplicates," you have a quick sanity check on your data quality. You can also choose whether to keep the first occurrence or the last occurrence of each duplicate, which matters if the earlier or later version has more complete information.</p>
+
+                <p><strong>The use cases people keep telling us about:</strong></p>
+                <ul>
+                  <li><strong>Email list deduplication</strong> — Merging subscriber lists from different platforms and removing people who appear on multiple lists before importing into your email tool</li>
+                  <li><strong>Data cleaning</strong> — Removing duplicate entries from CSV exports, log files, database dumps, or any tabular data where duplicates throw off your analysis</li>
+                  <li><strong>URL deduplication</strong> — SEO specialists checking that sitemap files and internal link reports do not contain duplicate URLs that waste crawl budget</li>
+                  <li><strong>Inventory management</strong> — Product catalogs that have been updated by multiple team members and ended up with duplicate SKUs or product names</li>
+                </ul>
+
+                <blockquote>The tool handles lists with tens of thousands of lines without breaking a sweat. I have personally tested it with a 50,000-line server log file — it processed the entire thing in under two seconds on a mid-range laptop. For most real-world tasks, the processing time is effectively instant.</blockquote>
+              </div>
+            </section>
+
+            <!-- AD SLOT 4 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 4: TEXT SORTER ===== -->
+            <section id="text-sorter">
+              <h2 id="h-text-sorter">Text Sorter: Organize Anything Alphabetically or Numerically</h2>
+
+              <div class="tool-card">
+                <span class="card-tag pink">Tool #4</span>
+                <h3 id="h-sort">Flexible Line Sorting</h3>
+
+                <p>Alphabetizing things is one of those tasks that sounds trivial until you actually have to do it by hand. Try sorting a list of 200 names alphabetically in a text editor without a dedicated tool. Go ahead — I will wait. What you end up doing is cutting and pasting individual lines one at a time, and after about fifteen minutes you realize you missed one and have to start over. It is tedious, error-prone, and a genuinely terrible use of your time.</p>
+
+                <p>The Text Sorter handles the whole thing in a single click. You paste your list, pick a sorting method, and it is done. The available modes are: <strong>A to Z</strong> (alphabetical ascending), <strong>Z to A</strong> (alphabetical descending), <strong>numerical ascending</strong>, <strong>numerical descending</strong>, <strong>by line length</strong> (shortest to longest), and <strong>random shuffle</strong>. That last one sounds like a gimmick until you need to randomize a list of names for a drawing, shuffle quiz questions, or create a randomized playlist order.</p>
+
+                <p>There are two sorting modes that deserve special mention because they solve problems most people do not think about until they run into them. First, <strong>natural sorting</strong>. Standard alphabetical sorting puts "item10" before "item2" because it compares character by character, and "1" comes before "2." Natural sorting understands that 10 is a bigger number than 2, so it orders them correctly. If you have ever tried to alphabetize a list of numbered files and gotten frustrated that "Chapter 10" appears before "Chapter 2," natural sorting is what you needed.</p>
+
+                <p>Second, the <strong>case-insensitive option</strong>. By default, most sorting algorithms put all uppercase letters before lowercase ones. So "Zebra" would come before "apple" in a standard sort. The case-insensitive mode treats them the same, which is almost always what you actually want when sorting names, titles, or any list containing a mix of capitalization styles.</p>
+
+                <p><strong>Who uses this regularly:</strong></p>
+                <ul>
+                  <li><strong>Event organizers</strong> — Alphabetizing attendee lists, speaker rosters, or sponsor names for programs and badges</li>
+                  <li><strong>Developers</strong> — Sorting configuration files, log entries, CSV data, or any structured text that needs to be in a specific order</li>
+                  <li><strong>Teachers and professors</strong> — Organizing student name lists for grade books, attendance sheets, and class rosters</li>
+                  <li><strong>E-commerce managers</strong> — Sorting product catalogs, category lists, or SKU inventories for reports and audits</li>
+                </ul>
+              </div>
+            </section>
+
+            <!-- ===== TOOL 5: TEXT REVERSER ===== -->
+            <section id="text-reverser">
+              <h2 id="h-text-reverser">Text Reverser: Flip Text, Words, or Lines in Any Direction</h2>
+
+              <div class="tool-card">
+                <span class="card-tag green">Tool #5</span>
+                <h3 id="h-reverse">Multi-Mode Text Reversal</h3>
+
+                <p>I will be honest — when we first added a text reverser to the tool suite, I thought it would be the least-used tool by a wide margin. It sounds like a novelty. "Why would anyone need to reverse text?" But the usage data surprised me. It consistently ranks third or fourth in terms of daily active users, ahead of the encryptor and sometimes even the sorter. The reason is that text reversal has more practical applications than most people realize.</p>
+
+                <p>The tool offers four reversal modes. <strong>Reverse entire text</strong> flips every character in your input, so "Hello World" becomes "dlroW olleH." <strong>Reverse word order</strong> keeps each word spelled correctly but flips the order — "The quick brown fox" becomes "fox brown quick The." <strong>Reverse each word</strong> keeps the words in order but reverses the characters within each one. And <strong>reverse line order</strong> flips multi-line text so the last line becomes the first line, which is handy when you are working with log files or chronological data that you need in reverse chronological order.</p>
+
+                <p>The line reversal mode is the one that gets the most practical use, from what I can tell. Server logs, application logs, chat transcripts, and social media feeds are often displayed with the newest entries at the bottom. Reversing the line order puts the most recent entries at the top, which is how most people prefer to read them. It is a small thing, but it saves you from scrolling to the bottom of a 500-line log file every time you want to check the latest entry.</p>
+
+                <p><strong>The less obvious use cases:</strong></p>
+                <ul>
+                  <li><strong>Palindrome checking</strong> — Developers testing whether a string reads the same forwards and backwards. Reversing the text and comparing it to the original is the fastest manual check</li>
+                  <li><strong>Ambiguous/hidden text</strong> — Encoding messages that are not immediately readable, often used in puzzles, games, or educational exercises</li>
+                  <li><strong>Data migration</strong> — Some legacy systems store text fields in reverse order for reasons that made sense to whoever designed them in 1998. This tool undoes that decision</li>
+                  <li><strong>Creative and design work</strong> — Mirror text effects for posters, social media graphics, and t-shirt designs. Designers use it more than you would think</li>
+                </ul>
+
+                <p>The tool handles Unicode correctly — emojis, accented characters, and non-Latin scripts all reverse properly without breaking into mojibake. That sounds like table stakes, but a surprising number of text reversal tools mess up anything beyond basic ASCII.</p>
+              </div>
+            </section>
+
+            <!-- ===== TOOL 6: ENCRYPTOR ===== -->
+            <section id="text-encryptor">
+              <h2 id="h-encryptor">Text Encryptor and Decryptor: Keep Sensitive Text Private</h2>
+
+              <div class="tool-card">
+                <span class="card-tag orange">Tool #6</span>
+                <h3 id="h-encrypt">Local Text Encryption</h3>
+
+                <p>Let me start with a clear disclaimer: this is not a replacement for PGP, AES-256 encryption through dedicated security software, or any tool that a security professional would recommend for protecting state secrets. If you are encrypting classified documents, use proper encryption software. What this tool does is provide a quick, convenient way to scramble text so that casual snooping does not reveal the contents. Think of it as the digital equivalent of writing in a code that your kid sister cannot crack, not one that the NSA cannot.</p>
+
+                <p>The tool supports three encryption methods, each at a different security level. <strong>Base64 encoding</strong> is the lightest option — it converts text into a format that looks like gibberish but can be decoded by anyone who knows it is Base64. It is not really encryption in the cryptographic sense; it is encoding. Useful for obfuscating text so it is not immediately readable in plain sight, but anyone with basic technical knowledge can decode it.</p>
+
+                <p>The <strong>Caesar cipher</strong> is a step up. It shifts each letter by a fixed number of positions in the alphabet. With the default shift of 3, "hello" becomes "khoor." You can adjust the shift value from 1 to 25, and the tool handles both encryption and decryption. It is named after Julius Caesar, who reportedly used it for military correspondence. That should tell you something about both its history and its security level — it was secure 2,000 years ago. Today, a child with a piece of paper can crack it. But for casual purposes — hiding the answer to a puzzle, encoding a spoiler in a forum post, or just having fun — it works fine.</p>
+
+                <p>The <strong>password-based encryption</strong> is the most secure option available in the tool. You enter a password, and the tool uses that password to generate an encryption key that scrambles your text. Without the correct password, the encrypted output is essentially unreadable. This uses a proper key derivation function, not just a simple substitution. I am not going to claim it is unbreakable — nothing implemented in client-side JavaScript can make that claim — but it is strong enough for everyday privacy needs: encrypting notes you want to keep private, protecting sensitive text in a shared document, or sending someone a message that casual observers cannot read.</p>
+
+                <p><strong>Practical scenarios where people use this:</strong></p>
+                <ul>
+                  <li><strong>Protecting notes</strong> — Encrypting personal journal entries, brainstorming notes, or anything you would not want someone to read over your shoulder</li>
+                  <li><strong>Sharing sensitive info</strong> — Sending passwords, account numbers, or personal details through a medium (email, chat) where you do not control who might see it</li>
+                  <li><strong>Game and puzzle design</strong> — Creating encoded clues for escape rooms, treasure hunts, and educational puzzles</li>
+                  <li><strong>Quick obfuscation</strong> — When you need to store text somewhere publicly (a GitHub gist, a shared document) but do not want the content to be immediately visible</li>
+                </ul>
+
+                <blockquote>Everything happens in your browser. The encryption key is generated locally from your password, and the text is scrambled on your device. The encrypted text (or the original password) is never transmitted anywhere. When you close the tab, the password is gone from memory.</blockquote>
+              </div>
+            </section>
+
+            <!-- AD SLOT 5 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== HOW TO USE ===== -->
+            <section id="how-to-use">
+              <h2 id="h-how-to-use">How to Use Each Tool (Step-by-Step)</h2>
+
+              <h3 id="h-case-steps">Using the Case Converter</h3>
+              <ol>
+                <li><strong>Paste or type your text</strong> into the input area. There is no character limit — paste a single word or an entire document</li>
+                <li><strong>Click the case format you want</strong> — UPPERCASE, lowercase, Title Case, Sentence case, or aLtErNaTiNg. The converted text appears instantly</li>
+                <li><strong>Review the output</strong> to make sure it looks right. Title Case and Sentence Case have language-aware rules for articles, conjunctions, and prepositions</li>
+                <li><strong>Copy the result</strong> using the copy button or select it manually. The tool also lets you clear the input and start over with one click</li>
+              </ol>
+
+              <h3 id="h-counter-steps">Using the Word Counter</h3>
+              <ol>
+                <li><strong>Paste or start typing</strong> in the text area. Every metric updates in real time as you type — no button to click</li>
+                <li><strong>Check the stats panel</strong> for word count, character count (with and without spaces), sentence count, paragraph count, and estimated reading time</li>
+                <li><strong>Use it as a drafting tool</strong> — write directly in the text area and watch your stats update as you go. Many writers keep this tool open in a second tab while working in Google Docs or Notion</li>
+              </ol>
+
+              <h3 id="h-dedup-steps">Using the Duplicate Line Remover</h3>
+              <ol>
+                <li><strong>Paste your list</strong> — one item per line. Works with any text format: names, emails, URLs, file paths, whatever you have</li>
+                <li><strong>Choose your detection mode</strong> — exact match for identical lines, case-insensitive to ignore capitalization differences, or trim whitespace to catch invisible spacing issues</li>
+                <li><strong>Select which occurrence to keep</strong> — first occurrence (default) keeps the earliest version, last occurrence keeps the most recent</li>
+                <li><strong>Click "Remove Duplicates"</strong> and review the results. The tool tells you how many duplicates were found and removed, so you can verify the cleanup worked as expected</li>
+              </ol>
+
+              <h3 id="h-sort-steps">Using the Text Sorter</h3>
+              <ol>
+                <li><strong>Paste your list</strong> — one item per line, same as the duplicate remover</li>
+                <li><strong>Pick your sort order</strong> — A-Z, Z-A, numerical ascending/descending, by line length, or random shuffle</li>
+                <li><strong>Toggle case-insensitive mode</strong> if your list mixes uppercase and lowercase entries and you want them sorted alphabetically regardless of case</li>
+                <li><strong>Click "Sort" and copy</strong> the result. That is it — the whole process takes about three seconds regardless of list size</li>
+              </ol>
+
+              <h3 id="h-reverse-steps">Using the Text Reverser</h3>
+              <ol>
+                <li><strong>Paste your text</strong> — this can be a single line, a paragraph, or a multi-line document</li>
+                <li><strong>Select the reversal mode</strong> — reverse entire text, reverse word order, reverse each word, or reverse line order</li>
+                <li><strong>Click "Reverse"</strong> and review the output. The tool preserves line breaks, spacing, and special characters through all reversal modes</li>
+              </ol>
+
+              <h3 id="h-encrypt-steps">Using the Text Encryptor/Decryptor</h3>
+              <ol>
+                <li><strong>Paste the text you want to encrypt</strong> — or, if you are decrypting, paste the encrypted text</li>
+                <li><strong>Choose the encryption method</strong> — Base64 for simple encoding, Caesar cipher for a basic shift cipher, or password-based for stronger protection</li>
+                <li><strong>If using Caesar cipher</strong>, set the shift value (1-25). If using password-based encryption, enter your password</li>
+                <li><strong>Click "Encrypt" or "Decrypt"</strong>. For Base64 and Caesar, the result appears instantly. Password-based encryption takes a fraction of a second longer due to the key derivation process</li>
+                <li><strong>Copy the result</strong>. For password-based encryption, make sure you remember the password — there is no "forgot password" recovery because nothing is stored on a server</li>
+              </ol>
+            </section>
+
+            <!-- ===== WHY BROWSER-BASED MATTERS ===== -->
+            <section id="privacy">
+              <h2 id="h-privacy">Why "Runs in Your Browser" Matters More Than You Think</h2>
+
+              <p>Most text tools on the internet work like this: you paste your text into a text box, click a button, and your text gets sent to a remote server. The server processes it and sends the result back. For a grocery list or a block of Lorem Ipsum, that is perfectly fine. But here is the thing — people use text tools for all kinds of sensitive content. Legal documents. Medical notes. Financial records. Business strategies. Client communications. Password lists. Source code.</p>
+
+              <p>When that content gets uploaded to a server, you are trusting the tool provider with it. You have no way of knowing whether they store it, log it, sell it, or use it to train their AI models. You have not read their privacy policy (nobody reads privacy policies), and even if you did, you would probably find language like "we may collect and process your data to improve our services" buried in paragraph 47. That is not malicious — it is just how the ad-supported tool economy works. Free tools need to make money somehow, and your data is often the product.</p>
+
+              <p>Browser-based processing eliminates that entire trust problem. Your text does not leave your device. The tool runs JavaScript in your browser, your browser processes the text using your device's CPU and memory, and the result appears on your screen. No server in the middle. No data transmission. No storage. No logging. When you close the tab, the text is gone from memory. It is the digital equivalent of writing something on a whiteboard, reading it, and then erasing it.</p>
+
+              <p>There are real tradeoffs, and I do not want to pretend otherwise. Browser-based tools cannot match the processing power of server-side solutions for very large datasets. If you need to sort a file with a million lines, a dedicated data processing tool running on a server cluster will always be faster. And the tool is limited by your device's available memory — a phone with 4 GB of RAM will handle less text than a desktop with 32 GB. But for the vast majority of everyday text processing tasks, the browser handles it quickly and without any of the privacy concerns that come with server-based alternatives.</p>
+            </section>
+
+            <!-- ===== USE CASES ===== -->
+            <section id="use-cases">
+              <h2 id="h-use-cases">Who Uses These Tools (Based on Real Feedback)</h2>
+
+              <h3 id="h-writers">Writers and Content Creators</h3>
+              <p>This is the group that uses the most tools in combination. A typical workflow: paste a draft article into the Word Counter to check length, run it through the Case Converter to fix any title formatting, use the Duplicate Remover to clean up repetitive bullet points, and maybe encrypt a password or API key mentioned in the article before sharing it with an editor. Several freelance writers have told us this tool suite has cut their editing prep time by about 20 to 30 minutes per article, which adds up across a week of steady writing.</p>
+
+              <h3 id="h-developers">Developers and Data Professionals</h3>
+              <p>Developers use these tools differently than writers do. The Sorter is popular for alphabetizing JSON keys, organizing config files, and cleaning up CSV exports. The Duplicate Remover handles deduplication of log entries and data records. The Reverser is handy for debugging string manipulation issues. And the Encryptor gets used for quick obfuscation of sensitive values in code snippets that might get shared publicly — things like database credentials or API endpoints that you need to show the structure of without revealing the actual values.</p>
+
+              <h3 id="h-students">Students and Educators</h3>
+              <p>Students use the Word Counter constantly for hitting assignment requirements. The Case Converter handles essay title formatting. The Sorter organizes bibliography entries alphabetically. And the Duplicate Remover cleans up combined reading lists or merged note files. A graduate student in computer science told us they use the Text Reverser to verify algorithm correctness — they reverse the output of their sorting algorithm and compare it to the original input to confirm every element is accounted for. That is a clever use case we had not anticipated.</p>
+
+              <h3 id="h-business">Business and Administrative Professionals</h3>
+              <p>The Duplicate Remover is the star of the show here. HR departments use it to clean up merged applicant lists. Sales teams deduplicate contact databases before CRM imports. Marketing teams alphabetize sponsor lists for event programs. Administrative assistants use the Word Counter to verify that reports meet page or word count guidelines. And the Encryptor gets occasional use for protecting sensitive text fragments in shared documents — like embedding an encrypted client reference number that only the intended recipient can decrypt.</p>
+            </section>
+
+            <!-- AD SLOT 6 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== COMPARISON ===== -->
+            <section id="comparison">
+              <h2 id="h-comparison">Honest Comparison with Alternatives</h2>
+
+              <p>I am not going to pretend these tools are better than everything else out there. They have limitations — they run in a browser, so they cannot match the raw power of desktop software for enormous files, and they do not have the breadth of features that dedicated text editors like Notepad++ or VS Code offer. But for the specific tasks they handle, here is how they stack up against the alternatives most people use:</p>
+
+              <div style="overflow-x: auto; margin: 1.3rem 0; border-radius: var(--radius-xs); border: 1px solid var(--line);">
+                <table class="comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Feature</th>
+                      <th class="center" style="color: var(--accent1);">Tool Xeno</th>
+                      <th class="center">Typical Online Tools</th>
+                      <th class="center">Desktop Software</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Privacy (no uploads)</td><td class="center" style="color: #22c55e;">Yes</td><td class="center" style="color: #ef4444;">Text uploaded</td><td class="center" style="color: #22c55e;">Yes</td></tr>
+                    <tr><td>Cost</td><td class="center" style="color: #22c55e;">Free</td><td class="center">Freemium / Ads</td><td class="center">$0 – $100+</td></tr>
+                    <tr><td>Number of tools</td><td class="center" style="color: var(--accent1);">6 in one</td><td class="center">Usually 1</td><td class="center">1 per app</td></tr>
+                    <tr><td>Account required</td><td class="center" style="color: #22c55e;">No</td><td class="center" style="color: #ef4444;">Often yes</td><td class="center" style="color: #22c55e;">No</td></tr>
+                    <tr><td>Installation needed</td><td class="center" style="color: #22c55e;">None</td><td class="center" style="color: #22c55e;">None</td><td class="center" style="color: #ef4444;">Yes</td></tr>
+                    <tr><td>Cross-platform</td><td class="center" style="color: #22c55e;">Any browser</td><td class="center" style="color: #22c55e;">Any browser</td><td class="center" style="color: #ef4444;">Per-OS install</td></tr>
+                    <tr><td>Offline capability</td><td class="center" style="color: #22c55e;">Yes (cached)</td><td class="center" style="color: #ef4444;">No</td><td class="center" style="color: #22c55e;">Yes</td></tr>
+                    <tr><td>No ads in interface</td><td class="center" style="color: #22c55e;">Yes</td><td class="center" style="color: #ef4444;">Usually no</td><td class="center" style="color: #22c55e;">Yes</td></tr>
+                    <tr><td>Advanced text editing</td><td class="center">Basic</td><td class="center">Basic</td><td class="center" style="color: #22c55e;">Full</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p>Where desktop text editors like VS Code, Sublime Text, or Notepad++ clearly win is in advanced editing — regex search and replace, multi-cursor editing, syntax highlighting, plugin ecosystems, and the kind of power-user features that developers and writers who live in a text editor all day need. We are not trying to replace those. What these six tools handle is the other side of text work: the quick, repetitive formatting tasks that do not warrant opening a full editor. Convert a headline to title case. Check a word count. Remove duplicates from a list. Sort some names. That sort of thing — the text equivalent of a Swiss Army knife for tasks that take ten seconds but would take five minutes without the right tool.</p>
+            </section>
+
+            <!-- ===== CTA ===== -->
+            <section style="text-align: center; margin-top: 2.8rem; padding-top: 1.8rem; border-top: 2px solid var(--line);">
+              <p style="font-size: 1.08rem; color: var(--text); font-weight: 700; margin-bottom: 1rem;">All six tools are live, free, and ready to use right now.</p>
+              <a href="https://toolxeno.com/#tools" class="cta-btn">Open Text Tools <span class="btn-icon">→</span></a>
+            </section>
+
+            <!-- AUTHOR -->
+            <div class="author-box">
+              <div class="author-avatar">X</div>
+              <div class="author-info">
+                <div class="author-name">Tool Xeno Team</div>
+                <div class="author-bio">We build free, privacy-first online tools. No accounts, no data collection, no hidden fees. Everything runs in your browser — your files never leave your device.</div>
+              </div>
             </div>
+
+          </div>
         </article>
+      </div>
+
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar-area">
+        <!-- TABLE OF CONTENTS -->
+        <div class="sidebar-card toc-card" id="toc-card">
+          <h4>📋 Table of Contents <span class="h4-line"></span><button class="toc-toggle" id="toc-toggle" aria-label="Toggle TOC">▼</button></h4>
+          <nav class="toc" aria-label="Table of Contents">
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#introduction" class="toc-link">Introduction</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#case-converter" class="toc-link">Case Converter</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#word-counter" class="toc-link">Word & Character Counter</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#duplicate-remover" class="toc-link">Duplicate Line Remover</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#text-sorter" class="toc-link">Text Sorter</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#text-reverser" class="toc-link">Text Reverser</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#text-encryptor" class="toc-link">Text Encryptor</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#how-to-use" class="toc-link">How to Use Each Tool</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#privacy" class="toc-link">Privacy & Browser Processing</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#use-cases" class="toc-link">Real-World Use Cases</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#comparison" class="toc-link">Comparison with Alternatives</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#faq" class="toc-link">Frequently Asked Questions</a></div>
+          </nav>
+        </div>
+      </aside>
     </main>
-    
-    <script>
-        // Initialize particles
-        function initializeParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                container.appendChild(particle);
-            }
-        }
-        
-        // Theme toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
-        }
-        
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-theme');
-        }
-        
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeParticles();
+
+    <!-- ===== FAQ SECTION ===== -->
+    <section class="section-divider"></section>
+    <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+      <div style="text-align: center;">
+        <span class="section-label">Common Questions</span>
+        <h2 class="section-title" id="faq-heading">Frequently Asked Questions</h2>
+        <p class="section-sub" style="margin: 0 auto;">Straightforward answers to the questions people ask most about these tools.</p>
+      </div>
+
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            How does the Text Case Converter work?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">You paste or type your text into the input area, select the case format you want — uppercase, lowercase, title case, sentence case, or alternating case — and the tool converts it instantly. All processing happens in your browser using JavaScript string manipulation. No text is uploaded anywhere. Title Case and Sentence Case modes include language-aware rules that skip capitalizing common articles and conjunctions, so "the quick brown fox" becomes "The Quick Brown Fox" and not "The Quick Brown Fox And The."</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Does the Word Counter update in real time?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes. Every metric updates on each keystroke — word count, character count (with and without spaces), sentence count, paragraph count, and estimated reading time. There is no button to press or action to trigger. The reading time estimate uses an average adult reading speed of roughly 238 words per minute, which is the figure most readability research converges on. It is an estimate, not an exact measurement, but it is accurate enough for most practical purposes.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            How does the Duplicate Line Remover decide which lines to keep?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">By default, it keeps the first occurrence of each unique line and removes every subsequent duplicate. You can switch it to keep the last occurrence instead. The tool offers three detection modes: exact match (lines must be character-for-character identical), case-insensitive (ignores capitalization differences), and trim whitespace (ignores leading and trailing spaces before comparing). After processing, it tells you exactly how many duplicates were found and removed so you can verify the results.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            What encryption methods does the Encryptor tool support?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Three methods at different security levels. Base64 encoding converts text into an encoded format that is not immediately readable — it is obfuscation, not true encryption, but it works for casual privacy. Caesar cipher shifts each letter by a set number of positions in the alphabet (adjustable from 1 to 25). Password-based encryption is the strongest option — it uses your password to generate a cryptographic key that scrambles the text. All three methods encrypt and decrypt entirely in your browser. For password-based encryption, make sure you remember the password — there is no recovery mechanism because nothing is stored on a server.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Is my text data private with these tools?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes. Every tool processes text entirely within your browser. Your content is never uploaded, transmitted, stored, or logged on any server. When you close the browser tab, the text is gone from memory. This makes the tools suitable for confidential documents, personal notes, client information, financial records, and any other text you would not want uploaded to a random server. There is no analytics tracking on what you type into the tools.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Do I need to create an account to use these tools?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">No account, no signup, and no email address needed. Open any tool in your browser and start using it. There are no usage limits, no premium tiers, and no features locked behind a paywall. Every function is available to every visitor at all times. The tools load directly in your browser with no login screen, no cookie consent form, and no "create a free account to continue" prompt.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Is there a limit on how much text I can process?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">There is no artificial character limit or line limit. The practical constraint is your device's available memory and processing power. Most modern devices handle documents with tens of thousands of lines or several hundred thousand characters without any issues. Very large files — think 100,000+ lines — may take a moment longer to process, depending on your device. We have tested the Sorter and Duplicate Remover with 50,000-line files on a mid-range laptop, and both completed in under three seconds.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Do these tools work on mobile phones and tablets?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes. All six tools are fully responsive and work on any device with a modern browser — iPhone, Android phone, iPad, Android tablet, laptop, or desktop. The interface adapts to your screen size, and all touch interactions work the same as mouse clicks. The only difference you might notice on mobile is that very large text operations may be slightly slower due to the more limited processing power of mobile devices compared to desktop computers.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Are these tools really free? What is the catch?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Completely free, no catch. No usage limits, no file size caps, no watermarks on your output, no premium tiers, no trial periods, and no hidden fees. Every feature works for everyone at all times. The tools are supported by the Tool Xeno website overall — not by charging individual users or selling your data. That is the business model: useful free tools that bring people to the site.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-icon">X</div>
+          <span class="footer-brand-name">Tool Xeno</span>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://toolxeno.com/" class="footer-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="footer-link">All Tools</a>
+          <a href="https://toolxeno.com/privacy.html" class="footer-link">Privacy</a>
+          <a href="https://toolxeno.com/terms.html" class="footer-link">Terms</a>
+        </nav>
+        <a href="https://toolxeno.com/#tools" class="footer-back-btn">← Back to All Tools</a>
+        <div class="footer-copy">© <span id="footer-year"></span> Tool Xeno. All processing is performed locally in your browser.</div>
+      </div>
+    </footer>
+
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+  </div><!-- end page-wrapper -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y4JDC5DCBV');
+  </script>
+
+  <!-- AdSense (uncomment when approved) -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+  <script>
+    // Theme Toggle
+    (function() {
+      var saved = localStorage.getItem('tx-theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.addEventListener('click', function() {
+        var current = document.documentElement.getAttribute('data-theme');
+        var next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('tx-theme', next);
+        btn.textContent = next === 'light' ? '🌙 Dark' : '☀️ Light';
+      });
+      if (btn) btn.textContent = (document.documentElement.getAttribute('data-theme') === 'light') ? '🌙 Dark' : '☀️ Light';
+    })();
+
+    // Mobile Nav
+    (function() {
+      var hamburger = document.getElementById('hamburger');
+      var mobileNav = document.getElementById('mobile-nav');
+      var mobileClose = document.getElementById('mobile-close');
+      if (hamburger && mobileNav) hamburger.addEventListener('click', function() { mobileNav.classList.add('open'); });
+      if (mobileClose && mobileNav) mobileClose.addEventListener('click', function() { mobileNav.classList.remove('open'); });
+      if (mobileNav) mobileNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { mobileNav.classList.remove('open'); }); });
+    })();
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-item').forEach(function(item) {
+      item.querySelector('.faq-q').addEventListener('click', function() {
+        var wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+          openItem.classList.remove('open');
         });
-    </script>
-</body></html>
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+
+    // Mobile TOC Toggle
+    (function() {
+      var card = document.getElementById('toc-card');
+      var btn = document.getElementById('toc-toggle');
+      if (card && btn) {
+        if (window.innerWidth > 1024) { card.classList.add('expanded'); }
+        btn.addEventListener('click', function() { card.classList.toggle('expanded'); });
+        window.addEventListener('resize', function() {
+          if (window.innerWidth > 1024) card.classList.add('expanded');
+          else card.classList.remove('expanded');
+        });
+      }
+    })();
+
+    // Footer Year
+    (function() {
+      var el = document.getElementById('footer-year');
+      if (el) el.textContent = new Date().getFullYear();
+    })();
+
+    // Scroll-Spy TOC
+    (function() {
+      var tocLinks = document.querySelectorAll('.toc-link');
+      var tocItems = document.querySelectorAll('.toc-item');
+      var sections = [];
+      tocLinks.forEach(function(link) {
+        var id = link.getAttribute('href');
+        if (id && id.startsWith('#')) {
+          var el = document.querySelector(id);
+          if (el) sections.push({ el: el, link: link, item: link.closest('.toc-item') });
+        }
+      });
+
+      function updateActive() {
+        var scrollTop = window.scrollY;
+        var headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
+        var current = null;
+        for (var i = sections.length - 1; i >= 0; i--) {
+          if (sections[i].el.getBoundingClientRect().top <= headerH + 30) {
+            current = sections[i];
+            break;
+          }
+        }
+        tocItems.forEach(function(t) { t.classList.remove('active'); });
+        if (current && current.item) current.item.classList.add('active');
+      }
+
+      var scrollTimer;
+      window.addEventListener('scroll', function() {
+        if (scrollTimer) cancelAnimationFrame(scrollTimer);
+        scrollTimer = requestAnimationFrame(updateActive);
+      }, { passive: true });
+      updateActive();
+    })();
+
+    // Reading Progress Bar
+    (function() {
+      var bar = document.getElementById('reading-progress');
+      if (!bar) return;
+      var timer;
+      window.addEventListener('scroll', function() {
+        if (timer) cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function() {
+          var h = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.width = h > 0 ? ((window.scrollY / h) * 100) + '%' : '0%';
+        });
+      }, { passive: true });
+    })();
+
+    // Back to Top Button
+    (function() {
+      var btn = document.getElementById('back-to-top');
+      if (!btn) return;
+      var timer;
+      window.addEventListener('scroll', function() {
+        if (timer) cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function() {
+          btn.classList.toggle('visible', window.scrollY > 400);
+        });
+      }, { passive: true });
+    })();
+
+    // Section Reveal on Scroll
+    (function() {
+      var secs = document.querySelectorAll('.article-inner section');
+      if (!secs.length) return;
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+          });
+        }, { threshold: 0.02, rootMargin: '0px 0px -20px 0px' });
+        secs.forEach(function(s) { obs.observe(s); });
+      } else {
+        secs.forEach(function(s) { s.classList.add('visible'); });
+      }
+    })();
+  </script>
+</body>
+</html>

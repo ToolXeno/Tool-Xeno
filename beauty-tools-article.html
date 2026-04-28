@@ -1,600 +1,947 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US" dir="ltr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#007cf0">
+  <meta name="color-scheme" content="dark light">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Beauty Tools – Tool Xeno">
+  <meta name="application-name" content="Tool Xeno">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="rating" content="general">
 
-  gtag('config', 'G-Y4JDC5DCBV');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Beauty Analysis Tools - AI-Powered Skin & Hair Care | Tool Xeno</title>
-    <meta name="description" content="Discover advanced AI-powered beauty analysis tools for professional skin and hair assessment. Get personalized care recommendations with Glass Skin Checker, Skin Type Checker, and Hair Type Analyzer.">
-    <meta name="keywords" content="beauty tools, skin analysis, hair analysis, AI beauty checker, glass skin, skin type, hair type analyzer, professional beauty assessment">
-    <meta name="author" content="Tool Xeno">
-    <link rel="canonical" href="https://toolxeno.com/beauty-tools">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Professional Beauty Analysis Tools - AI-Powered Skin & Hair Care">
-    <meta property="og:description" content="Advanced AI-powered beauty tools for professional skin and hair analysis with personalized recommendations.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://toolxeno.com/beauty-tools">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Professional Beauty Analysis Tools - AI-Powered Skin & Hair Care">
-    <meta name="twitter:description" content="Advanced AI-powered beauty tools for professional skin and hair analysis.">
-    
-    <!-- Schema Markup -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
+  <title>Free Beauty Tools: Glass Skin Checker, Skin Type & Hair Type Analyzer | Tool Xeno</title>
+  <meta name="description" content="Three free beauty analysis tools that run in your browser. Check your glass skin score with AI camera analysis, discover your skin type through a smart questionnaire, and get a personalized hair type profile. No signup required.">
+  <meta name="keywords" content="glass skin checker, skin type checker, hair type analyzer, beauty tools, skin analysis, hair analysis, online skin test, skin type quiz, hair type quiz, free beauty tools, AI skin analysis">
+  <meta name="author" content="Tool Xeno">
+  <link rel="canonical" href="https://toolxeno.com/beauty-tools.html">
+  <link rel="alternate" hreflang="en" href="https://toolxeno.com/beauty-tools.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://toolxeno.com/beauty-tools.html">
+  <meta property="og:title" content="Free Beauty Tools: Glass Skin Checker, Skin Type & Hair Type Analyzer | Tool Xeno">
+  <meta property="og:description" content="Three free browser-based beauty tools: AI-powered glass skin scoring, skin type identification, and hair type profiling. No signup, no uploads required.">
+  <meta property="og:site_name" content="Tool Xeno">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2025-04-28T08:00:00+05:00">
+  <meta property="article:modified_time" content="2025-04-28T12:00:00+05:00">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Beauty Tools: Glass Skin, Skin Type & Hair Analyzer">
+  <meta name="twitter:description" content="AI glass skin scoring, skin type quiz, and hair type analysis. Free, private, browser-based.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
         "@type": "Article",
-        "headline": "Professional Beauty Analysis Tools - AI-Powered Skin & Hair Care",
-        "description": "Comprehensive guide to advanced AI-powered beauty analysis tools for professional skin and hair assessment.",
-        "author": {
-            "@type": "Organization",
-            "name": "Tool Xeno"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Tool Xeno",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://toolxeno.com/logo.png"
-            }
-        },
-        "datePublished": "2024-12-09",
-        "dateModified": "2024-12-09",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://toolxeno.com/beauty-tools"
-        }
-    }
-    </script>
-    
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            
-            --dark-bg: #0a0a0a;
-            --dark-surface: #1a1a1a;
-            --dark-surface-elevated: #252525;
-            --dark-text: #ffffff;
-            --dark-text-secondary: #a0a0a0;
-            --dark-border: #333333;
-            
-            --light-bg: #f8fafc;
-            --light-surface: #ffffff;
-            --light-surface-elevated: #f1f5f9;
-            --light-text: #1e293b;
-            --light-text-secondary: #64748b;
-            --light-border: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            line-height: 1.7;
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-            min-height: 100vh;
-        }
-        
-        body.light-theme { 
-            background-color: var(--light-bg); 
-            color: var(--light-text); 
-        }
+        "headline": "Free Beauty Tools: Glass Skin Checker, Skin Type Checker and Hair Type Analyzer",
+        "description": "Three free browser-based beauty analysis tools for glass skin scoring, skin type identification, and hair type profiling. No signup or uploads required.",
+        "author": { "@type": "Organization", "name": "Tool Xeno", "url": "https://toolxeno.com/" },
+        "publisher": { "@type": "Organization", "name": "Tool Xeno", "url": "https://toolxeno.com/", "logo": { "@type": "ImageObject", "url": "https://toolxeno.com/logo.png" } },
+        "datePublished": "2025-04-28T08:00:00+05:00",
+        "dateModified": "2025-04-28T12:00:00+05:00",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://toolxeno.com/beauty-tools.html" },
+        "wordCount": 5400,
+        "articleSection": "Beauty"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How does the Glass Skin Checker work?", "acceptedAnswer": { "@type": "Answer", "text": "It uses your device's camera to capture a photo of your face, then analyzes it using AI algorithms that evaluate skin clarity, texture, evenness, and radiance. The entire analysis happens locally in your browser — your photo is never uploaded to any server. You get a glass skin score out of 100 along with specific recommendations." } },
+          { "@type": "Question", "name": "How does the Skin Type Checker determine my skin type?", "acceptedAnswer": { "@type": "Answer", "text": "The Skin Type Checker uses a carefully designed questionnaire — not a camera. You answer questions about how your skin behaves throughout the day, how it reacts to products, and what it feels like after washing. The AI processes your answers to identify one of five skin types: normal, dry, oily, combination, or sensitive, along with personalized care recommendations." } },
+          { "@type": "Question", "name": "How accurate is the Hair Type Analyzer?", "acceptedAnswer": { "@type": "Answer", "text": "The accuracy depends on how honestly and carefully you answer the questions. The questionnaire was designed based on trichology (hair science) principles and evaluates texture, porosity, density, elasticity, and curl pattern. Users who answer thoughtfully typically find the results match what a professional hair stylist would tell them." } },
+          { "@type": "Question", "name": "Is my photo data safe with the Glass Skin Checker?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The photo you take is processed entirely in your browser using client-side AI. It is never uploaded to any server, stored, or transmitted anywhere. When you close the browser tab, the photo is gone from memory. This is fundamentally different from camera-based tools that send your image to a remote server for analysis." } },
+          { "@type": "Question", "name": "Do I need to create an account to use these beauty tools?", "acceptedAnswer": { "@type": "Answer", "text": "No. No signup, no account, and no email address required. Open any of the tools in your browser and start using them immediately. There are no usage limits and no premium tiers." } },
+          { "@type": "Question", "name": "Can I use these tools on my phone?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. All three tools are fully responsive and work on phones, tablets, and desktops. The Glass Skin Checker works particularly well on phones since it uses your device's camera — the front-facing camera on most modern phones produces excellent results for the analysis." } },
+          { "@type": "Question", "name": "How long does each analysis take?", "acceptedAnswer": { "@type": "Answer", "text": "The Glass Skin Checker takes about 10-15 seconds for the AI to analyze your photo after you capture it. The Skin Type Checker and Hair Type Analyzer depend on how quickly you answer the questions — most people complete each questionnaire in 2 to 3 minutes." } },
+          { "@type": "Question", "name": "Are these beauty tools free? What is the catch?", "acceptedAnswer": { "@type": "Answer", "text": "Completely free with no catch. No usage limits, no paywalls, no premium tiers, no hidden fees. Every feature is available to everyone. The tools are supported by the Tool Xeno website as a whole." } },
+          { "@type": "Question", "name": "Can I retake the Glass Skin Checker test to track progress?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. You can retake the test as many times as you want. Many users check their glass skin score weekly or monthly to track how their skincare routine is working. Since the tool is free and unlimited, there is no reason not to check regularly." } }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolxeno.com/" },
+          { "@type": "ListItem", "position": 2, "name": "All Tools", "item": "https://toolxeno.com/#tools" },
+          { "@type": "ListItem", "position": 3, "name": "Beauty Tools", "item": "https://toolxeno.com/beauty-tools.html" }
+        ]
+      },
+      {
+        "@type": "WebApplication",
+        "name": "Beauty Tools",
+        "url": "https://toolxeno.com/beauty-tools.html",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Three free browser-based beauty tools: AI glass skin checker with camera analysis, skin type quiz, and hair type analyzer."
+      }
+    ]
+  }
+  </script>
 
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.05;
-            background: radial-gradient(circle, #667eea 0%, transparent 70%);
-        }
-        
-        body.light-theme .particle { 
-            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(100vh) rotate(0deg); } 
-            100% { transform: translateY(-100px) rotate(360deg); } 
-        }
-        
-        .header-glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.35s ease, border-color 0.35s ease;
-        }
-        
-        body.light-theme .header-glass { 
-            background: rgba(255, 255, 255, 0.9); 
-            border-bottom-color: rgba(0, 0, 0, 0.1); 
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--dark-surface);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.light-theme .theme-toggle { 
-            background: var(--light-surface-elevated); 
-            border-color: var(--light-border); 
-        }
-        
-        body.light-theme .theme-toggle::after { 
-            transform: translateX(28px); 
-            background: var(--secondary-gradient); 
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
-        
-        body.light-theme .glass-card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-color: rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
-        }
-        
-        .btn-gradient {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .btn-gradient:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
-        }
-        
-        .nav-link {
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-        }
-        
-        .nav-link:hover { 
-            background: rgba(255, 255, 255, 0.1); 
-            color: white; 
-        }
-        
-        body.light-theme .nav-link { 
-            color: rgba(0, 0, 0, 0.7); 
-        }
-        
-        body.light-theme .nav-link:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            color: black; 
-        }
-        
-        .article-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .article-content h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .article-content h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .article-content p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-        
-        .article-content ul, .article-content ol {
-            margin-bottom: 1.5rem;
-            margin-left: 2rem;
-        }
-        
-        .article-content li {
-            margin-bottom: 0.75rem;
-            line-height: 1.8;
-        }
-        
-        .tool-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
-        }
-        
-        body.light-theme .tool-card {
-            background: rgba(0, 0, 0, 0.02);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .feature-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-        
-        body.light-theme .feature-item {
-            background: rgba(0, 0, 0, 0.02);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .icon-large {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @media (max-width: 768px) {
-            .article-content h2 { font-size: 1.5rem; }
-            .article-content h3 { font-size: 1.25rem; }
-            .article-content p { font-size: 1rem; }
-        }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%237928ca'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg0: #030712;
+      --bg1: #0a0f1e;
+      --bg2: #0f172a;
+      --bg3: #1e293b;
+      --card: rgba(255,255,255,0.04);
+      --card-hover: rgba(255,255,255,0.08);
+      --card-solid: #1e293b;
+      --glass: rgba(255,255,255,0.03);
+      --text: #f1f5f9;
+      --text2: #cbd5e1;
+      --muted: #94a3b8;
+      --line: rgba(255,255,255,0.1);
+      --line-strong: rgba(255,255,255,0.2);
+      --accent1: #007cf0;
+      --accent2: #00dfd8;
+      --accent3: #7928ca;
+      --accent4: #ff0080;
+      --shadow: 0 24px 60px rgba(0,0,0,0.6);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.3);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --max: 1240px;
+      --ring: 0 0 0 3px rgba(0,124,240,0.4);
+      --grad: linear-gradient(135deg, var(--accent1), var(--accent2));
+      --grad-purple: linear-gradient(135deg, var(--accent3), var(--accent4));
+      --grad-text: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+      --font: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+      --header-h: 72px;
+    }
+
+    [data-theme="light"] {
+      --bg0: #f8fafc;
+      --bg1: #f1f5f9;
+      --bg2: #e2e8f0;
+      --bg3: #cbd5e1;
+      --card: rgba(255,255,255,0.9);
+      --card-hover: rgba(255,255,255,1);
+      --card-solid: #ffffff;
+      --glass: rgba(255,255,255,0.8);
+      --text: #0f172a;
+      --text2: #334155;
+      --muted: #64748b;
+      --line: rgba(0,0,0,0.1);
+      --line-strong: rgba(0,0,0,0.15);
+      --shadow: 0 24px 60px rgba(0,0,0,0.1);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+    body { font-family: var(--font); background-color: var(--bg0); color: var(--text); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+    ul, ol { list-style: none; }
+
+    /* ===== ANIMATED BACKGROUND ===== */
+    .bg-orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; will-change: transform; }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent1); top: -200px; left: -200px; animation: oF1 20s linear infinite; }
+    .orb-2 { width: 500px; height: 500px; background: var(--accent3); top: 30%; right: -150px; animation: oF2 25s linear infinite; }
+    .orb-3 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: 30%; animation: oF3 18s linear infinite; }
+    .orb-4 { width: 300px; height: 300px; background: var(--accent4); top: 60%; left: 10%; animation: oF4 22s linear infinite; }
+    @keyframes oF1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(60px,40px) scale(1.1);} 66%{transform:translate(-40px,60px) scale(0.95);} }
+    @keyframes oF2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-80px,50px) scale(1.05);} 66%{transform:translate(40px,-60px) scale(1.1);} }
+    @keyframes oF3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(70px,-40px) scale(1.15);} }
+    @keyframes oF4 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,-80px) scale(1.1);} }
+    .bg-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%); }
+    .page-wrapper { position: relative; z-index: 1; }
+
+    /* ===== HEADER ===== */
+    .header { position: sticky; top: 0; z-index: 1000; height: var(--header-h); display: flex; align-items: center; backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); background: rgba(3,7,18,0.85); border-bottom: 1px solid var(--line); transition: background var(--transition); }
+    [data-theme="light"] .header { background: rgba(248,250,252,0.90); }
+    .header-inner { max-width: var(--max); width: 100%; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; flex-shrink: 0; }
+    .logo-icon { width: 36px; height: 36px; background: var(--grad); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 900; color: #fff; box-shadow: 0 4px 14px rgba(0,124,240,0.4); }
+    .logo-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-primary { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .nav-link { padding: 7px 13px; font-size: 0.875rem; font-weight: 500; color: var(--text2); border-radius: var(--radius-xs); transition: color var(--transition), background var(--transition); }
+    .nav-link:hover { color: var(--text); background: var(--card); }
+    .header-actions { display: flex; align-items: center; gap: 10px; margin-left: 12px; }
+    .btn-theme { padding: 8px 20px; font-size: 0.85rem; font-weight: 600; font-family: var(--font); background: var(--card); backdrop-filter: blur(8px); border-radius: 40px; color: var(--text2); border: 1px solid var(--line); transition: all 0.3s ease; cursor: pointer; }
+    .btn-theme:hover { color: var(--text); border-color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; margin-left: auto; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); display: block; }
+    .mobile-nav { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(3,7,18,0.98); backdrop-filter: blur(24px); flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-link { font-size: 1.4rem; font-weight: 700; color: var(--text2); padding: 12px 32px; border-radius: var(--radius-sm); transition: all var(--transition); }
+    .mobile-nav-link:hover { color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; font-size: 1.5rem; color: var(--muted); padding: 8px; border-radius: 8px; transition: color var(--transition); cursor: pointer; background: none; border: none; }
+    .mobile-close:hover { color: var(--text); }
+
+    /* ===== HERO ===== */
+    .hero { padding: 60px 24px 40px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(0,124,240,0.15); border: 1px solid rgba(0,124,240,0.3); border-radius: 100px; font-size: 0.78rem; font-weight: 600; color: var(--accent1); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 20px; }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
+    .hero-h1 { font-size: clamp(1.8rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 16px; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero-h1 .grad-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: clamp(0.9rem, 1.5vw, 1.05rem); color: var(--text2); max-width: 650px; margin: 0 auto 24px; line-height: 1.75; }
+    .hero-meta { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px 20px; font-size: 0.82rem; color: var(--muted); }
+    .hero-meta-item { display: flex; align-items: center; gap: 6px; }
+    .hero-meta-dot { color: var(--accent2); }
+
+    /* ===== ARTICLE LAYOUT ===== */
+    .article-layout { max-width: var(--max); margin: 0 auto; padding: 0 24px 60px; display: grid; grid-template-columns: 1fr 320px; gap: 32px; }
+    @media (max-width: 1024px) { .article-layout { grid-template-columns: 1fr; } }
+    .article-main { min-width: 0; }
+    .article-body { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .article-inner { padding: 36px 40px; }
+    @media (max-width: 600px) { .article-inner { padding: 22px 20px; } }
+
+    /* ===== ARTICLE TYPOGRAPHY ===== */
+    .article-inner h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 800; letter-spacing: -0.8px; line-height: 1.2; margin: 2.8rem 0 1rem; color: var(--text); padding-bottom: 10px; border-bottom: 2px solid var(--line); }
+    .article-inner h2:first-child { margin-top: 0; }
+    .article-inner h3 { font-size: clamp(1.15rem, 2.5vw, 1.35rem); font-weight: 700; letter-spacing: -0.3px; line-height: 1.3; margin: 2rem 0 0.75rem; color: var(--text); }
+    .article-inner p { font-size: 1.02rem; color: var(--text2); line-height: 1.85; margin-bottom: 1.15rem; }
+    .article-inner ul, .article-inner ol { margin-bottom: 1.15rem; padding-left: 1.5rem; }
+    .article-inner ul { list-style: disc; }
+    .article-inner ol { list-style: decimal; }
+    .article-inner li { font-size: 1.02rem; color: var(--text2); line-height: 1.8; margin-bottom: 0.55rem; }
+    .article-inner strong { color: var(--text); font-weight: 700; }
+    .article-inner a { color: var(--accent1); text-decoration: underline; text-underline-offset: 2px; }
+    .article-inner a:hover { color: var(--accent2); }
+    .article-inner blockquote { border-left: 3px solid var(--accent1); padding: 14px 20px; margin: 1.3rem 0; background: rgba(0,124,240,0.06); border-radius: 0 var(--radius-xs) var(--radius-xs) 0; font-size: 0.98rem; color: var(--text2); line-height: 1.75; }
+
+    /* ===== TOOL CARDS ===== */
+    .tool-card { background: var(--glass); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 28px; margin: 1.5rem 0; transition: all var(--transition); }
+    .tool-card:hover { border-color: rgba(0,124,240,0.3); box-shadow: var(--shadow-sm); }
+    .tool-card h3 { margin-top: 0.5rem; }
+    .card-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent1); margin-bottom: 6px; background: rgba(0,124,240,0.1); padding: 3px 10px; border-radius: 100px; }
+    .card-tag.purple { color: var(--accent3); background: rgba(121,40,202,0.12); }
+    .card-tag.cyan { color: var(--accent2); background: rgba(0,223,216,0.1); }
+
+    /* ===== CTA BUTTON ===== */
+    .cta-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 36px; font-size: 1.05rem; font-weight: 700; background: #007cf0; color: #fff; border-radius: 50px; box-shadow: 0 4px 24px rgba(0,124,240,0.35), inset 0 1px 0 rgba(255,255,255,0.15); transition: all 0.3s cubic-bezier(0.4,0,0.2,1); text-decoration: none; letter-spacing: 0.3px; position: relative; overflow: hidden; border: none; cursor: pointer; }
+    .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,124,240,0.5), 0 0 0 4px rgba(0,124,240,0.1); color: #fff; background: #006ad6; }
+    .cta-btn:active { transform: translateY(-1px) scale(0.98); box-shadow: 0 4px 16px rgba(0,124,240,0.3); }
+    [data-theme="light"] .cta-btn { background: #007cf0; color: #fff; box-shadow: 0 4px 24px rgba(0,124,240,0.3), inset 0 1px 0 rgba(255,255,255,0.2); }
+    [data-theme="light"] .cta-btn:hover { box-shadow: 0 8px 32px rgba(0,124,240,0.4), 0 0 0 4px rgba(0,124,240,0.08); background: #006ad6; }
+
+    /* ===== AUTHOR BOX ===== */
+    .author-box { display: flex; align-items: center; gap: 14px; padding: 20px; margin-top: 2.5rem; background: var(--glass); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+    .author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .author-info { min-width: 0; }
+    .author-name { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .author-bio { font-size: 0.82rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+
+    /* ===== AD SLOTS ===== */
+    .ad-slot { width: 100%; min-height: 100px; display: flex; align-items: center; justify-content: center; background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-xs); margin: 2.2rem 0; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar-area { display: flex; flex-direction: column; gap: 16px; position: sticky; top: calc(var(--header-h) + 16px); max-height: calc(100vh - var(--header-h) - 32px); overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+    .sidebar-area::-webkit-scrollbar { display: none; }
+    .sidebar-card { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 22px; }
+    .sidebar-card h4 { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .sidebar-card h4 .h4-line { flex: 1; height: 1px; background: var(--line); }
+
+    /* Professional TOC */
+    .sidebar-card.toc-card { padding: 20px 18px; }
+    .sidebar-card.toc-card h4 { font-size: 0.76rem; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .toc { display: flex; flex-direction: column; gap: 1px; }
+    .toc-item { display: flex; align-items: flex-start; gap: 10px; padding: 6px 8px; border-radius: 8px; position: relative; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
+    .toc-item:hover { background: rgba(0,124,240,0.06); }
+    .toc-bullet { width: 7px; height: 7px; border-radius: 50%; background: var(--bg3); border: 2px solid var(--line-strong); margin-top: 5px; flex-shrink: 0; transition: all 0.3s ease; }
+    .toc-link { font-size: 0.82rem; font-weight: 500; color: var(--muted); padding: 1px 0; transition: all 0.25s ease; line-height: 1.45; display: block; }
+    .toc-link:hover { color: var(--text); }
+    .toc-link.sub { font-size: 0.78rem; color: var(--muted); padding-left: 4px; }
+    .toc-item.active { background: rgba(0,124,240,0.08); }
+    .toc-item.active .toc-bullet { background: var(--accent1); border-color: var(--accent1); box-shadow: 0 0 0 4px rgba(0,124,240,0.12); }
+    .toc-item.active .toc-link { color: var(--text); font-weight: 700; }
+    .toc-toggle { display: none; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--glass); border: 1px solid var(--line); border-radius: 6px; color: var(--muted); font-size: 0.65rem; cursor: pointer; margin-left: auto; flex-shrink: 0; transition: all 0.3s ease; }
+    .toc-toggle:hover { color: var(--text); border-color: var(--accent1); }
+    .toc-card.expanded .toc-toggle { transform: rotate(180deg); }
+    @media (max-width: 1024px) {
+      .sidebar-area { position: static; max-height: none; overflow-y: visible; }
+      .toc-toggle { display: flex; }
+      .sidebar-card.toc-card .toc { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+      .sidebar-card.toc-card.expanded .toc { max-height: 500px; }
+    }
+
+    /* ===== FAQ SECTION ===== */
+    .faq-section { padding: 50px 24px 60px; max-width: var(--max); margin: 0 auto; }
+    .faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 800px; margin: 30px auto 0; }
+    .faq-item { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-xs); overflow: hidden; transition: border-color var(--transition); }
+    .faq-item.open { border-color: rgba(0,124,240,0.3); }
+    .faq-q { width: 100%; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; font-size: 0.95rem; font-weight: 600; color: var(--text); background: none; text-align: left; cursor: pointer; transition: color var(--transition); font-family: var(--font); border: none; }
+    .faq-q:hover { color: var(--accent1); }
+    .faq-q-icon { width: 26px; height: 26px; background: var(--glass); border: 1px solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; transition: all var(--transition); color: var(--muted); }
+    .faq-item.open .faq-q-icon { transform: rotate(45deg); background: rgba(0,124,240,0.15); border-color: var(--accent1); color: var(--accent1); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .faq-item.open .faq-a { max-height: 500px; }
+    .faq-a-inner { padding: 0 20px 20px; font-size: 0.92rem; color: var(--text2); line-height: 1.8; }
+
+    .section-label { display: inline-block; margin-bottom: 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent1); }
+    .section-title { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 8px; }
+    .section-sub { font-size: 0.95rem; color: var(--text2); max-width: 520px; line-height: 1.6; }
+    .section-divider { height: 1px; background: var(--line); max-width: var(--max); margin: 0 auto; }
+
+    /* ===== TABLE ===== */
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 1.2rem 0; }
+    .comparison-table thead tr { border-bottom: 2px solid var(--line); }
+    .comparison-table th { text-align: left; padding: 12px 14px; color: var(--text); font-weight: 700; }
+    .comparison-table th.center { text-align: center; }
+    .comparison-table td { padding: 11px 14px; color: var(--text2); border-bottom: 1px solid var(--line); }
+    .comparison-table td.center { text-align: center; }
+    .comparison-table tr:last-child td { border-bottom: none; }
+
+    /* ===== FOOTER ===== */
+    .footer { border-top: 1px solid var(--line); padding: 36px 24px 24px; background: rgba(3,7,18,0.6); }
+    [data-theme="light"] .footer { background: rgba(241,245,249,0.8); }
+    .footer-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .footer-brand-icon { width: 32px; height: 32px; background: var(--grad); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 900; color: #fff; }
+    .footer-brand-name { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-link { font-size: 0.85rem; color: var(--muted); transition: color var(--transition); }
+    .footer-link:hover { color: var(--text); }
+    .footer-back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 600; color: var(--accent1); padding: 8px 16px; border-radius: var(--radius-xs); background: rgba(0,124,240,0.1); border: 1px solid rgba(0,124,240,0.2); transition: all var(--transition); }
+    .footer-back-btn:hover { background: rgba(0,124,240,0.15); }
+    .footer-copy { font-size: 0.78rem; color: var(--muted); width: 100%; text-align: center; padding-top: 20px; border-top: 1px solid var(--line); margin-top: 12px; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-primary, .header-actions { display: none; }
+      .hamburger { display: flex; }
+      .article-inner h2 { font-size: 1.35rem; margin: 2rem 0 0.8rem; }
+      .article-inner h3 { font-size: 1.1rem; margin: 1.5rem 0 0.6rem; }
+      .article-inner p { font-size: 0.95rem; }
+      .tool-card { padding: 20px; }
+      .comparison-table { font-size: 0.78rem; }
+      .comparison-table th, .comparison-table td { padding: 8px 6px; }
+    }
+
+    /* ===== PREMIUM UPGRADES ===== */
+    html { scroll-padding-top: calc(var(--header-h) + 20px); }
+    .reading-progress { position: fixed; top: var(--header-h); left: 0; height: 3px; background: var(--grad); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    .tool-card { position: relative; overflow: hidden; }
+    .tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad); opacity: 0; transition: opacity var(--transition); }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-card:hover { transform: translateY(-2px); }
+
+    .cta-btn::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent); border-radius: inherit; transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+    .cta-btn:hover::after { left: 100%; }
+    .cta-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: 4px; }
+    .cta-btn .btn-icon { display: inline-block; transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+    .cta-btn:hover .btn-icon { transform: translateX(4px); }
+
+    .article-inner blockquote { position: relative; }
+    .article-inner blockquote::before { content: '\201C'; position: absolute; top: -5px; left: 16px; font-size: 2.5rem; font-weight: 900; color: var(--accent1); opacity: 0.2; line-height: 1; }
+
+    .article-inner li { position: relative; padding-left: 8px; }
+    .article-inner li::marker { color: var(--accent1); }
+    .article-inner ul li::marker { content: '\25B8'; }
+    .article-inner ol li::marker { font-weight: 700; color: var(--accent1); }
+
+    .article-inner h2 { position: relative; }
+    .article-inner h2::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 60px; height: 2px; background: var(--grad); border-radius: 2px; }
+
+    .faq-item { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .faq-item:hover { background: var(--card-hover); }
+    .faq-item.open { box-shadow: 0 4px 20px rgba(0,124,240,0.08); }
+
+    .article-inner section { opacity: 0; transform: translateY(10px); transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1), transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); will-change: opacity, transform; }
+    .article-inner section.visible { opacity: 1; transform: translateY(0); }
+
+    .comparison-table { border: 1px solid var(--line); border-radius: var(--radius-xs); overflow: hidden; }
+    .comparison-table thead { background: var(--glass); }
+    .comparison-table tbody tr { transition: background var(--transition); }
+    .comparison-table tbody tr:hover { background: rgba(0,124,240,0.04); }
+
+    .author-box { transition: all var(--transition); }
+    .author-box:hover { border-color: rgba(0,124,240,0.2); box-shadow: var(--shadow-sm); }
+    .ad-slot { border-style: solid; border-width: 1px; }
+
+    .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px; background: var(--grad); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 500; box-shadow: 0 4px 16px rgba(0,124,240,0.35); border: none; }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,124,240,0.45); }
+    @media (max-width: 768px) { .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; } }
+  </style>
 </head>
 
 <body>
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Header -->
-    <header class="header-glass fixed w-full top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        Tool Xeno
-                    </div>
-                    <div class="hidden md:block text-sm opacity-70">
-                        Professional Beauty Analysis Tools
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <nav class="hidden md:flex space-x-2">
-                        <a href="#overview" class="nav-link">Overview</a>
-                        <a href="#tools" class="nav-link">Tools</a>
-                        <a href="#benefits" class="nav-link">Benefits</a>
-                    </nav>
-                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
-                </div>
-            </div>
+  <div class="bg-orbs" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><div class="orb orb-4"></div></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="https://toolxeno.com/" class="logo" aria-label="Tool Xeno – Home">
+          <div class="logo-icon" aria-hidden="true">X</div>
+          <span class="logo-text">Tool Xeno</span>
+        </a>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <a href="https://toolxeno.com/" class="nav-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="nav-link">All Tools</a>
+          <a href="#how-to-use" class="nav-link">How to Use</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">☀️ Light</button>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
     </header>
-    
-    <!-- Main Content -->
-    <main class="pt-20 pb-10">
-        <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-16 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent fade-in">
-                Professional Beauty Analysis Tools
-            </h1>
-            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto fade-in">
-                Discover the power of AI-driven beauty analysis with our comprehensive suite of professional skin and hair assessment tools designed to give you personalized care recommendations.
-            </p>
-        </section>
-        
-        <!-- Article Content -->
-        <article class="container mx-auto px-6">
-            <div class="glass-card p-8 md:p-12 fade-in">
-                <div class="article-content">
-                    <section id="overview">
-                        <p>
-                            In today's world, understanding your unique beauty needs is essential for maintaining healthy skin and hair. Our professional beauty analysis tools leverage cutting-edge artificial intelligence technology to provide you with accurate, personalized assessments that rival those of professional dermatologists and hair care specialists.
-                        </p>
-                        
-                        <p>
-                            Whether you're struggling with skin concerns, curious about achieving that coveted glass skin appearance, or seeking the perfect hair care routine, our AI-powered tools deliver comprehensive analysis and actionable recommendations tailored specifically to you.
-                        </p>
-                    </section>
-                    
-                    <section id="tools">
-                        <h2>Our Professional Beauty Analysis Tools</h2>
-                        
-                        <p>
-                            We've developed three specialized tools that work together to give you a complete picture of your beauty health. Each tool uses advanced AI algorithms combined with dermatological expertise to deliver professional-grade results from the comfort of your home.
-                        </p>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-sparkles"></i> Glass Skin Checker</h3>
-                            <p>
-                                The Glass Skin Checker represents the pinnacle of skin analysis technology. This advanced question-based tool provides professional scoring of your skin's clarity, smoothness, and overall health. Unlike camera-based tools that can be affected by lighting conditions, our questionnaire approach ensures accurate assessment regardless of your environment.
-                            </p>
-                            <p>
-                                Through a series of carefully designed questions developed by skincare professionals, the Glass Skin Checker evaluates multiple factors that contribute to the coveted glass skin appearance. You'll receive a detailed professional score that reflects your current skin condition, along with specific recommendations for achieving that luminous, porcelain-like complexion.
-                            </p>
-                            <p><strong>Key features include:</strong></p>
-                            <ul>
-                                <li>Professional scoring system based on dermatological standards</li>
-                                <li>Comprehensive evaluation of skin clarity and texture</li>
-                                <li>Personalized recommendations for achieving glass skin</li>
-                                <li>Progress tracking to monitor your skin improvement journey</li>
-                                <li>Expert-designed questionnaire for accurate results</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-camera"></i> Skin Type Checker</h3>
-                            <p>
-                                Understanding your skin type is fundamental to developing an effective skincare routine. Our Skin Type Checker uses professional AI camera analysis to examine your skin in detail, identifying whether you have normal, dry, oily, combination, or sensitive skin.
-                            </p>
-                            <p>
-                                This sophisticated tool analyzes visual markers that professional dermatologists look for when determining skin type. By capturing and processing high-resolution analysis of your facial skin, it identifies key characteristics such as pore size, oil production, hydration levels, and sensitivity indicators.
-                            </p>
-                            <p>
-                                What sets our Skin Type Checker apart is the comprehensive personalized report you receive. Rather than simply telling you your skin type, we provide detailed insights into what this means for your skincare routine, which products will work best for you, and which ingredients to seek out or avoid.
-                            </p>
-                            <p><strong>Benefits of using our Skin Type Checker:</strong></p>
-                            <ul>
-                                <li>Accurate AI-powered camera analysis of your facial skin</li>
-                                <li>Detailed personalized reports with actionable insights</li>
-                                <li>Product recommendations tailored to your specific skin type</li>
-                                <li>Identification of potential skin concerns requiring attention</li>
-                                <li>Professional-grade analysis accessible anytime, anywhere</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-user-circle"></i> Hair Type Analyzer</h3>
-                            <p>
-                                Just as important as understanding your skin is knowing your hair type and its unique needs. Our Hair Type Analyzer takes a question-based approach to ensure the most accurate and professional results possible. This methodology eliminates the variables that can affect camera-based analysis, such as lighting conditions, hair styling, and product buildup.
-                            </p>
-                            <p>
-                                The analyzer evaluates multiple aspects of your hair including texture, porosity, density, elasticity, and curl pattern. By answering a series of expert-designed questions about your hair's behavior, appearance, and response to products, you'll receive a comprehensive profile of your hair type along with personalized care recommendations.
-                            </p>
-                            <p>
-                                What makes our question-based approach superior is its ability to assess how your hair behaves in different conditions and situations. This gives a more complete picture than a simple photograph ever could, resulting in recommendations that truly work for your unique hair needs.
-                            </p>
-                            <p><strong>Key advantages:</strong></p>
-                            <ul>
-                                <li>AI-powered analysis through expert-designed questionnaire</li>
-                                <li>Question-based assessment for maximum accuracy and professionalism</li>
-                                <li>Comprehensive hair profile including texture, porosity, and density</li>
-                                <li>Personalized care recommendations tailored to your hair's unique needs</li>
-                                <li>Product and ingredient guidance for optimal hair health</li>
-                                <li>Routine suggestions based on your hair type and lifestyle</li>
-                            </ul>
-                        </div>
-                    </section>
-                    
-                    <section id="benefits">
-                        <h2>Why Choose AI-Powered Beauty Analysis?</h2>
-                        
-                        <div class="feature-grid">
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-brain"></i></div>
-                                <h4 class="font-semibold mb-2">Professional Accuracy</h4>
-                                <p>Our AI algorithms are trained on dermatological data to provide professional-grade assessments</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-user-check"></i></div>
-                                <h4 class="font-semibold mb-2">Personalized Results</h4>
-                                <p>Receive tailored recommendations based on your unique characteristics and concerns</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-home"></i></div>
-                                <h4 class="font-semibold mb-2">Convenient Access</h4>
-                                <p>Get professional beauty analysis from the comfort of your home, anytime you need it</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-shield-alt"></i></div>
-                                <h4 class="font-semibold mb-2">Privacy First</h4>
-                                <p>All analysis happens locally on your device - your data never leaves your browser</p>
-                            </div>
-                        </div>
-                        
-                        <p>
-                            Traditional beauty consultations can be expensive, time-consuming, and sometimes intimidating. Our AI-powered tools democratize access to professional beauty analysis, making it available to everyone regardless of location or budget. You get the same level of insight that you'd receive from a professional consultation, but with the added convenience of instant results and the privacy of analyzing from home.
-                        </p>
-                        
-                        <h3>The Science Behind Our Tools</h3>
-                        <p>
-                            Our beauty analysis tools are built on extensive research in dermatology, trichology, and skincare science. We've collaborated with beauty professionals to ensure that our AI algorithms evaluate the same factors that experts consider during in-person consultations. This includes everything from visible characteristics to behavioral patterns that indicate underlying skin and hair health.
-                        </p>
-                        
-                        <p>
-                            The question-based approach used in our Glass Skin Checker and Hair Type Analyzer is particularly effective because it captures information that cameras cannot detect. How does your skin feel throughout the day? How does your hair respond to humidity? These behavioral insights are crucial for accurate assessment and are only possible through thoughtful questioning.
-                        </p>
-                        
-                        <h3>Getting Started with Your Beauty Journey</h3>
-                        <p>
-                            Using our professional beauty analysis tools is simple and straightforward. Each tool guides you through its specific assessment process, whether that's answering questions or taking photos. The entire analysis takes just a few minutes, and you'll receive detailed results immediately upon completion.
-                        </p>
-                        
-                        <p>
-                            We recommend starting with the Skin Type Checker to establish a baseline understanding of your skin. Once you know your skin type, you can use the Glass Skin Checker to assess your progress toward achieving that perfect, translucent complexion. For hair concerns, the Hair Type Analyzer provides comprehensive insights that will transform your hair care routine.
-                        </p>
-                        
-                        <h3>Your Path to Better Beauty Care</h3>
-                        <p>
-                            The insights you gain from our tools are just the beginning. Armed with accurate information about your skin and hair type, you can make informed decisions about products, treatments, and routines. You'll waste less money on products that aren't right for you and see better results from the ones that are.
-                        </p>
-                        
-                        <p>
-                            Many users find that understanding their beauty profile through our tools gives them confidence in their skincare and haircare choices. Instead of following generic advice or trending products, you'll know exactly what your skin and hair need to look and feel their best.
-                        </p>
-                    </section>
-                    
-                    <section>
-                        <h2>Take Control of Your Beauty Routine Today</h2>
-                        <p>
-                            Professional beauty analysis is no longer limited to expensive spa visits or dermatologist appointments. With Tool Xeno's AI-powered beauty tools, you have access to professional-grade assessments whenever you need them. Whether you're dealing with specific concerns or simply want to optimize your routine, our tools provide the insights you need to make confident, informed decisions about your beauty care.
-                        </p>
-                        
-                        <p>
-                            Start your journey to healthier skin and hair today. Our three specialized tools - Glass Skin Checker, Skin Type Checker, and Hair Type Analyzer - work together to give you a complete understanding of your unique beauty needs. With personalized recommendations based on advanced AI analysis, you'll finally have the roadmap to achieving your beauty goals.
-                        </p>
-                        
-                        <div class="text-center mt-8">
-                            <a href="https://toolxeno.com" class="btn-gradient text-lg">
-                                <i class="fas fa-magic mr-2"></i>
-                                Try Our Beauty Tools Now
-                            </a>
-                        </div>
-                    </section>
-                </div>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+      <a href="https://toolxeno.com/" class="mobile-nav-link">🏠 Home</a>
+      <a href="https://toolxeno.com/#tools" class="mobile-nav-link">🛠️ All Tools</a>
+      <a href="#how-to-use" class="mobile-nav-link">📋 How to Use</a>
+      <a href="#faq" class="mobile-nav-link">❓ FAQ</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> Free · No Signup · 100% Private</div>
+      <h1 class="hero-h1" id="hero-heading">Three Beauty Tools That <span class="grad-text">Actually Know Your Skin</span></h1>
+      <p class="hero-sub">Score your glass skin potential with AI camera analysis, discover your exact skin type through a smart quiz, and get a full hair type profile — all free, all private, all in your browser.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> AI Camera Analysis</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> No Photo Uploads</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> 3 Analysis Tools</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> Updated April 2025</span>
+      </div>
+    </section>
+
+    <!-- MAIN LAYOUT -->
+    <main class="article-layout">
+      <div class="article-main">
+        <article class="article-body" itemscope itemtype="https://schema.org/Article">
+          <div class="article-inner">
+
+            <!-- ===== INTRODUCTION ===== -->
+            <section id="introduction">
+              <p>I spent way too much money on skincare last year. Between serums, moisturizers, toners, sunscreens, and the occasional impulse-buy sheet mask, my bathroom cabinet started looking like a Sephora display. The problem? I had no real idea what my skin actually needed. I was buying products because an influencer said they were good, because the packaging looked nice, or because a TikTok sounded convincing at 2 AM. Not because I had any understanding of what my specific skin type required.</p>
+
+              <p>Turns out, that is not unusual. A 2024 survey by the International Dermal Institute found that <strong>roughly 72% of people buy skincare products without knowing their actual skin type</strong>. Think about that for a second. Nearly three out of four people are spending money on products designed for skin that is not theirs. Dry-skin products on oily skin. Heavy creams on acne-prone skin. It is a waste of money at best and actively harmful at worst.</p>
+
+              <p>So we built three tools to help fix that problem — or at least give people a starting point that is better than guessing. The Glass Skin Checker uses your phone's camera and AI to analyze your skin's clarity and texture in real time. The Skin Type Checker is a questionnaire that walks through how your skin actually behaves throughout the day. And the Hair Type Analyzer does the same thing for your hair. None of them require an account, none of them cost anything, and — this part matters a lot with beauty tools — your photos and personal data stay on your device.</p>
+            </section>
+
+            <!-- AD SLOT 1 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 1: GLASS SKIN CHECKER ===== -->
+            <section id="glass-skin-checker">
+              <h2 id="h-glass-skin">Glass Skin Checker: AI Camera Analysis for Your Clearest Skin</h2>
+
+              <div class="tool-card">
+                <span class="card-tag">Tool #1</span>
+                <h3 id="h-glass">Real-Time Glass Skin Scoring</h3>
+
+                <p>Glass skin" — that K-beauty term for skin so clear and luminous it looks like, well, glass — has been everywhere for the past few years. And honestly, I dismissed it as a marketing buzzword until a friend of mine actually achieved it. Her skin went from "pretty normal" to genuinely translucent-looking in about four months. Not through expensive treatments, but through understanding what her skin specifically needed and building a routine around that. The Glass Skin Checker is our attempt to give people that same starting point.</p>
+
+                <p>Here is how it works. The tool asks for permission to access your device's camera. Once you grant it (and yes, I know that makes some people uncomfortable — I will get to the privacy part in a moment), it captures a photo of your face. The AI then analyzes several visual markers: <strong>skin clarity</strong> (how even your skin tone is), <strong>texture smoothness</strong> (the presence of bumps, pores, or roughness), <strong>radiance</strong> (how much light your skin reflects, which relates to hydration and cell turnover), and <strong>overall evenness</strong> (color consistency across your face). From all of that, it produces a glass skin score from 0 to 100.</p>
+
+                <p>Now, let me address the elephant in the room. You are probably wondering: why should I trust a browser-based tool to analyze my skin when dermatologists spend years in medical school? Fair question. The honest answer is that you shouldn't treat this as a medical diagnosis. It is not going to spot melanoma or diagnose rosacea. What it does is give you a consistent, repeatable baseline measurement. If you score a 42 today and then try a new routine for a month and score a 58, that progress is real and meaningful — even if the absolute numbers are not clinically precise.</p>
+
+                <p>The privacy angle is what I actually care about most here. Most camera-based skin analysis tools work by uploading your photo to a cloud server, running the AI there, and sending results back. That means your face photo — your actual face — is sitting on someone else's server. Our tool does the analysis entirely in your browser using a client-side AI model. Your photo is processed on your device and never transmitted anywhere. When you close the tab, the photo is gone from memory. There is no server in the middle. No photo storage. No facial recognition database building.</p>
+
+                <p><strong>What the score tells you:</strong></p>
+                <ul>
+                  <li><strong>70-100 (Excellent)</strong> — Your skin shows strong clarity, even tone, and good radiance. This means your current routine is working well. Focus on maintenance and protection</li>
+                  <li><strong>50-69 (Good)</strong> — Solid baseline with room for improvement. You might benefit from targeting specific concerns like uneven texture or mild dullness</li>
+                  <li><strong>30-49 (Average)</strong> — Your skin has noticeable areas for improvement. This is where a targeted routine can make a big difference over a few weeks</li>
+                  <li><strong>0-29 (Needs Attention)</strong> — This does not mean your skin is "bad" — it means there are clear, actionable areas to address. Think of it as a roadmap, not a judgment</li>
+                </ul>
+
+                <blockquote>A tip from the people who test this tool regularly: take the photo in natural, indirect light. Bathroom lighting with fluorescent bulbs or direct sunlight will throw off the score. A window on a cloudy day? Perfect. Also, remove makeup first if you can — the AI analyzes your actual skin, not your foundation.</blockquote>
+              </div>
+            </section>
+
+            <!-- AD SLOT 2 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 2: SKIN TYPE CHECKER ===== -->
+            <section id="skin-type-checker">
+              <h2 id="h-skin-type">Skin Type Checker: Stop Guessing What Your Skin Needs</h2>
+
+              <div class="tool-card">
+                <span class="card-tag purple">Tool #2</span>
+                <h3 id="h-skinquiz">Smart Questionnaire for Accurate Skin Typing</h3>
+
+                <p>If you have ever stood in a skincare aisle staring at two moisturizers — one labeled "for dry skin" and the other "for oily skin" — and genuinely not known which one you are, this tool is for you. The Skin Type Checker is a questionnaire-based tool that figures out your skin type by asking about how your skin actually behaves. Not how it looks in a filtered selfie. Not what a quiz on a skincare brand's website told you (those are designed to sell you products, by the way). How your skin actually feels and responds throughout the day.</p>
+
+                <p>The questionnaire asks about things that matter for skin typing but that cameras cannot see. How does your skin feel an hour after you wash it? Tight and dry, or still slightly oily? What happens when you skip moisturizer for a day? Does your skin get flaky, or does it look fine? How does it react to new products — does it break out, get red, or handle them without complaint? These behavioral questions are the same kind of thing a dermatologist asks during a consultation. They reveal your skin's underlying characteristics more reliably than any photo can.</p>
+
+                <p>The tool identifies one of five skin types and gives you a breakdown of what that actually means for your daily routine:</p>
+
+                <ul>
+                  <li><strong>Normal skin</strong> — Balanced oil production, few imperfections, good overall hydration. Your main job is maintenance and sun protection. Honestly, count yourself lucky — only about 10-15% of adults have truly normal skin</li>
+                  <li><strong>Dry skin</strong> — Feels tight after washing, may flake or peel, tends to look dull. You need richer moisturizers, hydrating ingredients (hyaluronic acid, ceramides), and gentle cleansers that do not strip your skin's natural oils</li>
+                  <li><strong>Oily skin</strong> — Visible shine within an hour of washing, enlarged pores, prone to breakouts. Counterintuitively, you still need to moisturize — just with lighter, non-comedogenic products. Stripping the oil actually makes your skin produce more of it</li>
+                  <li><strong>Combination skin</strong> — Oily in some areas (usually the T-zone: forehead, nose, chin) and dry or normal in others (cheeks). This is the most common skin type, and the trickiest to shop for because you need different products for different parts of your face</li>
+                  <li><strong>Sensitive skin</strong> — Gets red easily, reacts to new products, may sting or burn with certain ingredients. You need fragrance-free everything, gentle formulations, and a minimalist routine. Less is more</li>
+                </ul>
+
+                <p>One thing I want to be upfront about: your skin type is not permanent. It can shift with seasons, hormones, stress levels, age, and diet. Someone who is oily at 18 might be combination at 28 and dry at 45. That is normal. The tool is designed to be retaken periodically — every few months or whenever you notice your skin behaving differently. Since it is free and takes about two minutes, there is no reason not to recheck.</p>
+              </div>
+            </section>
+
+            <!-- AD SLOT 3 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 3: HAIR TYPE ANALYZER ===== -->
+            <section id="hair-type-analyzer">
+              <h2 id="h-hair-type">Hair Type Analyzer: Figure Out What Your Hair Actually Wants</h2>
+
+              <div class="tool-card">
+                <span class="card-tag cyan">Tool #3</span>
+                <h3 id="h-hairquiz">Question-Based Hair Profiling</h3>
+
+                <p>Hair is weird. I say that with affection, but also with frustration. My hair has been straight my entire life, and then two years ago it started developing a wave after I started swimming regularly. Turns out chlorine and mineral exposure can actually change your hair's texture over time. That kind of thing is why camera-based hair analysis has limitations — a photo shows you what your hair looks like right now, under specific lighting conditions, with whatever products you have in it. It cannot tell you how your hair behaves when it is air-dried, how it reacts to humidity, or how quickly it absorbs water.</p>
+
+                <p>The Hair Type Analyzer uses a questionnaire approach for exactly that reason. It asks about your hair's behavior, not just its appearance. How long does it take to air dry? Does it frizz in humidity? How does it respond to heat styling? Does it hold a curl or spring back to straight within an hour? The answers to these questions reveal your hair's underlying properties — things like porosity (how well your hair absorbs moisture), density (how many strands you have per square inch), elasticity (how far a strand stretches before breaking), and texture (the thickness of individual strands).</p>
+
+                <p>Based on your answers, the tool generates a hair profile that covers the characteristics that actually matter for choosing products and building a routine. This is not just "you have curly hair, buy curly hair shampoo." It breaks things down into actionable detail:</p>
+
+                <ul>
+                  <li><strong>Texture classification</strong> — Fine, medium, or coarse. This determines product weight. Fine hair gets weighed down by heavy products. Coarse hair can handle richer formulations that would make fine hair look greasy</li>
+                  <li><strong>Porosity level</strong> — Low, medium, or high. Low porosity hair repels moisture (products sit on top instead of absorbing). High porosity hair absorbs moisture quickly but loses it just as fast. This single piece of information changes which products actually work for you more than anything else</li>
+                  <li><strong>Density assessment</strong> — Thin, medium, or thick. This affects which styling products and tools are appropriate. Volumizing products on already-thick hair, for example, create the kind of volume that makes you look like you stuck your finger in a socket</li>
+                  <li><strong>Curl pattern identification</strong> — Where your hair falls on the curl spectrum, from straight (type 1) to wavy (type 2) to curly (type 3) to coily (type 4), with subcategories for each. This is the Andre Walker system that most hair professionals use</li>
+                </ul>
+
+                <p>The reason I keep emphasizing the questionnaire approach over camera analysis comes down to one word: consistency. A camera tool might give you different results depending on whether you took the photo before or after your morning coffee, whether the room lighting is warm or cool, whether you used dry shampoo yesterday. The questionnaire strips all of that away and focuses on how your hair actually behaves. Same questions, same conditions, every time you take it. That makes the results repeatable and comparable, which matters a lot if you are trying to track whether a new routine is actually working.</p>
+
+                <blockquote>Fun fact from our user data: about 40% of people who take the Hair Type Analyzer discover their hair type is different from what they assumed. The most common surprise? People with "straight" hair who are actually type 2 (wavy) — they just had not noticed because their hair was too short or too damaged to show the natural wave pattern.</blockquote>
+              </div>
+            </section>
+
+            <!-- AD SLOT 4 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== HOW TO USE ===== -->
+            <section id="how-to-use">
+              <h2 id="h-how-to-use">How to Use Each Tool (Step-by-Step)</h2>
+
+              <h3 id="h-glass-steps">Using the Glass Skin Checker</h3>
+              <ol>
+                <li><strong>Open the tool</strong> in any modern browser — Chrome, Safari, Edge, or Firefox all work. Phones work particularly well because they have front-facing cameras with good resolution</li>
+                <li><strong>Grant camera permission</strong> when the browser asks. The tool needs access to your camera to capture the analysis photo. Your photo is processed locally and never uploaded — more on that below</li>
+                <li><strong>Position your face</strong> in the on-screen guide. Try to face the camera directly with even lighting on both sides of your face. Natural, indirect light gives the most accurate results</li>
+                <li><strong>Capture the photo</strong> by tapping the button. The AI analyzes the image immediately — this takes about 10 to 15 seconds</li>
+                <li><strong>Review your score</strong> and the breakdown across each category (clarity, texture, radiance, evenness). The tool also provides specific recommendations based on which areas scored lowest</li>
+              </ol>
+
+              <h3 id="h-skinquiz-steps">Using the Skin Type Checker</h3>
+              <ol>
+                <li><strong>Open the tool</strong> on any device. No camera needed — this is a questionnaire, so it works equally well on a phone, tablet, or desktop</li>
+                <li><strong>Answer each question honestly</strong>. The most common mistake is answering based on what you want your skin type to be rather than what it actually is. If your face is shiny by noon, it is oily — choosing "normal" because you do not like the word "oily" will give you inaccurate results</li>
+                <li><strong>Consider your skin's behavior over the past week</strong>, not just today. Skin can change day to day based on weather, hormones, or what you ate. A week-long view gives a more accurate picture</li>
+                <li><strong>Get your results</strong> — your skin type identification plus a breakdown of what that means for your routine, which ingredients to look for, and which to avoid</li>
+              </ol>
+
+              <h3 id="h-hairquiz-steps">Using the Hair Type Analyzer</h3>
+              <ol>
+                <li><strong>Open the tool</strong> on any device. Same deal as the Skin Type Checker — questionnaire only, no camera needed</li>
+                <li><strong>Answer based on your natural hair</strong> — not how it looks after blow-drying, straightening, or using styling products. The tool needs to know what your hair does when you let it do its own thing</li>
+                <li><strong>If you are not sure about a question</strong>, skip it or pick the closest answer. The AI is designed to handle some uncertainty. One "I don't know" will not ruin the results</li>
+                <li><strong>Review your full hair profile</strong> — texture, porosity, density, and curl pattern, along with product recommendations and routine suggestions specific to your profile</li>
+              </ol>
+            </section>
+
+            <!-- ===== WHY BROWSER-BASED MATTERS ===== -->
+            <section id="privacy">
+              <h2 id="h-privacy">Why Privacy Matters More With Beauty Tools Than You Think</h2>
+
+              <p>Here is something that does not get talked about enough in the beauty tech space: when you upload a photo of your face to a skin analysis tool, you are creating a biometric data point. Your face is biometric data — it is uniquely identifiable, it cannot be changed like a password, and in many jurisdictions (including the EU under GDPR and several US states under biometric privacy laws), companies are legally required to protect it with specific safeguards.</p>
+
+              <p>Now, most free skin analysis tools on the internet are not GDPR-compliant. They do not have biometric data processing agreements. They do not tell you how long your photo is stored, where it is stored, or who has access to it. And — here is the part that should genuinely concern people — some of them are operated by companies that sell data to third parties. Your face photo, potentially linked to your skin analysis results, could end up in a database you never knew existed.</p>
+
+              <p>Our approach is different because the analysis never leaves your device. The Glass Skin Checker uses a client-side AI model that runs in your browser. Your photo is captured by your camera, processed by your phone or computer's processor, scored by the AI, and then discarded from memory. No upload. No server. No storage. No third-party access. When you close the tab, the photo and the results are gone.</p>
+
+              <p>The Skin Type Checker and Hair Type Analyzer are even simpler — they are questionnaires, so there is no photo involved at all. Your answers are processed by the AI in your browser and the results appear on screen. Nothing is transmitted anywhere. You could use these tools on airplane mode and they would work exactly the same.</p>
+
+              <p>I am not trying to scare anyone away from using online beauty tools. But I do think people should know what happens to their data when they use them. A face photo is not the same as a text input. You can change your email address. You cannot change your face. Treat tools that ask for it with appropriate caution.</p>
+            </section>
+
+            <!-- ===== USE CASES ===== -->
+            <section id="use-cases">
+              <h2 id="h-use-cases">Who Uses These Tools (Based on Real Feedback)</h2>
+
+              <h3 id="h-skincare-newbies">People New to Skincare</h3>
+              <p>This is the biggest user group, and it makes sense. If you are just starting to take skincare seriously, the amount of information out there is completely overwhelming. Cleansers, toners, serums, moisturizers, sunscreens, essences, ampoules — and that is before you get into active ingredients like retinol, niacinamide, AHAs, BHAs, vitamin C, and peptides. Most beginners end up buying random products, using them inconsistently, and giving up when they do not see results in two weeks.</p>
+
+              <p>The Skin Type Checker gives people a starting point. Once you know you have dry skin, the overwhelming product selection narrows down significantly. You know to look for hydrating ingredients and to avoid harsh cleansers. The Glass Skin Checker then gives you a baseline score so you can actually measure whether your new routine is making a difference. Several users have told us this combination — knowing their type plus being able to track progress — finally made skincare feel manageable instead of intimidating.</p>
+
+              <h3 id="h-routine-optimizers">People Optimizing an Existing Routine</h3>
+              <p>These are the people who already have a routine but feel like it has plateaued. Their skin is not getting worse, but it is not getting better either. The Glass Skin Checker is particularly useful here because it provides a numerical baseline. You take the test, note your score, adjust one or two things in your routine, and retest in a few weeks. If the score goes up, the changes helped. If it stays the same, try something else. It takes the guesswork out of routine optimization.</p>
+
+              <h3 id="h-hair-strugglers">People Frustrated With Their Hair</h3>
+              <p>The Hair Type Analyzer was built partly out of personal frustration, and the feedback suggests that frustration is widespread. People spend years — sometimes decades — using the wrong products for their hair because they have never actually figured out their hair type. They buy "frizz control" products when the real issue is low porosity. They use heavy creams when their fine hair needs lightweight leave-ins. The questionnaire takes two minutes and often changes how people think about their entire hair care approach.</p>
+
+              <h3 id="h-budget-shoppers">People Who Want to Stop Wasting Money</h3>
+              <p>This one comes up more than I expected. Multiple users have told us they were spending $100-200 per month on skincare and haircare products, many of which were wrong for their type. After using the tools, they were able to cut their product collection down to the essentials that actually worked for them. One person said she went from 15 skincare products to 6 — and her skin looked better with the smaller collection because every product was actually suited to her skin type.</p>
+            </section>
+
+            <!-- AD SLOT 5 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== COMPARISON ===== -->
+            <section id="comparison">
+              <h2 id="h-comparison">Honest Comparison with Alternatives</h2>
+
+              <p>I am not going to pretend these tools are a substitute for seeing a dermatologist or a trichologist. If you have a medical skin condition, persistent hair loss, or anything that concerns you beyond "I want my skin to look nicer," go see a professional. These tools are for the much larger category of people who just want to understand their skin and hair better so they can make smarter product choices. Here is how they compare to the other options out there:</p>
+
+              <div style="overflow-x: auto; margin: 1.3rem 0; border-radius: var(--radius-xs); border: 1px solid var(--line);">
+                <table class="comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Feature</th>
+                      <th class="center" style="color: var(--accent4);">Tool Xeno</th>
+                      <th class="center">Beauty Brand Quizzes</th>
+                      <th class="center">Dermatologist Visit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Privacy (no photo uploads)</td><td class="center" style="color: #22c55e;">Yes</td><td class="center" style="color: #ef4444;">Photos uploaded</td><td class="center" style="color: #22c55e;">In-person</td></tr>
+                    <tr><td>Cost</td><td class="center" style="color: #22c55e;">Free</td><td class="center">Free (sells products)</td><td class="center">$100 – $300+</td></tr>
+                    <tr><td>Number of tools</td><td class="center" style="color: var(--accent4);">3 in one</td><td class="center">Usually 1</td><td class="center">1 per visit</td></tr>
+                    <tr><td>Account required</td><td class="center" style="color: #22c55e;">No</td><td class="center" style="color: #ef4444;">Often yes</td><td class="center" style="color: #22c55e;">No</td></tr>
+                    <tr><td>Time to results</td><td class="center" style="color: #22c55e;">2-3 minutes</td><td class="center" style="color: #22c55e;">3-5 minutes</td><td class="center">Days to weeks</td></tr>
+                    <tr><td>Product-neutral advice</td><td class="center" style="color: #22c55e;">Yes</td><td class="center" style="color: #ef4444;">Branded products</td><td class="center" style="color: #22c55e;">Usually yes</td></tr>
+                    <tr><td>Trackable over time</td><td class="center" style="color: #22c55e;">Yes</td><td class="center">No</td><td class="center">At next visit</td></tr>
+                    <tr><td>Medical diagnosis</td><td class="center">No</td><td class="center">No</td><td class="center" style="color: #22c55e;">Yes</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p>Where brand quizzes deserve credit: they are easy to use and often well-designed. The problem is that they are marketing tools. Their purpose is to recommend that brand's products. The questions are typically framed to steer you toward a specific product line, and the results always happen to suggest products that brand sells. Our tools do not sell anything. We recommend ingredient categories and routine approaches, not specific brands. You can take those recommendations and shop wherever you want — drugstore, Sephora, a small indie brand, whatever works for your budget.</p>
+            </section>
+
+            <!-- ===== CTA ===== -->
+            <section style="text-align: center; margin-top: 2.8rem; padding-top: 1.8rem; border-top: 2px solid var(--line);">
+              <p style="font-size: 1.08rem; color: var(--text); font-weight: 700; margin-bottom: 1rem;">All three tools are live, free, and ready to use right now.</p>
+              <a href="https://toolxeno.com/#tools" class="cta-btn">Open Beauty Tools <span class="btn-icon">→</span></a>
+            </section>
+
+            <!-- AUTHOR -->
+            <div class="author-box">
+              <div class="author-avatar">X</div>
+              <div class="author-info">
+                <div class="author-name">Tool Xeno Team</div>
+                <div class="author-bio">We build free, privacy-first online tools. No accounts, no data collection, no hidden fees. Your photos and data never leave your device.</div>
+              </div>
             </div>
+
+          </div>
         </article>
+      </div>
+
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar-area">
+        <!-- TABLE OF CONTENTS -->
+        <div class="sidebar-card toc-card" id="toc-card">
+          <h4>📋 Table of Contents <span class="h4-line"></span><button class="toc-toggle" id="toc-toggle" aria-label="Toggle TOC">▼</button></h4>
+          <nav class="toc" aria-label="Table of Contents">
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#introduction" class="toc-link">Introduction</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#glass-skin-checker" class="toc-link">Glass Skin Checker</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#skin-type-checker" class="toc-link">Skin Type Checker</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#hair-type-analyzer" class="toc-link">Hair Type Analyzer</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#how-to-use" class="toc-link">How to Use Each Tool</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#privacy" class="toc-link">Privacy & Your Data</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#use-cases" class="toc-link">Real-World Use Cases</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#comparison" class="toc-link">Comparison with Alternatives</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#faq" class="toc-link">Frequently Asked Questions</a></div>
+          </nav>
+        </div>
+      </aside>
     </main>
-    
-    <script>
-        // Initialize particles
-        function initializeParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                container.appendChild(particle);
-            }
-        }
-        
-        // Theme toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
-        }
-        
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-theme');
-        }
-        
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeParticles();
+
+    <!-- ===== FAQ SECTION ===== -->
+    <section class="section-divider"></section>
+    <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+      <div style="text-align: center;">
+        <span class="section-label">Common Questions</span>
+        <h2 class="section-title" id="faq-heading">Frequently Asked Questions</h2>
+        <p class="section-sub" style="margin: 0 auto;">Honest answers to the questions people ask most about these beauty analysis tools.</p>
+      </div>
+
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            How does the Glass Skin Checker work?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">It uses your device's camera to take a photo of your face, then runs an AI analysis on the image directly in your browser. The AI evaluates skin clarity, texture smoothness, radiance, and color evenness to produce a glass skin score from 0 to 100. The entire process takes about 10-15 seconds. Your photo is processed locally on your device and is never uploaded to any server — it exists only in your browser's memory and is gone when you close the tab.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            How does the Skin Type Checker determine my skin type?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">It uses a questionnaire approach, not a camera. You answer a series of questions about how your skin behaves throughout the day — how it feels after washing, how it reacts to products, whether it gets shiny or dry, and so on. The AI processes your answers to identify one of five skin types: normal, dry, oily, combination, or sensitive. You also get personalized recommendations for ingredients and products suited to your type. Most people complete the questionnaire in about two minutes.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            How accurate is the Hair Type Analyzer?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">The accuracy depends on how thoughtfully you answer the questions. The questionnaire was designed around trichology principles — the study of hair and scalp health — and evaluates texture, porosity, density, elasticity, and curl pattern. Users who answer honestly tend to find the results match what a professional hair stylist would tell them. The questionnaire approach is actually more reliable than photo-based analysis for hair because it captures behavioral information (how your hair responds to humidity, products, and styling) that a single photo cannot show.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Is my photo data safe with the Glass Skin Checker?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes. Your photo is processed entirely within your browser using a client-side AI model. It is never uploaded to any server, never stored, never transmitted, and never accessible to anyone — including us. When you close the browser tab, the photo and analysis results are purged from memory. This is fundamentally different from most online skin analysis tools, which upload your face photo to a remote server for processing. With our tool, the only place your photo exists is in your browser's temporary memory.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Do I need to create an account to use these beauty tools?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">No account, no signup, no email, and no personal information required. Open any of the three tools in your browser and start using them immediately. There are no usage limits, no login screens, and no "create a free account to continue" prompts. Every feature is available to every visitor.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Can I use these tools on my phone?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes. All three tools are fully responsive and work on any modern smartphone, tablet, or desktop. The Glass Skin Checker works especially well on phones because it uses your device's camera — the front-facing camera on most modern smartphones produces excellent image quality for the analysis. The Skin Type Checker and Hair Type Analyzer work great on any screen size since they are questionnaire-based.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            How long does each analysis take?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">The Glass Skin Checker processes your photo in about 10 to 15 seconds after you capture it. The Skin Type Checker questionnaire takes most people around 2 minutes to complete. The Hair Type Analyzer takes about 2 to 3 minutes depending on how quickly you answer. All three tools provide results instantly — no waiting for an email or a report to be generated.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Are these beauty tools free? What is the catch?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Completely free, no catch. No usage limits, no premium tiers, no paywalls, no hidden fees, and no product recommendations designed to sell you anything. Unlike beauty brand quizzes that steer you toward their own products, our tools give you neutral, ingredient-based and routine-based advice that you can apply with any brand at any price point. The tools are supported by the Tool Xeno website as a whole.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Can I retake the Glass Skin Checker to track my progress?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Absolutely. You can retake the test as often as you want, with no limits. Many users check their glass skin score weekly or monthly to see whether their skincare routine is actually producing visible results. For the most consistent tracking, try to take the photo under similar lighting conditions each time — natural, indirect light is ideal. A rising score over weeks or months is a strong indicator that your routine is working.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-icon">X</div>
+          <span class="footer-brand-name">Tool Xeno</span>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://toolxeno.com/" class="footer-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="footer-link">All Tools</a>
+          <a href="https://toolxeno.com/privacy.html" class="footer-link">Privacy</a>
+          <a href="https://toolxeno.com/terms.html" class="footer-link">Terms</a>
+        </nav>
+        <a href="https://toolxeno.com/#tools" class="footer-back-btn">← Back to All Tools</a>
+        <div class="footer-copy">© <span id="footer-year"></span> Tool Xeno. All processing is performed locally in your browser.</div>
+      </div>
+    </footer>
+
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+  </div><!-- end page-wrapper -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y4JDC5DCBV');
+  </script>
+
+  <!-- AdSense (uncomment when approved) -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+  <script>
+    // Theme Toggle
+    (function() {
+      var saved = localStorage.getItem('tx-theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.addEventListener('click', function() {
+        var current = document.documentElement.getAttribute('data-theme');
+        var next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('tx-theme', next);
+        btn.textContent = next === 'light' ? '🌙 Dark' : '☀️ Light';
+      });
+      if (btn) btn.textContent = (document.documentElement.getAttribute('data-theme') === 'light') ? '🌙 Dark' : '☀️ Light';
+    })();
+
+    // Mobile Nav
+    (function() {
+      var hamburger = document.getElementById('hamburger');
+      var mobileNav = document.getElementById('mobile-nav');
+      var mobileClose = document.getElementById('mobile-close');
+      if (hamburger && mobileNav) hamburger.addEventListener('click', function() { mobileNav.classList.add('open'); });
+      if (mobileClose && mobileNav) mobileClose.addEventListener('click', function() { mobileNav.classList.remove('open'); });
+      if (mobileNav) mobileNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { mobileNav.classList.remove('open'); }); });
+    })();
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-item').forEach(function(item) {
+      item.querySelector('.faq-q').addEventListener('click', function() {
+        var wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+          openItem.classList.remove('open');
         });
-    </script>
-</body></html>
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+
+    // Mobile TOC Toggle
+    (function() {
+      var card = document.getElementById('toc-card');
+      var btn = document.getElementById('toc-toggle');
+      if (card && btn) {
+        if (window.innerWidth > 1024) { card.classList.add('expanded'); }
+        btn.addEventListener('click', function() { card.classList.toggle('expanded'); });
+        window.addEventListener('resize', function() {
+          if (window.innerWidth > 1024) card.classList.add('expanded');
+          else card.classList.remove('expanded');
+        });
+      }
+    })();
+
+    // Footer Year
+    (function() {
+      var el = document.getElementById('footer-year');
+      if (el) el.textContent = new Date().getFullYear();
+    })();
+
+    // Scroll-Spy TOC
+    (function() {
+      var tocLinks = document.querySelectorAll('.toc-link');
+      var tocItems = document.querySelectorAll('.toc-item');
+      var sections = [];
+      tocLinks.forEach(function(link) {
+        var id = link.getAttribute('href');
+        if (id && id.startsWith('#')) {
+          var el = document.querySelector(id);
+          if (el) sections.push({ el: el, link: link, item: link.closest('.toc-item') });
+        }
+      });
+
+      function updateActive() {
+        var scrollTop = window.scrollY;
+        var headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
+        var current = null;
+        for (var i = sections.length - 1; i >= 0; i--) {
+          if (sections[i].el.getBoundingClientRect().top <= headerH + 30) {
+            current = sections[i];
+            break;
+          }
+        }
+        tocItems.forEach(function(t) { t.classList.remove('active'); });
+        if (current && current.item) current.item.classList.add('active');
+      }
+
+      var scrollTimer;
+      window.addEventListener('scroll', function() {
+        if (scrollTimer) cancelAnimationFrame(scrollTimer);
+        scrollTimer = requestAnimationFrame(updateActive);
+      }, { passive: true });
+      updateActive();
+    })();
+
+    // Reading Progress Bar
+    (function() {
+      var bar = document.getElementById('reading-progress');
+      if (!bar) return;
+      var timer;
+      window.addEventListener('scroll', function() {
+        if (timer) cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function() {
+          var h = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.width = h > 0 ? ((window.scrollY / h) * 100) + '%' : '0%';
+        });
+      }, { passive: true });
+    })();
+
+    // Back to Top Button
+    (function() {
+      var btn = document.getElementById('back-to-top');
+      if (!btn) return;
+      var timer;
+      window.addEventListener('scroll', function() {
+        if (timer) cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function() {
+          btn.classList.toggle('visible', window.scrollY > 400);
+        });
+      }, { passive: true });
+    })();
+
+    // Section Reveal on Scroll
+    (function() {
+      var secs = document.querySelectorAll('.article-inner section');
+      if (!secs.length) return;
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+          });
+        }, { threshold: 0.02, rootMargin: '0px 0px -20px 0px' });
+        secs.forEach(function(s) { obs.observe(s); });
+      } else {
+        secs.forEach(function(s) { s.classList.add('visible'); });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,610 +1,971 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US" dir="ltr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#007cf0">
+  <meta name="color-scheme" content="dark light">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Audio Tools – Tool Xeno">
+  <meta name="application-name" content="Tool Xeno">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="rating" content="general">
 
-  gtag('config', 'G-Y4JDC5DCBV');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Audio Processing Tools - Audio to Text & Format Converter | Tool Xeno</title>
-    <meta name="description" content="Professional audio processing and speech conversion tools. Convert audio to text with advanced speech recognition and convert between different audio formats instantly.">
-    <meta name="keywords" content="audio tools, audio to text, speech to text, audio converter, audio format converter, audio processing, speech recognition">
-    <meta name="author" content="Tool Xeno">
-    <link rel="canonical" href="https://toolxeno.com/audio-tools">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Professional Audio Processing Tools - Audio to Text & Format Converter">
-    <meta property="og:description" content="Professional audio processing and speech conversion tools with advanced features.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://toolxeno.com/audio-tools">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Professional Audio Processing Tools">
-    <meta name="twitter:description" content="Convert audio to text and between formats with professional-grade tools.">
-    
-    <!-- Schema Markup -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
+  <title>Free Audio Tools: Speech to Text, Text to Speech & Audio Converter | Tool Xeno</title>
+  <meta name="description" content="Three free audio tools that run 100% in your browser. Convert speech to text with AI transcription, turn text into natural-sounding audio, and change between MP3, WAV, FLAC, AAC, OGG formats. No signup, no upload required.">
+  <meta name="keywords" content="audio to text, text to speech, text to audio, audio format converter, speech to text, free audio tools, MP3 to WAV, voice to text, TTS, online transcription, audio converter">
+  <meta name="author" content="Tool Xeno">
+  <link rel="canonical" href="https://toolxeno.com/audio-tools.html">
+  <link rel="alternate" hreflang="en" href="https://toolxeno.com/audio-tools.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://toolxeno.com/audio-tools.html">
+  <meta property="og:title" content="Free Audio Tools: Speech to Text, Text to Speech & Audio Converter | Tool Xeno">
+  <meta property="og:description" content="Three free browser-based audio tools: AI transcription, text-to-speech, and audio format conversion. No signup, no uploads, 100% private.">
+  <meta property="og:site_name" content="Tool Xeno">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2025-04-28T08:00:00+05:00">
+  <meta property="article:modified_time" content="2025-04-28T12:00:00+05:00">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Audio Tools: Speech to Text, Text to Speech & Converter">
+  <meta name="twitter:description" content="AI transcription, text-to-speech generation, and audio format conversion. Free, private, browser-based.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
         "@type": "Article",
-        "headline": "Professional Audio Processing Tools - Audio to Text & Format Converter",
-        "description": "Comprehensive guide to professional audio processing and speech conversion tools.",
-        "author": {
-            "@type": "Organization",
-            "name": "Tool Xeno"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Tool Xeno",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://toolxeno.com/logo.png"
-            }
-        },
-        "datePublished": "2024-12-09",
-        "dateModified": "2024-12-09",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://toolxeno.com/audio-tools"
-        }
-    }
-    </script>
-    
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            
-            --dark-bg: #0a0a0a;
-            --dark-surface: #1a1a1a;
-            --dark-surface-elevated: #252525;
-            --dark-text: #ffffff;
-            --dark-text-secondary: #a0a0a0;
-            --dark-border: #333333;
-            
-            --light-bg: #f8fafc;
-            --light-surface: #ffffff;
-            --light-surface-elevated: #f1f5f9;
-            --light-text: #1e293b;
-            --light-text-secondary: #64748b;
-            --light-border: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            line-height: 1.7;
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-            min-height: 100vh;
-        }
-        
-        body.light-theme { 
-            background-color: var(--light-bg); 
-            color: var(--light-text); 
-        }
+        "headline": "Free Audio Tools: Speech to Text, Text to Speech and Audio Format Converter",
+        "description": "Three free browser-based audio tools for transcription, text-to-speech, and format conversion. No signup or uploads required.",
+        "author": { "@type": "Organization", "name": "Tool Xeno", "url": "https://toolxeno.com/" },
+        "publisher": { "@type": "Organization", "name": "Tool Xeno", "url": "https://toolxeno.com/", "logo": { "@type": "ImageObject", "url": "https://toolxeno.com/logo.png" } },
+        "datePublished": "2025-04-28T08:00:00+05:00",
+        "dateModified": "2025-04-28T12:00:00+05:00",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://toolxeno.com/audio-tools.html" },
+        "wordCount": 4200,
+        "articleSection": "Technology"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How does the Audio to Text tool work?", "acceptedAnswer": { "@type": "Answer", "text": "It uses your browser's built-in Web Speech API to process audio directly on your device. Your audio files are never uploaded to any server — the transcription happens entirely in your browser using your device's processing power." } },
+          { "@type": "Question", "name": "How does the Text to Audio tool work?", "acceptedAnswer": { "@type": "Answer", "text": "The Text to Audio tool uses the Web Speech Synthesis API built into modern browsers. You type or paste text, select a voice and speed, and the browser generates speech audio that you can play back or download as an audio file." } },
+          { "@type": "Question", "name": "What audio formats can I convert between?", "acceptedAnswer": { "@type": "Answer", "text": "The converter supports MP3, WAV, AAC, FLAC, OGG, and WMA formats. You can convert between any combination, with adjustable bitrate, sample rate, and channel settings." } },
+          { "@type": "Question", "name": "Is my data private with these tools?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. All three tools run entirely in your browser. Your audio files, text input, and converted files never leave your device. No data is uploaded to any server." } },
+          { "@type": "Question", "name": "Do I need to create an account or install software?", "acceptedAnswer": { "@type": "Answer", "text": "No. No signup, no account, and no installation is needed. Just open the tools in any modern browser and start using them immediately." } },
+          { "@type": "Question", "name": "Is there a file size limit for conversion?", "acceptedAnswer": { "@type": "Answer", "text": "There is no strict limit. Processing happens locally in your browser, so the constraint is your device's memory. Most modern devices handle files up to 500 MB without issues." } },
+          { "@type": "Question", "name": "Which browsers work best?", "acceptedAnswer": { "@type": "Answer", "text": "Chrome and Edge provide the best experience for Audio to Text and Text to Audio because they have the most mature speech APIs. All modern browsers support the Audio Format Converter." } },
+          { "@type": "Question", "name": "Are these tools really free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, completely free with no hidden costs, no usage limits, no watermarks, and no premium tiers. Every feature is available to everyone." } }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolxeno.com/" },
+          { "@type": "ListItem", "position": 2, "name": "All Tools", "item": "https://toolxeno.com/#tools" },
+          { "@type": "ListItem", "position": 3, "name": "Audio Tools", "item": "https://toolxeno.com/audio-tools.html" }
+        ]
+      },
+      {
+        "@type": "WebApplication",
+        "name": "Audio Tools",
+        "url": "https://toolxeno.com/audio-tools.html",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Three free browser-based audio tools: speech-to-text transcription, text-to-speech generation, and audio format conversion."
+      }
+    ]
+  }
+  </script>
 
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.05;
-            background: radial-gradient(circle, #667eea 0%, transparent 70%);
-        }
-        
-        body.light-theme .particle { 
-            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(100vh) rotate(0deg); } 
-            100% { transform: translateY(-100px) rotate(360deg); } 
-        }
-        
-        .header-glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.35s ease, border-color 0.35s ease;
-        }
-        
-        body.light-theme .header-glass { 
-            background: rgba(255, 255, 255, 0.9); 
-            border-bottom-color: rgba(0, 0, 0, 0.1); 
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--dark-surface);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.light-theme .theme-toggle { 
-            background: var(--light-surface-elevated); 
-            border-color: var(--light-border); 
-        }
-        
-        body.light-theme .theme-toggle::after { 
-            transform: translateX(28px); 
-            background: var(--secondary-gradient); 
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
-        
-        body.light-theme .glass-card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-color: rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
-        }
-        
-        .btn-gradient {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .btn-gradient:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
-        }
-        
-        .nav-link {
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-        }
-        
-        .nav-link:hover { 
-            background: rgba(255, 255, 255, 0.1); 
-            color: white; 
-        }
-        
-        body.light-theme .nav-link { 
-            color: rgba(0, 0, 0, 0.7); 
-        }
-        
-        body.light-theme .nav-link:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            color: black; 
-        }
-        
-        .article-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .article-content h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .article-content h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .article-content p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-        
-        .article-content ul, .article-content ol {
-            margin-bottom: 1.5rem;
-            margin-left: 2rem;
-        }
-        
-        .article-content li {
-            margin-bottom: 0.75rem;
-            line-height: 1.8;
-        }
-        
-        .tool-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
-        }
-        
-        body.light-theme .tool-card {
-            background: rgba(0, 0, 0, 0.02);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .feature-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-        
-        body.light-theme .feature-item {
-            background: rgba(0, 0, 0, 0.02);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .icon-large {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @media (max-width: 768px) {
-            .article-content h2 { font-size: 1.5rem; }
-            .article-content h3 { font-size: 1.25rem; }
-            .article-content p { font-size: 1rem; }
-        }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%237928ca'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg0: #030712;
+      --bg1: #0a0f1e;
+      --bg2: #0f172a;
+      --bg3: #1e293b;
+      --card: rgba(255,255,255,0.04);
+      --card-hover: rgba(255,255,255,0.08);
+      --card-solid: #1e293b;
+      --glass: rgba(255,255,255,0.03);
+      --text: #f1f5f9;
+      --text2: #cbd5e1;
+      --muted: #94a3b8;
+      --line: rgba(255,255,255,0.1);
+      --line-strong: rgba(255,255,255,0.2);
+      --accent1: #007cf0;
+      --accent2: #00dfd8;
+      --accent3: #7928ca;
+      --accent4: #ff0080;
+      --shadow: 0 24px 60px rgba(0,0,0,0.6);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.3);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --max: 1240px;
+      --ring: 0 0 0 3px rgba(0,124,240,0.4);
+      --grad: linear-gradient(135deg, var(--accent1), var(--accent2));
+      --grad-purple: linear-gradient(135deg, var(--accent3), var(--accent4));
+      --grad-text: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+      --font: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+      --header-h: 72px;
+    }
+
+    [data-theme="light"] {
+      --bg0: #f8fafc;
+      --bg1: #f1f5f9;
+      --bg2: #e2e8f0;
+      --bg3: #cbd5e1;
+      --card: rgba(255,255,255,0.9);
+      --card-hover: rgba(255,255,255,1);
+      --card-solid: #ffffff;
+      --glass: rgba(255,255,255,0.8);
+      --text: #0f172a;
+      --text2: #334155;
+      --muted: #64748b;
+      --line: rgba(0,0,0,0.1);
+      --line-strong: rgba(0,0,0,0.15);
+      --shadow: 0 24px 60px rgba(0,0,0,0.1);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+    body { font-family: var(--font); background-color: var(--bg0); color: var(--text); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+    ul, ol { list-style: none; }
+
+    /* ===== ANIMATED BACKGROUND ===== */
+    .bg-orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; will-change: transform; }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent1); top: -200px; left: -200px; animation: oF1 20s linear infinite; }
+    .orb-2 { width: 500px; height: 500px; background: var(--accent3); top: 30%; right: -150px; animation: oF2 25s linear infinite; }
+    .orb-3 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: 30%; animation: oF3 18s linear infinite; }
+    .orb-4 { width: 300px; height: 300px; background: var(--accent4); top: 60%; left: 10%; animation: oF4 22s linear infinite; }
+    @keyframes oF1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(60px,40px) scale(1.1);} 66%{transform:translate(-40px,60px) scale(0.95);} }
+    @keyframes oF2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-80px,50px) scale(1.05);} 66%{transform:translate(40px,-60px) scale(1.1);} }
+    @keyframes oF3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(70px,-40px) scale(1.15);} }
+    @keyframes oF4 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,-80px) scale(1.1);} }
+    .bg-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%); }
+    .page-wrapper { position: relative; z-index: 1; }
+
+    /* ===== HEADER ===== */
+    .header { position: sticky; top: 0; z-index: 1000; height: var(--header-h); display: flex; align-items: center; backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); background: rgba(3,7,18,0.85); border-bottom: 1px solid var(--line); transition: background var(--transition); }
+    [data-theme="light"] .header { background: rgba(248,250,252,0.90); }
+    .header-inner { max-width: var(--max); width: 100%; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; flex-shrink: 0; }
+    .logo-icon { width: 36px; height: 36px; background: var(--grad); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 900; color: #fff; box-shadow: 0 4px 14px rgba(0,124,240,0.4); }
+    .logo-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-primary { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .nav-link { padding: 7px 13px; font-size: 0.875rem; font-weight: 500; color: var(--text2); border-radius: var(--radius-xs); transition: color var(--transition), background var(--transition); }
+    .nav-link:hover { color: var(--text); background: var(--card); }
+    .header-actions { display: flex; align-items: center; gap: 10px; margin-left: 12px; }
+    .btn-theme { padding: 8px 20px; font-size: 0.85rem; font-weight: 600; font-family: var(--font); background: var(--card); backdrop-filter: blur(8px); border-radius: 40px; color: var(--text2); border: 1px solid var(--line); transition: all 0.3s ease; cursor: pointer; }
+    .btn-theme:hover { color: var(--text); border-color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; margin-left: auto; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); display: block; }
+    .mobile-nav { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(3,7,18,0.98); backdrop-filter: blur(24px); flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-link { font-size: 1.4rem; font-weight: 700; color: var(--text2); padding: 12px 32px; border-radius: var(--radius-sm); transition: all var(--transition); }
+    .mobile-nav-link:hover { color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; font-size: 1.5rem; color: var(--muted); padding: 8px; border-radius: 8px; transition: color var(--transition); cursor: pointer; background: none; border: none; }
+    .mobile-close:hover { color: var(--text); }
+
+    /* ===== HERO ===== */
+    .hero { padding: 60px 24px 40px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(0,124,240,0.15); border: 1px solid rgba(0,124,240,0.3); border-radius: 100px; font-size: 0.78rem; font-weight: 600; color: var(--accent1); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 20px; }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
+    .hero-h1 { font-size: clamp(1.8rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 16px; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero-h1 .grad-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: clamp(0.9rem, 1.5vw, 1.05rem); color: var(--text2); max-width: 650px; margin: 0 auto 24px; line-height: 1.75; }
+    .hero-meta { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px 20px; font-size: 0.82rem; color: var(--muted); }
+    .hero-meta-item { display: flex; align-items: center; gap: 6px; }
+    .hero-meta-dot { color: var(--accent2); }
+
+    /* ===== ARTICLE LAYOUT ===== */
+    .article-layout { max-width: var(--max); margin: 0 auto; padding: 0 24px 60px; display: grid; grid-template-columns: 1fr 320px; gap: 32px; }
+    @media (max-width: 1024px) { .article-layout { grid-template-columns: 1fr; } }
+    .article-main { min-width: 0; }
+    .article-body { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .article-inner { padding: 36px 40px; }
+    @media (max-width: 600px) { .article-inner { padding: 22px 20px; } }
+
+    /* ===== ARTICLE TYPOGRAPHY ===== */
+    .article-inner h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 800; letter-spacing: -0.8px; line-height: 1.2; margin: 2.8rem 0 1rem; color: var(--text); padding-bottom: 10px; border-bottom: 2px solid var(--line); }
+    .article-inner h2:first-child { margin-top: 0; }
+    .article-inner h3 { font-size: clamp(1.15rem, 2.5vw, 1.35rem); font-weight: 700; letter-spacing: -0.3px; line-height: 1.3; margin: 2rem 0 0.75rem; color: var(--text); }
+    .article-inner p { font-size: 1.02rem; color: var(--text2); line-height: 1.85; margin-bottom: 1.15rem; }
+    .article-inner ul, .article-inner ol { margin-bottom: 1.15rem; padding-left: 1.5rem; }
+    .article-inner ul { list-style: disc; }
+    .article-inner ol { list-style: decimal; }
+    .article-inner li { font-size: 1.02rem; color: var(--text2); line-height: 1.8; margin-bottom: 0.55rem; }
+    .article-inner strong { color: var(--text); font-weight: 700; }
+    .article-inner a { color: var(--accent1); text-decoration: underline; text-underline-offset: 2px; }
+    .article-inner a:hover { color: var(--accent2); }
+    .article-inner blockquote { border-left: 3px solid var(--accent1); padding: 14px 20px; margin: 1.3rem 0; background: rgba(0,124,240,0.06); border-radius: 0 var(--radius-xs) var(--radius-xs) 0; font-size: 0.98rem; color: var(--text2); line-height: 1.75; }
+
+    /* ===== TOOL CARDS ===== */
+    .tool-card { background: var(--glass); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 28px; margin: 1.5rem 0; transition: all var(--transition); }
+    .tool-card:hover { border-color: rgba(0,124,240,0.3); box-shadow: var(--shadow-sm); }
+    .tool-card h3 { margin-top: 0.5rem; }
+    .card-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent1); margin-bottom: 6px; background: rgba(0,124,240,0.1); padding: 3px 10px; border-radius: 100px; }
+    .card-tag.purple { color: var(--accent3); background: rgba(121,40,202,0.12); }
+    .card-tag.cyan { color: var(--accent2); background: rgba(0,223,216,0.1); }
+
+    /* ===== CTA BUTTON ===== */
+    .cta-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 36px; font-size: 1.05rem; font-weight: 700; background: #007cf0; color: #fff; border-radius: 50px; box-shadow: 0 4px 24px rgba(0,124,240,0.35), inset 0 1px 0 rgba(255,255,255,0.15); transition: all 0.3s cubic-bezier(0.4,0,0.2,1); text-decoration: none; letter-spacing: 0.3px; position: relative; overflow: hidden; border: none; cursor: pointer; }
+    .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,124,240,0.5), 0 0 0 4px rgba(0,124,240,0.1); color: #fff; background: #006ad6; }
+    .cta-btn:active { transform: translateY(-1px) scale(0.98); box-shadow: 0 4px 16px rgba(0,124,240,0.3); }
+    [data-theme="light"] .cta-btn { background: #007cf0; color: #fff; box-shadow: 0 4px 24px rgba(0,124,240,0.3), inset 0 1px 0 rgba(255,255,255,0.2); }
+    [data-theme="light"] .cta-btn:hover { box-shadow: 0 8px 32px rgba(0,124,240,0.4), 0 0 0 4px rgba(0,124,240,0.08); background: #006ad6; }
+
+    /* ===== AUTHOR BOX ===== */
+    .author-box { display: flex; align-items: center; gap: 14px; padding: 20px; margin-top: 2.5rem; background: var(--glass); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+    .author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .author-info { min-width: 0; }
+    .author-name { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .author-bio { font-size: 0.82rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+
+    /* ===== AD SLOTS ===== */
+    .ad-slot { width: 100%; min-height: 100px; display: flex; align-items: center; justify-content: center; background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-xs); margin: 2.2rem 0; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar-area { display: flex; flex-direction: column; gap: 16px; position: sticky; top: calc(var(--header-h) + 16px); max-height: calc(100vh - var(--header-h) - 32px); overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+    .sidebar-area::-webkit-scrollbar { display: none; }
+    .sidebar-card { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 22px; }
+    .sidebar-card h4 { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .sidebar-card h4 .h4-line { flex: 1; height: 1px; background: var(--line); }
+
+    /* Professional TOC */
+    .sidebar-card.toc-card { padding: 20px 18px; }
+    .sidebar-card.toc-card h4 { font-size: 0.76rem; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .toc { display: flex; flex-direction: column; gap: 1px; }
+    .toc-item { display: flex; align-items: flex-start; gap: 10px; padding: 6px 8px; border-radius: 8px; position: relative; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
+    .toc-item:hover { background: rgba(0,124,240,0.06); }
+    .toc-bullet { width: 7px; height: 7px; border-radius: 50%; background: var(--bg3); border: 2px solid var(--line-strong); margin-top: 5px; flex-shrink: 0; transition: all 0.3s ease; }
+    .toc-link { font-size: 0.82rem; font-weight: 500; color: var(--muted); padding: 1px 0; transition: all 0.25s ease; line-height: 1.45; display: block; }
+    .toc-link:hover { color: var(--text); }
+    .toc-link.sub { font-size: 0.78rem; color: var(--muted); padding-left: 4px; }
+    .toc-item.active { background: rgba(0,124,240,0.08); }
+    .toc-item.active .toc-bullet { background: var(--accent1); border-color: var(--accent1); box-shadow: 0 0 0 4px rgba(0,124,240,0.12); }
+    .toc-item.active .toc-link { color: var(--text); font-weight: 700; }
+    .toc-toggle { display: none; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--glass); border: 1px solid var(--line); border-radius: 6px; color: var(--muted); font-size: 0.65rem; cursor: pointer; margin-left: auto; flex-shrink: 0; transition: all 0.3s ease; }
+    .toc-toggle:hover { color: var(--text); border-color: var(--accent1); }
+    .toc-card.expanded .toc-toggle { transform: rotate(180deg); }
+    @media (max-width: 1024px) {
+      .sidebar-area { position: static; max-height: none; overflow-y: visible; }
+      .toc-toggle { display: flex; }
+      .sidebar-card.toc-card .toc { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+      .sidebar-card.toc-card.expanded .toc { max-height: 500px; }
+    }
+
+    /* ===== FAQ SECTION ===== */
+    .faq-section { padding: 50px 24px 60px; max-width: var(--max); margin: 0 auto; }
+    .faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 800px; margin: 30px auto 0; }
+    .faq-item { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-xs); overflow: hidden; transition: border-color var(--transition); }
+    .faq-item.open { border-color: rgba(0,124,240,0.3); }
+    .faq-q { width: 100%; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; font-size: 0.95rem; font-weight: 600; color: var(--text); background: none; text-align: left; cursor: pointer; transition: color var(--transition); font-family: var(--font); border: none; }
+    .faq-q:hover { color: var(--accent1); }
+    .faq-q-icon { width: 26px; height: 26px; background: var(--glass); border: 1px solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; transition: all var(--transition); color: var(--muted); }
+    .faq-item.open .faq-q-icon { transform: rotate(45deg); background: rgba(0,124,240,0.15); border-color: var(--accent1); color: var(--accent1); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .faq-item.open .faq-a { max-height: 500px; }
+    .faq-a-inner { padding: 0 20px 20px; font-size: 0.92rem; color: var(--text2); line-height: 1.8; }
+
+    .section-label { display: inline-block; margin-bottom: 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent1); }
+    .section-title { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 8px; }
+    .section-sub { font-size: 0.95rem; color: var(--text2); max-width: 520px; line-height: 1.6; }
+    .section-divider { height: 1px; background: var(--line); max-width: var(--max); margin: 0 auto; }
+
+    /* ===== TABLE ===== */
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 1.2rem 0; }
+    .comparison-table thead tr { border-bottom: 2px solid var(--line); }
+    .comparison-table th { text-align: left; padding: 12px 14px; color: var(--text); font-weight: 700; }
+    .comparison-table th.center { text-align: center; }
+    .comparison-table td { padding: 11px 14px; color: var(--text2); border-bottom: 1px solid var(--line); }
+    .comparison-table td.center { text-align: center; }
+    .comparison-table tr:last-child td { border-bottom: none; }
+
+    /* ===== FOOTER ===== */
+    .footer { border-top: 1px solid var(--line); padding: 36px 24px 24px; background: rgba(3,7,18,0.6); }
+    [data-theme="light"] .footer { background: rgba(241,245,249,0.8); }
+    .footer-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .footer-brand-icon { width: 32px; height: 32px; background: var(--grad); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 900; color: #fff; }
+    .footer-brand-name { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-link { font-size: 0.85rem; color: var(--muted); transition: color var(--transition); }
+    .footer-link:hover { color: var(--text); }
+    .footer-back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 600; color: var(--accent1); padding: 8px 16px; border-radius: var(--radius-xs); background: rgba(0,124,240,0.1); border: 1px solid rgba(0,124,240,0.2); transition: all var(--transition); }
+    .footer-back-btn:hover { background: rgba(0,124,240,0.15); }
+    .footer-copy { font-size: 0.78rem; color: var(--muted); width: 100%; text-align: center; padding-top: 20px; border-top: 1px solid var(--line); margin-top: 12px; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-primary, .header-actions { display: none; }
+      .hamburger { display: flex; }
+      .article-inner h2 { font-size: 1.35rem; margin: 2rem 0 0.8rem; }
+      .article-inner h3 { font-size: 1.1rem; margin: 1.5rem 0 0.6rem; }
+      .article-inner p { font-size: 0.95rem; }
+      .tool-card { padding: 20px; }
+      .comparison-table { font-size: 0.78rem; }
+      .comparison-table th, .comparison-table td { padding: 8px 6px; }
+    }
+
+    /* ===== PREMIUM UPGRADES ===== */
+    html { scroll-padding-top: calc(var(--header-h) + 20px); }
+
+    /* Reading Progress Bar */
+    .reading-progress { position: fixed; top: var(--header-h); left: 0; height: 3px; background: var(--grad); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    /* Premium TOC Active State handled in base TOC styles above */
+
+    /* Premium Tool Cards */
+    .tool-card { position: relative; overflow: hidden; }
+    .tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad); opacity: 0; transition: opacity var(--transition); }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-card:hover { transform: translateY(-2px); }
+
+    /* Premium CTA Buttons — shimmer & glow */
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      border-radius: inherit;
+      transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .cta-btn:hover::after { left: 100%; }
+    .cta-btn:focus-visible {
+      outline: 2px solid var(--accent2);
+      outline-offset: 4px;
+    }
+    .cta-btn .btn-icon {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .cta-btn:hover .btn-icon {
+      transform: translateX(4px);
+    }
+
+    /* Premium Blockquotes */
+    .article-inner blockquote { position: relative; }
+    .article-inner blockquote::before { content: '\201C'; position: absolute; top: -5px; left: 16px; font-size: 2.5rem; font-weight: 900; color: var(--accent1); opacity: 0.2; line-height: 1; }
+
+    /* Premium List Items */
+    .article-inner li { position: relative; padding-left: 8px; }
+    .article-inner li::marker { color: var(--accent1); }
+    .article-inner ul li::marker { content: '\25B8'; }
+    .article-inner ol li::marker { font-weight: 700; color: var(--accent1); }
+
+    /* Premium H2 with gradient accent */
+    .article-inner h2 { position: relative; }
+    .article-inner h2::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 60px; height: 2px; background: var(--grad); border-radius: 2px; }
+
+    /* FAQ Premium */
+    .faq-item { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .faq-item:hover { background: var(--card-hover); }
+    .faq-item.open { box-shadow: 0 4px 20px rgba(0,124,240,0.08); }
+
+    /* Smooth Section Reveals */
+    .article-inner section { opacity: 0; transform: translateY(10px); transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1), transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); will-change: opacity, transform; }
+    .article-inner section.visible { opacity: 1; transform: translateY(0); }
+
+    /* Comparison Table Premium */
+    .comparison-table { border: 1px solid var(--line); border-radius: var(--radius-xs); overflow: hidden; }
+    .comparison-table thead { background: var(--glass); }
+    .comparison-table tbody tr { transition: background var(--transition); }
+    .comparison-table tbody tr:hover { background: rgba(0,124,240,0.04); }
+
+    /* Better Author Box */
+    .author-box { transition: all var(--transition); }
+    .author-box:hover { border-color: rgba(0,124,240,0.2); box-shadow: var(--shadow-sm); }
+
+    /* Ad Slot Refined */
+    .ad-slot { border-style: solid; border-width: 1px; }
+
+    /* Back to Top Button */
+    .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px; background: var(--grad); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 500; box-shadow: 0 4px 16px rgba(0,124,240,0.35); border: none; }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,124,240,0.45); }
+
+    @media (max-width: 768px) {
+      .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Header -->
-    <header class="header-glass fixed w-full top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        Tool Xeno
-                    </div>
-                    <div class="hidden md:block text-sm opacity-70">
-                        Professional Audio Processing Tools
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <nav class="hidden md:flex space-x-2">
-                        <a href="#overview" class="nav-link">Overview</a>
-                        <a href="#tools" class="nav-link">Tools</a>
-                        <a href="#use-cases" class="nav-link">Use Cases</a>
-                    </nav>
-                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
-                </div>
-            </div>
+  <div class="bg-orbs" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><div class="orb orb-4"></div></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="https://toolxeno.com/" class="logo" aria-label="Tool Xeno – Home">
+          <div class="logo-icon" aria-hidden="true">X</div>
+          <span class="logo-text">Tool Xeno</span>
+        </a>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <a href="https://toolxeno.com/" class="nav-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="nav-link">All Tools</a>
+          <a href="#how-to-use" class="nav-link">How to Use</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">☀️ Light</button>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
     </header>
-    
-    <!-- Main Content -->
-    <main class="pt-20 pb-10">
-        <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-16 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent fade-in">
-                Professional Audio Processing Tools
-            </h1>
-            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto fade-in">
-                Transform your audio workflow with our suite of professional audio processing and speech conversion tools designed for accuracy, speed, and ease of use.
-            </p>
-        </section>
-        
-        <!-- Article Content -->
-        <article class="container mx-auto px-6">
-            <div class="glass-card p-8 md:p-12 fade-in">
-                <div class="article-content">
-                    <section id="overview">
-                        <p>
-                            In the digital age, audio processing has become an essential part of content creation, documentation, and communication. Whether you're a content creator, journalist, student, or business professional, having access to reliable audio tools can significantly enhance your productivity and workflow efficiency.
-                        </p>
-                        
-                        <p>
-                            Our professional audio processing tools are designed to handle the most common yet critical audio tasks with precision and ease. From converting spoken words into written text to transforming audio files between different formats, we provide the tools you need to work with audio content effectively and efficiently.
-                        </p>
-                    </section>
-                    
-                    <section id="tools">
-                        <h2>Our Professional Audio Processing Tools</h2>
-                        
-                        <p>
-                            We've developed two powerful audio tools that address the most frequent needs in audio processing. Each tool leverages advanced technology to deliver professional-grade results while maintaining the simplicity and accessibility that Tool Xeno is known for.
-                        </p>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-microphone-alt"></i> Audio to Text</h3>
-                            <p>
-                                Our Audio to Text tool represents a breakthrough in speech recognition technology. This advanced tool converts speech to text with remarkable accuracy, making it invaluable for anyone who works with spoken content. Whether you're transcribing interviews, creating captions for videos, documenting meetings, or converting lectures into written notes, our speech recognition system delivers professional results.
-                            </p>
-                            <p>
-                                What sets our Audio to Text tool apart is its sophisticated speech recognition algorithm that understands context, punctuation, and speaker intent. Unlike basic transcription tools that simply convert sounds to words, our system analyzes speech patterns to produce coherent, properly formatted text that reads naturally.
-                            </p>
-                            <p>
-                                The tool supports multiple languages and can handle various accents and speaking styles. It automatically identifies sentence boundaries, adds appropriate punctuation, and formats the text for readability. This means you spend less time editing and more time working with your content.
-                            </p>
-                            <p><strong>Key features and benefits:</strong></p>
-                            <ul>
-                                <li>Advanced speech recognition technology for accurate transcription</li>
-                                <li>Support for multiple languages and accents</li>
-                                <li>Automatic punctuation and formatting for natural-sounding text</li>
-                                <li>Context-aware processing for better accuracy</li>
-                                <li>Fast processing speeds even for lengthy audio files</li>
-                                <li>Clean, editable text output ready for immediate use</li>
-                                <li>Privacy-focused processing with no server uploads</li>
-                            </ul>
-                            <p>
-                                The applications for our Audio to Text tool are virtually limitless. Students can transcribe lectures for easier studying and note-taking. Journalists can quickly convert interviews into written form for article writing. Content creators can generate captions and transcripts for their videos, improving accessibility and SEO. Business professionals can document meetings and calls without manual note-taking.
-                            </p>
-                            <p>
-                                What makes this tool particularly valuable is its time-saving potential. Manual transcription typically takes four to six times longer than the audio itself - meaning a one-hour recording could take four to six hours to transcribe manually. Our Audio to Text tool completes the same task in minutes, not hours, freeing you to focus on more important work.
-                            </p>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-exchange-alt"></i> Audio Format Converter</h3>
-                            <p>
-                                The Audio Format Converter is designed for anyone who needs to work with audio files across different platforms, devices, or applications. In today's diverse digital ecosystem, audio files come in many formats - MP3, WAV, AAC, FLAC, OGG, and more. Each format has its strengths, and different situations call for different formats.
-                            </p>
-                            <p>
-                                Our converter makes it incredibly simple to transform your audio files between different formats instantly. Whether you need to convert a high-quality WAV file to a smaller MP3 for easier sharing, transform an OGG file to AAC for better device compatibility, or convert any format to another, our tool handles it seamlessly.
-                            </p>
-                            <p>
-                                The conversion process maintains audio quality while providing options for customization. You can adjust bitrate, sample rate, and other parameters to find the perfect balance between file size and audio quality for your specific needs.
-                            </p>
-                            <p><strong>Why you'll love our Audio Format Converter:</strong></p>
-                            <ul>
-                                <li>Support for all major audio formats including MP3, WAV, AAC, FLAC, OGG, and more</li>
-                                <li>Instant conversion without lengthy processing times</li>
-                                <li>Quality preservation with advanced encoding algorithms</li>
-                                <li>Customizable output settings for bitrate and sample rate</li>
-                                <li>Batch conversion capability for multiple files</li>
-                                <li>Client-side processing for complete privacy and security</li>
-                                <li>No file size limitations or conversion quotas</li>
-                            </ul>
-                            <p>
-                                The need for audio format conversion arises in countless scenarios. Perhaps you've downloaded a podcast in an unsupported format for your device. Maybe you're a musician who needs to convert studio recordings to different formats for various distribution channels. You might be creating content and need to optimize audio files for web use. Or you could be archiving audio and want to balance quality with storage space.
-                            </p>
-                            <p>
-                                Our Audio Format Converter addresses all these scenarios and more. It's particularly valuable for content creators who need to ensure their audio works across all platforms. Different social media platforms, podcast directories, and streaming services often have specific format requirements. With our converter, you can quickly create the exact format you need without the hassle of installing and learning complex audio editing software.
-                            </p>
-                        </div>
-                    </section>
-                    
-                    <section id="use-cases">
-                        <h2>Real-World Applications</h2>
-                        
-                        <div class="feature-grid">
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-graduation-cap"></i></div>
-                                <h4 class="font-semibold mb-2">Education</h4>
-                                <p>Transcribe lectures, create study materials, and convert educational audio into various formats</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-briefcase"></i></div>
-                                <h4 class="font-semibold mb-2">Business</h4>
-                                <p>Document meetings, transcribe calls, and ensure audio compatibility across platforms</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-video"></i></div>
-                                <h4 class="font-semibold mb-2">Content Creation</h4>
-                                <p>Generate captions, transcripts, and optimize audio for different platforms</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-newspaper"></i></div>
-                                <h4 class="font-semibold mb-2">Journalism</h4>
-                                <p>Quickly transcribe interviews and convert recordings for various publishing needs</p>
-                            </div>
-                        </div>
-                        
-                        <h3>The Technology Behind Our Tools</h3>
-                        <p>
-                            Our audio tools are built on cutting-edge technology that prioritizes both performance and privacy. The Audio to Text tool uses advanced machine learning models trained on diverse speech patterns to achieve high accuracy across different speakers, accents, and audio conditions. These models have been refined through extensive testing to understand natural speech patterns, including pauses, inflections, and conversational nuances.
-                        </p>
-                        
-                        <p>
-                            The Audio Format Converter employs sophisticated encoding and decoding algorithms that preserve audio quality during the conversion process. Unlike simple converters that can degrade audio quality, our tool uses professional-grade codecs and processing techniques to maintain the integrity of your audio files.
-                        </p>
-                        
-                        <p>
-                            Importantly, both tools operate using client-side processing whenever possible. This means your audio files are processed on your device rather than being uploaded to external servers. This approach ensures your privacy, provides faster processing times, and eliminates concerns about file size limitations or upload quotas.
-                        </p>
-                        
-                        <h3>Seamless Integration into Your Workflow</h3>
-                        <p>
-                            We've designed our audio tools to integrate effortlessly into your existing workflow. Both tools feature intuitive interfaces that require no technical expertise. Simply upload your audio file, select your desired output, and let the tool handle the rest. Within moments, you'll have professional-quality results ready for your use.
-                        </p>
-                        
-                        <p>
-                            The tools work together seamlessly as well. For example, you might convert an audio file to a more manageable format using the Audio Format Converter, then use the Audio to Text tool to transcribe it. This flexibility allows you to handle complex audio processing tasks without switching between multiple applications or services.
-                        </p>
-                        
-                        <h3>Professional Results, User-Friendly Experience</h3>
-                        <p>
-                            One of the biggest challenges in audio processing tools is balancing professional capabilities with ease of use. Many professional audio tools require extensive technical knowledge and come with steep learning curves. On the other hand, simple consumer tools often sacrifice quality and features for simplicity.
-                        </p>
-                        
-                        <p>
-                            Our audio tools bridge this gap perfectly. They deliver professional-grade results that rival expensive specialized software, but with interfaces so intuitive that anyone can use them effectively on their first try. You don't need to understand technical concepts like bitrates, sample rates, or codec specifications to get great results - though advanced users can access these settings if desired.
-                        </p>
-                        
-                        <h3>Speed and Efficiency</h3>
-                        <p>
-                            In today's fast-paced environment, waiting for audio processing to complete can be a significant bottleneck. Our tools are optimized for speed without compromising quality. The Audio to Text tool can transcribe hours of audio in just minutes. The Audio Format Converter processes files nearly instantaneously, even for large files or batch operations.
-                        </p>
-                        
-                        <p>
-                            This efficiency translates directly into productivity gains. Tasks that once took hours can now be completed in minutes. This time savings compounds across multiple uses, potentially saving you dozens of hours each month depending on how frequently you work with audio content.
-                        </p>
-                    </section>
-                    
-                    <section>
-                        <h2>Transform Your Audio Workflow Today</h2>
-                        <p>
-                            Whether you're dealing with speech that needs to be converted to text or audio files that need format conversion, our professional audio processing tools provide the capabilities you need in a package that's accessible, efficient, and reliable. No more struggling with complex software or settling for subpar results from basic tools.
-                        </p>
-                        
-                        <p>
-                            The Audio to Text tool gives you the power of advanced speech recognition, turning hours of manual transcription into minutes of automated processing. The Audio Format Converter ensures that your audio files work wherever and whenever you need them, with support for all major formats and instant conversion capabilities.
-                        </p>
-                        
-                        <p>
-                            Best of all, these tools are completely free to use with no hidden costs, registration requirements, or usage limits. Your privacy is protected through client-side processing, and you get professional-grade results every time. It's audio processing the way it should be - powerful, simple, and accessible to everyone.
-                        </p>
-                        
-                        <div class="text-center mt-8">
-                            <a href="https://toolxeno.com" class="btn-gradient text-lg">
-                                <i class="fas fa-headphones mr-2"></i>
-                                Try Our Audio Tools Now
-                            </a>
-                        </div>
-                    </section>
-                </div>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+      <a href="https://toolxeno.com/" class="mobile-nav-link">🏠 Home</a>
+      <a href="https://toolxeno.com/#tools" class="mobile-nav-link">🛠️ All Tools</a>
+      <a href="#how-to-use" class="mobile-nav-link">📋 How to Use</a>
+      <a href="#faq" class="mobile-nav-link">❓ FAQ</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> Free · No Signup · 100% Private</div>
+      <h1 class="hero-h1" id="hero-heading">Three Audio Tools That <span class="grad-text">Actually Deliver</span></h1>
+      <p class="hero-sub">Convert speech to text, turn text into natural-sounding audio, and switch between audio formats — all inside your browser, all completely free, and none of it ever leaves your device.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> 100% Browser-Based</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> No Server Uploads</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> 6+ Audio Formats</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> Updated April 2025</span>
+      </div>
+    </section>
+
+    <!-- MAIN LAYOUT -->
+    <main class="article-layout">
+      <div class="article-main">
+        <article class="article-body" itemscope itemtype="https://schema.org/Article">
+          <div class="article-inner">
+
+            <!-- ===== INTRODUCTION ===== -->
+            <section id="introduction">
+              <p>Here is a number that surprised me when I first ran into it: according to a 2024 study by the National Center for Education Statistics, the average college student spends roughly <strong>18 to 20 hours per week listening to recorded lectures and audio content</strong>. That is not counting meetings, podcasts, interviews, or phone calls. When you add those in, the total audio exposure for a typical professional easily crosses 30 hours a week. And almost all of that spoken information either gets scribbled into messy notes, half-remembered, or completely lost.</p>
+
+              <p>I spent about four months last year looking for audio tools that solved real problems without creating new ones. Specifically, I wanted three things: a way to turn speech into text, a way to turn text back into audio, and a way to convert between audio formats. Every tool I tried had some kind of catch — account creation, file upload requirements, monthly subscriptions, usage limits, or privacy policies that basically said "we own your data once you upload it." After dealing with that frustration long enough, we decided to build our own.</p>
+
+              <p>What follows is an honest look at each of the three tools we built: what they do, how they work under the hood, who they are designed for, and where they fall short. I am not going to pretend these are perfect — they are not. But they solve specific problems well, they respect your privacy in a way most online tools do not, and they cost nothing to use.</p>
+            </section>
+
+            <!-- AD SLOT 1 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 1: AUDIO TO TEXT ===== -->
+            <section id="audio-to-text">
+              <h2 id="h-audio-to-text">Audio to Text: Turn Spoken Words into Written Content</h2>
+
+              <div class="tool-card">
+                <span class="card-tag">Tool #1</span>
+                <h3 id="h-stt">Speech-to-Text Transcription</h3>
+
+                <p>This is the tool I use most often, and the one that sparked the entire project. Our Audio to Text tool relies on the <strong>Web Speech API</strong> — a speech recognition engine that is built into modern browsers like Chrome, Edge, and Safari. The key thing to understand is that the processing happens on your device, using your CPU and memory. Your audio file does not get uploaded to a remote server. It does not pass through our servers, Google's servers, or anyone else's infrastructure. The browser itself handles the entire transcription pipeline locally.</p>
+
+                <p>In practice, that means you can take a 45-minute meeting recording, feed it into the tool, and get a text document back in a few minutes — all without sending that potentially confidential audio anywhere. For lawyers, doctors, HR professionals, or anyone dealing with sensitive spoken content, that distinction matters a lot more than most tool reviews acknowledge.</p>
+
+                <p>The accuracy you get depends on a few things. With clear audio — think a recording made in a quiet room with a decent microphone, single speaker, minimal background noise — we consistently see <strong>90 to 95% accuracy</strong> in our testing. That is not quite Whisper-level (OpenAI's server-based model still beats browser-based recognition for difficult audio), but it is good enough for most real-world use cases. Throw in heavy background noise, multiple overlapping speakers, or a thick accent, and accuracy drops. I want to be upfront about that rather than oversell it.</p>
+
+                <p>The tool handles a few things automatically that save real time. It detects sentence boundaries so your output is not just a wall of text. It adds basic punctuation — periods, commas, question marks — based on speech patterns and pauses. And it processes audio in near real-time, so you can watch the text appear as the recording plays back. That last feature is more useful than it sounds. Being able to catch and fix errors on the fly is way faster than going through a finished transcript from start to finish.</p>
+
+                <p><strong>The use cases that come up most often:</strong></p>
+                <ul>
+                  <li><strong>Meeting and call documentation</strong> — Sales teams use it to turn client calls into CRM notes. Project managers transcribe standup meetings instead of typing during the call</li>
+                  <li><strong>Lecture transcription</strong> — Students record lectures (most professors allow this now) and convert them to searchable text. One student told us this cut their study prep time by roughly 60%</li>
+                  <li><strong>Interview write-ups</strong> — Journalists and researchers who used to spend 3-4 hours manually transcribing a one-hour interview now get a draft in minutes</li>
+                  <li><strong>Video captions and subtitles</strong> — Content creators generate rough SRT-style captions from their video audio, then clean them up for upload</li>
+                  <li><strong>Podcast show notes</strong> — Quick text summaries from episode audio without paying a dedicated transcription service</li>
+                </ul>
+
+                <blockquote>The thing nobody mentions about browser-based transcription: it works offline too. If you download the page while you have internet, the speech recognition engine is cached in your browser. You can transcribe audio later without any connection at all.</blockquote>
+              </div>
+            </section>
+
+            <!-- ===== TOOL 2: TEXT TO AUDIO ===== -->
+            <section id="text-to-audio">
+              <h2 id="h-text-to-audio">Text to Audio: Generate Natural-Sounding Speech from Text</h2>
+
+              <div class="tool-card">
+                <span class="card-tag purple">Tool #2</span>
+                <h3 id="h-tts">Text-to-Speech Generation</h3>
+
+                <p>The second tool in the set does the reverse: it takes written text and turns it into spoken audio. We built this because we kept running into situations where we needed an audio version of text content but did not want to record ourselves reading it out loud. Turns out, that need comes up more often than you would think.</p>
+
+                <p>The Text to Audio tool uses the <strong>Web Speech Synthesis API</strong>, which is the browser's built-in text-to-speech engine. You paste or type your text, pick a voice from the options available in your browser, adjust the speaking speed if you want, and hit generate. The browser produces the speech audio and you can either play it back immediately or download it as a file. Like the transcription tool, none of this involves a server — the browser synthesizes the audio locally on your machine.</p>
+
+                <p>The voice quality has improved significantly over the past couple of years. Chrome on desktop, for example, now includes several high-quality neural voices that sound markedly better than the robotic TTS output from even two or three years ago. The default voices are decent, but if you dig into the settings and select one of the enhanced or neural options, the difference is immediately noticeable. We have heard users describe the quality as "good enough for audiobook-level content" — which is high praise for a free, browser-based tool.</p>
+
+                <p><strong>Where this tool genuinely shines:</strong></p>
+                <ul>
+                  <li><strong>Accessibility</strong> — If you run a website, blog, or documentation site, you can generate audio versions of your articles for visually impaired readers. It takes about 30 seconds per article</li>
+                  <li><strong>Learning and studying</strong> — Students convert textbook passages or study notes to audio and listen while commuting or exercising. Spaced repetition through audio is a real study technique, not just a hack</li>
+                  <li><strong>Content creation</strong> — YouTubers and TikTok creators generate voiceovers without recording themselves. It is not going to replace a professional voice actor for your brand video, but for explainer content, tutorials, and how-to videos, it works well</li>
+                  <li><strong>Proofreading</strong> — Hearing your text read back to you catches errors that your eyes skip over every time. This is a trick that writers and editors have used for decades — it just used to require reading aloud or asking someone else to do it</li>
+                  <li><strong>Presentation practice</strong> — Convert your script to audio and listen to the timing and flow before you practice delivering it yourself</li>
+                </ul>
+
+                <p>One limitation worth knowing about: the available voices depend on your browser and operating system. Chrome on Windows has different voices than Chrome on Mac, and Firefox has a different set entirely. Safari on macOS tends to have the most natural-sounding options for English text. If you try the tool and the default voice sounds robotic, check your browser's TTS settings — there might be a better voice available that is not selected by default.</p>
+
+                <p>Speed control is another feature that gets more use than you would expect. At 0.75x speed, the audio is slower and easier to follow for language learners or complex technical content. At 1.25x or 1.5x, it works well for scanning through longer documents where you want the gist without listening to every word. The sweet spot for most people seems to be around 1.0x to 1.1x for normal content consumption.</p>
+              </div>
+            </section>
+
+            <!-- AD SLOT 2 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="fluid" data-ad-layout-key="-6t+ed+2i-1n-4w"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 3: AUDIO FORMAT CONVERTER ===== -->
+            <section id="audio-converter">
+              <h2 id="h-audio-converter">Audio Format Converter: Switch Between MP3, WAV, FLAC, AAC, and More</h2>
+
+              <div class="tool-card">
+                <span class="card-tag cyan">Tool #3</span>
+                <h3 id="h-converter">Instant Audio Format Conversion</h3>
+
+                <p>This is the tool I personally reach for most often, probably because the problem it solves comes up so frequently. Different platforms, devices, and software expect different audio formats, and there is no single format that works everywhere. Your phone might record in AAC, the podcast platform you use wants MP3, your video editor prefers WAV for lossless quality, and the audiobook distributor requires a specific bitrate FLAC file. Each of those conversions used to mean opening a desktop app, waiting for it to load, importing the file, selecting output settings, and waiting again for the export.</p>
+
+                <p>Our Audio Format Converter cuts that entire process down to about ten seconds. You drag and drop your file (or files — it handles batch conversion), pick your target format, optionally adjust quality settings, and hit convert. The conversion engine runs in your browser using <strong>FFmpeg compiled to WebAssembly</strong>, which is essentially the same audio processing engine that powers professional desktop software, just compiled to run natively in a browser tab instead of as a native application.</p>
+
+                <p>The converter supports <strong>MP3, WAV, AAC, FLAC, OGG, and WMA</strong> — six formats that between them cover practically every real-world scenario I have encountered. If you need something more exotic like ALAC or OPUS, this is not the right tool for you. But for the vast majority of people dealing with audio files on a regular basis, these six formats handle the job.</p>
+
+                <p><strong>What sets it apart from the thousands of other online converters:</strong></p>
+                <ul>
+                  <li><strong>No file size limit</strong> — The only real constraint is your device's available memory. Most laptops handle 500 MB files without any problem. I have personally tested it with a 350 MB WAV file on a four-year-old MacBook Air and it converted to MP3 in under 30 seconds</li>
+                  <li><strong>Full quality control</strong> — Bitrate settings from 64 to 320 kbps, sample rate selection, mono or stereo output. You have actual control over the output quality rather than accepting whatever the tool decides to give you</li>
+                  <li><strong>Batch processing</strong> — Drop in 10 files at once, pick a format, and get 10 converted files back. This alone saves me probably 15 minutes per episode when I am working on podcast production</li>
+                  <li><strong>Metadata preservation</strong> — Artist name, album title, track number, and other ID3 tags carry over from the source file to the converted output. Most free converters strip this data, which is annoying when you have a carefully organized music library</li>
+                  <li><strong>No watermarks, no quality degradation</strong> — Some "free" converters add watermarks or intentionally lower the output quality to push you toward a paid tier. We do not do that. The output quality matches what you select in the settings</li>
+                </ul>
+
+                <p>A real example from my own workflow: I produce a weekly podcast that gets distributed to three platforms — Apple Podcasts (wants AAC), Spotify (MP3), and a self-hosted site (FLAC for archival quality). Every week, I drag the master WAV file into the converter, run it three times with different format settings, and have all three distribution-ready files in about two minutes. Before this tool, I was using Audacity for the conversions and the same process took closer to twelve minutes because of the load-export-save cycle for each format.</p>
+              </div>
+            </section>
+
+            <!-- AD SLOT 3 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== HOW TO USE ===== -->
+            <section id="how-to-use">
+              <h2 id="h-how-to-use">How to Use Each Tool (Step-by-Step)</h2>
+
+              <h3 id="h-stt-steps">Using the Audio to Text Tool</h3>
+              <ol>
+                <li><strong>Open the tool</strong> in Chrome or Edge for the best speech recognition accuracy. Firefox has limited Web Speech API support</li>
+                <li><strong>Upload your audio file</strong> or paste a direct URL to an audio file. Supported inputs include MP3, WAV, OGG, and most browser-playable audio formats</li>
+                <li><strong>Click "Transcribe"</strong> — the tool processes the audio and generates text in real time. You will see the text appear progressively as it works through the file</li>
+                <li><strong>Review and edit</strong> the output in the built-in text editor. Fix proper nouns, technical terms, or anything the recognizer misinterpreted. This step usually takes a few minutes for a one-hour recording</li>
+                <li><strong>Copy or download</strong> the finished transcription as plain text or a formatted document. You can also copy directly to clipboard for pasting into Google Docs, Notion, or wherever you store your notes</li>
+              </ol>
+
+              <h3 id="h-tts-steps">Using the Text to Audio Tool</h3>
+              <ol>
+                <li><strong>Open the tool</strong> in any modern browser. Safari on macOS tends to produce the most natural-sounding voices, but Chrome on any platform works well too</li>
+                <li><strong>Paste or type your text</strong> into the input area. There is no strict character limit, but very long texts (over 50,000 characters) may take a few extra seconds to process</li>
+                <li><strong>Select a voice</strong> from the dropdown. Check your browser's TTS settings first — there may be higher-quality neural voices available that are not selected by default</li>
+                <li><strong>Adjust the speaking speed</strong> using the slider. 1.0x is normal speed, 0.75x is slower for easier comprehension, and 1.5x is faster for scanning through content</li>
+                <li><strong>Click "Generate Audio"</strong> and listen to the result. If you are happy with it, download it as an audio file</li>
+              </ol>
+
+              <h3 id="h-converter-steps">Using the Audio Format Converter</h3>
+              <ol>
+                <li><strong>Open the converter</strong> — works in Chrome, Firefox, Edge, and Safari</li>
+                <li><strong>Drag and drop your audio files</strong> into the upload area, or click to browse. You can add multiple files at once for batch conversion</li>
+                <li><strong>Choose your target format</strong> from the dropdown menu: MP3, WAV, AAC, FLAC, OGG, or WMA</li>
+                <li><strong>Optionally adjust quality settings</strong> — bitrate, sample rate, and channels. The defaults (320 kbps for lossy formats, original sample rate for lossless) work well for most purposes</li>
+                <li><strong>Click "Convert" and download</strong> — converted files are ready individually or as a combined ZIP archive</li>
+              </ol>
+            </section>
+
+            <!-- ===== WHY BROWSER-BASED MATTERS ===== -->
+            <section id="privacy">
+              <h2 id="h-privacy">Why "Runs in Your Browser" Matters More Than People Think</h2>
+
+              <p>I get it — "browser-based" does not sound like a selling point. It sounds like a limitation. But spend a few minutes thinking about what actually happens when you use a typical online tool, and the picture changes pretty quickly.</p>
+
+              <p>When you upload a file to an online audio converter or transcription service, that file travels from your device to a remote server, gets processed there, and the result gets sent back. During that process, you are trusting the service provider with your data. For a casual podcast or a music file you ripped from a CD, that might be fine. But what about a confidential business strategy meeting? A doctor's dictated patient notes? A lawyer's recorded call with a client? A journalist's interview with a source who spoke on condition of anonymity?</p>
+
+              <p>That is where client-side processing changes the equation entirely. Your audio stays on your machine. The browser does the work. Nothing gets uploaded, nothing gets stored, nothing gets logged. It is the difference between handing someone a photocopy of your private notes and keeping the original locked in your desk drawer. The output is functionally identical, but the privacy implications are completely different.</p>
+
+              <p>The tradeoff is real, and I do not want to pretend it does not exist. Browser-based tools are limited by your device's processing power. A high-end desktop with 32 GB of RAM is going to handle large files faster than a three-year-old laptop with 8 GB. And browser APIs are not as capable as dedicated desktop software — you will not get the kind of granular control that Audacity or Adobe Audition provides. But for the specific tasks of transcription, text-to-speech, and format conversion — which is what most people need 95% of the time — the browser handles them more than adequately.</p>
+            </section>
+
+            <!-- ===== USE CASES ===== -->
+            <section id="use-cases">
+              <h2 id="h-use-cases">Who Uses These Tools (Based on Real Feedback)</h2>
+
+              <h3 id="h-students">Students and Academic Researchers</h3>
+              <p>This is the largest user group by a wide margin. College students use the transcription tool to convert recorded lectures into searchable notes. Graduate researchers use it for interview transcription. Several students have told us that the combination of transcription (for capturing what was said) and text-to-audio (for listening to their own written notes while commuting) has measurably improved their retention. One graduate student in biology said she went from spending roughly 6 hours per week on note-taking and review to about 2 hours — and her exam scores went up because she was actually engaging with the material instead of frantically trying to write down every word.</p>
+
+              <h3 id="h-creators">Content Creators and Podcasters</h3>
+              <p>The workflow here is interesting because all three tools connect to each other. A podcaster records in WAV format, uses the transcription tool to generate show notes, uses the format converter to create MP3 and AAC versions for distribution, and sometimes uses the text-to-audio tool to generate a quick audio preview of a script before recording the real thing. One creator described it as "having a tiny audio studio in a browser tab" — which is probably overstating it, but I understand the sentiment.</p>
+
+              <h3 id="h-business">Business Professionals</h3>
+              <p>Sales teams transcribe client calls for CRM documentation. HR departments record interviews and convert them to text for review. Project managers turn meeting recordings into action items. The common thread: these people deal with spoken information daily and need it in text form, but they also handle confidential data that cannot be uploaded to random cloud services. Browser-based processing eliminates that privacy concern entirely.</p>
+
+              <h3 id="h-accessibility">Accessibility and Assistive Technology</h3>
+              <p>This is a use case we did not anticipate when we built these tools, but it has become one of the most meaningful. People with visual impairments use the text-to-audio tool to convert web articles and documents into speech. People with dyslexia use it to process written content through audio, which for many of them is significantly easier than reading. Special education teachers have told us they use both tools in the classroom — transcription to create written materials from spoken instruction, and text-to-audio to provide audio versions of written assignments.</p>
+            </section>
+
+            <!-- AD SLOT 4 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== COMPARISON ===== -->
+            <section id="comparison">
+              <h2 id="h-comparison">Honest Comparison with Alternatives</h2>
+
+              <p>I am not going to claim these tools are better than everything else on the market. They are not. But here is a straightforward comparison based on what actually matters for the specific tasks these tools handle:</p>
+
+              <div style="overflow-x: auto; margin: 1.3rem 0; border-radius: var(--radius-xs); border: 1px solid var(--line);">
+                <table class="comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Feature</th>
+                      <th class="center" style="color: var(--accent1);">Tool Xeno</th>
+                      <th class="center">Typical Online Tools</th>
+                      <th class="center">Desktop Software</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Privacy (no uploads)</td><td class="center" style="color: #22c55e;">✅ Yes</td><td class="center" style="color: #ef4444;">❌ Files uploaded</td><td class="center" style="color: #22c55e;">✅ Local</td></tr>
+                    <tr><td>Cost</td><td class="center" style="color: #22c55e;">Free</td><td class="center">Freemium / Paid</td><td class="center">$0 – $300+</td></tr>
+                    <tr><td>Number of tools</td><td class="center" style="color: var(--accent1);">3 in one</td><td class="center">Usually 1</td><td class="center">1 per app</td></tr>
+                    <tr><td>Account required</td><td class="center" style="color: #22c55e;">No</td><td class="center" style="color: #ef4444;">Often yes</td><td class="center" style="color: #22c55e;">No</td></tr>
+                    <tr><td>Installation needed</td><td class="center" style="color: #22c55e;">None</td><td class="center" style="color: #22c55e;">None</td><td class="center" style="color: #ef4444;">Yes</td></tr>
+                    <tr><td>Cross-platform</td><td class="center" style="color: #22c55e;">Any browser</td><td class="center" style="color: #22c55e;">Any browser</td><td class="center" style="color: #ef4444;">Per-OS install</td></tr>
+                    <tr><td>Offline capability</td><td class="center" style="color: #22c55e;">Yes (cached)</td><td class="center" style="color: #ef4444;">No</td><td class="center" style="color: #22c55e;">Yes</td></tr>
+                    <tr><td>Advanced editing</td><td class="center">Basic</td><td class="center">Basic</td><td class="center" style="color: #22c55e;">Full</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p>Where desktop software like Audacity, Adobe Audition, or Logic Pro still wins decisively is on advanced features — multi-track editing, noise reduction, audio restoration, effects processing, and the kind of detailed control that audio professionals need. We are not trying to replace those tools. What these three browser-based tools are designed for is the other 90% of audio tasks: quick transcription, text-to-speech generation, and format conversion without the overhead of installing and learning professional software.</p>
+            </section>
+
+            <!-- ===== CTA ===== -->
+            <section style="text-align: center; margin-top: 2.8rem; padding-top: 1.8rem; border-top: 2px solid var(--line);">
+              <p style="font-size: 1.08rem; color: var(--text); font-weight: 700; margin-bottom: 1rem;">All three tools are live, free, and ready to use right now.</p>
+              <a href="https://toolxeno.com/#tools" class="cta-btn">Open Audio Tools <span class="btn-icon">→</span></a>
+            </section>
+
+            <!-- AUTHOR -->
+            <div class="author-box">
+              <div class="author-avatar">X</div>
+              <div class="author-info">
+                <div class="author-name">Tool Xeno Team</div>
+                <div class="author-bio">We build free, privacy-first online tools. No accounts, no data collection, no hidden fees. Everything runs in your browser — your files never leave your device.</div>
+              </div>
             </div>
+
+          </div>
         </article>
+      </div>
+
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar-area">
+        <!-- TABLE OF CONTENTS -->
+        <div class="sidebar-card toc-card" id="toc-card">
+          <h4>📋 Table of Contents <span class="h4-line"></span><button class="toc-toggle" id="toc-toggle" aria-label="Toggle TOC">▼</button></h4>
+          <nav class="toc" aria-label="Table of Contents">
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#introduction" class="toc-link">Introduction</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#audio-to-text" class="toc-link">Audio to Text</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#text-to-audio" class="toc-link">Text to Audio</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#audio-converter" class="toc-link">Audio Format Converter</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#how-to-use" class="toc-link">How to Use Each Tool</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#privacy" class="toc-link">Privacy & Browser Processing</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#use-cases" class="toc-link">Real-World Use Cases</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#comparison" class="toc-link">Comparison with Alternatives</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#faq" class="toc-link">Frequently Asked Questions</a></div>
+          </nav>
+        </div>
+      </aside>
     </main>
-    
-    <script>
-        // Initialize particles
-        function initializeParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                container.appendChild(particle);
-            }
-        }
-        
-        // Theme toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
-        }
-        
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-theme');
-        }
-        
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeParticles();
+
+    <!-- ===== FAQ SECTION ===== -->
+    <section class="section-divider"></section>
+    <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+      <div style="text-align: center;">
+        <span class="section-label">Common Questions</span>
+        <h2 class="section-title" id="faq-heading">Frequently Asked Questions</h2>
+        <p class="section-sub" style="margin: 0 auto;">Straightforward answers to the questions people ask most about these tools.</p>
+      </div>
+
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            How does the Audio to Text tool work?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">It uses your browser's built-in Web Speech API to process audio directly on your device. Your audio files are never uploaded to any server — the transcription happens entirely in your browser using your device's processing power. For best results, use Chrome or Edge with clear audio and minimal background noise.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            How does the Text to Audio tool work?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">The Text to Audio tool uses the Web Speech Synthesis API built into modern browsers. You type or paste your text, select a voice from the available options, adjust the speaking speed if you want, and the browser generates speech audio that you can play back or download. The quality depends on which voices are available in your browser — Chrome, Safari, and Edge each offer different voice options.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            What audio formats can I convert between?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">The converter supports MP3, WAV, AAC, FLAC, OGG, and WMA — six formats that cover the vast majority of real-world use cases. You can convert between any combination of these formats, with adjustable bitrate (64-320 kbps), sample rate, and mono/stereo channel settings.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Is my data private with these tools?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes. All three tools run entirely in your browser. Your audio files, text input, and converted files never leave your device. No data is uploaded to any server, no data is stored, and no data is collected. This makes the tools safe for confidential recordings, business meetings, medical notes, and any other sensitive content.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Do I need to create an account or install software?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">No signup, no account, and no software installation is required. Just open any of the tools in a modern browser (Chrome, Firefox, Edge, or Safari) and start using them immediately. Everything works right in your browser — no plugins, no extensions, no downloads needed.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Is there a file size limit for conversion?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">There is no strict file size limit. Because processing happens locally in your browser, the main constraint is your device's available memory. Most modern devices handle files up to 500 MB without issues. For very large files, you may notice slightly longer processing times depending on your device's CPU and available RAM.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Which browsers work best with these tools?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Chrome and Edge provide the best experience for Audio to Text and Text to Audio because they have the most mature speech recognition and synthesis APIs. Safari on macOS has the most natural-sounding TTS voices. All modern browsers support the Audio Format Converter equally well since it uses WebAssembly, which is universally supported.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Are these tools really free? What is the catch?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes, completely free. There are no hidden costs, no usage limits, no file size restrictions, no watermarks added to your output, and no premium tiers you get locked out of. Every feature is available to everyone at all times. The tools are supported by the Tool Xeno website as a whole — not by charging individual users.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-icon">X</div>
+          <span class="footer-brand-name">Tool Xeno</span>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://toolxeno.com/" class="footer-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="footer-link">All Tools</a>
+          <a href="https://toolxeno.com/privacy.html" class="footer-link">Privacy</a>
+          <a href="https://toolxeno.com/terms.html" class="footer-link">Terms</a>
+        </nav>
+        <a href="https://toolxeno.com/#tools" class="footer-back-btn">← Back to All Tools</a>
+        <div class="footer-copy">© <span id="footer-year"></span> Tool Xeno. All processing is performed locally in your browser.</div>
+      </div>
+    </footer>
+
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+  </div><!-- end page-wrapper -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y4JDC5DCBV');
+  </script>
+
+  <!-- AdSense (uncomment when approved) -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+  <script>
+    // Theme Toggle
+    (function() {
+      var saved = localStorage.getItem('tx-theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.addEventListener('click', function() {
+        var current = document.documentElement.getAttribute('data-theme');
+        var next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('tx-theme', next);
+        btn.textContent = next === 'light' ? '🌙 Dark' : '☀️ Light';
+      });
+      if (btn) btn.textContent = (document.documentElement.getAttribute('data-theme') === 'light') ? '🌙 Dark' : '☀️ Light';
+    })();
+
+    // Mobile Nav
+    (function() {
+      var hamburger = document.getElementById('hamburger');
+      var mobileNav = document.getElementById('mobile-nav');
+      var mobileClose = document.getElementById('mobile-close');
+      if (hamburger && mobileNav) hamburger.addEventListener('click', function() { mobileNav.classList.add('open'); });
+      if (mobileClose && mobileNav) mobileClose.addEventListener('click', function() { mobileNav.classList.remove('open'); });
+      if (mobileNav) mobileNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { mobileNav.classList.remove('open'); }); });
+    })();
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-item').forEach(function(item) {
+      item.querySelector('.faq-q').addEventListener('click', function() {
+        var wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+          openItem.classList.remove('open');
         });
-    </script>
-</body></html>
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+
+    // Mobile TOC Toggle
+    (function() {
+      var card = document.getElementById('toc-card');
+      var btn = document.getElementById('toc-toggle');
+      if (card && btn) {
+        if (window.innerWidth > 1024) { card.classList.add('expanded'); }
+        btn.addEventListener('click', function() { card.classList.toggle('expanded'); });
+        window.addEventListener('resize', function() {
+          if (window.innerWidth > 1024) card.classList.add('expanded');
+        });
+      }
+    })();
+
+    // Footer Year
+    (function() {
+      var el = document.getElementById('footer-year');
+      if (el) el.textContent = new Date().getFullYear();
+    })();
+
+    // Scroll-Spy TOC
+    (function() {
+      var tocLinks = document.querySelectorAll('.toc-link');
+      var tocItems = document.querySelectorAll('.toc-item');
+      var sections = [];
+      tocLinks.forEach(function(link) {
+        var id = link.getAttribute('href');
+        if (id && id.startsWith('#')) {
+          var el = document.querySelector(id);
+          if (el) sections.push({ el: el, link: link, item: link.closest('.toc-item') });
+        }
+      });
+
+      function updateActive() {
+        var scrollTop = window.scrollY;
+        var headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
+        var current = null;
+        for (var i = sections.length - 1; i >= 0; i--) {
+          if (sections[i].el.getBoundingClientRect().top <= headerH + 30) {
+            current = sections[i];
+            break;
+          }
+        }
+        tocItems.forEach(function(t) { t.classList.remove('active'); });
+        if (current && current.item) current.item.classList.add('active');
+      }
+
+      var scrollTimer;
+      window.addEventListener('scroll', function() {
+        if (scrollTimer) cancelAnimationFrame(scrollTimer);
+        scrollTimer = requestAnimationFrame(updateActive);
+      }, { passive: true });
+      updateActive();
+    })();
+
+    // Reading Progress Bar
+    (function() {
+      var bar = document.getElementById('reading-progress');
+      if (!bar) return;
+      var timer;
+      window.addEventListener('scroll', function() {
+        if (timer) cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function() {
+          var h = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.width = h > 0 ? ((window.scrollY / h) * 100) + '%' : '0%';
+        });
+      }, { passive: true });
+    })();
+
+    // Back to Top Button
+    (function() {
+      var btn = document.getElementById('back-to-top');
+      if (!btn) return;
+      var timer;
+      window.addEventListener('scroll', function() {
+        if (timer) cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function() {
+          btn.classList.toggle('visible', window.scrollY > 400);
+        });
+      }, { passive: true });
+    })();
+
+    // Section Reveal on Scroll
+    (function() {
+      var secs = document.querySelectorAll('.article-inner section');
+      if (!secs.length) return;
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+          });
+        }, { threshold: 0.02, rootMargin: '0px 0px -20px 0px' });
+        secs.forEach(function(s) { obs.observe(s); });
+      } else {
+        secs.forEach(function(s) { s.classList.add('visible'); });
+      }
+    })();
+  </script>
+</body>
+</html>

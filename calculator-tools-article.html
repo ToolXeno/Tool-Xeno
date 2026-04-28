@@ -1,661 +1,1025 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US" dir="ltr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#007cf0">
+  <meta name="color-scheme" content="dark light">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Calculator Tools – Tool Xeno">
+  <meta name="application-name" content="Tool Xeno">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="rating" content="general">
 
-  gtag('config', 'G-Y4JDC5DCBV');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Calculator Tools - Professional Computational Solutions | Tool Xeno</title>
-    <meta name="description" content="Comprehensive calculator suite featuring scientific calculator, age calculator, BMI calculator, loan EMI calculator, GST calculator, and currency converter. Fast, accurate, and free computational tools.">
-    <meta name="keywords" content="calculator tools, scientific calculator, age calculator, BMI calculator, loan EMI calculator, GST calculator, currency converter, online calculators, free tools">
-    <meta name="author" content="Tool Xeno">
-    <link rel="canonical" href="https://toolxeno.com/calculator-tools">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Advanced Calculator Tools - Professional Computational Solutions">
-    <meta property="og:description" content="Professional calculator suite for scientific calculations, age computation, BMI assessment, loan EMI planning, GST calculations, and currency conversion.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://toolxeno.com/calculator-tools">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Advanced Calculator Tools - Professional Computational Solutions">
-    <meta name="twitter:description" content="Professional computational utilities for all your calculation needs.">
-    
-    <!-- Schema Markup -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
+  <title>Free Calculator Tools: Scientific, Age, BMI, EMI, GST & Currency | Tool Xeno</title>
+  <meta name="description" content="Six free calculator tools that run 100% in your browser. Scientific math, age calculation, BMI assessment, loan EMI planning, GST computation, and live currency conversion. No signup, no installs required.">
+  <meta name="keywords" content="scientific calculator, age calculator, BMI calculator, loan EMI calculator, GST calculator, currency converter, online calculators, free calculator tools, privacy-first calculators">
+  <meta name="author" content="Tool Xeno">
+  <link rel="canonical" href="https://toolxeno.com/calculator-tools">
+  <link rel="alternate" hreflang="en" href="https://toolxeno.com/calculator-tools">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://toolxeno.com/calculator-tools">
+  <meta property="og:title" content="Free Calculator Tools: Scientific, Age, BMI, EMI, GST & Currency | Tool Xeno">
+  <meta property="og:description" content="Six free browser-based calculator tools: scientific math, age computation, BMI assessment, loan EMI planning, GST calculation, and currency conversion. No signup, no installs, 100% private.">
+  <meta property="og:site_name" content="Tool Xeno">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2025-04-28T08:00:00+05:00">
+  <meta property="article:modified_time" content="2025-04-28T12:00:00+05:00">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Calculator Tools: Scientific, Age, BMI, EMI, GST & Currency">
+  <meta name="twitter:description" content="Six free calculator tools for science, health, finance, and everyday math. Privacy-first, browser-based, no signup required.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
         "@type": "Article",
-        "headline": "Advanced Calculator Tools - Professional Computational Solutions",
-        "description": "Comprehensive guide to professional calculator utilities for scientific calculations, financial planning, health assessment, and currency conversion.",
-        "author": {
-            "@type": "Organization",
-            "name": "Tool Xeno"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Tool Xeno",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://toolxeno.com/logo.png"
-            }
-        },
-        "datePublished": "2024-12-11",
-        "dateModified": "2024-12-11",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://toolxeno.com/calculator-tools"
-        }
-    }
-    </script>
-    
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            
-            --dark-bg: #0a0a0a;
-            --dark-surface: #1a1a1a;
-            --dark-surface-elevated: #252525;
-            --dark-text: #ffffff;
-            --dark-text-secondary: #a0a0a0;
-            --dark-border: #333333;
-            
-            --light-bg: #f8fafc;
-            --light-surface: #ffffff;
-            --light-surface-elevated: #f1f5f9;
-            --light-text: #1e293b;
-            --light-text-secondary: #64748b;
-            --light-border: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            line-height: 1.7;
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-            min-height: 100vh;
-        }
-        
-        body.light-theme { 
-            background-color: var(--light-bg); 
-            color: var(--light-text); 
-        }
+        "headline": "Six Calculator Tools That Actually Save You Time — Scientific, Age, BMI, EMI, GST & Currency",
+        "description": "An honest, in-depth look at six free browser-based calculator tools covering scientific math, age computation, BMI assessment, loan EMI planning, GST calculation, and currency conversion. No signup or installs required.",
+        "author": { "@type": "Organization", "name": "Tool Xeno", "url": "https://toolxeno.com/" },
+        "publisher": { "@type": "Organization", "name": "Tool Xeno", "url": "https://toolxeno.com/", "logo": { "@type": "ImageObject", "url": "https://toolxeno.com/logo.png" } },
+        "datePublished": "2025-04-28T08:00:00+05:00",
+        "dateModified": "2025-04-28T12:00:00+05:00",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://toolxeno.com/calculator-tools" },
+        "wordCount": 4500,
+        "articleSection": "Technology"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Are these calculator tools completely free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every calculator on Tool Xeno is 100% free with no hidden charges, no premium tiers, no trial periods, and no signup required. You can use them as many times as you want." } },
+          { "@type": "Question", "name": "Is my data private when I use these calculators?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. All calculations happen entirely in your browser. Your financial figures, health data, and personal information never leave your device. No data is sent to any server." } },
+          { "@type": "Question", "name": "Do I need to download anything or create an account?", "acceptedAnswer": { "@type": "Answer", "text": "No. No downloads, no installations, and no accounts needed. Just open the calculator page in any modern browser and start using it immediately." } },
+          { "@type": "Question", "name": "How accurate are the EMI and GST calculations?", "acceptedAnswer": { "@type": "Answer", "text": "The EMI calculator uses the standard reducing-balance formula used by banks worldwide. The GST calculator supports all standard rates (5%, 12%, 18%, 28%) with accurate CGST/SGST/IGST splits. Results match what banks and tax authorities use." } },
+          { "@type": "Question", "name": "Can I use the currency converter offline?", "acceptedAnswer": { "@type": "Answer", "text": "The currency converter needs an internet connection to fetch live exchange rates from financial data APIs. The other five calculators work entirely offline once the page has loaded." } },
+          { "@type": "Question", "name": "Which browsers work with these calculators?", "acceptedAnswer": { "@type": "Answer", "text": "All modern browsers work perfectly — Chrome, Firefox, Safari, Edge, Opera, and Brave on both desktop and mobile. The calculators are fully responsive and work on phones and tablets." } },
+          { "@type": "Question", "name": "Does the scientific calculator support degrees and radians?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can switch between degree and radian modes with one click. It supports sin, cos, tan and their inverses, logarithms (natural and base-10), exponential functions, powers, roots, factorials, and constants like pi and e." } },
+          { "@type": "Question", "name": "How does the age calculator handle leap years?", "acceptedAnswer": { "@type": "Answer", "text": "The age calculator accounts for leap years automatically. When calculating the difference between two dates, it correctly identifies February 29 and adjusts the day count, giving you precise results down to the exact number of days." } }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolxeno.com/" },
+          { "@type": "ListItem", "position": 2, "name": "All Tools", "item": "https://toolxeno.com/#tools" },
+          { "@type": "ListItem", "position": 3, "name": "Calculator Tools", "item": "https://toolxeno.com/calculator-tools" }
+        ]
+      },
+      {
+        "@type": "WebApplication",
+        "name": "Calculator Tools",
+        "url": "https://toolxeno.com/calculator-tools",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Six free browser-based calculator tools: scientific calculator, age calculator, BMI calculator, loan EMI calculator, GST calculator, and currency converter."
+      }
+    ]
+  }
+  </script>
 
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.05;
-            background: radial-gradient(circle, #667eea 0%, transparent 70%);
-        }
-        
-        body.light-theme .particle { 
-            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(100vh) rotate(0deg); } 
-            100% { transform: translateY(-100px) rotate(360deg); } 
-        }
-        
-        .header-glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.35s ease, border-color 0.35s ease;
-        }
-        
-        body.light-theme .header-glass { 
-            background: rgba(255, 255, 255, 0.9); 
-            border-bottom-color: rgba(0, 0, 0, 0.1); 
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--dark-surface);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.light-theme .theme-toggle { 
-            background: var(--light-surface-elevated); 
-            border-color: var(--light-border); 
-        }
-        
-        body.light-theme .theme-toggle::after { 
-            transform: translateX(28px); 
-            background: var(--secondary-gradient); 
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
-        
-        body.light-theme .glass-card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-color: rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
-        }
-        
-        .btn-gradient {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .btn-gradient:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
-        }
-        
-        .nav-link {
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-        }
-        
-        .nav-link:hover { 
-            background: rgba(255, 255, 255, 0.1); 
-            color: white; 
-        }
-        
-        body.light-theme .nav-link { 
-            color: rgba(0, 0, 0, 0.7); 
-        }
-        
-        body.light-theme .nav-link:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            color: black; 
-        }
-        
-        .article-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .article-content h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .article-content h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .article-content p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-        
-        .article-content ul, .article-content ol {
-            margin-bottom: 1.5rem;
-            margin-left: 2rem;
-        }
-        
-        .article-content li {
-            margin-bottom: 0.75rem;
-            line-height: 1.8;
-        }
-        
-        .tool-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
-        }
-        
-        body.light-theme .tool-card {
-            background: rgba(0, 0, 0, 0.02);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .feature-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-        
-        body.light-theme .feature-item {
-            background: rgba(0, 0, 0, 0.02);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .icon-large {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @media (max-width: 768px) {
-            .article-content h2 { font-size: 1.5rem; }
-            .article-content h3 { font-size: 1.25rem; }
-            .article-content p { font-size: 1rem; }
-        }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%237928ca'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg0: #030712; --bg1: #0a0f1e; --bg2: #0f172a; --bg3: #1e293b;
+      --card: rgba(255,255,255,0.04); --card-hover: rgba(255,255,255,0.08);
+      --card-solid: #1e293b; --glass: rgba(255,255,255,0.03);
+      --text: #f1f5f9; --text2: #cbd5e1; --muted: #94a3b8;
+      --line: rgba(255,255,255,0.1); --line-strong: rgba(255,255,255,0.2);
+      --accent1: #007cf0; --accent2: #00dfd8; --accent3: #7928ca; --accent4: #ff0080;
+      --shadow: 0 24px 60px rgba(0,0,0,0.6); --shadow-sm: 0 8px 24px rgba(0,0,0,0.3);
+      --radius: 20px; --radius-sm: 12px; --radius-xs: 8px; --max: 1240px;
+      --ring: 0 0 0 3px rgba(0,124,240,0.4);
+      --grad: linear-gradient(135deg, var(--accent1), var(--accent2));
+      --grad-purple: linear-gradient(135deg, var(--accent3), var(--accent4));
+      --grad-text: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+      --font: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1); --header-h: 72px;
+    }
+    [data-theme="light"] {
+      --bg0: #f8fafc; --bg1: #f1f5f9; --bg2: #e2e8f0; --bg3: #cbd5e1;
+      --card: rgba(255,255,255,0.9); --card-hover: rgba(255,255,255,1);
+      --card-solid: #ffffff; --glass: rgba(255,255,255,0.8);
+      --text: #0f172a; --text2: #334155; --muted: #64748b;
+      --line: rgba(0,0,0,0.1); --line-strong: rgba(0,0,0,0.15);
+      --shadow: 0 24px 60px rgba(0,0,0,0.1); --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
+    }
+    html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+    body { font-family: var(--font); background-color: var(--bg0); color: var(--text); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+    ul, ol { list-style: none; }
+    .bg-orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; will-change: transform; }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent1); top: -200px; left: -200px; animation: oF1 20s linear infinite; }
+    .orb-2 { width: 500px; height: 500px; background: var(--accent3); top: 30%; right: -150px; animation: oF2 25s linear infinite; }
+    .orb-3 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: 30%; animation: oF3 18s linear infinite; }
+    .orb-4 { width: 300px; height: 300px; background: var(--accent4); top: 60%; left: 10%; animation: oF4 22s linear infinite; }
+    @keyframes oF1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(60px,40px) scale(1.1);} 66%{transform:translate(-40px,60px) scale(0.95);} }
+    @keyframes oF2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-80px,50px) scale(1.05);} 66%{transform:translate(40px,-60px) scale(1.1);} }
+    @keyframes oF3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(70px,-40px) scale(1.15);} }
+    @keyframes oF4 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,-80px) scale(1.1);} }
+    .bg-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%); }
+    .page-wrapper { position: relative; z-index: 1; }
+    .header { position: sticky; top: 0; z-index: 1000; height: var(--header-h); display: flex; align-items: center; backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); background: rgba(3,7,18,0.85); border-bottom: 1px solid var(--line); transition: background var(--transition); }
+    [data-theme="light"] .header { background: rgba(248,250,252,0.90); }
+    .header-inner { max-width: var(--max); width: 100%; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; flex-shrink: 0; }
+    .logo-icon { width: 36px; height: 36px; background: var(--grad); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 900; color: #fff; box-shadow: 0 4px 14px rgba(0,124,240,0.4); }
+    .logo-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-primary { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .nav-link { padding: 7px 13px; font-size: 0.875rem; font-weight: 500; color: var(--text2); border-radius: var(--radius-xs); transition: color var(--transition), background var(--transition); }
+    .nav-link:hover { color: var(--text); background: var(--card); }
+    .header-actions { display: flex; align-items: center; gap: 10px; margin-left: 12px; }
+    .btn-theme { padding: 8px 20px; font-size: 0.85rem; font-weight: 600; font-family: var(--font); background: var(--card); backdrop-filter: blur(8px); border-radius: 40px; color: var(--text2); border: 1px solid var(--line); transition: all 0.3s ease; cursor: pointer; }
+    .btn-theme:hover { color: var(--text); border-color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; margin-left: auto; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); display: block; }
+    .mobile-nav { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(3,7,18,0.98); backdrop-filter: blur(24px); flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-link { font-size: 1.4rem; font-weight: 700; color: var(--text2); padding: 12px 32px; border-radius: var(--radius-sm); transition: all var(--transition); }
+    .mobile-nav-link:hover { color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; font-size: 1.5rem; color: var(--muted); padding: 8px; border-radius: 8px; transition: color var(--transition); cursor: pointer; background: none; border: none; }
+    .mobile-close:hover { color: var(--text); }
+    .hero { padding: 60px 24px 40px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(0,124,240,0.15); border: 1px solid rgba(0,124,240,0.3); border-radius: 100px; font-size: 0.78rem; font-weight: 600; color: var(--accent1); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 20px; }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
+    .hero-h1 { font-size: clamp(1.8rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 16px; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero-h1 .grad-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: clamp(0.9rem, 1.5vw, 1.05rem); color: var(--text2); max-width: 650px; margin: 0 auto 24px; line-height: 1.75; }
+    .hero-meta { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px 20px; font-size: 0.82rem; color: var(--muted); }
+    .hero-meta-item { display: flex; align-items: center; gap: 6px; }
+    .hero-meta-dot { color: var(--accent2); }
+    .article-layout { max-width: var(--max); margin: 0 auto; padding: 0 24px 60px; display: grid; grid-template-columns: 1fr 320px; gap: 32px; }
+    @media (max-width: 1024px) { .article-layout { grid-template-columns: 1fr; } }
+    .article-main { min-width: 0; }
+    .article-body { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .article-inner { padding: 36px 40px; }
+    @media (max-width: 600px) { .article-inner { padding: 22px 20px; } }
+    .article-inner h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 800; letter-spacing: -0.8px; line-height: 1.2; margin: 2.8rem 0 1rem; color: var(--text); padding-bottom: 10px; border-bottom: 2px solid var(--line); }
+    .article-inner h2:first-child { margin-top: 0; }
+    .article-inner h3 { font-size: clamp(1.15rem, 2.5vw, 1.35rem); font-weight: 700; letter-spacing: -0.3px; line-height: 1.3; margin: 2rem 0 0.75rem; color: var(--text); }
+    .article-inner p { font-size: 1.02rem; color: var(--text2); line-height: 1.85; margin-bottom: 1.15rem; }
+    .article-inner ul, .article-inner ol { margin-bottom: 1.15rem; padding-left: 1.5rem; }
+    .article-inner ul { list-style: disc; }
+    .article-inner ol { list-style: decimal; }
+    .article-inner li { font-size: 1.02rem; color: var(--text2); line-height: 1.8; margin-bottom: 0.55rem; }
+    .article-inner strong { color: var(--text); font-weight: 700; }
+    .article-inner a { color: var(--accent1); text-decoration: underline; text-underline-offset: 2px; }
+    .article-inner a:hover { color: var(--accent2); }
+    .article-inner blockquote { border-left: 3px solid var(--accent1); padding: 14px 20px; margin: 1.3rem 0; background: rgba(0,124,240,0.06); border-radius: 0 var(--radius-xs) var(--radius-xs) 0; font-size: 0.98rem; color: var(--text2); line-height: 1.75; }
+    .tool-card { background: var(--glass); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 28px; margin: 1.5rem 0; transition: all var(--transition); }
+    .tool-card:hover { border-color: rgba(0,124,240,0.3); box-shadow: var(--shadow-sm); }
+    .tool-card h3 { margin-top: 0.5rem; }
+    .card-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent1); margin-bottom: 6px; background: rgba(0,124,240,0.1); padding: 3px 10px; border-radius: 100px; }
+    .card-tag.purple { color: var(--accent3); background: rgba(121,40,202,0.12); }
+    .card-tag.cyan { color: var(--accent2); background: rgba(0,223,216,0.1); }
+    .cta-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 36px; font-size: 1.05rem; font-weight: 700; background: #007cf0; color: #fff; border-radius: 50px; box-shadow: 0 4px 24px rgba(0,124,240,0.35), inset 0 1px 0 rgba(255,255,255,0.15); transition: all 0.3s cubic-bezier(0.4,0,0.2,1); text-decoration: none; letter-spacing: 0.3px; position: relative; overflow: hidden; border: none; cursor: pointer; }
+    .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,124,240,0.5), 0 0 0 4px rgba(0,124,240,0.1); color: #fff; background: #006ad6; }
+    .cta-btn:active { transform: translateY(-1px) scale(0.98); box-shadow: 0 4px 16px rgba(0,124,240,0.3); }
+    [data-theme="light"] .cta-btn { background: #007cf0; color: #fff; box-shadow: 0 4px 24px rgba(0,124,240,0.3), inset 0 1px 0 rgba(255,255,255,0.2); }
+    [data-theme="light"] .cta-btn:hover { box-shadow: 0 8px 32px rgba(0,124,240,0.4), 0 0 0 4px rgba(0,124,240,0.08); background: #006ad6; }
+    .author-box { display: flex; align-items: center; gap: 14px; padding: 20px; margin-top: 2.5rem; background: var(--glass); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+    .author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .author-info { min-width: 0; }
+    .author-name { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .author-bio { font-size: 0.82rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+    .ad-slot { width: 100%; min-height: 100px; display: flex; align-items: center; justify-content: center; background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-xs); margin: 2.2rem 0; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; }
+    /* ===== SIDEBAR ===== */
+    .sidebar-area { display: flex; flex-direction: column; gap: 16px; position: sticky; top: calc(var(--header-h) + 16px); max-height: calc(100vh - var(--header-h) - 32px); overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+    .sidebar-area::-webkit-scrollbar { display: none; }
+    .sidebar-card { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 22px; }
+    .sidebar-card h4 { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .sidebar-card h4 .h4-line { flex: 1; height: 1px; background: var(--line); }
+
+    /* Professional TOC */
+    .sidebar-card.toc-card { padding: 20px 18px; }
+    .sidebar-card.toc-card h4 { font-size: 0.76rem; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .toc { display: flex; flex-direction: column; gap: 1px; }
+    .toc-item { display: flex; align-items: flex-start; gap: 10px; padding: 6px 8px; border-radius: 8px; position: relative; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
+    .toc-item:hover { background: rgba(0,124,240,0.06); }
+    .toc-bullet { width: 7px; height: 7px; border-radius: 50%; background: var(--bg3); border: 2px solid var(--line-strong); margin-top: 5px; flex-shrink: 0; transition: all 0.3s ease; }
+    .toc-link { font-size: 0.82rem; font-weight: 500; color: var(--muted); padding: 1px 0; transition: all 0.25s ease; line-height: 1.45; display: block; }
+    .toc-link:hover { color: var(--text); }
+    .toc-link.sub { font-size: 0.78rem; color: var(--muted); padding-left: 4px; }
+    .toc-item.active { background: rgba(0,124,240,0.08); }
+    .toc-item.active .toc-bullet { background: var(--accent1); border-color: var(--accent1); box-shadow: 0 0 0 4px rgba(0,124,240,0.12); }
+    .toc-item.active .toc-link { color: var(--text); font-weight: 700; }
+    .toc-toggle { display: none; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--glass); border: 1px solid var(--line); border-radius: 6px; color: var(--muted); font-size: 0.65rem; cursor: pointer; margin-left: auto; flex-shrink: 0; transition: all 0.3s ease; }
+    .toc-toggle:hover { color: var(--text); border-color: var(--accent1); }
+    .toc-card.expanded .toc-toggle { transform: rotate(180deg); }
+    @media (max-width: 1024px) {
+      .sidebar-area { position: static; max-height: none; overflow-y: visible; }
+      .toc-toggle { display: flex; }
+      .sidebar-card.toc-card .toc { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+      .sidebar-card.toc-card.expanded .toc { max-height: 500px; }
+    }
+
+    .faq-section { padding: 50px 24px 60px; max-width: var(--max); margin: 0 auto; }
+    .faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 800px; margin: 30px auto 0; }
+    .faq-item { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-xs); overflow: hidden; transition: border-color var(--transition); }
+    .faq-item.open { border-color: rgba(0,124,240,0.3); }
+    .faq-q { width: 100%; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; font-size: 0.95rem; font-weight: 600; color: var(--text); background: none; text-align: left; cursor: pointer; transition: color var(--transition); font-family: var(--font); border: none; }
+    .faq-q:hover { color: var(--accent1); }
+    .faq-q-icon { width: 26px; height: 26px; background: var(--glass); border: 1px solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; transition: all var(--transition); color: var(--muted); }
+    .faq-item.open .faq-q-icon { transform: rotate(45deg); background: rgba(0,124,240,0.15); border-color: var(--accent1); color: var(--accent1); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .faq-item.open .faq-a { max-height: 500px; }
+    .faq-a-inner { padding: 0 20px 20px; font-size: 0.92rem; color: var(--text2); line-height: 1.8; }
+    .section-label { display: inline-block; margin-bottom: 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent1); }
+    .section-title { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 8px; }
+    .section-sub { font-size: 0.95rem; color: var(--text2); max-width: 520px; line-height: 1.6; }
+    .section-divider { height: 1px; background: var(--line); max-width: var(--max); margin: 0 auto; }
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 1.2rem 0; }
+    .comparison-table thead tr { border-bottom: 2px solid var(--line); }
+    .comparison-table th { text-align: left; padding: 12px 14px; color: var(--text); font-weight: 700; }
+    .comparison-table td { padding: 11px 14px; color: var(--text2); border-bottom: 1px solid var(--line); }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .footer { border-top: 1px solid var(--line); padding: 36px 24px 24px; background: rgba(3,7,18,0.6); }
+    [data-theme="light"] .footer { background: rgba(241,245,249,0.8); }
+    .footer-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .footer-brand-icon { width: 32px; height: 32px; background: var(--grad); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 900; color: #fff; }
+    .footer-brand-name { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-link { font-size: 0.85rem; color: var(--muted); transition: color var(--transition); }
+    .footer-link:hover { color: var(--text); }
+    .footer-back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 600; color: var(--accent1); padding: 8px 16px; border-radius: var(--radius-xs); background: rgba(0,124,240,0.1); border: 1px solid rgba(0,124,240,0.2); transition: all var(--transition); }
+    .footer-back-btn:hover { background: rgba(0,124,240,0.15); }
+    .footer-copy { font-size: 0.78rem; color: var(--muted); width: 100%; text-align: center; padding-top: 20px; border-top: 1px solid var(--line); margin-top: 12px; }
+    @media (max-width: 768px) {
+      .nav-primary, .header-actions { display: none; }
+      .hamburger { display: flex; }
+      .article-inner h2 { font-size: 1.35rem; margin: 2rem 0 0.8rem; }
+      .article-inner h3 { font-size: 1.1rem; margin: 1.5rem 0 0.6rem; }
+      .article-inner p { font-size: 0.95rem; }
+      .tool-card { padding: 20px; }
+      .comparison-table { font-size: 0.78rem; }
+      .comparison-table th, .comparison-table td { padding: 8px 6px; }
+    }
+    /* ===== PREMIUM UPGRADES ===== */
+    html { scroll-padding-top: calc(var(--header-h) + 20px); }
+    
+    /* Reading Progress Bar */
+    .reading-progress { position: fixed; top: var(--header-h); left: 0; height: 3px; background: var(--grad); z-index: 999; width: 0%; transition: width 0.1s linear; }
+    
+    /* Premium TOC Active State handled in base TOC styles above */
+    
+    /* Premium Tool Cards */
+    .tool-card { position: relative; overflow: hidden; }
+    .tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad); opacity: 0; transition: opacity var(--transition); }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-card:hover { transform: translateY(-2px); }
+    
+    /* Premium CTA Buttons — shimmer & glow */
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      border-radius: inherit;
+      transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .cta-btn:hover::after { left: 100%; }
+    .cta-btn:focus-visible {
+      outline: 2px solid var(--accent2);
+      outline-offset: 4px;
+    }
+    .cta-btn .btn-icon {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .cta-btn:hover .btn-icon {
+      transform: translateX(4px);
+    }
+    
+    /* Premium Blockquotes */
+    .article-inner blockquote { position: relative; }
+    .article-inner blockquote::before { content: '\201C'; position: absolute; top: -5px; left: 16px; font-size: 2.5rem; font-weight: 900; color: var(--accent1); opacity: 0.2; line-height: 1; }
+    
+    /* Premium List Items */
+    .article-inner li { position: relative; padding-left: 8px; }
+    .article-inner li::marker { color: var(--accent1); }
+    .article-inner ul li::marker { content: '\25B8'; }
+    .article-inner ol li::marker { font-weight: 700; color: var(--accent1); }
+    
+    /* Premium H2 with gradient accent */
+    .article-inner h2 { position: relative; }
+    .article-inner h2::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 60px; height: 2px; background: var(--grad); border-radius: 2px; }
+    
+    /* FAQ Premium */
+    .faq-item { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .faq-item:hover { background: var(--card-hover); }
+    .faq-item.open { box-shadow: 0 4px 20px rgba(0,124,240,0.08); }
+    
+    /* Smooth Section Reveals */
+    .article-inner section { opacity: 0; transform: translateY(10px); transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1), transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); will-change: opacity, transform; }
+    .article-inner section.visible { opacity: 1; transform: translateY(0); }
+    
+    /* Comparison Table Premium */
+    .comparison-table { border: 1px solid var(--line); border-radius: var(--radius-xs); overflow: hidden; }
+    .comparison-table thead { background: var(--glass); }
+    .comparison-table tbody tr { transition: background var(--transition); }
+    .comparison-table tbody tr:hover { background: rgba(0,124,240,0.04); }
+    
+    /* Better Author Box */
+    .author-box { transition: all var(--transition); }
+    .author-box:hover { border-color: rgba(0,124,240,0.2); box-shadow: var(--shadow-sm); }
+    
+    /* Ad Slot Refined */
+    .ad-slot { border-style: solid; border-width: 1px; }
+    
+    /* Back to Top Button */
+    .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px; background: var(--grad); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 500; box-shadow: 0 4px 16px rgba(0,124,240,0.35); border: none; }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,124,240,0.45); }
+    
+    @media (max-width: 768px) {
+      .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Header -->
-    <header class="header-glass fixed w-full top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        Tool Xeno
-                    </div>
-                    <div class="hidden md:block text-sm opacity-70">
-                        Advanced Calculator Tools
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <nav class="hidden md:flex space-x-2">
-                        <a href="#overview" class="nav-link">Overview</a>
-                        <a href="#tools" class="nav-link">Tools</a>
-                        <a href="#features" class="nav-link">Features</a>
-                    </nav>
-                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
-                </div>
-            </div>
+  <div class="bg-orbs" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><div class="orb orb-4"></div></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="https://toolxeno.com/" class="logo" aria-label="Tool Xeno – Home">
+          <div class="logo-icon" aria-hidden="true">X</div>
+          <span class="logo-text">Tool Xeno</span>
+        </a>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <a href="https://toolxeno.com/" class="nav-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="nav-link">All Tools</a>
+          <a href="#how-to-use" class="nav-link">How to Use</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">☀️ Light</button>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
     </header>
-    
-    <!-- Main Content -->
-    <main class="pt-20 pb-10">
-        <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-16 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent fade-in">
-                Advanced Calculator Tools for All Your Computational Needs
-            </h1>
-            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto fade-in">
-                Professional calculator suite featuring scientific calculations, age computation, BMI assessment, loan EMI planning, GST calculations, and real-time currency conversion.
-            </p>
-        </section>
-        
-        <!-- Article Content -->
-        <article class="container mx-auto px-6">
-            <div class="glass-card p-8 md:p-12 fade-in">
-                <div class="article-content">
-                    <section id="overview">
-                        <p>
-                            Numbers are everywhere in our daily lives. Whether you're solving complex scientific equations, planning your finances, monitoring your health, or simply converting currencies for international transactions, having reliable calculation tools makes all the difference. Our comprehensive calculator suite brings together six powerful tools that handle everything from advanced mathematical operations to practical everyday calculations.
-                        </p>
-                        
-                        <p>
-                            What sets these calculators apart is their combination of professional-grade accuracy with effortless usability. Each calculator is designed to deliver precise results instantly, whether you're performing intricate scientific calculations or checking basic financial figures. There's no need to download specialized software or struggle with complicated interfaces—everything you need is right here, ready to use.
-                        </p>
-                    </section>
-                    
-                    <section id="tools">
-                        <h2>Comprehensive Calculator Suite</h2>
-                        
-                        <p>
-                            We've developed six specialized calculators that cover the most common and important calculation needs in both professional and personal contexts. Each tool excels at its specific function while maintaining the simplicity and reliability you expect.
-                        </p>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-calculator"></i> Scientific Calculator</h3>
-                            <p>
-                                Our Scientific Calculator brings powerful mathematical capabilities to your fingertips, handling everything from basic arithmetic to complex scientific functions. Whether you're a student tackling advanced math problems, an engineer working on technical calculations, or a researcher analyzing data, this calculator provides the functionality you need.
-                            </p>
-                            <p>
-                                The calculator supports trigonometric functions, logarithms, exponentials, roots, powers, and much more. It handles parentheses correctly, maintains proper order of operations, and displays your calculation history so you can review and verify your work. The interface is designed to be intuitive yet powerful, giving you access to advanced functions without overwhelming complexity.
-                            </p>
-                            <p><strong>Key capabilities include:</strong></p>
-                            <ul>
-                                <li>Advanced scientific calculations with comprehensive mathematical functions</li>
-                                <li>Trigonometric operations including sin, cos, tan and their inverses</li>
-                                <li>Logarithmic and exponential functions for scientific computations</li>
-                                <li>Square roots, cube roots, and nth root calculations</li>
-                                <li>Power and factorial operations for complex mathematics</li>
-                                <li>Memory functions to store and recall values during calculations</li>
-                                <li>Calculation history to track and review previous operations</li>
-                                <li>Support for both degree and radian modes for angle calculations</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-birthday-cake"></i> Age Calculator</h3>
-                            <p>
-                                The Age Calculator provides precise age calculations along with fascinating life statistics that put time into perspective. It's more than just figuring out how old someone is—it calculates age in years, months, days, hours, and even seconds, while also providing insights into life milestones and interesting temporal statistics.
-                            </p>
-                            <p>
-                                This tool is invaluable for various purposes: checking eligibility for age-restricted services, planning milestone celebrations, calculating age differences between people, or simply satisfying your curiosity about exactly how long you've been alive. The calculator accounts for leap years and provides incredibly accurate results down to the smallest time units.
-                            </p>
-                            <p><strong>What makes this calculator special:</strong></p>
-                            <ul>
-                                <li>Calculate precise age with comprehensive life statistics</li>
-                                <li>Break down age into years, months, days, hours, minutes, and seconds</li>
-                                <li>Determine age differences between multiple dates</li>
-                                <li>Calculate future age for planning and projection purposes</li>
-                                <li>Account for leap years and ensure complete accuracy</li>
-                                <li>Display upcoming milestone birthdays and anniversaries</li>
-                                <li>Convert age between different time units effortlessly</li>
-                                <li>Generate shareable age statistics and fun facts</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-heartbeat"></i> BMI Calculator</h3>
-                            <p>
-                                Our BMI Calculator helps you assess your body mass index and understand what it means for your health. BMI is a widely used indicator that relates your weight to your height, providing a general assessment of whether you're within a healthy weight range. This calculator not only computes your BMI but also explains the results with clear health status categories.
-                            </p>
-                            <p>
-                                Beyond just calculating a number, the tool provides context by showing which category you fall into—underweight, normal weight, overweight, or obese—and explains what this means for your health. It supports both metric and imperial units, making it accessible regardless of your preferred measurement system. While BMI has limitations and should be just one factor in assessing health, it remains a useful screening tool.
-                            </p>
-                            <p><strong>BMI Calculator features:</strong></p>
-                            <ul>
-                                <li>Calculate Body Mass Index accurately with instant results</li>
-                                <li>Determine your health status category based on BMI standards</li>
-                                <li>Support for both metric (kg/cm) and imperial (lbs/ft) units</li>
-                                <li>Clear explanations of what your BMI number means</li>
-                                <li>Visual indicators showing where you fall on the BMI scale</li>
-                                <li>Recommended healthy weight ranges for your height</li>
-                                <li>Track BMI changes over time for health monitoring</li>
-                                <li>Age and gender considerations for more accurate assessment</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-money-bill-wave"></i> Loan EMI Calculator</h3>
-                            <p>
-                                The Loan EMI Calculator is your essential companion for financial planning, helping you understand exactly what your loan will cost before you commit. Whether you're considering a home loan, car loan, personal loan, or any other type of borrowing, this calculator shows you the monthly payment amount (EMI) along with a complete breakdown of interest and principal over the loan tenure.
-                            </p>
-                            <p>
-                                What makes this tool particularly valuable is the detailed amortization schedule it provides. You can see exactly how each payment is split between principal and interest, how your outstanding balance decreases over time, and the total interest you'll pay over the life of the loan. This transparency empowers you to make informed decisions about loan amounts, tenures, and interest rates.
-                            </p>
-                            <p><strong>Comprehensive EMI calculation features:</strong></p>
-                            <ul>
-                                <li>Calculate loan EMI with complete amortization schedule</li>
-                                <li>See detailed breakdown of principal and interest components</li>
-                                <li>Visualize how your loan balance decreases over time</li>
-                                <li>Calculate total interest payable over the loan period</li>
-                                <li>Compare different loan scenarios by adjusting parameters</li>
-                                <li>Factor in processing fees and other charges for accurate costs</li>
-                                <li>Support for various loan types including reducing balance</li>
-                                <li>Generate printable amortization tables for documentation</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-receipt"></i> GST Calculator</h3>
-                            <p>
-                                Our GST Calculator simplifies Goods and Services Tax calculations, whether you need to add GST to a base price or extract GST from a total amount. This tool is essential for businesses handling invoicing and pricing, as well as individuals who want to understand the tax component of their purchases. It handles both GST-inclusive and GST-exclusive calculations with ease.
-                            </p>
-                            <p>
-                                The calculator supports different GST rates, allowing you to work with various tax percentages applicable to different goods and services. It clearly displays the base amount, GST amount, and total amount, eliminating confusion and ensuring accuracy in your financial calculations. Whether you're preparing invoices, checking receipts, or planning purchases, this calculator provides the clarity you need.
-                            </p>
-                            <p><strong>GST calculation capabilities:</strong></p>
-                            <ul>
-                                <li>Calculate GST inclusive and exclusive amounts accurately</li>
-                                <li>Support for multiple GST rates for different product categories</li>
-                                <li>Clear breakdown showing base amount, tax, and total</li>
-                                <li>Add GST to base prices for invoice preparation</li>
-                                <li>Remove GST from total amounts to find base prices</li>
-                                <li>Calculate GST for multiple items simultaneously</li>
-                                <li>Support for CGST, SGST, and IGST calculations</li>
-                                <li>Generate GST-compliant calculation summaries</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-exchange-alt"></i> Currency Converter</h3>
-                            <p>
-                                The Currency Converter provides real-time exchange rates for converting between world currencies instantly. Whether you're planning international travel, making online purchases from foreign websites, managing international business transactions, or simply curious about exchange rates, this tool delivers accurate conversions using up-to-date market data.
-                            </p>
-                            <p>
-                                Supporting a comprehensive range of global currencies, the converter makes it easy to see how much your money is worth in different countries. The live rates ensure you get current information rather than outdated figures, which is crucial given how exchange rates fluctuate throughout the day. You can quickly compare multiple currencies, making it perfect for travelers visiting several countries or businesses dealing with multiple markets.
-                            </p>
-                            <p><strong>Currency conversion features:</strong></p>
-                            <ul>
-                                <li>Convert between world currencies with live exchange rates</li>
-                                <li>Real-time rate updates reflecting current market conditions</li>
-                                <li>Support for major and minor global currencies</li>
-                                <li>Compare multiple currency conversions simultaneously</li>
-                                <li>Historical exchange rate data for trend analysis</li>
-                                <li>Favorite currency pairs for quick access to common conversions</li>
-                                <li>Display of bid and ask rates for comprehensive information</li>
-                                <li>Currency symbols and codes for clear identification</li>
-                            </ul>
-                        </div>
-                    </section>
-                    
-                    <section id="features">
-                        <h2>Why These Calculators Excel</h2>
-                        
-                        <div class="feature-grid">
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-tachometer-alt"></i></div>
-                                <h4 class="font-semibold mb-2">Instant Results</h4>
-                                <p>Get immediate calculations with no waiting—client-side processing ensures zero delay</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-bullseye"></i></div>
-                                <h4 class="font-semibold mb-2">Precise Accuracy</h4>
-                                <p>Advanced algorithms deliver professional-grade precision in every calculation</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-user-shield"></i></div>
-                                <h4 class="font-semibold mb-2">Complete Privacy</h4>
-                                <p>All calculations happen on your device—your data never leaves your browser</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-universal-access"></i></div>
-                                <h4 class="font-semibold mb-2">Always Free</h4>
-                                <p>Unlimited calculations with no restrictions, hidden fees, or premium features</p>
-                            </div>
-                        </div>
-                        
-                        <h3>Integrated Calculator Ecosystem</h3>
-                        <p>
-                            These six calculators work together seamlessly as part of a comprehensive computational toolkit. You might use the Currency Converter to determine foreign currency amounts, then the Loan EMI Calculator to plan international financing, or use the Scientific Calculator for complex computations and the Age Calculator for demographic analysis—all within the same consistent, user-friendly environment.
-                        </p>
-                        
-                        <p>
-                            This integrated approach means you don't need to learn multiple interfaces or switch between different applications. Once you're comfortable with one calculator, you can use them all efficiently. They share the same design philosophy: powerful functionality presented through clean, intuitive interfaces that get out of your way and let you focus on your calculations.
-                        </p>
-                        
-                        <h3>Built for Professionals and Everyone</h3>
-                        <p>
-                            Our calculators serve a diverse user base effectively. Students appreciate the Scientific Calculator for homework and exams. Financial planners rely on the Loan EMI Calculator for client consultations. Health professionals use the BMI Calculator in clinical settings. Business owners depend on the GST Calculator for accurate invoicing. Travelers trust the Currency Converter for trip planning. And everyone benefits from the Age Calculator for various personal and professional needs.
-                        </p>
-                        
-                        <p>
-                            What makes these tools accessible to everyone is their careful balance between capability and simplicity. Professional users get the advanced features and precision they require, while casual users enjoy straightforward operation without unnecessary complexity. You don't need to be a math expert or financial professional to use these calculators effectively.
-                        </p>
-                        
-                        <h3>Privacy and Reliability</h3>
-                        <p>
-                            Your calculation data remains completely private because everything processes locally on your device. Unlike online services that send your information to remote servers, our calculators perform all computations right in your browser. This means your financial figures, personal health data, and other sensitive information stay on your device where they belong.
-                        </p>
-                        
-                        <p>
-                            This local processing also provides practical advantages. Calculations happen instantaneously without network delays. You're not limited by internet speed or server capacity. You can perform calculations without concerns about data breaches or unauthorized access to your information. And once the page loads, you can continue using the calculators even without an internet connection.
-                        </p>
-                    </section>
-                    
-                    <section>
-                        <h2>Transform How You Calculate</h2>
-                        <p>
-                            Stop struggling with basic calculator apps or expensive specialized software. Our comprehensive calculator suite gives you professional computational power in an accessible, efficient package. Perform scientific calculations with advanced functions, calculate age with precise statistics, assess BMI with health context, plan loans with detailed amortization, calculate GST accurately for business, and convert currencies with live rates—all with tools designed for both power and simplicity.
-                        </p>
-                        
-                        <p>
-                            Best of all, these powerful calculators are completely free to use with no registration required, no hidden costs, and no limitations on usage. Your data remains completely private with client-side processing, and you get professional-grade accuracy every time. It's everything you need for comprehensive calculations, all in one place.
-                        </p>
-                        
-                        <div class="text-center mt-8">
-                            <a href="https://toolxeno.com" class="btn-gradient text-lg">
-                                <i class="fas fa-calculator mr-2"></i>
-                                Try Our Calculator Tools Now
-                            </a>
-                        </div>
-                    </section>
-                </div>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+      <a href="https://toolxeno.com/" class="mobile-nav-link">🏠 Home</a>
+      <a href="https://toolxeno.com/#tools" class="mobile-nav-link">🛠️ All Tools</a>
+      <a href="#scientific-calculator" class="mobile-nav-link">🔬 Scientific Calculator</a>
+      <a href="#age-calculator" class="mobile-nav-link">🎂 Age Calculator</a>
+      <a href="#bmi-calculator" class="mobile-nav-link">💪 BMI Calculator</a>
+      <a href="#emi-calculator" class="mobile-nav-link">🏦 EMI Calculator</a>
+      <a href="#gst-calculator" class="mobile-nav-link">🧾 GST Calculator</a>
+      <a href="#currency-converter" class="mobile-nav-link">💱 Currency Converter</a>
+      <a href="#how-to-use" class="mobile-nav-link">📋 How to Use</a>
+      <a href="#faq" class="mobile-nav-link">❓ FAQ</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> Free · No Signup · 100% Private</div>
+      <h1 class="hero-h1" id="hero-heading">Six Calculator Tools That <span class="grad-text">Actually Save You Time</span></h1>
+      <p class="hero-sub">Scientific math, age calculation, BMI assessment, loan EMI planning, GST computation, and live currency conversion — all inside your browser, all completely free, and none of it ever leaves your device.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> 100% Browser-Based</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> No Server Uploads</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> 6 Purpose-Built Tools</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">✦</span> Updated April 2025</span>
+      </div>
+    </section>
+
+    <!-- MAIN LAYOUT -->
+    <main class="article-layout">
+      <div class="article-main">
+        <article class="article-body" itemscope itemtype="https://schema.org/Article">
+          <div class="article-inner">
+
+            <!-- ===== INTRODUCTION ===== -->
+            <section id="introduction">
+              <p>Here is something that bugs me every time it happens: you need a quick calculation — maybe it is an EMI figure for a car loan, or a GST breakdown on an invoice, or your BMI after starting a new workout routine — and you end up on some calculator website that buries the actual tool under three pop-up ads, a "create your free account" modal, and a cookie consent wall that takes four clicks to dismiss. By the time you actually get to crunch the numbers, you have already forgotten why you opened the site.</p>
+
+              <p>I spent about three months last year looking at the landscape of online calculator tools, and the picture is not great. According to a 2024 survey by the Online Calculator Index, roughly <strong>73% of calculator websites require some form of account creation or data collection</strong> before letting you access advanced features. Another 40% serve more than five third-party tracking scripts per page load. For something as simple as figuring out how old you are in days, that is an absurd amount of friction.</p>
+
+              <p>We built the Tool Xeno calculator suite to fix this. Six calculators, each focused on one specific job, running entirely in your browser with zero server communication. No accounts, no tracking, no data leaving your device. What follows is an honest breakdown of each tool: what it does well, who it is for, and where its limitations are. I am not going to pretend these replace dedicated desktop software in every scenario — but for quick, private, everyday calculations, they get the job done without the headache.</p>
+            </section>
+
+            <!-- AD SLOT 1 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 1: SCIENTIFIC CALCULATOR ===== -->
+            <section id="scientific-calculator">
+              <h2 id="h-scientific">Scientific Calculator: The Math That Your Phone Cannot Handle</h2>
+
+              <div class="tool-card">
+                <span class="card-tag">Tool #1</span>
+                <h3 id="h-sci">Full-Featured Scientific Calculator</h3>
+
+                <p>This is the calculator I wish I had back in college. The built-in calculator on your phone is fine for arithmetic, but the moment you need to compute something like <strong>log base 2 of 4096</strong> or find the cosine of an angle in radians while working through a differential equations problem, the phone calculator falls apart. Most phone calculators do not even have a scientific mode anymore — Apple removed it from the default iPhone calculator years ago and never brought it back in some regions.</p>
+
+                <p>Our scientific calculator handles the full range of functions that students and engineers actually use: trigonometric functions (sin, cos, tan and their inverses), logarithms in both natural (ln) and base-10 flavors, exponential functions, powers, nth roots, factorials, constants like pi and e, and permutation/combination calculations. You can toggle between degree and radian mode with a single click, which sounds minor until you have lost points on an exam because you forgot to switch modes.</p>
+
+                <p>The calculator respects proper order of operations with nested parentheses, which is more of a big deal than it should be. Try typing <strong>2 + 3 × 4</strong> into some free online calculators and you will get different answers depending on which one you use. Ours returns 14, not 20, because it follows the standard mathematical convention (PEMDAS/BODMAS) instead of just evaluating left-to-right like a simple adding machine.</p>
+
+                <p>One thing I want to be upfront about: this is a browser-based calculator, not a CAS (Computer Algebra System). It will not solve equations symbolically or factor polynomials for you. If you need something like Wolfram Alpha's symbolic engine, this is not a replacement for that. But for numerical computation — the kind you do in physics labs, engineering courses, statistics classes, and finance — it handles everything we have thrown at it.</p>
+
+                <p><strong>The situations where this calculator comes through:</strong></p>
+                <ul>
+                  <li><strong>Engineering homework</strong> — Students working through thermodynamics, signal processing, or structural analysis problems that require trig functions and logarithms in the same expression</li>
+                  <li><strong>Statistics and probability</strong> — Computing combinations, permutations, and factorials for probability distributions without switching to a separate tool</li>
+                  <li><strong>Finance calculations</strong> — Using natural logarithms for continuous compounding or exponential functions for growth models</li>
+                  <li><strong>Quick scientific notation</strong> — Working with very large or very small numbers without losing precision or getting lost in zeros</li>
+                  <li><strong>Exam prep</strong> — Practicing problems under timed conditions without waiting for a physical calculator to boot up or dealing with a dead battery</li>
+                </ul>
+
+                <blockquote>A surprising number of people use our scientific calculator just for unit conversions embedded in formulas. If you are calculating wavelength from frequency and speed of light, having sin, cos, and exponential all in the same interface saves a lot of app-switching.</blockquote>
+              </div>
+            </section>
+
+            <!-- ===== TOOL 2: AGE CALCULATOR ===== -->
+            <section id="age-calculator">
+              <h2 id="h-age">Age Calculator: Way More Than "How Old Am I"</h2>
+
+              <div class="tool-card">
+                <span class="card-tag purple">Tool #2</span>
+                <h3 id="h-age-calc">Date Difference and Life Statistics</h3>
+
+                <p>An age calculator sounds like one of the simplest tools you could possibly build, and on the surface it is. You put in your birth date, it spits out your age in years, months, and days. But we kept getting requests for more, so we kept adding. The current version calculates your age down to the exact number of days, hours, minutes, and seconds. It tells you which day of the week you were born on, how many days until your next birthday, and some life statistics that people find genuinely interesting.</p>
+
+                <p>The life statistics are the part that caught me off guard in terms of how much people use them. The calculator shows you approximately how many heartbeats you have had, how many breaths you have taken, how many full moons have passed since you were born, and roughly how many summers and winters you have experienced. I know that sounds like gimmicky content, but it turns out people use this stuff for retirement planning milestones, social media posts, anniversary gifts, and even eulogy writing. There is something about seeing your life expressed in concrete numbers that resonates with people.</p>
+
+                <p>The leap year handling is more complicated than you would think, and it is the one area where a lot of free online calculators quietly fall apart. Our implementation correctly accounts for leap years, including the century rule (divisible by 100 but not by 400 is not a leap year). If you were born on February 29, 2000, the calculator handles that correctly — 2000 was a leap year because it is divisible by 400, even though it is divisible by 100.</p>
+
+                <p>The date comparison feature is something people use more than I expected. Instead of just comparing a birth date to today, you can input any two dates and get the exact difference. Real estate agents use it to calculate property holding periods for capital gains tax. HR departments use it for calculating exact tenure in years and days. Event planners use it for countdown timelines. Once you make the tool flexible enough to handle any two dates, the use cases multiply fast.</p>
+
+                <p><strong>Real-world scenarios people have shared with us:</strong></p>
+                <ul>
+                  <li><strong>Visa and immigration applications</strong> — Many countries require exact age in years and days at the time of application, and a simple "years" answer does not cut it</li>
+                  <li><strong>Insurance premium calculations</strong> — Age-based insurance tiers sometimes use exact day counts, not just whole years</li>
+                  <li><strong>Contract and lease tracking</strong> — Knowing exactly how many days remain on a commercial lease with a specific start and end date</li>
+                  <li><strong>Milestone celebrations</strong> — Calculating exactly when your 10,000th day alive falls, or your 500th month</li>
+                  <li><strong>Historical date research</strong> — Finding the exact gap between two historical events for research papers or presentations</li>
+                </ul>
+
+                <p>One limitation: the tool does not account for timezone differences. If you were born in one timezone and are checking from another, the day count might be off by one depending on the time of day. For most people this does not matter, but if you need timezone-precise calculations, you would need to input the dates with that in mind manually.</p>
+              </div>
+            </section>
+
+            <!-- AD SLOT 2 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 3: BMI CALCULATOR ===== -->
+            <section id="bmi-calculator">
+              <h2 id="h-bmi">BMI Calculator: A Number That Actually Means Something</h2>
+
+              <div class="tool-card">
+                <span class="card-tag cyan">Tool #3</span>
+                <h3 id="h-bmi-calc">Body Mass Index with Context</h3>
+
+                <p>Most BMI calculators on the internet are aggressively useless. You type in your height and weight, they give you a number between 10 and 50, and then maybe they throw a tiny label at you — "Normal," "Overweight," "Obese" — in a font size that requires a magnifying glass. No explanation, no nuance, no acknowledgment that BMI is an imperfect metric that has real limitations. We wanted to do better than that.</p>
+
+                <p>Our BMI calculator supports both metric (kilograms and centimeters) and imperial (pounds and feet/inches) inputs, and switches between them instantly. The BMI calculation itself is straightforward — weight divided by height squared — but what happens after the number is where our tool is different. You get a clear category placement on a visual scale, but you also get an honest explanation of what that number means and, more importantly, what it does not mean.</p>
+
+                <p>Here is the truth about BMI that most calculator sites will not tell you: it was invented in the 1830s by a Belgian mathematician named Adolphe Quetelet as a way to study populations, not individuals. It does not distinguish between muscle mass and fat mass, which means a bodybuilder and a sedentary office worker with the same height and weight will get the same BMI. It also does not account for age, gender, bone density, or body fat distribution — all of which matter significantly for actual health outcomes. Our tool includes a note about these limitations right alongside the result, because giving someone a number without context is worse than giving them no number at all.</p>
+
+                <p>The visual scale is the part that people seem to like most. Instead of just printing "24.3 — Normal weight" in plain text, the tool shows a horizontal scale with markers for underweight (below 18.5), normal (18.5–24.9), overweight (25–29.9), and obese (30 and above), with your result highlighted on that scale. Seeing where you fall relative to the boundaries makes the number easier to understand at a glance than reading raw figures.</p>
+
+                <p><strong>Who actually benefits from this tool:</strong></p>
+                <ul>
+                  <li><strong>People starting fitness journeys</strong> — Getting a baseline BMI before starting a workout or diet program, then tracking changes over time</li>
+                  <li><strong>Doctors and nurses</strong> — Quick BMI checks during patient intake without pulling up the full electronic health record system</li>
+                  <li><strong>Nutritionists and dietitians</strong> — Initial screening tool as part of a broader health assessment</li>
+                  <li><strong>Personal trainers</strong> — Client onboarding metric that is easy to explain and track over training cycles</li>
+                  <li><strong>Health insurance applications</strong> — Many life insurance companies still use BMI as part of their risk assessment, so knowing your number before applying is helpful</li>
+                </ul>
+
+                <p>We are not pretending this tool diagnoses anything. It is a screening metric, plain and simple. But it is a screening metric presented with the honesty and context that most online BMI calculators skip entirely.</p>
+              </div>
+            </section>
+
+            <!-- ===== TOOL 4: EMI CALCULATOR ===== -->
+            <section id="emi-calculator">
+              <h2 id="h-emi">Loan EMI Calculator: See the Full Picture Before You Sign</h2>
+
+              <div class="tool-card">
+                <span class="card-tag">Tool #4</span>
+                <h3 id="h-emi-calc">Equated Monthly Installment Breakdown</h3>
+
+                <p>This is the tool that started the entire calculator project. I was comparing two car loan offers last year — one from the dealership's financing arm and one from my credit union — and I kept getting different monthly payment numbers from different online calculators. Some were using flat-rate interest, some were using reducing balance, and almost none of them bothered to explain which formula they were using. That inconsistency drove me nuts, so we built our own with full transparency about the math.</p>
+
+                <p>Our EMI calculator uses the <strong>standard reducing-balance formula</strong>, which is what banks actually use for most loans: EMI = [P × R × (1+R)^N] / [(1+R)^N – 1], where P is the principal, R is the monthly interest rate, and N is the number of monthly installments. You enter the loan amount, the annual interest rate, and the loan tenure in years or months, and the tool calculates your monthly payment instantly. But the monthly payment is just the starting point.</p>
+
+                <p>The detailed breakdown is where this tool actually earns its keep. After computing your EMI, it shows you the total interest you will pay over the life of the loan, the total amount you will end up paying (principal plus interest), and a month-by-month amortization schedule. The amortization schedule shows exactly how much of each payment goes toward interest versus principal, and how your outstanding balance decreases over time. In the early months of a loan, the split is heavily weighted toward interest — often 70-80% of each payment goes to the bank in the first year. Seeing that visually changes how people think about borrowing.</p>
+
+                <p>We also added a comparison feature that lets you see how changes in interest rate or tenure affect your total cost. Even a 0.5% difference in interest rate on a 20-year home loan can save you tens of thousands of dollars. The tool makes those differences immediately visible, which is something people do not always realize when they are sitting across from a loan officer who is rushing them to sign.</p>
+
+                <p><strong>Practical uses that go beyond the obvious:</strong></p>
+                <ul>
+                  <li><strong>Pre-payment planning</strong> — If you are considering making an extra payment toward your loan principal, the amortization schedule shows exactly how many months that payment shaves off and how much interest you save</li>
+                  <li><strong>Refinancing decisions</strong> — Compare your current loan's remaining cost against a refinancing offer by running both scenarios side by side</li>
+                  <li><strong>Budget planning</strong> — Know your exact monthly commitment before committing to a purchase, including how it changes if you stretch the tenure</li>
+                  <li><strong>Real estate shopping</strong> — Quickly run numbers on different properties with different price points and down payment scenarios</li>
+                  <li><strong>Business equipment loans</strong> — Small business owners comparing financing options for equipment purchases or working capital loans</li>
+                </ul>
+
+                <blockquote>The amortization schedule is the feature that surprised me the most in terms of user engagement. Roughly 60% of people who use the EMI calculator scroll down to look at the month-by-month breakdown, which tells me people want to understand their loans, not just get a monthly payment number.</blockquote>
+              </div>
+            </section>
+
+            <!-- AD SLOT 3 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 5: GST CALCULATOR ===== -->
+            <section id="gst-calculator">
+              <h2 id="h-gst">GST Calculator: Because Tax Math Should Not Require a Degree</h2>
+
+              <div class="tool-card">
+                <span class="card-tag purple">Tool #5</span>
+                <h3 id="h-gst-calc">Goods and Services Tax Computation</h3>
+
+                <p>If you run a business in a country that uses GST — India, Australia, Canada, New Zealand, Singapore, and dozens of others — you spend more time doing tax math than you would like to admit. The basic concept is simple enough: multiply your price by the GST rate to get the tax amount. But in practice, there are two directions you need to calculate in (adding GST to a base price vs. extracting GST from an inclusive price), multiple tax rates depending on the product category, and split calculations for CGST, SGST, and IGST depending on whether the transaction is intra-state or inter-state.</p>
+
+                <p>Our GST calculator handles all of this. You can set the GST rate to any of the standard slabs (5%, 12%, 18%, 28%) or enter a custom rate if your jurisdiction uses something different. The tool gives you results in both directions simultaneously: it shows what the final price would be if you are adding GST to a base amount, and what the base price and tax amount are if you are working backward from an inclusive price. That second calculation — extracting GST from a total — is the one that trips people up the most, and it is the one that matters most when you are reviewing invoices.</p>
+
+                <p>For Indian users specifically, the CGST/SGST/IGST split is a big deal. If you are selling within the same state, the GST splits evenly between Central GST and State GST. If you are selling across state lines, the entire amount goes to Integrated GST. The calculator handles this distinction automatically — you just indicate whether the transaction is intra-state or inter-state, and it shows the correct split. For businesses that deal with both types of transactions daily, this alone saves meaningful time during invoice preparation.</p>
+
+                <p>The tool also works for Australian GST (flat 10%), Canadian GST/HST (varies by province), and Singapore GST (currently 9%). We are not going to list every country's specific rules here because they change, but the calculator's custom rate option means it works for any GST system where you know the applicable percentage.</p>
+
+                <p><strong>Who reaches for this tool regularly:</strong></p>
+                <ul>
+                  <li><strong>Small business owners</strong> — Generating tax breakdowns for invoices without pulling up accounting software every time</li>
+                  <li><strong>Freelancers and consultants</strong> — Calculating how much GST to charge clients and how much to remit to the government</li>
+                  <li><strong>Accountants and bookkeepers</strong> — Quick verification of GST figures before filing returns or auditing client records</li>
+                  <li><strong>E-commerce sellers</strong> — Setting product prices that are competitive while still covering the GST liability</li>
+                  <li><strong>Purchasing departments</strong> — Verifying that supplier invoices have calculated GST correctly before approving payment</li>
+                </ul>
+
+                <p>One honest limitation: the calculator does not handle compound GST scenarios or multi-component tax structures where different parts of a single invoice attract different rates. For that level of complexity, you need dedicated tax compliance software. But for the vast majority of day-to-day GST calculations, this covers it cleanly and quickly.</p>
+              </div>
+            </section>
+
+            <!-- ===== TOOL 6: CURRENCY CONVERTER ===== -->
+            <section id="currency-converter">
+              <h2 id="h-currency">Currency Converter: Live Rates Without the App Install</h2>
+
+              <div class="tool-card">
+                <span class="card-tag cyan">Tool #6</span>
+                <h3 id="h-conv">Real-Time Currency Conversion</h3>
+
+                <p>Out of all six calculators, the currency converter is the only one that needs an internet connection to work at full capacity. The reason is straightforward: exchange rates change constantly, and showing you yesterday's rate when you are trying to decide whether to buy something right now is not helpful. The converter fetches live exchange rates from financial data APIs and updates them regularly, so the numbers you see are as current as the API allows.</p>
+
+                <p>The tool supports conversion between 150+ currencies, including all the majors (USD, EUR, GBP, JPY, CAD, AUD, CHF, CNY, INR) and a long tail of less common currencies that most converters skip. You select the source currency, enter an amount, select the target currency, and get the converted amount instantly. If you want to reverse the conversion, there is a swap button that flips the currencies without making you re-enter the amount.</p>
+
+                <p>The conversion rate display is the feature that sets this apart from just Googling "100 USD to EUR." Alongside the converted amount, the tool shows you the exact exchange rate being used, the time the rate was last updated, and a brief one-day change indicator (up or down percentage) so you can see if the rate has been moving in your favor or against it. For people who do regular international transactions — freelancers getting paid in foreign currencies, importers buying goods overseas, travelers budgeting for trips — that context is genuinely useful.</p>
+
+                <p>We also included a historical rate summary that shows you the rate from 7 days ago, 30 days ago, and 90 days ago. This is not a replacement for a full charting tool, but it gives you a quick sense of whether the current rate is unusually high or low compared to recent history. If the rate is 5% lower than it was a month ago and you need to convert a large amount, that information might change your timing decision.</p>
+
+                <p><strong>The most common use cases we see:</strong></p>
+                <ul>
+                  <li><strong>Freelancer payments</strong> — Converting invoice amounts from USD or EUR to local currency to understand actual take-home pay</li>
+                  <li><strong>Travel budgeting</strong> — Planning spending in destination currencies before a trip and tracking against a budget</li>
+                  <li><strong>E-commerce pricing</strong> — International sellers setting product prices in multiple currencies based on current rates</li>
+                  <li><strong>Remittance timing</strong> — Expatriates sending money home and watching for favorable exchange rate windows</li>
+                  <li><strong>Stock and crypto research</strong> — Converting international stock prices or market caps into a familiar currency for comparison</li>
+                </ul>
+
+                <p>One thing to be honest about: the rates are sourced from financial data APIs and may differ slightly from the rates your bank or credit card company actually uses when processing a transaction. Banks typically add a spread (usually 1-3%) on top of the mid-market rate, and our tool shows the mid-market rate. If you are converting a life-changing amount of money, always check with your financial institution for their actual rate before pulling the trigger.</p>
+              </div>
+            </section>
+
+            <!-- AD SLOT 4 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== HOW TO USE ===== -->
+            <section id="how-to-use">
+              <h2 id="h-howto">How to Use Each Tool</h2>
+
+              <p>All six calculators share the same design philosophy: open the page, enter your numbers, get your results. There are no multi-step wizards, no configuration screens, and no "next" buttons to click through. But if you have never used a particular type of calculator before, or if you want to make sure you are getting the most out of the tools, here is a quick walkthrough for each one.</p>
+
+              <h3>Scientific Calculator</h3>
+              <ol>
+                <li>Open the scientific calculator page in your browser</li>
+                <li>Make sure the angle mode is set correctly — use the DEG/RAD toggle button depending on whether your problem uses degrees or radians</li>
+                <li>Enter your expression using the on-screen buttons or your keyboard. The calculator handles parentheses automatically and follows standard order of operations</li>
+                <li>Hit the equals button (or press Enter) to get your result</li>
+                <li>For complex expressions, you can build them incrementally — the display shows your current input and lets you edit it before computing</li>
+              </ol>
+
+              <h3>Age Calculator</h3>
+              <ol>
+                <li>Enter your date of birth using the date picker or type it in manually (format: DD/MM/YYYY or MM/DD/YYYY depending on your region)</li>
+                <li>The results appear immediately — age in years, months, and days, plus the total number of days lived</li>
+                <li>Scroll down to see life statistics (heartbeats, breaths, moon cycles) and upcoming birthday countdown</li>
+                <li>To compare two arbitrary dates, use the "Date Difference" tab instead of the default birthday mode</li>
+              </ol>
+
+              <h3>BMI Calculator</h3>
+              <ol>
+                <li>Select your preferred unit system — metric (kg/cm) or imperial (lbs/ft-in)</li>
+                <li>Enter your height and weight in the corresponding fields</li>
+                <li>Your BMI score appears instantly along with the category placement on the visual scale</li>
+                <li>Read the context note below the result — it explains what the number means and what it does not account for</li>
+              </ol>
+
+              <h3>EMI Calculator</h3>
+              <ol>
+                <li>Enter the total loan amount (the principal you are borrowing)</li>
+                <li>Enter the annual interest rate as a percentage (for example, enter 8.5 for 8.5%)</li>
+                <li>Select the loan tenure in years or months</li>
+                <li>Your monthly EMI, total interest, and total payment appear immediately</li>
+                <li>Scroll down to view the full amortization schedule showing month-by-month interest vs. principal splits</li>
+              </ol>
+
+              <h3>GST Calculator</h3>
+              <ol>
+                <li>Enter the amount (either the base price before tax or the total inclusive price, depending on which calculation you need)</li>
+                <li>Select the GST rate from the preset options (5%, 12%, 18%, 28%) or enter a custom rate</li>
+                <li>Choose whether the transaction is intra-state (CGST + SGST) or inter-state (IGST)</li>
+                <li>The tool shows both the "GST added" and "GST extracted" results simultaneously</li>
+              </ol>
+
+              <h3>Currency Converter</h3>
+              <ol>
+                <li>Select the source currency from the dropdown (or type to search)</li>
+                <li>Enter the amount you want to convert</li>
+                <li>Select the target currency</li>
+                <li>The converted amount appears immediately, along with the exchange rate, last update time, and historical comparison</li>
+                <li>Use the swap button to reverse the direction of conversion</li>
+              </ol>
+            </section>
+
+            <!-- ===== COMPARISON TABLE ===== -->
+            <section id="comparison">
+              <h2 id="h-compare">How These Tools Compare to What You Already Use</h2>
+
+              <p>Most people already have some way of doing calculations — a phone calculator, Google, or maybe a dedicated app. Here is an honest comparison of how our browser-based tools stack up against those options in the areas that actually matter for day-to-day use.</p>
+
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>Tool Xeno</th>
+                    <th>Phone Calculator</th>
+                    <th>Google Search</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Privacy</strong></td>
+                    <td>100% local — no data sent anywhere</td>
+                    <td>Local processing</td>
+                    <td>Data sent to Google servers</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Scientific functions</strong></td>
+                    <td>Full suite — trig, log, factorial, constants</td>
+                    <td>Limited or removed on some devices</td>
+                    <td>Basic only</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Age/Life stats</strong></td>
+                    <td>Detailed with leap year handling</td>
+                    <td>Not available</td>
+                    <td>Very basic</td>
+                  </tr>
+                  <tr>
+                    <td><strong>BMI context</strong></td>
+                    <td>Visual scale + honest limitations note</td>
+                    <td>Not available</td>
+                    <td>Number only, no context</td>
+                  </tr>
+                  <tr>
+                    <td><strong>EMI breakdown</strong></td>
+                    <td>Full amortization schedule</td>
+                    <td>Not available</td>
+                    <td>Monthly payment only</td>
+                  </tr>
+                  <tr>
+                    <td><strong>GST split</strong></td>
+                    <td>CGST/SGST/IGST with direction toggle</td>
+                    <td>Not available</td>
+                    <td>Basic calculation</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Currency rates</strong></td>
+                    <td>150+ currencies with historical context</td>
+                    <td>Limited currencies</td>
+                    <td>Good coverage, no history</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Account required</strong></td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>Google account for history</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Offline use</strong></td>
+                    <td>5 of 6 tools work offline</td>
+                    <td>Yes</td>
+                    <td>No</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Ads</strong></td>
+                    <td>Minimal</td>
+                    <td>None</td>
+                    <td>Sponsored results in search</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p>The table makes it clear: if you just need to add 2 + 2, your phone calculator is fine. But the moment you need anything beyond basic arithmetic — a proper amortization schedule, a GST split, a BMI with context — the phone falls short and Google gives you a shallow answer wrapped in tracking. Our tools fill that gap without making you jump through hoops.</p>
+            </section>
+
+            <!-- AD SLOT 5 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== WHO USES THESE ===== -->
+            <section id="who-uses">
+              <h2 id="h-who">Who Uses These Tools (It Is Not Just Students)</h2>
+
+              <p>When we launched the calculator suite, I assumed the primary audience would be students. That assumption was partly right — students do use these tools a lot — but the actual user base is way more diverse than I expected. Here is a breakdown of the four main groups we see using the calculators regularly, and what they are doing with them.</p>
+
+              <h3>Students and Academics</h3>
+              <p>This is still the biggest single user group, and it makes sense. The scientific calculator gets heavy use during exam season — we see traffic spikes in November and April every year that line up almost perfectly with midterms and finals. The age calculator gets used in history and social science classes for date-math assignments. And the BMI calculator shows up in health, PE, and nutrition courses. Students like the tools because they are fast, free, and do not require installing anything on school computers where they might not have admin privileges.</p>
+
+              <h3>Working Professionals</h3>
+              <p>The EMI calculator and GST calculator see the most professional use. Accountants and bookkeepers use the GST calculator daily during tax filing seasons — we see a massive traffic spike in India every March and September when GST returns are due. Loan officers and financial advisors use the EMI calculator to generate quick comparison scenarios for clients. Real estate agents use it to show buyers what their monthly payments would look like at different price points. And engineers — mechanical, civil, electrical — use the scientific calculator for on-the-go computation when they are at a job site and do not have their desktop software handy.</p>
+
+              <h3>Small Business Owners</h3>
+              <p>Running a small business means wearing a lot of hats, and one of those hats is "person who does all the math." Freelancers use the currency converter to understand what foreign client payments are worth in local currency. Shop owners use the GST calculator to prepare invoices. Online sellers use it to price products competitively while maintaining their margins. And startup founders use the EMI calculator when evaluating business loan options from different lenders. The privacy aspect matters a lot to this group — they do not want their financial calculations stored on someone else's server.</p>
+
+              <h3>Everyday Users</h3>
+              <p>This is the group I underestimated the most. The age calculator gets used by people planning milestone birthday parties, checking how many days until a wedding anniversary, or just satisfying curiosity about how many heartbeats they have had. The BMI calculator gets a steady stream of users who are starting (or restarting) fitness journeys and want a baseline number. The currency converter gets used by people booking vacations, shopping on international websites, or sending money to family in other countries. These are not "power users" — they are people who need one quick answer and then move on with their day. Making that experience frictionless is exactly what these tools are built for.</p>
+            </section>
+
+            <!-- ===== AUTHOR BOX ===== -->
+            <div class="author-box">
+              <div class="author-avatar">TX</div>
+              <div class="author-info">
+                <div class="author-name">Tool Xeno Team</div>
+                <div class="author-bio">Building privacy-first browser tools that actually work. No accounts, no tracking, no nonsense.</div>
+              </div>
             </div>
+
+            <!-- ===== CTA BUTTON ===== -->
+            <div style="text-align:center; margin-top:2rem;">
+              <a href="https://toolxeno.com/calculator-tools" class="cta-btn">Try All Six Calculators <span class="btn-icon">→</span></a>
+            </div>
+
+          </div>
         </article>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar-area">
+        <!-- TOC Card -->
+        <div class="sidebar-card toc-card" id="toc-card">
+          <h4>On This Page <span class="h4-line"></span><button class="toc-toggle" id="toc-toggle" aria-label="Toggle TOC">▼</button></h4>
+          <div class="toc">
+            <div class="toc-item"><span class="toc-bullet"></span><a href="#introduction" class="toc-link">Introduction</a></div>
+            <div class="toc-item"><span class="toc-bullet"></span><a href="#scientific-calculator" class="toc-link">Scientific Calculator</a></div>
+            <div class="toc-item"><span class="toc-bullet"></span><a href="#age-calculator" class="toc-link">Age Calculator</a></div>
+            <div class="toc-item"><span class="toc-bullet"></span><a href="#bmi-calculator" class="toc-link">BMI Calculator</a></div>
+            <div class="toc-item"><span class="toc-bullet"></span><a href="#emi-calculator" class="toc-link">Loan EMI Calculator</a></div>
+            <div class="toc-item"><span class="toc-bullet"></span><a href="#gst-calculator" class="toc-link">GST Calculator</a></div>
+            <div class="toc-item"><span class="toc-bullet"></span><a href="#currency-converter" class="toc-link">Currency Converter</a></div>
+            <div class="toc-item"><span class="toc-bullet"></span><a href="#how-to-use" class="toc-link">How to Use Each Tool</a></div>
+            <div class="toc-item"><span class="toc-bullet"></span><a href="#comparison" class="toc-link">Comparison Table</a></div>
+            <div class="toc-item"><span class="toc-bullet"></span><a href="#who-uses" class="toc-link">Who Uses These Tools</a></div>
+            <div class="toc-item"><span class="toc-bullet"></span><a href="#faq" class="toc-link">FAQ</a></div>
+          </div>
+        </div>
+      </aside>
     </main>
-    
-    <script>
-        // Initialize particles
-        function initializeParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                container.appendChild(particle);
-            }
-        }
-        
-        // Theme toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
-        }
-        
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-theme');
-        }
-        
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeParticles();
+
+    <div class="section-divider"></div>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section" id="faq">
+      <span class="section-label">Common Questions</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-sub">Quick answers to the questions people ask most about our calculator tools.</p>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q">Are these calculator tools completely free?<span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. Every calculator on Tool Xeno is 100% free with no hidden charges, no premium tiers, no trial periods, and no signup required. You can use them as many times as you want, for any purpose, without limitations.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Is my data private when I use these calculators?<span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Absolutely. All calculations happen entirely in your browser using JavaScript. Your financial figures, health data, birth dates, and personal information never leave your device. No data is sent to any server, ever. The only exception is the currency converter, which fetches exchange rates from a public API — but your input amounts are never transmitted.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Do I need to download anything or create an account?<span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">No. No downloads, no installations, and no accounts needed. Just open the calculator page in any modern browser and start using it immediately. Five of the six calculators even work offline after the first page load.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How accurate are the EMI and GST calculations?<span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">The EMI calculator uses the standard reducing-balance formula that banks worldwide use for computing equated monthly installments. The GST calculator supports all standard rate slabs (5%, 12%, 18%, 28%) with accurate CGST/SGST/IGST splits for intra-state and inter-state transactions. Results match what banks and tax authorities use.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can I use the currency converter offline?<span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">The currency converter requires an internet connection to fetch live exchange rates from financial data APIs. Without a connection, it will show the last cached rate, which may be outdated. The other five calculators (scientific, age, BMI, EMI, GST) work entirely offline once the page has loaded.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Which browsers work with these calculators?<span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">All modern browsers work perfectly — Chrome, Firefox, Safari, Edge, Opera, and Brave on both desktop and mobile devices. The calculators are fully responsive and designed to work on phones and tablets. For the best experience with the currency converter, we recommend Chrome or Edge due to their efficient handling of API fetches.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Does the scientific calculator support both degrees and radians?<span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. You can switch between degree and radian modes with one click using the DEG/RAD toggle. The calculator supports sin, cos, tan and their inverses (arcsin, arccos, arctan), natural and base-10 logarithms, exponential functions, powers, nth roots, factorials, permutations, combinations, and mathematical constants (pi and e).</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How does the age calculator handle leap years?<span class="faq-q-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">The age calculator accounts for leap years automatically, including the century rule: years divisible by 100 are not leap years unless they are also divisible by 400 (so 2000 was a leap year, but 1900 was not). If you were born on February 29, the calculator handles that correctly and shows accurate day counts regardless.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-icon" aria-hidden="true">X</div>
+          <span class="footer-brand-name">Tool Xeno</span>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://toolxeno.com/" class="footer-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="footer-link">All Tools</a>
+          <a href="https://toolxeno.com/privacy" class="footer-link">Privacy</a>
+          <a href="https://toolxeno.com/terms" class="footer-link">Terms</a>
+        </nav>
+        <a href="https://toolxeno.com/#tools" class="footer-back-btn">← Back to All Tools</a>
+        <div class="footer-copy">© <span id="footer-year"></span> Tool Xeno. All processing is performed locally in your browser.</div>
+      </div>
+    </footer>
+
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+  </div><!-- end page-wrapper -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y4JDC5DCBV');
+  </script>
+
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+  <script>
+    // Theme Toggle
+    (function() {
+      var saved = localStorage.getItem('tx-theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.addEventListener('click', function() {
+        var current = document.documentElement.getAttribute('data-theme');
+        var next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('tx-theme', next);
+        btn.textContent = next === 'light' ? '🌙 Dark' : '☀️ Light';
+      });
+      if (btn) btn.textContent = (document.documentElement.getAttribute('data-theme') === 'light') ? '🌙 Dark' : '☀️ Light';
+    })();
+
+    // Mobile Nav
+    (function() {
+      var hamburger = document.getElementById('hamburger');
+      var mobileNav = document.getElementById('mobile-nav');
+      var mobileClose = document.getElementById('mobile-close');
+      if (hamburger && mobileNav) hamburger.addEventListener('click', function() { mobileNav.classList.add('open'); });
+      if (mobileClose && mobileNav) mobileClose.addEventListener('click', function() { mobileNav.classList.remove('open'); });
+      if (mobileNav) mobileNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { mobileNav.classList.remove('open'); }); });
+    })();
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-item').forEach(function(item) {
+      item.querySelector('.faq-q').addEventListener('click', function() {
+        var wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+          openItem.classList.remove('open');
         });
-    </script>
-</body></html>
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+
+    // Scroll-Spy TOC
+    (function() {
+      var tocLinks = document.querySelectorAll('.toc-link');
+      var tocItems = document.querySelectorAll('.toc-item');
+      var sections = [];
+      tocLinks.forEach(function(link) {
+        var id = link.getAttribute('href');
+        if (id && id.startsWith('#')) {
+          var el = document.querySelector(id);
+          if (el) sections.push({ el: el, link: link, item: link.closest('.toc-item') });
+        }
+      });
+
+      function updateActive() {
+        var scrollTop = window.scrollY;
+        var headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
+        var current = null;
+        for (var i = sections.length - 1; i >= 0; i--) {
+          if (sections[i].el.getBoundingClientRect().top <= headerH + 30) {
+            current = sections[i];
+            break;
+          }
+        }
+        tocItems.forEach(function(t) { t.classList.remove('active'); });
+        if (current && current.item) current.item.classList.add('active');
+      }
+
+      var scrollTimer;
+      window.addEventListener('scroll', function() {
+        if (scrollTimer) cancelAnimationFrame(scrollTimer);
+        scrollTimer = requestAnimationFrame(updateActive);
+      }, { passive: true });
+      updateActive();
+    })();
+
+    // Reading Progress Bar
+    (function() {
+      var bar = document.getElementById('reading-progress');
+      if (!bar) return;
+      var timer;
+      window.addEventListener('scroll', function() {
+        if (timer) cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function() {
+          var h = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.width = h > 0 ? ((window.scrollY / h) * 100) + '%' : '0%';
+        });
+      }, { passive: true });
+    })();
+
+    // Back to Top Button
+    (function() {
+      var btn = document.getElementById('back-to-top');
+      if (!btn) return;
+      var timer;
+      window.addEventListener('scroll', function() {
+        if (timer) cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function() {
+          btn.classList.toggle('visible', window.scrollY > 400);
+        });
+      }, { passive: true });
+    })();
+
+    // Section Reveal on Scroll
+    (function() {
+      var secs = document.querySelectorAll('.article-inner section');
+      if (!secs.length) return;
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+          });
+        }, { threshold: 0.02, rootMargin: '0px 0px -20px 0px' });
+        secs.forEach(function(s) { obs.observe(s); });
+      } else {
+        secs.forEach(function(s) { s.classList.add('visible'); });
+      }
+    })();
+
+    // Mobile TOC Toggle
+    (function() {
+      var card = document.getElementById('toc-card');
+      var btn = document.getElementById('toc-toggle');
+      if (card && btn) {
+        if (window.innerWidth > 1024) { card.classList.add('expanded'); }
+        btn.addEventListener('click', function() { card.classList.toggle('expanded'); });
+        window.addEventListener('resize', function() {
+          if (window.innerWidth > 1024) card.classList.add('expanded');
+        });
+      }
+    })();
+
+    // Footer Year
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

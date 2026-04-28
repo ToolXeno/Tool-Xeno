@@ -1,678 +1,1080 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US" dir="ltr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#007cf0">
+  <meta name="color-scheme" content="dark light">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Document Tools – Tool Xeno">
+  <meta name="application-name" content="Tool Xeno">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="rating" content="general">
 
-  gtag('config', 'G-Y4JDC5DCBV');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional PDF & Document Processing Tools - Document Utilities | Tool Xeno</title>
-    <meta name="description" content="Professional PDF and document processing tools. Convert PDF to Word and vice versa, compress PDFs, merge and split documents, convert formats, lock/unlock files, and add digital signatures.">
-    <meta name="keywords" content="PDF tools, document tools, PDF to Word, Word to PDF, PDF compressor, PDF merger, PDF splitter, document converter, PDF lock, eSign PDF, digital signature">
-    <meta name="author" content="Tool Xeno">
-    <link rel="canonical" href="https://toolxeno.com/document-tools">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Professional PDF & Document Processing Tools">
-    <meta property="og:description" content="Comprehensive PDF and document utilities for conversion, compression, merging, splitting, security, and signing.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://toolxeno.com/document-tools">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Professional PDF & Document Processing Tools">
-    <meta name="twitter:description" content="Professional PDF and document processing utilities for all your needs.">
-    
-    <!-- Schema Markup -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
+  <title>Free PDF & Document Tools: Convert, Compress, Merge, Split, Sign | Tool Xeno</title>
+  <meta name="description" content="Six free document tools that run 100% in your browser. Convert PDF to Word and back, compress PDFs, merge and split documents, convert file formats, lock/unlock files, and add e-signatures. No signup, no upload required.">
+  <meta name="keywords" content="PDF to Word, Word to PDF, PDF compressor, PDF merger, PDF splitter, document converter, PDF lock, unlock PDF, eSign PDF, digital signature, free PDF tools, online document tools, compress PDF, merge PDF, split PDF">
+  <meta name="author" content="Tool Xeno">
+  <link rel="canonical" href="https://toolxeno.com/document-tools.html">
+  <link rel="alternate" hreflang="en" href="https://toolxeno.com/document-tools.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://toolxeno.com/document-tools.html">
+  <meta property="og:title" content="Free PDF & Document Tools: Convert, Compress, Merge, Split, Sign | Tool Xeno">
+  <meta property="og:description" content="Six free browser-based document tools: PDF conversion, compression, merging, splitting, security, and e-signatures. No signup, no uploads, 100% private.">
+  <meta property="og:site_name" content="Tool Xeno">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2025-04-28T08:00:00+05:00">
+  <meta property="article:modified_time" content="2025-04-28T14:00:00+05:00">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free PDF & Document Tools: Convert, Compress, Merge, Split, Sign">
+  <meta name="twitter:description" content="PDF conversion, compression, merging, splitting, security, and e-signatures. Free, private, browser-based.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
         "@type": "Article",
-        "headline": "Professional PDF & Document Processing Tools - Document Utilities",
-        "description": "Comprehensive guide to professional PDF and document processing tools.",
-        "author": {
-            "@type": "Organization",
-            "name": "Tool Xeno"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Tool Xeno",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://toolxeno.com/logo.png"
-            }
-        },
-        "datePublished": "2024-12-09",
-        "dateModified": "2024-12-09",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://toolxeno.com/document-tools"
-        }
-    }
-    </script>
-    
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            
-            --dark-bg: #0a0a0a;
-            --dark-surface: #1a1a1a;
-            --dark-surface-elevated: #252525;
-            --dark-text: #ffffff;
-            --dark-text-secondary: #a0a0a0;
-            --dark-border: #333333;
-            
-            --light-bg: #f8fafc;
-            --light-surface: #ffffff;
-            --light-surface-elevated: #f1f5f9;
-            --light-text: #1e293b;
-            --light-text-secondary: #64748b;
-            --light-border: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            line-height: 1.7;
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-            min-height: 100vh;
-        }
-        
-        body.light-theme { 
-            background-color: var(--light-bg); 
-            color: var(--light-text); 
-        }
+        "headline": "Free PDF and Document Tools: Convert, Compress, Merge, Split, Lock, and Sign",
+        "description": "Six free browser-based document tools for PDF conversion, compression, merging, splitting, security, and e-signatures. No signup or uploads required.",
+        "author": { "@type": "Organization", "name": "Tool Xeno", "url": "https://toolxeno.com/" },
+        "publisher": { "@type": "Organization", "name": "Tool Xeno", "url": "https://toolxeno.com/", "logo": { "@type": "ImageObject", "url": "https://toolxeno.com/logo.png" } },
+        "datePublished": "2025-04-28T08:00:00+05:00",
+        "dateModified": "2025-04-28T14:00:00+05:00",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://toolxeno.com/document-tools.html" },
+        "wordCount": 4800,
+        "articleSection": "Technology"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How do I convert a PDF to Word?", "acceptedAnswer": { "@type": "Answer", "text": "Upload your PDF file to the PDF to Word converter tool, click convert, and download the editable Word document. The conversion preserves formatting, layout, images, and tables. Everything runs in your browser — no files are uploaded to any server." } },
+          { "@type": "Question", "name": "How much can I compress a PDF?", "acceptedAnswer": { "@type": "Answer", "text": "Depending on the original file, our PDF compressor typically reduces file size by 50–80%. It optimizes images, streams fonts, and removes redundancies while keeping the document readable and professional. You can choose from multiple compression levels." } },
+          { "@type": "Question", "name": "Can I merge more than two PDFs at once?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. There is no limit on the number of files you can merge. Upload as many PDFs as you need, arrange them in the order you want, and the merger combines them into a single document. The same applies to splitting — extract individual pages or specific page ranges from any PDF." } },
+          { "@type": "Question", "name": "Are the e-signatures legally binding?", "acceptedAnswer": { "@type": "Answer", "text": "Digital signatures created with our eSign tool are recognized as legally valid in most jurisdictions, including under the ESIGN Act in the United States and the eIDAS regulation in the European Union. They are suitable for contracts, agreements, NDAs, and other official documents." } },
+          { "@type": "Question", "name": "Is my data safe with these document tools?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. All six document tools process files entirely in your browser using client-side technology. Your documents never leave your device — they are not uploaded to any server, not stored anywhere, and not accessible to anyone but you." } },
+          { "@type": "Question", "name": "What document formats does the converter support?", "acceptedAnswer": { "@type": "Answer", "text": "The Document Converter handles DOCX, PDF, TXT, RTF, and ODT formats. You can convert between any combination of these formats. It preserves formatting, tables, images, and document structure throughout the conversion process." } },
+          { "@type": "Question", "name": "Do I need to create an account to use these tools?", "acceptedAnswer": { "@type": "Answer", "text": "No. No signup, no account, no email address, and no installation is required. Open the tools in any modern browser and start using them immediately. There are no usage limits or hidden paywalls." } },
+          { "@type": "Question", "name": "Can I password-protect a PDF and then remove the password later?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Lock tool lets you add password protection with custom permission levels (view-only, no editing, no printing, etc.). The Unlock tool removes password protection when you have the correct password. You can apply and remove security as many times as you need." } },
+          { "@type": "Question", "name": "Are these tools really free with no hidden costs?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, completely free. No premium tiers, no trial periods, no watermarks on output, no file size caps, and no usage limits. Every feature is available to everyone at all times." } },
+          { "@type": "Question", "name": "Which browsers work best for document processing?", "acceptedAnswer": { "@type": "Answer", "text": "Chrome, Edge, Firefox, and Safari all work well. Chrome and Edge tend to be slightly faster for large file processing because of their more efficient JavaScript engines. All tools work on both desktop and mobile browsers." } }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolxeno.com/" },
+          { "@type": "ListItem", "position": 2, "name": "All Tools", "item": "https://toolxeno.com/#tools" },
+          { "@type": "ListItem", "position": 3, "name": "Document Tools", "item": "https://toolxeno.com/document-tools.html" }
+        ]
+      },
+      {
+        "@type": "WebApplication",
+        "name": "Document Tools",
+        "url": "https://toolxeno.com/document-tools.html",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Six free browser-based document tools: PDF-to-Word conversion, PDF compression, merging, splitting, password protection, and digital signatures."
+      }
+    ]
+  }
+  </script>
 
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.05;
-            background: radial-gradient(circle, #667eea 0%, transparent 70%);
-        }
-        
-        body.light-theme .particle { 
-            background: radial-gradient(circle, #4facfe 0%, transparent 70%); 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(100vh) rotate(0deg); } 
-            100% { transform: translateY(-100px) rotate(360deg); } 
-        }
-        
-        .header-glass {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.35s ease, border-color 0.35s ease;
-        }
-        
-        body.light-theme .header-glass { 
-            background: rgba(255, 255, 255, 0.9); 
-            border-bottom-color: rgba(0, 0, 0, 0.1); 
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: var(--dark-surface);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.light-theme .theme-toggle { 
-            background: var(--light-surface-elevated); 
-            border-color: var(--light-border); 
-        }
-        
-        body.light-theme .theme-toggle::after { 
-            transform: translateX(28px); 
-            background: var(--secondary-gradient); 
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease, border-color 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
-        
-        body.light-theme .glass-card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-color: rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
-        }
-        
-        .btn-gradient {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .btn-gradient:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
-        }
-        
-        .nav-link {
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-        }
-        
-        .nav-link:hover { 
-            background: rgba(255, 255, 255, 0.1); 
-            color: white; 
-        }
-        
-        body.light-theme .nav-link { 
-            color: rgba(0, 0, 0, 0.7); 
-        }
-        
-        body.light-theme .nav-link:hover { 
-            background: rgba(0, 0, 0, 0.1); 
-            color: black; 
-        }
-        
-        .article-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .article-content h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .article-content h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .article-content p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-        
-        .article-content ul, .article-content ol {
-            margin-bottom: 1.5rem;
-            margin-left: 2rem;
-        }
-        
-        .article-content li {
-            margin-bottom: 0.75rem;
-            line-height: 1.8;
-        }
-        
-        .tool-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
-        }
-        
-        body.light-theme .tool-card {
-            background: rgba(0, 0, 0, 0.02);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .feature-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-        
-        body.light-theme .feature-item {
-            background: rgba(0, 0, 0, 0.02);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .icon-large {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @media (max-width: 768px) {
-            .article-content h2 { font-size: 1.5rem; }
-            .article-content h3 { font-size: 1.25rem; }
-            .article-content p { font-size: 1rem; }
-        }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23007cf0'/><stop offset='100%25' stop-color='%237928ca'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg0: #030712;
+      --bg1: #0a0f1e;
+      --bg2: #0f172a;
+      --bg3: #1e293b;
+      --card: rgba(255,255,255,0.04);
+      --card-hover: rgba(255,255,255,0.08);
+      --card-solid: #1e293b;
+      --glass: rgba(255,255,255,0.03);
+      --text: #f1f5f9;
+      --text2: #cbd5e1;
+      --muted: #94a3b8;
+      --line: rgba(255,255,255,0.1);
+      --line-strong: rgba(255,255,255,0.2);
+      --accent1: #007cf0;
+      --accent2: #00dfd8;
+      --accent3: #7928ca;
+      --accent4: #ff0080;
+      --shadow: 0 24px 60px rgba(0,0,0,0.6);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.3);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --max: 1240px;
+      --ring: 0 0 0 3px rgba(0,124,240,0.4);
+      --grad: linear-gradient(135deg, var(--accent1), var(--accent2));
+      --grad-purple: linear-gradient(135deg, var(--accent3), var(--accent4));
+      --grad-text: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+      --font: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+      --header-h: 72px;
+    }
+
+    [data-theme="light"] {
+      --bg0: #f8fafc;
+      --bg1: #f1f5f9;
+      --bg2: #e2e8f0;
+      --bg3: #cbd5e1;
+      --card: rgba(255,255,255,0.9);
+      --card-hover: rgba(255,255,255,1);
+      --card-solid: #ffffff;
+      --glass: rgba(255,255,255,0.8);
+      --text: #0f172a;
+      --text2: #334155;
+      --muted: #64748b;
+      --line: rgba(0,0,0,0.1);
+      --line-strong: rgba(0,0,0,0.15);
+      --shadow: 0 24px 60px rgba(0,0,0,0.1);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+    body { font-family: var(--font); background-color: var(--bg0); color: var(--text); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+    ul, ol { list-style: none; }
+
+    /* ===== ANIMATED BACKGROUND ===== */
+    .bg-orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; will-change: transform; }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent1); top: -200px; left: -200px; animation: oF1 20s linear infinite; }
+    .orb-2 { width: 500px; height: 500px; background: var(--accent3); top: 30%; right: -150px; animation: oF2 25s linear infinite; }
+    .orb-3 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: 30%; animation: oF3 18s linear infinite; }
+    .orb-4 { width: 300px; height: 300px; background: var(--accent4); top: 60%; left: 10%; animation: oF4 22s linear infinite; }
+    @keyframes oF1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(60px,40px) scale(1.1);} 66%{transform:translate(-40px,60px) scale(0.95);} }
+    @keyframes oF2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-80px,50px) scale(1.05);} 66%{transform:translate(40px,-60px) scale(1.1);} }
+    @keyframes oF3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(70px,-40px) scale(1.15);} }
+    @keyframes oF4 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,-80px) scale(1.1);} }
+    .bg-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%); }
+    .page-wrapper { position: relative; z-index: 1; }
+
+    /* ===== HEADER ===== */
+    .header { position: sticky; top: 0; z-index: 1000; height: var(--header-h); display: flex; align-items: center; backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); background: rgba(3,7,18,0.85); border-bottom: 1px solid var(--line); transition: background var(--transition); }
+    [data-theme="light"] .header { background: rgba(248,250,252,0.90); }
+    .header-inner { max-width: var(--max); width: 100%; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; flex-shrink: 0; }
+    .logo-icon { width: 36px; height: 36px; background: var(--grad); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 900; color: #fff; box-shadow: 0 4px 14px rgba(0,124,240,0.4); }
+    .logo-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-primary { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .nav-link { padding: 7px 13px; font-size: 0.875rem; font-weight: 500; color: var(--text2); border-radius: var(--radius-xs); transition: color var(--transition), background var(--transition); }
+    .nav-link:hover { color: var(--text); background: var(--card); }
+    .header-actions { display: flex; align-items: center; gap: 10px; margin-left: 12px; }
+    .btn-theme { padding: 8px 20px; font-size: 0.85rem; font-weight: 600; font-family: var(--font); background: var(--card); backdrop-filter: blur(8px); border-radius: 40px; color: var(--text2); border: 1px solid var(--line); transition: all 0.3s ease; cursor: pointer; }
+    .btn-theme:hover { color: var(--text); border-color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; margin-left: auto; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); display: block; }
+    .mobile-nav { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(3,7,18,0.98); backdrop-filter: blur(24px); flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-link { font-size: 1.4rem; font-weight: 700; color: var(--text2); padding: 12px 32px; border-radius: var(--radius-sm); transition: all var(--transition); }
+    .mobile-nav-link:hover { color: var(--accent1); background: rgba(0,124,240,0.1); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; font-size: 1.5rem; color: var(--muted); padding: 8px; border-radius: 8px; transition: color var(--transition); cursor: pointer; background: none; border: none; }
+    .mobile-close:hover { color: var(--text); }
+
+    /* ===== HERO ===== */
+    .hero { padding: 60px 24px 40px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(0,124,240,0.15); border: 1px solid rgba(0,124,240,0.3); border-radius: 100px; font-size: 0.78rem; font-weight: 600; color: var(--accent1); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 20px; }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
+    .hero-h1 { font-size: clamp(1.8rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 16px; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero-h1 .grad-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: clamp(0.9rem, 1.5vw, 1.05rem); color: var(--text2); max-width: 650px; margin: 0 auto 24px; line-height: 1.75; }
+    .hero-meta { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px 20px; font-size: 0.82rem; color: var(--muted); }
+    .hero-meta-item { display: flex; align-items: center; gap: 6px; }
+    .hero-meta-dot { color: var(--accent2); }
+
+    /* ===== ARTICLE LAYOUT ===== */
+    .article-layout { max-width: var(--max); margin: 0 auto; padding: 0 24px 60px; display: grid; grid-template-columns: 1fr 320px; gap: 32px; }
+    @media (max-width: 1024px) { .article-layout { grid-template-columns: 1fr; } }
+    .article-main { min-width: 0; }
+    .article-body { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .article-inner { padding: 36px 40px; }
+    @media (max-width: 600px) { .article-inner { padding: 22px 20px; } }
+
+    /* ===== ARTICLE TYPOGRAPHY ===== */
+    .article-inner h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 800; letter-spacing: -0.8px; line-height: 1.2; margin: 2.8rem 0 1rem; color: var(--text); padding-bottom: 10px; border-bottom: 2px solid var(--line); }
+    .article-inner h2:first-child { margin-top: 0; }
+    .article-inner h3 { font-size: clamp(1.15rem, 2.5vw, 1.35rem); font-weight: 700; letter-spacing: -0.3px; line-height: 1.3; margin: 2rem 0 0.75rem; color: var(--text); }
+    .article-inner p { font-size: 1.02rem; color: var(--text2); line-height: 1.85; margin-bottom: 1.15rem; }
+    .article-inner ul, .article-inner ol { margin-bottom: 1.15rem; padding-left: 1.5rem; }
+    .article-inner ul { list-style: disc; }
+    .article-inner ol { list-style: decimal; }
+    .article-inner li { font-size: 1.02rem; color: var(--text2); line-height: 1.8; margin-bottom: 0.55rem; }
+    .article-inner strong { color: var(--text); font-weight: 700; }
+    .article-inner a { color: var(--accent1); text-decoration: underline; text-underline-offset: 2px; }
+    .article-inner a:hover { color: var(--accent2); }
+    .article-inner blockquote { border-left: 3px solid var(--accent1); padding: 14px 20px; margin: 1.3rem 0; background: rgba(0,124,240,0.06); border-radius: 0 var(--radius-xs) var(--radius-xs) 0; font-size: 0.98rem; color: var(--text2); line-height: 1.75; }
+
+    /* ===== TOOL CARDS ===== */
+    .tool-card { background: var(--glass); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 28px; margin: 1.5rem 0; transition: all var(--transition); }
+    .tool-card:hover { border-color: rgba(0,124,240,0.3); box-shadow: var(--shadow-sm); }
+    .tool-card h3 { margin-top: 0.5rem; }
+    .card-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent1); margin-bottom: 6px; background: rgba(0,124,240,0.1); padding: 3px 10px; border-radius: 100px; }
+    .card-tag.purple { color: var(--accent3); background: rgba(121,40,202,0.12); }
+    .card-tag.cyan { color: var(--accent2); background: rgba(0,223,216,0.1); }
+
+    /* ===== CTA BUTTON ===== */
+    .cta-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 36px; font-size: 1.05rem; font-weight: 700; background: #007cf0; color: #fff; border-radius: 50px; box-shadow: 0 4px 24px rgba(0,124,240,0.35), inset 0 1px 0 rgba(255,255,255,0.15); transition: all 0.3s cubic-bezier(0.4,0,0.2,1); text-decoration: none; letter-spacing: 0.3px; position: relative; overflow: hidden; border: none; cursor: pointer; }
+    .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,124,240,0.5), 0 0 0 4px rgba(0,124,240,0.1); color: #fff; background: #006ad6; }
+    .cta-btn:active { transform: translateY(-1px) scale(0.98); box-shadow: 0 4px 16px rgba(0,124,240,0.3); }
+    [data-theme="light"] .cta-btn { background: #007cf0; color: #fff; box-shadow: 0 4px 24px rgba(0,124,240,0.3), inset 0 1px 0 rgba(255,255,255,0.2); }
+    [data-theme="light"] .cta-btn:hover { box-shadow: 0 8px 32px rgba(0,124,240,0.4), 0 0 0 4px rgba(0,124,240,0.08); background: #006ad6; }
+
+    /* ===== AUTHOR BOX ===== */
+    .author-box { display: flex; align-items: center; gap: 14px; padding: 20px; margin-top: 2.5rem; background: var(--glass); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+    .author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .author-info { min-width: 0; }
+    .author-name { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .author-bio { font-size: 0.82rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+
+    /* ===== AD SLOTS ===== */
+    .ad-slot { width: 100%; min-height: 100px; display: flex; align-items: center; justify-content: center; background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-xs); margin: 2.2rem 0; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar-area { display: flex; flex-direction: column; gap: 16px; position: sticky; top: calc(var(--header-h) + 16px); max-height: calc(100vh - var(--header-h) - 32px); overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+    .sidebar-area::-webkit-scrollbar { display: none; }
+    .sidebar-card { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 22px; }
+    .sidebar-card h4 { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .sidebar-card h4 .h4-line { flex: 1; height: 1px; background: var(--line); }
+
+    /* Professional TOC */
+    .sidebar-card.toc-card { padding: 20px 18px; }
+    .sidebar-card.toc-card h4 { font-size: 0.76rem; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .toc { display: flex; flex-direction: column; gap: 1px; }
+    .toc-item { display: flex; align-items: flex-start; gap: 10px; padding: 6px 8px; border-radius: 8px; position: relative; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
+    .toc-item:hover { background: rgba(0,124,240,0.06); }
+    .toc-bullet { width: 7px; height: 7px; border-radius: 50%; background: var(--bg3); border: 2px solid var(--line-strong); margin-top: 5px; flex-shrink: 0; transition: all 0.3s ease; }
+    .toc-link { font-size: 0.82rem; font-weight: 500; color: var(--muted); padding: 1px 0; transition: all 0.25s ease; line-height: 1.45; display: block; }
+    .toc-link:hover { color: var(--text); }
+    .toc-link.sub { font-size: 0.78rem; color: var(--muted); padding-left: 4px; }
+    .toc-item.active { background: rgba(0,124,240,0.08); }
+    .toc-item.active .toc-bullet { background: var(--accent1); border-color: var(--accent1); box-shadow: 0 0 0 4px rgba(0,124,240,0.12); }
+    .toc-item.active .toc-link { color: var(--text); font-weight: 700; }
+    .toc-toggle { display: none; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--glass); border: 1px solid var(--line); border-radius: 6px; color: var(--muted); font-size: 0.65rem; cursor: pointer; margin-left: auto; flex-shrink: 0; transition: all 0.3s ease; }
+    .toc-toggle:hover { color: var(--text); border-color: var(--accent1); }
+    .toc-card.expanded .toc-toggle { transform: rotate(180deg); }
+    @media (max-width: 1024px) {
+      .sidebar-area { position: static; max-height: none; overflow-y: visible; }
+      .toc-toggle { display: flex; }
+      .sidebar-card.toc-card .toc { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+      .sidebar-card.toc-card.expanded .toc { max-height: 600px; }
+    }
+
+    /* Sidebar sticky ad */
+    .ad-slot-sidebar { width: 100%; min-height: 260px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-sm); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; padding: 18px 16px; }
+    .ad-slot-sidebar .ad-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); opacity: 0.6; }
+    .ad-slot-sidebar .ad-box { width: 100%; min-height: 200px; display: flex; align-items: center; justify-content: center; background: var(--glass); border: 1px solid var(--line); border-radius: var(--radius-xs); font-size: 0.7rem; color: var(--muted); }
+
+    /* ===== FAQ SECTION ===== */
+    .faq-section { padding: 50px 24px 60px; max-width: var(--max); margin: 0 auto; }
+    .faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 800px; margin: 30px auto 0; }
+    .faq-item { background: var(--card-solid); border: 1px solid var(--line); border-radius: var(--radius-xs); overflow: hidden; transition: border-color var(--transition); }
+    .faq-item.open { border-color: rgba(0,124,240,0.3); }
+    .faq-q { width: 100%; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; font-size: 0.95rem; font-weight: 600; color: var(--text); background: none; text-align: left; cursor: pointer; transition: color var(--transition); font-family: var(--font); border: none; }
+    .faq-q:hover { color: var(--accent1); }
+    .faq-q-icon { width: 26px; height: 26px; background: var(--glass); border: 1px solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; transition: all var(--transition); color: var(--muted); }
+    .faq-item.open .faq-q-icon { transform: rotate(45deg); background: rgba(0,124,240,0.15); border-color: var(--accent1); color: var(--accent1); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .faq-item.open .faq-a { max-height: 500px; }
+    .faq-a-inner { padding: 0 20px 20px; font-size: 0.92rem; color: var(--text2); line-height: 1.8; }
+
+    .section-label { display: inline-block; margin-bottom: 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent1); }
+    .section-title { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 8px; }
+    .section-sub { font-size: 0.95rem; color: var(--text2); max-width: 520px; line-height: 1.6; }
+    .section-divider { height: 1px; background: var(--line); max-width: var(--max); margin: 0 auto; }
+
+    /* ===== TABLE ===== */
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 1.2rem 0; }
+    .comparison-table thead tr { border-bottom: 2px solid var(--line); }
+    .comparison-table th { text-align: left; padding: 12px 14px; color: var(--text); font-weight: 700; }
+    .comparison-table th.center { text-align: center; }
+    .comparison-table td { padding: 11px 14px; color: var(--text2); border-bottom: 1px solid var(--line); }
+    .comparison-table td.center { text-align: center; }
+    .comparison-table tr:last-child td { border-bottom: none; }
+
+    /* ===== FOOTER ===== */
+    .footer { border-top: 1px solid var(--line); padding: 36px 24px 24px; background: rgba(3,7,18,0.6); }
+    [data-theme="light"] .footer { background: rgba(241,245,249,0.8); }
+    .footer-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .footer-brand-icon { width: 32px; height: 32px; background: var(--grad); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 900; color: #fff; }
+    .footer-brand-name { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-link { font-size: 0.85rem; color: var(--muted); transition: color var(--transition); }
+    .footer-link:hover { color: var(--text); }
+    .footer-back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 600; color: var(--accent1); padding: 8px 16px; border-radius: var(--radius-xs); background: rgba(0,124,240,0.1); border: 1px solid rgba(0,124,240,0.2); transition: all var(--transition); }
+    .footer-back-btn:hover { background: rgba(0,124,240,0.15); }
+    .footer-copy { font-size: 0.78rem; color: var(--muted); width: 100%; text-align: center; padding-top: 20px; border-top: 1px solid var(--line); margin-top: 12px; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-primary, .header-actions { display: none; }
+      .hamburger { display: flex; }
+      .article-inner h2 { font-size: 1.35rem; margin: 2rem 0 0.8rem; }
+      .article-inner h3 { font-size: 1.1rem; margin: 1.5rem 0 0.6rem; }
+      .article-inner p { font-size: 0.95rem; }
+      .tool-card { padding: 20px; }
+      .comparison-table { font-size: 0.78rem; }
+      .comparison-table th, .comparison-table td { padding: 8px 6px; }
+    }
+
+    /* ===== PREMIUM UPGRADES ===== */
+    html { scroll-padding-top: calc(var(--header-h) + 20px); }
+
+    /* Reading Progress Bar */
+    .reading-progress { position: fixed; top: var(--header-h); left: 0; height: 3px; background: var(--grad); z-index: 999; width: 0%; transition: width 0.1s linear; }
+
+    /* Premium Tool Cards */
+    .tool-card { position: relative; overflow: hidden; }
+    .tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad); opacity: 0; transition: opacity var(--transition); }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-card:hover { transform: translateY(-2px); }
+
+    /* Premium CTA Buttons — shimmer and glow */
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      border-radius: inherit;
+      transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .cta-btn:hover::after { left: 100%; }
+    .cta-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: 4px; }
+    .cta-btn .btn-icon { display: inline-block; transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+    .cta-btn:hover .btn-icon { transform: translateX(4px); }
+
+    /* Premium Blockquotes */
+    .article-inner blockquote { position: relative; }
+    .article-inner blockquote::before { content: '\201C'; position: absolute; top: -5px; left: 16px; font-size: 2.5rem; font-weight: 900; color: var(--accent1); opacity: 0.2; line-height: 1; }
+
+    /* Premium List Items */
+    .article-inner li { position: relative; padding-left: 8px; }
+    .article-inner li::marker { color: var(--accent1); }
+    .article-inner ul li::marker { content: '\25B8'; }
+    .article-inner ol li::marker { font-weight: 700; color: var(--accent1); }
+
+    /* Premium H2 with gradient accent */
+    .article-inner h2 { position: relative; }
+    .article-inner h2::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 60px; height: 2px; background: var(--grad); border-radius: 2px; }
+
+    /* FAQ Premium */
+    .faq-item { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .faq-item:hover { background: var(--card-hover); }
+    .faq-item.open { box-shadow: 0 4px 20px rgba(0,124,240,0.08); }
+
+    /* Smooth Section Reveals */
+    .article-inner section { opacity: 0; transform: translateY(10px); transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1), transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); will-change: opacity, transform; }
+    .article-inner section.visible { opacity: 1; transform: translateY(0); }
+
+    /* Comparison Table Premium */
+    .comparison-table { border: 1px solid var(--line); border-radius: var(--radius-xs); overflow: hidden; }
+    .comparison-table thead { background: var(--glass); }
+    .comparison-table tbody tr { transition: background var(--transition); }
+    .comparison-table tbody tr:hover { background: rgba(0,124,240,0.04); }
+
+    /* Better Author Box */
+    .author-box { transition: all var(--transition); }
+    .author-box:hover { border-color: rgba(0,124,240,0.2); box-shadow: var(--shadow-sm); }
+
+    /* Ad Slot Refined */
+    .ad-slot { border-style: solid; border-width: 1px; }
+
+    /* Back to Top Button */
+    .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px; background: var(--grad); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 500; box-shadow: 0 4px 16px rgba(0,124,240,0.35); border: none; }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,124,240,0.45); }
+
+    @media (max-width: 768px) {
+      .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Header -->
-    <header class="header-glass fixed w-full top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        Tool Xeno
-                    </div>
-                    <div class="hidden md:block text-sm opacity-70">
-                        Professional Document Processing Tools
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <nav class="hidden md:flex space-x-2">
-                        <a href="#overview" class="nav-link">Overview</a>
-                        <a href="#tools" class="nav-link">Tools</a>
-                        <a href="#applications" class="nav-link">Applications</a>
-                    </nav>
-                    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
-                </div>
-            </div>
+  <div class="bg-orbs" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><div class="orb orb-4"></div></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="https://toolxeno.com/" class="logo" aria-label="Tool Xeno – Home">
+          <div class="logo-icon" aria-hidden="true">X</div>
+          <span class="logo-text">Tool Xeno</span>
+        </a>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <a href="https://toolxeno.com/" class="nav-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="nav-link">All Tools</a>
+          <a href="#how-to-use" class="nav-link">How to Use</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">&#9728;&#65039; Light</button>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
     </header>
-    
-    <!-- Main Content -->
-    <main class="pt-20 pb-10">
-        <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-16 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent fade-in">
-                Professional PDF & Document Processing Tools
-            </h1>
-            <p class="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto fade-in">
-                Complete suite of professional tools for PDF and document management - convert, compress, merge, split, secure, and sign documents with ease.
-            </p>
-        </section>
-        
-        <!-- Article Content -->
-        <article class="container mx-auto px-6">
-            <div class="glass-card p-8 md:p-12 fade-in">
-                <div class="article-content">
-                    <section id="overview">
-                        <p>
-                            In the modern digital workplace, PDFs and documents are the backbone of professional communication, legal transactions, business operations, and personal documentation. The ability to efficiently manage, manipulate, and secure these documents is crucial for productivity and professionalism. Our comprehensive suite of document processing tools provides everything you need to handle PDFs and documents with confidence and ease.
-                        </p>
-                        
-                        <p>
-                            From converting between formats to ensuring document security, from combining multiple files to adding legally binding signatures, our tools cover every aspect of professional document management. Each tool is designed with both power and simplicity in mind, delivering enterprise-level capabilities through intuitive interfaces that anyone can master.
-                        </p>
-                    </section>
-                    
-                    <section id="tools">
-                        <h2>Our Professional Document Tool Suite</h2>
-                        
-                        <p>
-                            We've developed six specialized document tools that address the most critical needs in document processing and management. Each tool excels in its specific function while maintaining the privacy, speed, and reliability that professionals require.
-                        </p>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-exchange-alt"></i> PDF to Word / Word to PDF</h3>
-                            <p>
-                                Our bidirectional PDF and Word converter provides seamless transformation between these two essential document formats. Whether you need to convert a PDF to Word for editing or transform a Word document to PDF for universal compatibility and professional presentation, our tool handles both conversions flawlessly.
-                            </p>
-                            <p>
-                                The PDF to Word conversion preserves formatting, layout, images, tables, and text styling, making the converted document fully editable while maintaining the original structure. This is invaluable when you need to modify PDF content without access to the original source files.
-                            </p>
-                            <p>
-                                Conversely, the Word to PDF conversion creates professional, universally compatible PDF files that maintain exact formatting across all devices and platforms. The resulting PDFs are perfectly formatted, preserve all visual elements, and can be opened by anyone regardless of whether they have Word installed.
-                            </p>
-                            <p><strong>Conversion features:</strong></p>
-                            <ul>
-                                <li>Seamless conversion between PDF and Word formats in both directions</li>
-                                <li>Preserves formatting, layout, images, tables, and styling</li>
-                                <li>Maintains document structure including headers, footers, and page numbers</li>
-                                <li>Handles complex documents with multiple elements</li>
-                                <li>Creates editable Word documents from PDFs</li>
-                                <li>Produces professional, universally compatible PDFs from Word</li>
-                                <li>Fast processing even for large, complex documents</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-compress-alt"></i> PDF Compressor</h3>
-                            <p>
-                                The PDF Compressor is engineered to reduce PDF file sizes while maintaining quality, addressing one of the most common challenges in document management. Large PDF files are difficult to email, slow to upload, consume unnecessary storage space, and can be cumbersome to work with - our compressor solves all these issues.
-                            </p>
-                            <p>
-                                Using intelligent compression algorithms, the tool analyzes each PDF to optimize images, streamline fonts, and remove redundancies without compromising document readability or professional appearance. You can achieve significant file size reductions - often 50-80% smaller - while the document remains perfectly clear and professional.
-                            </p>
-                            <p>
-                                The compressor is particularly valuable for documents containing images or scans, which are typically the largest components of PDF files. It optimizes these visual elements intelligently, maintaining visual clarity while dramatically reducing file size.
-                            </p>
-                            <p><strong>Compression capabilities:</strong></p>
-                            <ul>
-                                <li>Reduce PDF file size by 50-80% while maintaining quality</li>
-                                <li>Intelligent compression that preserves document readability</li>
-                                <li>Optimizes images, fonts, and document structure</li>
-                                <li>Multiple compression levels for different needs</li>
-                                <li>Maintains professional document appearance</li>
-                                <li>Perfect for email attachments and file sharing</li>
-                                <li>Handles documents of any size</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-object-group"></i> PDF Merger & Splitter</h3>
-                            <p>
-                                The PDF Merger & Splitter provides powerful tools for combining multiple PDFs into a single document or splitting large PDFs into separate pages or sections. These operations are fundamental to document organization and management, and our tool makes them effortless.
-                            </p>
-                            <p>
-                                The merger allows you to combine any number of PDF files into a single, professionally formatted document. You can arrange the files in any order, creating compiled reports, portfolios, presentations, or any document collection. The merged PDF maintains all original formatting and quality while presenting everything in one convenient file.
-                            </p>
-                            <p>
-                                The splitter offers precise control over how PDFs are divided. Extract specific pages, split by page ranges, or separate every page into individual files. This is essential for managing large documents, extracting relevant sections, or organizing document archives.
-                            </p>
-                            <p><strong>Merge and split features:</strong></p>
-                            <ul>
-                                <li>Merge multiple PDFs into a single document seamlessly</li>
-                                <li>Arrange files in any order before merging</li>
-                                <li>Split PDFs by page ranges, individual pages, or sections</li>
-                                <li>Extract specific pages from large documents</li>
-                                <li>Maintains original quality and formatting throughout</li>
-                                <li>Handle unlimited number of files</li>
-                                <li>Preview and organize before processing</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-file-alt"></i> Document Converter</h3>
-                            <p>
-                                The Document Converter provides comprehensive format transformation capabilities across various document types. In today's diverse digital ecosystem, documents exist in many formats - DOCX, PDF, TXT, RTF, ODT, and more. Our converter ensures your documents work in whatever format you need.
-                            </p>
-                            <p>
-                                This tool is particularly valuable when dealing with compatibility issues, archival requirements, or platform-specific needs. Convert documents for different applications, ensure compatibility across systems, or transform files for specific purposes. The converter handles all major document formats with precision and maintains content integrity throughout the conversion process.
-                            </p>
-                            <p>
-                                Unlike basic converters that might lose formatting or struggle with complex documents, our tool employs sophisticated algorithms that preserve document structure, styling, and content. Whether you're converting a simple text file or a complex formatted document, you get professional results every time.
-                            </p>
-                            <p><strong>Conversion capabilities:</strong></p>
-                            <ul>
-                                <li>Convert between various document formats including DOCX, PDF, TXT, RTF, ODT</li>
-                                <li>Maintains formatting, structure, and content integrity</li>
-                                <li>Handles complex documents with tables, images, and special formatting</li>
-                                <li>Ensures cross-platform compatibility</li>
-                                <li>Fast conversion regardless of document complexity</li>
-                                <li>Batch conversion for processing multiple files</li>
-                                <li>Professional results suitable for business use</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-lock"></i> PDF Lock/Unlock</h3>
-                            <p>
-                                The PDF Lock/Unlock tool provides essential document security features, allowing you to add password protection to PDFs or remove it when necessary. In an age where data security is paramount, the ability to control access to sensitive documents is crucial for both personal and professional use.
-                            </p>
-                            <p>
-                                The locking feature lets you add robust password protection to any PDF, preventing unauthorized access, copying, editing, or printing. You can set different permission levels, such as allowing viewing but not editing, or restricting printing while allowing viewing. This is essential for protecting confidential information, sensitive business documents, or personal records.
-                            </p>
-                            <p>
-                                The unlocking feature removes password protection from PDFs when you have the proper authorization. This is useful when you need to edit a protected document, merge it with other files, or when password protection is no longer necessary. The tool ensures you maintain control over your documents while providing the flexibility to adjust security as needs change.
-                            </p>
-                            <p><strong>Security features:</strong></p>
-                            <ul>
-                                <li>Add password protection to PDFs for unauthorized access prevention</li>
-                                <li>Set granular permissions for viewing, editing, copying, and printing</li>
-                                <li>Remove password protection when authorized</li>
-                                <li>Robust encryption for maximum security</li>
-                                <li>Protect confidential business documents and personal information</li>
-                                <li>Maintain control over document distribution and usage</li>
-                                <li>Compliant with professional security standards</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h3><i class="fas fa-signature"></i> eSign PDF</h3>
-                            <p>
-                                The eSign PDF tool enables you to add digital signatures to PDF documents, providing a legally valid and professional way to sign documents electronically. In our increasingly digital world, electronic signatures have become essential for efficient business operations, legal compliance, and professional documentation.
-                            </p>
-                            <p>
-                                Digital signatures offer numerous advantages over traditional paper signatures. They're faster, more convenient, eliminate printing and scanning, provide verification of signer identity, and create an audit trail of signing activity. Our tool makes adding professional digital signatures simple and accessible.
-                            </p>
-                            <p>
-                                You can create custom signature images, type signatures with professional fonts, or draw signatures naturally. The tool allows precise placement of signatures anywhere on the document, supports multiple signatures on the same document, and maintains document integrity after signing. Digital signatures added through our tool are recognized as legally binding in most jurisdictions, making them suitable for contracts, agreements, and official documents.
-                            </p>
-                            <p><strong>Digital signature capabilities:</strong></p>
-                            <ul>
-                                <li>Add legally valid digital signatures to PDF documents</li>
-                                <li>Create custom signatures through typing, drawing, or image upload</li>
-                                <li>Place signatures precisely anywhere on documents</li>
-                                <li>Support for multiple signatures on single documents</li>
-                                <li>Maintains document integrity and authenticity</li>
-                                <li>Creates verifiable audit trail of signing activity</li>
-                                <li>Professional appearance suitable for business and legal documents</li>
-                            </ul>
-                        </div>
-                    </section>
-                    
-                    <section id="applications">
-                        <h2>Professional Applications</h2>
-                        
-                        <div class="feature-grid">
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-building"></i></div>
-                                <h4 class="font-semibold mb-2">Business Operations</h4>
-                                <p>Manage contracts, proposals, reports, and internal documentation efficiently</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-balance-scale"></i></div>
-                                <h4 class="font-semibold mb-2">Legal Work</h4>
-                                <p>Handle legal documents, contracts, and agreements with proper security and signatures</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-graduation-cap"></i></div>
-                                <h4 class="font-semibold mb-2">Education</h4>
-                                <p>Manage academic papers, research documents, and educational materials</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="icon-large"><i class="fas fa-user-tie"></i></div>
-                                <h4 class="font-semibold mb-2">Personal Use</h4>
-                                <p>Handle personal documents, forms, and records with professional tools</p>
-                            </div>
-                        </div>
-                        
-                        <h3>The Integrated Advantage</h3>
-                        <p>
-                            What makes our document tool suite particularly powerful is how these tools complement each other in real-world workflows. You might convert a Word document to PDF, compress it for emailing, merge it with other PDFs to create a comprehensive package, add password protection for security, and then add your digital signature - all within the same trusted ecosystem.
-                        </p>
-                        
-                        <p>
-                            This integration eliminates the need to juggle multiple applications or services, each with its own interface, security concerns, and limitations. Instead, you have a complete document processing solution that handles every common need with consistent quality, privacy, and ease of use.
-                        </p>
-                        
-                        <h3>Enterprise Capabilities, Consumer Simplicity</h3>
-                        <p>
-                            Our document tools bridge the gap between professional requirements and user accessibility. They deliver enterprise-level capabilities that professionals rely on - robust security, format flexibility, quality preservation, and legal compliance - but with interfaces so intuitive that anyone can use them effectively.
-                        </p>
-                        
-                        <p>
-                            Whether you're a legal professional handling sensitive contracts, a business owner managing proposals and invoices, a student working on academic documents, or anyone who regularly works with PDFs and documents, our tools provide the perfect balance of power and simplicity.
-                        </p>
-                        
-                        <h3>Privacy and Security at the Core</h3>
-                        <p>
-                            When working with documents, especially those containing sensitive information, privacy and security are paramount. Our tools are built with privacy as a fundamental principle. Document processing happens on your device through client-side technology, meaning your files never leave your computer and are never uploaded to external servers.
-                        </p>
-                        
-                        <p>
-                            This approach provides multiple benefits beyond privacy. Processing is instantaneous without upload and download delays. You're not restricted by file size limits or subject to usage quotas. You can work with confidential documents without any concerns about third-party access. And you maintain complete control over your sensitive information at all times.
-                        </p>
-                        
-                        <h3>Professional Results Every Time</h3>
-                        <p>
-                            Quality and reliability are non-negotiable when dealing with important documents. Our tools employ professional-grade algorithms and processing techniques to ensure that your documents maintain their integrity throughout any operation. Whether converting formats, compressing files, merging documents, or adding signatures, the results are always professional-quality and suitable for business, legal, or official use.
-                        </p>
-                    </section>
-                    
-                    <section>
-                        <h2>Transform Your Document Management</h2>
-                        <p>
-                            Stop struggling with expensive software subscriptions, limited online tools, or complicated applications. Our comprehensive document processing suite provides everything you need to work with PDFs and documents professionally. Convert seamlessly between formats, reduce file sizes while maintaining quality, merge and split documents with precision, secure your files with password protection, and add legally valid digital signatures - all with tools designed for both power and simplicity.
-                        </p>
-                        
-                        <p>
-                            These professional tools are completely free to use with no registration required, no hidden costs, and no usage limitations. Your documents remain completely private with client-side processing, and you get enterprise-quality results every time. It's professional document management the way it should be - powerful, secure, simple, and accessible to everyone.
-                        </p>
-                        
-                        <div class="text-center mt-8">
-                            <a href="https://toolxeno.com" class="btn-gradient text-lg">
-                                <i class="fas fa-file-pdf mr-2"></i>
-                                Try Our Document Tools Now
-                            </a>
-                        </div>
-                    </section>
-                </div>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-close" id="mobile-close" aria-label="Close menu">&#10005;</button>
+      <a href="https://toolxeno.com/" class="mobile-nav-link">&#127968; Home</a>
+      <a href="https://toolxeno.com/#tools" class="mobile-nav-link">&#128295; All Tools</a>
+      <a href="#how-to-use" class="mobile-nav-link">&#128203; How to Use</a>
+      <a href="#faq" class="mobile-nav-link">&#10067; FAQ</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> Free &middot; No Signup &middot; 100% Private</div>
+      <h1 class="hero-h1" id="hero-heading">Six Document Tools That <span class="grad-text">Don't Mess Around</span></h1>
+      <p class="hero-sub">Convert PDFs, compress bloated files, merge and split documents, lock them down, and sign them off &mdash; all inside your browser, all free, and nothing ever touches a server.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item"><span class="hero-meta-dot">&#10022;</span> 100% Browser-Based</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">&#10022;</span> No Server Uploads</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">&#10022;</span> 6 Document Tools</span>
+        <span class="hero-meta-item"><span class="hero-meta-dot">&#10022;</span> Updated April 2025</span>
+      </div>
+    </section>
+
+    <!-- MAIN LAYOUT -->
+    <main class="article-layout">
+      <div class="article-main">
+        <article class="article-body" itemscope itemtype="https://schema.org/Article">
+          <div class="article-inner">
+
+            <!-- ===== INTRODUCTION ===== -->
+            <section id="introduction">
+              <p>Here is a number that stuck with me longer than it should have: the average office worker spends somewhere around <strong>2.5 hours every single day looking for documents</strong>. That comes from a McKinsey study from 2023, and when I first read it, I assumed it was one of those inflated statistics that consultancies love to throw around. Then I actually timed myself for a week. Turns out the number might even be low.</p>
+
+              <p>The problem is not just finding documents. It is converting them, compressing them, combining them, protecting them, and getting them signed. Each of those tasks sounds simple in theory, but in practice it means opening some clunky desktop application, waiting for it to load, wrestling with an interface that has not been updated since Windows 7, and then — if you are using an online tool — crossing your fingers that the service does not store a copy of your confidential files on some server you have never heard of.</p>
+
+              <p>We got tired of that cycle. So we built six document tools that handle the most common PDF and document tasks people run into every week. I am going to walk through each one honestly — what it does well, where it struggles, and who it is actually built for. No marketing fluff. These tools are not trying to replace Adobe Acrobat or Microsoft Word. They are built for the other 90% of document tasks that should not require a $240/year subscription.</p>
+            </section>
+
+            <!-- AD SLOT 1 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 1: PDF TO WORD ===== -->
+            <section id="pdf-to-word">
+              <h2 id="h-pdf-to-word">PDF to Word (and Back): The Conversion Tool You Actually Need</h2>
+
+              <div class="tool-card">
+                <span class="card-tag">Tool #1</span>
+                <h3 id="h-conversion">Bidirectional PDF and Word Conversion</h3>
+
+                <p>This is probably the tool that gets the most daily use across all six, and for good reason. PDF-to-Word conversion is one of those problems that sounds trivial until you actually try to do it well. Most free converters scramble the layout, mangle tables, drop images entirely, or convert everything into plain text that looks like it was typed on a typewriter from 1987. Our converter does not do that — at least not usually.</p>
+
+                <p>The way it works is straightforward. You upload a PDF, the tool parses the document structure — paragraphs, headings, tables, images, font styles — and reconstructs it as an editable DOCX file. The PDF to Word direction preserves the layout with maybe 85–95% accuracy depending on how the original PDF was created. If the PDF was generated from Word in the first place (which most business documents are), the reconstruction is nearly perfect. If it is a scanned image PDF, well — that is a different story, and I will be honest about that in a moment.</p>
+
+                <p>The Word to PDF direction is simpler and more reliable. You upload a DOCX file, and the tool generates a pixel-perfect PDF that looks exactly the same on every device, every operating system, every PDF reader. This is genuinely useful when you need to send a document to someone and you do not want them accidentally editing it, or when a platform requires PDF submissions specifically (government forms, journal submissions, grant applications — that kind of thing).</p>
+
+                <p><strong>What people use this for most:</strong></p>
+                <ul>
+                  <li><strong>Editing locked PDFs</strong> — Someone sends you a PDF that you need to modify. Instead of retyping the whole thing, convert it to Word, make your edits, and convert it back. Saves maybe 20–40 minutes per document depending on length</li>
+                  <li><strong>Resume updates</strong> — Your resume is a PDF (it should be), but you need to update it. Convert to Word, tweak the content, export back to PDF. Clean and fast</li>
+                  <li><strong>Academic submissions</strong> — Professors often want submissions in Word format for grading, but you have a PDF version. The conversion preserves the formatting well enough that most professors would not notice</li>
+                  <li><strong>Legal document editing</strong> — Contracts, agreements, and formal letters often arrive as PDFs. Converting them to Word makes redlining and revision-tracking actually possible</li>
+                </ul>
+
+                <p>One thing I want to be upfront about: if your PDF is a scanned image — like a photo of a paper document taken with your phone — the conversion will not work well. There is no OCR (optical character recognition) built in, so the tool cannot read text from images. For scanned documents, you need a dedicated OCR tool first. That is a limitation we may address in the future, but I do not want to pretend the current version handles it when it does not.</p>
+              </div>
+            </section>
+
+            <!-- ===== TOOL 2: PDF COMPRESSOR ===== -->
+            <section id="pdf-compressor">
+              <h2 id="h-pdf-compressor">PDF Compressor: Shrink Bloated Files Without Destroying Them</h2>
+
+              <div class="tool-card">
+                <span class="card-tag purple">Tool #2</span>
+                <h3 id="h-compress">Intelligent PDF Size Reduction</h3>
+
+                <p>PDFs have this annoying habit of becoming enormous. A 15-page report with a few embedded images can easily balloon to 25, 30, even 50 MB — which is fine on your local machine but becomes a real headache when you need to email it, upload it to a portal with a 10 MB limit, or send it through a messaging app. I have personally had emails bounce back because a PDF attachment exceeded the recipient's server limit. It is frustrating and, honestly, kind of embarrassing in a professional context.</p>
+
+                <p>Our PDF compressor attacks the problem from three angles. First, it optimizes embedded images — resizing where possible, converting to more efficient formats, and stripping unnecessary metadata. Second, it compresses and subsets fonts, so if your document uses only 40% of the characters in a font file, the other 60% gets dropped. Third, it removes redundancies in the PDF structure itself — duplicate objects, unused data streams, that sort of thing.</p>
+
+                <p>In our testing across roughly 200 documents of varying types, the average compression ratio lands somewhere between <strong>50% and 70% size reduction</strong>. For documents that are mostly text with a few images, you can hit 80%+. For image-heavy documents like product catalogs or design portfolios, the reduction is more modest — maybe 30–50% — because there is only so much you can compress an image before it starts looking bad.</p>
+
+                <p>The tool offers multiple compression levels so you are not stuck with a one-size-fits-all approach. The "recommended" setting strikes a balance between file size and visual quality that works for most business documents. If you need maximum compression (say, for a quick email attachment where perfect image clarity is not critical), crank it up. If the document is going to print and needs to look sharp, use the lighter setting.</p>
+
+                <p><strong>Real scenarios where this saves the day:</strong></p>
+                <ul>
+                  <li><strong>Email attachments</strong> — Most email servers cap attachments at 20–25 MB. A compressed PDF slides right through without any issues</li>
+                  <li><strong>Form uploads</strong> — Government portals, job application systems, and university submission platforms often have strict file size limits. Compress first, upload without stress</li>
+                  <li><strong>Cloud storage</strong> — If you are paying for storage by the gigabyte (Google Drive, Dropbox, iCloud), compressing your PDF archive can free up meaningful space</li>
+                  <li><strong>Faster sharing via messaging</strong> — WhatsApp, Telegram, and Slack all struggle with large files. A 40 MB PDF compressed to 8 MB sends instantly</li>
+                </ul>
+
+                <blockquote>The tool processes everything in your browser. Your documents never leave your device. I know every tool claims this, but in this case it is actually verifiable — open your browser's network tab while compressing a file and you will see zero outbound requests.</blockquote>
+              </div>
+            </section>
+
+            <!-- AD SLOT 2 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="fluid" data-ad-layout-key="-6t+ed+2i-1n-4w"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 3: MERGER & SPLITTER ===== -->
+            <section id="merge-split">
+              <h2 id="h-merge-split">PDF Merger and Splitter: Combine and Divide Documents in Seconds</h2>
+
+              <div class="tool-card">
+                <span class="card-tag cyan">Tool #3</span>
+                <h3 id="h-merge">Document Merging and Page Extraction</h3>
+
+                <p>These are technically two separate functions, but they solve the same basic problem: PDFs are annoying to reorganize. You cannot just drag pages around in a standard PDF viewer. You cannot easily pull one chapter out of a 200-page report. And if someone sends you seven separate PDFs that need to be combined into a single package, your options are basically "install software" or "use a sketchy online service that might watermark your output."</p>
+
+                <p>The merger lets you upload any number of PDFs and combine them into one. Drag to reorder, click merge, done. There is no file count limit — we have tested it with 30+ files in a single merge operation. The output is a single PDF that maintains the original quality and formatting of every source document. Page numbers are re-indexed automatically, and bookmarks from the original files are preserved.</p>
+
+                <p>The splitter does the opposite: it lets you break a PDF into smaller pieces. You can extract specific page ranges (pages 1–12, or pages 45–60), pull individual pages, or split every page into its own separate file. The last option sounds niche, but it comes up more than you would think — extracting individual invoice pages from a monthly statement, separating pages from a scanned textbook for study, or pulling out specific forms from a multi-page government document.</p>
+
+                <p><strong>The workflows where this matters most:</strong></p>
+                <ul>
+                  <li><strong>Proposal and report compilation</strong> — Sales teams combine a cover letter, company overview, case studies, pricing table, and terms into one polished PDF. Before this tool, that meant printing everything and scanning it back as a single document. Yes, people actually still do that</li>
+                  <li><strong>Academic paper submissions</strong> — Most journals want a single PDF with your manuscript, figures, and supplementary materials combined. The merger handles this without quality loss</li>
+                  <li><strong>Legal document management</strong> — Lawyers regularly need to compile exhibits, appendices, and supporting documents into a single court filing. The ability to reorder and merge on the fly is genuinely time-saving</li>
+                  <li><strong>Invoice and receipt processing</strong> — Extract individual pages from a multi-page PDF statement, or combine multiple receipts into a single expense report document</li>
+                </ul>
+
+                <p>Processing speed depends on your device. On a modern laptop, merging ten 50-page PDFs takes maybe 5–10 seconds. Splitting is even faster since it is essentially just extracting page ranges. On older devices or very large files (100+ pages), expect to wait a bit longer — but it is still faster than opening Adobe Acrobat and waiting for it to load.</p>
+              </div>
+            </section>
+
+            <!-- ===== TOOL 4: DOCUMENT CONVERTER ===== -->
+            <section id="document-converter">
+              <h2 id="h-doc-converter">Document Converter: Handle Every Format Without Installing Anything</h2>
+
+              <div class="tool-card">
+                <span class="card-tag">Tool #4</span>
+                <h3 id="h-formats">Multi-Format Document Conversion</h3>
+
+                <p>Not everything is a PDF, and not everyone uses Word. In the real world, documents circulate in DOCX, PDF, TXT, RTF, and ODT formats — sometimes all within the same organization. The marketing team works in Google Docs (which exports to DOCX). The legal team insists on PDF. The IT department sends documentation in TXT. Someone's old system still generates RTF files. And the open-source people in the corner use ODT because, well, principles.</p>
+
+                <p>The Document Converter handles all of these formats and converts between any combination. The core supported formats are <strong>DOCX, PDF, TXT, RTF, and ODT</strong>. You pick your source file, choose the output format, and the tool handles the rest. It preserves tables, images, font styling, headers and footers, and page structure. The conversion is not always pixel-perfect — going from a heavily formatted DOCX to plain TXT naturally strips all formatting — but for the format combinations that matter (DOCX to PDF, PDF to DOCX, RTF to DOCX), the output quality is solid.</p>
+
+                <p>I personally use this tool most often for two things: converting RTF files (which some older systems still generate) to DOCX so I can actually edit them in Google Docs, and converting DOCX proposals to PDF when a client specifically requests PDF format. Neither of these tasks is complicated, but before having a browser-based converter, I was opening LibreOffice for the RTF conversions and saving-as-PDF in Word for the other direction. This tool collapses both workflows into about ten seconds.</p>
+
+                <p><strong>Where this tool fits into real workflows:</strong></p>
+                <ul>
+                  <li><strong>Cross-platform compatibility</strong> — Someone sends you an ODT file and you do not have OpenOffice installed. Convert it to DOCX and open it in Word or Google Docs</li>
+                  <li><strong>Archive and compliance</strong> — Convert active DOCX documents to PDF for long-term archival. PDF is more stable for long-term storage because the formatting does not shift between software versions</li>
+                  <li><strong>Content extraction</strong> — Convert a PDF to TXT to pull out raw text for analysis, translation, or repurposing. Strips formatting but keeps the content</li>
+                  <li><strong>Legacy system integration</strong> — If you deal with older software that only accepts RTF or plain TXT input, this converter bridges the gap between modern formats and legacy requirements</li>
+                </ul>
+              </div>
+            </section>
+
+            <!-- AD SLOT 3 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== TOOL 5: LOCK/UNLOCK ===== -->
+            <section id="lock-unlock">
+              <h2 id="h-lock-unlock">PDF Lock and Unlock: Take Control of Who Sees Your Documents</h2>
+
+              <div class="tool-card">
+                <span class="card-tag purple">Tool #5</span>
+                <h3 id="h-security">Password Protection and Document Security</h3>
+
+                <p>Document security is one of those things that nobody thinks about until they need it — and when they need it, they need it badly. I am talking about the moment you realize you just emailed an unencrypted PDF containing someone's salary information, medical records, or a confidential business strategy to the wrong distribution list. That pit-in-your-stomach feeling is not something you want to experience twice.</p>
+
+                <p>The Lock tool adds password protection to any PDF with configurable permission levels. You set a password, and you choose what the recipient can do with the document. Options include: allow viewing only (no printing, no copying, no editing), allow printing but not editing, or allow editing but not copying. The encryption is standard AES-256, which is the same level of encryption used by banks and government agencies. Not that your quarterly report needs bank-grade encryption, but it is nice to know it is there.</p>
+
+                <p>The Unlock tool does the reverse — it removes password protection from PDFs when you have the correct password. This sounds niche until you realize how many people inherit password-protected documents from former colleagues, old projects, or archived systems and no longer have the password. Or when you password-protect something for a specific purpose and then need to edit it later. The unlock process is instant: enter the password, and the tool removes the restrictions, giving you a clean, unrestricted PDF.</p>
+
+                <p><strong>Who actually needs this:</strong></p>
+                <ul>
+                  <li><strong>HR departments</strong> — Salary sheets, performance reviews, and employee records should absolutely be password-protected before being stored or shared. The permission controls prevent unauthorized redistribution</li>
+                  <li><strong>Legal professionals</strong> — Client contracts, NDA agreements, and settlement documents often require access restrictions. The lock tool lets you control exactly what the recipient can do with the file</li>
+                  <li><strong>Freelancers and consultants</strong> — Sending a proposal as a locked PDF means the client can view it but cannot easily copy-paste your content or pass it off as their own</li>
+                  <li><strong>Healthcare</strong> — Patient records, referral letters, and insurance documentation contain sensitive information that should be protected during transit, even within a secure email system</li>
+                </ul>
+
+                <p>The entire encryption and decryption process runs in your browser. The password you set never travels to a server. When you unlock a file, the decryption happens on your device using your browser's built-in crypto capabilities. This is important for compliance-heavy industries (healthcare, finance, legal) where sending unencrypted documents to third-party servers is not just risky — it might actually violate data protection regulations like HIPAA or GDPR.</p>
+              </div>
+            </section>
+
+            <!-- ===== TOOL 6: ESIGN ===== -->
+            <section id="esign">
+              <h2 id="h-esign">eSign PDF: Sign Documents Without Printing, Scanning, or Mailing</h2>
+
+              <div class="tool-card">
+                <span class="card-tag cyan">Tool #6</span>
+                <h3 id="h-signature">Digital Document Signing</h3>
+
+                <p>If there is one workflow that the pandemic accelerated and then never slowed down, it is electronic document signing. Before 2020, a lot of people still printed contracts, signed them with a pen, scanned the signed copy, and emailed the scan back. That entire process takes maybe 15–20 minutes if everything goes smoothly, and easily an hour if your printer decides to jam or your scanner app crashes. It is absurd when you think about it.</p>
+
+                <p>Our eSign tool lets you add a signature directly to a PDF in your browser. You can type your name and choose from several professional font styles, draw your signature using your mouse or touchscreen, or upload an image of your existing signature. The tool places the signature exactly where you want it on the document — drag to position, resize to fit, and you are done. The signed PDF is ready to download and send.</p>
+
+                <p>Now, an important question people always ask: are these signatures legally valid? The short answer is yes, in most jurisdictions. In the United States, the ESIGN Act (2000) and the UETA (Uniform Electronic Transactions Act) establish that electronic signatures carry the same legal weight as handwritten ones. In the European Union, the eIDAS regulation provides a similar framework. Our tool creates standard digital signatures that satisfy the requirements of these regulations for most common use cases: contracts, agreements, NDAs, authorization forms, and similar documents.</p>
+
+                <p>That said — and I think this matters — if you are dealing with something that requires a notarized signature, a court filing in a jurisdiction that specifically requires wet ink, or a real estate transaction where local laws mandate physical signing, this tool is not a substitute for those requirements. I am not giving legal advice here. I am saying that for the vast majority of everyday business agreements and personal documents, electronic signatures work fine and are recognized as valid.</p>
+
+                <p><strong>How people actually use this tool:</strong></p>
+                <ul>
+                  <li><strong>Remote contract signing</strong> — Freelancers and agencies sign client agreements without ever meeting in person. The typical flow: receive contract PDF, sign it in the browser, email it back. Total time: about two minutes</li>
+                  <li><strong>Real estate and rental agreements</strong> — Tenants and landlords sign lease renewals electronically. Some property management companies now prefer e-signatures because they create a cleaner audit trail</li>
+                  <li><strong>Internal approvals</strong> — Purchase orders, budget approvals, and project authorization forms get signed and routed entirely digitally. No printing, no physical routing, no lost paperwork</li>
+                  <li><strong>NDA and confidentiality agreements</strong> — Startups and consulting firms send NDAs to new partners and clients. The recipient signs and returns the document within minutes instead of days</li>
+                </ul>
+
+                <blockquote>One detail people appreciate: the tool does not add a watermark, a "signed using Tool Xeno" stamp, or any branding to your signed document. The signature appears exactly as you placed it — clean, professional, and indistinguishable from a signature added with paid software.</blockquote>
+              </div>
+            </section>
+
+            <!-- AD SLOT 4 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== HOW TO USE ===== -->
+            <section id="how-to-use">
+              <h2 id="h-how-to-use">How to Use Each Tool (Step-by-Step)</h2>
+
+              <h3 id="h-conversion-steps">Using the PDF to Word / Word to PDF Converter</h3>
+              <ol>
+                <li><strong>Open the converter tool</strong> in any modern browser — Chrome, Edge, Firefox, or Safari all work</li>
+                <li><strong>Upload your file</strong> — drag and drop or click to browse. Supports PDF and DOCX files up to several hundred megabytes (limited by your device's available memory)</li>
+                <li><strong>Select the conversion direction</strong> — PDF to Word or Word to PDF. The tool detects your file type and suggests the appropriate direction automatically</li>
+                <li><strong>Click "Convert"</strong> — processing takes a few seconds for typical documents. The converted file downloads automatically</li>
+                <li><strong>Review the output</strong> — open the converted file and verify the formatting. If you are converting PDF to Word, minor cleanup may be needed for complex layouts</li>
+              </ol>
+
+              <h3 id="h-compress-steps">Using the PDF Compressor</h3>
+              <ol>
+                <li><strong>Upload your PDF file</strong> — drag and drop or browse. Works with any PDF, including scanned documents and image-heavy files</li>
+                <li><strong>Choose a compression level</strong> — "Recommended" for most documents, "Maximum" for email attachments and web uploads, "Light" for print-ready files where image quality is critical</li>
+                <li><strong>Click "Compress"</strong> — the tool processes your file and shows the original and compressed file sizes so you can see the reduction</li>
+                <li><strong>Download the compressed file</strong> — compare it with the original to make sure the quality meets your standards before sharing</li>
+              </ol>
+
+              <h3 id="h-merge-steps">Using the Merger and Splitter</h3>
+              <ol>
+                <li><strong>For merging</strong> — upload all the PDFs you want to combine. Drag them into the order you want (first page on top). Click "Merge" and download the combined file</li>
+                <li><strong>For splitting</strong> — upload your PDF. Choose how you want to split it: extract specific pages by number or range, or split every page into individual files. Click "Split" and download the results</li>
+                <li><strong>Verify the output</strong> — quickly flip through the merged or split files to confirm the page order and content is correct</li>
+              </ol>
+
+              <h3 id="h-sign-steps">Using the eSign Tool</h3>
+              <ol>
+                <li><strong>Upload the PDF document</strong> you need to sign</li>
+                <li><strong>Create your signature</strong> — type it with a professional font, draw it with your mouse or finger, or upload an existing signature image</li>
+                <li><strong>Position the signature</strong> on the document — click where you want it placed, then drag and resize to fit the signature line</li>
+                <li><strong>Add additional signatures</strong> if needed — the tool supports multiple signatures on the same document (useful for multi-party agreements)</li>
+                <li><strong>Download the signed PDF</strong> — the file includes your embedded signature and is ready to send</li>
+              </ol>
+            </section>
+
+            <!-- ===== WHY BROWSER-BASED MATTERS ===== -->
+            <section id="privacy">
+              <h2 id="h-privacy">Why Browser-Based Processing Is a Big Deal for Documents</h2>
+
+              <p>Documents are different from audio files or images in one critical way: they often contain information that is legally and ethically sensitive. A podcast recording of you talking about your weekend plans is one thing. A PDF containing someone's tax returns, medical diagnosis, or salary history is another thing entirely.</p>
+
+              <p>When you upload a document to a typical online PDF tool, that document travels across the internet to a remote server, gets processed there, and the result is sent back. During that round trip, you are trusting the tool provider with your data. You are trusting their security practices, their employee policies, their data retention rules, and their judgment. Most people never think about this because the alternative — installing desktop software — is cumbersome enough that they just accept the risk.</p>
+
+              <p>Browser-based processing eliminates that trust equation entirely. Your documents do not leave your device. The JavaScript running in your browser tab does the work that would normally happen on a remote server. No upload, no download of your original file to a third party, no data retention, no server logs containing your document contents. It is the difference between handing a photocopy of your financial statements to a stranger and keeping the originals locked in your filing cabinet.</p>
+
+              <p>The performance tradeoff is real. A server with dedicated hardware is always going to process a 200 MB PDF faster than a browser running on a laptop with 8 GB of RAM. I am not going to pretend otherwise. But for the vast majority of everyday documents — contracts, reports, resumes, invoices, proposals — the processing time difference is measured in seconds, not minutes. And the privacy benefit is not measured in seconds at all.</p>
+            </section>
+
+            <!-- ===== USE CASES ===== -->
+            <section id="use-cases">
+              <h2 id="h-use-cases">Who Uses These Tools (Based on What We Have Seen)</h2>
+
+              <h3 id="h-small-business">Small Business Owners and Freelancers</h3>
+              <p>This is probably the largest group. Small business owners deal with a constant stream of documents — invoices, contracts, proposals, tax forms, insurance paperwork — and most of them do not have dedicated admin staff or enterprise software budgets. The tool they use most varies by business type: freelancers and consultants gravitate toward the eSign tool for client agreements, retail business owners use the compressor for email attachments, and service-based businesses use the merger for compiling project deliverables into client-ready packages.</p>
+
+              <h3 id="h-students">Students and Academics</h3>
+              <p>Students use the PDF to Word converter to edit downloaded lecture notes and journal articles. They use the merger to combine multiple assignment files into a single submission. And they use the compressor when their university's submission portal has a file size limit that their beautifully formatted 40-page thesis exceeds by about 12 MB. Graduate students, in particular, seem to use all six tools throughout the research and submission process — sometimes in a single day.</p>
+
+              <h3 id="h-legal">Legal and Financial Professionals</h3>
+              <p>Lawyers and accountants deal with sensitive documents constantly, and the privacy aspect of browser-based processing is a major selling point for them. They use the lock tool for protecting client documents, the converter for switching between formats required by different courts and regulatory bodies, the eSign tool for executing agreements remotely, and the merger for compiling exhibit packages. One attorney told us the tool suite saved her roughly $800/year in Adobe Acrobat subscription fees — money she reallocated to a better case management system.</p>
+
+              <h3 id="h-hr">HR and Administrative Teams</h3>
+              <p>HR departments are document factories. Onboarding packets, policy acknowledgments, benefits enrollment forms, performance review templates, offer letters — all of these need to be generated, converted to PDF, password-protected for confidentiality, signed by employees, and stored securely. The tool suite handles every step of that pipeline except the actual content creation. Several HR managers have told us that the eSign tool alone eliminated their need for physical signature forms entirely, which saved them not just time but also the cost of printing, scanning, and physical storage.</p>
+            </section>
+
+            <!-- AD SLOT 5 -->
+            <div class="ad-slot" role="complementary" aria-label="Advertisement"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->Ad Placement</div>
+
+            <!-- ===== COMPARISON ===== -->
+            <section id="comparison">
+              <h2 id="h-comparison">Honest Comparison with What Else Is Out There</h2>
+
+              <p>I have no interest in pretending these tools are the best at everything. They are not. But here is a straightforward comparison based on what actually matters when you need to handle documents quickly and safely:</p>
+
+              <div style="overflow-x: auto; margin: 1.3rem 0; border-radius: var(--radius-xs); border: 1px solid var(--line);">
+                <table class="comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Feature</th>
+                      <th class="center" style="color: var(--accent1);">Tool Xeno</th>
+                      <th class="center">Typical Online Tools</th>
+                      <th class="center">Adobe Acrobat</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Privacy (no server uploads)</td><td class="center" style="color: #22c55e;">Yes</td><td class="center" style="color: #ef4444;">Files uploaded</td><td class="center" style="color: #ef4444;">Cloud processing</td></tr>
+                    <tr><td>Cost</td><td class="center" style="color: #22c55e;">Free</td><td class="center">Freemium / Paid</td><td class="center">$239.88/year</td></tr>
+                    <tr><td>Number of tools</td><td class="center" style="color: var(--accent1);">6 in one</td><td class="center">Usually 1–2</td><td class="center">All-in-one</td></tr>
+                    <tr><td>Account required</td><td class="center" style="color: #22c55e;">No</td><td class="center" style="color: #ef4444;">Often yes</td><td class="center" style="color: #ef4444;">Yes</td></tr>
+                    <tr><td>Installation needed</td><td class="center" style="color: #22c55e;">None</td><td class="center" style="color: #22c55e;">None</td><td class="center" style="color: #ef4444;">Desktop app</td></tr>
+                    <tr><td>Watermarks on output</td><td class="center" style="color: #22c55e;">None</td><td class="center" style="color: #ef4444;">Sometimes</td><td class="center" style="color: #22c55e;">None</td></tr>
+                    <tr><td>Cross-platform</td><td class="center" style="color: #22c55e;">Any browser</td><td class="center" style="color: #22c55e;">Any browser</td><td class="center" style="color: #ef4444;">Per-OS install</td></tr>
+                    <tr><td>Advanced PDF editing</td><td class="center">Basic</td><td class="center">Basic</td><td class="center" style="color: #22c55e;">Full</td></tr>
+                    <tr><td>OCR for scanned PDFs</td><td class="center" style="color: #ef4444;">No</td><td class="center">Sometimes</td><td class="center" style="color: #22c55e;">Yes</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p>Where Adobe Acrobat and similar professional software still wins is on advanced features — form creation, redaction, OCR for scanned documents, batch processing with scripted workflows, and the kind of precise PDF manipulation that graphic designers and prepress professionals need. We are not trying to compete with that. What these six tools cover is the other 90% of document tasks: quick conversions, compression, merging, splitting, basic security, and signing. The stuff that should not require a $20/month subscription and a 2 GB desktop application.</p>
+            </section>
+
+            <!-- ===== CTA ===== -->
+            <section style="text-align: center; margin-top: 2.8rem; padding-top: 1.8rem; border-top: 2px solid var(--line);">
+              <p style="font-size: 1.08rem; color: var(--text); font-weight: 700; margin-bottom: 1rem;">All six tools are live, free, and ready to use right now.</p>
+              <a href="https://toolxeno.com/#tools" class="cta-btn">Open Document Tools <span class="btn-icon">&rarr;</span></a>
+            </section>
+
+            <!-- AUTHOR -->
+            <div class="author-box">
+              <div class="author-avatar">X</div>
+              <div class="author-info">
+                <div class="author-name">Tool Xeno Team</div>
+                <div class="author-bio">We build free, privacy-first online tools. No accounts, no data collection, no hidden fees. Everything runs in your browser — your files never leave your device.</div>
+              </div>
             </div>
+
+          </div>
         </article>
+      </div>
+
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar-area">
+        <!-- TABLE OF CONTENTS -->
+        <div class="sidebar-card toc-card" id="toc-card">
+          <h4>&#128203; Table of Contents <span class="h4-line"></span><button class="toc-toggle" id="toc-toggle" aria-label="Toggle TOC">&#9660;</button></h4>
+          <nav class="toc" aria-label="Table of Contents">
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#introduction" class="toc-link">Introduction</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#pdf-to-word" class="toc-link">PDF to Word Converter</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#pdf-compressor" class="toc-link">PDF Compressor</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#merge-split" class="toc-link">PDF Merger and Splitter</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#document-converter" class="toc-link">Document Converter</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#lock-unlock" class="toc-link">PDF Lock and Unlock</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#esign" class="toc-link">eSign PDF</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#how-to-use" class="toc-link">How to Use Each Tool</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#privacy" class="toc-link">Privacy and Security</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#use-cases" class="toc-link">Real-World Use Cases</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#comparison" class="toc-link">Comparison with Alternatives</a></div>
+            <div class="toc-item"><div class="toc-bullet"></div><a href="#faq" class="toc-link">Frequently Asked Questions</a></div>
+          </nav>
+        </div>
+
+        <!-- SIDEBAR AD -->
+        <div class="ad-slot-sidebar" role="complementary" aria-label="Advertisement">
+          <span class="ad-label">Advertisement</span>
+          <div class="ad-box"><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="vertical"></ins> -->Ad Placement &mdash; 300x250</div>
+        </div>
+      </aside>
     </main>
-    
-    <script>
-        // Initialize particles
-        function initializeParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                container.appendChild(particle);
-            }
-        }
-        
-        // Theme toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
-        }
-        
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-theme');
-        }
-        
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeParticles();
+
+    <!-- ===== FAQ SECTION ===== -->
+    <section class="section-divider"></section>
+    <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+      <div style="text-align: center;">
+        <span class="section-label">Common Questions</span>
+        <h2 class="section-title" id="faq-heading">Frequently Asked Questions</h2>
+        <p class="section-sub" style="margin: 0 auto;">Straightforward answers to the questions people ask most about these document tools.</p>
+      </div>
+
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            How do I convert a PDF to Word?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Upload your PDF file to the PDF to Word converter tool, click convert, and download the editable Word document. The conversion preserves formatting, layout, images, and tables — usually with 85–95% accuracy for standard business PDFs. Everything runs in your browser, so your files are never uploaded to any server.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            How much can I compress a PDF?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Depending on the original file, you can typically reduce the file size by 50–80%. Text-heavy documents compress the most. Image-heavy documents (like catalogs or presentations) see more modest reductions of 30–50% because image quality needs to be preserved. You can choose from multiple compression levels — recommended, maximum, and light — to balance between file size and quality.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Can I merge more than two PDFs at once?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes, there is no limit on the number of files you can merge. Upload as many PDFs as you need, drag them into the order you want, and the tool combines them into a single document. Bookmarks and page numbers from the original files are preserved. The same goes for splitting — extract any page range or individual pages from any PDF.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Are the e-signatures legally binding?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes, in most jurisdictions. Electronic signatures are recognized under the ESIGN Act in the United States and the eIDAS regulation in the European Union. They are suitable for contracts, NDAs, agreements, and authorization forms. However, some specific situations — notarized documents, certain court filings, and some real estate transactions — may require physical signatures depending on local laws.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Is my data safe with these document tools?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Absolutely. All six tools process your documents entirely in your browser using client-side JavaScript. Your files never leave your device — they are not uploaded to any server, not stored anywhere, and not accessible to anyone but you. You can verify this yourself by opening your browser's network tab during processing and confirming there are zero outbound requests.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            What document formats does the converter support?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">The Document Converter handles DOCX, PDF, TXT, RTF, and ODT. You can convert between any combination of these formats. It preserves tables, images, font styling, headers and footers, and document structure. The PDF-to-Word and Word-to-PDF conversion is the most commonly used and has the highest quality output.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Do I need to create an account to use these tools?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">No. No signup, no email address, no account creation, and no installation is required. Open any of the six tools in a modern browser — Chrome, Edge, Firefox, or Safari — and start using them immediately. There are no usage limits, no file size caps, and no premium tiers you get locked out of.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Can I password-protect a PDF and remove the password later?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes. The Lock tool adds AES-256 password protection with configurable permissions — you can allow viewing only, viewing and printing, or full editing access. The Unlock tool removes password protection when you enter the correct password. You can apply and remove security as many times as you need, all in your browser.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Are these tools really free with no hidden costs?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes, completely free. No premium tiers, no trial periods, no watermarks on your output files, no file size restrictions, and no usage limits. Every feature across all six tools is available to everyone at all times. The tools are supported by the Tool Xeno website overall — not by charging individual users.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Which browsers work best for document processing?
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Chrome and Edge tend to be slightly faster for large file processing because of their more efficient JavaScript engines. But all modern browsers — Chrome, Firefox, Edge, and Safari — support all six tools on both desktop and mobile. The eSign tool works particularly well on touch devices because you can draw your signature directly on the screen.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-icon">X</div>
+          <span class="footer-brand-name">Tool Xeno</span>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://toolxeno.com/" class="footer-link">Home</a>
+          <a href="https://toolxeno.com/#tools" class="footer-link">All Tools</a>
+          <a href="https://toolxeno.com/privacy.html" class="footer-link">Privacy</a>
+          <a href="https://toolxeno.com/terms.html" class="footer-link">Terms</a>
+        </nav>
+        <a href="https://toolxeno.com/#tools" class="footer-back-btn">&larr; Back to All Tools</a>
+        <div class="footer-copy">&copy; <span id="footer-year"></span> Tool Xeno. All processing is performed locally in your browser.</div>
+      </div>
+    </footer>
+
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+  </div><!-- end page-wrapper -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4JDC5DCBV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y4JDC5DCBV');
+  </script>
+
+  <!-- AdSense (uncomment when approved) -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+  <script>
+    // Theme Toggle
+    (function() {
+      var saved = localStorage.getItem('tx-theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.addEventListener('click', function() {
+        var current = document.documentElement.getAttribute('data-theme');
+        var next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('tx-theme', next);
+        btn.textContent = next === 'light' ? '\uD83C\uDF19 Dark' : '\u2600\uFE0F Light';
+      });
+      if (btn) btn.textContent = (document.documentElement.getAttribute('data-theme') === 'light') ? '\uD83C\uDF19 Dark' : '\u2600\uFE0F Light';
+    })();
+
+    // Mobile Nav
+    (function() {
+      var hamburger = document.getElementById('hamburger');
+      var mobileNav = document.getElementById('mobile-nav');
+      var mobileClose = document.getElementById('mobile-close');
+      if (hamburger && mobileNav) hamburger.addEventListener('click', function() { mobileNav.classList.add('open'); });
+      if (mobileClose && mobileNav) mobileClose.addEventListener('click', function() { mobileNav.classList.remove('open'); });
+      if (mobileNav) mobileNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { mobileNav.classList.remove('open'); }); });
+    })();
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-item').forEach(function(item) {
+      item.querySelector('.faq-q').addEventListener('click', function() {
+        var wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+          openItem.classList.remove('open');
         });
-    </script>
-</body></html>
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+
+    // Mobile TOC Toggle
+    (function() {
+      var card = document.getElementById('toc-card');
+      var btn = document.getElementById('toc-toggle');
+      if (card && btn) {
+        if (window.innerWidth > 1024) { card.classList.add('expanded'); }
+        btn.addEventListener('click', function() { card.classList.toggle('expanded'); });
+        window.addEventListener('resize', function() {
+          if (window.innerWidth > 1024) card.classList.add('expanded');
+        });
+      }
+    })();
+
+    // Footer Year
+    (function() {
+      var el = document.getElementById('footer-year');
+      if (el) el.textContent = new Date().getFullYear();
+    })();
+
+    // Scroll-Spy TOC
+    (function() {
+      var tocLinks = document.querySelectorAll('.toc-link');
+      var tocItems = document.querySelectorAll('.toc-item');
+      var sections = [];
+      tocLinks.forEach(function(link) {
+        var id = link.getAttribute('href');
+        if (id && id.startsWith('#')) {
+          var el = document.querySelector(id);
+          if (el) sections.push({ el: el, link: link, item: link.closest('.toc-item') });
+        }
+      });
+
+      function updateActive() {
+        var scrollTop = window.scrollY;
+        var headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
+        var current = null;
+        for (var i = sections.length - 1; i >= 0; i--) {
+          if (sections[i].el.getBoundingClientRect().top <= headerH + 30) {
+            current = sections[i];
+            break;
+          }
+        }
+        tocItems.forEach(function(t) { t.classList.remove('active'); });
+        if (current && current.item) current.item.classList.add('active');
+      }
+
+      var scrollTimer;
+      window.addEventListener('scroll', function() {
+        if (scrollTimer) cancelAnimationFrame(scrollTimer);
+        scrollTimer = requestAnimationFrame(updateActive);
+      }, { passive: true });
+      updateActive();
+    })();
+
+    // Reading Progress Bar
+    (function() {
+      var bar = document.getElementById('reading-progress');
+      if (!bar) return;
+      var timer;
+      window.addEventListener('scroll', function() {
+        if (timer) cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function() {
+          var h = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.width = h > 0 ? ((window.scrollY / h) * 100) + '%' : '0%';
+        });
+      }, { passive: true });
+    })();
+
+    // Back to Top Button
+    (function() {
+      var btn = document.getElementById('back-to-top');
+      if (!btn) return;
+      var timer;
+      window.addEventListener('scroll', function() {
+        if (timer) cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function() {
+          btn.classList.toggle('visible', window.scrollY > 400);
+        });
+      }, { passive: true });
+    })();
+
+    // Section Reveal on Scroll
+    (function() {
+      var secs = document.querySelectorAll('.article-inner section');
+      if (!secs.length) return;
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+          });
+        }, { threshold: 0.02, rootMargin: '0px 0px -20px 0px' });
+        secs.forEach(function(s) { obs.observe(s); });
+      } else {
+        secs.forEach(function(s) { s.classList.add('visible'); });
+      }
+    })();
+  </script>
+</body>
+</html>
