@@ -2298,14 +2298,18 @@ async function handleFile(file) {
     $('total-pages').textContent = S.totalPages;
     $('page-input').max = S.totalPages;
     $('page-input').value = 1;
-    showLoading(true, 'Rendering pages...', 60);
-    await renderPage(S.currentPage);
-    await renderThumbnails();
-    showLoading(false);
+    // Show editor FIRST so container is visible for rendering
     $('upload-container').style.display = 'none';
     $('editor-container').classList.add('active');
+    showLoading(true, 'Rendering page...', 60);
+    // Wait for layout to compute before rendering
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    await renderPage(S.currentPage);
+    showLoading(false);
     $('btn-export').disabled = false;
     showToast(`PDF loaded — ${S.totalPages} page${S.totalPages > 1 ? 's' : ''}`, 'success');
+    // Render thumbnails in background — don't block the UI
+    renderThumbnailsAsync();
   } catch (err) {
     showLoading(false);
     if (err.name === 'PasswordException') {
@@ -2319,13 +2323,18 @@ async function handleFile(file) {
 // ============================
 // PDF RENDERING
 // ============================
-async function renderPage(num) {
+async function renderPage(num, retryCount = 0) {
   if (!S.pdfDoc) return;
   if (S.renderTask) { try { await S.renderTask.cancel(); } catch(e){} S.renderTask = null; }
   const page = await S.pdfDoc.getPage(num);
   const container = $('pdf-canvas-wrapper');
   const availW = container.clientWidth - 48;
-  if (availW <= 0) { await new Promise(r => setTimeout(r, 50)); return renderPage(num); }
+  // Fixed: limit retries instead of infinite recursion
+  if (availW <= 0) {
+    if (retryCount >= 20) { console.error('renderPage: container never became visible'); return; }
+    await new Promise(r => setTimeout(r, 100));
+    return renderPage(num, retryCount + 1);
+  }
   const unscaled = page.getViewport({ scale: 1 });
   S.baseScale = Math.min(availW / unscaled.width, 1.5);
   const vp = page.getViewport({ scale: S.baseScale * S.scale });
@@ -2343,24 +2352,38 @@ async function renderPage(num) {
   updatePageUI();
 }
 
-async function renderThumbnails() {
+async function renderThumbnailsAsync() {
+  if (!S.pdfDoc) return;
   const list = $('thumbnails-list');
   list.innerHTML = '';
+  // Render thumbnails progressively — yield to UI between each page
   for (let i = 1; i <= S.totalPages; i++) {
-    const page = await S.pdfDoc.getPage(i);
-    const vp = page.getViewport({ scale: 0.2 });
-    const canvas = document.createElement('canvas');
-    canvas.width = vp.width; canvas.height = vp.height;
-    const ctx = canvas.getContext('2d');
-    await page.render({ canvasContext: ctx, viewport: vp }).promise;
-    const item = document.createElement('div');
-    item.className = 'thumbnail-item' + (i === S.currentPage ? ' active' : '');
-    item.dataset.page = i;
-    item.innerHTML = `<span class="thumbnail-label">${i}</span>`;
-    item.prepend(canvas);
-    item.onclick = () => goToPage(i);
-    list.appendChild(item);
+    try {
+      const page = await S.pdfDoc.getPage(i);
+      const vp = page.getViewport({ scale: 0.2 });
+      const canvas = document.createElement('canvas');
+      canvas.width = vp.width; canvas.height = vp.height;
+      const ctx = canvas.getContext('2d');
+      await page.render({ canvasContext: ctx, viewport: vp }).promise;
+      const item = document.createElement('div');
+      item.className = 'thumbnail-item' + (i === S.currentPage ? ' active' : '');
+      item.dataset.page = i;
+      item.innerHTML = `<span class="thumbnail-label">${i}</span>`;
+      item.prepend(canvas);
+      item.onclick = () => goToPage(i);
+      list.appendChild(item);
+      // Yield to the browser so UI stays responsive
+      await new Promise(r => setTimeout(r, 0));
+    } catch(e) {
+      // Skip failed thumbnail — don't block the rest
+      console.warn('Thumbnail render failed for page', i, e);
+    }
   }
+}
+
+// Keep legacy name for compatibility
+async function renderThumbnails() {
+  return renderThumbnailsAsync();
 }
 
 function goToPage(n) {
