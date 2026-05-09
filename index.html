@@ -405,37 +405,7 @@
 
   <!-- Deferred non-critical CSS -->
   <style media="print" onload="this.media='all'">
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg0: #030712;
-      --bg1: #0a0f1e;
-      --bg2: #0f172a;
-      --card: rgba(255,255,255,0.04);
-      --card-hover: rgba(255,255,255,0.07);
-      --glass: rgba(255,255,255,0.03);
-      --text: #f1f5f9;
-      --text2: #cbd5e1;
-      --muted: #64748b;
-      --line: rgba(255,255,255,0.08);
-      --accent1: #007cf0;
-      --accent2: #00dfd8;
-      --accent3: #7928ca;
-      --accent4: #ff0080;
-      --shadow: 0 24px 60px rgba(0,0,0,0.6);
-      --shadow-sm: 0 8px 24px rgba(0,0,0,0.3);
-      --radius: 20px;
-      --radius-sm: 12px;
-      --radius-xs: 8px;
-      --max: 1240px;
-      --ring: 0 0 0 3px rgba(0,124,240,0.35);
-      --grad: linear-gradient(135deg, var(--accent1), var(--accent2));
-      --grad-purple: linear-gradient(135deg, var(--accent3), var(--accent4));
-      --grad-text: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
-      --grad-bg: linear-gradient(135deg, rgba(0,124,240,0.08) 0%, rgba(121,40,202,0.08) 100%);
-      --font: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
-      --transition-slow: 0.5s cubic-bezier(0.4,0,0.2,1);
-      --header-h: 72px;
       --neon-1: #007cf0;
       --neon-2: #00dfd8;
       --neon-3: #7928ca;
@@ -475,23 +445,7 @@
       --search-clear-bg: rgba(15,23,42,0.06);
       --search-shadow: 0 18px 40px rgba(0,124,240,0.14), 0 8px 22px rgba(121,40,202,0.10);
     }
-    html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
-    body {
-      font-family: var(--font);
-      background-color: var(--bg0);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-      padding-left: var(--safe-left);
-      padding-right: var(--safe-right);
-    }
-    a { color: inherit; text-decoration: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-    img { max-width: 100%; display: block; }
-    button { font-family: var(--font); cursor: pointer; border: none; background: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-    ul { list-style: none; }
+    body { padding-left: var(--safe-left); padding-right: var(--safe-right); }
     .bg-orbs {
       position: fixed;
       inset: 0;
@@ -595,13 +549,16 @@
     .logo-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .nav-primary { display: flex; align-items: center; gap: 4px; margin-left: auto; }
     .nav-link {
-      padding: 8px 14px;
+      padding: 8px 16px;
       font-size: 0.875rem;
       font-weight: 500;
       color: var(--text2);
       border-radius: var(--radius-xs);
       transition: color var(--transition), background var(--transition);
       position: relative;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
     }
     .nav-link::after {
       content: '';
@@ -674,7 +631,7 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 28px rgba(0,124,240,0.35);
     }
-    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 12px; cursor: pointer; }
     .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); display: block; }
     .mobile-nav {
       display: none;
@@ -870,6 +827,9 @@
       color: var(--text2);
       backdrop-filter: blur(12px);
       white-space: nowrap;
+      max-width: 45%;
+      overflow: hidden;
+      text-overflow: ellipsis;
       animation: chipFloat var(--dur, 6s) ease-in-out infinite;
     }
     .floating-chip svg { flex-shrink: 0; }
@@ -924,7 +884,7 @@
       border-radius: 100px;
       font-size: 0.75rem;
       font-weight: 700;
-      color: var(--accent1);
+      color: #3b9bff;
       letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: 16px;
@@ -1014,7 +974,7 @@
       min-height: 52px;
       padding: 15px 52px 15px 50px;
       font-family: var(--font);
-      font-size: 0.98rem;
+      font-size: 1rem;
       font-weight: 600;
       letter-spacing: 0.01em;
       background: var(--search-surface);
@@ -1039,9 +999,13 @@
       top: 50%;
       transform: translateY(-50%);
       color: var(--search-icon-color);
-      padding: 6px;
-      border-radius: 999px;
+      padding: 10px;
+      min-width: 44px;
+      min-height: 44px;
       display: none;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
       transition: color var(--transition), background var(--transition), transform var(--transition);
       background: var(--search-clear-bg);
       line-height: 1;
@@ -1480,9 +1444,9 @@
       gap: 16px;
       flex-wrap: wrap;
     }
-    .footer-bottom p { font-size: 0.8rem; color: #b0bec5; }
+    .footer-bottom p { font-size: 0.82rem; color: #b0bec5; }
     .footer-bottom-links { display: flex; gap: 20px; flex-wrap: wrap; }
-    .footer-bottom-link { font-size: 0.8rem; transition: color var(--transition); }
+    .footer-bottom-link { font-size: 0.82rem; transition: color var(--transition); }
     .footer-bottom-link:hover { color: var(--text); }
     .reveal {
       opacity: 0;
@@ -1494,6 +1458,7 @@
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
     :focus-visible { outline: 2px solid var(--accent1); outline-offset: 3px; border-radius: 4px; }
+    .tool-card:focus-visible { outline-offset: -2px; outline: 2px solid var(--accent1); }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
     .seo-sitemap {
       position: absolute;
@@ -1827,7 +1792,7 @@
       .contact-sub, .section-sub { font-size: 0.98rem; }
       .contact-email-link { width: 100%; justify-content: center; }
     }
-    @media (prefers-reduced-motion: reduce), (max-width: 640px) {
+    @media (prefers-reduced-motion: reduce), (max-width: 768px) {
       .bg-orbs .orb,
       .search-wrap::before,
       .search-wrap::after {
@@ -1959,7 +1924,7 @@
       padding-left: 54px;
       padding-right: 54px;
       border-radius: 18px;
-      font-size: 0.96rem;
+      font-size: 1rem;
     }
     .search-tip {
       margin-top: -20px;
@@ -1970,7 +1935,7 @@
       gap: 10px;
     }
     .cat-btn {
-      min-height: 40px;
+      min-height: 44px;
       padding: 9px 16px;
       border-radius: 999px;
       font-weight: 700;
@@ -2026,8 +1991,8 @@
       border-radius: 999px;
       background: rgba(0,124,240,0.08);
       border: 1px solid rgba(0,124,240,0.18);
-      color: var(--accent1);
-      font-size: 0.68rem;
+      color: #3b9bff;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.05em;
       text-transform: uppercase;
@@ -2134,8 +2099,8 @@
       border-radius: 999px;
       background: linear-gradient(135deg, rgba(0,124,240,0.14), rgba(121,40,202,0.10));
       border: 1px solid rgba(0,124,240,0.22);
-      color: #8fdcff;
-      font-size: 0.68rem;
+      color: #3b9bff;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.05em;
       text-transform: uppercase;
@@ -2143,7 +2108,7 @@
     .guide-card-category {
       margin-bottom: 10px;
       color: var(--accent1);
-      font-size: 0.74rem;
+      font-size: 0.76rem;
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -2305,6 +2270,7 @@
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .cta-inner { padding: 40px 24px; }
       .floating-chip { display: none; }
+      .bg-orbs, .bg-grid, #particles-canvas { display: none; }
       .hero { padding: 60px 20px 40px; }
       section { padding: 60px 20px; }
       .search-wrap { width: 100%; margin: 24px auto 32px; }
@@ -2316,7 +2282,7 @@
         padding-bottom: 10px;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        gap: 8px;
+        gap: 10px;
       }
       .category-filters::-webkit-scrollbar { display: none; }
       .cat-btn { flex-shrink: 0; }
@@ -2611,11 +2577,11 @@
       background: rgba(0,124,240,0.06) !important;
       border-color: rgba(0,124,240,0.2) !important;
     }
-    [data-theme="light"] .stat-label { color: #475569 !important; }
-    [data-theme="light"] .how-step-desc { color: #475569 !important; }
-    [data-theme="light"] .footer-brand p { color: #475569 !important; }
-    [data-theme="light"] .footer-bottom p { color: #475569 !important; }
-    [data-theme="light"] .footer-bottom-link { color: #475569 !important; }
+    [data-theme="light"] .stat-label { color: #334155 !important; }
+    [data-theme="light"] .how-step-desc { color: #334155 !important; }
+    [data-theme="light"] .footer-brand p { color: #334155 !important; }
+    [data-theme="light"] .footer-bottom p { color: #334155 !important; }
+    [data-theme="light"] .footer-bottom-link { color: #334155 !important; }
     html { overflow-x: clip; }
     .tool-card,
     .guide-card,
@@ -2683,7 +2649,7 @@
   <noscript><style>/* Non-critical CSS fallback for no-JS */ .bg-orbs,.bg-grid,#particles-canvas,.floating-chip,.search-wrap::before,.search-wrap::after{display:none!important}section,.hero,.stats-band,.cta-section,.footer,.contact-section{padding:60px 24px}.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
-  <a class="skip-link" href="#tools">Skip to tools</a>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
   <div class="bg-orbs" aria-hidden="true">
     <div class="orb orb-1"></div>
@@ -2723,11 +2689,11 @@
 
     <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" role="dialog" aria-modal="true">
       <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
-      <a href="#tools" class="mobile-nav-link" onclick="closeMobileNav()">🛠 Tools Directory</a>
-      <a href="#features" class="mobile-nav-link" onclick="closeMobileNav()">⚡ Why Tool Xeno?</a>
-      <a href="#guides" class="mobile-nav-link" onclick="closeMobileNav()">📖 Guides</a>
-      <a href="#faq" class="mobile-nav-link" onclick="closeMobileNav()">❓ FAQ</a>
-      <a href="#contact" class="mobile-nav-link" onclick="closeMobileNav()">📬 Contact</a>
+      <a href="#tools" class="mobile-nav-link">🛠 Tools Directory</a>
+      <a href="#features" class="mobile-nav-link">⚡ Why Tool Xeno?</a>
+      <a href="#guides" class="mobile-nav-link">📖 Guides</a>
+      <a href="#faq" class="mobile-nav-link">❓ FAQ</a>
+      <a href="#contact" class="mobile-nav-link">📬 Contact</a>
       <a href="mailto:toolxeno@proton.me" class="mobile-nav-link">📧 toolxeno@proton.me</a>
     </nav>
 
@@ -3399,7 +3365,7 @@
     function renderFAQ() {
       document.getElementById('faq-list').innerHTML = FAQS.map((f,i) => `
         <div class="faq-item" role="listitem">
-          <button class="faq-q" onclick="toggleFAQ(this)" aria-expanded="false" aria-controls="faq-a-${i}" id="faq-q-${i}">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a-${i}" id="faq-q-${i}">
             ${f.q}
             <span class="faq-icon" aria-hidden="true">
               <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -3411,6 +3377,11 @@
         </div>
       `).join('');
     }
+
+    document.getElementById('faq-list').addEventListener('click', function(e) {
+      const btn = e.target.closest('.faq-q');
+      if (btn) toggleFAQ(btn);
+    });
 
     function toggleFAQ(btn) {
       const item = btn.closest('.faq-item');
@@ -3561,6 +3532,9 @@
     }
     mobileClose.addEventListener('click', closeMobileNav);
     mobileNav.addEventListener('click', e => { if (e.target === mobileNav) closeMobileNav(); });
+    mobileNav.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', closeMobileNav);
+    });
 
     /* ===========================================
        SCROLL REVEAL
